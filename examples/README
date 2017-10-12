@@ -1,0 +1,9 @@
+README
+
+To run the example scripts see the HTML documentation:
+
+Tutorial: Using MTINV
+
+Tutorial: Using MTINV with Real Data 
+
+(To build the documentation use: python setup.py build_sphinx)

@@ -1,0 +1,33 @@
+/*dl.class {
+   background-color:#eee;
+   padding-bottom:0.5em;
+ }
+dt {
+  background-color:#ccc;
+   color:#000;
+  padding-left:1%;
+  padding-right:1%;
+}
+dl.method,dl.staticmethod,dl.attribute   {
+  background-color:#ddd;
+   padding-bottom:0.5em;
+}
+th.field-name{
+   background-color: #ddd;
+}
+th.head{
+   background-color: #ddd;
+
+}
+
+div.body{
+    margin-top:1.8em;
+}
+div.related{
+    position: fixed;
+    margin-top:0em;
+}*/
+
+div.wy-nav-content{
+max-width: 100%;
+}
