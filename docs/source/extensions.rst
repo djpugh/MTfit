@@ -761,11 +761,11 @@ If an alternate sampling is desired for the Markov chain Monte Carlo case (ie. a
 mtfit.plot
 --------------------------
 
-This extension provides an entry point for customising the plot type the for mtfit.plot.MTplot object. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.MTplot`` entry point to the extension ``setup.py`` script::
+This extension provides an entry point for customising the plot type the for mtfit.plot.MTplot object. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.plot`` entry point to the extension ``setup.py`` script::
 
     setup(...
           entry_points={
-                'mtfit.MTplot':
+                'mtfit.plot':
                     ['plottype = mymodule:my_plot_class']
                 }
           ...)

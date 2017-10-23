@@ -3265,4 +3265,4 @@ class_mapping = {'amplitude': _AmplitudePlot, 'beachball': _AmplitudePlot,
                  'radiation': _RadiationPlot, 'faultplane': _FaultPlanePlot,
                  'lune': _LunePlot, 'hudson': _HudsonPlot, 'riedeseljordan': _RiedeselJordanPlot,
                  'tape': _TapePlot, 'parameter': _ParameterHistPlot}
-class_mapping = get_extensions(group='mtfit.MTplot', defaults=class_mapping)[1]
+class_mapping = get_extensions(group='mtfit.plot', defaults=class_mapping)[1]
