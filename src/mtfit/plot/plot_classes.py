@@ -94,7 +94,7 @@ class MTData(object):
 
         Args
             MTs: numpy array of moment tensor six vectors with shape (6,n).
-                Alternatively, the input can be a dictionary from the MTINV output.
+                Alternatively, the input can be a dictionary from the mtfit output.
 
 
         Keyword Args
@@ -3265,4 +3265,4 @@ class_mapping = {'amplitude': _AmplitudePlot, 'beachball': _AmplitudePlot,
                  'radiation': _RadiationPlot, 'faultplane': _FaultPlanePlot,
                  'lune': _LunePlot, 'hudson': _HudsonPlot, 'riedeseljordan': _RiedeselJordanPlot,
                  'tape': _TapePlot, 'parameter': _ParameterHistPlot}
-class_mapping = get_extensions(group='MTINV.MTplot', defaults=class_mapping)[1]
+class_mapping = get_extensions(group='mtfit.MTplot', defaults=class_mapping)[1]

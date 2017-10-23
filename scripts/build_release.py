@@ -9,7 +9,7 @@ import argparse
 
 from git import Repo, InvalidGitRepositoryError
 
-from MTINV import __version__
+from mtfit import __version__
 
 
 class DirtyRepository(Exception):
