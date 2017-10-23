@@ -1281,11 +1281,11 @@ The model must generate a random sample according in the form of a numpy matrix 
 If an alternate sampling is desired for the McMC case (ie. a different model), it is necessary to extend the algorithm class using the mtfit.directed_algorithms entry point.
 """
 
-_mtplot_rst_doc = """This extension provides an entry point for customising the plot type the for mtfit.plot.MTplot object. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.MTplot`` entry point to the extension ``setup.py`` script::
+_mtplot_rst_doc = """This extension provides an entry point for customising the plot type the for mtfit.plot.MTplot object. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.plot`` entry point to the extension ``setup.py`` script::
 
     setup(...
           entry_points={
-                'mtfit.MTplot':
+                'mtfit.plot':
                     ['plottype = mymodule:my_plot_class']
                 }
           ...)
@@ -1296,11 +1296,11 @@ The plottype name in the setup.py script should be lower case with no spaces, hy
 
 """
 
-_mtplot_doc = """This extension provides an entry point for customising the plot type the for mtfit.plot.MTplot object. This can be installed can be installed using setuptools (https://pypi.python.org/pypi/setuptools) by adding the mtfit.MTplot entry point to the extension setup.py script:
+_mtplot_doc = """This extension provides an entry point for customising the plot type the for mtfit.plot.MTplot object. This can be installed can be installed using setuptools (https://pypi.python.org/pypi/setuptools) by adding the mtfit.plot entry point to the extension setup.py script:
 
     setup(...
           entry_points={
-                'mtfit.MTplot':
+                'mtfit.plot':
                     ['plottype = mymodule:my_plot_class']
                 }
           ...)

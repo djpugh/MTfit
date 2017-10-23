@@ -660,8 +660,8 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
             lines.append(['NLLOC', event_data['UID']])
         except:
             lines.append(['NLLOC'])
-        lines.append(['SIGNATURE', 'MTINV', __version__+'/'+datetime.now().isoformat()])
-        lines.append(['COMMENT', 'MTINV inversion'])
+        lines.append(['SIGNATURE', 'mtfit', __version__+'/'+datetime.now().isoformat()])
+        lines.append(['COMMENT', 'mtfit inversion'])
         lines.append(['GRID', 'None'])
         lines.append(['SEARCH', 'None'])
         lines.append(['HYPOCENTER', 'x', '?', 'y', '?', 'z', '?',
@@ -973,7 +973,7 @@ def hyp_output_dicts(event_data, inversion_options=False, output_data=False, loc
 #
 
 
-def MATLAB_output(output_data, fid='MTINVOutput.mat', pool=False, version='7.3', *args, **kwargs):
+def MATLAB_output(output_data, fid='mtfitOutput.mat', pool=False, version='7.3', *args, **kwargs):
     """
     Outputs event results to fid as .mat
 
@@ -984,7 +984,7 @@ def MATLAB_output(output_data, fid='MTINVOutput.mat', pool=False, version='7.3',
 
     Args
         output_data: data dictionary for the event_data.
-        fid:['MTINVOutput.mat'] Filename for output.
+        fid:['mtfitOutput.mat'] Filename for output.
         pool:[False] Use Jobpool for parallel output.
         version:[7.3] MATLAB file type to use (v 7.3 requires hdf5storage and h5py).
 
@@ -1049,7 +1049,7 @@ def MATLAB_output(output_data, fid='MTINVOutput.mat', pool=False, version='7.3',
     return output_string, fid
 
 
-def pickle_output(output_data, fid='MTINVOutput.out', pool=False, *args, **kwargs):
+def pickle_output(output_data, fid='mtfitOutput.out', pool=False, *args, **kwargs):
     """
     Outputs event results to fid as .out (default)
 
@@ -1059,7 +1059,7 @@ def pickle_output(output_data, fid='MTINVOutput.out', pool=False, *args, **kwarg
 
     Args
         output_data: data dictionary for the event_data.
-        fid:['MTINVOutput.out'] Filename for output.
+        fid:['mtfitOutput.out'] Filename for output.
         pool:[False] Use Jobpool for parallel output.
 
     Returns
@@ -1093,7 +1093,7 @@ def pickle_output(output_data, fid='MTINVOutput.out', pool=False, *args, **kwarg
     return output_string, fid
 
 
-def hyp_output(output_data, fid='MTINVOutput.hyp', pool=False, *args, **kwargs):
+def hyp_output(output_data, fid='mtfitOutput.hyp', pool=False, *args, **kwargs):
     """
     Outputs event results to fid as .hyp (default)
 
@@ -1103,7 +1103,7 @@ def hyp_output(output_data, fid='MTINVOutput.hyp', pool=False, *args, **kwargs):
 
     Args
         output_data: data dictionary for the event_data.
-        fid:['MTINVOutput.hyp'] Filename for output.
+        fid:['mtfitOutput.hyp'] Filename for output.
         pool:[False] Use Jobpool for parallel output.
 
     Returns

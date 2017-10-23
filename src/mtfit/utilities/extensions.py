@@ -2,7 +2,7 @@
 extensions.py
 ******************
 
-Utility functions for handling MTINV extensions.
+Utility functions for handling mtfit extensions.
 
 Simple functions that are used throughout the module
 """
