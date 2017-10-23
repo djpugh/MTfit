@@ -208,14 +208,14 @@ Running from the command line
 To run from the command line on  linux/*nix  it is necessary to make sure that the mtfit script installed is on the path,
 or to set up a manual alias/script, e.g. for bash::
 
-    $ python -c "import mtfit;mtfit.__run__()" $*
+    $ python -c "import mtfit;mtfit.run.mtfit()" $*
 
 
 On windows using powershell add the following commandlet to your profile (for information on customizing your powershell profile see: http://www.howtogeek.com/50236/customizing-your-powershell-profile/)::
 
     function mtfit{
         $script={
-            python -c "import mtfit;mtfit.__run__()" $args
+            python -c "import mtfit;mtfit.run.mtfit()" $args
         }
         Invoke-Command -ScriptBlock $script -ArgumentList $args
     }
@@ -253,7 +253,7 @@ If there are any errors please see the documentation and if necessary contact th
 """
 
 
-def build_docs(html=True, manpages=True, pdf=True, epub=True):
+def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
     if 'setup.py' not in os.listdir('.'):
         raise ValueError('Needs to be run in the top of the repository')
     print '\n\n==============================\n\nBuilding Documentation\n\n==============================\n\n'
@@ -276,6 +276,7 @@ def build_docs(html=True, manpages=True, pdf=True, epub=True):
         if epub:
             build_epub()
         if html:
+            prepare_downloads(epub, pdf)
             build_html()
         print "*********************************\n\nDocumentation Build Succeeded\n\n*********************************"
     except Exception:
@@ -348,6 +349,10 @@ def build_epub(output_path=os.path.abspath('./docs/epub/')):
     except SystemExit:
         pass
 
+
+def prepare_downloads(epub=False, pdf=False):
+    if epub:
+        shutil.copyfile('./docs/epub/mtfit.epub', './docs/')
 
 
 def get_run():
