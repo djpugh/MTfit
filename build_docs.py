@@ -382,8 +382,8 @@ def setup_gh_pages():
             shutil.rmtree(item)
         else:
             os.remove(item)
-    copy_recursively(os.path.join(tempfile, 'html'), './')
-    shutil.rmtree(tempfile)
+    copy_recursively(os.path.join(temp_dir, 'html'), './')
+    shutil.rmtree(temp_dir)
     # Commit the changes
     repo.git.add('*')
     repo.git.commit('-m', 'Documentation {}'.format(__version__))
@@ -394,19 +394,18 @@ def setup_gh_pages():
 
 def copy_recursively(source_folder, destination_folder):
     for root, dirs, files in os.walk(source_folder):
-        for item in files:
-            src_path = os.path.join(root, item)
-            dst_path = os.path.join(destination_folder, src_path.replace(source_folder, ""))
-            if os.path.exists(dst_path):
-                if os.stat(src_path).st_mtime > os.stat(dst_path).st_mtime:
-                    shutil.copy2(src_path, dst_path)
-            else:
-                shutil.copy2(src_path, dst_path)
         for item in dirs:
             src_path = os.path.join(root, item)
             dst_path = os.path.join(destination_folder, src_path.replace(source_folder, ""))
             if not os.path.exists(dst_path):
                 os.mkdir(dst_path)
+        for item in files:
+            try:
+                src_path = os.path.join(root, item)
+                dst_path = os.path.join(destination_folder, src_path.replace(source_folder, ""))
+                shutil.copy2(src_path, dst_path)
+            except Exception:
+                pass
 
 
 def get_run():
