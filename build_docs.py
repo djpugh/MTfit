@@ -4,6 +4,9 @@ import traceback
 import sphinx
 import subprocess
 import shutil
+import tempfile
+import glob
+
 
 from examples.example_data import synthetic_event, krafla_event
 
@@ -268,6 +271,9 @@ def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
     setup_extensions()
     # Source code extension
     make_plot_docs()
+    if html:
+        pdf = True
+        epub = True
     try:
         if manpages:
             build_man_pages()
@@ -276,12 +282,14 @@ def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
         if epub:
             build_epub()
         if html:
-            prepare_downloads(epub, pdf)
             build_html()
         print "*********************************\n\nDocumentation Build Succeeded\n\n*********************************"
     except Exception:
         traceback.print_exc()
         print "*********************************\n\nDocumentation Build Failed\n\n*********************************"
+    if gh_pages:
+        print "*********************************\n\nSetting up gh-pages\n\n*********************************"
+        setup_gh_pages()
 
 
 def build_html(output_path=os.path.abspath('./docs/html/')):
@@ -300,7 +308,7 @@ def build_man_pages(output_path=os.path.abspath('./docs/man/')):
                 pass
 
 
-def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit_documentation.pdf')):
+def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit.pdf')):
     print "------------------------------\n\nLaTeX Build\n\n------------------------------"
     try:
         sphinx.main(['sphinx', '-b', 'latex', '-a', os.path.abspath('./docs/source/'), os.path.abspath('./docs/latex/')])
@@ -322,7 +330,7 @@ def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit_documentation.pdf'))
     # modify table of contents location
     tex = open('mtfit.tex').readlines()
     if '\\endabstract\n' in tex:
-        tex.insert(tex.index('\\endabstract\n'), tex.pop(tex.index('\\tableofcontents\n')))
+        tex.insert(tex.index('\\endabstract\n'), tex.pop(tex.index('\\sphinxtableofcontents\n')))
     with open('mtfit.tex', 'w') as f:
         f.write(''.join(tex))
     print "------------------------------\n\nPDF Build\n\n------------------------------"
@@ -350,9 +358,52 @@ def build_epub(output_path=os.path.abspath('./docs/epub/')):
         pass
 
 
-def prepare_downloads(epub=False, pdf=False):
-    if epub:
-        shutil.copyfile('./docs/epub/mtfit.epub', './docs/')
+def setup_gh_pages():
+    # Copy docs/html to tempfolder
+    from mtfit import __version__
+    temp_dir = tempfile.mkdtemp()
+    shutil.copytree('./docs/html', os.path.join(temp_dir, 'html'))
+    # Checkout gh-pages branch
+    # Need to stash any current work
+    import git
+    repo = git.repo('.')
+    repo.git.stash('save')
+    current_branch = repo.active_branch.name
+    repo.git.checkout('gh-pages')
+    # Clean folder and copy html into folder
+    contents = glob.glob('./*')
+    for item in contents:
+        if '.git' in item or '.venv' in item or '.tox' in item:
+            continue
+        if os.path.isdir(item):
+            shutil.rmtree(item)
+        else:
+            os.remove(item)
+    copy_recursively(os.path.join(tempfile, 'html'), './')
+    shutil.rmtree(tempfile)
+    # Commit the changes
+    repo.git.add('*')
+    repo.git.commit('-m', 'Documentation {}'.format(__version__))
+    # Checkout old branch
+    repo.git.checkout(current_branch)
+    repo.git.stash('pop')
+
+
+def copy_recursively(source_folder, destination_folder):
+    for root, dirs, files in os.walk(source_folder):
+        for item in files:
+            src_path = os.path.join(root, item)
+            dst_path = os.path.join(destination_folder, src_path.replace(source_folder, ""))
+            if os.path.exists(dst_path):
+                if os.stat(src_path).st_mtime > os.stat(dst_path).st_mtime:
+                    shutil.copy2(src_path, dst_path)
+            else:
+                shutil.copy2(src_path, dst_path)
+        for item in dirs:
+            src_path = os.path.join(root, item)
+            dst_path = os.path.join(destination_folder, src_path.replace(source_folder, ""))
+            if not os.path.exists(dst_path):
+                os.mkdir(dst_path)
 
 
 def get_run():
@@ -367,7 +418,22 @@ def get_run():
 
 
 def get_cli_and_man():
-    cli = open('./docs/source/cli.rst').read()
+    from mtfit.utilities.argparser import mtfit_parser
+    old_stdout = sys.stdout
+    try:
+        sys.stdout = open('./docs/source/cli.rst', 'w')
+        mtfit_parser(['-h'])
+        sys.stdout.close()
+        sys.stdout = old_stdout
+    except SystemExit:
+        sys.stdout.close()
+        sys.stdout = old_stdout
+    except Exception:
+        sys.stdout.close()
+        sys.stdout = old_stdout
+        traceback.print_exc()
+    with open('./docs/source/cli.rst') as f:
+        cli = f.read()
     cli = cli.replace('usage: ', '********************************\nmtfit command line options\n********************************\nCommand line usage::\n')
     cli = cli.replace('MTfit - Moment Tensor', '#A~A~A~A')
     cli = cli.replace('positional arguments:', '#B~B~B~BPositional Arguments:\n============================\n')
@@ -498,18 +564,19 @@ def make_plot_docs():
         from mtfit.utilities.argparser import MTplot_parser
     path = './docs/source/'
     try:
+        old_stdout = sys.stdout
         try:
             with open(path+'mtplotcli.rst', 'w') as f:
                 sys.stdout = f
                 MTplot_parser(['-h'])
                 sys.stdout.close()
-                sys.stdout = sys.__stdout__
+                sys.stdout = old_stdout
         except SystemExit:
             sys.stdout.close()
-            sys.stdout = sys.__stdout__
+            sys.stdout = old_stdout
         except Exception:
             sys.stdout.close()
-            sys.stdout = sys.__stdout__
+            sys.stdout = old_stdout
             traceback.print_exc()
         with open(path+'mtplotcli.rst') as f:
             cli = f.read()

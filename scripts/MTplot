@@ -1,3 +1,3 @@
 #!/usr/bin/env python
 import mtfit.plot
-mtfit.plot.__run__()
+mtfit.plot.run()

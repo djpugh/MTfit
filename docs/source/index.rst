@@ -39,7 +39,9 @@ mtfit: Bayesian Source Inversion
 
 :mod:`mtfit` also works with the automated Bayesian polarity approach described in :ref:`Pugh et al, 2016b <Pugh-2016b>` as an alternative method of estimating polarity probabilities. This is available as the :mod:`autopol` Python module.
 
-This documentation is available as a :download:`PDF<../pdf/mtfit.pdf>` and an :download:`epub<../epub/mtfit.epub>` file
+.. only:: html
+   
+   This documentation is available as a :download:`PDF<../pdf/mtfit.pdf>` and an :download:`epub<../epub/mtfit.epub>` file
 
 ---------------------------------------
 
