@@ -87,3 +87,28 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+*.pyc
+*.nfs*
+*.egg-info
+build
+*.csv
+*.inv
+*.scatangle
+*.pyd
+*.log
+*.mat
+docs/epub/*
+docs/latex/*
+docs/man/*
+docs/pdf/*
+docs/html/*
+dist/*
+wheelhouse/*
+*.doctree
+*.envrc
+env/*
+.tox/*
+*/PKG-INFO
+*.so
+.venv/*
