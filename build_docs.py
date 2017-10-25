@@ -375,6 +375,9 @@ def setup_gh_pages():
     for item in contents:
         if '.git' in item or '.venv' in item or '.tox' in item:
             continue
+        if 'src' in item or 'docs' in item or 'examples' in item:
+            # ignored in .gitignore
+            continue
         if os.path.isdir(item):
             shutil.rmtree(item)
         else:
@@ -720,4 +723,8 @@ For the extensions documentation see :ref:`extensions`"""
 
 
 if __name__ == "__main__":
-    build_docs()
+    if len(sys.argv) > 1 and sys.argv[1].lower() in ['true', 't', '1']:
+        gh_pages = True
+    else:
+        gh_pages = False
+    build_docs(gh_pages=gh_pages)
