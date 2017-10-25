@@ -366,7 +366,7 @@ def setup_gh_pages():
     # Checkout gh-pages branch
     # Need to stash any current work
     import git
-    repo = git.repo('.')
+    repo = git.Repo('.')
     repo.git.stash('save')
     current_branch = repo.active_branch.name
     repo.git.checkout('gh-pages')
