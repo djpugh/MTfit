@@ -19,7 +19,7 @@ lib/
 lib64/
 parts/
 sdist/
-var/
+var/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -62,6 +62,7 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+docs/*
 
 # PyBuilder
 target/
@@ -92,12 +93,7 @@ ENV/
 *.nfs*
 *.egg-info
 build
-*.csv
-*.inv
-*.scatangle
 *.pyd
-*.log
-*.mat
 docs/epub/*
 docs/latex/*
 docs/man/*
@@ -105,10 +101,13 @@ docs/pdf/*
 docs/html/*
 dist/*
 wheelhouse/*
-*.doctree
 *.envrc
 env/*
 .tox/*
 */PKG-INFO
 *.so
 .venv/*
+docs/*
+src/*
+examples/*
+*.pyc
