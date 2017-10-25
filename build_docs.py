@@ -382,7 +382,7 @@ def setup_gh_pages():
             shutil.rmtree(item)
         else:
             os.remove(item)
-    copy_recursively(os.path.join(temp_dir, 'html'), './')
+    copy_recursively(os.path.join(temp_dir, 'html'), os.path.abspath('./'))
     shutil.rmtree(temp_dir)
     # Commit the changes
     repo.git.add('*')
@@ -395,11 +395,16 @@ def setup_gh_pages():
 def copy_recursively(source_folder, destination_folder):
     for root, dirs, files in os.walk(source_folder):
         for item in dirs:
+            if item[0] == '.':
+                continue
             src_path = os.path.join(root, item)
             dst_path = os.path.join(destination_folder, src_path.replace(source_folder, ""))
             if not os.path.exists(dst_path):
                 os.mkdir(dst_path)
+            copy_recursively(src_path, dst_path)
         for item in files:
+            if item[0] == '.':
+                continue
             try:
                 src_path = os.path.join(root, item)
                 dst_path = os.path.join(destination_folder, src_path.replace(source_folder, ""))
