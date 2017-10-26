@@ -418,21 +418,20 @@ def copy_recursively(source_folder, destination_folder):
             if item[0] == '.':
                 continue
             src_path = os.path.join(root, item)
-            dst_path = os.path.join(destination_folder, os.path.relpath(src_path, root))
+            dst_path = os.path.join(destination_folder, os.path.relpath(src_path, source_folder))
             if destination_folder not in dst_path:
                 raise ValueError('Error joining paths - {} not in {}'.format(dst_path, destination_folder))
             if not os.path.exists(dst_path):
                 os.mkdir(dst_path)
-            copy_recursively(src_path, dst_path)
         for item in files:
             if item[0] == '.':
                 continue
             try:
                 src_path = os.path.join(root, item)
-                dst_path = os.path.join(destination_folder, os.path.relpath(src_path, root))
+                dst_path = os.path.join(destination_folder, os.path.relpath(src_path, source_folder))
                 if destination_folder not in dst_path:
                     raise ValueError('Error joining paths - {} not in {}'.format(dst_path, destination_folder))
-                shutil.copy2(src_path, dst_path)
+                shutil.copyfile(src_path, dst_path)
             except Exception:
                 pass
 
