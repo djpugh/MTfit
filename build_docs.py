@@ -400,16 +400,27 @@ def setup_gh_pages():
     repo.git.checkout(current_branch)
     print "------------------------------\n\nUnstashing Changes\n\n------------------------------"
     repo.git.stash('pop')
+    print "------------------------------\n\nCleaning Working Directory\n\n------------------------------"
+    doctrees = glob.glob('*.doctree')
+    for item in doctrees:
+        os.remove(item)
+    invs = glob.glob('*.inv')
+    for item in invs:
+        os.remove(item)
+    jss = glob.glob('*.js')
+    for item in jss:
+        os.remove(item)
 
 
 def copy_recursively(source_folder, destination_folder):
-    import ipdb; ipdb.set_trace()
     for root, dirs, files in os.walk(source_folder):
         for item in dirs:
             if item[0] == '.':
                 continue
             src_path = os.path.join(root, item)
-            dst_path = os.path.join(destination_folder, src_path.replace(source_folder, ""))
+            dst_path = os.path.join(destination_folder, os.path.relpath(src_path, root))
+            if destination_folder not in dst_path:
+                raise ValueError('Error joining paths - {} not in {}'.format(dst_path, destination_folder))
             if not os.path.exists(dst_path):
                 os.mkdir(dst_path)
             copy_recursively(src_path, dst_path)
@@ -418,7 +429,9 @@ def copy_recursively(source_folder, destination_folder):
                 continue
             try:
                 src_path = os.path.join(root, item)
-                dst_path = os.path.join(destination_folder, src_path.replace(source_folder, ""))
+                dst_path = os.path.join(destination_folder, os.path.relpath(src_path, root))
+                if destination_folder not in dst_path:
+                    raise ValueError('Error joining paths - {} not in {}'.format(dst_path, destination_folder))
                 shutil.copy2(src_path, dst_path)
             except Exception:
                 pass
