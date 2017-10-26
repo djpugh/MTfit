@@ -1,4 +1,4 @@
-The documentation is available in mtfit/docs/ (including HTML and PDF documentation).
+The documentation is available at `https://djpugh.github.io/MTfit/<https://djpugh.github.io/MTfit/>`_ and can be built using `sphinx` from the source in mtfit/docs/.
 
 The documentation includes tutorials and explanations of mtfit and the approaches used.
 
