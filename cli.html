@@ -1,0 +1,882 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9. mtfit command line options &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="next" title="10. Plotting the Moment Tensor" href="mtplot.html"/>
+        <link rel="prev" title="8. convert" href="mtconvert.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Command Line Options</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#positional-arguments">9.1. Positional Arguments:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-arguments">9.2. Optional Arguments:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scatangle">9.3. Scatangle:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cluster">9.4. Cluster:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>9. mtfit command line options</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/cli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mtfit-command-line-options">
+<h1>9. mtfit command line options<a class="headerlink" href="#mtfit-command-line-options" title="Permalink to this headline">¶</a></h1>
+<p>Command line usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mtfit</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">DATAFILE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">LOCATION_PDF_FILE_PATH</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="p">{</span><span class="n">iterate</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="n">mcmc</span><span class="p">,</span><span class="n">transdmcmc</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">N</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span> <span class="n">MEM</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">b</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">nstations</span> <span class="n">NUMBER_STATIONS</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">nanglesamples</span> <span class="n">NUMBER_LOCATION_SAMPLES</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">not_file_safe</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">INVERSION_OPTIONS</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">FID</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">x</span> <span class="n">MAX_SAMPLES</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">MAX_TIME</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">marginalise_relative</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">R</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">invext</span> <span class="n">DATA_EXTENSION</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">angleext</span> <span class="n">ANGLE_EXTENSION</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">S</span> <span class="n">MINIMUM_NUMBER_INTERSECTIONS</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">M</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">B</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">X</span> <span class="n">MIN_NUMBER_INITIALISATION_SAMPLES</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">T</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">Q</span> <span class="p">[</span><span class="n">QUALITY_CHECK</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">V</span> <span class="n">VERBOSITY</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">g</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="n">DIMENSION_JUMP_PROB</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">y</span> <span class="p">{</span><span class="n">grid</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">u</span> <span class="n">MIN_ACCEPTANCE_RATE</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="n">MAX_ACCEPTANCE_RATE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">w</span> <span class="n">ACCEPTANCE_RATE_WINDOW</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">W</span> <span class="n">WARNINGS</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">z</span> <span class="n">LEARNING_LENGTH</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">version</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">mpi_call</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">pickle</span><span class="p">,</span><span class="n">matlab</span><span class="p">}]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">results</span><span class="o">-</span><span class="nb">format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">full_pdf</span><span class="p">}]</span> <span class="p">[</span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">dist</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">dc</span><span class="o">-</span><span class="n">prior</span> <span class="n">DC_PRIOR</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">sampling</span> <span class="n">SAMPLING</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">sample</span><span class="o">-</span><span class="n">models</span> <span class="n">SAMPLE_DISTRIBUTION</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">sampling</span><span class="o">-</span><span class="n">prior</span> <span class="n">SAMPLING_PRIOR</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">normalise</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">convert</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">discard</span> <span class="n">DISCARD</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">mpioutput</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">combine_mpi_output</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">c_generate</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">relative_loop</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="nb">bin</span><span class="o">-</span><span class="n">scatangle</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="nb">bin</span><span class="o">-</span><span class="n">size</span> <span class="n">BIN_SCATANGLE_SIZE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">nodes</span> <span class="n">QSUB_NODES</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">ppn</span> <span class="n">QSUB_PPN</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">pmem</span> <span class="n">QSUB_PMEM</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">email</span> <span class="n">QSUB_M</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">emailoptions</span> <span class="n">QSUB_M</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">name</span> <span class="n">QSUB_N</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">walltime</span> <span class="n">QSUB_WALLTIME</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">queue</span> <span class="n">QSUB_Q</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">bladeproperties</span> <span class="n">QSUB_BLADE_PROPERTIES</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">feature</span> <span class="n">QSUB_BLADE_FEATURE</span><span class="p">]</span>
+<span class="p">[</span><span class="n">data_file</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="positional-arguments">
+<h2>9.1. Positional Arguments:<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">data_file</span>
+</pre></div>
+</div>
+<p>Data file to use for the inversion, optional but must
+be specified either as a positional argument or as an
+optional argument (see -d below) If not specified
+defaults to all <a href="#id1"><span class="problematic" id="id2">*</span></a>.inv files in current directory, and
+searches for all anglescatterfiles in the directory
+too. Inversion file extension can be set using
+--invext option. Angle scatter file extension can be
+set using --angleext option</p>
+</div>
+<div class="section" id="optional-arguments">
+<h2>9.2. Optional Arguments:<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<p>show this help message and exit</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">d</span> <span class="n">DATAFILE</span><span class="p">,</span> <span class="o">--</span><span class="n">datafile</span> <span class="n">DATAFILE</span><span class="p">,</span> <span class="o">--</span><span class="n">data_file</span> <span class="n">DATAFILE</span>
+</pre></div>
+</div>
+<p>Data file to use for the inversion. Can be provided as
+a positional argument.
+There are several different data file types:</p>
+<blockquote>
+<div><ul class="simple">
+<li>pickled dictionary</li>
+<li>csv file</li>
+<li>NLLOC hyp file</li>
+</ul>
+</div></blockquote>
+<p>The data file is a pickled python dictionary of
+the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;DataType&#39;</span><span class="p">:{</span><span class="s1">&#39;Stations&#39;</span><span class="p">:{</span><span class="s1">&#39;Name&#39;</span><span class="p">:[</span><span class="s1">&#39;STA1&#39;</span><span class="p">,</span><span class="s1">&#39;STA2&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+<span class="s1">&#39;Azimuth&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">190</span><span class="p">],[</span><span class="mi">40</span><span class="p">],</span><span class="o">...</span><span class="p">]),</span>
+<span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">70</span><span class="p">],[</span><span class="mi">40</span><span class="p">],</span><span class="o">...</span><span class="p">])},</span>
+<span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="o">...</span><span class="p">]),</span>
+<span class="s1">&#39;Error&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">0.01</span><span class="p">],[</span><span class="mf">0.02</span><span class="p">],</span><span class="o">...</span><span class="p">])}}</span>
+</pre></div>
+</div>
+<p>e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;P/SHRMSAmplitudeRatio&#39;</span><span class="p">:{</span><span class="s1">&#39;Stations&#39;</span><span class="p">:{</span><span class="s1">&#39;Name&#39;</span><span class="p">:[</span><span class="s1">&#39;S</span>
+<span class="mi">0649</span><span class="s1">&#39;,&quot;S0162&quot;],</span>
+<span class="s1">&#39;Azimuth&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">90.0</span><span class="p">,</span><span class="mf">270.0</span><span class="p">]),</span>
+<span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">30.0</span><span class="p">,</span><span class="mf">60.0</span><span class="p">])},</span>
+<span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]),</span>
+<span class="s1">&#39;Error&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span> <span class="mf">0.001</span><span class="p">,</span><span class="mf">0.02</span><span class="p">],[</span>
+<span class="mf">0.001</span><span class="p">,</span><span class="mf">0.001</span><span class="p">]])}}</span>
+</pre></div>
+</div>
+<p>Or a CSV file with events split by blank lines, a
+header line showing which row corresponds to which
+information (default is as shown here),
+UID and data-type information stored in the first
+column,
+e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">UID</span><span class="o">=</span><span class="mi">123</span><span class="p">,,,,</span>
+<span class="n">PPolarity</span><span class="p">,,,,</span>
+<span class="n">Name</span><span class="p">,</span><span class="n">Azimuth</span><span class="p">,</span><span class="n">TakeOffAngle</span><span class="p">,</span><span class="n">Measured</span><span class="p">,</span><span class="n">Error</span>
+<span class="n">S001</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.01</span>
+<span class="n">S002</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.02</span>
+<span class="n">P</span><span class="o">/</span><span class="n">SHRMSAmplitudeRatio</span><span class="p">,,,,</span>
+<span class="n">Name</span><span class="p">,</span><span class="n">Azimuth</span><span class="p">,</span><span class="n">TakeOffAngle</span><span class="p">,</span><span class="n">Measured</span><span class="p">,</span><span class="n">Error</span>
+<span class="n">S003</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.05</span> <span class="mf">0.04</span>
+<span class="p">,,,,</span>
+<span class="n">PPolarity</span> <span class="p">,,,,</span>
+<span class="n">Name</span><span class="p">,</span><span class="n">Azimuth</span><span class="p">,</span><span class="n">TakeOffAngle</span><span class="p">,</span><span class="n">Measured</span><span class="p">,</span><span class="n">Error</span>
+<span class="n">S003</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.05</span>
+</pre></div>
+</div>
+<p>Is a CSV file with 2 events, one event UID of 123,
+and PPolarity data at S001 and S002 and
+P/SHRMSAmplitude data at S003,
+and a second event with no UID (will default to
+the event number, in this case 2) with PPolarity data
+at S003.</p>
+<p>This data format can be constructed manually or
+automatically.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">s</span> <span class="n">LOCATION_PDF_FILE_PATH</span><span class="p">,</span> <span class="o">--</span><span class="n">anglescatterfilepath</span> <span class="n">LOCATION_PDF_FILE_PATH</span><span class="p">,</span>
+<span class="o">--</span><span class="n">location_pdf_file_path</span> <span class="n">LOCATION_PDF_FILE_PATH</span><span class="p">,</span>
+<span class="o">--</span><span class="n">location_file_path</span> <span class="n">LOCATION_PDF_FILE_PATH</span><span class="p">,</span>
+<span class="o">--</span><span class="n">scatterfilepath</span> <span class="n">LOCATION_PDF_FILE_PATH</span><span class="p">,</span>
+<span class="o">--</span><span class="n">scatter_file_path</span> <span class="n">LOCATION_PDF_FILE_PATH</span>
+</pre></div>
+</div>
+<p>Path to location scatter angle files - wild cards
+behave as normal.
+To include the model and location uncertainty, a
+ray path angle pdf file must be provided.
+This is of the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">probability1</span>
+<span class="n">Station1</span>    <span class="n">Azimuth1</span>    <span class="n">TakeOffAngle1</span>
+<span class="n">Station2</span>    <span class="n">Azimuth2</span>    <span class="n">TakeOffAngle2</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="n">StationN</span>    <span class="n">AzimuthN</span>    <span class="n">TakeOffAngleN</span>
+</pre></div>
+</div>
+<p>probability2
+Station1    Azimuth1    TakeOffAngle1
+Station2    Azimuth2    TakeOffAngle2
+.
+.
+.
+StationN    AzimuthN    TakeOffAngleN</p>
+<p>e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">504.7</span>
+<span class="n">S0529</span>   <span class="mf">326.1</span>   <span class="mf">131.7</span>
+<span class="n">S0083</span>   <span class="mf">223.7</span>   <span class="mf">118.2</span>
+<span class="n">S0595</span>   <span class="mf">42.6</span>    <span class="mf">117.8</span>
+<span class="n">S0236</span>   <span class="mf">253.6</span>   <span class="mf">118.6</span>
+<span class="o">&amp;&amp;</span>
+<span class="mf">504.7</span>
+<span class="n">S0529</span>   <span class="mf">326.1</span>   <span class="mf">131.8</span>
+<span class="n">S0083</span>   <span class="mf">223.7</span>   <span class="mf">118.2</span>
+<span class="n">S0595</span>   <span class="mf">42.7</span>    <span class="mf">117.9</span>
+<span class="n">S0236</span>   <span class="mf">253.5</span>   <span class="mf">118.7</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">a</span> <span class="p">{</span><span class="n">iterate</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="n">mcmc</span><span class="p">,</span><span class="n">transdmcmc</span><span class="p">},</span> <span class="o">--</span><span class="n">algorithm</span> <span class="p">{</span><span class="n">iterate</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="n">mcmc</span><span class="p">,</span><span class="n">transdmcmc</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Selects the algorithm used for the search.
+[default=time]
+Possible algorithms are:
+iterate (random sampling of the source space
+for a set number of samples)
+time (random sampling of the source space for
+a set time)
+mcmc (Markov chain Monte Carlo sampling)</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="o">--</span><span class="n">singlethread</span><span class="p">,</span> <span class="o">--</span><span class="n">single</span><span class="p">,</span> <span class="o">--</span><span class="n">single_thread</span>
+</pre></div>
+</div>
+<p>Flag to disable parallel computation</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">n</span> <span class="n">N</span><span class="p">,</span> <span class="o">--</span><span class="n">numberworkers</span> <span class="n">N</span><span class="p">,</span> <span class="o">--</span><span class="n">number_workers</span> <span class="n">N</span>
+</pre></div>
+</div>
+<p>Set the number of workers used in the parallel
+computation. [default=all available cpus]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">MEM</span><span class="p">,</span> <span class="o">--</span><span class="n">mem</span> <span class="n">MEM</span><span class="p">,</span> <span class="o">--</span><span class="n">memory</span> <span class="n">MEM</span><span class="p">,</span> <span class="o">--</span><span class="n">physical_memory</span> <span class="n">MEM</span><span class="p">,</span> <span class="o">--</span><span class="n">physicalmemory</span> <span class="n">MEM</span>
+</pre></div>
+</div>
+<p>Set the maximum memory used in Gb if psutil not
+available [default=8Gb]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">--</span><span class="n">doublecouple</span><span class="p">,</span> <span class="o">--</span><span class="n">double</span><span class="o">-</span><span class="n">couple</span><span class="p">,</span> <span class="o">--</span><span class="n">double_couple</span><span class="p">,</span> <span class="o">--</span><span class="n">dc</span><span class="p">,</span> <span class="o">--</span><span class="n">DC</span>
+</pre></div>
+</div>
+<p>Flag to constrain the inversion to double-couple
+sources only</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">b</span><span class="p">,</span> <span class="o">--</span><span class="n">compareconstrained</span><span class="p">,</span> <span class="o">--</span><span class="n">compare_constrained</span>
+</pre></div>
+</div>
+<p>Flag to run two inversions, one constrained to
+double-couple and one unconstrained</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">nstations</span> <span class="n">NUMBER_STATIONS</span>
+</pre></div>
+</div>
+<p>Set the maximum number of stations without having to
+load an angle pdf file - used for calculating sample
+sizes and memory sizes, and can speed up the
+calculation a bit, but has no effect on result.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">nanglesamples</span> <span class="n">NUMBER_LOCATION_SAMPLES</span><span class="p">,</span>
+<span class="o">--</span><span class="n">nlocationsamples</span> <span class="n">NUMBER_LOCATION_SAMPLES</span><span class="p">,</span>
+<span class="o">--</span><span class="n">number_location_samples</span> <span class="n">NUMBER_LOCATION_SAMPLES</span><span class="p">,</span>
+<span class="o">--</span><span class="n">number</span><span class="o">-</span><span class="n">location</span><span class="o">-</span><span class="n">samples</span> <span class="n">NUMBER_LOCATION_SAMPLES</span>
+</pre></div>
+</div>
+<p>Set the maximum number of angle pdf samples to use. If
+this is less than the total number of samples, a
+subset are randomly selected [default=0].</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">f</span><span class="p">,</span> <span class="o">--</span><span class="n">file_sample</span><span class="p">,</span> <span class="o">--</span><span class="n">file</span><span class="o">-</span><span class="n">sample</span><span class="p">,</span> <span class="o">--</span><span class="n">filesample</span><span class="p">,</span> <span class="o">--</span><span class="n">disk_sample</span><span class="p">,</span>
+<span class="o">--</span><span class="n">disk</span><span class="o">-</span><span class="n">sample</span><span class="p">,</span> <span class="o">--</span><span class="n">disksample</span>
+</pre></div>
+</div>
+<p>Save sampling to disk (allows for easier recovery and
+reduces memory requirements, but can be slower)</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">not_file_safe</span><span class="p">,</span> <span class="o">--</span><span class="ow">not</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">safe</span><span class="p">,</span> <span class="o">--</span><span class="n">notfilesafe</span><span class="p">,</span> <span class="o">--</span><span class="n">no_file_safe</span><span class="p">,</span>
+<span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">safe</span><span class="p">,</span> <span class="o">--</span><span class="n">nofilesafe</span>
+</pre></div>
+</div>
+<p>Disable file safe saving (i.e. copy and write to .mat~
+then copy back</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">i</span> <span class="n">INVERSION_OPTIONS</span><span class="p">,</span> <span class="o">--</span><span class="n">inversionoptions</span> <span class="n">INVERSION_OPTIONS</span><span class="p">,</span>
+<span class="o">--</span><span class="n">inversion_options</span> <span class="n">INVERSION_OPTIONS</span>
+</pre></div>
+</div>
+<p>Set the inversion data types to use: comma delimited.
+If not set, the inversion uses all the data types
+in the data file.
+e.g.
+PPolarity,P/SHRMSAmplitudeRatio</p>
+<p>Needs to correspond to the data types in the data
+file.</p>
+<p>If not specified can lead to independence errors:
+e.g.
+P/SH Amplitude Ratio and P/SV Amplitude Ratio can
+give SH/SV Amplitude Ratio.
+Therefore using SH/SV Amplitude Ratio in the
+inversion is reusing data and will artificially
+sharpen the PDF.
+This applies to all forms of dependent
+measurements.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">o</span> <span class="n">FID</span><span class="p">,</span> <span class="o">--</span><span class="n">out</span> <span class="n">FID</span><span class="p">,</span> <span class="o">--</span><span class="n">fid</span> <span class="n">FID</span><span class="p">,</span> <span class="o">--</span><span class="n">outputfile</span> <span class="n">FID</span><span class="p">,</span> <span class="o">--</span><span class="n">outfile</span> <span class="n">FID</span>
+</pre></div>
+</div>
+<p>Set output file basename [default=mtfitOutput]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">MAX_SAMPLES</span><span class="p">,</span> <span class="o">--</span><span class="n">samples</span> <span class="n">MAX_SAMPLES</span><span class="p">,</span> <span class="o">--</span><span class="n">maxsamples</span> <span class="n">MAX_SAMPLES</span><span class="p">,</span>
+<span class="o">--</span><span class="n">max_samples</span> <span class="n">MAX_SAMPLES</span><span class="p">,</span> <span class="o">--</span><span class="n">chain_length</span> <span class="n">MAX_SAMPLES</span><span class="p">,</span>
+<span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">samples</span> <span class="n">MAX_SAMPLES</span><span class="p">,</span> <span class="o">--</span><span class="n">chain</span><span class="o">-</span><span class="n">length</span> <span class="n">MAX_SAMPLES</span><span class="p">,</span> <span class="o">--</span><span class="n">chainlength</span> <span class="n">MAX_SAMPLES</span>
+</pre></div>
+</div>
+<p>Iteration algorithm: Set maximum number of samples to
+use [default=6000000]. McMC algorithms: Set chain
+length [default=10000], trans-d McMC [default=100000]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">t</span> <span class="n">MAX_TIME</span><span class="p">,</span> <span class="o">--</span><span class="n">time</span> <span class="n">MAX_TIME</span><span class="p">,</span> <span class="o">--</span><span class="n">maxtime</span> <span class="n">MAX_TIME</span><span class="p">,</span> <span class="o">--</span><span class="n">max_time</span> <span class="n">MAX_TIME</span>
+</pre></div>
+</div>
+<p>Time algorithm: Set maximum time to use [default=600]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="o">--</span><span class="n">multiple_events</span><span class="p">,</span> <span class="o">--</span><span class="n">multiple</span><span class="o">-</span><span class="n">events</span>
+</pre></div>
+</div>
+<p>Run using events using joint PDF approach</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="o">--</span><span class="n">relative_amplitude</span><span class="p">,</span> <span class="o">--</span><span class="n">relative</span><span class="o">-</span><span class="n">amplitude</span>
+</pre></div>
+</div>
+<p>Run using events using joint PDF approach</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">marginalise_relative</span><span class="p">,</span> <span class="o">--</span><span class="n">marginalise</span><span class="p">,</span> <span class="o">--</span><span class="n">marginalise</span><span class="o">-</span><span class="n">relative</span>
+</pre></div>
+</div>
+<p>Flag to marginalise location uncertainty in relative
+amplitude case [default=False]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">R</span><span class="p">,</span> <span class="o">--</span><span class="n">recover</span>
+</pre></div>
+</div>
+<p>Recover crashed run (ie restart from last event not
+written out)]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">invext</span> <span class="n">DATA_EXTENSION</span><span class="p">,</span> <span class="o">--</span><span class="n">dataextension</span> <span class="n">DATA_EXTENSION</span><span class="p">,</span>
+<span class="o">--</span><span class="n">dataext</span> <span class="n">DATA_EXTENSION</span><span class="p">,</span> <span class="o">--</span><span class="n">data</span><span class="o">-</span><span class="n">extension</span> <span class="n">DATA_EXTENSION</span><span class="p">,</span>
+<span class="o">--</span><span class="n">data_extension</span> <span class="n">DATA_EXTENSION</span>
+</pre></div>
+</div>
+<p>Set data file extension to search for when inverting
+on a folder</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">angleext</span> <span class="n">ANGLE_EXTENSION</span><span class="p">,</span> <span class="o">--</span><span class="n">locationextension</span> <span class="n">ANGLE_EXTENSION</span><span class="p">,</span>
+<span class="o">--</span><span class="n">locationext</span> <span class="n">ANGLE_EXTENSION</span><span class="p">,</span> <span class="o">--</span><span class="n">location</span><span class="o">-</span><span class="n">extension</span> <span class="n">ANGLE_EXTENSION</span><span class="p">,</span>
+<span class="o">--</span><span class="n">location_extension</span> <span class="n">ANGLE_EXTENSION</span>
+</pre></div>
+</div>
+<p>Set location sample file extension to search for when
+inverting on a folder</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">S</span> <span class="n">MINIMUM_NUMBER_INTERSECTIONS</span><span class="p">,</span>
+<span class="o">--</span><span class="n">minimum_number_intersections</span> <span class="n">MINIMUM_NUMBER_INTERSECTIONS</span><span class="p">,</span>
+<span class="o">--</span><span class="n">min_number_intersections</span> <span class="n">MINIMUM_NUMBER_INTERSECTIONS</span><span class="p">,</span>
+<span class="o">--</span><span class="n">minimum</span><span class="o">-</span><span class="n">number</span><span class="o">-</span><span class="n">intersections</span> <span class="n">MINIMUM_NUMBER_INTERSECTIONS</span><span class="p">,</span>
+<span class="o">--</span><span class="nb">min</span><span class="o">-</span><span class="n">number</span><span class="o">-</span><span class="n">intersections</span> <span class="n">MINIMUM_NUMBER_INTERSECTIONS</span>
+</pre></div>
+</div>
+<p>For relative amplitude inversion, the minimum number
+of intersecting stations required (must be greater
+than 1) [default=2]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">M</span><span class="p">,</span> <span class="o">--</span><span class="n">mpi</span><span class="p">,</span> <span class="o">--</span><span class="n">MPI</span>
+</pre></div>
+</div>
+<p>Run using mpi - will reinitialise using mpirun (mpi
+etc needs to be added to path)</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">B</span><span class="p">,</span> <span class="o">--</span><span class="n">benchmark</span><span class="p">,</span> <span class="o">--</span><span class="n">benchmarking</span>
+</pre></div>
+</div>
+<p>Run benchmark tests for the event</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">X</span> <span class="n">MIN_NUMBER_INITIALISATION_SAMPLES</span><span class="p">,</span>
+<span class="o">--</span><span class="n">min_number_check_samples</span> <span class="n">MIN_NUMBER_INITIALISATION_SAMPLES</span><span class="p">,</span>
+<span class="o">--</span><span class="n">min_number_initialisation_samples</span> <span class="n">MIN_NUMBER_INITIALISATION_SAMPLES</span>
+</pre></div>
+</div>
+<p>Minimum number of samples for McMC initialiser, or the
+minimum number of samples required when using quality
+check (-Q)</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">T</span><span class="p">,</span> <span class="o">--</span><span class="n">test</span><span class="p">,</span> <span class="o">--</span><span class="n">test</span>
+</pre></div>
+</div>
+<p>Run mtfit Test suite (if combined with -q runs test
+suite on cluster</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">Q</span> <span class="p">[</span><span class="n">QUALITY_CHECK</span><span class="p">],</span> <span class="o">--</span><span class="n">quality</span> <span class="p">[</span><span class="n">QUALITY_CHECK</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Run mtfit with quality checks enabled [default=False].
+Checks if an event has a percentage of non-zero
+samples lower than the flag - values from 0-100.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">D</span><span class="p">,</span> <span class="o">--</span><span class="n">debug</span>
+</pre></div>
+</div>
+<p>Run mtfit with debugging enabled.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">V</span> <span class="n">VERBOSITY</span><span class="p">,</span> <span class="o">--</span><span class="n">verbosity</span> <span class="n">VERBOSITY</span>
+</pre></div>
+</div>
+<p>Set verbosity level for non-fatal errors [default=0].</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="o">--</span><span class="n">diagnostics</span>
+</pre></div>
+</div>
+<p>Run mtfit with diagnostic output. Outputs the full
+chain and sampling - wil make a large file.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">j</span> <span class="n">DIMENSION_JUMP_PROB</span><span class="p">,</span> <span class="o">--</span><span class="n">jumpProbability</span> <span class="n">DIMENSION_JUMP_PROB</span><span class="p">,</span>
+<span class="o">--</span><span class="n">jumpProb</span> <span class="n">DIMENSION_JUMP_PROB</span><span class="p">,</span> <span class="o">--</span><span class="n">jumpprob</span> <span class="n">DIMENSION_JUMP_PROB</span><span class="p">,</span>
+<span class="o">--</span><span class="n">jumpProb</span> <span class="n">DIMENSION_JUMP_PROB</span><span class="p">,</span> <span class="o">--</span><span class="n">dimensionJumpProb</span> <span class="n">DIMENSION_JUMP_PROB</span><span class="p">,</span>
+<span class="o">--</span><span class="n">dimensionjumpprob</span> <span class="n">DIMENSION_JUMP_PROB</span>
+</pre></div>
+</div>
+<p>Sets the probability of making a dimension jump in the
+Trans-Dimensional McMC algorithm [default=0.01]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">y</span> <span class="p">{</span><span class="n">grid</span><span class="p">},</span> <span class="o">--</span><span class="n">initialSampling</span> <span class="p">{</span><span class="n">grid</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Sets the initialisation sampling method for McMC
+algorithms choices:
+grid - use grid based sampling to find non-zero
+initial sample [default=grid]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">u</span> <span class="n">MIN_ACCEPTANCE_RATE</span><span class="p">,</span> <span class="o">--</span><span class="n">minAcceptanceRate</span> <span class="n">MIN_ACCEPTANCE_RATE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">minacceptancerate</span> <span class="n">MIN_ACCEPTANCE_RATE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">min_acceptance_rate</span> <span class="n">MIN_ACCEPTANCE_RATE</span>
+</pre></div>
+</div>
+<p>Set the minimum acceptance rate for the McMC algorithm
+[mcmc default=0.3, transdmcmc default=0.05]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">v</span> <span class="n">MAX_ACCEPTANCE_RATE</span><span class="p">,</span> <span class="o">--</span><span class="n">maxAcceptanceRate</span> <span class="n">MAX_ACCEPTANCE_RATE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">maxacceptancerate</span> <span class="n">MAX_ACCEPTANCE_RATE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">max_acceptance_rate</span> <span class="n">MAX_ACCEPTANCE_RATE</span>
+</pre></div>
+</div>
+<p>Set the maximum acceptance rate for the McMC algorithm
+[mcmc default=0.5, transdmcmc default=0.2]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">w</span> <span class="n">ACCEPTANCE_RATE_WINDOW</span><span class="p">,</span>
+<span class="o">--</span><span class="n">acceptanceLearningWindow</span> <span class="n">ACCEPTANCE_RATE_WINDOW</span><span class="p">,</span>
+<span class="o">--</span><span class="n">acceptancelearningwindow</span> <span class="n">ACCEPTANCE_RATE_WINDOW</span>
+</pre></div>
+</div>
+<p>Sets the window for calculating and updating the
+acceptance rate for McMC algorithms [default=500]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">W</span> <span class="n">WARNINGS</span><span class="p">,</span> <span class="o">--</span><span class="n">warnings</span> <span class="n">WARNINGS</span><span class="p">,</span> <span class="o">--</span><span class="n">Warnings</span> <span class="n">WARNINGS</span>
+</pre></div>
+</div>
+<p>Sets the warning visibility.</p>
+<p>options are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&quot;e&quot;,&quot;error&quot; - turn matching warnings intoexceptions</li>
+<li>&quot;i&quot;,&quot;ignore&quot; - never print matching warnings</li>
+<li>&quot;a&quot;,&quot;always&quot; - always print matchingwarnings</li>
+<li>&quot;d&quot;,&quot;default&quot; - print the first occurrenceof matching warnings for each location where thewarning is issued</li>
+<li>&quot;m&quot;,&quot;module&quot; - print the first occurrence ofmatching warnings for each module where the warning isissued</li>
+<li>&quot;o&quot;,&quot;once&quot; - print only the first occurrenceof matching warnings, regardless of location</li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">z</span> <span class="n">LEARNING_LENGTH</span><span class="p">,</span> <span class="o">--</span><span class="n">learningLength</span> <span class="n">LEARNING_LENGTH</span><span class="p">,</span>
+<span class="o">--</span><span class="n">learninglength</span> <span class="n">LEARNING_LENGTH</span><span class="p">,</span> <span class="o">--</span><span class="n">learning_length</span> <span class="n">LEARNING_LENGTH</span>
+</pre></div>
+</div>
+<p>Sets the number of samples to discard as the learning
+period [default=5000]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>show program's version number and exit</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">mpi_call</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not use - automatically set when spawning mpi subprocess</p>
+</div>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">pickle</span><span class="p">,</span><span class="n">matlab</span><span class="p">},</span> <span class="o">--</span><span class="n">output_format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">pickle</span><span class="p">,</span><span class="n">matlab</span><span class="p">},</span>
+<span class="o">--</span><span class="n">outputformat</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">pickle</span><span class="p">,</span><span class="n">matlab</span><span class="p">},</span> <span class="o">--</span><span class="nb">format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">pickle</span><span class="p">,</span><span class="n">matlab</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Output file format [default=matlab]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">results</span><span class="o">-</span><span class="nb">format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">full_pdf</span><span class="p">},</span> <span class="o">--</span><span class="n">results_format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">full_pdf</span><span class="p">},</span>
+<span class="o">--</span><span class="n">resultsformat</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">full_pdf</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Output results data format (extensible)
+[default=full_pdf]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">dist</span><span class="p">,</span> <span class="o">--</span><span class="n">no_dist</span><span class="p">,</span> <span class="o">--</span><span class="n">nodist</span>
+</pre></div>
+</div>
+<p>Do not output station distribution if running location
+samples</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">dc</span><span class="o">-</span><span class="n">prior</span> <span class="n">DC_PRIOR</span><span class="p">,</span> <span class="o">--</span><span class="n">dc_prior</span> <span class="n">DC_PRIOR</span><span class="p">,</span> <span class="o">--</span><span class="n">dcprior</span> <span class="n">DC_PRIOR</span>
+</pre></div>
+</div>
+<p>Prior probability for the double-couple model when
+using the Trans-Dimensional McMC algorithm</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">sampling</span> <span class="n">SAMPLING</span><span class="p">,</span> <span class="o">--</span><span class="n">sampling</span> <span class="n">SAMPLING</span><span class="p">,</span> <span class="o">--</span><span class="n">sampling</span> <span class="n">SAMPLING</span>
+</pre></div>
+</div>
+<p>Random moment tensor sampling distribution</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">sample</span><span class="o">-</span><span class="n">models</span> <span class="n">SAMPLE_DISTRIBUTION</span><span class="p">,</span>
+<span class="o">--</span><span class="n">sample_distribution</span> <span class="n">SAMPLE_DISTRIBUTION</span><span class="p">,</span> <span class="o">--</span><span class="n">samplemodels</span> <span class="n">SAMPLE_DISTRIBUTION</span>
+</pre></div>
+</div>
+<p>Alternate models for random sampling (Monte Carlo
+algorithms only)</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">sampling</span><span class="o">-</span><span class="n">prior</span> <span class="n">SAMPLING_PRIOR</span><span class="p">,</span> <span class="o">--</span><span class="n">sampling_prior</span> <span class="n">SAMPLING_PRIOR</span><span class="p">,</span>
+<span class="o">--</span><span class="n">samplingprior</span> <span class="n">SAMPLING_PRIOR</span>
+</pre></div>
+</div>
+<p>Prior probability for the model distribution when
+using the McMC algorithm, alternatively the prior
+distribution for the source type parameters gamma and
+delta for use by the Bayesian evidence calculation for
+the MC algorithms</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">normalise</span><span class="p">,</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">norm</span><span class="p">,</span> <span class="o">--</span><span class="n">no_normalise</span><span class="p">,</span> <span class="o">--</span><span class="n">no_norm</span>
+</pre></div>
+</div>
+<p>Do not normalise the output pdf</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">convert</span>
+</pre></div>
+</div>
+<p>Convert the output MTs to Tape parameters, hudson
+parameters and strike dip rakes.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">discard</span> <span class="n">DISCARD</span>
+</pre></div>
+</div>
+<p>Fraction of maxProbability * total samples to discard
+as negligeable.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">mpioutput</span><span class="p">,</span> <span class="o">--</span><span class="n">mpi_output</span><span class="p">,</span> <span class="o">--</span><span class="n">mpi</span><span class="o">-</span><span class="n">output</span>
+</pre></div>
+</div>
+<p>When the mpi flag -M is used outputs each processor
+individually rather than combining</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">combine_mpi_output</span><span class="p">,</span> <span class="o">--</span><span class="n">combine</span><span class="o">-</span><span class="n">mpi</span><span class="o">-</span><span class="n">output</span><span class="p">,</span> <span class="o">--</span><span class="n">combinempioutput</span>
+</pre></div>
+</div>
+<p>Combine the mpi output from the mpioutput flag. The
+data path corresponds to the root path for the mpi
+output</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">c_generate</span><span class="p">,</span> <span class="o">--</span><span class="n">c</span><span class="o">-</span><span class="n">generate</span><span class="p">,</span> <span class="o">--</span><span class="n">generate</span>
+</pre></div>
+</div>
+<p>Generate moment tensor samples in the probability
+evaluation</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">relative_loop</span><span class="p">,</span> <span class="o">--</span><span class="n">relative</span><span class="o">-</span><span class="n">loop</span><span class="p">,</span> <span class="o">--</span><span class="n">relativeloop</span><span class="p">,</span> <span class="o">--</span><span class="n">loop</span>
+</pre></div>
+</div>
+<p>Loop over independent non-zero samples randomly to
+construct joint rather than joint samples</p>
+</div>
+<div class="section" id="scatangle">
+<h2>9.3. Scatangle:<a class="headerlink" href="#scatangle" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">bin</span><span class="o">-</span><span class="n">scatangle</span><span class="p">,</span> <span class="o">--</span><span class="n">binscatangle</span><span class="p">,</span> <span class="o">--</span><span class="n">bin_scatangle</span>
+</pre></div>
+</div>
+<p>Bin the scatangle file to reduce the number of samples
+[default=False]. --bin-size Sets the bin size
+parameter .</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="nb">bin</span><span class="o">-</span><span class="n">size</span> <span class="n">BIN_SCATANGLE_SIZE</span><span class="p">,</span> <span class="o">--</span><span class="n">binsize</span> <span class="n">BIN_SCATANGLE_SIZE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">bin_size</span> <span class="n">BIN_SCATANGLE_SIZE</span>
+</pre></div>
+</div>
+<p>Sets the scatangle bin size parameter [default=1.0]</p>
+</div>
+<div class="section" id="cluster">
+<h2>9.4. Cluster:<a class="headerlink" href="#cluster" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Commands</span> <span class="k">for</span> <span class="n">using</span> <span class="n">mtfit</span> <span class="n">on</span> <span class="n">a</span> <span class="n">cluster</span> <span class="n">environment</span> <span class="n">using</span> <span class="n">qsub</span><span class="o">/</span><span class="n">PBS</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">q</span><span class="p">,</span> <span class="o">--</span><span class="n">qsub</span><span class="p">,</span> <span class="o">--</span><span class="n">pbs</span>
+</pre></div>
+</div>
+<p>Flag to set mtfit to submit to cluster</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">nodes</span> <span class="n">QSUB_NODES</span>
+</pre></div>
+</div>
+<p>Set number of nodes to use for job submission.
+[default=1]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">ppn</span> <span class="n">QSUB_PPN</span>
+</pre></div>
+</div>
+<p>Set ppn to use for job submission. [default=8]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">pmem</span> <span class="n">QSUB_PMEM</span>
+</pre></div>
+</div>
+<p>Set pmem (Gb) to use for job submission.
+[default=2Gb]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">email</span> <span class="n">QSUB_M</span>
+</pre></div>
+</div>
+<p>Set user email address.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">emailoptions</span> <span class="n">QSUB_M</span>
+</pre></div>
+</div>
+<p>Set PBS -m mail options. Requires email address using
+-M. [default=bae]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">name</span> <span class="n">QSUB_N</span>
+</pre></div>
+</div>
+<p>Set PBS -N job name options. [default=mtfit]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">walltime</span> <span class="n">QSUB_WALLTIME</span>
+</pre></div>
+</div>
+<p>Set PBS maximum wall time. Needs to be of the form
+HH:MM:SS. [default=24:00:00]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">queue</span> <span class="n">QSUB_Q</span>
+</pre></div>
+</div>
+<p>Set PBS -q Queue options. [default=batch]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">bladeproperties</span> <span class="n">QSUB_BLADE_PROPERTIES</span>
+</pre></div>
+</div>
+<p>Set desired PBS blade properties. [default=False]</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">feature</span> <span class="n">QSUB_BLADE_FEATURE</span>
+</pre></div>
+</div>
+<p>Set desired Torque feature arguments. [default=False]</p>
+<p><a class="reference internal" href="run.html"><span class="doc">Running mtfit</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mtplot.html" class="btn btn-neutral float-right" title="10. Plotting the Moment Tensor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mtconvert.html" class="btn btn-neutral" title="8. convert" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,967 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10. Plotting the Moment Tensor &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="next" title="11. Plotting classes" href="plot_classes.html"/>
+        <link rel="prev" title="9. mtfit command line options" href="cli.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-mtplot-from-the-command-line">10.1. Using MTplot from the command line</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#script-installation">10.1.1. Script Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#linux">10.1.1.1. Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows">10.1.1.2. Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-options">10.1.2. Command Line Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-mtplot-from-the-python-interpreter">10.2. Using MTplot from the Python interpreter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-data">10.3. Input Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtplot-class">10.4. MTplot Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtdata-class">10.5. MTData Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beachball-plot">10.6. Beachball plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fault-plane-plot">10.7. Fault Plane plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#riedesel-jordan-plot">10.8. Riedesel-Jordan plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#radiation-plot">10.9. Radiation plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hudson-plot">10.10. Hudson plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lune-plot">10.11. Lune plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">10.12. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>10. Plotting the Moment Tensor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/mtplot.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="plotting-the-moment-tensor">
+<h1>10. Plotting the Moment Tensor<a class="headerlink" href="#plotting-the-moment-tensor" title="Permalink to this headline">¶</a></h1>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> has a plotting submodule that can be used to represent the source. There are several different plot types, shown below, and MTplot can be used both from the command line, and from within the python interpreter.</p>
+<p>This section describes how to use the plotting tools and shows the different plot types:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#beachball"><span class="std std-ref">Beachball</span></a></li>
+<li><a class="reference internal" href="#faultplane"><span class="std std-ref">Fault plane</span></a></li>
+<li><a class="reference internal" href="#rjplot"><span class="std std-ref">Riedesel-Jordan</span></a></li>
+<li><a class="reference internal" href="#radiation"><span class="std std-ref">Radiation</span></a></li>
+<li><a class="reference internal" href="#lune"><span class="std std-ref">Lune</span></a></li>
+<li><a class="reference internal" href="#hudson"><span class="std std-ref">Hudson</span></a></li>
+</ul>
+</div></blockquote>
+<p>These are plotted using <a class="reference external" href="http://matplotlib.org/">matplotlib</a>, using a class based system. The main plotting class is the <code class="xref py py-class docutils literal"><span class="pre">MTplot</span></code> class, which stores the figure and handles the plotting, and each axes plotted is shown using a plot class from <code class="xref py py-mod docutils literal"><span class="pre">mtfit.plot.plot_classes</span></code>. The plotting methods are designed to enable easy plotting without much user input, but also allow more complex plots to be made.
+The <a class="reference internal" href="#mtplot-examples"><span class="std std-ref">examples section</span></a> shows two examples of using the plotting submodule.</p>
+<p>The source code is shown in <a class="reference internal" href="source-plot_classes.html"><span class="doc">mtfit.plot.plot_classes</span></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><code class="xref py py-mod docutils literal"><span class="pre">matplotlib</span></code> does not plot 3d plots very well, as each object is converted to a 2d object and plotted, and given a constant zorder for the whole plot. Consequently, the bi-axes plot (<a class="reference internal" href="references.html#chapman-2011"><span class="std std-ref">Chapman and Leaney, 2011</span></a>) is not included as an option, and other 3D plots may not always work correctly.</p>
+</div>
+<p>For the full plot_classes documentation, see <a class="reference internal" href="plot_classes.html"><span class="doc">Plotting classes</span></a>.</p>
+<div class="section" id="using-mtplot-from-the-command-line">
+<h2>10.1. Using MTplot from the command line<a class="headerlink" href="#using-mtplot-from-the-command-line" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-mod docutils literal"><span class="pre">MTplot</span></code> can be run from the command line. A script should have been installed onto the path during installation and should be callable as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTplot
+</pre></div>
+</div>
+<p>However it may be necessary to install the script manually. This is platform dependent.</p>
+<div class="section" id="script-installation">
+<h3>10.1.1. Script Installation<a class="headerlink" href="#script-installation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="linux">
+<h4>10.1.1.1. Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
+<p>Add this python script to a directory on the $PATH environmental variable:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">__run__</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>and make sure it is executable.</p>
+</div>
+<div class="section" id="windows">
+<h4>10.1.1.2. Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
+<p>Add the linux script (above) to the path or if using powershell edit the powershell profile (usually found in <em>Documents/WindowsPowerShell/</em> - if not present use <code class="docutils literal"><span class="pre">$PROFILE|Format-List</span> <span class="pre">-Force</span></code> to locate it, it may be necessary to create the profile) and add:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>function MTplot{
+    $script={
+        python -c &quot;import mtfit;mtfit.plot.__run__()&quot; $args
+        }
+    Invoke-Command -ScriptBlock $script -ArgumentList $args
+    }
+</pre></div>
+</div>
+<p>Windows Powershell does seem to have some errors with commandline arguments, if necessary these should be enclosed in quotation marks e.g. &quot;-d=datafile.inv&quot;</p>
+</div>
+</div>
+<div class="section" id="command-line-options">
+<h3>10.1.2. Command Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h3>
+<p>There are several command line options available, these can be found by calling:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTplot -h
+</pre></div>
+</div>
+<p>The command line defaults can be set using the same defaults file as for mtfit (see <a class="reference internal" href="run.html"><span class="doc">Running mtfit</span></a>).</p>
+</div>
+</div>
+<div class="section" id="using-mtplot-from-the-python-interpreter">
+<h2>10.2. Using MTplot from the Python interpreter<a class="headerlink" href="#using-mtplot-from-the-python-interpreter" title="Permalink to this headline">¶</a></h2>
+<p>Although MTplot can be run from the command line, it is much more powerful to run it from within the python interpreter.
+To run MTplot from the python interpreter, create the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes.MTplot" title="mtfit.plot.plot_classes.MTplot"><code class="xref py py-class docutils literal"><span class="pre">MTplot</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mtfit.plot</span> <span class="k">import</span> <span class="n">MTplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MTplot</span><span class="p">(</span><span class="n">MTs</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;beachball&#39;</span><span class="p">,</span><span class="n">stations</span><span class="o">=</span><span class="p">{},</span><span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="#mtplotclass"><span class="std std-ref">Making the MTplot class</span></a> for more information on the  <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes.MTplot" title="mtfit.plot.plot_classes.MTplot"><code class="xref py py-class docutils literal"><span class="pre">MTplot</span></code></a> object.</p>
+</div>
+<div class="section" id="input-data">
+<span id="input-data-label"></span><h2>10.3. Input Data<a class="headerlink" href="#input-data" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-func docutils literal"><span class="pre">mtfit.plot.__core__.read()</span></code> can read the three default output formats (MATLAB, hyp and pickle) for mtfit results.</p>
+<p>Additional parsers can be installed using the <cite>mtfit.plot_read</cite> entry point described in <a class="reference internal" href="extensions.html"><span class="doc">Extending mtfit</span></a>.</p>
+</div>
+<div class="section" id="mtplot-class">
+<span id="mtplotclass"></span><h2>10.4. MTplot Class<a class="headerlink" href="#mtplot-class" title="Permalink to this headline">¶</a></h2>
+<p>The MTplot class is used to handle plotting the moment tensors. The moment tensors are stored as an <a class="reference internal" href="#mtdataclass"><span class="std std-ref">MTData</span></a> class.</p>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes.MTplot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">MTplot</code><span class="sig-paren">(</span><em>MTs</em>, <em>plot_type='beachball'</em>, <em>stations={}</em>, <em>plot=True</em>, <em>label=False</em>, <em>save_file=''</em>, <em>save_dpi=200</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTplot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTplot class - handles plotting of the moment tensor using  different plot_classes</p>
+<p>This object acts as a handle round a matplotlib figure, handling the moment tensors and creating the plot classes for axes.</p>
+<p>Initialises the MTplot object.</p>
+<p>Multiple plots (subplots) are handled using the matplotlib GridSpec - to create multiple plots, use nested lists for the MTs, with the inner lists corresponding to each column and the outer each row, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">;</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">;</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>The total number of columns is given by the max number of points in the nested list. Lists with fewer points will have the last plot stretched to cover the remaining columns.
+Setting None in the list will stretch the plot to it's left to cover the columns.</p>
+<p>The args and kwargs, which are passed through to the plot_class object can also be nested in this way. Additionally, if the parameters are equal to the number of columns,
+or number of rows, the same values are used for each plot in the corresponding column or row. If the dimension of the multiplot is square, the parameters are assumed to correspond to the rows.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MTs: Moment tensor samples for creating MTData object, such as a numpy array of MT 6 vectors (see MTData initialisation for different types, and MTplot docstring for handling multiple plots</dd>
+<dt>Keyword Args</dt>
+<dd>plot_type: str - plot type selection (Default is 'beachball')
+stations: dict - Dictionary of stations, containing keys: 'names','azimuth','takeoff_angle' and 'polarity' or an empty dict (default)
+plot: bool - flag to actually plot and show the figure
+label: bool - flag to show axis labels if multiple plots are being shown
+save_file: string  - filename to save plot to (if set)
+save_dpi: int - output dpi for file save
+args: passed through to plot_class initialisation
+kwargs: passed through to plot_class initialisation</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTplot.ax_labels">
+<code class="descname">ax_labels</code><span class="sig-paren">(</span><em>show=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTplot.ax_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTplot.ax_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or update axis label to axis corners.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTplot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTplot.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTplot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the figure and shows it.</p>
+<p>Calls the plot functions for each plot_class in the multiplot.</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+</div>
+<div class="section" id="mtdata-class">
+<span id="mtdataclass"></span><h2>10.5. MTData Class<a class="headerlink" href="#mtdata-class" title="Permalink to this headline">¶</a></h2>
+<p>The MTData class is used for storing and converting the moment tensors for plotting.</p>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes.MTData">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">MTData</code><span class="sig-paren">(</span><em>MTs</em>, <em>probability=[]</em>, <em>c=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTData object manages the moment tensors.</p>
+<p>Additionally it enables conversion between different parameterisations
+and calculation of several statistics.</p>
+<p>This is used by all of the plot classes for handling the moment tensor,
+and is transparent to converting and accessing the moment tensors, as
+it behaves like a numpy array (e.g. indexing and properties like shape
+are given for the moment tensor).</p>
+<p>The MTData object also stores the probability, and is used for
+calculating the orientation mean.</p>
+<p>MTData initialisation</p>
+<p>Parameters corresponding to the moment tensor samples can be set
+as kwargs. These parameters include:</p>
+<blockquote>
+<div>T, N, P, E, u, v, tau, k, gamma, delta, kappa, h, sigma,
+strike1, dip1, rake1, strike2, dip2, rake2, N1, N2</div></blockquote>
+<dl class="docutils">
+<dt>Args</dt>
+<dd><dl class="first last docutils">
+<dt>MTs: numpy array of moment tensor six vectors with shape (6,n).</dt>
+<dd>Alternatively, the input can be a dictionary from the mtfit output.</dd>
+</dl>
+</dd>
+<dt>Keyword Args</dt>
+<dd><dl class="first last docutils">
+<dt>probability: list or numpy array of probabilities - should be</dt>
+<dd>the same length as the number of moment tensors,
+or empty (Default is [])</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs: Attributes that correspond to converted parameters</dt>
+<dd>of the moment tensor, as described above</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.cluster_normals">
+<code class="descname">cluster_normals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.cluster_normals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.cluster_normals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cluster the normals.</p>
+<p>This is a very simplistic algorithm that clusters the normals by dividing them into two groups with the shortest distance between them.</p>
+<p>N.B. This depends on the initial values given, so if the normals are not well clustered, or the initial normals chosen are outliers, the results will not be a good clustering.</p>
+<p>Consequently, only use this approach for well clustered fault plane normals (in at least one normal direction). The more tightly clustered normals are set to clustered_N1.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array, numpy array: tuple of numpy arrays, clustered_N1, clustered_N2, clustered_rake1,clustered_rake2</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.get_max_probability">
+<code class="descname">get_max_probability</code><span class="sig-paren">(</span><em>single=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.get_max_probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.get_max_probability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an MTData object containing the maximum probability solutions</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>single: bool - flag to return only one moment tensor (the first maximum probability moment tensor)</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">New MTData object with max probability MT samples.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes.MTData" title="mtfit.plot.plot_classes.MTData">MTData</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.get_mean">
+<code class="descname">get_mean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.get_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.get_mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the mean moment tensor and variance of the moment tensor samples</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tuple of numpy arrays for the mean moment tensor six vector and the moment tensor six vector covariance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy array,numpy array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.get_mean_orientation">
+<code class="descname">get_mean_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.get_mean_orientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.get_mean_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mean orientation from the clustered normals and rake parameters using the more tightly clustered parameters.</p>
+<p>This also calculates the variance of the rake distributions and covariance of the clustered normals (using the probability if it is set)</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of the mean strike dip and rake of the fault planes.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.get_unique_McMC">
+<code class="descname">get_unique_McMC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.get_unique_McMC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.get_unique_McMC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the unique McMC samples, with the probability scaled by the number of samples</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>MTData: New MTData object with unique MT samples and probabilities corresponding to the moment tensor frequencies.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.is_dc">
+<code class="descname">is_dc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.is_dc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.is_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns array of DC values</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="beachball-plot">
+<span id="beachball"></span><h2>10.6. Beachball plot<a class="headerlink" href="#beachball-plot" title="Permalink to this headline">¶</a></h2>
+<p>The simplest plot is a beachball plot using the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes._AmplitudePlot" title="mtfit.plot.plot_classes._AmplitudePlot"><code class="xref py py-class docutils literal"><span class="pre">mtfit.plot.plot_classes._AmplitudePlot</span></code></a> class.</p>
+<p>Using the MTplot function, it can be made with the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]),</span><span class="s1">&#39;beachball&#39;</span><span class="p">,</span>
+<span class="go">        fault_plane=True)</span>
+</pre></div>
+</div>
+<p>This plots the equal area projection of the source (a double-couple).</p>
+<p>Stations can be included as a dictionary, with the azimuths and takeoff angles in degrees, such as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;names&#39;</span><span class="p">:[</span><span class="s1">&#39;S01&#39;</span><span class="p">,</span><span class="s1">&#39;S02&#39;</span><span class="p">,</span><span class="s1">&#39;S03&#39;</span><span class="p">,</span><span class="s1">&#39;S04&#39;</span><span class="p">],</span>
+<span class="go">              &#39;azimuth&#39;:np.array([120.,5.,250.,75.]),</span>
+<span class="go">              &#39;takeoff_angle&#39;:np.array([30.,60.,45.,10.]),</span>
+<span class="go">              &#39;polarity&#39;:np.array([1,0,1,-1])}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]),</span><span class="s1">&#39;beachball&#39;</span><span class="p">,</span>
+<span class="go">            stations=stations,fault_plane=True)</span>
+</pre></div>
+</div>
+<p>If the polarity probabilities have been used in the inversion, the probabilities can be plotted on the receivers, by setting the stations <code class="docutils literal"><span class="pre">polarity</span></code> array as an array of the larger polarity probabilities, with negative polarity probabilities corresponding to polarities in the negative direction, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stations</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;names&#39;</span><span class="p">:[</span><span class="s1">&#39;S01&#39;</span><span class="p">,</span><span class="s1">&#39;S02&#39;</span><span class="p">,</span><span class="s1">&#39;S03&#39;</span><span class="p">,</span><span class="s1">&#39;S04&#39;</span><span class="p">],</span>
+<span class="go">              &#39;azimuth&#39;:np.array([120.,5.,250.,75.]),</span>
+<span class="go">              &#39;takeoff_angle&#39;:np.array([30.,60.,45.,10.]),</span>
+<span class="go">              &#39;polarity&#39;:np.array([0.8,0.5,0.7,-0.9])}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]),</span><span class="s1">&#39;beachball&#39;</span><span class="p">,</span>
+<span class="go">            stations=stations,fault_plane=True)</span>
+</pre></div>
+</div>
+<p>To tweak the plot further, the plot class can be used directly:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_classes</span><span class="o">.</span><span class="n">_AmplitudePlot</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span>
+<span class="go">        np.array([[1],[0],[-1],[0],[0],[0]]),&#39;beachball&#39;,</span>
+<span class="go">        stations=stations,fault_plane=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The first two arguments correspond to the subplot_spec and matplotlib figure to be used - if these are False, then a new figure is created.</p>
+<p>It uses the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes._AmplitudePlot" title="mtfit.plot.plot_classes._AmplitudePlot"><code class="xref py py-class docutils literal"><span class="pre">mtfit.plot.plot_classes._AmplitudePlot</span></code></a> class:</p>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_AmplitudePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_AmplitudePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amplitude plotting (beachball)</p>
+<p>parameter single is set to True, as can only plot one source per axis</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+stations: dict - station dict containing keys: 'names','azimuth','takeoff_angle' and 'polarity'
+station_distribution: list - list of station dictionaries corresponding to a location PDF distribution
+show_zero_polarity: bool - flag to show zero polarity receivers
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - station marker size (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="fault-plane-plot">
+<span id="faultplane"></span><h2>10.7. Fault Plane plot<a class="headerlink" href="#fault-plane-plot" title="Permalink to this headline">¶</a></h2>
+<p>A similar plot to the amplitude beachball plot is the fault plane plot, made using the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes._FaultPlanePlot" title="mtfit.plot.plot_classes._FaultPlanePlot"><code class="xref py py-class docutils literal"><span class="pre">mtfit.plot.plot_classes._FaultPlanePlot</span></code></a> class.</p>
+<p>Using the MTplot function, it can be made with the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]),</span><span class="s1">&#39;faultplane&#39;</span><span class="p">,</span>
+<span class="go">        fault_plane=True)</span>
+</pre></div>
+</div>
+<p>This plots the equal area projection of the source (a double-couple).</p>
+<p>Stations can be included as a dictionary, like with the beachball plot.</p>
+<p>The fault plane plot also can plot the solutions for multiple moment tensors, so the input array can be longer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span><span class="mf">0.4</span><span class="p">],</span>
+<span class="go">                                [ 0,0.1,-0.1,0.6],</span>
+<span class="go">                                [-1, -1,  -1, -1],</span>
+<span class="go">                                [ 0,  0,   0,  0],</span>
+<span class="go">                                [ 0,  0,   0,  0],</span>
+<span class="go">                                [ 0,  0,   0,  0]]),</span>
+<span class="go">                     &#39;faultplane&#39;,fault_plane=True)</span>
+</pre></div>
+</div>
+<p>There are additional initialisation arguments, such as <code class="docutils literal"><span class="pre">show_max_likelihood</span></code> and <code class="docutils literal"><span class="pre">show_mean</span></code> boolean flags, which shows the maximum likelihood fault planes in the color given by the default color argument, and the mean orientation in green.</p>
+<p>Additionally, if  the probability argument is set, the fault planes are coloured by the probability, with more likely planes darker.</p>
+<p>It uses the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes._FaultPlanePlot" title="mtfit.plot.plot_classes._FaultPlanePlot"><code class="xref py py-class docutils literal"><span class="pre">mtfit.plot.plot_classes._FaultPlanePlot</span></code></a> class:</p>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_FaultPlanePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>probability=[]</em>, <em>phase='p'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FaultPlanePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fault plane distribution</p>
+<p>parameter single is set to False as multiple sources can be plotted per axes</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>probability: numpy array - moment tensor probabilities
+phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+stations: dict - station dict containing keys: 'names','azimuth','takeoff_angle' and 'polarity'
+station_distribution: list - list of station dictionaries corresponding to a location PDF distribution
+show_zero_polarity: bool - flag to show zero polarity receivers
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - station marker size (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc
+show_max_likelihood: bool - show the maximum likelihood solution in the default color
+show_mean: bool - show the mean orientation source in green (thicker plane is better constrained)
+color: set color for maximum likelihood fault plane (show_max_likelihood)</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="riedesel-jordan-plot">
+<span id="rjplot"></span><h2>10.8. Riedesel-Jordan plot<a class="headerlink" href="#riedesel-jordan-plot" title="Permalink to this headline">¶</a></h2>
+<p>The Riedesel-Jordan plot is more complicated, and is described in <a class="reference internal" href="references.html#riedesel-1989"><span class="std std-ref">Riedesel and Jordan (1989)</span></a>. It plots the source type on the focal sphere, in a region described by the source eigenvectors.</p>
+<p>Using the MTplot function, it can be made with the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]),</span><span class="s1">&#39;riedeseljordan&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This plots the equal area projection of the source (a double-couple).</p>
+<p>Stations cannot be shown on this plot.</p>
+<p>The Riedesel-Jordan plot cannot plot the solutions for multiple moment tensors, so the input array can only be one moment tensor.</p>
+<p>It uses the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes._RiedeselJordanPlot" title="mtfit.plot.plot_classes._RiedeselJordanPlot"><code class="xref py py-class docutils literal"><span class="pre">mtfit.plot.plot_classes._RiedeselJordanPlot</span></code></a> class:</p>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_RiedeselJordanPlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RiedeselJordanPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the source as a Riedesel-Jordan type plot</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - sets the source type marker sizes (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+color: str - matplotlib color for source region
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="radiation-plot">
+<span id="radiation"></span><h2>10.9. Radiation plot<a class="headerlink" href="#radiation-plot" title="Permalink to this headline">¶</a></h2>
+<p>The radiation plot shows the same pattern as the beachball plot, except the shape is scaled by the amplitude on the focal sphere.</p>
+<p>Using the MTplot function, it can be made with the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]),</span><span class="s1">&#39;radiation&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This plots the equal area projection of the source (a double-couple).</p>
+<p>Stations cannot be shown on this plot.</p>
+<p>The radiation plot cannot plot the solutions for multiple moment tensors, so the input array can only be one moment tensor.</p>
+<p>It uses the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes._RadiationPlot" title="mtfit.plot.plot_classes._RadiationPlot"><code class="xref py py-class docutils literal"><span class="pre">mtfit.plot.plot_classes._RadiationPlot</span></code></a> class:</p>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._RadiationPlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_RadiationPlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RadiationPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the radiation pattern</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+stations: dict - station dict containing keys: 'names','azimuth','takeoff_angle' and 'polarity'
+station_distribution: list - list of station dictionaries corresponding to a location PDF distribution
+show_zero_polarity: bool - flag to show zero polarity receivers
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - station marker size (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="hudson-plot">
+<span id="hudson"></span><h2>10.10. Hudson plot<a class="headerlink" href="#hudson-plot" title="Permalink to this headline">¶</a></h2>
+<p>The Hudson plot is a source type plot, described in <a class="reference internal" href="references.html#hudson-1989"><span class="std std-ref">Hudson et al. (1989)</span></a>. It plots the source type in a quadrilateral, depending on the chosen projection. There are two projections, the tau-k plot and the u-v plot, with the latter being more common (and the default).</p>
+<p>Using the MTplot function, it can be made with the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]),</span><span class="s1">&#39;hudson&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This plots the u-v plot of the source (a double-couple).</p>
+<p>Stations cannot be shown on this plot.</p>
+<p>The Hudson plot can plot the solutions for multiple moment tensors, so the input array can be longer. Additionally, it can also plot a histogram of the PDF, if the probability argument is set.</p>
+<p>It uses the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes._HudsonPlot" title="mtfit.plot.plot_classes._HudsonPlot"><code class="xref py py-class docutils literal"><span class="pre">mtfit.plot.plot_classes._HudsonPlot</span></code></a> class:</p>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._HudsonPlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_HudsonPlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>projection='uv'</em>, <em>probability=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_HudsonPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hudson plot class</p>
+<p>Plots the source on the u-v or tau-k Hudson plot</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>projection: str - select the projection type from uv or tauk [default is uv]
+probability: numpy array - moment tensor probabilities
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc
+grid_lines: bool - show the interior grid lines
+marginalised: bool - marginalise the PDF (defailt is True)
+color: set marker color
+type_label: bool - show the label of the different types
+hex_bin: bool - use the hex-bin histogram type (slightly smoother)
+bins: int/array/list of arrays - bins for numpy histogram call</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="lune-plot">
+<span id="lune"></span><h2>10.11. Lune plot<a class="headerlink" href="#lune-plot" title="Permalink to this headline">¶</a></h2>
+<p>The Lune plot is a source type plot, described in <a class="reference internal" href="references.html#tape-2012"><span class="std std-ref">Tape and Tape (2012)</span></a>. It plots the source type in the fundamental eigenvalue lune, which can be projected into 2 dimensions.</p>
+<p>Using the MTplot function, it can be made with the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]),</span><span class="s1">&#39;lune&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Stations cannot be shown on this plot.</p>
+<p>The Lune plot can plot the solutions for multiple moment tensors, so the input array can be longer. Additionally, it can also plot a histogram of the PDF, if the probability argument is set.</p>
+<p>It uses the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes._LunePlot" title="mtfit.plot.plot_classes._LunePlot"><code class="xref py py-class docutils literal"><span class="pre">mtfit.plot.plot_classes._LunePlot</span></code></a> class:</p>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._LunePlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_LunePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the source on the fundamental eigenvalue lune</p>
+<p>Can be either a histogram or scatter plot.</p>
+<p>parameter single is set to False as multiple sources can be plotted per axes</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+stations: dict - station dict containing keys: 'names','azimuth','takeoff_angle' and 'polarity'
+station_distribution: list - list of station dictionaries corresponding to a location PDF distribution
+show_zero_polarity: bool - flag to show zero polarity receivers
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - station marker size (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="examples">
+<span id="mtplot-examples"></span><h2>10.12. Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>This section shows a pair of simple examples and their results.</p>
+<p>The first example is to plot the data from <a class="reference internal" href="real-tutorial.html#real-p-polarity"><span class="std std-ref">Krafla P Polarity example</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1">#Load Data</span>
+<span class="n">st_dist</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;krafla_event_ppolarityDCStationDistribution.mat&#39;</span><span class="p">,</span>
+    <span class="n">station_distribution</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">DCs</span><span class="p">,</span><span class="n">DCstations</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;krafla_event_ppolarityDC.mat&#39;</span><span class="p">)</span>
+<span class="n">MTs</span><span class="p">,</span><span class="n">MTstations</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;krafla_event_ppolarityMT.mat&#39;</span><span class="p">)</span>
+<span class="c1">#Plot</span>
+<span class="n">plot</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span><span class="n">DCs</span><span class="p">,</span><span class="n">MTs</span><span class="p">],</span>
+    <span class="n">stations</span><span class="o">=</span><span class="p">[</span><span class="n">DCstations</span><span class="p">,</span><span class="n">DCstations</span><span class="p">,</span><span class="n">MTstations</span><span class="p">],</span>
+    <span class="n">station_distribution</span><span class="o">=</span><span class="p">[</span><span class="n">st_dist</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span>
+    <span class="n">plot_type</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;faultplane&#39;</span><span class="p">,</span><span class="s1">&#39;faultplane&#39;</span><span class="p">,</span><span class="s1">&#39;hudson&#39;</span><span class="p">],</span><span class="n">fault_plane</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span>
+    <span class="n">show_mean</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">show_max</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">grid_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">TNP</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This produces a <code class="xref py py-mod docutils literal"><span class="pre">matplotlib</span></code> figure:</p>
+<div class="figure align-center" id="id3" style="width: 60%">
+<a class="reference internal image-reference" href="_images/krafla_event_mtplot_example.png"><img alt="Beachball plot showing the fault plane orientations for the double-couple constrained inversion and the marginalised source-type PDF for the full moment tensor inversion of the krafla data." src="_images/krafla_event_mtplot_example.png" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-text"><em>Beachball plots showing the station location uncertainty, and the fault plane orientations for the double-couple constrained inversion and the marginalised source-type PDF for the faultplane moment tensor inversion of the krafla data using polarity probabilities.</em></span></p>
+</div>
+<p>The second example shows the different plot types:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="c1">#Generate Data</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">DCs</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">MTconvert</span><span class="o">.</span><span class="n">Tape_MT6</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">+</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
+        <span class="mf">0.5</span><span class="o">+</span><span class="mf">0.01</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">probDCs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">g</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">12</span><span class="o">+</span><span class="mf">0.01</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">d</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="o">+</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">MTs</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">MTconvert</span><span class="o">.</span><span class="n">Tape_MT6</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">+</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
+        <span class="mf">0.5</span><span class="o">+</span><span class="mf">0.01</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">probMTs</span><span class="o">=</span><span class="n">sp</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plot_sources</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span><span class="n">DCs</span><span class="p">,</span><span class="n">MTs</span><span class="p">,</span><span class="n">MTs</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])]</span>
+<span class="c1">#Plot</span>
+<span class="n">plot</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">MTplot</span><span class="p">(</span><span class="n">plot_sources</span><span class="p">,</span>
+    <span class="n">plot_type</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;beachball&#39;</span><span class="p">,</span><span class="s1">&#39;faultplane&#39;</span><span class="p">,</span><span class="s1">&#39;hudson&#39;</span><span class="p">,</span><span class="s1">&#39;lune&#39;</span><span class="p">,</span><span class="s1">&#39;riedeseljordan&#39;</span><span class="p">],</span>
+    <span class="n">probability</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="n">probDCs</span><span class="p">,</span><span class="n">probMTs</span><span class="p">,</span><span class="n">probMTs</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span>
+    <span class="n">colormap</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span><span class="s1">&#39;bwr&#39;</span><span class="p">],</span>
+    <span class="n">stations</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;names&#39;</span><span class="p">:[</span><span class="s1">&#39;S01&#39;</span><span class="p">,</span><span class="s1">&#39;S02&#39;</span><span class="p">,</span><span class="s1">&#39;S03&#39;</span><span class="p">,</span><span class="s1">&#39;S04&#39;</span><span class="p">],</span>
+               <span class="s1">&#39;azimuth&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">120.</span><span class="p">,</span><span class="mf">45.</span><span class="p">,</span><span class="mf">238.</span><span class="p">,</span><span class="mf">341.</span><span class="p">]),</span>
+               <span class="s1">&#39;takeoff_angle&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">12.</span><span class="p">,</span><span class="mf">56.</span><span class="p">,</span><span class="mf">37.</span><span class="p">,</span><span class="mf">78.</span><span class="p">]),</span>
+               <span class="s1">&#39;polarity&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]},{},{},{},{}],</span>
+    <span class="n">show_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">show_max</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">grid_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">TNP</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">station_markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This produces a <code class="xref py py-mod docutils literal"><span class="pre">matplotlib</span></code> figure:</p>
+<div class="figure align-center" id="id5" style="width: 60%">
+<a class="reference internal image-reference" href="_images/mtplot_example.png"><img alt="MTplot examples showing an equal area projection of a beachball for an example moment tensor source, fault plane distribution showing the mean orientation in green, Hudson and lune type plots of a full moment tensor PDF, and a Riedesel-Jordan type plot of an example moment tensor source." src="_images/mtplot_example.png" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-text"><em>MTplot examples showing an equal area projection of a beachball for an example moment tensor source, fault plane distribution showing the mean orientation in green, Hudson and lune type plots of a full moment tensor PDF, and a Riedesel-Jordan type plot of an example moment tensor source.</em></span></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plot_classes.html" class="btn btn-neutral float-right" title="11. Plotting classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cli.html" class="btn btn-neutral" title="9. mtfit command line options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

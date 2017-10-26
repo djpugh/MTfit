@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MTplot command line options &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>MTplot command line options</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/manMTplot.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mtplot-command-line-options">
+<h1>MTplot command line options<a class="headerlink" href="#mtplot-command-line-options" title="Permalink to this headline">¶</a></h1>
+<p>Command line usage::
+MTplot [-h] [-d DATAFILE] [-p PLOT_TYPE] [-c COLORMAP] [-f FONTSIZE]</p>
+<blockquote>
+<div>[-l LINEWIDTH] [-t] [-r RESOLUTION] [-b BINS] [--fault_plane]
+[-n] [--tnp] [--marker_size MARKERSIZE]
+[--station_marker_size STATION_MARKERSIZE] [--showmaxlikelihood]
+[--showmean] [--grid_lines] [--color COLOR] [--type_label]
+[--hex_bin] [--projection PROJECTION] [--save SAVE_FILE]
+[--save-dpi SAVE_DPI] [--version]
+[data_file]</div></blockquote>
+<div class="section" id="positional-arguments">
+<h2>Positional Arguments:<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>data_file             Data file to use for plotting, optional but must be</dt>
+<dd>specified either as a positional argument or as an
+optional argument (see -d below)</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="optional-arguments">
+<h2>Optional Arguments:<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
+<td>show this help message and exit</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-d <var>DATAFILE</var></span>, <span class="option">--datafile <var>DATAFILE</var></span>, <span class="option">--data_file <var>DATAFILE</var></span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>MTplot can read the output data from mtfit</td></tr>
+</tbody>
+</table>
+<p>-p PLOT_TYPE, --plot_type PLOT_TYPE, --plottype PLOT_TYPE,
+--plot-type PLOT_TYPE, --type PLOT_TYPE</p>
+<blockquote>
+<div>Type of plot to make</div></blockquote>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-c <var>COLORMAP</var></span>, <span class="option">--colormap <var>COLORMAP</var></span>, <span class="option">--color_map <var>COLORMAP</var></span>, <span class="option">--color-map <var>COLORMAP</var></span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Matplotlib colormap selection</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-f <var>FONTSIZE</var></span>, <span class="option">--font_size <var>FONTSIZE</var></span>, <span class="option">--fontsize <var>FONTSIZE</var></span>, <span class="option">--font-size <var>FONTSIZE</var></span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Fontsize</td></tr>
+</tbody>
+</table>
+<p>-l LINEWIDTH, --line_width LINEWIDTH, --linewidth LINEWIDTH,
+--line-width LINEWIDTH</p>
+<blockquote>
+<div>Linewidth</div></blockquote>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-t</span>, <span class="option">--text</span>, <span class="option">--show-text</span>, <span class="option">--show_text</span>, <span class="option">--showtext</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Flag to show text or not</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-r <var>RESOLUTION</var></span>, <span class="option">--resolution <var>RESOLUTION</var></span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Resolution for the focal sphere plot types</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-b <var>BINS</var></span>, <span class="option">--bins <var>BINS</var></span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Number of bins for the histogram plot types</td></tr>
+</tbody>
+</table>
+<p class="attribution">&mdash;fault_plane, --faultplane, --fault-plane
+Show the fault planes on a focal sphere type plot</p>
+</div></blockquote>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-n</span>, <span class="option">--nodal_line</span>, <span class="option">--nodal-line</span>, <span class="option">--nodalline</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Show the nodal lines on a focal sphere type plot</td></tr>
+</tbody>
+</table>
+<p class="attribution">&mdash;tnp, --tp, --pt     Show TNP axes on focal sphere plots</p>
+</div></blockquote>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--marker_size <var>MARKERSIZE</var></span>, <span class="option">--markersize <var>MARKERSIZE</var></span>, <span class="option">--marker-size <var>MARKERSIZE</var></span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Set marker size</td></tr>
+</tbody>
+</table>
+<p class="attribution">&mdash;station_marker_size STATION_MARKERSIZE,
+--stationmarkersize STATION_MARKERSIZE,
+--station-marker-size STATION_MARKERSIZE,
+--station_markersize STATION_MARKERSIZE, --station-markersize STATION_MARKERSIZE</p>
+</div></blockquote>
+<blockquote>
+<div><blockquote>
+<div>Set station marker size</div></blockquote>
+<p class="attribution">&mdash;showmaxlikelihood, --show_max_likelihood, --show-max-likelihood
+Show the maximum likelihood solution on a fault plane
+plot (shown in color set by --color).</p>
+</div></blockquote>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--showmean</span>, <span class="option">--show-mean</span>, <span class="option">--show_mean</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Show the mean orientaion on a fault plane plot (shown
+in green).</td></tr>
+</tbody>
+</table>
+<p class="attribution">&mdash;grid_lines, --gridlines, --grid-lines
+Show interior lines on Hudson and lune plots</p>
+</div></blockquote>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--color <var>COLOR</var></span></kbd></td>
+<td>Set default color</td></tr>
+</tbody>
+</table>
+<p class="attribution">&mdash;type_label, --typelabel, --type-label
+Show source type labels on Hudson and lune plots.</p>
+</div></blockquote>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--hex_bin</span>, <span class="option">--hexbin</span>, <span class="option">--hex-bin</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Use hex bin for histogram plottings</td></tr>
+</tbody>
+</table>
+<p class="attribution">&mdash;projection PROJECTION
+Projection choice for focal sphere plots</p>
+</div></blockquote>
+<blockquote>
+<div><p>--save SAVE_FILE, --save_file SAVE_FILE, --savefile SAVE_FILE,
+--save-file SAVE_FILE</p>
+<blockquote>
+<div>Set the filename to save to (if set the plot is saved
+to the file)</div></blockquote>
+<p class="attribution">&mdash;save-dpi SAVE_DPI, --savedpi SAVE_DPI, --save_dpi SAVE_DPI
+Output file dpi</p>
+</div></blockquote>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--version</span></kbd></td>
+<td>show program's version number and exit</td></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

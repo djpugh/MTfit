@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mtfit.algorithms.base &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mtfit documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="../../../_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mtfit.algorithms.base</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mtfit.algorithms.base</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">algorithms/base.py</span>
+<span class="sd">******************</span>
+
+<span class="sd">Basic algorithm class for mtfit</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># **Restricted:  For Non-Commercial Use Only**</span>
+<span class="c1"># This code is protected intellectual property and is available solely for teaching</span>
+<span class="c1"># and non-commercially funded academic research purposes.</span>
+<span class="c1">#</span>
+<span class="c1"># Applications for commercial use should be made to Schlumberger or the University of Cambridge.</span>
+
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">types</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..sampling</span> <span class="k">import</span> <span class="n">Sample</span><span class="p">,</span> <span class="n">FileSample</span><span class="p">,</span> <span class="n">_6sphere_prior</span>
+<span class="kn">from</span> <span class="nn">..utilities.extensions</span> <span class="k">import</span> <span class="n">get_extensions</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">cprobability</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">cprobability</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MTfit.algorithms&#39;</span><span class="p">)</span>
+
+<span class="c1"># No. of iterations to print output on</span>
+<span class="n">PRINT_N_ITERATIONS</span> <span class="o">=</span> <span class="mi">20</span>
+
+
+<div class="viewcode-block" id="BaseAlgorithm"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm">[docs]</a><span class="k">class</span> <span class="nc">BaseAlgorithm</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for algorithms including the base methods required for forward</span>
+<span class="sd">    modelling based inversions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Returns zero for testing - should be set in __init__</span>
+    <span class="n">default_sampling_priors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;6sphere_prior&#39;</span><span class="p">:</span> <span class="n">_6sphere_prior</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quality_check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">file_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">file_safe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">generate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        BaseAlgorithm initialisation</span>
+
+<span class="sd">        Args</span>
+<span class="sd">            number_samples:[10000] Number of samples to use per iteration.</span>
+<span class="sd">            dc:[False] Boolean to select inversion constrained to double-couple</span>
+<span class="sd">                space or over the full moment tensor space.</span>
+<span class="sd">            quality_check:[False] Carry out quality check after 40,000 samples.</span>
+<span class="sd">                If there are too many non-zero samples, the inversion is stopped</span>
+<span class="sd">                for that event.</span>
+<span class="sd">            file_sample:[False] Boolean to select whether to use file sampling</span>
+<span class="sd">                (saving the output to file).</span>
+<span class="sd">            file_safe:[False] Boolean to select whether to use file safe outputs</span>
+<span class="sd">                when using file sampling.</span>
+<span class="sd">            generate:[False] Boolean to select whether to generate the random</span>
+<span class="sd">                moment tensors in the forward task or not.</span>
+
+<span class="sd">        Keyword Arguments</span>
+<span class="sd">            basic_cdc:[False] Boolean to select whether to use the Basic CDC</span>
+<span class="sd">                model (inversion constrained to crack+double-couple space).</span>
+<span class="sd">            number_events:[1] Integer giving the number of events in this</span>
+<span class="sd">                inversion (for use with multiple event inversions).</span>
+<span class="sd">            sampling_prior:[6sphere_prior] string selector for the full moment</span>
+<span class="sd">                tensor sampling prior (MTfit.sampling_prior entry point)</span>
+<span class="sd">            sampling:[6sphere] string selector for the full moment tensor</span>
+<span class="sd">                sampling model (MTfit.sampling entry point)</span>
+<span class="sd">            model:[False] selector for alternate models using the</span>
+<span class="sd">                MTfit.sample_distribution entry_point</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span> <span class="o">=</span> <span class="n">number_samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_number_samples</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dc</span> <span class="o">=</span> <span class="n">dc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mcmc</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basic_cdc</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;basic_cdc&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_events</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;number_events&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate</span> <span class="o">=</span> <span class="n">generate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quality_check</span> <span class="o">=</span> <span class="n">quality_check</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sample_distribution&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_sampling_model</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">file_sample</span><span class="p">,</span> <span class="n">file_safe</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BaseAlgorithm.get_sampling_model"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.get_sampling_model">[docs]</a>    <span class="k">def</span> <span class="nf">get_sampling_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">file_sample</span><span class="p">,</span> <span class="n">file_safe</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the sampling model from the entry points&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">:</span>
+            <span class="c1"># Assume that prior is the correct form for the sampling (either</span>
+            <span class="c1"># correcting or not so that Bayesian evidence calculation is ok</span>
+            <span class="n">model_names</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="s1">&#39;MTfit.sample_distribution&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;clvd&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_clvd</span><span class="p">})</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">random_model</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">]</span><span class="o">.</span><span class="n">func_name</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">random_model</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">],</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error setting prior: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">sampling</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;6sphere&#39;</span><span class="p">:</span> <span class="n">_6sphere_random_mt</span><span class="p">}</span>
+
+        <span class="n">sampling_names</span><span class="p">,</span> <span class="n">sampling</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="s1">&#39;MTfit.sampling&#39;</span><span class="p">,</span> <span class="n">sampling</span><span class="p">)</span>
+        <span class="c1"># Check sampling distribution selection</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sampling&#39;</span><span class="p">,</span> <span class="s1">&#39;6sphere&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sampling_names</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;sampling&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;6sphere&#39;</span>
+        <span class="c1"># Set prior sampling as random_mt - check if the method already exists in self</span>
+        <span class="c1"># and use that, otherwise use types to add method</span>
+
+        <span class="c1"># Assume that prior is the correct form for the sampling (either</span>
+        <span class="c1"># correcting or not so that Bayesian evidence calculation is ok</span>
+        <span class="n">sampling_prior_names</span><span class="p">,</span> <span class="n">sampling_prior</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span>
+            <span class="s1">&#39;MTfit.sampling_prior&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_sampling_priors</span><span class="p">)</span>
+
+        <span class="c1"># Check sampling_prior distribution selection</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sampling_prior&#39;</span><span class="p">,</span> <span class="s1">&#39;6sphere&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sampling_prior_names</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;sampling_prior&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_sampling_priors</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span> <span class="o">=</span> <span class="n">sampling_prior</span><span class="p">[</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sampling_prior&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_sampling_priors</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">])]</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error setting prior: </span><span class="si">{}</span><span class="s1">, using default: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sampling_prior&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_sampling_priors</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">default_sampling_priors</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span> <span class="o">=</span> <span class="n">sampling_prior</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">default_sampling_priors</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">random_mt</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sampling</span><span class="p">[</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sampling&#39;</span><span class="p">,</span> <span class="s1">&#39;6sphere&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">func_name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">random_mt</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">(</span><span class="n">sampling</span><span class="p">[</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sampling&#39;</span><span class="p">,</span> <span class="s1">&#39;6sphere&#39;</span><span class="p">)],</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">file_sample</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span> <span class="o">=</span> <span class="n">FileSample</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fid&#39;</span><span class="p">,</span> <span class="s1">&#39;MTfit_run&#39;</span><span class="p">),</span>
+                                         <span class="n">number_events</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">number_events</span><span class="p">,</span>
+                                         <span class="n">file_safe</span><span class="o">=</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="p">(</span><span class="n">number_events</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">number_events</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">max_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39; BaseAlgorithm has no max_value&#39;</span>
+
+<div class="viewcode-block" id="BaseAlgorithm.random_sample"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.random_sample">[docs]</a>    <span class="k">def</span> <span class="nf">random_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return random samples</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            results from generating the random samples.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># Return random samples</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dc</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_dc</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">basic_cdc</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_basic_cdc</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_mt</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="BaseAlgorithm.output"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.output">[docs]</a>    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">normalise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">discard</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the algorithm results for output.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            Dictionary containing output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">output_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="c1"># Check if any PDF samples</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="p">):</span>
+            <span class="n">output</span><span class="p">,</span> <span class="n">output_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">normalise</span><span class="p">,</span> <span class="n">convert</span><span class="p">,</span>
+                                                           <span class="bp">self</span><span class="o">.</span><span class="n">total_number_samples</span><span class="p">,</span>
+                                                           <span class="n">discard</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mcmc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;probability&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;total_number_samples&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_number_samples</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">output_string</span></div>
+
+<div class="viewcode-block" id="BaseAlgorithm.iterate"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.iterate">[docs]</a>    <span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Basic iteration function</span>
+
+<span class="sd">        Args</span>
+<span class="sd">            result: Result from forward Task</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            task,End</span>
+<span class="sd">            task: New task for forward model</span>
+<span class="sd">            End: Boolean flag for whether the inversion is finished.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Function is a place-holder for more complex algorithms</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">End</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">task</span><span class="p">,</span> <span class="n">End</span></div>
+
+<div class="viewcode-block" id="BaseAlgorithm.initialise"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.initialise">[docs]</a>    <span class="k">def</span> <span class="nf">initialise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Basic initialisation function</span>
+
+<span class="sd">        Return the first task</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            task, False</span>
+<span class="sd">            task: New task for forward model</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Function is a place-holder for more complex algorithms</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">task</span><span class="p">,</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="BaseAlgorithm.random_dc"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.random_dc">[docs]</a>    <span class="k">def</span> <span class="nf">random_dc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate random double-couple  moment tensors (size 6, number_samples)</span>
+
+<span class="sd">        Generates random double-couple moment tensors with random orientations.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            numpy matrix of random double-couple moment tensors, size 6,number_samples</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check CYTHON code - use C code if possible</span>
+        <span class="k">if</span> <span class="n">cprobability</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cprobability</span><span class="o">.</span><span class="n">random_dc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span><span class="p">)</span>
+        <span class="c1"># Use random_type for DC eigenvalues</span>
+        <span class="n">dc_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)]])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_type</span><span class="p">(</span><span class="n">dc_diag</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BaseAlgorithm.random_clvd"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.random_clvd">[docs]</a>    <span class="k">def</span> <span class="nf">random_clvd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate random CLVD moment tensors (size 6,number_samples)</span>
+
+<span class="sd">        Generates random CLVD moment tensors with random orientations.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            numpy matrix of random CLVD moment tensors, size 6,number_samples</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+        <span class="c1"># Select CVLD type</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span>
+            <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)]])</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">clvd_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[[</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)]])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">clvd_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[[</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)]])</span>
+        <span class="c1"># Use random_type for DC eigenvalues</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_type</span><span class="p">(</span><span class="n">clvd_diag</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BaseAlgorithm.random_type"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.random_type">[docs]</a>    <span class="k">def</span> <span class="nf">random_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diag</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate random  moment tensors from a given set of eigenvalues.</span>
+
+<span class="sd">        Generates random moment tensors with a given set of eigenvalues and random orientations.</span>
+
+<span class="sd">        Args</span>
+<span class="sd">            diag: numpy matrix of eigenvalues.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            numpy matrix of random moment tensors, size 6,number_samples</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Generate random eigenvectors</span>
+        <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_orthogonal_eigenvectors</span><span class="p">()</span>
+        <span class="c1"># Combine with eigenvalues</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eigenvectors_mt_2_mt6</span><span class="p">(</span><span class="n">diag</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BaseAlgorithm.random_orthogonal_eigenvectors"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.random_orthogonal_eigenvectors">[docs]</a>    <span class="k">def</span> <span class="nf">random_orthogonal_eigenvectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates random orthogonal eigenvectors.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            list of numpy arrays of eigenvectors.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialise seed</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+        <span class="c1"># Get random vector - eigenvector 1</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span><span class="p">)</span>
+        <span class="c1"># Normalise eigenvector 1</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="c1"># Get another random vector</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span><span class="p">)</span>
+        <span class="c1"># Cross x with the first eigenvector to get another orthogonal</span>
+        <span class="c1"># eigenvector 2</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="c1"># Check if any of the x are parallel to a (unlikely but a possible edge</span>
+        <span class="c1"># case), and redraw.</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="c1"># Normalise eigenvector 2</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="c1"># Obtain third eigenvector as orthogonal to first two (a and b)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="c1"># Normalise eigenvector 3</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="c1"># Return list of vectors</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="BaseAlgorithm.eigenvectors_mt_2_mt6"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.markov_chain_monte_carlo.BaseAlgorithm.eigenvectors_mt_2_mt6">[docs]</a>    <span class="k">def</span> <span class="nf">eigenvectors_mt_2_mt6</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diag</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts eigenvectors and eigenvalues to moment tensor 6-vector.</span>
+
+<span class="sd">        Generates moment tensor 6-vector.</span>
+
+<span class="sd">        Args</span>
+<span class="sd">            diag: numpy matrix of eigenvalues.</span>
+<span class="sd">            a: numpy array of eigenvectors corresponding to the first eigenvalue.</span>
+<span class="sd">            b: numpy array of eigenvectors corresponding to the second eigenvalue.</span>
+<span class="sd">            c: numpy array of eigenvectors corresponding to the third eigenvalue.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            numpy matrix of moment tensor 6-vectors.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Converts moment tensor from eigenvalues and eigenvectors to six</span>
+        <span class="c1"># vector form.</span>
+
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]])</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]])</span>
+        <span class="n">v3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:],</span> <span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:],</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]])</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v1</span><span class="o">*</span><span class="n">v1</span><span class="o">*</span><span class="n">diag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># M11</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v2</span><span class="o">*</span><span class="n">v2</span><span class="o">*</span><span class="n">diag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># M22</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v3</span><span class="o">*</span><span class="n">v3</span><span class="o">*</span><span class="n">diag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># M33</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v1</span><span class="o">*</span><span class="n">v2</span><span class="o">*</span><span class="n">diag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># sqrt2*M12</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v1</span><span class="o">*</span><span class="n">v3</span><span class="o">*</span><span class="n">diag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># sqrt2*M13</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v2</span><span class="o">*</span><span class="n">v3</span><span class="o">*</span><span class="n">diag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)])</span>  <span class="c1"># sqrt2*M23</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">M</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_6sphere_random_mt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate random moment tensors (size 6,number_samples)</span>
+
+<span class="sd">    Generates random moment tensors from the 6-Dimensional normal distribution N(0,1) and normalises onto the surface of the unit 6-sphere.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        numpy matrix of random moment tensors, size 6,number_samples</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check CYTHON code - use C code if possible</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">ns</span> <span class="o">=</span> <span class="bp">self</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span>
+    <span class="k">if</span> <span class="n">cprobability</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cprobability</span><span class="o">.</span><span class="n">random_mt</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
+    <span class="c1"># Reseed np.random and generate new random samples.</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">M</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

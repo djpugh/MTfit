@@ -1,0 +1,3185 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>11. Plotting classes &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="next" title="12. MTplot command line options" href="mtplotcli.html"/>
+        <link rel="prev" title="10. Plotting the Moment Tensor" href="mtplot.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. Plot Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mtplot-class">11.1. MTplot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtdata-class">11.2. MTData class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#baseplot-class">11.3. _BasePlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#focalsphereplot-class">11.4. _FocalSpherePlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#amplitudeplot-class">11.5. _AmplitudePlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#faultplaneplot-class">11.6. _FaultPlanePlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#riedeseljordanplot-class">11.7. _RiedeselJordanPlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#radiationplot-class">11.8. _RadiationPlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hudsonplot-class">11.9. _HudsonPlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#luneplot-class">11.10. _LunePlot class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>11. Plotting classes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/plot_classes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="plotting-classes">
+<h1>11. Plotting classes<a class="headerlink" href="#plotting-classes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="mtplot-class">
+<h2>11.1. MTplot class<a class="headerlink" href="#mtplot-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes.MTplot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">MTplot</code><span class="sig-paren">(</span><em>MTs</em>, <em>plot_type='beachball'</em>, <em>stations={}</em>, <em>plot=True</em>, <em>label=False</em>, <em>save_file=''</em>, <em>save_dpi=200</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTplot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTplot class - handles plotting of the moment tensor using  different plot_classes</p>
+<p>This object acts as a handle round a matplotlib figure, handling the moment tensors and creating the plot classes for axes.</p>
+<p>Initialises the MTplot object.</p>
+<p>Multiple plots (subplots) are handled using the matplotlib GridSpec - to create multiple plots, use nested lists for the MTs, with the inner lists corresponding to each column and the outer each row, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">;</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">;</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>The total number of columns is given by the max number of points in the nested list. Lists with fewer points will have the last plot stretched to cover the remaining columns.
+Setting None in the list will stretch the plot to it's left to cover the columns.</p>
+<p>The args and kwargs, which are passed through to the plot_class object can also be nested in this way. Additionally, if the parameters are equal to the number of columns,
+or number of rows, the same values are used for each plot in the corresponding column or row. If the dimension of the multiplot is square, the parameters are assumed to correspond to the rows.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MTs: Moment tensor samples for creating MTData object, such as a numpy array of MT 6 vectors (see MTData initialisation for different types, and MTplot docstring for handling multiple plots</dd>
+<dt>Keyword Args</dt>
+<dd>plot_type: str - plot type selection (Default is 'beachball')
+stations: dict - Dictionary of stations, containing keys: 'names','azimuth','takeoff_angle' and 'polarity' or an empty dict (default)
+plot: bool - flag to actually plot and show the figure
+label: bool - flag to show axis labels if multiple plots are being shown
+save_file: string  - filename to save plot to (if set)
+save_dpi: int - output dpi for file save
+args: passed through to plot_class initialisation
+kwargs: passed through to plot_class initialisation</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTplot.ax_labels">
+<code class="descname">ax_labels</code><span class="sig-paren">(</span><em>show=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTplot.ax_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTplot.ax_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or update axis label to axis corners.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTplot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTplot.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTplot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the figure and shows it.</p>
+<p>Calls the plot functions for each plot_class in the multiplot.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mtdata-class">
+<h2>11.2. MTData class<a class="headerlink" href="#mtdata-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes.MTData">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">MTData</code><span class="sig-paren">(</span><em>MTs</em>, <em>probability=[]</em>, <em>c=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTData object manages the moment tensors.</p>
+<p>Additionally it enables conversion between different parameterisations
+and calculation of several statistics.</p>
+<p>This is used by all of the plot classes for handling the moment tensor,
+and is transparent to converting and accessing the moment tensors, as
+it behaves like a numpy array (e.g. indexing and properties like shape
+are given for the moment tensor).</p>
+<p>The MTData object also stores the probability, and is used for
+calculating the orientation mean.</p>
+<p>MTData initialisation</p>
+<p>Parameters corresponding to the moment tensor samples can be set
+as kwargs. These parameters include:</p>
+<blockquote>
+<div>T, N, P, E, u, v, tau, k, gamma, delta, kappa, h, sigma,
+strike1, dip1, rake1, strike2, dip2, rake2, N1, N2</div></blockquote>
+<dl class="docutils">
+<dt>Args</dt>
+<dd><dl class="first last docutils">
+<dt>MTs: numpy array of moment tensor six vectors with shape (6,n).</dt>
+<dd>Alternatively, the input can be a dictionary from the mtfit output.</dd>
+</dl>
+</dd>
+<dt>Keyword Args</dt>
+<dd><dl class="first last docutils">
+<dt>probability: list or numpy array of probabilities - should be</dt>
+<dd>the same length as the number of moment tensors,
+or empty (Default is [])</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs: Attributes that correspond to converted parameters</dt>
+<dd>of the moment tensor, as described above</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.cluster_normals">
+<code class="descname">cluster_normals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.cluster_normals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.cluster_normals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cluster the normals.</p>
+<p>This is a very simplistic algorithm that clusters the normals by dividing them into two groups with the shortest distance between them.</p>
+<p>N.B. This depends on the initial values given, so if the normals are not well clustered, or the initial normals chosen are outliers, the results will not be a good clustering.</p>
+<p>Consequently, only use this approach for well clustered fault plane normals (in at least one normal direction). The more tightly clustered normals are set to clustered_N1.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array, numpy array: tuple of numpy arrays, clustered_N1, clustered_N2, clustered_rake1,clustered_rake2</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.get_max_probability">
+<code class="descname">get_max_probability</code><span class="sig-paren">(</span><em>single=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.get_max_probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.get_max_probability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an MTData object containing the maximum probability solutions</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>single: bool - flag to return only one moment tensor (the first maximum probability moment tensor)</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">New MTData object with max probability MT samples.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#mtfit.plot.plot_classes.MTData" title="mtfit.plot.plot_classes.MTData">MTData</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.get_mean">
+<code class="descname">get_mean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.get_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.get_mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the mean moment tensor and variance of the moment tensor samples</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tuple of numpy arrays for the mean moment tensor six vector and the moment tensor six vector covariance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">numpy array,numpy array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.get_mean_orientation">
+<code class="descname">get_mean_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.get_mean_orientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.get_mean_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mean orientation from the clustered normals and rake parameters using the more tightly clustered parameters.</p>
+<p>This also calculates the variance of the rake distributions and covariance of the clustered normals (using the probability if it is set)</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of the mean strike dip and rake of the fault planes.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.get_unique_McMC">
+<code class="descname">get_unique_McMC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.get_unique_McMC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.get_unique_McMC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the unique McMC samples, with the probability scaled by the number of samples</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>MTData: New MTData object with unique MT samples and probabilities corresponding to the moment tensor frequencies.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes.MTData.is_dc">
+<code class="descname">is_dc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#MTData.is_dc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes.MTData.is_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns array of DC values</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="baseplot-class">
+<h2>11.3. _BasePlot class<a class="headerlink" href="#baseplot-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._BasePlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_BasePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the base class for MT plotting</p>
+<p>This class handles plotting to a single axis including projection and conversion of the moment tensor, setting the figure background etc.</p>
+<p>Should be subclassed</p>
+<p>BasePlot initialisation</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._2d_line_plot">
+<code class="descname">_2d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._2d_line_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._2d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._2d_scatter_plot">
+<code class="descname">_2d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._2d_scatter_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._2d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._2d_surf_plot">
+<code class="descname">_2d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._2d_surf_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._2d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._2d_text">
+<code class="descname">_2d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._2d_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._2d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._3d_line_plot">
+<code class="descname">_3d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._3d_line_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._3d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._3d_scatter_plot">
+<code class="descname">_3d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._3d_scatter_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._3d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._3d_surf_plot">
+<code class="descname">_3d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._3d_surf_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._3d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._3d_text">
+<code class="descname">_3d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._3d_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._3d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>X(<a href="#id3"><span class="problematic" id="id4">*</span></a>args,**kwargs)=X.__call__(<a href="#id5"><span class="problematic" id="id6">*</span></a>args,**kwargs)</p>
+<p>Plots the result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>BasePlot initialisation</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mtfit.plot.plot_classes._BasePlot.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._ax_plot">
+<code class="descname">_ax_plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._ax_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._ax_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main plotting function</p>
+<p>Plots the axis</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._background">
+<code class="descname">_background</code><span class="sig-paren">(</span><em>handle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._background"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the plot background</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._convert">
+<code class="descname">_convert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles MT conversion to coordinates (setting xdata,ydata,zdata (if required) and cdata attributes)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._convert_mts">
+<code class="descname">_convert_mts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._convert_mts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._convert_mts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the moment tensors as required</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._eigenvector_matrix">
+<code class="descname">_eigenvector_matrix</code><span class="sig-paren">(</span><em>e1</em>, <em>e2</em>, <em>e3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._eigenvector_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._eigenvector_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an eigenvector matrix</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>e1: numpy array/matrix - first eigenvector
+e2: numpy array/matrix - second eigenvector
+e3: numpy array/matrix - third eigenvector</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: eigenvector matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._line_plot">
+<code class="descname">_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle='-'</em>, <em>linewidth=1</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._line_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a line
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c value</dd>
+<dt>Keyword Args</dt>
+<dd>linestyle: str - linestyle description (see matplotlib documentation)
+linewidth: float - line width
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._scatter_plot">
+<code class="descname">_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._scatter_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot scatter
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>marker: str - marker description (see matplotlib documentation)
+markersize: float - marker width (squared to correspond to markersize parameter)
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._surf_plot">
+<code class="descname">_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._surf_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a surface
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot._text">
+<code class="descname">_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot._text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot._text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to write text
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+text: str - text value</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._BasePlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_BasePlot.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._BasePlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="focalsphereplot-class">
+<h2>11.4. _FocalSpherePlot class<a class="headerlink" href="#focalsphereplot-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_FocalSpherePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for plotting on a focal sphere</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+stations: dict - station dict containing keys: 'names','azimuth','takeoff_angle' and 'polarity'
+station_distribution: list - list of station dictionaries corresponding to a location PDF distribution
+show_zero_polarity: bool - flag to show zero polarity receivers
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - station marker size (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._2d_line_plot">
+<code class="descname">_2d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._2d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._2d_scatter_plot">
+<code class="descname">_2d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._2d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._2d_surf_plot">
+<code class="descname">_2d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._2d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._2d_text">
+<code class="descname">_2d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._2d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._3d_line_plot">
+<code class="descname">_3d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._3d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._3d_scatter_plot">
+<code class="descname">_3d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._3d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._3d_surf_plot">
+<code class="descname">_3d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._3d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._3d_text">
+<code class="descname">_3d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._3d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._axis_lines">
+<code class="descname">_axis_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._axis_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._axis_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the axis lines through the origin</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._background">
+<code class="descname">_background</code><span class="sig-paren">(</span><em>handle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._background"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the axes background</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>handle: handle of the plot object (for surface plots)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._boundary_lines">
+<code class="descname">_boundary_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._boundary_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._boundary_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the boundary lines, fault planes, nodal lines and axis lines as selected by the initialisation parameters</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>r: float - circle radius (depends on the projection and determined in _background())</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._convert">
+<code class="descname">_convert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles MT conversion to coordinates (setting xdata,ydata,zdata (if required) and cdata attributes)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._eigenvector_matrix">
+<code class="descname">_eigenvector_matrix</code><span class="sig-paren">(</span><em>e1</em>, <em>e2</em>, <em>e3</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._eigenvector_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an eigenvector matrix</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>e1: numpy array/matrix - first eigenvector
+e2: numpy array/matrix - second eigenvector
+e3: numpy array/matrix - third eigenvector</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: eigenvector matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._fault_plane">
+<code class="descname">_fault_plane</code><span class="sig-paren">(</span><em>MT</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._fault_plane"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._fault_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fault planes for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._get_great_circle">
+<code class="descname">_get_great_circle</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>az=(0</em>, <em>6.283185307179586)</em>, <em>n=500</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._get_great_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._get_great_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the great circle described by the two vectors v1 and v2</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>v1: numpy matrix/tuple - vector on the great circle
+v2: numpy matrix/tuple - a different vector on the great circle</dd>
+<dt>Keyword Args</dt>
+<dd>n_quadrants: int - number of quadrants of the great circle to calculate</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._get_nodal_line">
+<code class="descname">_get_nodal_line</code><span class="sig-paren">(</span><em>T</em>, <em>N</em>, <em>P</em>, <em>E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._get_nodal_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._get_nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the nodal line (values with zero amplitude)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>T: numpy matrix - Tension (eigen)vector
+N: numpy matrix - Neutral (eigen)vector
+P: numpy matrix - Pressure (eigen)vector
+E: numpy array - Eigenvalues (E[0]&gt;=E[1]&gt;=E[2])</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array - tuple of x y z coordinates of the nodal lines</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._get_small_circle">
+<code class="descname">_get_small_circle</code><span class="sig-paren">(</span><em>pole</em>, <em>alpha</em>, <em>az=(0</em>, <em>6.283185307179586)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._get_small_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._get_small_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get small circle about the pole with opening angle alpha</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>pole: numpy matrix - pole of the small circle
+alpha: float - angle of the small circle from the pole</dd>
+<dt>Keyword Args</dt>
+<dd>az: tuple - lower and upper limits of the azimuth to calculate for the small circle</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._line_plot">
+<code class="descname">_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle='-'</em>, <em>linewidth=1</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a line
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c value</dd>
+<dt>Keyword Args</dt>
+<dd>linestyle: str - linestyle description (see matplotlib documentation)
+linewidth: float - line width
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._nodal_line">
+<code class="descname">_nodal_line</code><span class="sig-paren">(</span><em>MTs</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._nodal_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the nodal line for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the line (larger is higher)
+args: passed through to the  _line_plot call so can set e.g. linewidth
+kwargs: passed through to the _line_plot call so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._plot_TNP">
+<code class="descname">_plot_TNP</code><span class="sig-paren">(</span><em>MT, c=['w', 'k', 'w'], marker=('*', '*', '*'), markersize=10, zorder=0, *args, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._plot_TNP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._plot_TNP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the TNP axes for the given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot</dd>
+<dt>Keyword Args</dt>
+<dd>c: tuple - color description for T N P axes (see matplotlib documentation)
+marker: tuple - marker description for T N P axes (see matplotlib documentation)
+markersize: float - marker width - squared to give marker area
+zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._plot_stations">
+<code class="descname">_plot_stations</code><span class="sig-paren">(</span><em>names</em>, <em>azimuth</em>, <em>takeoff_angle</em>, <em>polarity</em>, <em>marker=('v'</em>, <em>'o'</em>, <em>'^')</em>, <em>colors=('k'</em>, <em>'w'</em>, <em>'k')</em>, <em>radians=False</em>, <em>lim=1.4142135623730951</em>, <em>zorder=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._plot_stations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._plot_stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles the station plotting on  the focal sphere.</p>
+<p>If self.text is True then the station names are annotated using radial arrows
+Args</p>
+<blockquote>
+<div>names: list - list of station names
+azimuth: numpy array - array of station azimuths
+takeoff_angle: numpy array - array of station takeoff angles
+polarity: numpy array - array of station polarities</div></blockquote>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>radians: bool - flag for station angles in radians [default is False]
+lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._rotation_matrix">
+<code class="descname">_rotation_matrix</code><span class="sig-paren">(</span><em>zaxis</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._rotation_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate rotation matrix to rotate the vector zaxis onto the z-axis</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>zaxis: numpy matrix - vector to be rotated onto the z-axis</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: rotation matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._scatter_plot">
+<code class="descname">_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot scatter
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>marker: str - marker description (see matplotlib documentation)
+markersize: float - marker width (squared to correspond to markersize parameter)
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._stations">
+<code class="descname">_stations</code><span class="sig-paren">(</span><em>lim=1.4142135623730951</em>, <em>colors=('k'</em>, <em>'w'</em>, <em>'k')</em>, <em>marker=('v'</em>, <em>'o'</em>, <em>'^')</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot._stations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots stations on the focal sphere</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._surf_plot">
+<code class="descname">_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a surface
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot._text">
+<code class="descname">_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot._text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to write text
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+text: str - text value</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FocalSpherePlot.plot_plane">
+<code class="descname">plot_plane</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>c</em>, <em>radians=False</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FocalSpherePlot.plot_plane"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FocalSpherePlot.plot_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a plane on the focal sphere</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>strike - strike of the plane
+dip - dip of the plane
+c - color description(see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>radians: bool - strike and dip in radians or degrees
+zorder: float - z order of the plane (larger is on top)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="amplitudeplot-class">
+<h2>11.5. _AmplitudePlot class<a class="headerlink" href="#amplitudeplot-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_AmplitudePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_AmplitudePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amplitude plotting (beachball)</p>
+<p>parameter single is set to True, as can only plot one source per axis</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+stations: dict - station dict containing keys: 'names','azimuth','takeoff_angle' and 'polarity'
+station_distribution: list - list of station dictionaries corresponding to a location PDF distribution
+show_zero_polarity: bool - flag to show zero polarity receivers
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - station marker size (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._2d_line_plot">
+<code class="descname">_2d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._2d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._2d_scatter_plot">
+<code class="descname">_2d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._2d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._2d_surf_plot">
+<code class="descname">_2d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._2d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._2d_text">
+<code class="descname">_2d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._2d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._3d_line_plot">
+<code class="descname">_3d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._3d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._3d_scatter_plot">
+<code class="descname">_3d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._3d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._3d_surf_plot">
+<code class="descname">_3d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._3d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._3d_text">
+<code class="descname">_3d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._3d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._ax_plot">
+<code class="descname">_ax_plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_AmplitudePlot._ax_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._ax_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects and plots the amplitude surface</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>matplotlib surface object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._axis_lines">
+<code class="descname">_axis_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._axis_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the axis lines through the origin</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._background">
+<code class="descname">_background</code><span class="sig-paren">(</span><em>handle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_AmplitudePlot._background"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the colormap to be symmetrical and plots the axes background.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>handle: handle of the plot object (for surface plots)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._boundary_lines">
+<code class="descname">_boundary_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._boundary_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the boundary lines, fault planes, nodal lines and axis lines as selected by the initialisation parameters</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>r: float - circle radius (depends on the projection and determined in _background())</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._convert">
+<code class="descname">_convert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles MT conversion to coordinates (setting xdata,ydata,zdata (if required) and cdata attributes)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._convert_mts">
+<code class="descname">_convert_mts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_AmplitudePlot._convert_mts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._convert_mts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate and convert the moment tensor to the amplitude on the focal sphere</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array, numpy array: tuple of x,y,z and (scaled) c values</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._eigenvector_matrix">
+<code class="descname">_eigenvector_matrix</code><span class="sig-paren">(</span><em>e1</em>, <em>e2</em>, <em>e3</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._eigenvector_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an eigenvector matrix</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>e1: numpy array/matrix - first eigenvector
+e2: numpy array/matrix - second eigenvector
+e3: numpy array/matrix - third eigenvector</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: eigenvector matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._fault_plane">
+<code class="descname">_fault_plane</code><span class="sig-paren">(</span><em>MT</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._fault_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fault planes for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._get_great_circle">
+<code class="descname">_get_great_circle</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>az=(0</em>, <em>6.283185307179586)</em>, <em>n=500</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._get_great_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the great circle described by the two vectors v1 and v2</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>v1: numpy matrix/tuple - vector on the great circle
+v2: numpy matrix/tuple - a different vector on the great circle</dd>
+<dt>Keyword Args</dt>
+<dd>n_quadrants: int - number of quadrants of the great circle to calculate</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._get_nodal_line">
+<code class="descname">_get_nodal_line</code><span class="sig-paren">(</span><em>T</em>, <em>N</em>, <em>P</em>, <em>E</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._get_nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the nodal line (values with zero amplitude)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>T: numpy matrix - Tension (eigen)vector
+N: numpy matrix - Neutral (eigen)vector
+P: numpy matrix - Pressure (eigen)vector
+E: numpy array - Eigenvalues (E[0]&gt;=E[1]&gt;=E[2])</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array - tuple of x y z coordinates of the nodal lines</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._get_small_circle">
+<code class="descname">_get_small_circle</code><span class="sig-paren">(</span><em>pole</em>, <em>alpha</em>, <em>az=(0</em>, <em>6.283185307179586)</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._get_small_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get small circle about the pole with opening angle alpha</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>pole: numpy matrix - pole of the small circle
+alpha: float - angle of the small circle from the pole</dd>
+<dt>Keyword Args</dt>
+<dd>az: tuple - lower and upper limits of the azimuth to calculate for the small circle</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._line_plot">
+<code class="descname">_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle='-'</em>, <em>linewidth=1</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a line
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c value</dd>
+<dt>Keyword Args</dt>
+<dd>linestyle: str - linestyle description (see matplotlib documentation)
+linewidth: float - line width
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._nodal_line">
+<code class="descname">_nodal_line</code><span class="sig-paren">(</span><em>MTs</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the nodal line for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the line (larger is higher)
+args: passed through to the  _line_plot call so can set e.g. linewidth
+kwargs: passed through to the _line_plot call so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._plot_TNP">
+<code class="descname">_plot_TNP</code><span class="sig-paren">(</span><em>MT, c=['w', 'k', 'w'], marker=('*', '*', '*'), markersize=10, zorder=0, *args, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._plot_TNP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the TNP axes for the given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot</dd>
+<dt>Keyword Args</dt>
+<dd>c: tuple - color description for T N P axes (see matplotlib documentation)
+marker: tuple - marker description for T N P axes (see matplotlib documentation)
+markersize: float - marker width - squared to give marker area
+zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._plot_stations">
+<code class="descname">_plot_stations</code><span class="sig-paren">(</span><em>names</em>, <em>azimuth</em>, <em>takeoff_angle</em>, <em>polarity</em>, <em>marker=('v'</em>, <em>'o'</em>, <em>'^')</em>, <em>colors=('k'</em>, <em>'w'</em>, <em>'k')</em>, <em>radians=False</em>, <em>lim=1.4142135623730951</em>, <em>zorder=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._plot_stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles the station plotting on  the focal sphere.</p>
+<p>If self.text is True then the station names are annotated using radial arrows
+Args</p>
+<blockquote>
+<div>names: list - list of station names
+azimuth: numpy array - array of station azimuths
+takeoff_angle: numpy array - array of station takeoff angles
+polarity: numpy array - array of station polarities</div></blockquote>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>radians: bool - flag for station angles in radians [default is False]
+lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._rotation_matrix">
+<code class="descname">_rotation_matrix</code><span class="sig-paren">(</span><em>zaxis</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate rotation matrix to rotate the vector zaxis onto the z-axis</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>zaxis: numpy matrix - vector to be rotated onto the z-axis</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: rotation matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._scatter_plot">
+<code class="descname">_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot scatter
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>marker: str - marker description (see matplotlib documentation)
+markersize: float - marker width (squared to correspond to markersize parameter)
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._stations">
+<code class="descname">_stations</code><span class="sig-paren">(</span><em>lim=1.4142135623730951</em>, <em>colors=('k'</em>, <em>'w'</em>, <em>'k')</em>, <em>marker=('v'</em>, <em>'o'</em>, <em>'^')</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots stations on the focal sphere</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._surf_plot">
+<code class="descname">_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a surface
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot._text">
+<code class="descname">_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot._text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to write text
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+text: str - text value</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._AmplitudePlot.plot_plane">
+<code class="descname">plot_plane</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>c</em>, <em>radians=False</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._AmplitudePlot.plot_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a plane on the focal sphere</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>strike - strike of the plane
+dip - dip of the plane
+c - color description(see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>radians: bool - strike and dip in radians or degrees
+zorder: float - z order of the plane (larger is on top)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="faultplaneplot-class">
+<h2>11.6. _FaultPlanePlot class<a class="headerlink" href="#faultplaneplot-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_FaultPlanePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>probability=[]</em>, <em>phase='p'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FaultPlanePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fault plane distribution</p>
+<p>parameter single is set to False as multiple sources can be plotted per axes</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>probability: numpy array - moment tensor probabilities
+phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+stations: dict - station dict containing keys: 'names','azimuth','takeoff_angle' and 'polarity'
+station_distribution: list - list of station dictionaries corresponding to a location PDF distribution
+show_zero_polarity: bool - flag to show zero polarity receivers
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - station marker size (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc
+show_max_likelihood: bool - show the maximum likelihood solution in the default color
+show_mean: bool - show the mean orientation source in green (thicker plane is better constrained)
+color: set color for maximum likelihood fault plane (show_max_likelihood)</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._2d_line_plot">
+<code class="descname">_2d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._2d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._2d_scatter_plot">
+<code class="descname">_2d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._2d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._2d_surf_plot">
+<code class="descname">_2d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._2d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._2d_text">
+<code class="descname">_2d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._2d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._3d_line_plot">
+<code class="descname">_3d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._3d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._3d_scatter_plot">
+<code class="descname">_3d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._3d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._3d_surf_plot">
+<code class="descname">_3d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._3d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._3d_text">
+<code class="descname">_3d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._3d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._ax_plot">
+<code class="descname">_ax_plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FaultPlanePlot._ax_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._ax_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fault planes/nodal lines/TNP axes with color scaled by the probability values (if set)</p>
+<p>Darker colors are more likely</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._axis_lines">
+<code class="descname">_axis_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._axis_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the axis lines through the origin</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._background">
+<code class="descname">_background</code><span class="sig-paren">(</span><em>handle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FaultPlanePlot._background"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the background (ignoring fault planes, nodal lines and TNP axes)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>handle: handle of the plot object (for surface plots)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._boundary_lines">
+<code class="descname">_boundary_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._boundary_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the boundary lines, fault planes, nodal lines and axis lines as selected by the initialisation parameters</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>r: float - circle radius (depends on the projection and determined in _background())</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._convert">
+<code class="descname">_convert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles MT conversion to coordinates (setting xdata,ydata,zdata (if required) and cdata attributes)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._convert_mts">
+<code class="descname">_convert_mts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_FaultPlanePlot._convert_mts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._convert_mts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns tuple of None as not used to plot the source</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._eigenvector_matrix">
+<code class="descname">_eigenvector_matrix</code><span class="sig-paren">(</span><em>e1</em>, <em>e2</em>, <em>e3</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._eigenvector_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an eigenvector matrix</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>e1: numpy array/matrix - first eigenvector
+e2: numpy array/matrix - second eigenvector
+e3: numpy array/matrix - third eigenvector</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: eigenvector matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._fault_plane">
+<code class="descname">_fault_plane</code><span class="sig-paren">(</span><em>MT</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._fault_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fault planes for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._get_great_circle">
+<code class="descname">_get_great_circle</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>az=(0</em>, <em>6.283185307179586)</em>, <em>n=500</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._get_great_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the great circle described by the two vectors v1 and v2</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>v1: numpy matrix/tuple - vector on the great circle
+v2: numpy matrix/tuple - a different vector on the great circle</dd>
+<dt>Keyword Args</dt>
+<dd>n_quadrants: int - number of quadrants of the great circle to calculate</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._get_nodal_line">
+<code class="descname">_get_nodal_line</code><span class="sig-paren">(</span><em>T</em>, <em>N</em>, <em>P</em>, <em>E</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._get_nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the nodal line (values with zero amplitude)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>T: numpy matrix - Tension (eigen)vector
+N: numpy matrix - Neutral (eigen)vector
+P: numpy matrix - Pressure (eigen)vector
+E: numpy array - Eigenvalues (E[0]&gt;=E[1]&gt;=E[2])</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array - tuple of x y z coordinates of the nodal lines</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._get_small_circle">
+<code class="descname">_get_small_circle</code><span class="sig-paren">(</span><em>pole</em>, <em>alpha</em>, <em>az=(0</em>, <em>6.283185307179586)</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._get_small_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get small circle about the pole with opening angle alpha</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>pole: numpy matrix - pole of the small circle
+alpha: float - angle of the small circle from the pole</dd>
+<dt>Keyword Args</dt>
+<dd>az: tuple - lower and upper limits of the azimuth to calculate for the small circle</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._line_plot">
+<code class="descname">_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle='-'</em>, <em>linewidth=1</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a line
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c value</dd>
+<dt>Keyword Args</dt>
+<dd>linestyle: str - linestyle description (see matplotlib documentation)
+linewidth: float - line width
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._nodal_line">
+<code class="descname">_nodal_line</code><span class="sig-paren">(</span><em>MTs</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the nodal line for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the line (larger is higher)
+args: passed through to the  _line_plot call so can set e.g. linewidth
+kwargs: passed through to the _line_plot call so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._plot_TNP">
+<code class="descname">_plot_TNP</code><span class="sig-paren">(</span><em>MT, c=['w', 'k', 'w'], marker=('*', '*', '*'), markersize=10, zorder=0, *args, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._plot_TNP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the TNP axes for the given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot</dd>
+<dt>Keyword Args</dt>
+<dd>c: tuple - color description for T N P axes (see matplotlib documentation)
+marker: tuple - marker description for T N P axes (see matplotlib documentation)
+markersize: float - marker width - squared to give marker area
+zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._plot_stations">
+<code class="descname">_plot_stations</code><span class="sig-paren">(</span><em>names</em>, <em>azimuth</em>, <em>takeoff_angle</em>, <em>polarity</em>, <em>marker=('v'</em>, <em>'o'</em>, <em>'^')</em>, <em>colors=('k'</em>, <em>'w'</em>, <em>'k')</em>, <em>radians=False</em>, <em>lim=1.4142135623730951</em>, <em>zorder=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._plot_stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles the station plotting on  the focal sphere.</p>
+<p>If self.text is True then the station names are annotated using radial arrows
+Args</p>
+<blockquote>
+<div>names: list - list of station names
+azimuth: numpy array - array of station azimuths
+takeoff_angle: numpy array - array of station takeoff angles
+polarity: numpy array - array of station polarities</div></blockquote>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>radians: bool - flag for station angles in radians [default is False]
+lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._rotation_matrix">
+<code class="descname">_rotation_matrix</code><span class="sig-paren">(</span><em>zaxis</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate rotation matrix to rotate the vector zaxis onto the z-axis</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>zaxis: numpy matrix - vector to be rotated onto the z-axis</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: rotation matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._scatter_plot">
+<code class="descname">_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot scatter
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>marker: str - marker description (see matplotlib documentation)
+markersize: float - marker width (squared to correspond to markersize parameter)
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._stations">
+<code class="descname">_stations</code><span class="sig-paren">(</span><em>lim=1.4142135623730951</em>, <em>colors=('k'</em>, <em>'w'</em>, <em>'k')</em>, <em>marker=('v'</em>, <em>'o'</em>, <em>'^')</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots stations on the focal sphere</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._surf_plot">
+<code class="descname">_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a surface
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot._text">
+<code class="descname">_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot._text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to write text
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+text: str - text value</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._FaultPlanePlot.plot_plane">
+<code class="descname">plot_plane</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>c</em>, <em>radians=False</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._FaultPlanePlot.plot_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a plane on the focal sphere</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>strike - strike of the plane
+dip - dip of the plane
+c - color description(see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>radians: bool - strike and dip in radians or degrees
+zorder: float - z order of the plane (larger is on top)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="riedeseljordanplot-class">
+<h2>11.7. _RiedeselJordanPlot class<a class="headerlink" href="#riedeseljordanplot-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_RiedeselJordanPlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RiedeselJordanPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the source as a Riedesel-Jordan type plot</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - sets the source type marker sizes (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+color: str - matplotlib color for source region
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._2d_line_plot">
+<code class="descname">_2d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._2d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._2d_scatter_plot">
+<code class="descname">_2d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._2d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._2d_surf_plot">
+<code class="descname">_2d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._2d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._2d_text">
+<code class="descname">_2d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._2d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._3d_line_plot">
+<code class="descname">_3d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._3d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._3d_scatter_plot">
+<code class="descname">_3d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._3d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._3d_surf_plot">
+<code class="descname">_3d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._3d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._3d_text">
+<code class="descname">_3d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._3d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._ax_plot">
+<code class="descname">_ax_plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RiedeselJordanPlot._ax_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._ax_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the sources on the Riedesel-Jordan plot (on the focal sphere)</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._axis_lines">
+<code class="descname">_axis_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._axis_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the axis lines through the origin</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._background">
+<code class="descname">_background</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RiedeselJordanPlot._background"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the axes background ignoring the fault plane, TNP and nodal line flags</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._boundary_lines">
+<code class="descname">_boundary_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RiedeselJordanPlot._boundary_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._boundary_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the boundary lines, and the valid source region with color set by the color flag.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>r: float - circle radius (depends on the projection and determined in _background())</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._convert">
+<code class="descname">_convert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles MT conversion to coordinates (setting xdata,ydata,zdata (if required) and cdata attributes)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._convert_mts">
+<code class="descname">_convert_mts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RiedeselJordanPlot._convert_mts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._convert_mts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the moment tensor and calculates the base vectors</p>
+<p>Returns tuple of None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._eigenvector_matrix">
+<code class="descname">_eigenvector_matrix</code><span class="sig-paren">(</span><em>e1</em>, <em>e2</em>, <em>e3</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._eigenvector_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an eigenvector matrix</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>e1: numpy array/matrix - first eigenvector
+e2: numpy array/matrix - second eigenvector
+e3: numpy array/matrix - third eigenvector</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: eigenvector matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._fault_plane">
+<code class="descname">_fault_plane</code><span class="sig-paren">(</span><em>MT</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._fault_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fault planes for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._get_great_circle">
+<code class="descname">_get_great_circle</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>az=(0</em>, <em>6.283185307179586)</em>, <em>n=500</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._get_great_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the great circle described by the two vectors v1 and v2</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>v1: numpy matrix/tuple - vector on the great circle
+v2: numpy matrix/tuple - a different vector on the great circle</dd>
+<dt>Keyword Args</dt>
+<dd>n_quadrants: int - number of quadrants of the great circle to calculate</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._get_nodal_line">
+<code class="descname">_get_nodal_line</code><span class="sig-paren">(</span><em>T</em>, <em>N</em>, <em>P</em>, <em>E</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._get_nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the nodal line (values with zero amplitude)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>T: numpy matrix - Tension (eigen)vector
+N: numpy matrix - Neutral (eigen)vector
+P: numpy matrix - Pressure (eigen)vector
+E: numpy array - Eigenvalues (E[0]&gt;=E[1]&gt;=E[2])</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array - tuple of x y z coordinates of the nodal lines</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._get_small_circle">
+<code class="descname">_get_small_circle</code><span class="sig-paren">(</span><em>pole</em>, <em>alpha</em>, <em>az=(0</em>, <em>6.283185307179586)</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._get_small_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get small circle about the pole with opening angle alpha</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>pole: numpy matrix - pole of the small circle
+alpha: float - angle of the small circle from the pole</dd>
+<dt>Keyword Args</dt>
+<dd>az: tuple - lower and upper limits of the azimuth to calculate for the small circle</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._line_plot">
+<code class="descname">_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle='-'</em>, <em>linewidth=1</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a line
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c value</dd>
+<dt>Keyword Args</dt>
+<dd>linestyle: str - linestyle description (see matplotlib documentation)
+linewidth: float - line width
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._nodal_line">
+<code class="descname">_nodal_line</code><span class="sig-paren">(</span><em>MTs</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the nodal line for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the line (larger is higher)
+args: passed through to the  _line_plot call so can set e.g. linewidth
+kwargs: passed through to the _line_plot call so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._plot_TNP">
+<code class="descname">_plot_TNP</code><span class="sig-paren">(</span><em>MT, c=['w', 'k', 'w'], marker=('*', '*', '*'), markersize=10, zorder=0, *args, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._plot_TNP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the TNP axes for the given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot</dd>
+<dt>Keyword Args</dt>
+<dd>c: tuple - color description for T N P axes (see matplotlib documentation)
+marker: tuple - marker description for T N P axes (see matplotlib documentation)
+markersize: float - marker width - squared to give marker area
+zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._plot_stations">
+<code class="descname">_plot_stations</code><span class="sig-paren">(</span><em>names</em>, <em>azimuth</em>, <em>takeoff_angle</em>, <em>polarity</em>, <em>marker=('v'</em>, <em>'o'</em>, <em>'^')</em>, <em>colors=('k'</em>, <em>'w'</em>, <em>'k')</em>, <em>radians=False</em>, <em>lim=1.4142135623730951</em>, <em>zorder=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._plot_stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles the station plotting on  the focal sphere.</p>
+<p>If self.text is True then the station names are annotated using radial arrows
+Args</p>
+<blockquote>
+<div>names: list - list of station names
+azimuth: numpy array - array of station azimuths
+takeoff_angle: numpy array - array of station takeoff angles
+polarity: numpy array - array of station polarities</div></blockquote>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>radians: bool - flag for station angles in radians [default is False]
+lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._rotation_matrix">
+<code class="descname">_rotation_matrix</code><span class="sig-paren">(</span><em>zaxis</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate rotation matrix to rotate the vector zaxis onto the z-axis</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>zaxis: numpy matrix - vector to be rotated onto the z-axis</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: rotation matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._scatter_plot">
+<code class="descname">_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot scatter
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>marker: str - marker description (see matplotlib documentation)
+markersize: float - marker width (squared to correspond to markersize parameter)
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._surf_plot">
+<code class="descname">_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a surface
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot._text">
+<code class="descname">_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot._text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to write text
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+text: str - text value</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RiedeselJordanPlot.plot_plane">
+<code class="descname">plot_plane</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>c</em>, <em>radians=False</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RiedeselJordanPlot.plot_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a plane on the focal sphere</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>strike - strike of the plane
+dip - dip of the plane
+c - color description(see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>radians: bool - strike and dip in radians or degrees
+zorder: float - z order of the plane (larger is on top)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="radiationplot-class">
+<h2>11.8. _RadiationPlot class<a class="headerlink" href="#radiationplot-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._RadiationPlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_RadiationPlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RadiationPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the radiation pattern</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+stations: dict - station dict containing keys: 'names','azimuth','takeoff_angle' and 'polarity'
+station_distribution: list - list of station dictionaries corresponding to a location PDF distribution
+show_zero_polarity: bool - flag to show zero polarity receivers
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - station marker size (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._2d_line_plot">
+<code class="descname">_2d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._2d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._2d_scatter_plot">
+<code class="descname">_2d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._2d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._2d_surf_plot">
+<code class="descname">_2d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._2d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._2d_text">
+<code class="descname">_2d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._2d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._3d_line_plot">
+<code class="descname">_3d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._3d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._3d_scatter_plot">
+<code class="descname">_3d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._3d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._3d_surf_plot">
+<code class="descname">_3d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._3d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._3d_text">
+<code class="descname">_3d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._3d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._ax_plot">
+<code class="descname">_ax_plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._ax_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects and plots the amplitude surface</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>matplotlib surface object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._axis_lines">
+<code class="descname">_axis_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._axis_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the axis lines through the origin</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._background">
+<code class="descname">_background</code><span class="sig-paren">(</span><em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the colormap to be symmetrical and plots the axes background.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>handle: handle of the plot object (for surface plots)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._boundary_lines">
+<code class="descname">_boundary_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RadiationPlot._boundary_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._boundary_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only plots the axis lines</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._convert">
+<code class="descname">_convert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles MT conversion to coordinates (setting xdata,ydata,zdata (if required) and cdata attributes)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._convert_mts">
+<code class="descname">_convert_mts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RadiationPlot._convert_mts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._convert_mts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scales the x,y,z coordinates by the amplitude</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array, numpy array: tuple of x,y,z and (scaled) c values</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._eigenvector_matrix">
+<code class="descname">_eigenvector_matrix</code><span class="sig-paren">(</span><em>e1</em>, <em>e2</em>, <em>e3</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._eigenvector_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an eigenvector matrix</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>e1: numpy array/matrix - first eigenvector
+e2: numpy array/matrix - second eigenvector
+e3: numpy array/matrix - third eigenvector</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: eigenvector matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._fault_plane">
+<code class="descname">_fault_plane</code><span class="sig-paren">(</span><em>MT</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._fault_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fault planes for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._get_great_circle">
+<code class="descname">_get_great_circle</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>az=(0</em>, <em>6.283185307179586)</em>, <em>n=500</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._get_great_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the great circle described by the two vectors v1 and v2</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>v1: numpy matrix/tuple - vector on the great circle
+v2: numpy matrix/tuple - a different vector on the great circle</dd>
+<dt>Keyword Args</dt>
+<dd>n_quadrants: int - number of quadrants of the great circle to calculate</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._get_nodal_line">
+<code class="descname">_get_nodal_line</code><span class="sig-paren">(</span><em>T</em>, <em>N</em>, <em>P</em>, <em>E</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._get_nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the nodal line (values with zero amplitude)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>T: numpy matrix - Tension (eigen)vector
+N: numpy matrix - Neutral (eigen)vector
+P: numpy matrix - Pressure (eigen)vector
+E: numpy array - Eigenvalues (E[0]&gt;=E[1]&gt;=E[2])</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array - tuple of x y z coordinates of the nodal lines</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._get_small_circle">
+<code class="descname">_get_small_circle</code><span class="sig-paren">(</span><em>pole</em>, <em>alpha</em>, <em>az=(0</em>, <em>6.283185307179586)</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._get_small_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get small circle about the pole with opening angle alpha</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>pole: numpy matrix - pole of the small circle
+alpha: float - angle of the small circle from the pole</dd>
+<dt>Keyword Args</dt>
+<dd>az: tuple - lower and upper limits of the azimuth to calculate for the small circle</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._line_plot">
+<code class="descname">_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle='-'</em>, <em>linewidth=1</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a line
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c value</dd>
+<dt>Keyword Args</dt>
+<dd>linestyle: str - linestyle description (see matplotlib documentation)
+linewidth: float - line width
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._nodal_line">
+<code class="descname">_nodal_line</code><span class="sig-paren">(</span><em>MTs</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the nodal line for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the line (larger is higher)
+args: passed through to the  _line_plot call so can set e.g. linewidth
+kwargs: passed through to the _line_plot call so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._plot_TNP">
+<code class="descname">_plot_TNP</code><span class="sig-paren">(</span><em>MT, c=['w', 'k', 'w'], marker=('*', '*', '*'), markersize=10, zorder=0, *args, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._plot_TNP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the TNP axes for the given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot</dd>
+<dt>Keyword Args</dt>
+<dd>c: tuple - color description for T N P axes (see matplotlib documentation)
+marker: tuple - marker description for T N P axes (see matplotlib documentation)
+markersize: float - marker width - squared to give marker area
+zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._plot_stations">
+<code class="descname">_plot_stations</code><span class="sig-paren">(</span><em>names</em>, <em>azimuth</em>, <em>takeoff_angle</em>, <em>polarity</em>, <em>marker=('v'</em>, <em>'o'</em>, <em>'^')</em>, <em>colors=('k'</em>, <em>'w'</em>, <em>'k')</em>, <em>radians=False</em>, <em>lim=1.4142135623730951</em>, <em>zorder=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._plot_stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles the station plotting on  the focal sphere.</p>
+<p>If self.text is True then the station names are annotated using radial arrows
+Args</p>
+<blockquote>
+<div>names: list - list of station names
+azimuth: numpy array - array of station azimuths
+takeoff_angle: numpy array - array of station takeoff angles
+polarity: numpy array - array of station polarities</div></blockquote>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>radians: bool - flag for station angles in radians [default is False]
+lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._rotation_matrix">
+<code class="descname">_rotation_matrix</code><span class="sig-paren">(</span><em>zaxis</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate rotation matrix to rotate the vector zaxis onto the z-axis</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>zaxis: numpy matrix - vector to be rotated onto the z-axis</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: rotation matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._scatter_plot">
+<code class="descname">_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot scatter
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>marker: str - marker description (see matplotlib documentation)
+markersize: float - marker width (squared to correspond to markersize parameter)
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._stations">
+<code class="descname">_stations</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_RadiationPlot._stations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Doesn't plot any stations</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._surf_plot">
+<code class="descname">_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a surface
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot._text">
+<code class="descname">_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot._text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to write text
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+text: str - text value</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._RadiationPlot.plot_plane">
+<code class="descname">plot_plane</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>c</em>, <em>radians=False</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._RadiationPlot.plot_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a plane on the focal sphere</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>strike - strike of the plane
+dip - dip of the plane
+c - color description(see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>radians: bool - strike and dip in radians or degrees
+zorder: float - z order of the plane (larger is on top)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="hudsonplot-class">
+<h2>11.9. _HudsonPlot class<a class="headerlink" href="#hudsonplot-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._HudsonPlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_HudsonPlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>projection='uv'</em>, <em>probability=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_HudsonPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hudson plot class</p>
+<p>Plots the source on the u-v or tau-k Hudson plot</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>projection: str - select the projection type from uv or tauk [default is uv]
+probability: numpy array - moment tensor probabilities
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc
+grid_lines: bool - show the interior grid lines
+marginalised: bool - marginalise the PDF (defailt is True)
+color: set marker color
+type_label: bool - show the label of the different types
+hex_bin: bool - use the hex-bin histogram type (slightly smoother)
+bins: int/array/list of arrays - bins for numpy histogram call</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._2d_hist">
+<code class="descname">_2d_hist</code><span class="sig-paren">(</span><em>data_x, data_y, c=None, bins=10, nx_hex=100, hex_extent=[-1, 1, -1, 1], **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._2d_hist" title="Permalink to this definition">¶</a></dt>
+<dd><p>2D histogram</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>data_x: numpy array - x data to bin
+data_y: numpy array - y data to bin</dd>
+<dt>Keyword Args</dt>
+<dd>bins: int - number of bins to use
+c: numpy array - weights to use for each sample in the histogram
+nx_hex: number of hexes to use when hex_bin is True
+hex_extent: minimum extent of the hexagon region
+hex_bin: use the matplotlib hexbin function to histogram (2D only)</dd>
+<dt>Returns</dt>
+<dd>matplotlib histogram/hexbin object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._2d_line_plot">
+<code class="descname">_2d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._2d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._2d_scatter_plot">
+<code class="descname">_2d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._2d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._2d_surf_plot">
+<code class="descname">_2d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._2d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._2d_text">
+<code class="descname">_2d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._2d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._3d_line_plot">
+<code class="descname">_3d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._3d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._3d_scatter_plot">
+<code class="descname">_3d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._3d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._3d_surf_plot">
+<code class="descname">_3d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._3d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._3d_text">
+<code class="descname">_3d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._3d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._ax_plot">
+<code class="descname">_ax_plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_HudsonPlot._ax_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._ax_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the sources on the hudson plot (as a 2D histogram of the PDF if the probability values are set)</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>matplotlib scatter/2dhist object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._background">
+<code class="descname">_background</code><span class="sig-paren">(</span><em>handle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_HudsonPlot._background"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets limits and plots the axes background</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>matplotlib surface object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._boundary_lines">
+<code class="descname">_boundary_lines</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_HudsonPlot._boundary_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._boundary_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and plot boundary lines</p>
+<p>Also plots type labels if type_label flag set on initialisation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._convert">
+<code class="descname">_convert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles MT conversion to coordinates (setting xdata,ydata,zdata (if required) and cdata attributes)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._convert_mts">
+<code class="descname">_convert_mts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_HudsonPlot._convert_mts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._convert_mts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the moment tensors to the chosen source parameters</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy array, numpy array, 0, numpy array: tuple of hudson parameters, 0 and probability</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._eigenvector_matrix">
+<code class="descname">_eigenvector_matrix</code><span class="sig-paren">(</span><em>e1</em>, <em>e2</em>, <em>e3</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._eigenvector_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an eigenvector matrix</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>e1: numpy array/matrix - first eigenvector
+e2: numpy array/matrix - second eigenvector
+e3: numpy array/matrix - third eigenvector</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: eigenvector matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._hist">
+<code class="descname">_hist</code><span class="sig-paren">(</span><em>data</em>, <em>c=None</em>, <em>bins=10</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._hist" title="Permalink to this definition">¶</a></dt>
+<dd><p>1D histogram</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>data: numpy array - data to bin</dd>
+<dt>Keyword Args</dt>
+<dd>bins: int - number of bins to use
+c: numpy array - weights to use for each sample in the histogram</dd>
+<dt>Returns</dt>
+<dd>matplotlib histogram object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._line_plot">
+<code class="descname">_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle='-'</em>, <em>linewidth=1</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a line
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c value</dd>
+<dt>Keyword Args</dt>
+<dd>linestyle: str - linestyle description (see matplotlib documentation)
+linewidth: float - line width
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._max_2d_for_hist">
+<code class="descname">_max_2d_for_hist</code><span class="sig-paren">(</span><em>data_x</em>, <em>data_y</em>, <em>c</em>, <em>bins</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._max_2d_for_hist" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Get Max value for 2d hist (silhouette type plot rather than marginalised</dt>
+<dd>(see Pugh, D J, 2015. Bayesian Source Inversion of Microseismic Events, Thesis))</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of numpy arrays describing the silhouette coordinates and maximum probability values for each point.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._scatter_plot">
+<code class="descname">_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot scatter
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>marker: str - marker description (see matplotlib documentation)
+markersize: float - marker width (squared to correspond to markersize parameter)
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._surf_plot">
+<code class="descname">_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a surface
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._text">
+<code class="descname">_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to write text
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+text: str - text value</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._tk_boundary_lines">
+<code class="descname">_tk_boundary_lines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_HudsonPlot._tk_boundary_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._tk_boundary_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and plot boundary lines for the tau-k plot</p>
+<p>Also plots type labels if type_label flag set on initialisation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot._uv_boundary_lines">
+<code class="descname">_uv_boundary_lines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_HudsonPlot._uv_boundary_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot._uv_boundary_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and plot boundary lines for the u-v plot</p>
+<p>Also plots type labels if type_label flag set on initialisation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._HudsonPlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._HudsonPlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="luneplot-class">
+<h2>11.10. _LunePlot class<a class="headerlink" href="#luneplot-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mtfit.plot.plot_classes._LunePlot">
+<em class="property">class </em><code class="descclassname">mtfit.plot.plot_classes.</code><code class="descname">_LunePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the source on the fundamental eigenvalue lune</p>
+<p>Can be either a histogram or scatter plot.</p>
+<p>parameter single is set to False as multiple sources can be plotted per axes</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>subplot_spec: matplotlib subplot spec
+fig: matplotlib figure
+MTs: moment tensor samples (see MTData initialisation docstring for formats)</dd>
+<dt>Keyword Args</dt>
+<dd>phase: str - phase to plot (default='p')
+lower: bool - project lower hemisphere (ie. downward hemisphere)
+full_sphere: bool - plot the full sphere
+fault_plane: bool - plot the fault planes
+nodal_line: bool - plot the nodal lines
+stations: dict - station dict containing keys: 'names','azimuth','takeoff_angle' and 'polarity'
+station_distribution: list - list of station dictionaries corresponding to a location PDF distribution
+show_zero_polarity: bool - flag to show zero polarity receivers
+show_stations: bool - flag to show stations when station_distribution present
+station_markersize: float - station marker size (squared to get area)
+station_colors: tuple - tuple of colors for negative, no, and positive polarity
+TNP: bool - show the TNP axes on the plot
+colormap: str - matplotlib colormap selection (using matplotlib.cm.get_cmap())
+fontsize: int - fontsize for text
+linewidth: float - base linewidth (sometimes thinner or thicker values are used, but relative to this parameter)
+text: bool - flag to show or hide text on the plot
+axis_lines: bool - flag to show or hide axis lines on the plot
+resolution: int - resolution for spherical sampling etc</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._2d_hist">
+<code class="descname">_2d_hist</code><span class="sig-paren">(</span><em>data_g, data_d, c=None, bins=10, nx_hex=100, hex_extent=[-0.5, 0.5, -1.5, 1.5], **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot._2d_hist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._2d_hist" title="Permalink to this definition">¶</a></dt>
+<dd><p>2D histogram - handles gamma delta conversion and plotting</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>data_g: numpy array - g data to bin
+data_d: numpy array - d data to bin</dd>
+<dt>Keyword Args</dt>
+<dd>bins: int - number of bins to use
+c: numpy array - weights to use for each sample in the histogram
+nx_hex: number of hexes to use when hex_bin is True
+hex_extent: minimum extent of the hexagon region
+hex_bin: use the matplotlib hexbin function to histogram (2D only)</dd>
+<dt>Returns</dt>
+<dd>matplotlib histogram/hexbin object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._2d_line_plot">
+<code class="descname">_2d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._2d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._2d_scatter_plot">
+<code class="descname">_2d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._2d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._2d_surf_plot">
+<code class="descname">_2d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._2d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._2d_text">
+<code class="descname">_2d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._2d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>2d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._3d_line_plot">
+<code class="descname">_3d_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle</em>, <em>linewidth</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._3d_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d line plot (see _line_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._3d_scatter_plot">
+<code class="descname">_3d_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._3d_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d scatter plot (see _scatter_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._3d_surf_plot">
+<code class="descname">_3d_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._3d_surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d surface plot (see _surf_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._3d_text">
+<code class="descname">_3d_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>fontsize</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._3d_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>3d text plot (see _text_plot documentation)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._ax_plot">
+<code class="descname">_ax_plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot._ax_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._ax_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the sources on the lune (as a 2D histogram of the PDF if the probability values are set)</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>matplotlib scatter/2dhist object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._axis_lines">
+<code class="descname">_axis_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._axis_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the axis lines through the origin</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._background">
+<code class="descname">_background</code><span class="sig-paren">(</span><em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the axes background</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>handle: handle of the plot object (for surface plots)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._boundary_lines">
+<code class="descname">_boundary_lines</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot._boundary_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._boundary_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and plot boundary lines</p>
+<p>Also plots type labels if type_label flag set on initialisation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._convert">
+<code class="descname">_convert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles MT conversion to coordinates (setting xdata,ydata,zdata (if required) and cdata attributes)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._convert_mts">
+<code class="descname">_convert_mts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot._convert_mts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._convert_mts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the moment tensors for plotting</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy array, numpy array, 0, numpy array: tuple of gamma,delta,0,probability values</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._eigenvector_matrix">
+<code class="descname">_eigenvector_matrix</code><span class="sig-paren">(</span><em>e1</em>, <em>e2</em>, <em>e3</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._eigenvector_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an eigenvector matrix</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>e1: numpy array/matrix - first eigenvector
+e2: numpy array/matrix - second eigenvector
+e3: numpy array/matrix - third eigenvector</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: eigenvector matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._fault_plane">
+<code class="descname">_fault_plane</code><span class="sig-paren">(</span><em>MT</em>, <em>c</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._fault_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fault planes for a given moment tensor</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>MT: MTData - Moment tensor to plot
+c: str - color description (see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z order for the plane (larger is higher)
+args: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth
+kwargs: passed through to the plot_plane (and _line_plot) calls so can set e.g. linewidth</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._get_great_circle">
+<code class="descname">_get_great_circle</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>az=(0</em>, <em>6.283185307179586)</em>, <em>n=500</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._get_great_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the great circle described by the two vectors v1 and v2</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>v1: numpy matrix/tuple - vector on the great circle
+v2: numpy matrix/tuple - a different vector on the great circle</dd>
+<dt>Keyword Args</dt>
+<dd>n_quadrants: int - number of quadrants of the great circle to calculate</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._get_nodal_line">
+<code class="descname">_get_nodal_line</code><span class="sig-paren">(</span><em>T</em>, <em>N</em>, <em>P</em>, <em>E</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._get_nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the nodal line (values with zero amplitude)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>T: numpy matrix - Tension (eigen)vector
+N: numpy matrix - Neutral (eigen)vector
+P: numpy matrix - Pressure (eigen)vector
+E: numpy array - Eigenvalues (E[0]&gt;=E[1]&gt;=E[2])</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array - tuple of x y z coordinates of the nodal lines</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._get_small_circle">
+<code class="descname">_get_small_circle</code><span class="sig-paren">(</span><em>pole</em>, <em>alpha</em>, <em>az=(0</em>, <em>6.283185307179586)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot._get_small_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._get_small_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and convert a small circle onto the Lune</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>pole: numpy matrix - pole of the small circle
+alpha: float - angle of the small circle from the pole</dd>
+<dt>Keyword Args</dt>
+<dd>az: tuple - lower and upper limits of the azimuth to calculate for the small circle</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of coordinates (x,y,z)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._hist">
+<code class="descname">_hist</code><span class="sig-paren">(</span><em>data</em>, <em>c=None</em>, <em>bins=10</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._hist" title="Permalink to this definition">¶</a></dt>
+<dd><p>1D histogram</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>data: numpy array - data to bin</dd>
+<dt>Keyword Args</dt>
+<dd>bins: int - number of bins to use
+c: numpy array - weights to use for each sample in the histogram</dd>
+<dt>Returns</dt>
+<dd>matplotlib histogram object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._line_plot">
+<code class="descname">_line_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>linestyle='-'</em>, <em>linewidth=1</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a line
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c value</dd>
+<dt>Keyword Args</dt>
+<dd>linestyle: str - linestyle description (see matplotlib documentation)
+linewidth: float - line width
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._lune_coords">
+<code class="descname">_lune_coords</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot._lune_coords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._lune_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the lune coordinates for a given gamma and delta values</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>gamma: numpy array/float - gamma values
+delta: numpy array/float - delta values</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of x, y and z coordinates</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._max_2d_for_hist">
+<code class="descname">_max_2d_for_hist</code><span class="sig-paren">(</span><em>data_x</em>, <em>data_y</em>, <em>c</em>, <em>bins</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._max_2d_for_hist" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Get Max value for 2d hist (silhouette type plot rather than marginalised</dt>
+<dd>(see Pugh, D J, 2015. Bayesian Source Inversion of Microseismic Events, Thesis))</dd>
+<dt>Returns</dt>
+<dd>numpy array, numpy array, numpy array: tuple of numpy arrays describing the silhouette coordinates and maximum probability values for each point.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._nodal_line">
+<code class="descname">_nodal_line</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot._nodal_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._nodal_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pass-through function - nothing plotted</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._plot_TNP">
+<code class="descname">_plot_TNP</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot._plot_TNP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._plot_TNP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pass-through function - nothing plotted</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._plot_stations">
+<code class="descname">_plot_stations</code><span class="sig-paren">(</span><em>names</em>, <em>azimuth</em>, <em>takeoff_angle</em>, <em>polarity</em>, <em>marker=('v'</em>, <em>'o'</em>, <em>'^')</em>, <em>colors=('k'</em>, <em>'w'</em>, <em>'k')</em>, <em>radians=False</em>, <em>lim=1.4142135623730951</em>, <em>zorder=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._plot_stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles the station plotting on  the focal sphere.</p>
+<p>If self.text is True then the station names are annotated using radial arrows
+Args</p>
+<blockquote>
+<div>names: list - list of station names
+azimuth: numpy array - array of station azimuths
+takeoff_angle: numpy array - array of station takeoff angles
+polarity: numpy array - array of station polarities</div></blockquote>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>radians: bool - flag for station angles in radians [default is False]
+lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._rotation_matrix">
+<code class="descname">_rotation_matrix</code><span class="sig-paren">(</span><em>zaxis</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate rotation matrix to rotate the vector zaxis onto the z-axis</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>zaxis: numpy matrix - vector to be rotated onto the z-axis</dd>
+<dt>Returns</dt>
+<dd>numpy matrix: rotation matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._scatter_plot">
+<code class="descname">_scatter_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>marker='.'</em>, <em>markersize=10</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot scatter
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>marker: str - marker description (see matplotlib documentation)
+markersize: float - marker width (squared to correspond to markersize parameter)
+zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._stations">
+<code class="descname">_stations</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/plot/plot_classes.html#_LunePlot._stations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pass-through function - nothing plotted</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._surf_plot">
+<code class="descname">_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._surf_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to plot a surface
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+c: numpy array/str- c values</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot._text">
+<code class="descname">_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>text</em>, <em>zorder=2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot._text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call to write text
+(handles 2 or 3 dimensions as required)</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: numpy array - x coordinates
+y: numpy array - y coordinates
+z: numpy array - z coordinates
+text: str - text value</dd>
+<dt>Keyword Args</dt>
+<dd>zorder: float - z index of the surface (positive higher)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><em>MTs=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the result</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>MTs: Moment tensors to plot (see MTData initialisation docstring for formats)
+args: args passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)
+kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be different from initialisation values)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.plot.plot_classes._LunePlot.plot_plane">
+<code class="descname">plot_plane</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>c</em>, <em>radians=False</em>, <em>zorder=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.plot.plot_classes._LunePlot.plot_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a plane on the focal sphere</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>strike - strike of the plane
+dip - dip of the plane
+c - color description(see matplotlib documentation)</dd>
+<dt>Keyword Args</dt>
+<dd>radians: bool - strike and dip in radians or degrees
+zorder: float - z order of the plane (larger is on top)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mtplotcli.html" class="btn btn-neutral float-right" title="12. MTplot command line options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mtplot.html" class="btn btn-neutral" title="10. Plotting the Moment Tensor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

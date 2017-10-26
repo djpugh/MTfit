@@ -1,0 +1,22 @@
+*****************************
+Introduction
+*****************************
+
+
+Source inversion is carried out at many seismological observatories and research groups around the world. :mod:`mtfit` builds on the approach introduced in :ref:`Pugh, 2015 <Pugh-2015t>`, using a Bayesian approach to source inversion for polarity and amplitude ratios, as well as automated Bayesian polarity probability estimates.  This approach differs from commonly used existing approaches, such as FPFIT (:ref:`Reasenberg and Oppenheimer 1985 <Reasenberg-1985>`), HASH (:ref:`Hardebeck and Shearer 2002<Hardebeck-2002>`, :ref:`2003<Hardebeck-2003>`) and FOCMEC (:ref:`Snoke 2003<Snoke-2003>`), because it uses polarities and amplitude ratios in a Bayesian framework to estimate the full source PDF for the double-couple and full moment tensor model spaces. The approach can include location and velocity model uncertainty, as well as marginalising over measurement uncertainties in the data
+
+:ref:`Pugh et al. (2015) <Pugh-2016a>` introduced a Bayesian approach to source inversion for polarity and amplitude ratios, as well as automated Bayesian polarity probability estimates (:ref:`Pugh et al., 2015 <Pugh-2016b>`). These approaches have been developed into mtfit, a Python module for source inversion. Python is a common programming and scripting language with many scientific modules available, both for mathematical calculation such as `NumPy <http://www.numpy.org>`_ and `SciPy <http://www.scipy.org>`_, and for seismological methods such as `ObsPy <http://www.obspy.org>`_ (:ref:`Beyreuther et al. 2010 <Beyreuther-2010>`). 
+
+Python and many of its modules are open source, allowing easy development and removing licensing restrictions. Moreover, Python is platform independent, intuitive and accessible, with a good shell interface in the form of `iPython <https://ipython.org/>`_. It is used in many fields and is easy to install on almost any computer platform. Python can also interface easily with C and fortran libraries, as well as calling functions from compiled C modules, such as those generated with `Cython <http://www.cython.org>`_, with no difference from normal Python functions. :mod:`mtfit` has been written in Python 2.7, and may not be compatible with Python 3.
+
+mtfit has been used in several studies, including those reported by :ref:`Wilks et al. 2015 <Wilks-2015>`, :ref:`Greenfield and White 2015 <Greenfield-2015>`, :ref:`Mildon et al. 2015 <Watson-2015>`, and :ref:`Pugh et al. 2015 <Pugh-2016a>`.
+
+The polarity probability estimates can be calculated using the Python module :mod:`autopol` (:ref:`Pugh, 2016a <Pugh-2016a>`).
+
+.. :ref:`Pugh et al. (2015f) <Pugh-2015f>` presents a short overview of mtfit, drawn mainly from the information in this documentation. goes into more detail than the paper, 
+This manual describes how to install and run :mod:`mtfit` in chapters :latex:`\ref{setup::doc}` and :latex:`\ref{run::doc}`. 
+Chapters :latex:`\ref{tutorial::doc}` and :latex:`\ref{real-tutorial::doc}` provide an introduction to using :mod:`mtfit` with different algorithms and parameter choices. 
+All the data and scripts to run these examples can be found in the ``mtfit/examples`` directory. The basic theory underlying :mod:`mtfit` is introduced in chapters :latex:`\ref{bayes::doc}` and :latex:`\ref{probability::doc}`, and :ref:`Pugh et al. (2016a) <Pugh-2016a>` provides a full derivation and explanation of the theory. 
+The different search algorithms are described in chapter :latex:`\ref{algorithms::doc}`. These are  investigated in more detail in :ref:`Pugh et al. (2015t) <Pugh-2015t>`. 
+The moment tensor conversion submodule, :mod:`MTconvert` is introduced in chapter :latex:`\ref{mtconvert::doc}`.
+Chapter :latex:`\ref{cli::doc}` presents the different command line options for :mod:`mtfit`. Chapter :latex:`\ref{mtplot::doc}` describes the different plotting options uisng the :mod:`mtfit.plot` submodule. Chapter :latex:`\ref{mtplotcli::doc}` presents the different command line options for :mod:`MTplot` script. The :class:`mtfit.inversion.Inversion` class, used for carrying out the forward model is documented in chapter :latex:`\ref{inversion::doc}`. Lastly the different ways :mod:`mtfit` can be extended are shown in chapter :latex:`\ref{extensions::doc}`.

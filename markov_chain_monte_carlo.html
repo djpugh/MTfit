@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Markov chain Monte Carlo Search Algorithm &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Markov chain Monte Carlo Search Algorithm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/markov_chain_monte_carlo.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mtfit.algorithms.markov_chain_monte_carlo">
+<span id="markov-chain-monte-carlo-search-algorithm"></span><h1>Markov chain Monte Carlo Search Algorithm<a class="headerlink" href="#module-mtfit.algorithms.markov_chain_monte_carlo" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="markov-chain-monte-carlo">
+<h2>markov_chain_monte_carlo<a class="headerlink" href="#markov-chain-monte-carlo" title="Permalink to this headline">¶</a></h2>
+<p>Module containing algorithm classes for Markov chain Monte Carlo sampling.</p>
+</div>
+<p>The McMC algorithms are initialised using the <a class="reference internal" href="#mtfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator" title="mtfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator"><code class="xref py py-class docutils literal"><span class="pre">McMCAlgorithmCreator</span></code></a> class:</p>
+<dl class="class">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator">
+<em class="property">class </em><code class="descclassname">mtfit.algorithms.markov_chain_monte_carlo.</code><code class="descname">McMCAlgorithmCreator</code><a class="reference internal" href="_modules/mtfit/algorithms/markov_chain_monte_carlo.html#McMCAlgorithmCreator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the Markov chain Monte Carlo algorithm from parameters</p>
+<p>Creates the correct McMC algorithm object depending on the selected mode.</p>
+<p>McMC Creator</p>
+<p>Returns initialised object of desired type. This is extensible using the
+MTfit.algorithms.markov_chain_monte_carlo group in pkg_resources (see extensions documentation)
+to add additional options</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd><p class="first">mode:[MetropolisHastings] McMC mode to use options are: MetropolisHastings
+alpha:[False] Default parameters for Markov chain steps, depend on transition probabilities
+trans_dimensional:[False] Boolean flag to run with trans-dimensional sampling
+learning_length:[10000] Number of samples for learning period and to discard from chain.
+parameterisation:['Tape'] Source type parameterisation to use options are: Tape
+transition:['Gaussian'] Transition pdf to use options are: 'Gaussian'
+chain_length:[1000000] End point of the Markov chain.
+min_acceptance_rate:[0.3] Minimum targetted sample acceptance rate.
+max_acceptance_rate:[0.5] Maximum targetted sample acceptance rate.
+acceptance_rate_window:[1000] Number of samples to use in learning period for calculating and</p>
+<blockquote>
+<div>modifying the acceptance rate.</div></blockquote>
+<p class="last">initial_sample:['Grid'] Initialisation sampling mode to use options are 'Grid'.</p>
+</dd>
+<dt>Returns</dt>
+<dd>McMC sampling object.</dd>
+</dl>
+<dl class="staticmethod">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator.__new__">
+<em class="property">static </em><code class="descname">__new__</code><span class="sig-paren">(</span><em>mode='metropolis_hastings'</em>, <em>alpha=False</em>, <em>trans_dimensional=False</em>, <em>learning_length=10000</em>, <em>parameterisation='tape'</em>, <em>transition='gaussian'</em>, <em>chain_length=1000000</em>, <em>min_acceptance_rate=0.3</em>, <em>max_acceptance_rate=0.5</em>, <em>acceptance_rate_window=1000</em>, <em>initial_sample='grid'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/markov_chain_monte_carlo.html#McMCAlgorithmCreator.__new__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator.__new__" title="Permalink to this definition">¶</a></dt>
+<dd><p>McMC Creator</p>
+<p>Returns initialised object of desired type. This is extensible using the
+MTfit.algorithms.markov_chain_monte_carlo group in pkg_resources (see extensions documentation)
+to add additional options</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd><p class="first">mode:[MetropolisHastings] McMC mode to use options are: MetropolisHastings
+alpha:[False] Default parameters for Markov chain steps, depend on transition probabilities
+trans_dimensional:[False] Boolean flag to run with trans-dimensional sampling
+learning_length:[10000] Number of samples for learning period and to discard from chain.
+parameterisation:['Tape'] Source type parameterisation to use options are: Tape
+transition:['Gaussian'] Transition pdf to use options are: 'Gaussian'
+chain_length:[1000000] End point of the Markov chain.
+min_acceptance_rate:[0.3] Minimum targetted sample acceptance rate.
+max_acceptance_rate:[0.5] Maximum targetted sample acceptance rate.
+acceptance_rate_window:[1000] Number of samples to use in learning period for calculating and</p>
+<blockquote>
+<div>modifying the acceptance rate.</div></blockquote>
+<p class="last">initial_sample:['Grid'] Initialisation sampling mode to use options are 'Grid'.</p>
+</dd>
+<dt>Returns</dt>
+<dd>McMC sampling object.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<p>The standard McMC algorithms used are the multiple try algorithms using the <a class="reference internal" href="references.html#tape-2012"><span class="std std-ref">Tape and Tape (2012)</span></a> parameterisation and a Gaussian proposal function.</p>
+<dl class="class">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape">
+<em class="property">class </em><code class="descclassname">mtfit.algorithms.markov_chain_monte_carlo.</code><code class="descname">IterativeMultipleTryMetropolisHastingsGaussianTape</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/markov_chain_monte_carlo.html#IterativeMultipleTryMetropolisHastingsGaussianTape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Metropolis-Hastings Markov chain Monte Carlo Algorithm using Gaussian Transition PDF and Tape parameterisation, chain length ends maximum length</p>
+<p>Algorithm ends when the number of samples in the chain equals the chain_length, where the chain length corresponds to the number of accepted samples.
+The parameterisation is from Tape and Tape (A geometric setting for moment tensors, Tape and Tape, 2012, GJI 190 pp 476-490).</p>
+<p>This is a child class of the IterativeMetropolisHastingsGaussianTape</p>
+<p>Initialisation of Metropolis-Hastings Markov chain Monte Carlo Algorithm using Gaussian Transition PDF and Tape parameterisation, constrained by chain length</p>
+<p>The chain length corresponds to the number of accepted samples.</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>number_samples:[1000] Maximum number of samples to try on each iteration. (unused samples are dropped)</dd>
+</dl>
+<p>This is a child class of the IterativeMetropolisHastingsGaussianTape</p>
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.acceptance">
+<code class="descname">acceptance</code><span class="sig-paren">(</span><em>x</em>, <em>ln_likelihood_x</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.acceptance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates acceptance</p>
+<p>Calculates the acceptance from the Metropolis condition.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: Model values
+ln_likelihood_x: Model ln_likelihood.</dd>
+<dt>Returns</dt>
+<dd>float:acceptance</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.acceptance_rate">
+<code class="descname">acceptance_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.acceptance_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets acceptance rate.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>float: acceptance rate.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.convert_sample">
+<code class="descname">convert_sample</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.convert_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts sample to MT form</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: sample</dd>
+<dt>Returns</dt>
+<dd>Converted Sample</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.eigenvectors_mt_2_mt6">
+<code class="descname">eigenvectors_mt_2_mt6</code><span class="sig-paren">(</span><em>diag</em>, <em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.eigenvectors_mt_2_mt6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts eigenvectors and eigenvalues to moment tensor 6-vector.</p>
+<p>Generates moment tensor 6-vector.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.
+a: numpy array of eigenvectors corresponding to the first eigenvalue.
+b: numpy array of eigenvectors corresponding to the second eigenvalue.
+c: numpy array of eigenvectors corresponding to the third eigenvalue.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of moment tensor 6-vectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.get_sampling_model">
+<code class="descname">get_sampling_model</code><span class="sig-paren">(</span><em>kwargs</em>, <em>file_sample</em>, <em>file_safe</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.get_sampling_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the sampling model from the entry points</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.initialise">
+<code class="descname">initialise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.initialise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialse samples</p>
+<p>Initialises the chain either using an initialiser if set, otherwise using random_sample.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>new_sample,False</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.is_dc">
+<code class="descname">is_dc</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.is_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a sample x is double-couple</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.iterate">
+<code class="descname">iterate</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate from result</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>result: Result dictionary from forward task (e.g. mtfit.inversion.ForwardTask)</dd>
+<dt>Returns</dt>
+<dd>new_sample,End where End is a boolean flag to end the chain if the length of accepted samples is longer than the chain length.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.learning_check">
+<code class="descname">learning_check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.learning_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if still in learning period</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.new_sample">
+<code class="descname">new_sample</code><span class="sig-paren">(</span><em>jump=0.0</em>, <em>gaussian_jump=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/markov_chain_monte_carlo.html#IterativeMultipleTryMetropolisHastingsGaussianTape.new_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.new_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get new samples including multiple samples to try</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.output">
+<code class="descname">output</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns output dictionary</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>dict: Output dictionary</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.prior">
+<code class="descname">prior</code><span class="sig-paren">(</span><em>x</em>, <em>dc=None</em>, <em>basic_cdc=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.prior" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates prior probability for x</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>float: prior probability</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_basic_cdc">
+<code class="descname">random_basic_cdc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_basic_cdc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a random C+DC</p>
+<p>Generates a random C+DC using flat pdfs for each parameter (gamma,delta given by alpha).</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>Random MT in Tape parameterisation</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_clvd">
+<code class="descname">random_clvd</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_clvd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random CLVD moment tensors (size 6,number_samples)</p>
+<p>Generates random CLVD moment tensors with random orientations.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy matrix of random CLVD moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_dc">
+<code class="descname">random_dc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a random DC</p>
+<p>Generates a random DC using flat pdfs for each parameter (gamma=delta=0).</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>Random MT in Tape parameterisation</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_orthogonal_eigenvectors">
+<code class="descname">random_orthogonal_eigenvectors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_orthogonal_eigenvectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates random orthogonal eigenvectors.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>list of numpy arrays of eigenvectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_sample">
+<code class="descname">random_sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random samples</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">results from generating the random samples.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_type">
+<code class="descname">random_type</code><span class="sig-paren">(</span><em>diag</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.random_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random  moment tensors from a given set of eigenvalues.</p>
+<p>Generates random moment tensors with a given set of eigenvalues and random orientations.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of random moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.transition_pdf">
+<code class="descname">transition_pdf</code><span class="sig-paren">(</span><em>x</em>, <em>x1</em>, <em>dc=None</em>, <em>basic_cdc=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.transition_pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates gaussian transition pdf</p>
+<p>Evaluates the gaussian transition probability for x and x1</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>float: transition probability</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape">
+<em class="property">class </em><code class="descclassname">mtfit.algorithms.markov_chain_monte_carlo.</code><code class="descname">IterativeMultipleTryTransDMetropolisHastingsGaussianTape</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/markov_chain_monte_carlo.html#IterativeMultipleTryTransDMetropolisHastingsGaussianTape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trans-Dimensional Metropolis-Hastings Markov chain Monte Carlo Algorithm using Gaussian Transition PDF and Tape parameterisation, chain length ends maximum length</p>
+<p>Trans Dimensional sampling, jumping between double-couple and full moment tensor models.
+Algorithm ends when the number of samples in the chain equals the chain_length, where the chain length corresponds to the number of accepted samples.
+The parameterisation is from Tape and Tape (A geometric setting for moment tensors, Tape and Tape, 2012, GJI 190 pp 476-490).</p>
+<p>This is a child class of both the IterativeTransDMetropolisHastingsGaussianTape and IterativeMultipleTryMetropolisHastingsGaussianTape</p>
+<p>Initialisation of Trans-Dimensional Metropolis-Hastings Markov chain Monte Carlo Algorithm using Gaussian Transition PDF and Tape parameterisation, chain length ends maximum length</p>
+<p>This is a child class of both the IterativeTransDMetropolisHastingsGaussianTape and IterativeMultipleTryMetropolisHastingsGaussianTape</p>
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.acceptance">
+<code class="descname">acceptance</code><span class="sig-paren">(</span><em>x</em>, <em>ln_likelihoodx</em>, <em>dc_prior=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.acceptance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates acceptance</p>
+<p>Calculates the acceptance from the Trans-Dimensional Metropolis condition.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: Model values
+ln_likelihoodx: Model likelihood.</dd>
+<dt>Returns</dt>
+<dd>float:acceptance</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.acceptance_rate">
+<code class="descname">acceptance_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.acceptance_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets acceptance rate.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>float: acceptance rate.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.convert_sample">
+<code class="descname">convert_sample</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.convert_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts sample to MT form</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x: sample</dd>
+<dt>Returns</dt>
+<dd>Converted Sample</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.eigenvectors_mt_2_mt6">
+<code class="descname">eigenvectors_mt_2_mt6</code><span class="sig-paren">(</span><em>diag</em>, <em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.eigenvectors_mt_2_mt6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts eigenvectors and eigenvalues to moment tensor 6-vector.</p>
+<p>Generates moment tensor 6-vector.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.
+a: numpy array of eigenvectors corresponding to the first eigenvalue.
+b: numpy array of eigenvectors corresponding to the second eigenvalue.
+c: numpy array of eigenvectors corresponding to the third eigenvalue.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of moment tensor 6-vectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.get_sampling_model">
+<code class="descname">get_sampling_model</code><span class="sig-paren">(</span><em>kwargs</em>, <em>file_sample</em>, <em>file_safe</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.get_sampling_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the sampling model from the entry points</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.initialise">
+<code class="descname">initialise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.initialise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialse samples</p>
+<p>Initialises the chain either using an initialiser if set, otherwise using random_sample.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>new_sample,False</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.is_dc">
+<code class="descname">is_dc</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.is_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a sample x is double-couple</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.iterate">
+<code class="descname">iterate</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates new sample</p>
+<p>Calculates the acceptance and handles the pDC output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.jump_params">
+<code class="descname">jump_params</code><span class="sig-paren">(</span><em>x=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.jump_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates dimension jump parameters</p>
+<p>Calculates either the probabilities of the balancing parameters if x exists, else returns the two balancing parameters.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>x:[False] Can be given as the two balancing parameters</dd>
+<dt>Returns</dt>
+<dd><dl class="first last docutils">
+<dt>if x is not  False:</dt>
+<dd>float: q - probability of balancing parameters</dd>
+<dt>else:</dt>
+<dd>float: gamma - Randomly distributed gamma value
+float: delta - Randomly distributed delta value</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.learning_check">
+<code class="descname">learning_check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.learning_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if still in learning period</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.new_sample">
+<code class="descname">new_sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/markov_chain_monte_carlo.html#IterativeMultipleTryTransDMetropolisHastingsGaussianTape.new_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.new_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates new sample</p>
+<p>Generates a new sample by drawing a new sample from the gaussian transition pdf, conditional on the previous sample.
+Probability if the sample jumping between models given by the dimension_jump_prob kwarg on initialisation.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>New sample.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.output">
+<code class="descname">output</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return output dict</p>
+<p>Return output dict including pDC value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.prior">
+<code class="descname">prior</code><span class="sig-paren">(</span><em>x</em>, <em>dc=None</em>, <em>basic_cdc=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.prior" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates prior probability for x</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>float: prior probability</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_basic_cdc">
+<code class="descname">random_basic_cdc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_basic_cdc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a random C+DC</p>
+<p>Generates a random C+DC using flat pdfs for each parameter (gamma,delta given by alpha).</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>Random MT in Tape parameterisation</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_clvd">
+<code class="descname">random_clvd</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_clvd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random CLVD moment tensors (size 6,number_samples)</p>
+<p>Generates random CLVD moment tensors with random orientations.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy matrix of random CLVD moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_dc">
+<code class="descname">random_dc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a random DC</p>
+<p>Generates a random DC using flat pdfs for each parameter (gamma=delta=0).</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>Random MT in Tape parameterisation</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_orthogonal_eigenvectors">
+<code class="descname">random_orthogonal_eigenvectors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_orthogonal_eigenvectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates random orthogonal eigenvectors.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>list of numpy arrays of eigenvectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_sample">
+<code class="descname">random_sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random samples</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">results from generating the random samples.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_type">
+<code class="descname">random_type</code><span class="sig-paren">(</span><em>diag</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.random_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random  moment tensors from a given set of eigenvalues.</p>
+<p>Generates random moment tensors with a given set of eigenvalues and random orientations.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of random moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.transition_pdf">
+<code class="descname">transition_pdf</code><span class="sig-paren">(</span><em>x</em>, <em>x1</em>, <em>dc=None</em>, <em>basic_cdc=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.transition_pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates gaussian transition pdf</p>
+<p>Evaluates the gaussian transition probability for x and x1</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>float: transition probability</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<p>The McMC sampling algorithms inherit from the <code class="xref py py-class docutils literal"><span class="pre">BaseAlgorithm</span></code> class:</p>
+<dl class="class">
+<dt id="mtfit.algorithms.base.BaseAlgorithm">
+<em class="property">class </em><code class="descclassname">mtfit.algorithms.base.</code><code class="descname">BaseAlgorithm</code><span class="sig-paren">(</span><em>number_samples=10000</em>, <em>dc=False</em>, <em>quality_check=False</em>, <em>file_sample=False</em>, <em>file_safe=True</em>, <em>generate=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for algorithms including the base methods required for forward
+modelling based inversions.</p>
+<p>BaseAlgorithm initialisation</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd><p class="first">number_samples:[10000] Number of samples to use per iteration.
+dc:[False] Boolean to select inversion constrained to double-couple</p>
+<blockquote>
+<div>space or over the full moment tensor space.</div></blockquote>
+<dl class="last docutils">
+<dt>quality_check:[False] Carry out quality check after 40,000 samples.</dt>
+<dd>If there are too many non-zero samples, the inversion is stopped
+for that event.</dd>
+<dt>file_sample:[False] Boolean to select whether to use file sampling</dt>
+<dd>(saving the output to file).</dd>
+<dt>file_safe:[False] Boolean to select whether to use file safe outputs</dt>
+<dd>when using file sampling.</dd>
+<dt>generate:[False] Boolean to select whether to generate the random</dt>
+<dd>moment tensors in the forward task or not.</dd>
+</dl>
+</dd>
+<dt>Keyword Arguments</dt>
+<dd><dl class="first last docutils">
+<dt>basic_cdc:[False] Boolean to select whether to use the Basic CDC</dt>
+<dd>model (inversion constrained to crack+double-couple space).</dd>
+<dt>number_events:[1] Integer giving the number of events in this</dt>
+<dd>inversion (for use with multiple event inversions).</dd>
+<dt>sampling_prior:[6sphere_prior] string selector for the full moment</dt>
+<dd>tensor sampling prior (MTfit.sampling_prior entry point)</dd>
+<dt>sampling:[6sphere] string selector for the full moment tensor</dt>
+<dd>sampling model (MTfit.sampling entry point)</dd>
+<dt>model:[False] selector for alternate models using the</dt>
+<dd>MTfit.sample_distribution entry_point</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.eigenvectors_mt_2_mt6">
+<code class="descname">eigenvectors_mt_2_mt6</code><span class="sig-paren">(</span><em>diag</em>, <em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.eigenvectors_mt_2_mt6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.eigenvectors_mt_2_mt6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts eigenvectors and eigenvalues to moment tensor 6-vector.</p>
+<p>Generates moment tensor 6-vector.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.
+a: numpy array of eigenvectors corresponding to the first eigenvalue.
+b: numpy array of eigenvectors corresponding to the second eigenvalue.
+c: numpy array of eigenvectors corresponding to the third eigenvalue.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of moment tensor 6-vectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.get_sampling_model">
+<code class="descname">get_sampling_model</code><span class="sig-paren">(</span><em>kwargs</em>, <em>file_sample</em>, <em>file_safe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.get_sampling_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.get_sampling_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the sampling model from the entry points</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.initialise">
+<code class="descname">initialise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.initialise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.initialise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic initialisation function</p>
+<p>Return the first task</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>task, False
+task: New task for forward model</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.iterate">
+<code class="descname">iterate</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.iterate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic iteration function</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>result: Result from forward Task</dd>
+<dt>Returns</dt>
+<dd>task,End
+task: New task for forward model
+End: Boolean flag for whether the inversion is finished.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.output">
+<code class="descname">output</code><span class="sig-paren">(</span><em>normalise=True</em>, <em>convert=False</em>, <em>discard=10000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the algorithm results for output.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>Dictionary containing output.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_clvd">
+<code class="descname">random_clvd</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_clvd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_clvd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random CLVD moment tensors (size 6,number_samples)</p>
+<p>Generates random CLVD moment tensors with random orientations.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy matrix of random CLVD moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_dc">
+<code class="descname">random_dc</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_dc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random double-couple  moment tensors (size 6, number_samples)</p>
+<p>Generates random double-couple moment tensors with random orientations.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy matrix of random double-couple moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_orthogonal_eigenvectors">
+<code class="descname">random_orthogonal_eigenvectors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_orthogonal_eigenvectors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_orthogonal_eigenvectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates random orthogonal eigenvectors.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>list of numpy arrays of eigenvectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_sample">
+<code class="descname">random_sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random samples</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">results from generating the random samples.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_type">
+<code class="descname">random_type</code><span class="sig-paren">(</span><em>diag</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random  moment tensors from a given set of eigenvalues.</p>
+<p>Generates random moment tensors with a given set of eigenvalues and random orientations.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of random moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

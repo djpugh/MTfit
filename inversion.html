@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>13. mtfit.Inversion: Inversion object &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="next" title="14. Extending mtfit" href="extensions.html"/>
+        <link rel="prev" title="12. MTplot command line options" href="mtplotcli.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>13. mtfit.Inversion: Inversion object</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/inversion.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mtfit-inversion-inversion-object">
+<h1>13. mtfit.Inversion: Inversion object<a class="headerlink" href="#mtfit-inversion-inversion-object" title="Permalink to this headline">¶</a></h1>
+<p>The main <code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> inversion object is used to handle the forward model evaluation and process the results. The object initialisation and forward functions are documented here, although there are additional (private and special) functions that are documented in the source code.</p>
+<dl class="class">
+<dt id="mtfit.inversion.Inversion">
+<em class="property">class </em><code class="descclassname">mtfit.inversion.</code><code class="descname">Inversion</code><span class="sig-paren">(</span><em>data={}</em>, <em>data_file=False</em>, <em>location_pdf_file_path=False</em>, <em>algorithm='iterate'</em>, <em>parallel=True</em>, <em>n=0</em>, <em>phy_mem=8</em>, <em>dc=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/inversion.html#Inversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.inversion.Inversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main Inversion object</p>
+<p>Runs the MT inversion, follwing a parameterisation set on initialisation. Parameters can be set for the algorithm to use in the kwargs.</p>
+<p>Algorithm options are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Time - Monte Carlo random sampling - runs until time limit reached.</li>
+<li>Iterate - Monte Carlo random sampling - runs until sample limit reached.</li>
+<li>McMC - Markov chain Monte Carlo sampling.</li>
+<li>TransDMcMC - Markov chain Monte Carlo sampling.</li>
+</ul>
+</div></blockquote>
+<p>These are discussed in more detail in the mtfit.algorithms documentation.</p>
+<p>The inversion is run by calling the forward function (mtfit.inversion.Inversion.forward)</p>
+<p><strong>Data Format</strong></p>
+<p>The inversion expects a python dictionary of the data in the format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">:{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">...</span><span class="p">]),</span>
+                     <span class="s1">&#39;Error&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">0.01</span><span class="p">],[</span><span class="mf">0.02</span><span class="p">],</span><span class="o">...</span><span class="p">]),</span>
+                     <span class="s1">&#39;Stations&#39;</span><span class="p">:{</span><span class="s1">&#39;Name&#39;</span><span class="p">:[</span><span class="n">Station1</span><span class="p">,</span><span class="n">Station2</span><span class="p">,</span><span class="o">...</span><span class="p">]</span>
+                                 <span class="s1">&#39;Azimuth&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">248.0</span><span class="p">],[</span><span class="mf">122.3</span><span class="p">]</span><span class="o">...</span><span class="p">]),</span>
+                                 <span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">24.5</span><span class="p">],[</span><span class="mf">2.8</span><span class="p">]</span><span class="o">...</span><span class="p">])</span>
+                                <span class="p">}</span>
+                 <span class="p">},</span>
+        <span class="s1">&#39;PSHAmplitudeRatio&#39;</span><span class="p">:{</span><span class="o">...</span><span class="p">},</span>
+        <span class="o">...</span>
+        <span class="s1">&#39;UID&#39;</span><span class="p">:</span><span class="s1">&#39;Event1&#39;</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<p>The initial key arguments correspond to the data types that can be used in the inversion. The inversion uses polarity observations and amplitude ratios, and can also use relative amplitudes.
+This means that the useable data types are:</p>
+<blockquote>
+<div><p><strong>Polarity</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>PPolarity</li>
+<li>SHPolarity</li>
+<li>SVPolarity</li>
+</ul>
+<p>Polarity observations made manually or automatically. The corresponding data dictionary for polarities needs the following keys:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>Measured</em>: numpy matrix of polarity observations</p>
+</li>
+<li><p class="first"><em>Error</em>: numpy matrix of fractional uncertainty in the polarity observations.</p>
+</li>
+<li><p class="first"><em>Stations</em>: dictionary of station information with keys:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>Name</em>: list of station names</li>
+<li><em>Azimuth</em>: numpy matrix of azimuth values in degrees</li>
+<li><em>TakeOffAngle</em>: numpy matrix of take off angle values in degrees - 0 down (NED coordinate system).</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>As with all of these dictionaries, the indexes of the observations and errors must correspond to the stations, i.e. <cite>data['Measured'][0,0]</cite> -&gt; from <cite>data['Stations']['Name'][0]</cite> with <cite>error data['Error'][0,:]</cite> etc.</p>
+<p>If polarity probabilities are being used, the keys are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>PPolarityProbability</li>
+<li>SHPolarityProbability</li>
+<li>SVPolarityProbability</li>
+</ul>
+</div></blockquote>
+<p>With a similar structure to the Polarity data, except the measured matrix has an additional dimension, i.e. <cite>data['Measured'][0,0]</cite> is the positive polarity probability and <cite>data['Measured'][0,1]</cite> is the negative polarity probability.</p>
+</div></blockquote>
+<p><strong>Amplitude ratios</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>P/SHRMSAmplitudeRatio</li>
+<li>P/SVRMSAmplitudeRatio</li>
+<li>SH/SVRMSAmplitudeRatio</li>
+<li>P/SHQRMSAmplitudeRatio</li>
+<li>P/SVQRMSAmplitudeRatio</li>
+<li>SH/SVQRMSAmplitudeRatio</li>
+<li>P/SHAmplitudeRatio</li>
+<li>P/SVAmplitudeRatio</li>
+<li>SH/SVAmplitudeRatio</li>
+<li>P/SHQAmplitudeRatio</li>
+<li>P/SVQAmplitudeRatio</li>
+<li>SH/SVQAmplitudeRatio</li>
+</ul>
+<p>Amplitude ratio observations made manually or automatically. The Q is not necessary but is useful to label the amplitudes with a Q correction.
+The corresponding data dictionary for amplitude ratios needs the following keys:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>Measured</em>: numpy matrix of corrected numerator and denominator amplitude ratio observations, needs to have two columns, one for the numerator and one for the denominator.</p>
+</li>
+<li><p class="first"><em>Error</em>: numpy matrix of uncertainty (standard deviation) in the amplitude ratio observations, needs to have two columns, one for the numerator and one for the denominator.</p>
+</li>
+<li><p class="first"><em>Stations</em>: dictionary of station information with keys:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>Name</em>: list of station names</li>
+<li><em>Azimuth</em>: numpy matrix of azimuth values in degrees</li>
+<li><em>TakeOffAngle</em>: numpy matrix of take off angle values in degrees - 0 down (NED coordinate system).</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>As with all of these dictionaries, the indexes of the observations and errors must correspond to the stations, i.e. <cite>data['Measured'][0,0]</cite> -&gt; from <cite>data['Stations']['Name'][0]</cite> with <cite>error data['Error'][0,:]</cite> etc.</p>
+</div></blockquote>
+<p><strong>Relative Amplitude Ratios</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>PAmplitude</li>
+<li>SHAmplitude</li>
+<li>SVAmplitude</li>
+<li>PQAmplitude</li>
+<li>SHQAmplitude</li>
+<li>SVQAmplitude</li>
+<li>PRMSAmplitude</li>
+<li>SHRMSAmplitude</li>
+<li>SVRMSAmplitude</li>
+<li>PQRMSAmplitude</li>
+<li>SHQRMSAmplitude</li>
+<li>SVQRMSAmplitude</li>
+</ul>
+<p>Relative Amplitude ratios use amplitude observations for different events made manually or automatically. The Q is not necessary but is useful to label the amplitudes with a Q correction.
+The corresponding data dictionary for amplitude ratios needs the following keys:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>Measured</em>: numpy matrix of amplitude observations for the event.</p>
+</li>
+<li><p class="first"><em>Error</em>: numpy matrix of uncertainty (standard deviation) in the amplitude observations.</p>
+</li>
+<li><p class="first"><em>Stations</em>: dictionary of station information with keys:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>Name</em>: list of station names</li>
+<li><em>Azimuth</em>: numpy matrix of azimuth values in degrees</li>
+<li><em>TakeOffAngle</em>: numpy matrix of take off angle values in degrees - 0 down (NED coordinate system).</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>As with all of these dictionaries, the indexes of the observations and errors must correspond to the stations, i.e. <cite>data['Measured'][0,0]</cite> -&gt; from <cite>data['Stations']['Name'][0]</cite> with <cite>error data['Error'][0,:]</cite> etc.</p>
+</div></blockquote>
+</div></blockquote>
+<p><strong>Angle Scatter Format</strong>
+The angle scatter files can be generated using a utility Scat2Angle based on the NonLinLoc angle code. The angle scatter file is a text file with samples separated by blank lines.
+The expected format is for samples from the location PDF that have been converted into take off and azimuth angles (in degrees) for the stations, along with a probability value. It is important that the samples are drawn
+from the location PDF as a Monte Carlo based integration approach is used for marginalising over the uncertainty.</p>
+<p>It is possible to use XYZ2Angle to samples drawn from a location PDF using the NonLinLoc angle approach.</p>
+<p>Expected format is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Probability</span>
+<span class="n">StationName</span> <span class="n">Azimuth</span> <span class="n">TakeOffAngle</span>
+<span class="n">StationName</span> <span class="n">Azimuth</span> <span class="n">TakeOffAngle</span>
+
+<span class="n">Probability</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
+</pre></div>
+</div>
+<p>With TakeOffAngle as 0 down (NED coordinate system).
+e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">504.7</span>
+<span class="n">S0271</span>   <span class="mf">231.1</span>   <span class="mf">154.7</span>
+<span class="n">S0649</span>   <span class="mf">42.9</span>    <span class="mf">109.7</span>
+<span class="n">S0484</span>   <span class="mf">21.2</span>    <span class="mf">145.4</span>
+<span class="n">S0263</span>   <span class="mf">256.4</span>   <span class="mf">122.7</span>
+<span class="n">S0142</span>   <span class="mf">197.4</span>   <span class="mf">137.6</span>
+<span class="n">S0244</span>   <span class="mf">229.7</span>   <span class="mf">148.1</span>
+<span class="n">S0415</span>   <span class="mf">75.6</span>    <span class="mf">122.8</span>
+<span class="n">S0065</span>   <span class="mf">187.5</span>   <span class="mf">126.1</span>
+<span class="n">S0362</span>   <span class="mf">85.3</span>    <span class="mf">128.2</span>
+<span class="n">S0450</span>   <span class="mf">307.5</span>   <span class="mf">137.7</span>
+<span class="n">S0534</span>   <span class="mf">355.8</span>   <span class="mf">138.2</span>
+<span class="n">S0641</span>   <span class="mf">14.7</span>    <span class="mf">120.2</span>
+<span class="n">S0155</span>   <span class="mf">123.5</span>   <span class="mi">117</span>
+<span class="n">S0162</span>   <span class="mf">231.8</span>   <span class="mf">127.5</span>
+<span class="n">S0650</span>   <span class="mf">45.9</span>    <span class="mf">108.2</span>
+<span class="n">S0195</span>   <span class="mf">193.8</span>   <span class="mf">147.3</span>
+<span class="n">S0517</span>   <span class="mf">53.7</span>    <span class="mf">124.2</span>
+<span class="n">S0004</span>   <span class="mf">218.4</span>   <span class="mf">109.8</span>
+<span class="n">S0588</span>   <span class="mf">12.9</span>    <span class="mf">128.6</span>
+<span class="n">S0377</span>   <span class="mf">325.5</span>   <span class="mf">165.3</span>
+<span class="n">S0618</span>   <span class="mf">29.4</span>    <span class="mf">120.5</span>
+<span class="n">S0347</span>   <span class="mf">278.9</span>   <span class="mf">149.5</span>
+<span class="n">S0529</span>   <span class="mf">326.1</span>   <span class="mf">131.7</span>
+<span class="n">S0083</span>   <span class="mf">223.7</span>   <span class="mf">118.2</span>
+<span class="n">S0595</span>   <span class="mf">42.6</span>    <span class="mf">117.8</span>
+<span class="n">S0236</span>   <span class="mf">253.6</span>   <span class="mf">118.6</span>
+
+<span class="mf">502.7</span>
+<span class="n">S0271</span>   <span class="mf">233.1</span>   <span class="mf">152.7</span>
+<span class="n">S0649</span>   <span class="mf">45.9</span>    <span class="mf">101.7</span>
+<span class="n">S0484</span>   <span class="mf">25.2</span>    <span class="mf">141.4</span>
+<span class="n">S0263</span>   <span class="mf">258.4</span>   <span class="mf">120.7</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
+</pre></div>
+</div>
+<p>Initialisation of inversion object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict/list</em>) -- Dictionary or list of dictionaries containing data for inversion. Can be ignored if a data_file is passed as an argument (for data format, see below).</li>
+<li><strong>data_file</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- Path or list of file paths containing (binary) pickled data dictionaries.</li>
+<li><strong>location_pdf_file_path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- Path or list of file paths to angle scatter files (for file format, see above - other format extensions can be added using setuptools entry points).</li>
+<li><strong>algorithm</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- ['iterate'] algorithm selector</li>
+<li><strong>parallel</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [True] Run the inversion in parallel using multiprocessing</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Number of workers, default is to use as many as returned by multiprocessing.cpu_count</li>
+<li><strong>phy_mem</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [8] Estimated physical memory to use (used for determining array sizes, it is likely that more memory will be used, and if so no errors are forced).
+<em>On python versions &lt;2.7.4 there is a bug (http://bugs.python.org/issue13555) with cPickle that limits the total number of samples when running in parallel, so large (&gt;20GB) phy_mem allocations per process are ignored.</em></li>
+<li><strong>dc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag as to run inversion constrained to double-couple or allowed to explore the full moment tensor space.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>number_stations</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Used for estimating sample sizes in the Monte Carlo random sampling algorithms (Time,Iterate) if set.</li>
+<li><strong>number_location_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Used for estimating sample sizes in the Monte Carlo random sampling algorithms (Time,Iterate) if set.</li>
+<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- File path for output. Default is current working dir (interactive) or PBS workdir.</li>
+<li><strong>fid</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- File name root for output, default is to use mtfitOutput or the event UID if set in the data dictionary.</li>
+<li><strong>inversion_options</strong> (<em>list</em>) -- List of data types to be used in the iversion, if not set, the inversion uses all the data types in the data dictionary, irrespective of independence.</li>
+<li><strong>diagnostic_output</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to output diagnostic information in MATLAB save file.</li>
+<li><strong>marginalise_relative</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to marginalise over location/model uncertainty during relative amplitude inversion.</li>
+<li><strong>mpi</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to run using MPI from mpi4py (useful on cluster).</li>
+<li><strong>multiple_events</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to run all the events in the inversion in one single joint inversion.</li>
+<li><strong>relative_amplitude</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to run multiple_events including relative amplitude inversion.</li>
+<li><strong>output_format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- ['matlab'] str format style.</li>
+<li><strong>minimum_number_intersections</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [2] Integer minimum number of station intersections between events in relative amplitude inversion.</li>
+<li><strong>quality_check</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag/Float value for maximum non-zero percentage check (stops inversion if event quality is poor)</li>
+<li><strong>recover</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Tries to recover pre-existing inversions, and does not re-run if an output file exists and is readable.</li>
+<li><strong>file_sample</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Saves samples to a mat file (allowing for easier recovery and reduced memory requirements but can slow the inversion down as requires disk writing every non-zero iteration. Only works well for recovery with random sampling methods)</li>
+<li><strong>results_format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- ['full_pdf'] Data format for the output</li>
+<li><strong>marginalise_relative</strong> -- [False] Boolean flag to marginalise the location uncertainty between absolute and relative data.</li>
+<li><strong>file_sample</strong> -- [False] save samples to file rather than keeping in memory (not necessary in normal use).</li>
+<li><strong>normalise</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [True] normalise output Probability (doesn't affect ln_pdf output).</li>
+<li><strong>convert</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- Convert output moment tensors to Tape parameters, Hudson u&amp;v coordinates and strike-dip-rake triples.</li>
+<li><strong>discard</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Probability cut-off for discarding samples Discarding samples - samples less than 1/(discard*n_samples) of the maximum likelihood value are discarded as negligeable. False means no samples are discarded.</li>
+<li><strong>c_generate</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Generate samples in the probability calculation when using Cython.</li>
+<li><strong>generate_cutoff</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- Set number of samples to cut-off at when using c_generate (Default is the value of max_samples)</li>
+<li><strong>relative_loop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Loop over non-zero samples when using relative amplitudes.</li>
+<li><strong>bin_angle_coefficient_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Bin size in degrees when binning angle coefficients (All station angle differences must be within this range for samples to fall in the same bin)</li>
+<li><strong>no_station_distribution</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [True] Boolean flag to output station distribution or not.</li>
+<li><strong>max_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [6000000] Max number of samples when using the iterate algorithm.</li>
+<li><strong>max_time</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [600] Max time when using the time algorithm.</li>
+<li><strong>verbosity</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Set verbosity level (0-4) high numbers mean more logging output and verbosity==4 means the debugger will be called on errors.</li>
+<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Sets debug on or off (True means verbosity set to 4).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Other kwargs are passed to the algorithm - see mtfit.algorithms documentation for help on those.</p>
+<dl class="method">
+<dt id="mtfit.inversion.Inversion.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/inversion.html#Inversion.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.inversion.Inversion.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs event forward model using the arguments when the Inversion object was initialised.</p>
+<p>Depending on the algorithm selection uses either random sampling or Markov chain Monte Carlo sampling - for more information on the different algorithms see mtfit.algorithms documentation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="extensions.html" class="btn btn-neutral float-right" title="14. Extending mtfit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mtplotcli.html" class="btn btn-neutral" title="12. MTplot command line options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

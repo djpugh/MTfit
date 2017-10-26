@@ -1,0 +1,456 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mtfit.algorithms.monte_carlo &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mtfit documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="../../../_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mtfit.algorithms.monte_carlo</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mtfit.algorithms.monte_carlo</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;monte_carlo_random</span>
+<span class="sd">******************</span>
+<span class="sd">Module containing algorithm classes for Monte Carlo random sampling.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># **Restricted:  For Non-Commercial Use Only**</span>
+<span class="c1"># This code is protected intellectual property and is available solely for teaching</span>
+<span class="c1"># and non-commercially funded academic research purposes.</span>
+<span class="c1">#</span>
+<span class="c1"># Applications for commercial use should be made to Schlumberger or the University of Cambridge.</span>
+
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">BaseAlgorithm</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">PRINT_N_ITERATIONS</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MTfit.algorithms&#39;</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BaseMonteCarloRandomSample&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;IterationSample&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;TimeSample&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="BaseMonteCarloRandomSample"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample">[docs]</a><span class="k">class</span> <span class="nc">BaseMonteCarloRandomSample</span><span class="p">(</span><span class="n">BaseAlgorithm</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for Monte Carlo Random Sampling</span>
+
+<span class="sd">    Contains base functions for new samples, iteration and initialisation.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialisation of BaseMonteCarloRandomSample object</span>
+
+<span class="sd">        Args</span>
+<span class="sd">            number_samples:[10000] Number of samples to use per iteration.</span>
+<span class="sd">            dc:[False] Boolean to select inversion constrained to double-couple space or over the full moment tensor space.</span>
+
+<span class="sd">        Keyword Arguments</span>
+<span class="sd">            basic_cdc:[False] Boolean to select whether to us the Basic CDC model (inversion constrained to double-couple space or over the full moment tensor space.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BaseMonteCarloRandomSample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_min_number_check_samples</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;min_number_check_samples&#39;</span><span class="p">,</span> <span class="mi">30000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="BaseMonteCarloRandomSample.random_sample"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.random_sample">[docs]</a>    <span class="k">def</span> <span class="nf">random_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return random sample</span>
+
+<span class="sd">        Extends _BaseAlgorithm.random_sample to account for multiple events, and checks the source type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_events</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">MTs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_events</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dc</span><span class="p">:</span>
+                    <span class="n">MTs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_dc</span><span class="p">())</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">basic_cdc</span><span class="p">:</span>
+                    <span class="n">MTs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_basic_cdc</span><span class="p">())</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">MTs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_mt</span><span class="p">())</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">MTs</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">BaseMonteCarloRandomSample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">random_sample</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get object attributes</span>
+<span class="sd">        total_number_samples is passed to pdf object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;total_number_samples&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">n</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">BaseMonteCarloRandomSample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">end</span>
+
+<div class="viewcode-block" id="BaseMonteCarloRandomSample.iterate"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.iterate">[docs]</a>    <span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Iteration function for BaseMonteCarloRandomSample object</span>
+
+<span class="sd">        Carries out iteration of random sampling from previous result.</span>
+
+<span class="sd">        Args</span>
+<span class="sd">            result: dictionary result from MTfit.inversion.ForwardTask, added to the pdf</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            new_samples,end</span>
+<span class="sd">            new_samples: New set of random samples to test.</span>
+<span class="sd">            end: Boolean flag as to whether inversion has finished, if a MemoryError error is thrown, ends iteration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">**</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">task</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_sample</span><span class="p">(),</span> <span class="kc">False</span>
+        <span class="k">except</span> <span class="ne">MemoryError</span><span class="p">:</span>
+            <span class="n">task</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="p">[],</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quality_check</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">quality_check</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">n</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_number_check_samples</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">ln_pdf</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()))</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">n</span><span class="p">))</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">quality_check</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Data Error: Non-zero sample percentage above </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quality_check</span><span class="p">))</span>
+                <span class="k">return</span> <span class="p">[],</span> <span class="kc">True</span>
+
+        <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_finished</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+        <span class="c1"># Check if the number of iterations is a multiple of the</span>
+        <span class="c1"># PRINT_N_ITERATIONS variable, and print iteration info.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">%</span> <span class="n">PRINT_N_ITERATIONS</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Iteration: </span><span class="si">{}</span><span class="s1"> | Elapsed Time: </span><span class="si">{:.0f}</span><span class="s1"> seconds | Total Samples: </span><span class="si">{}</span><span class="s1"> | Non-zero samples: </span><span class="si">{}</span><span class="s1"> | Percentage Non-Zero: </span><span class="si">{:f}</span><span class="s1"> %&#39;</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">start_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">ln_pdf</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()),</span>
+                                         <span class="mi">100</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">ln_pdf</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()))</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">n</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Iteration: </span><span class="si">{}</span><span class="s1"> | Elapsed Time: </span><span class="si">{:.0f}</span><span class="s1"> seconds | Total Samples: </span><span class="si">{}</span><span class="s1"> | Non-zero samples: </span><span class="si">{}</span><span class="s1">&#39;</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">start_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">ln_pdf</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">task</span><span class="p">,</span> <span class="n">end</span></div>
+
+<div class="viewcode-block" id="BaseMonteCarloRandomSample.initialise"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.initialise">[docs]</a>    <span class="k">def</span> <span class="nf">initialise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initial task for ForwardTask</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            task,end=False</span>
+<span class="sd">            task: the random samples starting the inversion.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_sample</span><span class="p">(),</span> <span class="kc">False</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">TimeSample</span><span class="p">(</span><span class="n">BaseMonteCarloRandomSample</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Time based sampling algorithm</span>
+
+<span class="sd">    Algorithm that runs until a maximum time is reached.</span>
+
+<span class="sd">    Initialisation</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_time</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialisation of TimeSample</span>
+
+<span class="sd">        Args</span>
+<span class="sd">            max_time:[600] Maximum time in seconds for the iteration to run for.</span>
+<span class="sd">            number_samples:[10000] Number of samples to use per iteration.</span>
+<span class="sd">            dc:[False] Boolean to select inversion constrained to double-couple space or over the full moment tensor space.</span>
+
+<span class="sd">        Keyword Arguments</span>
+<span class="sd">            BasicCDC:[False] Boolean to select whether to us the Basic CDC model (inversion constrained to double-couple space or over the full moment tensor space.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TimeSample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_time</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">max_time</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">max_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> seconds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_time</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_time</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">end</span>
+
+
+<div class="viewcode-block" id="IterationSample"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.IterationSample">[docs]</a><span class="k">class</span> <span class="nc">IterationSample</span><span class="p">(</span><span class="n">BaseMonteCarloRandomSample</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Iteration based sampling algorithm</span>
+
+<span class="sd">    Algorithm that runs for a fixed number of samples.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_samples</span><span class="o">=</span><span class="mi">600000</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialisation of IterationSample</span>
+
+<span class="sd">        Args</span>
+<span class="sd">            max_samples:[600000] Maximum time in seconds for the iteration to run for.</span>
+<span class="sd">            number_samples:[10000] Number of samples to use per iteration.</span>
+<span class="sd">            dc:[False] Boolean to select inversion constrained to double-couple space or over the full moment tensor space.</span>
+
+<span class="sd">        Keyword Arguments</span>
+<span class="sd">            basic_cdc:[False] Boolean to select whether to us the Basic CDC model (inversion constrained to double-couple space or over the full moment tensor space.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">IterationSample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_samples</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">max_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> samples&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_samples</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span><span class="o">.</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_samples</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">end</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

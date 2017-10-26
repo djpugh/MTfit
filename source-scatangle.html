@@ -1,0 +1,801 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>17.1.7.1. mtfit.extensions.scatangle &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="up" title="17.1.7. Contents" href="source-extensions.html"/>
+        <link rel="next" title="17.1.8. mtfit.convert" href="source-convert.html"/>
+        <link rel="prev" title="17.1.7. Contents" href="source-extensions.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="source.html">17. Source Code</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="source.html#contents">17.1. Contents:</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="source-inversion.html">17.1.1. mtfit.inversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-algorithms.html">17.1.2. mtfit.algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-probability.html">17.1.3. mtfit.probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-sampling.html">17.1.4. mtfit.sampling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-run.html">17.1.5. mtfit.run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-utilities.html">17.1.6. mtfit.utilities</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="source-extensions.html">17.1.7. mtfit.extensions</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">17.1.7.1. mtfit.extensions.scatangle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="source-convert.html">17.1.8. mtfit.convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-plot.html">17.1.9. mtfit.plot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="source.html">17. mtfit Source Code</a> &raquo;</li>
+        
+          <li><a href="source-extensions.html">17.1.7. Contents</a> &raquo;</li>
+        
+      <li>17.1.7.1. mtfit.extensions.scatangle</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/source-scatangle.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mtfit-extensions-scatangle">
+<h1>17.1.7.1. mtfit.extensions.scatangle<a class="headerlink" href="#mtfit-extensions-scatangle" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">scatangle.py</span>
+<span class="sd">************</span>
+<span class="sd">Extension for handling scatangle files (installed with the main module, but provides an example of an extension)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># **Restricted:  For Non-Commercial Use Only**</span>
+<span class="c1"># This code is protected intellectual property and is available solely for teaching</span>
+<span class="c1"># and non-commercially funded academic research purposes.</span>
+<span class="c1">#</span>
+<span class="c1"># Applications for commercial use should be made to Schlumberger or the University of Cambridge.</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..utilities.multiprocessing_helper</span> <span class="k">import</span> <span class="n">JobPool</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MTfit.extensions.scatangle&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">cscatangle</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="n">cscatangle</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">argparse</span>  <span class="c1"># noqa F401</span>
+    <span class="n">_argparse</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># noqa F811</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">_argparse</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">parse_scatangle</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bin_size</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read station angles scatter file</span>
+
+<span class="sd">    Reads the station angle scatter file. Expected format is given below. TakeOffAngle is 0 down (NED coordinate system).</span>
+<span class="sd">    The probabilities are read in, so if Oct-tree or metropolis sampling is used, the probability values should be set to one.</span>
+
+<span class="sd">    Args</span>
+<span class="sd">        filename: Angle scatter file name</span>
+<span class="sd">        location_samples:[Default=0] Number of samples to take from the full location PDF (0 means all samples)</span>
+<span class="sd">        bin_size:[Default=1] Bin size for sample weighting in degrees (if 0 no binning used) - reduces the number of samples required for well constrained locations.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        Records,Probability: Angle Records and the probability for each sample.</span>
+
+<span class="sd">    Expected format is:</span>
+<span class="sd">        Probability</span>
+<span class="sd">        StationName Azimuth TakeOffAngle</span>
+<span class="sd">        StationName Azimuth TakeOffAngle</span>
+
+<span class="sd">        Probability</span>
+<span class="sd">        .</span>
+<span class="sd">        .</span>
+<span class="sd">        .</span>
+
+<span class="sd">    e.g.</span>
+<span class="sd">        504.7</span>
+<span class="sd">        S0271   231.1   154.7</span>
+<span class="sd">        S0649   42.9    109.7</span>
+<span class="sd">        S0484   21.2    145.4</span>
+<span class="sd">        S0263   256.4   122.7</span>
+<span class="sd">        S0142   197.4   137.6</span>
+<span class="sd">        S0244   229.7   148.1</span>
+<span class="sd">        S0415   75.6    122.8</span>
+<span class="sd">        S0065   187.5   126.1</span>
+<span class="sd">        S0362   85.3    128.2</span>
+<span class="sd">        S0450   307.5   137.7</span>
+<span class="sd">        S0534   355.8   138.2</span>
+<span class="sd">        S0641   14.7    120.2</span>
+<span class="sd">        S0155   123.5   117</span>
+<span class="sd">        S0162   231.8   127.5</span>
+<span class="sd">        S0650   45.9    108.2</span>
+<span class="sd">        S0195   193.8   147.3</span>
+<span class="sd">        S0517   53.7    124.2</span>
+<span class="sd">        S0004   218.4   109.8</span>
+<span class="sd">        S0588   12.9    128.6</span>
+<span class="sd">        S0377   325.5   165.3</span>
+<span class="sd">        S0618   29.4    120.5</span>
+<span class="sd">        S0347   278.9   149.5</span>
+<span class="sd">        S0529   326.1   131.7</span>
+<span class="sd">        S0083   223.7   118.2</span>
+<span class="sd">        S0595   42.6    117.8</span>
+<span class="sd">        S0236   253.6   118.6</span>
+
+<span class="sd">        502.7</span>
+<span class="sd">        S0271   233.1   152.7</span>
+<span class="sd">        S0649   45.9    101.7</span>
+<span class="sd">        S0484   25.2    141.4</span>
+<span class="sd">        S0263   258.4   120.7</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Read file</span>
+    <span class="n">station_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">multipliers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sample_records</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Azimuth&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+    <span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="c1"># Loop over lines</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">station_file</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="ow">and</span> <span class="n">multiplier</span><span class="p">:</span>
+                <span class="n">record</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+                <span class="n">record</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+                <span class="n">sample_records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+                <span class="c1"># Using multipliers therefore prob = 1</span>
+                <span class="n">multipliers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">multiplier</span><span class="p">)</span>
+            <span class="n">record</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Azimuth&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">multiplier</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">))</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">multiplier</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">record</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">record</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">record</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]):</span>
+        <span class="n">record</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">record</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">sample_records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+        <span class="n">multipliers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">multiplier</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">number_location_samples</span> <span class="ow">and</span> <span class="n">number_location_samples</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">),</span> <span class="n">number_location_samples</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">())))</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">number_location_samples</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">())))</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">number_location_samples</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t sample angle PDF&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">samples</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">)]</span>
+        <span class="c1"># Sample randomly from records, probability</span>
+        <span class="n">sample_records</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sample_records</span><span class="p">)[</span><span class="n">samples</span><span class="p">])</span>
+        <span class="n">multipliers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">multipliers</span><span class="p">)[</span><span class="n">samples</span><span class="p">])</span>
+    <span class="n">new_multipliers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">bin_size</span><span class="p">:</span>
+        <span class="n">old_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cscatangle</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;C code used&#39;</span><span class="p">)</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">sample_records</span><span class="p">,</span> <span class="n">multipliers</span> <span class="o">=</span> <span class="n">cscatangle</span><span class="o">.</span><span class="n">bin_scatangle</span><span class="p">(</span><span class="n">sample_records</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">multipliers</span><span class="p">),</span> <span class="n">bin_size</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Elapsed time = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Python code used&#39;</span><span class="p">)</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">record</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_records</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> records completed&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+                <span class="n">multiplier</span> <span class="o">=</span> <span class="n">multipliers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">):</span>
+                    <span class="n">toa_diff</span> <span class="o">=</span> <span class="n">sample_records</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">]</span>
+                    <span class="n">az_diff</span> <span class="o">=</span> <span class="n">sample_records</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">record</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">toa_diff</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">bin_size</span><span class="o">/</span><span class="mf">2.0</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">az_diff</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">bin_size</span><span class="o">/</span><span class="mf">2.0</span><span class="p">:</span>
+                        <span class="n">multiplier</span> <span class="o">+=</span> <span class="n">multipliers</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                        <span class="n">sample_records</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">new_multipliers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">multiplier</span><span class="p">)</span>
+            <span class="n">multipliers</span> <span class="o">=</span> <span class="n">new_multipliers</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Elapsed time = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> degree binning reduced </span><span class="si">{}</span><span class="s1">  samples to </span><span class="si">{}</span><span class="s1"> samples.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bin_size</span><span class="p">,</span> <span class="n">old_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">sample_records</span><span class="p">,</span> <span class="n">multipliers</span>
+
+
+<span class="k">def</span> <span class="nf">_output_scatangle</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Output scatangle file from samples and probabilities.</span>
+
+<span class="sd">    Args</span>
+<span class="sd">        filename: str name of file to output to.</span>
+<span class="sd">        samples: list of location samples.</span>
+<span class="sd">        probabilities: list of sample probabilities.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Loop over samples</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">samples</span><span class="p">):</span>
+        <span class="c1"># Append multiplier (probability)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">probabilities</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="c1"># Loop over stations</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">st</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]):</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">st</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">]))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">])))</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">bin_scatangle</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bin_size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Bin scatangle samples into bins of size given by the bin size argument, if all the differences in angles for each station between the two samples are within that range</span>
+
+<span class="sd">    Args</span>
+<span class="sd">        filename: str of filename to read.</span>
+<span class="sd">        number_location_samples:[0} integer number of location samples to sub-sample (0 means to use all).</span>
+<span class="sd">        bin_size:[1.0] float size of bin to stack samples over.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Parse scatangle and bin</span>
+    <span class="n">sample_records</span><span class="p">,</span> <span class="n">multipliers</span> <span class="o">=</span> <span class="n">parse_scatangle</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="p">,</span> <span class="n">bin_size</span><span class="p">)</span>
+    <span class="n">old_filename</span> <span class="o">=</span> <span class="n">filename</span>
+    <span class="c1"># Add _bin_ to filename</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_bin_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">bin_size</span><span class="p">))</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+    <span class="c1"># Output to disk</span>
+    <span class="n">_output_scatangle</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sample_records</span><span class="p">,</span> <span class="n">multipliers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">old_filename</span><span class="p">,</span> <span class="n">filename</span>
+
+
+<span class="k">class</span> <span class="nc">BinScatangleTask</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Scatangle Binning task</span>
+
+<span class="sd">    Bins and Saves scatangle file</span>
+
+<span class="sd">    Initialisation</span>
+<span class="sd">        Args</span>
+<span class="sd">            fid: Filename for MATLAB output.</span>
+<span class="sd">            number_location_samples: number_location_samples.</span>
+<span class="sd">            bin_size: bin size.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bin_size</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialisation of MatlabOutputTask</span>
+
+<span class="sd">        Args</span>
+<span class="sd">            fid: Filename for MATLAB output.</span>
+<span class="sd">            output: Dictionary of output to be saved to fid.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fid</span> <span class="o">=</span> <span class="n">fid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_location_samples</span> <span class="o">=</span> <span class="n">number_location_samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bin_size</span> <span class="o">=</span> <span class="n">bin_size</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs the MATLAB output task</span>
+
+<span class="sd">        Runs the MatlabOutputTask and returns a result code.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            resultCode: 10 if successful, 20 if an exception is thrown.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">bin_scatangle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_location_samples</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bin_size</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Scatangle Bin Error&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">20</span>
+
+
+<span class="k">def</span> <span class="nf">bin_scatangle_files</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bin_scatangle_size</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mpi</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Bin scatangle samples into bins of size given by the bin size argument,</span>
+<span class="sd">    if all the differences in angles for each station between the two samples are within that range</span>
+
+<span class="sd">    Args</span>
+<span class="sd">        filename: str of filename to read.</span>
+<span class="sd">        number_location_samples:[0} integer number of location samples to sub-sample (0 means to use all).</span>
+<span class="sd">        bin_scatangle_size:[1.0] float size of bin to stack samples over.</span>
+<span class="sd">        parallel:[True] boolean to run in parallel using job pool (overridden by mpi option).</span>
+<span class="sd">        mpi: [False] boolean to run using MPI (ignores parallel flag).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        new_files:list of new file names</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># check path and glob</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.&#39;</span><span class="o">+</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;angle_extension&#39;</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;*&#39;</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+    <span class="c1"># Make sure the files are a list</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">files</span><span class="p">]</span>
+    <span class="c1"># Set parallel flag</span>
+    <span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="c1"># Get MPI parameters if running using MPI</span>
+    <span class="k">if</span> <span class="n">mpi</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">mpi4py</span> <span class="k">import</span> <span class="n">MPI</span>
+            <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">mpi</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1"># Otherwise create jobpool if running in parallel</span>
+    <span class="k">elif</span> <span class="n">parallel</span><span class="p">:</span>
+        <span class="n">job_pool</span> <span class="o">=</span> <span class="n">JobPool</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">BinScatangleTask</span><span class="p">)</span>
+        <span class="n">nworkers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">job_pool</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nworkers</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">job_pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">parallel</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">new_files</span> <span class="o">=</span> <span class="n">files</span><span class="p">[:]</span>
+    <span class="k">if</span> <span class="n">mpi</span><span class="p">:</span>
+        <span class="c1"># Sort files into size lists</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">())]</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
+        <span class="c1"># Loop over files for each process</span>
+        <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()]:</span>
+            <span class="c1"># If the filename is not blank, then bin it.</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+                <span class="n">new_files</span><span class="p">[</span><span class="n">new_files</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">fn</span><span class="p">)]</span> <span class="o">=</span> <span class="n">bin_scatangle</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="p">,</span> <span class="n">bin_scatangle_size</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Wait for end</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">i</span> <span class="ow">is</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="n">parallel</span><span class="p">:</span>
+        <span class="c1"># Loop over pool running tasks</span>
+        <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">job_pool</span><span class="o">.</span><span class="n">task</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="p">,</span> <span class="n">bin_scatangle_size</span><span class="p">)</span>
+        <span class="c1"># Get results</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">job_pool</span><span class="o">.</span><span class="n">all_results</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">new_fn</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">new_files</span><span class="p">[</span><span class="n">new_files</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">new_fn</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="n">new_fn</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">job_pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Run bin for each file</span>
+        <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">new_files</span><span class="p">[</span><span class="n">new_files</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">fn</span><span class="p">)]</span> <span class="o">=</span> <span class="n">bin_scatangle</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="p">,</span> <span class="n">bin_scatangle_size</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">new_files</span>
+
+
+<span class="k">def</span> <span class="nf">convert_scatangle_to_MATLAB</span><span class="p">(</span><span class="n">scatangle_file</span><span class="p">,</span> <span class="n">fid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data_file</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts scatangle file to MATLAB station distribution format</span>
+
+<span class="sd">    Converts the scatangle file to the station distribution format separately from the inversion.</span>
+
+<span class="sd">    Args</span>
+<span class="sd">        scatangle_file: Scatangle filename.</span>
+<span class="sd">        fid:[False] Output filename.</span>
+<span class="sd">        data_file:[False] Data file path (means that only stations with observations are outputted).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">..inversion</span> <span class="k">import</span> <span class="n">Inversion</span>
+    <span class="c1"># Parse scatangle file</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">parse_scatangle</span><span class="p">(</span><span class="n">scatangle_file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">fid</span><span class="p">:</span>
+        <span class="n">fid</span> <span class="o">=</span> <span class="n">scatangle_file</span>
+    <span class="k">if</span> <span class="n">data_file</span><span class="p">:</span>
+        <span class="c1"># Check Stations for only those with observations</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">({</span><span class="s1">&#39;UID&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span>
+        <span class="n">original_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">stations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;amplituderatio&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;amplitude_ratio&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;polarity&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()]:</span>
+            <span class="n">stations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span>
+        <span class="n">stations_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stations</span><span class="p">)</span>
+        <span class="n">location_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">original_samples</span><span class="p">]</span>
+        <span class="n">selected_stations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="n">stations_set</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">selected_stations</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">location_samples</span><span class="p">):</span>
+            <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="o">*</span><span class="n">indices</span><span class="p">)(</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span>
+            <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">][</span><span class="n">indices</span><span class="p">]</span>
+            <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">][</span><span class="n">indices</span><span class="p">]</span>
+        <span class="c1"># Output results</span>
+        <span class="n">Inversion</span><span class="p">(</span><span class="n">data_file</span><span class="o">=</span><span class="n">data_file</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">__output__</span><span class="p">({},</span> <span class="n">fid</span><span class="o">=</span><span class="n">fid</span><span class="p">,</span> <span class="n">location_samples</span><span class="o">=</span><span class="n">location_samples</span><span class="p">,</span>
+                                                                  <span class="n">location_sample_multipliers</span><span class="o">=</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">station_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Output results</span>
+        <span class="n">Inversion</span><span class="p">({</span><span class="s1">&#39;UID&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">__output__</span><span class="p">({},</span> <span class="n">fid</span><span class="o">=</span><span class="n">fid</span><span class="p">,</span> <span class="n">location_samples</span><span class="o">=</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                         <span class="n">location_sample_multipliers</span><span class="o">=</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">station_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">parser_check</span><span class="p">(</span><span class="n">parser</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">defaults</span><span class="p">):</span>
+    <span class="n">flags</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]:</span>
+            <span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;data_file&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">+</span><span class="s1">&#39;*&#39;</span><span class="o">+</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;angle_extension&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]]</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;no_location_update&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">options</span><span class="p">,</span> <span class="n">flags</span>
+
+
+<span class="c1"># MTfit pkg_resources EntryPoint functions</span>
+
+
+<span class="n">PARSER_DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s1">&#39;bin_scatangle&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+          <span class="s1">&#39;bin_size&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+          <span class="p">}</span>
+<span class="n">PARSER_DEFAULT_TYPES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="s1">&#39;bin_size&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">]}</span>
+
+
+<span class="k">def</span> <span class="nf">cmd_defaults</span><span class="p">():</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">PARSER_DEFAULTS</span><span class="p">,</span> <span class="n">PARSER_DEFAULT_TYPES</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">cmd_opts</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">argparser</span><span class="o">=</span><span class="n">_argparse</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="n">PARSER_DEFAULTS</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds parser group for scatangle arguments</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        group: argparse or optparse argument group</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">argparser</span><span class="p">:</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--bin-scatangle&quot;</span><span class="p">,</span> <span class="s2">&quot;--binscatangle&quot;</span><span class="p">,</span> <span class="s2">&quot;--bin_scatangle&quot;</span><span class="p">,</span>  <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                           <span class="n">default</span><span class="o">=</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Bin the scatangle file to reduce the number of samples [default=False]. --bin-size Sets the bin size parameter .&quot;</span><span class="p">,</span>
+                           <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;bin_scatangle&quot;</span><span class="p">)</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--bin-size&quot;</span><span class="p">,</span> <span class="s2">&quot;--binsize&quot;</span><span class="p">,</span> <span class="s2">&quot;--bin_size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">],</span>
+                           <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Sets the scatangle bin size parameter [default=</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">]),</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;bin_scatangle_size&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s2">&quot;--bin-scatangle&quot;</span><span class="p">,</span> <span class="s2">&quot;--binscatangle&quot;</span><span class="p">,</span> <span class="s2">&quot;--bin_scatangle&quot;</span><span class="p">,</span>  <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                         <span class="n">default</span><span class="o">=</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Bin the scatangle file to reduce the number of samples [default=False]. --bin-size Sets the bin size parameter .&quot;</span><span class="p">,</span>
+                         <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;bin_scatangle&quot;</span><span class="p">)</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s2">&quot;--bin-size&quot;</span><span class="p">,</span> <span class="s2">&quot;--binsize&quot;</span><span class="p">,</span> <span class="s2">&quot;--bin_size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">],</span>
+                         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Sets the scatangle bin size parameter [default=</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">]),</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;bin_scatangle_size&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">group</span><span class="p">,</span> <span class="n">parser_check</span>
+
+
+<span class="k">def</span> <span class="nf">pre_inversion</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bin_scatangle_files</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;number_location_samples&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">kwargs</span>
+
+
+<span class="k">def</span> <span class="nf">location_pdf_parser</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">parse_scatangle</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are also Cython functions:</p>
+<div class="highlight-cython"><div class="highlight"><pre><span></span><span class="c"># cython: infer_types=True</span>
+<span class="c">#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION</span>
+
+<span class="c"># **Restricted:  For Non-Commercial Use Only** </span>
+<span class="c"># This code is protected intellectual property and is available solely for teaching</span>
+<span class="c"># and non-commercially funded academic research purposes.</span>
+<span class="c">#</span>
+<span class="c"># Applications for commercial use should be made to Schlumberger or the University of Cambridge.</span>
+
+<span class="k">cimport</span> <span class="nn">cython</span>
+<span class="k">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">cimport</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">from</span> <span class="nn">cython.view</span> <span class="k">cimport</span> <span class="n">array</span> <span class="k">as</span> <span class="n">cvarray</span>
+<span class="k">from</span> <span class="nn">cpython</span> <span class="k">cimport</span> <span class="nb">bool</span>
+<span class="c"># DTYPE=np.float64</span>
+<span class="c"># ctypedef np.float64_t DTYPE_t</span>
+<span class="k">ctypedef</span> <span class="n">double</span> <span class="n">DTYPE_t</span>
+<span class="k">ctypedef</span> <span class="nb">long</span> <span class="nb">long</span> <span class="n">LONG</span>
+<span class="c"># ctypedef long long</span>
+<span class="k">from</span> <span class="nn">libc.stdlib</span> <span class="k">cimport</span> <span class="n">rand</span><span class="p">,</span> <span class="n">RAND_MAX</span>
+<span class="cp">IF</span> <span class="n">UNAME_SYSNAME</span> <span class="o">==</span> <span class="s">&quot;Windows&quot;</span><span class="p">:</span>
+    <span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">HUGE_VAL</span> <span class="k">as</span> <span class="n">inf</span>
+<span class="cp">ELSE</span><span class="p">:</span>
+    <span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">INFINITY</span> <span class="k">as</span> <span class="n">inf</span>
+    <span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">fmax</span>
+    <span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">fmin</span>
+    <span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">erf</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">sqrt</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">exp</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">log</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">fabs</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">cos</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">sin</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">M_PI</span> <span class="k">as</span> <span class="n">pi</span>
+<span class="k">from</span> <span class="nn">libc.math</span> <span class="k">cimport</span> <span class="n">M_SQRT2</span> <span class="k">as</span> <span class="n">sqrt2</span>
+
+
+<span class="nd">@cython</span><span class="o">.</span><span class="n">boundscheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="nd">@cython</span><span class="o">.</span><span class="n">wraparound</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="nd">@cython</span><span class="o">.</span><span class="n">nonecheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="nd">@cython</span><span class="o">.</span><span class="n">cdivision</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">cdef</span> <span class="kt">DTYPE_t</span>[<span class="p">::</span><span class="mf">1</span><span class="p">]</span> <span class="n">get_multipliers</span><span class="p">(</span><span class="n">DTYPE_t</span><span class="p">[:,:,::</span><span class="mf">1</span><span class="p">]</span> <span class="n">angles</span><span class="p">,</span><span class="n">DTYPE_t</span> <span class="n">bin_size</span><span class="p">,</span><span class="n">DTYPE_t</span> <span class="p">[::</span><span class="mf">1</span><span class="p">]</span> <span class="n">multipliers</span><span class="p">)</span> <span class="k">nogil</span><span class="p">:</span>
+    <span class="k">cdef</span> <span class="kt">Py_ssize_t</span> <span class="nf">umax</span><span class="o">=</span><span class="n">angles</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+    <span class="k">cdef</span> <span class="kt">Py_ssize_t</span> <span class="nf">nsta</span><span class="o">=</span><span class="n">angles</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span>
+    <span class="k">cdef</span> <span class="kt">Py_ssize_t</span> <span class="nf">u</span>
+    <span class="k">cdef</span> <span class="kt">Py_ssize_t</span> <span class="nf">w</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">ok</span><span class="o">=</span><span class="mf">1</span>
+    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">umax</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">multipliers</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">==-</span><span class="mf">1</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">u</span><span class="o">+</span><span class="mf">1</span><span class="p">,</span><span class="n">umax</span><span class="p">):</span>  
+            <span class="k">if</span> <span class="n">multipliers</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&gt;-</span><span class="mf">1</span><span class="p">:</span>
+                <span class="n">ok</span><span class="o">=</span><span class="mf">1</span>
+                <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsta</span><span class="p">):</span>
+                    <span class="n">ok</span><span class="o">=</span><span class="n">ok</span><span class="o">*</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">u</span><span class="p">,</span><span class="mf">0</span><span class="p">,</span><span class="n">w</span><span class="p">]</span><span class="o">-</span><span class="n">angles</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="mf">0</span><span class="p">,</span><span class="n">w</span><span class="p">])</span><span class="o">&lt;</span><span class="n">bin_size</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">u</span><span class="p">,</span><span class="mf">1</span><span class="p">,</span><span class="n">w</span><span class="p">]</span><span class="o">-</span><span class="n">angles</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="mf">1</span><span class="p">,</span><span class="n">w</span><span class="p">])</span><span class="o">&lt;</span><span class="n">bin_size</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">ok</span><span class="o">==</span><span class="mf">0</span><span class="p">:</span>
+                        <span class="k">break</span>
+                <span class="k">if</span> <span class="n">w</span><span class="o">==</span><span class="n">nsta</span><span class="o">-</span><span class="mf">1</span> <span class="ow">and</span> <span class="n">ok</span><span class="o">&gt;</span><span class="mf">0</span><span class="p">:</span>
+                    <span class="n">multipliers</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">+=</span><span class="n">multipliers</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">v</span><span class="o">&gt;</span><span class="n">u</span><span class="p">:</span>
+                        <span class="n">multipliers</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">=-</span><span class="mf">1</span>
+    <span class="k">return</span> <span class="n">multipliers</span>
+
+
+<span class="k">cpdef</span> <span class="nf">bin_scatangle</span><span class="p">(</span><span class="n">sample_records</span><span class="p">,</span><span class="n">multipliers</span><span class="p">,</span><span class="n">bin_size</span><span class="p">):</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span>[<span class="p">:,:,::</span><span class="mf">1</span><span class="p">]</span> <span class="n">angles</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">),</span><span class="mf">2</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sample_records</span><span class="p">[</span><span class="mf">0</span><span class="p">][</span><span class="s">&#39;Name&#39;</span><span class="p">])))</span>
+    <span class="k">cdef</span> <span class="kt">Py_ssize_t</span> <span class="nf">i</span>
+    <span class="k">cdef</span> <span class="kt">Py_ssize_t</span> <span class="nf">j</span>
+    <span class="n">new_records</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">new_multipliers</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">record</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_records</span><span class="p">):</span>
+        <span class="c"># print i,record</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">record</span><span class="p">[</span><span class="s">&#39;Name&#39;</span><span class="p">])):</span>
+            <span class="n">angles</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mf">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">record</span><span class="p">[</span><span class="s">&#39;TakeOffAngle&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">,</span><span class="mf">0</span><span class="p">]</span>
+            <span class="n">angles</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mf">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">record</span><span class="p">[</span><span class="s">&#39;Azimuth&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">,</span><span class="mf">0</span><span class="p">]</span>
+    <span class="c"># print multipliers,bin_size,angles</span>
+    <span class="n">multipliers</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">get_multipliers</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span><span class="n">bin_size</span><span class="p">,</span><span class="n">multipliers</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">record</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_records</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">multipliers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0</span><span class="p">:</span>
+            <span class="n">new_records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+            <span class="n">new_multipliers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">multipliers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">new_records</span><span class="p">,</span><span class="n">new_multipliers</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="source-convert.html" class="btn btn-neutral float-right" title="17.1.8. mtfit.convert" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="source-extensions.html" class="btn btn-neutral" title="17.1.7. Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

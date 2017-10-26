@@ -1,0 +1,1006 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>14. Extending mtfit &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="next" title="15. References" href="references.html"/>
+        <link rel="prev" title="13. mtfit.Inversion: Inversion object" href="inversion.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">14. Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-cmd-opts">14.1. mtfit.cmd_opts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-cmd-defaults">14.2. mtfit.cmd_defaults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-tests">14.3. mtfit.tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-pre-inversion">14.4. mtfit.pre_inversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-post-inversion">14.5. mtfit.post_inversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-extensions">14.6. mtfit.extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-parsers">14.7. mtfit.parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-location-pdf-parsers">14.8. mtfit.location_pdf_parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-output-data-formats">14.9. mtfit.output_data_formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-output-formats">14.10. mtfit.output_formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-process-data-types">14.11. mtfit.process_data_types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-data-types">14.12. mtfit.data_types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-parallel-algorithms">14.13. mtfit.parallel_algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-directed-algorithms">14.14. mtfit.directed_algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-sampling">14.15. mtfit.sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-sampling-prior">14.16. mtfit.sampling_prior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-sample-distribution">14.17. mtfit.sample_distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-plot">14.18. mtfit.plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-plot-read">14.19. mtfit.plot_read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-documentation">14.20. mtfit.documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtfit-source-code">14.21. mtfit.source_code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>14. Extending mtfit</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/extensions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="extending-mtfit">
+<h1>14. Extending mtfit<a class="headerlink" href="#extending-mtfit" title="Permalink to this headline">¶</a></h1>
+<p>mtfit has been written with the view that it is desirable to be able to easily extend the code. This is done using <a class="reference external" href="https://pythonhosted.org/setuptools/pkg_resources.html#entry-points">entry points</a> from the <a class="reference external" href="https://pythonhosted.org/setuptools">setuptools</a> module.</p>
+<p>The entry points are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Entry Point</th>
+<th class="head">Descriptions</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#entry-point-0"><span class="std std-ref">mtfit.cmd_opts</span></a></td>
+<td>Command line options</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point-1"><span class="std std-ref">mtfit.cmd_defaults</span></a></td>
+<td>Default parameters for the command line options</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point-2"><span class="std std-ref">mtfit.tests</span></a></td>
+<td>Test functions for the extensions</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point-3"><span class="std std-ref">mtfit.pre_inversion</span></a></td>
+<td>Function to be called with all kwargs before the
+inversion object is initialised</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point-4"><span class="std std-ref">mtfit.post_inversion</span></a></td>
+<td>Function to be called with all available kwargs
+after the inversion has occurred</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point-5"><span class="std std-ref">mtfit.extensions</span></a></td>
+<td>Functions that replaces the call to the inversion
+using all the kwargs</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point-6"><span class="std std-ref">mtfit.parsers</span></a></td>
+<td>Functions that return the data dictionary from an
+input filename</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point-7"><span class="std std-ref">mtfit.location_pdf_parsers</span></a></td>
+<td>Functions that return the location PDF samples
+from an input filename</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point-8"><span class="std std-ref">mtfit.output_data_formats</span></a></td>
+<td>Functions that format the output data into a given
+type, often linked to the output format</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point-9"><span class="std std-ref">mtfit.output_formats</span></a></td>
+<td>Functions that output the results from the
+output_data_formats</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point10"><span class="std std-ref">mtfit.process_data_types</span></a></td>
+<td>Functions to convert input data into correct
+format for new data types in forward model</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point11"><span class="std std-ref">mtfit.data_types</span></a></td>
+<td>Functions to evaluate the forward model for new
+data types</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point12"><span class="std std-ref">mtfit.parallel_algorithms</span></a></td>
+<td>Search algorithms that can be run (in parallel)
+like monte carlo random sampling</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point13"><span class="std std-ref">mtfit.directed_algorithms</span></a></td>
+<td>Search algorithms that are dependent on the
+previous value (e.g. McMC)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point14"><span class="std std-ref">mtfit.sampling</span></a></td>
+<td>Function that generates new moment tensor samples
+in the Monte Carlo random sampling algorithm</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point15"><span class="std std-ref">mtfit.sampling_prior</span></a></td>
+<td>Function that calculates the prior either in the
+McMC algorithm or the MC bayesian evidence
+estimate</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point16"><span class="std std-ref">mtfit.sample_distribution</span></a></td>
+<td>Function that generates random samples according
+to some source model</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point17"><span class="std std-ref">mtfit.plot</span></a></td>
+<td>Callable class for source plotting using
+matplotlib</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point18"><span class="std std-ref">mtfit.plot_read</span></a></td>
+<td>Function that reads the data from a file for the
+MTplot class</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#entry-point19"><span class="std std-ref">mtfit.documentation</span></a></td>
+<td>Installs the documentation for the extension</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#entry-point20"><span class="std std-ref">mtfit.source_code</span></a></td>
+<td>Installs the source code documentation for the
+extension</td>
+</tr>
+</tbody>
+</table>
+<p>These entry points can be accessed by adding some arguments to the <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> module <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;entry_points&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;entry_point_name&#39;</span><span class="p">:[</span><span class="s1">&#39;key = function&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">kwargs</span></code> is the keyword dictionary passed to the <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> <code class="xref py py-func docutils literal"><span class="pre">setup()</span></code> function, and the <code class="docutils literal"><span class="pre">entry_point_name</span></code> is the desired entry point in the other package.
+The <code class="docutils literal"><span class="pre">key</span></code> is the description of the <code class="xref py py-func docutils literal"><span class="pre">function()</span></code>, used for selecting it in the code (this should be described by the package), and the <code class="xref py py-func docutils literal"><span class="pre">function()</span></code> is the desired function to be called when this key is selected.</p>
+<p>The different usages for these entry points are described below.</p>
+<p><a class="reference download internal" href="_downloads/scatangle.py" download=""><code class="xref download docutils literal"><span class="pre">extensions/scatangle.py</span></code></a> is an example extension structure, although it would be necessary to make a <code class="docutils literal"><span class="pre">setup.py</span></code> file to install it.</p>
+<div class="section" id="mtfit-cmd-opts">
+<span id="entry-point-0"></span><h2>14.1. mtfit.cmd_opts<a class="headerlink" href="#mtfit-cmd-opts" title="Permalink to this headline">¶</a></h2>
+<p>This entry point handles command line options for extensions that have been added. It is called when parsing the command line options, and should not conflict with the options described in <a class="reference internal" href="cli.html"><span class="doc">mtfit command line options</span></a>.</p>
+<p>The function is called as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">parser_group</span><span class="p">,</span><span class="n">parser_check</span><span class="o">=</span><span class="n">cmd_opts</span><span class="p">(</span><span class="n">parser_group</span><span class="p">,</span><span class="n">argparse</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="o">/</span><span class="kc">False</span><span class="p">],</span><span class="n">defaults</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the <code class="docutils literal"><span class="pre">parser_group</span></code> is the <a class="reference external" href="https://docs.python.org/2/library/argparse.html#module-argparse" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">argparse</span></code></a> or <a class="reference external" href="https://docs.python.org/2/library/optparse.html#module-optparse" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">optparse</span></code></a> parser group depending on if <a class="reference external" href="https://docs.python.org/2/library/argparse.html#module-argparse" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">argparse</span></code></a> is installed (Python version 2.7 or later), defaults are the command line defaults (with corresponding entry points <a class="reference internal" href="#entry-point-1"><span class="std std-ref">mtfit.cmd_defaults</span></a>), and <code class="docutils literal"><span class="pre">parser_check</span></code> is the function called to check/process the parsers results.</p>
+<p>An example cmd_opts function is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">parser_check</span><span class="p">(</span><span class="n">parser</span><span class="p">,</span><span class="n">options</span><span class="p">,</span><span class="n">defaults</span><span class="p">):</span>
+    <span class="n">flags</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]:</span>
+          <span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;data_file&#39;</span><span class="p">]</span><span class="o">+</span>\
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">+</span><span class="s1">&#39;*&#39;</span><span class="o">+</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;angle_extension&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">])</span><span class="o">==</span><span class="nb">list</span><span class="p">:</span>
+          <span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]]</span>
+        <span class="c1">#flags=[&#39;no_data_file_ok&#39;,&#39;no_location_update&#39;]</span>
+        <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;no_location_update&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">options</span><span class="p">,</span><span class="n">flags</span>
+
+<span class="k">def</span> <span class="nf">cmd_opts</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="n">argparse</span><span class="o">=</span><span class="n">ARGPARSE</span><span class="p">,</span><span class="n">defaults</span><span class="o">=</span><span class="n">PARSER_DEFAULTS</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">argparse</span><span class="p">:</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--bin-scatangle&quot;</span><span class="p">,</span><span class="s2">&quot;--binscatangle&quot;</span><span class="p">,</span><span class="s2">&quot;--bin_scatangle&quot;</span><span class="p">,</span> \
+            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">],</span> \
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Bin the scatangle file to reduce the number of samples </span><span class="se">\</span>
+<span class="s2">                [default=False]. --bin-size Sets the bin size parameter .&quot;</span><span class="p">,</span> \
+            <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;bin_scatangle&quot;</span><span class="p">)</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--bin-size&quot;</span><span class="p">,</span><span class="s2">&quot;--binsize&quot;</span><span class="p">,</span><span class="s2">&quot;--bin_size&quot;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> \
+            <span class="n">default</span><span class="o">=</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">],</span><span class="n">help</span><span class="o">=</span><span class="s2">&quot;Sets the scatangle bin size parameter </span><span class="se">\</span>
+<span class="s2">                [default=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">])</span><span class="o">+</span><span class="s2">&quot;].&quot;</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="s2">&quot;bin_scatangle_size&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s2">&quot;--bin-scatangle&quot;</span><span class="p">,</span><span class="s2">&quot;--binscatangle&quot;</span><span class="p">,</span><span class="s2">&quot;--bin_scatangle&quot;</span><span class="p">,</span> \
+            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">],</span><span class="n">help</span><span class="o">=</span><span class="s2">&quot;Bin the </span><span class="se">\</span>
+<span class="s2">                scatangle file to reduce the number of samples [default=False]. </span><span class="se">\</span>
+<span class="s2">                --bin-size Sets the bin size parameter .&quot;</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="s2">&quot;bin_scatangle&quot;</span><span class="p">)</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s2">&quot;--bin-size&quot;</span><span class="p">,</span><span class="s2">&quot;--binsize&quot;</span><span class="p">,</span><span class="s2">&quot;--bin_size&quot;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> \
+            <span class="n">default</span><span class="o">=</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">],</span><span class="n">help</span><span class="o">=</span><span class="s2">&quot;Sets the scatangle bin size </span><span class="se">\</span>
+<span class="s2">                parameter [default=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">])</span><span class="o">+</span><span class="s2">&quot;].&quot;</span><span class="p">,</span> \
+            <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;bin_scatangle_size&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">group</span><span class="p">,</span><span class="n">parser_check</span>
+</pre></div>
+</div>
+<p>This is taken from <a class="reference download internal" href="_downloads/scatangle.py" download=""><code class="xref download docutils literal"><span class="pre">extensions/scatangle.py</span></code></a>.</p>
+<p>These command line options will be added to the options mtfit is called with so can then be parsed by other functions in the extension.</p>
+<p>The command line options for an extension can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.cmd_opts</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mtfit.cmd_opts&#39;</span><span class="p">:[</span><span class="s1">&#39;extension = mymodule:cmd_opts&#39;</span><span class="p">]}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mtfit-cmd-defaults">
+<span id="entry-point-1"></span><h2>14.2. mtfit.cmd_defaults<a class="headerlink" href="#mtfit-cmd-defaults" title="Permalink to this headline">¶</a></h2>
+<p>This entry point handles the default values and types for the command line options described in <a class="reference internal" href="#entry-point-0"><span class="std std-ref">mtfit.cmd_opts</span></a>. It is called when parsing the command line options.</p>
+<p>The function is called as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">plugin_defaults</span><span class="p">,</span><span class="n">plugin_default_types</span><span class="o">=</span><span class="n">cmd_defaults</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Where both are dicts, and should contain defaults for the <a class="reference internal" href="#entry-point-0"><span class="std std-ref">mtfit.cmd_opts</span></a>, although they can also update the normal <a class="reference internal" href="cli.html"><span class="doc">mtfit command line options</span></a> defaults and default types. Both dictionaries are used for updating the defaults from the default file (see <a class="reference internal" href="setup.html"><span class="doc">Installing mtfit</span></a>).</p>
+<p>An example cmd_defaults function is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PARSER_DEFAULTS</span><span class="o">=</span><span class="p">{</span>
+          <span class="s1">&#39;bin_scatangle&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="s1">&#39;bin_size&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span>
+          <span class="p">}</span>
+<span class="n">PARSER_DEFAULT_TYPES</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">:[</span><span class="nb">bool</span><span class="p">],</span><span class="s1">&#39;bin_size&#39;</span><span class="p">:[</span><span class="nb">float</span><span class="p">]}</span>
+<span class="k">def</span> <span class="nf">cmd_defaults</span><span class="p">():</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">PARSER_DEFAULTS</span><span class="p">,</span><span class="n">PARSER_DEFAULT_TYPES</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is taken from <a class="reference download internal" href="_downloads/scatangle.py" download=""><code class="xref download docutils literal"><span class="pre">extensions/scatangle.py</span></code></a>.</p>
+<p>The default command line options for an extension can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.cmd_defaults</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mtfit.cmd_defaults&#39;</span><span class="p">:[</span><span class="s1">&#39;extension = mymodule:cmd_defaults&#39;</span><span class="p">]}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mtfit-tests">
+<span id="entry-point-2"></span><h2>14.3. mtfit.tests<a class="headerlink" href="#mtfit-tests" title="Permalink to this headline">¶</a></h2>
+<p>This entry point is used for any extensions to add tests to the test suite, which can be run using <code class="docutils literal"><span class="pre">mtfit</span> <span class="pre">--test</span></code> on the command line, or as <code class="docutils literal"><span class="pre">mtfit.run_tests()</span></code> from within python.</p>
+<p>The function is called as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">test_suite</span><span class="p">,</span><span class="n">debug_test_suite</span><span class="p">,</span><span class="n">parser_test_function</span><span class="o">=</span><span class="n">tests</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">test_suite</span></code> is the <a class="reference external" href="https://docs.python.org/2/library/unittest.html#unittest.TestSuite" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">unittest.TestSuite</span></code></a> containing the TestSuite, created as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tests</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">tests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestLoader</span><span class="p">()</span><span class="o">.</span><span class="n">loadTestsFromTestCase</span><span class="p">(</span><span class="n">__ExtensionTestCase</span><span class="p">))</span>
+<span class="n">test_suite</span><span class="o">=</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestSuite</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>from each <a class="reference external" href="https://docs.python.org/2/library/unittest.html#unittest.TestCase" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">unittest.TestCase</span></code></a>.``debug_test_suite`` is a single <a class="reference external" href="https://docs.python.org/2/library/unittest.html#unittest.TestSuite" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">TestSuite</span></code></a> containing the tests, added as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">suite</span><span class="o">.</span><span class="n">addTests</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestLoader</span><span class="p">()</span><span class="o">.</span><span class="n">loadTestsFromTestCase</span><span class="p">(</span><span class="n">__ExtensionTestCase</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>from each <a class="reference external" href="https://docs.python.org/2/library/unittest.html#unittest.TestCase" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">unittest.TestCase</span></code></a>. <code class="docutils literal"><span class="pre">parser_test_function</span></code> is a single function to test the parser handling and checking.</p>
+<p>An example of these functions is taken from <a class="reference download internal" href="_downloads/scatangle.py" download=""><code class="xref download docutils literal"><span class="pre">extensions/scatangle.py</span></code></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">__ScatangleTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">_DEBUG</span>
+        <span class="bp">self</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="s1">&#39;existing_scatangle_files&#39;</span><span class="p">,</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.scatangle&#39;</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.scatangle&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">fname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">existing_scatangle_files</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="nb">print</span> <span class="s1">&#39;Cannot remove &#39;</span><span class="p">,</span><span class="n">fname</span>
+        <span class="kn">import</span> <span class="nn">gc</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;test.scatangle&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">station_angles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">.</span>
+        <span class="o">.</span>
+        <span class="o">.</span>
+        <span class="o">.</span>
+    <span class="k">def</span> <span class="nf">test_parse_scatangle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.scatangle&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">station_angles</span><span class="p">())</span>
+        <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="o">=</span><span class="n">parse_scatangle</span><span class="p">(</span><span class="s1">&#39;test.scatangle&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">B</span><span class="p">,[</span><span class="mf">504.7</span><span class="p">,</span> <span class="mf">504.7</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()),[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">])</span>
+        <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="o">=</span><span class="n">parse_scatangle</span><span class="p">(</span><span class="s1">&#39;test.scatangle&#39;</span><span class="p">,</span><span class="n">bin_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">B</span><span class="p">,[</span><span class="mf">1009.4</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()),[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">])</span>
+        <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.scatangle&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">station_angles</span><span class="p">()</span> \
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)]))</span>
+        <span class="k">global</span> <span class="n">_CYTHON</span>
+        <span class="kn">import</span> <span class="nn">time</span>
+        <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="o">=</span><span class="n">parse_scatangle</span><span class="p">(</span><span class="s1">&#39;test.scatangle&#39;</span><span class="p">,</span><span class="n">bin_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span>
+        <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">_CYTHON</span><span class="o">=</span><span class="kc">False</span>
+        <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="o">=</span><span class="n">parse_scatangle</span><span class="p">(</span><span class="s1">&#39;test.scatangle&#39;</span><span class="p">,</span><span class="n">bin_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="s1">&#39;NoC&#39;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span>
+        <span class="n">_CYTHON</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;test.scatangle&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">parser_tests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">_parser</span><span class="p">,</span><span class="n">defaults</span><span class="p">,</span><span class="n">argparse</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="s1">&#39;bin_scatangles --bin-scatangle and --bin-scatangle-size check&#39;</span>
+    <span class="n">options</span><span class="p">,</span><span class="n">options_map</span><span class="o">=</span><span class="n">_parser</span><span class="p">([</span><span class="s1">&#39;Test.i&#39;</span><span class="p">],</span><span class="n">test</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;bin_scatangle_size&#39;</span><span class="p">],</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">])</span>
+    <span class="n">options</span><span class="p">,</span><span class="n">options_map</span><span class="o">=</span><span class="n">_parser</span><span class="p">([</span><span class="s1">&#39;--bin_scatangle&#39;</span><span class="p">],</span><span class="n">test</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;bin_scatangle_size&#39;</span><span class="p">],</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;bin_size&#39;</span><span class="p">])</span>
+    <span class="n">options</span><span class="p">,</span><span class="n">options_map</span><span class="o">=</span><span class="n">_parser</span><span class="p">([</span><span class="s1">&#39;--bin_scatangle&#39;</span><span class="p">,</span><span class="s1">&#39;--bin-size=2.0&#39;</span><span class="p">],</span><span class="n">test</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;bin_scatangle&#39;</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;bin_scatangle_size&#39;</span><span class="p">],</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_debug_test_suite</span><span class="p">():</span>
+    <span class="n">suite</span><span class="o">=</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestSuite</span><span class="p">()</span>
+    <span class="n">suite</span><span class="o">.</span><span class="n">addTests</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestLoader</span><span class="p">()</span><span class="o">.</span><span class="n">loadTestsFromTestCase</span><span class="p">(</span><span class="n">__ScatangleTestCase</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">suite</span>
+
+<span class="k">def</span> <span class="nf">_test_suite</span><span class="p">():</span>
+    <span class="n">tests</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">tests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestLoader</span><span class="p">()</span><span class="o">.</span><span class="n">loadTestsFromTestCase</span><span class="p">(</span><span class="n">__ScatangleTestCase</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestSuite</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">tests</span><span class="p">():</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">_test_suite</span><span class="p">(),</span><span class="n">_debug_test_suite</span><span class="p">(),</span><span class="n">parser_tests</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where <code class="xref py py-func docutils literal"><span class="pre">tests()</span></code> is the entry point function.</p>
+<p>A test suite for an extension can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.tests</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mtfit.tests&#39;</span><span class="p">:[</span><span class="s1">&#39;extension = mymodule:tests&#39;</span><span class="p">]}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(N.B. the different test suites can be empty, and the <code class="docutils literal"><span class="pre">parser_test_function</span></code> can just be a pass function).</p>
+</div>
+<div class="section" id="mtfit-pre-inversion">
+<span id="entry-point-3"></span><h2>14.4. mtfit.pre_inversion<a class="headerlink" href="#mtfit-pre-inversion" title="Permalink to this headline">¶</a></h2>
+<p>This entry point provides an opportunity to call a function before the <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">mtfit.inversion.Inversion</span></code></a> object is created (e.g. for some additional data processing).</p>
+<p>The plugin is called as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kwargs</span><span class="o">=</span><span class="n">pre_inversion</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And can change the kwargs passed to the  <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object to create it.</p>
+<p>The function should just return the initial kwargs if the command line option to select it is not <code class="docutils literal"><span class="pre">True</span></code>, otherwise it will always be called.</p>
+<p>An pre_inversion function can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.pre_inversion</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.pre_inversion&#39;</span><span class="p">:[</span><span class="s1">&#39;my_fancy_function = mymodule:main_function&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;mtfit.cmd_opts&#39;</span><span class="p">:[</span><span class="s1">&#39;extension = mymodule:cmd_opts&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;mtfit.cmd_defaults&#39;</span><span class="p">:[</span><span class="s1">&#39;extension = mymodule:cmd_defaults&#39;</span><span class="p">]}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the <a class="reference internal" href="#entry-point-0"><span class="std std-ref">mtfit.cmd_opts</span></a> and <a class="reference internal" href="#entry-point-1"><span class="std std-ref">mtfit.cmd_defaults</span></a> entry points  have been included.</p>
+</div>
+<div class="section" id="mtfit-post-inversion">
+<span id="entry-point-4"></span><h2>14.5. mtfit.post_inversion<a class="headerlink" href="#mtfit-post-inversion" title="Permalink to this headline">¶</a></h2>
+<p>This entry point provides an opportunity to call a function after the <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">mtfit.inversion.Inversion</span></code></a> object is created (e.g. for some additional data processing).</p>
+<p>The plugin is called as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">post_inversion</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The function should just return nothing if the command line option to select it is not <code class="docutils literal"><span class="pre">True</span></code>, otherwise it will always be called.</p>
+<p>An post_inversion function can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.post_inversion</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.post_inversion&#39;</span><span class="p">:[</span><span class="s1">&#39;my_fancy_function = mymodule:main_function&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;mtfit.cmd_opts&#39;</span><span class="p">:[</span><span class="s1">&#39;extension = mymodule:cmd_opts&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;mtfit.cmd_defaults&#39;</span><span class="p">:[</span><span class="s1">&#39;extension = mymodule:cmd_defaults&#39;</span><span class="p">]}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the <a class="reference internal" href="#entry-point-0"><span class="std std-ref">mtfit.cmd_opts</span></a> and <a class="reference internal" href="#entry-point-1"><span class="std std-ref">mtfit.cmd_defaults</span></a>  entry points have been included.</p>
+</div>
+<div class="section" id="mtfit-extensions">
+<span id="entry-point-5"></span><h2>14.6. mtfit.extensions<a class="headerlink" href="#mtfit-extensions" title="Permalink to this headline">¶</a></h2>
+<p>This entry point allows functions that can replace the main call to the <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">mtfit.inversion.Inversion</span></code></a> object and to the <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion.forward" title="mtfit.inversion.Inversion.forward"><code class="xref py py-func docutils literal"><span class="pre">mtfit.inversion.Inversion.forward()</span></code></a> function.</p>
+<p>The plugin is called as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">=</span><span class="n">ext</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span> <span class="o">!=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Where kwargs are all the command line options that have been set.</p>
+<p>If the result of the extension is <code class="docutils literal"><span class="pre">1</span></code> the program will not exit (this should be the case if the kwargs option to call the extension is not True), otherwise it exits.</p>
+<p>N.B it is necessary for an extension to also have installed functions for the entry points:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#entry-point-0"><span class="std std-ref">mtfit.cmd_opts</span></a>,</li>
+<li><a class="reference internal" href="#entry-point-1"><span class="std std-ref">mtfit.cmd_defaults</span></a>,</li>
+</ul>
+</div></blockquote>
+<p>and the function should check if the appropriate option has been selected on the command line (if it doesn't it will always run).</p>
+<p>An extension function can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.extensions</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.extensions&#39;</span><span class="p">:[</span><span class="s1">&#39;my_fancy_function = mymodule:main_function&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;mtfit.cmd_opts&#39;</span><span class="p">:[</span><span class="s1">&#39;extension = mymodule:cmd_opts&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;mtfit.cmd_defaults&#39;</span><span class="p">:[</span><span class="s1">&#39;extension = mymodule:cmd_defaults&#39;</span><span class="p">]}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the <a class="reference internal" href="#entry-point-0"><span class="std std-ref">mtfit.cmd_opts</span></a> and <a class="reference internal" href="#entry-point-1"><span class="std std-ref">mtfit.cmd_defaults</span></a> entry points  have been included.</p>
+</div>
+<div class="section" id="mtfit-parsers">
+<span id="entry-point-6"></span><h2>14.7. mtfit.parsers<a class="headerlink" href="#mtfit-parsers" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#entry-point-6"><span class="std std-ref">mtfit.parsers</span></a> entry point allows additional input file parsers to be added. The CSV parser is added using this in the <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;entry_points&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mtfit.parsers&#39;</span><span class="p">:[</span><span class="s1">&#39;.csv = mtfit.inversion:parse_csv&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> expects to call the plugin (if the data-file extension matches) as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">plugin</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A parser for a new file format can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.parsers</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.parsers&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;.my_format = mymodule.all_parsers:my_format_parser_function&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span>
+      <span class="p">)</span>
+</pre></div>
+</div>
+<p>The parser is called using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">my_new_format_parser_function</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the <code class="docutils literal"><span class="pre">filename</span></code> is the data filename and <code class="docutils literal"><span class="pre">data</span></code> is the data dictionary (see <a class="reference internal" href="tutorial.html#creating-data-dictionary-label"><span class="std std-ref">Creating a Data Dictionary</span></a>).</p>
+<p>When a new parser is installed, the format (.my_new_format) will be called if it corresponds to the data-file extension. However if the extension doesn't match any of the parsers it will try all of them.</p>
+</div>
+<div class="section" id="mtfit-location-pdf-parsers">
+<span id="entry-point-7"></span><h2>14.8. mtfit.location_pdf_parsers<a class="headerlink" href="#mtfit-location-pdf-parsers" title="Permalink to this headline">¶</a></h2>
+<p>This entry point allows additional location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> file parsers to be added</p>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> expects to call the plugin (if the extension matches) as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">location_samples</span><span class="p">,</span><span class="n">location_probability</span><span class="o">=</span><span class="n">plugin</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">number_station_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where number_station_samples is the number of samples to use (i.e subsampling if there are more samples in the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>).</p>
+<p>A parser for a new format can be installed using  <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.location_pdf_parsers</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.location_pdf_parsers&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;.my_format = mymodule.all_parsers:my_format_parser_function&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The parser is called using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">location_samples</span><span class="p">,</span><span class="n">location_probability</span><span class="o">=</span><span class="n">my_format_parser_function</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
+        <span class="n">number_location_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the <code class="docutils literal"><span class="pre">filename</span></code> is the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> filename and <code class="docutils literal"><span class="pre">number_location_samples</span></code> is the number of samples to use (i.e subsampling if there are more samples in the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>).</p>
+<p>The expected format for the location_samples and location_probability return values are:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">location_samples</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:[</span><span class="s1">&#39;S01&#39;</span><span class="p">,</span><span class="s1">&#39;S02&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">],</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">121.</span><span class="p">],[</span><span class="mf">37.</span><span class="p">],</span><span class="o">...</span><span class="p">]),</span>
+        <span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">88.</span><span class="p">],[</span><span class="mf">12.</span><span class="p">],</span><span class="o">...</span><span class="p">])},</span>
+     <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:[</span><span class="s1">&#39;S01&#39;</span><span class="p">,</span><span class="s1">&#39;S02&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">],</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">120.</span><span class="p">],[</span><span class="mf">36.</span><span class="p">],</span><span class="o">...</span><span class="p">]),</span>
+        <span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">87.</span><span class="p">],[</span><span class="mf">11.</span><span class="p">],</span><span class="o">...</span><span class="p">])}</span>
+    <span class="p">]</span>
+<span class="n">location_probability</span><span class="o">=</span><span class="p">[</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>These are then used in a <a class="reference internal" href="glossary.html#term-monte-carlo-method"><span class="xref std std-term">Monte Carlo method</span></a> approach to include the location uncertainty in the inversion (see <a class="reference internal" href="bayes.html"><span class="doc">Bayesian Approach</span></a>).</p>
+<p>When a new parser is installed, the format (.my_new_format) will be called if it corresponds to the data-file extension. However if the extension doesn't match any of the parsers it will try all of them.</p>
+</div>
+<div class="section" id="mtfit-output-data-formats">
+<span id="entry-point-8"></span><h2>14.9. mtfit.output_data_formats<a class="headerlink" href="#mtfit-output-data-formats" title="Permalink to this headline">¶</a></h2>
+<p>A parser for a new output data format can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.output_data_formats</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.output_data_formats&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_format = mymodule.all_parsers:my_output_data_function&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The parser is called using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">output_data</span><span class="o">=</span><span class="n">my_output_data_function</span><span class="p">(</span><span class="n">event_data</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">inversion_options</span><span class="p">,</span>
+    <span class="n">output_data</span><span class="p">,</span><span class="n">location_samples</span><span class="p">,</span><span class="n">location_sample_multipliers</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">multiple_events</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_diagnostic_output</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Where the <code class="docutils literal"><span class="pre">event_data</span></code> is the dictionary of event data, <code class="docutils literal"><span class="pre">self.inversion_options</span></code> are the inversion options set using the <code class="docutils literal"><span class="pre">-i</span></code> command line argument (see <a class="reference internal" href="cli.html"><span class="doc">mtfit command line options</span></a>), the location_sample parameters are the <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a></dt>
+<dd>samples described above, and the <code class="docutils literal"><span class="pre">multiple_events</span></code> and <code class="docutils literal"><span class="pre">_diagnostic_output</span></code> are corresponding boolean flags.</dd>
+</dl>
+<p>The format is set using the <code class="docutils literal"><span class="pre">--resultsformat</span></code> command line argument (see <a class="reference internal" href="cli.html"><span class="doc">mtfit command line options</span></a>) or the <code class="docutils literal"><span class="pre">results_format</span></code>  function argument when initialising the  <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object.</p>
+<p>The resulting <code class="docutils literal"><span class="pre">output_data</span></code> is normally expected to be either a dictionary to be passed to the output_format function to write to disk, or a pair of dictionaries (<code class="docutils literal"><span class="pre">list</span></code>). However it is passed straight through to the output file format function so it is possible to have a custom <code class="docutils literal"><span class="pre">output_data</span></code> object that is then dealt with in the output file formats function (see <a class="reference internal" href="#entry-point-9"><span class="std std-ref">mtfit.output_formats</span></a>).
+When a new parser is installed, the format (<code class="docutils literal"><span class="pre">my_format</span></code>) will be added to the possible result formats on the command line (<code class="docutils literal"><span class="pre">--resultsformat</span></code> option in <a class="reference internal" href="cli.html"><span class="doc">mtfit command line options</span></a>).</p>
+</div>
+<div class="section" id="mtfit-output-formats">
+<span id="entry-point-9"></span><h2>14.10. mtfit.output_formats<a class="headerlink" href="#mtfit-output-formats" title="Permalink to this headline">¶</a></h2>
+<p>mtfit has an entry point for the function that outputs the results to a specific file format.</p>
+<p>The function outputs the results from the <a class="reference internal" href="#entry-point-8"><span class="std std-ref">output_data_formats function</span></a> and returns a string to be printed to the terminal and the output filename (it should change the extension as required) e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">out_string</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="n">output_formatter</span><span class="p">(</span><span class="n">out_data</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">JobPool</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">JobPool</span></code> is a <code class="xref py py-class docutils literal"><span class="pre">mtfit.inversion.JobPool</span></code>, which handles job tasking if the inversion is being run in parallel. It can be passed a task (callable object) to write to disk in parallel.</p>
+<p>The format is set using the <code class="docutils literal"><span class="pre">--format</span></code> command line argument (see <a class="reference internal" href="cli.html"><span class="doc">mtfit command line options</span></a>) or the <code class="docutils literal"><span class="pre">format</span></code>  function argument when initialising the  <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object.</p>
+<p>A new format can be installed using  <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.output_formats</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.output_formats&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_format = mymodule.all_parsers:my_output_format_function&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The parser is called using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">output_string</span><span class="p">,</span><span class="n">fname</span><span class="o">=</span><span class="n">my_output_format_function</span><span class="p">(</span><span class="n">output_data</span><span class="p">,</span>
+        <span class="n">fname</span><span class="p">,</span><span class="n">pool</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where the <code class="docutils literal"><span class="pre">fname</span></code> is the output filename and <code class="docutils literal"><span class="pre">output_data</span></code> is the output data from the output data parser (see :ref:entry_point-8`). <code class="docutils literal"><span class="pre">pool</span></code> is the <code class="xref py py-class docutils literal"><span class="pre">mtfit.inversion.JobPool</span></code>.</p>
+<p>When a new parser is installed, the format (<code class="docutils literal"><span class="pre">my_format</span></code>) will be added to the possible output formats on the command line (<code class="docutils literal"><span class="pre">--format</span></code> option in <a class="reference internal" href="cli.html"><span class="doc">mtfit command line options</span></a>).</p>
+</div>
+<div class="section" id="mtfit-process-data-types">
+<span id="entry-point10"></span><h2>14.11. mtfit.process_data_types<a class="headerlink" href="#mtfit-process-data-types" title="Permalink to this headline">¶</a></h2>
+<p>A function to process the data from the input data to the correct format for an <a class="reference internal" href="#entry-point11"><span class="std std-ref">mtfit.data_types</span></a> extension. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.process_data_types</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.process_data_types&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_data_type = mymodule.all_parsers:my_data_type_preparation&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The function is called using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">extension_data_dict</span><span class="o">=</span><span class="n">extension_function</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where event is the data dictionary (keys correspond to different data types and the settings of the inversion_options parameter).
+The function returns a dict, with the station coefficients having keys <code class="docutils literal"><span class="pre">a_***</span></code>  or <code class="docutils literal"><span class="pre">aX_***</span></code> where <code class="docutils literal"><span class="pre">X</span></code> is a single identifying digit. These station coefficients are a 3rd rank numpy array, with the middle index corresponding to the location samples.</p>
+</div>
+<div class="section" id="mtfit-data-types">
+<span id="entry-point11"></span><h2>14.12. mtfit.data_types<a class="headerlink" href="#mtfit-data-types" title="Permalink to this headline">¶</a></h2>
+<p>A function to evaluate the forward model likelihood for a new data-type. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.data_types</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.data_types&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_data_type = mymodule.all_parsers:my_data_type_likelihood&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The inputs are prepared using an <a class="reference internal" href="#entry-point10"><span class="std std-ref">mtfit.process_data_types</span></a> extension.</p>
+<p>The function is called using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ln_pdf</span><span class="o">=</span><span class="n">extension_function</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">,</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">ext_data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">self.ext_data[key]</span></code> is the data prepared by the <a class="reference internal" href="#entry-point10"><span class="std std-ref">mtfit.process_data_types</span></a> function for this extension. The <code class="docutils literal"><span class="pre">mt</span></code> variable is a numpy array of moment tensor six vectors in the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">m11</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+                  <span class="p">[</span><span class="n">m22</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+                  <span class="p">[</span><span class="n">m33</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+                  <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m12</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+                  <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m13</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+                  <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m23</span><span class="p">,</span><span class="o">...</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>The station coefficients for the extension should be named as <code class="docutils literal"><span class="pre">a_***</span></code> or <code class="docutils literal"><span class="pre">aX_***</span></code> where <code class="docutils literal"><span class="pre">X</span></code> is a single identifying digit, and be a 3rd rank numpy array, with the middle index corresponding to the location samples.
+The function returns a <code class="xref py py-class docutils literal"><span class="pre">mtfit.probability.LnPDF</span></code> for the moment tensors provided. If the function does not exist, an error is raised, and the result ignored.</p>
+<p>The function should handle any c/cython calling internally.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is assumed that the data used is independent, but this must be checked by the user.</p>
+</div>
+<p>Relative inversions can also be handled, but the extension name requires <code class="docutils literal"><span class="pre">relative</span></code> in it.</p>
+<p>Relative functions are called using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ln_pdf</span><span class="p">,</span><span class="n">scale</span><span class="p">,</span><span class="n">scale_uncertainty</span><span class="o">=</span><span class="n">extension_function</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">,</span><span class="n">ext_data_1</span><span class="p">,</span><span class="n">ext_data_2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">ext_data_*</span></code> is the extension data for each event as a dictionary. This dictionary, generated using the <a class="reference internal" href="#entry-point10"><span class="std std-ref">mtfit.process_data_types</span></a> function for this extension, should also contain a list of the receivers with observations, ordered in the same order as the numpy array of the data, as this is used for station indexing.</p>
+<p>The <code class="docutils literal"><span class="pre">scale</span></code> and <code class="docutils literal"><span class="pre">scale_uncertainty</span></code> return variables correspond to estimates of the relative seismic moment between the two events, if it is generated by the extension function (if this is not estimated, <code class="docutils literal"><span class="pre">1.</span></code> and <code class="docutils literal"><span class="pre">0.</span></code> should be returned)</p>
+</div>
+<div class="section" id="mtfit-parallel-algorithms">
+<span id="entry-point12"></span><h2>14.13. mtfit.parallel_algorithms<a class="headerlink" href="#mtfit-parallel-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides an entry point for customising the search algorithm. This can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.parallel_algorithms</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.parallel_algorithms&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_new_algorithm = mymodule:my_new_algorithm_class&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The algorithm should inherit from <code class="xref py py-class docutils literal"><span class="pre">mtfit.algorithms.monte_carlo_random._MonteCarloRandomSample</span></code>, or have the  functions <code class="xref py py-func docutils literal"><span class="pre">initialise()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">iterate()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">__output__()</span></code> and attributes <code class="xref py py-attr docutils literal"><span class="pre">iteration</span></code>, <code class="xref py py-attr docutils literal"><span class="pre">start_time</span></code>, and <code class="xref py py-attr docutils literal"><span class="pre">pdf_sample</span></code> as a <code class="xref py py-class docutils literal"><span class="pre">mtfit.sampling.Sample</span></code> or <code class="xref py py-class docutils literal"><span class="pre">mtfit.sampling.FileSample</span></code> object.</p>
+<p>The <code class="docutils literal"><span class="pre">mtfit.parallel_algorithms</span></code> entry point is for algorithms to replace the standard Monte Carlo random sampling algorithm, which can be called and run in parallel to generate new samples - see <code class="xref py py-func docutils literal"><span class="pre">mtfit.inversion._random_sampling_forward()</span></code>.</p>
+<p>The algorithm is initialised as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">algorithm</span><span class="o">=</span><span class="n">extension_algorithm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">kwargs</span></code> are the input arguments for the inversion object, and a few additional parameters such as the number of samples (<code class="docutils literal"><span class="pre">number_samples</span></code>), which is the number of samples per iteration, accounting for memory. Additional <code class="docutils literal"><span class="pre">kwargs</span></code> can be added using the <a class="reference internal" href="#entry-point-0"><span class="std std-ref">mtfit.cmd_opts</span></a> entry point.</p>
+<p>The algorithm will be initialised, and expected to return the moment tensors to check in the forward model, and <code class="docutils literal"><span class="pre">end=True</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mts</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">initialise</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">end</span></code> is a boolean flag to determine whether the end of the search has been reached, and mts is the numpy array of moment tensors in the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">m11</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">m22</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">m33</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m12</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m13</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m23</span><span class="p">,</span><span class="o">...</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>After initialisation, the results are returned from the <code class="xref py py-class docutils literal"><span class="pre">mtfit.inversion.ForwardTask</span></code> object as a dictionary which should be parsed using the <code class="xref py py-func docutils literal"><span class="pre">iterate()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mts</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">iterate</span><span class="p">({</span><span class="s1">&#39;moment_tensors&#39;</span><span class="p">:</span><span class="n">mts</span><span class="p">,</span><span class="s1">&#39;ln_pdf&#39;</span><span class="p">:</span><span class="n">ln_p_total</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="n">N</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>The forward models can be run in parallel, either using <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a> or using MPI to pass the <code class="docutils literal"><span class="pre">end</span></code> flag. Consequently, these algorithms have no ordering, so can not depend on previous samples - to add an algorithm that is, it is necessary to use the <a class="reference internal" href="#entry-point13"><span class="std std-ref">mtfit.directed_algorithms</span></a> entry point.</p>
+</div>
+<div class="section" id="mtfit-directed-algorithms">
+<span id="entry-point13"></span><h2>14.14. mtfit.directed_algorithms<a class="headerlink" href="#mtfit-directed-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides an entry point for customising the search algorithm. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.directed_algorithms</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.directed_algorithms&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_new_algorithm = mymodule:my_new_algorithm_class&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The algorithm should inherit from <code class="xref py py-class docutils literal"><span class="pre">mtfit.algorithms.__base__._BaseAlgorithm</span></code>, or have the functions <code class="xref py py-func docutils literal"><span class="pre">initialise()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">iterate()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">__output__()</span></code> and attribute <code class="xref py py-attr docutils literal"><span class="pre">pdf_sample</span></code> as a <code class="xref py py-class docutils literal"><span class="pre">mtfit.sampling.Sample</span></code> or <code class="xref py py-class docutils literal"><span class="pre">mtfit.sampling.FileSample</span></code> object.</p>
+<p>The <code class="docutils literal"><span class="pre">mtfit.directed_algorithms</span></code> entry point is for algorithms to replace the Markov chain Monte Carlo sampling algorithms - see <code class="xref py py-func docutils literal"><span class="pre">mtfit.inversion._mcmc_sampling_forward()</span></code>, using an <code class="xref py py-class docutils literal"><span class="pre">mtfit.inversion.MCMCForwardTask</span></code> object</p>
+<p>The algorithm is initialised as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">algorithm</span><span class="o">=</span><span class="n">extension_algorithm</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">kwargs</span></code> are the input arguments for the inversion object, and a few additional parameters such as the number of samples (<code class="docutils literal"><span class="pre">number_samples</span></code>), which is the number of samples per iteration, accounting for memory. Additional <code class="docutils literal"><span class="pre">kwargs</span></code> can be added using the <a class="reference internal" href="#entry-point-0"><span class="std std-ref">mtfit.cmd_opts</span></a> entry point.</p>
+<p>The algorithm will be initialised, and expected to return the moment tensors to check in the forward model, and <code class="docutils literal"><span class="pre">end=True</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mts</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">initialise</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">end</span></code> is a boolean flag to determine whether the end of the search has been reached, and <code class="docutils literal"><span class="pre">mts</span></code> is the numpy array of moment tensors in the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">m11</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">m22</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">m33</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m12</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m13</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m23</span><span class="p">,</span><span class="o">...</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>After initialisation, the results are returned from the <code class="xref py py-class docutils literal"><span class="pre">mtfit.inversion.ForwardTask</span></code> object as a dictionary which should be parsed using the iterate function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mts</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">iterate</span><span class="p">({</span><span class="s1">&#39;moment_tensors&#39;</span><span class="p">:</span><span class="n">mts</span><span class="p">,</span><span class="s1">&#39;ln_pdf&#39;</span><span class="p">:</span><span class="n">ln_p_total</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="n">N</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>The forward models are run in order, so can depend on previous samples - to add an algorithm that does not need this, use the <a class="reference internal" href="#entry-point12"><span class="std std-ref">mtfit.parallel_algorithms</span></a> entry point.</p>
+</div>
+<div class="section" id="mtfit-sampling">
+<span id="entry-point14"></span><h2>14.15. mtfit.sampling<a class="headerlink" href="#mtfit-sampling" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides an entry point for customising the moment tensor sampling used by the search algorithm. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.sampling</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.sampling&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_extension_name = mymodule:my_source_sampling&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The function should return a numpy array or matrix of normalised moment tensor six vectors in the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">m11</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">m22</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">m33</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m12</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m13</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m23</span><span class="p">,</span><span class="o">...</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>If an alternate sampling is desired for the McMC case (ie. a different model), it is necessary to extend the algorithm class using the <code class="docutils literal"><span class="pre">mtfit.directed_algorithms</span></code> entry point.</p>
+</div>
+<div class="section" id="mtfit-sampling-prior">
+<span id="entry-point15"></span><h2>14.16. mtfit.sampling_prior<a class="headerlink" href="#mtfit-sampling-prior" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides an entry point for customising the prior distribution of moment tensors used by the search algorithm. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.sampling_prior</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.sampling_prior&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_extension_name = mymodule:my_sampling_prior&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Different functions should be chosen for the Monte Carlo algorithms compared to the Markov chain Monte Carlo algorithms. In the Monte Carlo case, the prior is used to calculate the Bayesian evidence, and depends on the source type parameters.
+It must reflect the prior distribution on the source samples as a Monte Carlo type integration is used to calculate it, and should return a float from two input floats:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">prior</span><span class="o">=</span><span class="n">prior_func</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span><span class="n">delta</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the Markov chain Monte Carlo case, the function should return the prior of a sample, dependent on the selected model, again as a float. It is called as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">prior</span><span class="o">=</span><span class="n">uniform_prior</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">dc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">basic_cdc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_poisson</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">min_poisson</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where xi is a dictionary of the sample parameters e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">xi</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;gamma&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span><span class="s1">&#39;delta&#39;</span><span class="p">:</span><span class="mf">0.3</span><span class="p">,</span><span class="s1">&#39;kappa&#39;</span><span class="p">:</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;h&#39;</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span><span class="s1">&#39;sigma&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If an alternate sampling is desired for the Markov chain Monte Carlo case (ie. a different model), it is necessary to extend the algorithm class using the <code class="docutils literal"><span class="pre">mtfit.directed_algorithms</span></code> entry point.</p>
+</div>
+<div class="section" id="mtfit-sample-distribution">
+<span id="entry-point16"></span><h2>14.17. mtfit.sample_distribution<a class="headerlink" href="#mtfit-sample-distribution" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides an entry point for customising the source sampling used by the Monte Carlo search algorithm. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.sample_distribution</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.sample_distribution&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_extension_name = mymodule:my_random_model_func&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The model must generate a random sample according in the form of a numpy matrix or array:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">m11</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">m22</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">m33</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m12</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m13</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">m23</span><span class="p">,</span><span class="o">...</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>If an alternate sampling is desired for the Markov chain Monte Carlo case (ie. a different model), it is necessary to extend the algorithm class using the <code class="docutils literal"><span class="pre">mtfit.directed_algorithms</span></code> entry point.</p>
+</div>
+<div class="section" id="mtfit-plot">
+<span id="entry-point17"></span><h2>14.18. mtfit.plot<a class="headerlink" href="#mtfit-plot" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides an entry point for customising the plot type the for mtfit.plot.MTplot object. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.plot</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.plot&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;plottype = mymodule:my_plot_class&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The object should be a callable object which can accept the moment tensor 6-vector, matplotlib figure, matplotlib grid_spec and other arguments (see the <a class="reference internal" href="plot_classes.html#mtfit.plot.plot_classes._BasePlot" title="mtfit.plot.plot_classes._BasePlot"><code class="xref py py-class docutils literal"><span class="pre">mtfit.plot.plot_classes._BasePlot</span></code></a> class for an example), with the <code class="xref py py-func docutils literal"><span class="pre">__call__()</span></code> function corresponding to plotting the moment tensor.</p>
+<p>The plottype name in the setup.py script should be lower case with no spaces, hypens or underscores (these are removed in parsing the plottype).</p>
+</div>
+<div class="section" id="mtfit-plot-read">
+<span id="entry-point18"></span><h2>14.19. mtfit.plot_read<a class="headerlink" href="#mtfit-plot-read" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides an entry point for customising the input file parser for reading data for the mtfit.plot.MTplot object. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.plot_read</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.plot_read&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;.file_extension = mymodule:my_read_function&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The function should accept an input filename and return a tuple of dicts for event and station data respectively</p>
+</div>
+<div class="section" id="mtfit-documentation">
+<span id="entry-point19"></span><h2>14.20. mtfit.documentation<a class="headerlink" href="#mtfit-documentation" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides an entry point for customising the search algorithm. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.documentation</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.documentation&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_extension_name = mymodule:my_rst_docs&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The function should return a <span class="xref std std-ref">ReST</span> string that can be written out when building the documentation using <code class="xref py py-mod docutils literal"><span class="pre">sphinx</span></code>.</p>
+<p>The name should be the extension name with _ replacing spaces. This will be capitalised into the link in the documentation.</p>
+</div>
+<div class="section" id="mtfit-source-code">
+<span id="entry-point20"></span><h2>14.21. mtfit.source_code<a class="headerlink" href="#mtfit-source-code" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides an entry point for customising the search algorithm. This can be installed can be installed using <code class="xref py py-mod docutils literal"><span class="pre">setuptools</span></code> by adding the <code class="docutils literal"><span class="pre">mtfit.source_code</span></code> entry point to the extension <code class="docutils literal"><span class="pre">setup.py</span></code> script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span><span class="o">...</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;mtfit.source_code&#39;</span><span class="p">:</span>
+                <span class="p">[</span><span class="s1">&#39;my_extension_name = mymodule:my_rst_source_code_docs&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+      <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The function should return a <code class="docutils literal"><span class="pre">ReST</span></code> string that can be written out when building the documentation using <code class="xref py py-mod docutils literal"><span class="pre">sphinx</span></code>.</p>
+<p>The name should be the extension name with _ replacing spaces. This will be capitalised into the link in the documentation.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="references.html" class="btn btn-neutral float-right" title="15. References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="inversion.html" class="btn btn-neutral" title="13. mtfit.Inversion: Inversion object" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

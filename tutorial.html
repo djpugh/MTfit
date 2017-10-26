@@ -1,0 +1,808 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Tutorial: Using mtfit &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="next" title="4. Tutorial: Using mtfit with Real Data" href="real-tutorial.html"/>
+        <link rel="prev" title="2. Running mtfit" href="run.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-data-dictionary">3.1. Creating a Data Dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#p-polarity-inversion">3.2. P Polarity Inversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#p-sh-amplitude-ratio-inversion">3.3. P/SH Amplitude Ratio Inversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#double-couple-inversion">3.4. Double-Couple Inversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#time-limited-inversion">3.5. Time Limited Inversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parallel-mpi-inversion">3.6. Parallel MPI Inversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#submitting-to-a-cluster">3.7. Submitting to a Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inversion-from-a-csv-file">3.8. Inversion from a CSV File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#location-uncertainty">3.9. Location Uncertainty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-from-the-command-line">3.10. Running from the Command Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scatangle-file-binning">3.11. Scatangle file binning</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>3. Tutorial: Using mtfit</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial-using-mtfit">
+<h1>3. Tutorial: Using mtfit<a class="headerlink" href="#tutorial-using-mtfit" title="Permalink to this headline">¶</a></h1>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> is a bayesian approach to moment tensor inversion, allowing rigorous inclusion of uncertainties. This section shows a simple series of examples for running <code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code>.</p>
+<p>The example data is included in <a class="reference download internal" href="_downloads/example_data.py" download=""><code class="xref download docutils literal"><span class="pre">examples/example_data.py</span></code></a> and are purely data that are used as an example, rather than a necessarily good solution.</p>
+<p>These examples show some of the common usage of <code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code>. However, the reasons behind the choice of approach have not always been well explained. The next page (<a class="reference internal" href="real-tutorial.html"><span class="doc">Real Data Examples</span></a>) includes real and synthetic data used in the <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. 2016a</span></a> paper as an example of the results that can be obtained using <code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code>, along with some explanation of the parameter choices made.</p>
+<p>The tutorials described here are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#creating-data-dictionary-label"><span class="std std-ref">Creating a Data Dictionary</span></a></li>
+<li><a class="reference internal" href="#p-polarity-label"><span class="std std-ref">P Polarity Inversion</span></a></li>
+<li><a class="reference internal" href="#p-sh-label"><span class="std std-ref">P/SH Amplitude Ratio Inversion</span></a></li>
+<li><a class="reference internal" href="#dc-inv-label"><span class="std std-ref">Double-Couple Inversion</span></a></li>
+<li><a class="reference internal" href="#time-inversion-label"><span class="std std-ref">Time Limited Inversion</span></a></li>
+<li><a class="reference internal" href="#mpi-label"><span class="std std-ref">Parallel MPI Inversion</span></a></li>
+<li><a class="reference internal" href="#cluster-label"><span class="std std-ref">Submitting to a Cluster</span></a></li>
+<li><a class="reference internal" href="#csv-example-label"><span class="std std-ref">Inversion from a CSV File</span></a></li>
+<li><a class="reference internal" href="#location-uncertainty-tutorial-label"><span class="std std-ref">Location Uncertainty</span></a></li>
+<li><a class="reference internal" href="#cli-tutorial-label"><span class="std std-ref">Running from the Command Line</span></a></li>
+<li><a class="reference internal" href="#scatangle-tutorial-label"><span class="std std-ref">Scatangle file binning</span></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="creating-a-data-dictionary">
+<span id="creating-data-dictionary-label"></span><h2>3.1. Creating a Data Dictionary<a class="headerlink" href="#creating-a-data-dictionary" title="Permalink to this headline">¶</a></h2>
+<p>The input data dictionary (see <a class="reference internal" href="run.html#input-data-label"><span class="std std-ref">Input Data</span></a>) can either be pickled or not pickled. The structure is simple:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">:{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">]]),</span>
+<span class="go">                     &#39;Error&#39;:np.matrix([[0.01],[0.02],[0.4],[0.1]]),</span>
+<span class="go">                     &#39;Stations&#39;:{&#39;Name&#39;:[&#39;Station1&#39;,&#39;Station2&#39;,&#39;Station3&#39;,</span>
+<span class="go">                                        &#39;Station4&#39;],</span>
+<span class="go">                                 &#39;Azimuth&#39;:np.matrix([[248.0],[122.3],</span>
+<span class="go">                                                        [182.3],[35.2]]),</span>
+<span class="go">                                 &#39;TakeOffAngle&#39;:np.matrix([[24.5],[22.8],</span>
+<span class="go">                                                            [74.5],[54.3]]),</span>
+<span class="go">                                }</span>
+<span class="go">                     },</span>
+<span class="go">          &#39;UID&#39;:&#39;Event1&#39;</span>
+<span class="go">          }</span>
+</pre></div>
+</div>
+<p>This has created a data dictionary for <code class="docutils literal"><span class="pre">Event1</span></code> with P Polarity observations at 4 stations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">data</span>
+<span class="go">{&#39;PPolarity&#39;: {&#39;Stations&#39;: {&#39;TakeOffAngle&#39;: matrix([[ 24.5],</span>
+<span class="go">        [ 22.8],</span>
+<span class="go">        [ 74.5],</span>
+<span class="go">        [ 54.3]]),</span>
+<span class="go">    &#39;Name&#39;: [&#39;Station1&#39;, &#39;Station2&#39;, &#39;Station3&#39;, &#39;Station4&#39;],</span>
+<span class="go">    &#39;Azimuth&#39;: matrix([[ 248. ],</span>
+<span class="go">        [ 122.3],</span>
+<span class="go">        [ 182.3],</span>
+<span class="go">        [  35.2]])},</span>
+<span class="go">    &#39;Measured&#39;: matrix([[-1],</span>
+<span class="go">        [-1],</span>
+<span class="go">        [ 1],</span>
+<span class="go">        [ 1]]),</span>
+<span class="go">    &#39;Error&#39;: matrix([[ 0.01],</span>
+<span class="go">        [ 0.02],</span>
+<span class="go">        [ 0.4 ],</span>
+<span class="go">        [ 0.1 ]])},</span>
+<span class="go">&#39;UID&#39;: &#39;Event1&#39;}</span>
+</pre></div>
+</div>
+<p>If there were more observations such as P/SH Amplitude Ratios, the data dictionary above would need to be updated:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;P/SHAmplitudeRatio&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1242</span><span class="p">,</span><span class="mi">1113</span><span class="p">],[</span><span class="mi">742</span><span class="p">,</span><span class="mi">2341</span><span class="p">],</span>
+<span class="go">                                    [421,112],[120,87]]),</span>
+<span class="go">                     &#39;Error&#39;:np.matrix([[102,743],[66,45],[342,98],[14,11]]),</span>
+<span class="go">                     &#39;Stations&#39;:{&#39;Name&#39;:[&#39;Station5&#39;,&#39;Station6&#39;,</span>
+<span class="go">                                    &#39;Station7&#39;,&#39;Station8&#39;],</span>
+<span class="go">                                 &#39;Azimuth&#39;:np.matrix([[163.0],[345.3],</span>
+<span class="go">                                    [25.3],[99.2]]),</span>
+<span class="go">                                 &#39;TakeOffAngle&#39;:np.matrix([[51.5],[76.8],</span>
+<span class="go">                                    [22.5],[11.3]]),</span>
+<span class="go">                                }</span>
+<span class="go">                     }</span>
+</pre></div>
+</div>
+<p>This has added P/SH Amplitude Ratio observations for 4 more stations to the data dictionary:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">data</span>
+<span class="go">{&#39;PPolarity&#39;: {&#39;Stations&#39;: {&#39;TakeOffAngle&#39;: matrix([[ 24.5],</span>
+<span class="go">        [ 22.8],</span>
+<span class="go">        [ 74.5],</span>
+<span class="go">        [ 54.3]]),</span>
+<span class="go">    &#39;Name&#39;: [&#39;Station1&#39;, &#39;Station2&#39;, &#39;Station3&#39;, &#39;Station4&#39;],</span>
+<span class="go">    &#39;Azimuth&#39;: matrix([[ 248. ],</span>
+<span class="go">        [ 122.3],</span>
+<span class="go">        [ 182.3],</span>
+<span class="go">        [  35.2]])},</span>
+<span class="go">    &#39;Measured&#39;: matrix([[-1],</span>
+<span class="go">        [-1],</span>
+<span class="go">        [ 1],</span>
+<span class="go">        [ 1]]),</span>
+<span class="go">    &#39;Error&#39;: matrix([[ 0.01],</span>
+<span class="go">        [ 0.02],</span>
+<span class="go">        [ 0.4 ],</span>
+<span class="go">        [ 0.1 ]])},</span>
+<span class="go">&#39;P/SHAmplitudeRatio&#39;: {&#39;Stations&#39;: {&#39;TakeOffAngle&#39;: matrix([[ 51.5],</span>
+<span class="go">        [ 76.8],</span>
+<span class="go">        [ 22.5],</span>
+<span class="go">        [ 11.3]]),</span>
+<span class="go">    &#39;Name&#39;: [&#39;Station5&#39;, &#39;Station6&#39;, &#39;Station7&#39;, &#39;Station8&#39;],</span>
+<span class="go">    &#39;Azimuth&#39;: matrix([[ 163. ],</span>
+<span class="go">        [ 345.3],</span>
+<span class="go">        [  25.3],</span>
+<span class="go">        [  99.2]])},</span>
+<span class="go">    &#39;Measured&#39;: matrix([[1242, 1113],</span>
+<span class="go">        [ 742, 2341],</span>
+<span class="go">        [ 421,  112],</span>
+<span class="go">        [ 120,   87]]),</span>
+<span class="go">    &#39;Error&#39;: matrix([[102, 743],</span>
+<span class="go">        [ 66,  45],</span>
+<span class="go">        [342,  98],</span>
+<span class="go">        [ 14,  11]])},</span>
+<span class="go">&#39;UID&#39;: &#39;Event1&#39;}</span>
+</pre></div>
+</div>
+<p>The amplitude ratio <code class="docutils literal"><span class="pre">Measured</span></code> and <code class="docutils literal"><span class="pre">Error</span></code> numpy matrices have the observations of the ratio numerator and denominator at each station, i.e. in this case, <code class="docutils literal"><span class="pre">Station5</span></code> has P Amplitude is <code class="docutils literal"><span class="pre">1242</span></code> and SH Amplitude is <code class="docutils literal"><span class="pre">1113</span></code>, along with P error <code class="docutils literal"><span class="pre">102</span></code> and SH error <code class="docutils literal"><span class="pre">743</span></code>. The split into numerator and denominator is required because the appropriate <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> is the ratio PDF (see <a class="reference internal" href="probability.html#ratio-pdf-label"><span class="std std-ref">Amplitude Ratio PDF</span></a>).</p>
+<p>This dictionary can either be provided as a construction argument for the <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inversion_object</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Or read in from the command line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cPickle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Event1.inv&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This has created a pickled dictionary called <code class="docutils literal"><span class="pre">Event1.inv</span></code> in the current directory. To perform the inversion, open a shell in the same directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit -d Event1.inv
+</pre></div>
+</div>
+<p>This will create an output file <code class="docutils literal"><span class="pre">Event1MT.mat</span></code> which contains the MATLAB output data (see <a class="reference internal" href="run.html#matlab-output-label"><span class="std std-ref">Output</span></a>).</p>
+<p>The creation of the dictionary can easily be automated from different data types by writing a simple parser for the format.</p>
+</div>
+<div class="section" id="p-polarity-inversion">
+<span id="p-polarity-label"></span><h2>3.2. P Polarity Inversion<a class="headerlink" href="#p-polarity-inversion" title="Permalink to this headline">¶</a></h2>
+<p>Using the above tutorial, it is simple to carry out a P polarity inversion, <a class="reference download internal" href="_downloads/p_polarity.py" download=""><code class="xref download docutils literal"><span class="pre">examples/p_polarity.py</span></code></a> shows the example script and data and can be run in the examples directory.</p>
+<p>The script can be run from the command line as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python p_polarity.py
+</pre></div>
+</div>
+<p>The parameters used are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>algorithm = 'iterate' - uses an iterative random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>).</li>
+<li>parallel = True - tries to run in parallel using <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a>.</li>
+<li>phy_mem = 0.5 - uses a soft limit of 500Mb of RAM for estimating the sample sizes (This is only a soft limit, so no errors are thrown if the memory usage increases above this).</li>
+<li>dc = False - runs the full moment tensor inversion.</li>
+<li>max_samples = 1000000 - runs the inversion for 1,000,000 samples.</li>
+</ul>
+</div></blockquote>
+<p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<blockquote>
+<div></div></blockquote>
+<p>The output file is <code class="docutils literal"><span class="pre">P_Polarity_Example_OutputMT.mat</span></code>.</p>
+<p>The source PDF can be plotted:</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="_images/p_polarity_hudson_result.png"><img alt="Hudson plot of the example results" src="_images/p_polarity_hudson_result.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text"><em>Hudson plot of the example results from</em> <a class="reference download internal" href="_downloads/p_polarity.py" download=""><code class="xref download docutils literal"><span class="pre">examples/p_polarity.py</span></code></a> <em>(Plotted using MTplot MATLAB code)</em></span></p>
+</div>
+<p>Increasing the number of samples can improve the fit at the expense of time taken to run the inversion. Re-running the inversion with more samples (10,000,000) takes longer, but produces a better density of sampling (output file is <code class="docutils literal"><span class="pre">P_Polarity_Example_Dense_OutputMT.mat</span></code>).</p>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="_images/p_polarity_hudson_result_dense.png"><img alt="Dense Hudson plot of the example results" src="_images/p_polarity_hudson_result_dense.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text"><em>Hudson plot of the example results from</em> <a class="reference download internal" href="_downloads/p_polarity.py" download=""><code class="xref download docutils literal"><span class="pre">examples/p_polarity.py</span></code></a> <em>(Plotted using MTplot MATLAB code)</em></span></p>
+</div>
+</div>
+<div class="section" id="p-sh-amplitude-ratio-inversion">
+<span id="p-sh-label"></span><h2>3.3. P/SH Amplitude Ratio Inversion<a class="headerlink" href="#p-sh-amplitude-ratio-inversion" title="Permalink to this headline">¶</a></h2>
+<p>Example script for running P/SH amplitude ratio inversion is <a class="reference download internal" href="_downloads/p_sh_amplitude_ratio.py" download=""><code class="xref download docutils literal"><span class="pre">examples/p_sh_amplitude_ratio.py</span></code></a>
+To run the script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python p_sh_amplitude_ratio.py
+</pre></div>
+</div>
+<p>The parameters used are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>algorithm = 'iterate' - uses an iterative random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>).</li>
+<li>parallel = True - tries to run in parallel using <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a>.</li>
+<li>phy_mem = 1 - uses a soft limit of 1Gb of RAM for estimating the sample sizes (This is only a soft limit, so no errors are thrown if the memory usage increases above this).</li>
+<li>dc = False - runs the full moment tensor inversion.</li>
+<li>max_samples = 1000000 - runs the inversion for 1,000,000 samples.</li>
+</ul>
+</div></blockquote>
+<p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<blockquote>
+<div></div></blockquote>
+<p>The output file is <code class="docutils literal"><span class="pre">P_SH_Amplitude_Ratio_Example_OutputMT.mat</span></code>.</p>
+<p>It is also possible to run the inversion for as many samples as possible in a given time (output file is <code class="docutils literal"><span class="pre">P_Polarity_Example_Time_OutputMT.mat</span></code>) by setting the parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>algorithm = 'time' - uses an iterative random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>) until a specified time has elapsed.</li>
+<li>max_time = 300 - runs the inversion for 300 seconds.</li>
+</ul>
+</div></blockquote>
+<p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="double-couple-inversion">
+<span id="dc-inv-label"></span><h2>3.4. Double-Couple Inversion<a class="headerlink" href="#double-couple-inversion" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it may be better to constrain the solution to only the double-couple space, this is easy to do from the command line using the <code class="docutils literal"><span class="pre">-c</span></code> flag (see <a class="reference internal" href="cli.html"><span class="doc">mtfit command line options</span></a>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit -c ...
+</pre></div>
+</div>
+<p>An example script for running a mixed inversion constrained to double-couple space is <a class="reference download internal" href="_downloads/double_couple.py" download=""><code class="xref download docutils literal"><span class="pre">examples/double_couple.py</span></code></a>.
+To run the script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python double_couple.py
+</pre></div>
+</div>
+<p>The inversion is run from a data file, which is the pickled (<a class="reference external" href="https://docs.python.org/2/library/pickle.html#module-pickle" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">pickle</span></code></a>/<a class="reference external" href="https://docs.python.org/2/library/pickle.html#module-cPickle" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">cPickle</span></code></a>) data dictionary:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cPickle</span>
+<span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Double_Couple_Example.inv&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The inversion parameters used are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>algorithm = 'iterate' - uses an iterative random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>)</li>
+<li>parallel = True - tries to run in parallel using <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a></li>
+<li>phy_mem = 1 - uses a soft limit of 1Gb of RAM for estimating the sample sizes (This is only a soft limit, so no errors are thrown if the memory usage increases above this)</li>
+<li>dc = True - runs the inversion in the double-couple space.</li>
+<li>max_samples = 100000 - runs the inversion for 100,000 samples.</li>
+</ul>
+</div></blockquote>
+<p>Since the double-couple space has fewer dimensions than the moment tensor space, fewer samples are required for good coverage of the space, so only 100,000 samples are used.</p>
+<p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="time-limited-inversion">
+<span id="time-inversion-label"></span><h2>3.5. Time Limited Inversion<a class="headerlink" href="#time-limited-inversion" title="Permalink to this headline">¶</a></h2>
+<p>A different algorithm for the inverson can be set using the algorithm option. In this case the time constrained algorithm is used (for other options see <a class="reference internal" href="algorithms.html"><span class="doc">mtfit.Algorithms: Search Algorithms</span></a>). An example script for running a time constrained inversion is <a class="reference download internal" href="_downloads/time_inversion.py" download=""><code class="xref download docutils literal"><span class="pre">examples/time_inversion.py</span></code></a>.
+To run the script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python time_inversion.py
+</pre></div>
+</div>
+<p>The time option for the inversion algorithm sets a maximum time (in seconds) to run the inversion for rather than a maximum number of samples. To select the algorithm from the command line use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$mtfit --algorithm=time ...
+</pre></div>
+</div>
+<p>For the other options see <a class="reference internal" href="cli.html"><span class="doc">Command Line Options</span></a>. The inversion parameters used in <a class="reference download internal" href="_downloads/time_inversion.py" download=""><code class="xref download docutils literal"><span class="pre">examples/time_inversion.py</span></code></a> are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>algorithm = 'time' - uses an time limited random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>)</li>
+<li>parallel = False - runs in a single thread.</li>
+<li>phy_mem = 1 - uses a soft limit of 1Gb of RAM for estimating the sample sizes (This is only a soft limit, so no errors are thrown if the memory usage increases above this)</li>
+<li>dc = False - runs the inversion in the double-couple space.</li>
+<li>max_time = 120 - runs the inversion for 120 seconds.</li>
+<li>inversion_options = 'PPolarity,P/SHAmplitudeRatio' - Just uses PPolarity and P/SH Amplitude Ratios rather than all the data in the dictionary</li>
+</ul>
+</div></blockquote>
+<p>In this case the <code class="docutils literal"><span class="pre">inversion_options</span></code> keyword argument is used to set the data types used in the inversion. If this is not set the inversion will use all of the available data types in the dictionary that match possible data types (see <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> documentation), this is because the example data has other data types that are not desired or not independent:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">,</span><span class="s1">&#39;P/SHRMSAmplitudeRatio&#39;</span><span class="p">,</span><span class="s1">&#39;P/SVRMSAmplitudeRatio&#39;</span><span class="p">,</span><span class="s1">&#39;P/SHAmplitudeRatio&#39;</span><span class="p">,</span><span class="s1">&#39;UID]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">P/SHRMSAmplitudeRatio</span></code> and the <code class="docutils literal"><span class="pre">P/SHAmplitudeRatio</span></code> are not independent, and so cannot both be used in this inversion.</p>
+<p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<blockquote>
+<div></div></blockquote>
+<p>The output file is <code class="docutils literal"><span class="pre">Time_Inversion_Example_OutputMT.mat</span></code>.</p>
+<p>It is also possible to run the inversion for the double-couple constrained inversion (output file is <code class="docutils literal"><span class="pre">Time_Inversion_Example_OutputDC.mat</span></code>):</p>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="parallel-mpi-inversion">
+<span id="mpi-label"></span><h2>3.6. Parallel MPI Inversion<a class="headerlink" href="#parallel-mpi-inversion" title="Permalink to this headline">¶</a></h2>
+<p>Running the inversion using <a class="reference internal" href="glossary.html#term-mpi"><span class="xref std std-term">MPI</span></a> on a multi-node environment (such as a cluster) is done from the command line using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit -M ...
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not use the <code class="docutils literal"><span class="pre">--mpi-call</span></code> flag as this is a flag set automatically by the code</p>
+</div>
+<p>The script <a class="reference download internal" href="_downloads/mpi.py" download=""><code class="xref download docutils literal"><span class="pre">examples/mpi.py</span></code></a> is an example script for running using <a class="reference internal" href="glossary.html#term-mpi"><span class="xref std std-term">MPI</span></a> (It will test if <a class="reference external" href="http://mpi4py.scipy.org/">mpi4py</a>  is installed)</p>
+<p>The data file is pickled using <a class="reference external" href="https://docs.python.org/2/library/pickle.html#module-cPickle" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">cPickle</span></code></a>:</p>
+<blockquote>
+<div></div></blockquote>
+<p>And then <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#module-subprocess" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">subprocess</span></code></a> is used to call the inversion:</p>
+<blockquote>
+<div></div></blockquote>
+<p>This is equivalent to (see <a class="reference internal" href="cli.html"><span class="doc">command line options</span></a> for more information on the command line options):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit -M --data_file=MPI_Example.inv --algorithm=iterate --max_samples=100000
+</pre></div>
+</div>
+<p>The output file is <code class="docutils literal"><span class="pre">MPI_Inversion_Example_OutputMT.mat</span></code>.</p>
+<p>The main advantage of running using MPI is to allow for more samples to be tried in a given time by using more processors.</p>
+</div>
+<div class="section" id="submitting-to-a-cluster">
+<span id="cluster-label"></span><h2>3.7. Submitting to a Cluster<a class="headerlink" href="#submitting-to-a-cluster" title="Permalink to this headline">¶</a></h2>
+<p>Submitting an <code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> job to a cluster using <code class="docutils literal"><span class="pre">qsub</span></code> uses a simple module called <code class="docutils literal"><span class="pre">pyqsub</span></code> (from <a class="reference external" href="https://www.github.com/djpugh/pyqsub">https://www.github.com/djpugh/pyqsub</a>) which provides command line options for running <code class="docutils literal"><span class="pre">qsub</span></code>.</p>
+<p>To submit to the cluster from command line, on a computer with qsub available use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit -q ...
+</pre></div>
+</div>
+<p>There are other available options when submitting to the cluster:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit -q  --walltime=48:00:00 --nodes=4 --ppn=4 --pmem=2 --emailoptions=ae
+    --email=example@example.com --name=mtfitClusterTest --queue=auto ...
+</pre></div>
+</div>
+<p>This submits an mtfit job to the cluster using <code class="docutils literal"><span class="pre">qsub</span></code> (<code class="docutils literal"><span class="pre">-q</span></code>) with a <a class="reference internal" href="glossary.html#term-walltime"><span class="xref std std-term">walltime</span></a> of 48 hours (<code class="docutils literal"><span class="pre">--walltime</span></code>) using 4 nodes (<code class="docutils literal"><span class="pre">--nodes</span></code>) and 4 processors per node (<code class="docutils literal"><span class="pre">--ppn</span></code>) with a maximum amount of physical memory per process of 2Gb (<code class="docutils literal"><span class="pre">--pmem</span></code>). The job will send emails on abort and end (<code class="docutils literal"><span class="pre">--emailoptions</span></code>) to email <code class="docutils literal"><span class="pre">example&#64;example.com</span></code> (<code class="docutils literal"><span class="pre">--email</span></code>). It has a job name of <code class="docutils literal"><span class="pre">mtfitClusterTest</span></code> (<code class="docutils literal"><span class="pre">--name</span></code>) and is submitted to the auto queue (<code class="docutils literal"><span class="pre">--queue</span></code>).</p>
+<p>These options, combined with the other <a class="reference internal" href="cli.html"><span class="doc">command line options</span></a>, will be saved to a job script named <code class="docutils literal"><span class="pre">JobName.pJobID</span></code>. For the above case, if the JobID was <code class="docutils literal"><span class="pre">207642</span></code> a <code class="docutils literal"><span class="pre">PBS</span></code> script is saved called
+<code class="docutils literal"><span class="pre">mtfitClusterTest.p207642</span></code></p>
+</div>
+<div class="section" id="inversion-from-a-csv-file">
+<span id="csv-example-label"></span><h2>3.8. Inversion from a CSV File<a class="headerlink" href="#inversion-from-a-csv-file" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> can use a <a class="reference internal" href="glossary.html#term-csv"><span class="xref std std-term">CSV</span></a> file as input. An example CSV file can be made by running <a class="reference download internal" href="_downloads/make_csv_file.py" download=""><code class="xref download docutils literal"><span class="pre">examples/make_csv_file.py</span></code></a> in the examples folder:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python make_csv_file.py
+</pre></div>
+</div>
+<p>This makes a <a class="reference internal" href="glossary.html#term-csv"><span class="xref std std-term">CSV</span></a> file (called csv_example_file.csv):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">UID</span><span class="o">=</span><span class="n">Event1</span><span class="p">,,,,</span>
+<span class="n">PPolarity</span><span class="p">,,,,</span>
+<span class="n">Error</span><span class="p">,</span><span class="n">Name</span><span class="p">,</span><span class="n">TakeOffAngle</span><span class="p">,</span><span class="n">Measured</span><span class="p">,</span><span class="n">Azimuth</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0006</span><span class="p">,</span><span class="mf">112.8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">210.6</span>
+<span class="mf">0.3</span><span class="p">,</span><span class="n">S0573</span><span class="p">,</span><span class="mf">110.0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">306.7</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0563</span><span class="p">,</span><span class="mf">131.4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">23.1</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0016</span><span class="p">,</span><span class="mf">117.6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">167.8</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0567</span><span class="p">,</span><span class="mf">123.7</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">41.3</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0654</span><span class="p">,</span><span class="mf">110.0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">323.4</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0634</span><span class="p">,</span><span class="mf">119.7</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">342.5</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0533</span><span class="p">,</span><span class="mf">138.3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">354.1</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0249</span><span class="p">,</span><span class="mf">155.2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">153.5</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0571</span><span class="p">,</span><span class="mf">113.7</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">54.5</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0065</span><span class="p">,</span><span class="mf">125.6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">184.2</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0095</span><span class="p">,</span><span class="mf">127.4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">159.2</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0537</span><span class="p">,</span><span class="mf">134.9</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mf">25.6</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0372</span><span class="p">,</span><span class="mf">145.9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">288.2</span>
+<span class="mf">0.1</span><span class="p">,</span><span class="n">S0097</span><span class="p">,</span><span class="mf">124.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">150.0</span>
+<span class="n">P</span><span class="o">/</span><span class="n">SHAmplitudeRatio</span><span class="p">,,,,</span>
+<span class="n">TakeOffAngle</span><span class="p">,</span><span class="n">Measured</span><span class="p">,</span><span class="n">Error</span><span class="p">,</span><span class="n">Name</span><span class="p">,</span><span class="n">Azimuth</span>
+<span class="mf">112.8</span><span class="p">,</span><span class="mf">1.91468406e-08</span>   <span class="mf">3.22758296e-08</span><span class="p">,</span><span class="mf">9.58863666e-10</span>   <span class="mf">7.70965062e-09</span><span class="p">,</span><span class="n">S0006</span><span class="p">,</span><span class="mf">210.6</span>
+<span class="mf">110.0</span><span class="p">,</span><span class="mf">4.88113677e-09</span>   <span class="mf">1.96675583e-08</span><span class="p">,</span><span class="mf">2.45607268e-10</span>   <span class="mf">3.45469389e-09</span><span class="p">,</span><span class="n">S0573</span><span class="p">,</span><span class="mf">306.7</span>
+<span class="mf">131.4</span><span class="p">,</span><span class="mf">1.45833761e-07</span>   <span class="mf">1.79089155e-09</span><span class="p">,</span><span class="mf">7.28757867e-09</span>   <span class="mf">3.45820500e-09</span><span class="p">,</span><span class="n">S0563</span><span class="p">,</span><span class="mf">23.1</span>
+<span class="mf">117.6</span><span class="p">,</span><span class="mf">9.31790661e-08</span>   <span class="mf">2.93385249e-08</span><span class="p">,</span><span class="mf">4.65480572e-09</span>   <span class="mf">8.95408759e-09</span><span class="p">,</span><span class="n">S0016</span><span class="p">,</span><span class="mf">167.8</span>
+<span class="mf">123.7</span><span class="p">,</span><span class="mf">1.20612039e-07</span>   <span class="mf">3.84818185e-08</span><span class="p">,</span><span class="mf">6.02547046e-09</span>   <span class="mf">9.23059636e-09</span><span class="p">,</span><span class="n">S0567</span><span class="p">,</span><span class="mf">41.3</span>
+<span class="mf">110.0</span><span class="p">,</span><span class="mf">2.07444768e-08</span>   <span class="mf">3.27506473e-08</span><span class="p">,</span><span class="mf">1.03738569e-09</span>   <span class="mf">3.93335483e-09</span><span class="p">,</span><span class="n">S0654</span><span class="p">,</span><span class="mf">323.4</span>
+<span class="mf">119.7</span><span class="p">,</span><span class="mf">7.83955802e-08</span>   <span class="mf">5.52997744e-08</span><span class="p">,</span><span class="mf">3.91683797e-09</span>   <span class="mf">7.86172468e-10</span><span class="p">,</span><span class="n">S0634</span><span class="p">,</span><span class="mf">342.5</span>
+<span class="mf">138.3</span><span class="p">,</span><span class="mf">1.38297893e-07</span>   <span class="mf">4.90243560e-08</span><span class="p">,</span><span class="mf">6.91029070e-09</span>   <span class="mf">9.79988215e-10</span><span class="p">,</span><span class="n">S0533</span><span class="p">,</span><span class="mf">354.1</span>
+<span class="mf">155.2</span><span class="p">,</span><span class="mf">1.74815653e-07</span>   <span class="mf">3.48061608e-08</span><span class="p">,</span><span class="mf">8.75143170e-09</span>   <span class="mf">7.61184113e-10</span><span class="p">,</span><span class="n">S0249</span><span class="p">,</span><span class="mf">153.5</span>
+<span class="mf">113.7</span><span class="p">,</span><span class="mf">8.41802958e-08</span>   <span class="mf">4.60234127e-08</span><span class="p">,</span><span class="mf">4.20431936e-09</span>   <span class="mf">1.17189815e-08</span><span class="p">,</span><span class="n">S0571</span><span class="p">,</span><span class="mf">54.5</span>
+<span class="mf">125.6</span><span class="p">,</span><span class="mf">1.09705743e-07</span>   <span class="mf">4.42081432e-08</span><span class="p">,</span><span class="mf">5.48271153e-09</span>   <span class="mf">9.58851515e-10</span><span class="p">,</span><span class="n">S0065</span><span class="p">,</span><span class="mf">184.2</span>
+<span class="mf">127.4</span><span class="p">,</span><span class="mf">1.35994091e-07</span>   <span class="mf">1.03528610e-08</span><span class="p">,</span><span class="mf">6.79566727e-09</span>   <span class="mf">2.75097217e-09</span><span class="p">,</span><span class="n">S0095</span><span class="p">,</span><span class="mf">159.2</span>
+<span class="mf">134.9</span><span class="p">,</span><span class="mf">1.54309735e-07</span>   <span class="mf">1.22170773e-08</span><span class="p">,</span><span class="mf">7.71089395e-09</span>   <span class="mf">2.61801853e-09</span><span class="p">,</span><span class="n">S0537</span><span class="p">,</span><span class="mf">25.6</span>
+<span class="mf">145.9</span><span class="p">,</span><span class="mf">6.88684554e-09</span>   <span class="mf">8.43199415e-08</span><span class="p">,</span><span class="mf">3.43601244e-10</span>   <span class="mf">1.79928175e-09</span><span class="p">,</span><span class="n">S0372</span><span class="p">,</span><span class="mf">288.2</span>
+<span class="mf">124.5</span><span class="p">,</span><span class="mf">1.24505851e-07</span>   <span class="mf">6.84587855e-09</span><span class="p">,</span><span class="mf">6.22146156e-09</span>   <span class="mf">2.83710916e-09</span><span class="p">,</span><span class="n">S0097</span><span class="p">,</span><span class="mf">150.0</span>
+<span class="p">,,,,</span>
+<span class="n">P</span><span class="o">/</span><span class="n">SVAmplitudeRatio</span><span class="p">,,,,</span>
+<span class="n">Name</span><span class="p">,</span><span class="n">Azimuth</span><span class="p">,</span><span class="n">Measured</span><span class="p">,</span><span class="n">Error</span><span class="p">,</span><span class="n">TakeOffAngle</span>
+<span class="n">S0006</span><span class="p">,</span><span class="mf">210.6</span><span class="p">,</span><span class="mf">3.22758296e-08</span>   <span class="mf">8.19892140e-08</span><span class="p">,</span><span class="mf">7.70965062e-09</span>   <span class="mf">9.80424095e-09</span><span class="p">,</span><span class="mf">112.8</span>
+<span class="n">S0573</span><span class="p">,</span><span class="mf">306.7</span><span class="p">,</span><span class="mf">1.96675583e-08</span>   <span class="mf">3.68506966e-08</span><span class="p">,</span><span class="mf">3.45469389e-09</span>   <span class="mf">3.35913629e-09</span><span class="p">,</span><span class="mf">110.0</span>
+<span class="n">S0563</span><span class="p">,</span><span class="mf">23.1</span><span class="p">,</span><span class="mf">1.79089155e-09</span>   <span class="mf">3.56992402e-08</span><span class="p">,</span><span class="mf">3.45820500e-09</span>   <span class="mf">3.64333023e-09</span><span class="p">,</span><span class="mf">131.4</span>
+<span class="n">S0016</span><span class="p">,</span><span class="mf">167.8</span><span class="p">,</span><span class="mf">2.93385249e-08</span>   <span class="mf">6.26397384e-08</span><span class="p">,</span><span class="mf">8.95408759e-09</span>   <span class="mf">8.69575530e-09</span><span class="p">,</span><span class="mf">117.6</span>
+<span class="n">S0567</span><span class="p">,</span><span class="mf">41.3</span><span class="p">,</span><span class="mf">3.84818185e-08</span>   <span class="mf">1.55744928e-08</span><span class="p">,</span><span class="mf">9.23059636e-09</span>   <span class="mf">4.07140152e-09</span><span class="p">,</span><span class="mf">123.7</span>
+<span class="n">S0654</span><span class="p">,</span><span class="mf">323.4</span><span class="p">,</span><span class="mf">3.27506473e-08</span>   <span class="mf">4.94388184e-08</span><span class="p">,</span><span class="mf">3.93335483e-09</span>   <span class="mf">4.17167829e-09</span><span class="p">,</span><span class="mf">110.0</span>
+<span class="n">S0634</span><span class="p">,</span><span class="mf">342.5</span><span class="p">,</span><span class="mf">5.52997744e-08</span>   <span class="mf">3.26269606e-08</span><span class="p">,</span><span class="mf">7.86172468e-10</span>   <span class="mf">1.20208387e-09</span><span class="p">,</span><span class="mf">119.7</span>
+<span class="n">S0533</span><span class="p">,</span><span class="mf">354.1</span><span class="p">,</span><span class="mf">4.90243560e-08</span>   <span class="mf">4.51596183e-08</span><span class="p">,</span><span class="mf">9.79988215e-10</span>   <span class="mf">1.97681026e-09</span><span class="p">,</span><span class="mf">138.3</span>
+<span class="n">S0249</span><span class="p">,</span><span class="mf">153.5</span><span class="p">,</span><span class="mf">3.48061608e-08</span>   <span class="mf">8.71989457e-08</span><span class="p">,</span><span class="mf">7.61184113e-10</span>   <span class="mf">1.37314781e-09</span><span class="p">,</span><span class="mf">155.2</span>
+<span class="n">S0571</span><span class="p">,</span><span class="mf">54.5</span><span class="p">,</span><span class="mf">4.60234127e-08</span>   <span class="mf">4.20042749e-09</span><span class="p">,</span><span class="mf">1.17189815e-08</span>   <span class="mf">4.50190885e-09</span><span class="p">,</span><span class="mf">113.7</span>
+<span class="n">S0065</span><span class="p">,</span><span class="mf">184.2</span><span class="p">,</span><span class="mf">4.42081432e-08</span>   <span class="mf">6.15020436e-08</span><span class="p">,</span><span class="mf">9.58851515e-10</span>   <span class="mf">3.53524312e-09</span><span class="p">,</span><span class="mf">125.6</span>
+<span class="n">S0095</span><span class="p">,</span><span class="mf">159.2</span><span class="p">,</span><span class="mf">1.03528610e-08</span>   <span class="mf">3.56854812e-08</span><span class="p">,</span><span class="mf">2.75097217e-09</span>   <span class="mf">2.22496836e-09</span><span class="p">,</span><span class="mf">127.4</span>
+<span class="n">S0537</span><span class="p">,</span><span class="mf">25.6</span><span class="p">,</span><span class="mf">1.22170773e-08</span>   <span class="mf">5.41945269e-08</span><span class="p">,</span><span class="mf">2.61801853e-09</span>   <span class="mf">2.74678803e-09</span><span class="p">,</span><span class="mf">134.9</span>
+<span class="n">S0372</span><span class="p">,</span><span class="mf">288.2</span><span class="p">,</span><span class="mf">8.43199415e-08</span>   <span class="mf">1.80916924e-08</span><span class="p">,</span><span class="mf">1.79928175e-09</span>   <span class="mf">2.95196095e-10</span><span class="p">,</span><span class="mf">145.9</span>
+<span class="n">S0097</span><span class="p">,</span><span class="mf">150.0</span><span class="p">,</span><span class="mf">6.84587855e-09</span>   <span class="mf">3.48806733e-08</span><span class="p">,</span><span class="mf">2.83710916e-09</span>   <span class="mf">1.82493870e-09</span><span class="p">,</span><span class="mf">124.5</span>
+<span class="p">,,,,</span>
+</pre></div>
+</div>
+<p>This is a CSV file with 2 events, one event ID of Event 1 with PPolarity and P/SHAmplitudeRatio and P/SVAmplitudeRatio data at 15 receivers, and a second event with no ID (will default to the event number, in this case 2) with PPolarity data at 15 receivers.</p>
+<p>Running an inversion using a <a class="reference internal" href="glossary.html#term-csv"><span class="xref std std-term">CSV</span></a> file is the same as running a normal inversion. Calling from the command line is simply called by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit --datafile=thecsvfile.csv ...
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">--invext</span></code> flag sets the file ending that the inversion searches for when no datafile is specified, so to search for CSV files in the current directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit --invext=csv
+</pre></div>
+</div>
+<p>This will try to invert the data from all the CSV files in the current directory.</p>
+<p><cite>mtfit</cite> can be extended for other inversion file formats using <a class="reference internal" href="extensions.html"><span class="doc">setuptools entry-points</span></a></p>
+</div>
+<div class="section" id="location-uncertainty">
+<span id="location-uncertainty-tutorial-label"></span><h2>3.9. Location Uncertainty<a class="headerlink" href="#location-uncertainty" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> can include location uncertainty in the resultant <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>. This requires samples from the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>. The location uncertainty is included in the inversion using a <a class="reference internal" href="glossary.html#term-monte-carlo-method"><span class="xref std std-term">Monte Carlo method</span></a> (see <a class="reference internal" href="bayes.html"><span class="doc">Bayesian Approach</span></a>).</p>
+<p>This file can be made from the <a class="reference external" href="http://alomax.free.fr/nlloc">NonLinLoc</a> <code class="docutils literal"><span class="pre">*.scat</span></code> file using <code class="xref py py-mod docutils literal"><span class="pre">Scat2Angle</span></code> in the <a class="reference external" href="https://github.com/djpugh/pyNLLoc">pyNLLoc</a> module.</p>
+<p>The expected format for the location uncertainty file is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Probability</span>
+<span class="n">StationName</span> <span class="n">Azimuth</span> <span class="n">TakeOffAngle</span>
+<span class="n">StationName</span> <span class="n">Azimuth</span> <span class="n">TakeOffAngle</span>
+
+<span class="n">Probability</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
+</pre></div>
+</div>
+<p>e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">504.7</span>
+<span class="n">S0271</span>   <span class="mf">231.1</span>   <span class="mf">154.7</span>
+<span class="n">S0649</span>   <span class="mf">42.9</span>    <span class="mf">109.7</span>
+<span class="n">S0484</span>   <span class="mf">21.2</span>    <span class="mf">145.4</span>
+<span class="n">S0263</span>   <span class="mf">256.4</span>   <span class="mf">122.7</span>
+<span class="n">S0142</span>   <span class="mf">197.4</span>   <span class="mf">137.6</span>
+<span class="n">S0244</span>   <span class="mf">229.7</span>   <span class="mf">148.1</span>
+<span class="n">S0415</span>   <span class="mf">75.6</span>    <span class="mf">122.8</span>
+<span class="n">S0065</span>   <span class="mf">187.5</span>   <span class="mf">126.1</span>
+<span class="n">S0362</span>   <span class="mf">85.3</span>    <span class="mf">128.2</span>
+<span class="n">S0450</span>   <span class="mf">307.5</span>   <span class="mf">137.7</span>
+<span class="n">S0534</span>   <span class="mf">355.8</span>   <span class="mf">138.2</span>
+<span class="n">S0641</span>   <span class="mf">14.7</span>    <span class="mf">120.2</span>
+<span class="n">S0155</span>   <span class="mf">123.5</span>   <span class="mi">117</span>
+<span class="n">S0162</span>   <span class="mf">231.8</span>   <span class="mf">127.5</span>
+<span class="n">S0650</span>   <span class="mf">45.9</span>    <span class="mf">108.2</span>
+<span class="n">S0195</span>   <span class="mf">193.8</span>   <span class="mf">147.3</span>
+<span class="n">S0517</span>   <span class="mf">53.7</span>    <span class="mf">124.2</span>
+<span class="n">S0004</span>   <span class="mf">218.4</span>   <span class="mf">109.8</span>
+<span class="n">S0588</span>   <span class="mf">12.9</span>    <span class="mf">128.6</span>
+<span class="n">S0377</span>   <span class="mf">325.5</span>   <span class="mf">165.3</span>
+<span class="n">S0618</span>   <span class="mf">29.4</span>    <span class="mf">120.5</span>
+<span class="n">S0347</span>   <span class="mf">278.9</span>   <span class="mf">149.5</span>
+<span class="n">S0529</span>   <span class="mf">326.1</span>   <span class="mf">131.7</span>
+<span class="n">S0083</span>   <span class="mf">223.7</span>   <span class="mf">118.2</span>
+<span class="n">S0595</span>   <span class="mf">42.6</span>    <span class="mf">117.8</span>
+<span class="n">S0236</span>   <span class="mf">253.6</span>   <span class="mf">118.6</span>
+
+<span class="mf">502.7</span>
+<span class="n">S0271</span>   <span class="mf">233.1</span>   <span class="mf">152.7</span>
+<span class="n">S0649</span>   <span class="mf">45.9</span>    <span class="mf">101.7</span>
+<span class="n">S0484</span>   <span class="mf">25.2</span>    <span class="mf">141.4</span>
+<span class="n">S0263</span>   <span class="mf">258.4</span>   <span class="mf">120.7</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
+</pre></div>
+</div>
+<p><cite>mtfit</cite> can be extended to use other location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> file formats using <a class="reference internal" href="extensions.html"><span class="doc">setuptools entry-points</span></a></p>
+<p>Running with the location uncertainty included will slow the inversion as this requires more memory to store each of the location samples in the inversion. The number of samples used can be changed by setting the <code class="docutils literal"><span class="pre">number_location_samples</span></code> parameter in the <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">Inversion</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="n">number_location_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This limits the number of station samples to 10,000, reducing the memory requirements and improving the speed.</p>
+<p>The script <a class="reference download internal" href="_downloads/location_uncertainty.py" download=""><code class="xref download docutils literal"><span class="pre">examples/location_uncertainty.py</span></code></a> contains an example for the location uncertainty inversion.
+To run the script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python location_uncertainty.py
+</pre></div>
+</div>
+<p>The angle scatter file path option can be set from the command line using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit --anglescatterfilepath=./ --angleext=.scatangle ...
+</pre></div>
+</div>
+<p>This will search in the current directory for <cite>scatangle</cite> files (default is to search for <cite>scatangle</cite> files if <code class="docutils literal"><span class="pre">--angleext</span></code> is not specified). The files are matched to the input data files if mtfit is called from the command line. A specific file or list of files can be set using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit --anglescatterfilepath=./thisanglefile.scatangle ...
+</pre></div>
+</div>
+<p>Which uses the <cite>thisanglefile.scatangle</cite> file in the current directory.</p>
+<p>The inversion parameters used in <a class="reference download internal" href="_downloads/location_uncertainty.py" download=""><code class="xref download docutils literal"><span class="pre">examples/location_uncertainty.py</span></code></a> are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>algorithm = 'time' - uses an time limited random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>)</li>
+<li>parallel = True - runs in multiple threads using <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a>.</li>
+<li>phy_mem = 1 - uses a soft limit of 1Gb of RAM for estimating the sample sizes (This is only a soft limit, so no errors are thrown if the memory usage increases above this)</li>
+<li>dc = False - runs the inversion in the double-couple space.</li>
+<li>max_time = 60 - runs the inversion for 60 seconds.</li>
+<li>inversion_options = 'PPolarity' - Just uses PPolarity rather than all the data in the dictionary</li>
+<li>location_pdf_file_path = 'Location_Uncertainty.scatangle'</li>
+</ul>
+</div></blockquote>
+<p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<blockquote>
+<div></div></blockquote>
+<p>The output file is <code class="docutils literal"><span class="pre">Location_Uncertainty_Example_OutputMT.mat</span></code>.</p>
+<p>Including the location uncertainty in an inversion is slower, since fewer samples are used in a given time. Setting the number of station samples parameter to a smaller number can reduce this:</p>
+<blockquote>
+<div></div></blockquote>
+<p>This tries more samples, however it has a worse sampling of the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> than before. Taking this to extremes, reducing the <code class="docutils literal"><span class="pre">number_location_samples</span></code> to <code class="docutils literal"><span class="pre">100</span></code> improves the number of samples tried but reduces the quality of the location uncertainty sampling.</p>
+<p>The method of including location uncertainty can also be used to include <strong>velocity model</strong> uncertainty by drawing location samples from a range of models and combining (see <a class="reference download internal" href="_downloads/model_sampling.py" download=""><code class="xref download docutils literal"><span class="pre">scripts/model_sampling.py</span></code></a>).</p>
+</div>
+<div class="section" id="running-from-the-command-line">
+<span id="cli-tutorial-label"></span><h2>3.10. Running from the Command Line<a class="headerlink" href="#running-from-the-command-line" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">mtfit</span></code> is easy to run from the command line. The installation should install a script onto the path so that:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit -h
+</pre></div>
+</div>
+<p>Gives the command line options. If this does not work see <a class="reference internal" href="run.html"><span class="doc">Running mtfit</span></a> to install the script.</p>
+<p>There are many command line options available (see <a class="reference internal" href="cli.html"><span class="doc">mtfit command line options</span></a>) but the default settings are usually ok.</p>
+<p><a class="reference download internal" href="_downloads/command_line.sh" download=""><code class="xref download docutils literal"><span class="pre">examples/command_line.sh</span></code></a> (<a href="#id1"><span class="problematic" id="id2">*</span></a>nix) or <a class="reference download internal" href="_downloads/command_line.bat" download=""><code class="xref download docutils literal"><span class="pre">examples/command_line.bat</span></code></a> is an example script for running the inversion from the command line:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/sh</span>
+<span class="nb">echo</span> <span class="s2">&quot;Command line mtfit example script\n&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Needs mtfit to have been installed to run.\n&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Making data file - csv_example_file.csv\n&quot;</span>
+python make_csv_file.py
+
+<span class="nb">echo</span> <span class="s2">&quot;mtfit --version:\n&quot;</span>
+<span class="c1">#Output mtfit version</span>
+mtfit --version
+
+<span class="nb">echo</span> <span class="s2">&quot;Running mtfit from command line:\n&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;mtfit --data_file=csv_example*.inv --algorithm=iterate \</span>
+<span class="s2">        --max_samples=100000 -b  --inversionoptions=PPolarity&quot;</span>
+<span class="c1">#Run mtfit from the command line. Options are:</span>
+<span class="c1">#   --data_file=csv_example*.inv - use the data files matching csv_example*.inv </span>
+<span class="c1">#   --algorithm=iterate - use the iterative algorithm</span>
+<span class="c1">#   --max_samples=100000 - run for 100,000 samples</span>
+<span class="c1">#   -b - carry out the inversion for both the double couple constrained </span>
+<span class="c1">#           and full moment tensor spaces</span>
+<span class="c1">#   --inversionoptions=PPolarity - carry out the inversion using </span>
+<span class="c1">#           PPolarity data only</span>
+<span class="c1">#   --convert - convert the solution using MTconvert.</span>
+
+mtfit --data_file<span class="o">=</span>csv_example*.csv --algorithm<span class="o">=</span>iterate --max_samples<span class="o">=</span><span class="m">100000</span> <span class="se">\</span>
+     -b  --inversionoptions<span class="o">=</span>PPolarity --convert
+</pre></div>
+</div>
+</div></blockquote>
+<p>This uses the data from the CSV example file (see <a class="reference internal" href="#csv-example-label"><span class="std std-ref">Inversion from a CSV File</span></a>), prints the version of mtfit being used and then calls mtfit from the command line. The parameters used are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>--data_file=csv_*.inv - use the data files matching csv_*.inv</li>
+<li>--algorithm=iterate - use the iterative algorithm</li>
+<li>--max_samples=100000 - run for 100,000 samples</li>
+<li>-b - carry out the inversion for both the double couple constrained and full moment tensor spaces</li>
+<li>--inversionoptions=PPolarity - carry out the inversion using PPolarity data only</li>
+<li>--convert - convert the solution using <code class="xref py py-mod docutils literal"><span class="pre">mtfit.MTconvert</span></code>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="scatangle-file-binning">
+<span id="scatangle-tutorial-label"></span><h2>3.11. Scatangle file binning<a class="headerlink" href="#scatangle-file-binning" title="Permalink to this headline">¶</a></h2>
+<p>Often the scatangle files are large with many samples at similar station angles. The size of these files can be reduced by binning these samples into similar bins. This can be done either before running mtfit or as a pre-inversion step using the command line parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>--bin-scatangle=True - run the scatangle binning before the inversion</li>
+<li>--bin-size=1.0 - set a bin size of 1.0 degrees.</li>
+</ul>
+</div></blockquote>
+<p>This can be run in parallel, which can speed up the process, using the same command line arguments as before.</p>
+<p>The new files are outputted with _bin_1.0 appended if the bin-size is 1.0, and are automatically used in the inversio</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="real-tutorial.html" class="btn btn-neutral float-right" title="4. Tutorial: Using mtfit with Real Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="run.html" class="btn btn-neutral" title="2. Running mtfit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

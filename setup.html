@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Installing mtfit &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="next" title="2. Running mtfit" href="run.html"/>
+        <link rel="prev" title="mtfit: Bayesian Source Inversion" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Installing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">1.1. Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#optional-requirements">1.1.1. Optional requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hdf5-matlab-v7-3">1.1.1.1. HDF5 (Matlab -v7.3)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mpi">1.1.1.2. MPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nonlinloc-location-uncertainty">1.1.1.3. NonLinLoc Location Uncertainty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-documentation">1.1.1.4. Building the Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-test-suite">1.2. Running the Test Suite</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>1. Installing mtfit</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/setup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-mtfit">
+<h1>1. Installing mtfit<a class="headerlink" href="#installing-mtfit" title="Permalink to this headline">¶</a></h1>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> is available in several formats, including as a <code class="docutils literal"><span class="pre">tar.gz</span></code> file, a <code class="docutils literal"><span class="pre">zip</span></code> file, a Windows <code class="docutils literal"><span class="pre">msi</span></code> installer. Additionally the git repository can be cloned.</p>
+<p>Apart from the Windows installer, all the other formats require installing from the source (after unpacking the compressed files e.g. <code class="docutils literal"><span class="pre">tar.gz</span></code>).</p>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> can be installed from the source by calling:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py install
+</pre></div>
+</div>
+<p>To see additional command line options for the <code class="docutils literal"><span class="pre">setup.py</span></code> file use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py --help
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py --help-commands
+</pre></div>
+</div>
+<div class="section" id="requirements">
+<h2>1.1. Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> requires three modules</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.numpy.org">NumPy</a></li>
+<li><a class="reference external" href="http://www.scipy.org">SciPy</a></li>
+<li><a class="reference external" href="https://www.github.com/djpugh/pyqsub">pyqsub</a> - a simple module to provide interfacing with qsub, and will be automatically installed.</li>
+<li><a class="reference external" href="http://matplotlib.org/">matplotlib</a></li>
+</ul>
+<div class="section" id="optional-requirements">
+<h3>1.1.1. Optional requirements<a class="headerlink" href="#optional-requirements" title="Permalink to this headline">¶</a></h3>
+<p>Additionally there are several optional requirements which allow additional features in <code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code>.</p>
+<div class="section" id="hdf5-matlab-v7-3">
+<h4>1.1.1.1. HDF5 (Matlab -v7.3)<a class="headerlink" href="#hdf5-matlab-v7-3" title="Permalink to this headline">¶</a></h4>
+<p>To use the HDF5 MATLAB format (format -v7.3) or disk-based storage of the in progress sampling (slower but saves on memory requirements) requires:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.h5py.org/">h5py</a></li>
+<li><a class="reference external" href="http://pythonhosted.org/hdf5storage/">hdf5storage</a></li>
+</ul>
+<p>If installing from source these modules require:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.hdfgroup.org/HDF5/">HDF5</a> 1.8.4 or newer, shared library version with development headers (libhdf5-dev or similar)</li>
+<li>Python 2.6 - 3.3 with development headers (python-dev or similar)</li>
+<li>NumPy 1.6 or newer</li>
+<li>Optionally: <a class="reference external" href="http://cython.org/">Cython</a>, if you want to access features introduced after HDF5 1.8.4, or Parallel HDF5.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">HDF5 support is required if the output files are large (&gt;2GB) and MATLAB output is used, beacause MATLAB cannot read older format files bigger than this.</p>
+</div>
+</div>
+<div class="section" id="mpi">
+<h4>1.1.1.2. MPI<a class="headerlink" href="#mpi" title="Permalink to this headline">¶</a></h4>
+<p>To run on multiple nodes on a cluster requires <code class="xref py py-mod docutils literal"><span class="pre">mpi4py</span></code> installed and a distribution of <a class="reference external" href="http://www.mcs.anl.gov/research/projects/mpi/">MPI</a> such as <a class="reference external" href="http://www.open-mpi.org/">OpenMPI</a> to run in parallel on multiple nodes (single node multi-processor uses <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a>)</p>
+<ul class="simple">
+<li><a class="reference external" href="http://mpi4py.scipy.org/">mpi4py</a></li>
+</ul>
+</div>
+<div class="section" id="nonlinloc-location-uncertainty">
+<h4>1.1.1.3. NonLinLoc Location Uncertainty<a class="headerlink" href="#nonlinloc-location-uncertainty" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="http://alomax.free.fr/nlloc">NonLinLoc</a> scatter files can be used for the location PDF. This requires:</p>
+<ul class="simple">
+<li><code class="xref py py-mod docutils literal"><span class="pre">Scat2Angle</span></code> from <a class="reference external" href="https://www.github.com/djpugh/pyNLLoc">pyNLLoc</a>.</li>
+</ul>
+</div>
+<div class="section" id="building-the-documentation">
+<h4>1.1.1.4. Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h4>
+<p>To build this documentation from source requires:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://sphinx-doc.org">sphinx</a> 1.3.1 or newer</li>
+</ul>
+<p>It can be built in the source directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py build-docs
+</pre></div>
+</div>
+<p>and after installation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">mtfit</span><span class="o">.</span><span class="n">build_docs</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="running-the-test-suite">
+<h2>1.2. Running the Test Suite<a class="headerlink" href="#running-the-test-suite" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> comes with a complete test suite which can be run in the source directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py build
+$ python setup.py test
+</pre></div>
+</div>
+<p>and after installation from the python interpreter:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mtfit</span><span class="o">.</span><span class="n">run_tests</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="run.html" class="btn btn-neutral float-right" title="2. Running mtfit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="mtfit: Bayesian Source Inversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

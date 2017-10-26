@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Random Sampling Search Algorithm &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Random Sampling Search Algorithm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/monte_carlo_random.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mtfit.algorithms.monte_carlo">
+<span id="random-sampling-search-algorithm"></span><span id="iterative-sampling-label"></span><h1>Random Sampling Search Algorithm<a class="headerlink" href="#module-mtfit.algorithms.monte_carlo" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="monte-carlo-random">
+<h2>monte_carlo_random<a class="headerlink" href="#monte-carlo-random" title="Permalink to this headline">¶</a></h2>
+<p>Module containing algorithm classes for Monte Carlo random sampling.</p>
+</div>
+<hr class="docutils" />
+<dl class="class">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample">
+<em class="property">class </em><code class="descclassname">mtfit.algorithms.monte_carlo.</code><code class="descname">IterationSample</code><span class="sig-paren">(</span><em>max_samples=600000</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/monte_carlo.html#IterationSample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteration based sampling algorithm</p>
+<p>Algorithm that runs for a fixed number of samples.</p>
+<p>Initialisation of IterationSample</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>max_samples:[600000] Maximum time in seconds for the iteration to run for.
+number_samples:[10000] Number of samples to use per iteration.
+dc:[False] Boolean to select inversion constrained to double-couple space or over the full moment tensor space.</dd>
+<dt>Keyword Arguments</dt>
+<dd>basic_cdc:[False] Boolean to select whether to us the Basic CDC model (inversion constrained to double-couple space or over the full moment tensor space.</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.eigenvectors_mt_2_mt6">
+<code class="descname">eigenvectors_mt_2_mt6</code><span class="sig-paren">(</span><em>diag</em>, <em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.eigenvectors_mt_2_mt6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts eigenvectors and eigenvalues to moment tensor 6-vector.</p>
+<p>Generates moment tensor 6-vector.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.
+a: numpy array of eigenvectors corresponding to the first eigenvalue.
+b: numpy array of eigenvectors corresponding to the second eigenvalue.
+c: numpy array of eigenvectors corresponding to the third eigenvalue.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of moment tensor 6-vectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.get_sampling_model">
+<code class="descname">get_sampling_model</code><span class="sig-paren">(</span><em>kwargs</em>, <em>file_sample</em>, <em>file_safe</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.get_sampling_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the sampling model from the entry points</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.initialise">
+<code class="descname">initialise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.initialise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial task for ForwardTask</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>task,end=False
+task: the random samples starting the inversion.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.iterate">
+<code class="descname">iterate</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteration function for BaseMonteCarloRandomSample object</p>
+<p>Carries out iteration of random sampling from previous result.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>result: dictionary result from MTfit.inversion.ForwardTask, added to the pdf</dd>
+<dt>Returns</dt>
+<dd>new_samples,end
+new_samples: New set of random samples to test.
+end: Boolean flag as to whether inversion has finished, if a MemoryError error is thrown, ends iteration.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.output">
+<code class="descname">output</code><span class="sig-paren">(</span><em>normalise=True</em>, <em>convert=False</em>, <em>discard=10000</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the algorithm results for output.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>Dictionary containing output.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.random_clvd">
+<code class="descname">random_clvd</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.random_clvd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random CLVD moment tensors (size 6,number_samples)</p>
+<p>Generates random CLVD moment tensors with random orientations.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy matrix of random CLVD moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.random_dc">
+<code class="descname">random_dc</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.random_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random double-couple  moment tensors (size 6, number_samples)</p>
+<p>Generates random double-couple moment tensors with random orientations.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy matrix of random double-couple moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.random_orthogonal_eigenvectors">
+<code class="descname">random_orthogonal_eigenvectors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.random_orthogonal_eigenvectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates random orthogonal eigenvectors.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>list of numpy arrays of eigenvectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.random_sample">
+<code class="descname">random_sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.random_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random sample</p>
+<p>Extends _BaseAlgorithm.random_sample to account for multiple events, and checks the source type.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.IterationSample.random_type">
+<code class="descname">random_type</code><span class="sig-paren">(</span><em>diag</em><span class="sig-paren">)</span><a class="headerlink" href="#mtfit.algorithms.monte_carlo.IterationSample.random_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random  moment tensors from a given set of eigenvalues.</p>
+<p>Generates random moment tensors with a given set of eigenvalues and random orientations.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of random moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">members:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">inherited-members:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<hr class="docutils" />
+<p>The random sampling algorithms inherit from the <code class="xref py py-class docutils literal"><span class="pre">BaseAlgorithm</span></code> class:</p>
+<dl class="class">
+<dt id="mtfit.algorithms.base.BaseAlgorithm">
+<em class="property">class </em><code class="descclassname">mtfit.algorithms.base.</code><code class="descname">BaseAlgorithm</code><span class="sig-paren">(</span><em>number_samples=10000</em>, <em>dc=False</em>, <em>quality_check=False</em>, <em>file_sample=False</em>, <em>file_safe=True</em>, <em>generate=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for algorithms including the base methods required for forward
+modelling based inversions.</p>
+<p>BaseAlgorithm initialisation</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd><p class="first">number_samples:[10000] Number of samples to use per iteration.
+dc:[False] Boolean to select inversion constrained to double-couple</p>
+<blockquote>
+<div>space or over the full moment tensor space.</div></blockquote>
+<dl class="last docutils">
+<dt>quality_check:[False] Carry out quality check after 40,000 samples.</dt>
+<dd>If there are too many non-zero samples, the inversion is stopped
+for that event.</dd>
+<dt>file_sample:[False] Boolean to select whether to use file sampling</dt>
+<dd>(saving the output to file).</dd>
+<dt>file_safe:[False] Boolean to select whether to use file safe outputs</dt>
+<dd>when using file sampling.</dd>
+<dt>generate:[False] Boolean to select whether to generate the random</dt>
+<dd>moment tensors in the forward task or not.</dd>
+</dl>
+</dd>
+<dt>Keyword Arguments</dt>
+<dd><dl class="first last docutils">
+<dt>basic_cdc:[False] Boolean to select whether to use the Basic CDC</dt>
+<dd>model (inversion constrained to crack+double-couple space).</dd>
+<dt>number_events:[1] Integer giving the number of events in this</dt>
+<dd>inversion (for use with multiple event inversions).</dd>
+<dt>sampling_prior:[6sphere_prior] string selector for the full moment</dt>
+<dd>tensor sampling prior (MTfit.sampling_prior entry point)</dd>
+<dt>sampling:[6sphere] string selector for the full moment tensor</dt>
+<dd>sampling model (MTfit.sampling entry point)</dd>
+<dt>model:[False] selector for alternate models using the</dt>
+<dd>MTfit.sample_distribution entry_point</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.eigenvectors_mt_2_mt6">
+<code class="descname">eigenvectors_mt_2_mt6</code><span class="sig-paren">(</span><em>diag</em>, <em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.eigenvectors_mt_2_mt6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.eigenvectors_mt_2_mt6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts eigenvectors and eigenvalues to moment tensor 6-vector.</p>
+<p>Generates moment tensor 6-vector.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.
+a: numpy array of eigenvectors corresponding to the first eigenvalue.
+b: numpy array of eigenvectors corresponding to the second eigenvalue.
+c: numpy array of eigenvectors corresponding to the third eigenvalue.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of moment tensor 6-vectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.get_sampling_model">
+<code class="descname">get_sampling_model</code><span class="sig-paren">(</span><em>kwargs</em>, <em>file_sample</em>, <em>file_safe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.get_sampling_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.get_sampling_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the sampling model from the entry points</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.initialise">
+<code class="descname">initialise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.initialise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.initialise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic initialisation function</p>
+<p>Return the first task</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>task, False
+task: New task for forward model</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.iterate">
+<code class="descname">iterate</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.iterate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic iteration function</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>result: Result from forward Task</dd>
+<dt>Returns</dt>
+<dd>task,End
+task: New task for forward model
+End: Boolean flag for whether the inversion is finished.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.output">
+<code class="descname">output</code><span class="sig-paren">(</span><em>normalise=True</em>, <em>convert=False</em>, <em>discard=10000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the algorithm results for output.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>Dictionary containing output.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_clvd">
+<code class="descname">random_clvd</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_clvd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_clvd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random CLVD moment tensors (size 6,number_samples)</p>
+<p>Generates random CLVD moment tensors with random orientations.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy matrix of random CLVD moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_dc">
+<code class="descname">random_dc</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_dc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random double-couple  moment tensors (size 6, number_samples)</p>
+<p>Generates random double-couple moment tensors with random orientations.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy matrix of random double-couple moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_orthogonal_eigenvectors">
+<code class="descname">random_orthogonal_eigenvectors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_orthogonal_eigenvectors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_orthogonal_eigenvectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates random orthogonal eigenvectors.</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>list of numpy arrays of eigenvectors.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_sample">
+<code class="descname">random_sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random samples</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">results from generating the random samples.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.base.BaseAlgorithm.random_type">
+<code class="descname">random_type</code><span class="sig-paren">(</span><em>diag</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/base.html#BaseAlgorithm.random_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.base.BaseAlgorithm.random_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random  moment tensors from a given set of eigenvalues.</p>
+<p>Generates random moment tensors with a given set of eigenvalues and random orientations.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>diag: numpy matrix of eigenvalues.</dd>
+<dt>Returns</dt>
+<dd>numpy matrix of random moment tensors, size 6,number_samples</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<p>They also inherit from the <a class="reference internal" href="#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample" title="mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample"><code class="xref py py-class docutils literal"><span class="pre">BaseMonteCarloRandomSample</span></code></a> class:</p>
+<dl class="class">
+<dt id="mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample">
+<em class="property">class </em><code class="descclassname">mtfit.algorithms.monte_carlo.</code><code class="descname">BaseMonteCarloRandomSample</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/monte_carlo.html#BaseMonteCarloRandomSample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for Monte Carlo Random Sampling</p>
+<p>Contains base functions for new samples, iteration and initialisation.</p>
+<p>Initialisation of BaseMonteCarloRandomSample object</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>number_samples:[10000] Number of samples to use per iteration.
+dc:[False] Boolean to select inversion constrained to double-couple space or over the full moment tensor space.</dd>
+<dt>Keyword Arguments</dt>
+<dd>basic_cdc:[False] Boolean to select whether to us the Basic CDC model (inversion constrained to double-couple space or over the full moment tensor space.</dd>
+</dl>
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.initialise">
+<code class="descname">initialise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/monte_carlo.html#BaseMonteCarloRandomSample.initialise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.initialise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial task for ForwardTask</p>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>task,end=False
+task: the random samples starting the inversion.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.iterate">
+<code class="descname">iterate</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/monte_carlo.html#BaseMonteCarloRandomSample.iterate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteration function for BaseMonteCarloRandomSample object</p>
+<p>Carries out iteration of random sampling from previous result.</p>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>result: dictionary result from MTfit.inversion.ForwardTask, added to the pdf</dd>
+<dt>Returns</dt>
+<dd>new_samples,end
+new_samples: New set of random samples to test.
+end: Boolean flag as to whether inversion has finished, if a MemoryError error is thrown, ends iteration.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.random_sample">
+<code class="descname">random_sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/algorithms/monte_carlo.html#BaseMonteCarloRandomSample.random_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.random_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random sample</p>
+<p>Extends _BaseAlgorithm.random_sample to account for multiple events, and checks the source type.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

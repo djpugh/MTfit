@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>12. MTplot command line options &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="next" title="13. mtfit.Inversion: Inversion object" href="inversion.html"/>
+        <link rel="prev" title="11. Plotting classes" href="plot_classes.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">12. MTplot Command Line Options</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#positional-arguments">12.1. Positional Arguments:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-arguments">12.2. Optional Arguments:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>12. MTplot command line options</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/mtplotcli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mtplot-command-line-options">
+<h1>12. MTplot command line options<a class="headerlink" href="#mtplot-command-line-options" title="Permalink to this headline">¶</a></h1>
+<p>Command line usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MTplot</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">DATAFILE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">PLOT_TYPE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">COLORMAP</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="n">FONTSIZE</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">LINEWIDTH</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="n">RESOLUTION</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">BINS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">fault_plane</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">tnp</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">marker_size</span> <span class="n">MARKERSIZE</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">station_marker_size</span> <span class="n">STATION_MARKERSIZE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">showmaxlikelihood</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">showmean</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">grid_lines</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">color</span> <span class="n">COLOR</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">type_label</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">hex_bin</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">projection</span> <span class="n">PROJECTION</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">save</span> <span class="n">SAVE_FILE</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">save</span><span class="o">-</span><span class="n">dpi</span> <span class="n">SAVE_DPI</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">version</span><span class="p">]</span>
+<span class="p">[</span><span class="n">data_file</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="positional-arguments">
+<h2>12.1. Positional Arguments:<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">data_file</span>
+</pre></div>
+</div>
+<p>Data file to use for plotting, optional but must be
+specified either as a positional argument or as an
+optional argument (see -d below)</p>
+</div>
+<div class="section" id="optional-arguments">
+<h2>12.2. Optional Arguments:<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<p>show this help message and exit</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">d</span> <span class="n">DATAFILE</span><span class="p">,</span> <span class="o">--</span><span class="n">datafile</span> <span class="n">DATAFILE</span><span class="p">,</span> <span class="o">--</span><span class="n">data_file</span> <span class="n">DATAFILE</span>
+</pre></div>
+</div>
+<p>MTplot can read the output data from mtfit</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">p</span> <span class="n">PLOT_TYPE</span><span class="p">,</span> <span class="o">--</span><span class="n">plot_type</span> <span class="n">PLOT_TYPE</span><span class="p">,</span> <span class="o">--</span><span class="n">plottype</span> <span class="n">PLOT_TYPE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">plot</span><span class="o">-</span><span class="nb">type</span> <span class="n">PLOT_TYPE</span><span class="p">,</span> <span class="o">--</span><span class="nb">type</span> <span class="n">PLOT_TYPE</span>
+</pre></div>
+</div>
+<p>Type of plot to make</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span> <span class="n">COLORMAP</span><span class="p">,</span> <span class="o">--</span><span class="n">colormap</span> <span class="n">COLORMAP</span><span class="p">,</span> <span class="o">--</span><span class="n">color_map</span> <span class="n">COLORMAP</span><span class="p">,</span> <span class="o">--</span><span class="n">color</span><span class="o">-</span><span class="nb">map</span> <span class="n">COLORMAP</span>
+</pre></div>
+</div>
+<p>Matplotlib colormap selection</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">f</span> <span class="n">FONTSIZE</span><span class="p">,</span> <span class="o">--</span><span class="n">font_size</span> <span class="n">FONTSIZE</span><span class="p">,</span> <span class="o">--</span><span class="n">fontsize</span> <span class="n">FONTSIZE</span><span class="p">,</span> <span class="o">--</span><span class="n">font</span><span class="o">-</span><span class="n">size</span> <span class="n">FONTSIZE</span>
+</pre></div>
+</div>
+<p>Fontsize</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">l</span> <span class="n">LINEWIDTH</span><span class="p">,</span> <span class="o">--</span><span class="n">line_width</span> <span class="n">LINEWIDTH</span><span class="p">,</span> <span class="o">--</span><span class="n">linewidth</span> <span class="n">LINEWIDTH</span><span class="p">,</span>
+<span class="o">--</span><span class="n">line</span><span class="o">-</span><span class="n">width</span> <span class="n">LINEWIDTH</span>
+</pre></div>
+</div>
+<p>Linewidth</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">text</span><span class="p">,</span> <span class="o">--</span><span class="n">show</span><span class="o">-</span><span class="n">text</span><span class="p">,</span> <span class="o">--</span><span class="n">show_text</span><span class="p">,</span> <span class="o">--</span><span class="n">showtext</span>
+</pre></div>
+</div>
+<p>Flag to show text or not</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="n">RESOLUTION</span><span class="p">,</span> <span class="o">--</span><span class="n">resolution</span> <span class="n">RESOLUTION</span>
+</pre></div>
+</div>
+<p>Resolution for the focal sphere plot types</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">b</span> <span class="n">BINS</span><span class="p">,</span> <span class="o">--</span><span class="n">bins</span> <span class="n">BINS</span>  <span class="n">Number</span> <span class="n">of</span> <span class="n">bins</span> <span class="k">for</span> <span class="n">the</span> <span class="n">histogram</span> <span class="n">plot</span> <span class="n">types</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">fault_plane</span><span class="p">,</span> <span class="o">--</span><span class="n">faultplane</span><span class="p">,</span> <span class="o">--</span><span class="n">fault</span><span class="o">-</span><span class="n">plane</span>
+</pre></div>
+</div>
+<p>Show the fault planes on a focal sphere type plot</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="o">--</span><span class="n">nodal_line</span><span class="p">,</span> <span class="o">--</span><span class="n">nodal</span><span class="o">-</span><span class="n">line</span><span class="p">,</span> <span class="o">--</span><span class="n">nodalline</span>
+</pre></div>
+</div>
+<p>Show the nodal lines on a focal sphere type plot</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">tnp</span><span class="p">,</span> <span class="o">--</span><span class="n">tp</span><span class="p">,</span> <span class="o">--</span><span class="n">pt</span>
+</pre></div>
+</div>
+<p>Show TNP axes on focal sphere plots</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">marker_size</span> <span class="n">MARKERSIZE</span><span class="p">,</span> <span class="o">--</span><span class="n">markersize</span> <span class="n">MARKERSIZE</span><span class="p">,</span> <span class="o">--</span><span class="n">marker</span><span class="o">-</span><span class="n">size</span> <span class="n">MARKERSIZE</span>
+</pre></div>
+</div>
+<p>Set marker size</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">station_marker_size</span> <span class="n">STATION_MARKERSIZE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">stationmarkersize</span> <span class="n">STATION_MARKERSIZE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">station</span><span class="o">-</span><span class="n">marker</span><span class="o">-</span><span class="n">size</span> <span class="n">STATION_MARKERSIZE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">station_markersize</span> <span class="n">STATION_MARKERSIZE</span><span class="p">,</span> <span class="o">--</span><span class="n">station</span><span class="o">-</span><span class="n">markersize</span> <span class="n">STATION_MARKERSIZE</span>
+</pre></div>
+</div>
+<p>Set station marker size</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">showmaxlikelihood</span><span class="p">,</span> <span class="o">--</span><span class="n">show_max_likelihood</span><span class="p">,</span> <span class="o">--</span><span class="n">show</span><span class="o">-</span><span class="nb">max</span><span class="o">-</span><span class="n">likelihood</span>
+</pre></div>
+</div>
+<p>Show the maximum likelihood solution on a fault plane
+plot (shown in color set by --color).</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">showmean</span><span class="p">,</span> <span class="o">--</span><span class="n">show</span><span class="o">-</span><span class="n">mean</span><span class="p">,</span> <span class="o">--</span><span class="n">show_mean</span>
+</pre></div>
+</div>
+<p>Show the mean orientaion on a fault plane plot (shown
+in green).</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">grid_lines</span><span class="p">,</span> <span class="o">--</span><span class="n">gridlines</span><span class="p">,</span> <span class="o">--</span><span class="n">grid</span><span class="o">-</span><span class="n">lines</span>
+</pre></div>
+</div>
+<p>Show interior lines on Hudson and lune plots</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">color</span> <span class="n">COLOR</span>
+</pre></div>
+</div>
+<p>Set default color</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">type_label</span><span class="p">,</span> <span class="o">--</span><span class="n">typelabel</span><span class="p">,</span> <span class="o">--</span><span class="nb">type</span><span class="o">-</span><span class="n">label</span>
+</pre></div>
+</div>
+<p>Show source type labels on Hudson and lune plots.</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hex_bin</span><span class="p">,</span> <span class="o">--</span><span class="n">hexbin</span><span class="p">,</span> <span class="o">--</span><span class="nb">hex</span><span class="o">-</span><span class="nb">bin</span>
+</pre></div>
+</div>
+<p>Use hex bin for histogram plottings</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">projection</span> <span class="n">PROJECTION</span>
+</pre></div>
+</div>
+<p>Projection choice for focal sphere plots</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">save</span> <span class="n">SAVE_FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">save_file</span> <span class="n">SAVE_FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">savefile</span> <span class="n">SAVE_FILE</span><span class="p">,</span>
+<span class="o">--</span><span class="n">save</span><span class="o">-</span><span class="n">file</span> <span class="n">SAVE_FILE</span>
+</pre></div>
+</div>
+<p>Set the filename to save to (if set the plot is saved
+to the file)</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">save</span><span class="o">-</span><span class="n">dpi</span> <span class="n">SAVE_DPI</span><span class="p">,</span> <span class="o">--</span><span class="n">savedpi</span> <span class="n">SAVE_DPI</span><span class="p">,</span> <span class="o">--</span><span class="n">save_dpi</span> <span class="n">SAVE_DPI</span>
+</pre></div>
+</div>
+<p>Output file dpi</p>
+<hr class="docutils" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>show program's version number and exit</p>
+<p><a class="reference internal" href="run.html"><span class="doc">Running mtfit</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="inversion.html" class="btn btn-neutral float-right" title="13. mtfit.Inversion: Inversion object" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plot_classes.html" class="btn btn-neutral" title="11. Plotting classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

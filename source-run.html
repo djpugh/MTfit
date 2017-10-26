@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>17.1.5. mtfit.run &mdash; mtfit documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mtfit documentation" href="index.html"/>
+        <link rel="up" title="17. mtfit Source Code" href="source.html"/>
+        <link rel="next" title="17.1.6. mtfit.utilities" href="source-utilities.html"/>
+        <link rel="prev" title="17.1.4. mtfit.sampling" href="source-sampling.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtfit
+          
+
+          
+            
+            <img src="_static/mtfitsphinx.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0+untagged.15.g53a39ba
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="source.html">17. Source Code</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="source.html#contents">17.1. Contents:</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="source-inversion.html">17.1.1. mtfit.inversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-algorithms.html">17.1.2. mtfit.algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-probability.html">17.1.3. mtfit.probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-sampling.html">17.1.4. mtfit.sampling</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">17.1.5. mtfit.run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-utilities.html">17.1.6. mtfit.utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-extensions.html">17.1.7. mtfit.extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-convert.html">17.1.8. mtfit.convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-plot.html">17.1.9. mtfit.plot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtfit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="source.html">17. mtfit Source Code</a> &raquo;</li>
+        
+      <li>17.1.5. mtfit.run</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/source-run.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mtfit-run">
+<h1>17.1.5. mtfit.run<a class="headerlink" href="#mtfit-run" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">run.py</span>
+<span class="sd">******</span>
+<span class="sd">Core module for mtfit - handles all the command line parsing logic and calling the forward model based inversion.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># **Restricted:  For Non-Commercial Use Only**</span>
+<span class="c1"># This code is protected intellectual property and is available solely for teaching</span>
+<span class="c1"># and non-commercially funded academic research purposes.</span>
+<span class="c1">#</span>
+<span class="c1"># Applications for commercial use should be made to Schlumberger or the University of Cambridge.</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="c1"># Test flag for running qsub flags in test</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">pyqsub</span>  <span class="c1"># python module for cluster job submission using qsub.</span>
+    <span class="n">_PYQSUB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">_PYQSUB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="kn">from</span> <span class="nn">.inversion</span> <span class="k">import</span> <span class="n">Inversion</span>
+<span class="kn">from</span> <span class="nn">.inversion</span> <span class="k">import</span> <span class="n">combine_mpi_output</span>
+<span class="kn">from</span> <span class="nn">.utilities.extensions</span> <span class="k">import</span> <span class="n">get_extensions</span>
+<span class="kn">from</span> <span class="nn">.extensions</span> <span class="k">import</span> <span class="n">default_pre_inversions</span>
+<span class="kn">from</span> <span class="nn">.extensions</span> <span class="k">import</span> <span class="n">default_post_inversions</span>
+<span class="kn">from</span> <span class="nn">.extensions</span> <span class="k">import</span> <span class="n">default_extensions</span>
+<span class="kn">from</span> <span class="nn">.utilities.argparser</span> <span class="k">import</span> <span class="n">mtfit_parser</span>
+
+
+<span class="n">WARNINGS_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="s1">&#39;always&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="s1">&#39;ignore&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="s1">&#39;module&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">:</span> <span class="s1">&#39;once&#39;</span><span class="p">}</span>
+
+
+<span class="c1"># Main mtfit function</span>
+
+<span class="k">def</span> <span class="nf">mtfit</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{},</span> <span class="n">data_file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">location_pdf_file_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs mtfit</span>
+
+<span class="sd">    Creates an mtfit.inversion.Inversion object for the given arguments and runs the forward model based inversion.</span>
+<span class="sd">    For a simple method of initialising the inversion use the command line approach (see mtfit docs).</span>
+
+<span class="sd">    Args</span>
+<span class="sd">        Data: Data dictionary (see mtfit.inversion.Inversion for structure).</span>
+<span class="sd">        data_file: File or list of files which are pickled Data dictionaries.</span>
+<span class="sd">        location_pdf_file_path: Path to angle scatter files or List of Angle Scatter Files (for Monte carlo marginalisation over location and model uncertainty)</span>
+<span class="sd">            Can be generated from NonLinLoc *.scat files.</span>
+<span class="sd">        algorithm:[&#39;Time&#39;] Default search algorithm, for more information on the different algorithms see the mtfit.inversion.Inversion docstrings.</span>
+<span class="sd">        parallel:[&#39;True&#39;] Selects whether to run the inversion in parallel or on a single thread.</span>
+<span class="sd">        n:[0] Number of threads to use, 0 defaults to all available threads reported by the system (from multiprocessing.cpu_count()).</span>
+<span class="sd">        phy_mem:[8Gb] Estimated physical memory to use (used for determining array sizes, it is likely that more memory will be used, and if so no errors are forced).</span>
+<span class="sd">        dc:[False] If true constrains the inversion to the double-couple space only.</span>
+
+<span class="sd">    Keyword Arguments</span>
+<span class="sd">        Test:[False] If true, runs unittests rather than the inversion.</span>
+<span class="sd">        Other arguments to pass to the mtfit.inversion.Inversion object or for the algorithm (for more information see the mtfit.inversion.Inversion docstrings).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        0</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;data_file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_file</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;location_pdf_file_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">location_pdf_file_path</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;algorithm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">algorithm</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;parallel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parallel</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;phy_mem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phy_mem</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dc</span>
+    <span class="c1"># GET PLUGINS</span>
+    <span class="n">pre_inversion_names</span><span class="p">,</span> <span class="n">pre_inversions</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="s1">&#39;mtfit.pre_inversion&#39;</span><span class="p">,</span> <span class="n">default_pre_inversions</span><span class="p">)</span>
+    <span class="n">post_inversion_names</span><span class="p">,</span> <span class="n">post_inversions</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="s1">&#39;mtfit.post_inversion&#39;</span><span class="p">,</span> <span class="n">default_post_inversions</span><span class="p">)</span>
+    <span class="n">extension_names</span><span class="p">,</span> <span class="n">extensions</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="s1">&#39;mtfit.extension&#39;</span><span class="p">,</span> <span class="n">default_extensions</span><span class="p">)</span>
+    <span class="c1"># Default extensions</span>
+    <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">extensions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">ext</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span>
+    <span class="c1"># Check combine mpi output</span>
+    <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;combine_mpi_output&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="n">combine_mpi_output</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;output_format&#39;</span><span class="p">,</span> <span class="s1">&#39;matlab&#39;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># binary_file_version flag set here</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">data_file</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">WARNINGS_MAP</span><span class="p">[</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;warnings&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">)])</span>
+        <span class="c1"># Pre-inversion</span>
+        <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="n">pre_inversions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="n">plugin</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_mpi_call&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="nb">print</span> <span class="s1">&#39;Running mtfit.&#39;</span>
+        <span class="c1"># Effectively</span>
+        <span class="c1"># inversion = Inversion(data, data_file, location_pdf_file_path, algorithm, parallel, n, phy_mem, dc, **kwargs)</span>
+        <span class="c1"># but allowing the pre inversion plugin to change the kwargs</span>
+        <span class="n">inversion</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">inversion</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dc_mt&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="c1"># inversion = Inversion(data, data_file, location_pdf_file_path, algorithm, parallel, n, phy_mem, not dc, **kwargs)</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dc&#39;</span><span class="p">]</span>
+            <span class="n">inversion</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">inversion</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+        <span class="c1"># Post-inversion</span>
+        <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="n">post_inversions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">plugin</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs inversion from command line arguments</span>
+
+<span class="sd">    Runs the command line options parser and either submits job to cluster or runs the inversion on the local machine depending on the command line arguments</span>
+
+<span class="sd">    Args</span>
+<span class="sd">        args:[None] Input arguments - if not given, defaults to using sys.argv</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        0</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">options</span><span class="p">,</span> <span class="n">options_map</span> <span class="o">=</span> <span class="n">mtfit_parser</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;qsub&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">_PYQSUB</span><span class="p">:</span>
+        <span class="n">options_map</span><span class="p">[</span><span class="s1">&#39;data_file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">options_map</span><span class="p">[</span><span class="s1">&#39;DATAFILE&#39;</span><span class="p">]</span>
+        <span class="n">options</span><span class="p">[</span><span class="s1">&#39;singlethread&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;parallel&#39;</span><span class="p">)</span>
+        <span class="n">options</span><span class="p">[</span><span class="s1">&#39;_mpi_call&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;mpi&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;mcmc&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;algorithm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">options</span><span class="p">[</span><span class="s1">&#39;max_samples&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;chain_length&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">pyqsub</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">options_map</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">options</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="s1">&#39;qsub&#39;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+                <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;mpi&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;_mpi_call&#39;</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># could add extra changeable MPI python handling here (and</span>
+                <span class="c1"># elsewhere?)</span>
+                <span class="kn">import</span> <span class="nn">mpi4py</span>  <span class="c1"># noqa F401</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;MPI module mpi4py not found, unable to run in mpi&#39;</span><span class="p">)</span>
+            <span class="c1"># restart python as mpirun</span>
+            <span class="n">options</span><span class="p">[</span><span class="s1">&#39;_mpi_call&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="nb">print</span> <span class="s1">&#39;Running mtfit using mpirun&#39;</span>
+            <span class="n">optstring</span> <span class="o">=</span> <span class="n">pyqsub</span><span class="o">.</span><span class="n">make_optstr</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">options_map</span><span class="p">)</span>
+            <span class="n">mpiargs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mpirun&quot;</span><span class="p">,</span> <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]),</span> <span class="s2">&quot;mtfit&quot;</span><span class="p">]</span>
+            <span class="n">mpiargs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">optstring</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+            <span class="k">return</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">mpiargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mtfit</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="source-utilities.html" class="btn btn-neutral float-right" title="17.1.6. mtfit.utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="source-sampling.html" class="btn btn-neutral" title="17.1.4. mtfit.sampling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, David Pugh.
+      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0+untagged.15.g53a39ba',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
