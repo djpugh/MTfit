@@ -24,7 +24,7 @@ Add this python script to a directory in the $PATH environmental variable::
 
     #!/usr/bin/env python
     import mtfit
-    mtfit.run.run()
+    mtfit.__run__()
 
 And make sure it is executable.
 
@@ -35,7 +35,7 @@ Add the linux script (above) to the path or if using powershell edit the powersh
 
     function mtfit{
         $script={
-            python -c "import mtfit;mtfit.run.run()" $args
+            python -c "import mtfit;mtfit.__run__()" $args
             }
         Invoke-Command -ScriptBlock $script -ArgumentList $args
         }
@@ -83,7 +83,7 @@ Running mtfit from the python interpreter is done as::
 
     >>> import mtfit
     >>> args=['-o','-d']
-    >>> mtfit.run.run(args)
+    >>> mtfit.__run__(args)
 
 .. only:: latex
 

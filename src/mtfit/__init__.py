@@ -11,3 +11,5 @@ __all__ = ['algorithms', 'convert', 'extensions', 'plot', 'utilities', 'inversio
 
 __version__ = get_versions()['version']
 del get_versions
+
+from .run import mtfit

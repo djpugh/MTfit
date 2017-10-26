@@ -4,9 +4,18 @@ mtfit
 *********************************
 
 Bayesian Moment Tensor Inversion Code by David J Pugh
-mtfit is based on the bayesian approach presented in #########
+mtfit is based on the bayesian approach presented in Pugh, D J, 2015,
+Bayesian Source Inversion of Microseismic Events, PhD Thesis, Department of Earth Sciences,
+University of Cambridge.
 
 The code can be called from the command line directly or from within python itself (see below)
+
+
+**Restricted:  For Non-Commercial Use Only**
+This code is protected intellectual property and is available solely for teaching
+and non-commercially funded academic research purposes.
+
+Applications for commercial use should be made to Schlumberger or the University of Cambridge.
 
 
 Input Data
@@ -186,14 +195,14 @@ Running from the command line
 To run from the command line on  linux/*nix  it is necessary to make sure that the mtfit script installed is on the path,
 or to set up a manual alias/script, e.g. for bash::
 
-    $ python -c "import mtfit;mtfit.__run__()" $*
+    $ python -c "import mtfit;mtfit.run.mtfit()" $*
 
 
 On windows using powershell add the following commandlet to your profile (for information on customizing your powershell profile see: http://www.howtogeek.com/50236/customizing-your-powershell-profile/)::
 
     function mtfit{
         $script={
-            python -c "import mtfit;mtfit.__run__()" $args
+            python -c "import mtfit;mtfit.run.mtfit()" $args
         }
         Invoke-Command -ScriptBlock $script -ArgumentList $args
     }
