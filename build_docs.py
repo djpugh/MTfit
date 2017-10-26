@@ -361,16 +361,21 @@ def build_epub(output_path=os.path.abspath('./docs/epub/')):
 def setup_gh_pages():
     # Copy docs/html to tempfolder
     from mtfit import __version__
+    print "------------------------------\n\nMaking Temporary Directory\n\n------------------------------"
     temp_dir = tempfile.mkdtemp()
+    print temp_dir
     shutil.copytree('./docs/html', os.path.join(temp_dir, 'html'))
     # Checkout gh-pages branch
     # Need to stash any current work
     import git
     repo = git.Repo('.')
+    print "------------------------------\n\nStashing Changes\n\n------------------------------"
     repo.git.stash('save')
+    print "------------------------------\n\nSwitching Branch to gh-pages\n\n------------------------------"
     current_branch = repo.active_branch.name
     repo.git.checkout('gh-pages')
     # Clean folder and copy html into folder
+    print "------------------------------\n\nCleaning Working Set\n\n------------------------------"
     contents = glob.glob('./*')
     for item in contents:
         if '.git' in item or '.venv' in item or '.tox' in item:
@@ -382,17 +387,23 @@ def setup_gh_pages():
             shutil.rmtree(item)
         else:
             os.remove(item)
+    print "------------------------------\n\nCopying Documentation from Temporary Directory\n\n------------------------------"
     copy_recursively(os.path.join(temp_dir, 'html'), os.path.abspath('./'))
+    print "------------------------------\n\nRemoving Temporary Directory\n\n------------------------------"
     shutil.rmtree(temp_dir)
+    print "------------------------------\n\nCommitting Documentation to gh-pages\n\n------------------------------"
     # Commit the changes
     repo.git.add('*')
     repo.git.commit('-m', 'Documentation {}'.format(__version__))
     # Checkout old branch
+    print "------------------------------\n\nReturning to {} Branch\n\n------------------------------".format(current_branch)
     repo.git.checkout(current_branch)
+    print "------------------------------\n\nUnstashing Changes\n\n------------------------------"
     repo.git.stash('pop')
 
 
 def copy_recursively(source_folder, destination_folder):
+    import ipdb; ipdb.set_trace()
     for root, dirs, files in os.walk(source_folder):
         for item in dirs:
             if item[0] == '.':
