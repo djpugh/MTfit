@@ -16,7 +16,7 @@ from unittest import result
 from unittest.signals import registerResult
 try:
     import ipdb
-except:
+except Exception:
     import pdb as ipdb
 
 import numpy as np
@@ -194,7 +194,7 @@ def run_tests(suite, verbosity=2):
     test_runner.stream.flush()
     try:
         test_runner.stream.stream.flush()
-    except:
+    except Exception:
         pass
     sys.stdout.flush()
     sys.stderr.flush()
@@ -251,7 +251,7 @@ def debug_tests(suite, _print=True):
                         from IPython.core.ultratb import VerboseTB
                         vtb = VerboseTB(call_pdb=1)
                         vtb(*sys.exc_info())
-                    except:
+                    except Exception:
                         import traceback
                         print('\n')
                         traceback.print_exc()

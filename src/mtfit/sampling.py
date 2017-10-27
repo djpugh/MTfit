@@ -220,7 +220,7 @@ class Sample(object):
                     output_string += str(V)+'\n'
                     output['dkl'] = dkl_estimate(self.ln_pdf, V, n_samples)
                     output_string += 'PDF Kullback-Leibler Divergence Estimate (Dkl): '+str(output['dkl'])+'\n\n'
-            except:
+            except Exception:
                 pass
             if isinstance(output['ln_pdf'], LnPDF):
                 output['ln_pdf'] = output['ln_pdf']._ln_pdf
@@ -271,7 +271,7 @@ class FileSample(Sample):
             from hdf5storage import loadmat
             self.savemat = savemat
             self.loadmat = loadmat
-        except:
+        except Exception:
             raise ImportError('hdf5storage module missing - required for FileSample sample type')
         # Set default filename
         if not isinstance(fname, str):
@@ -290,7 +290,7 @@ class FileSample(Sample):
                 self.n = data['n']
                 self.non_zero_samples = data['non_zero_samples']
                 self.i = data['i']
-            except:
+            except Exception:
                 pass
 
     def append(self, moment_tensors, ln_pdf, n, scale_factor=False, extensions_scale_factor=False):
@@ -388,7 +388,7 @@ class FileSample(Sample):
         output, output_string = super(FileSample, self).output(*args, **kwargs)
         try:
             os.remove(self.fname)
-        except:
+        except Exception:
             pass
         return output, output_string
 

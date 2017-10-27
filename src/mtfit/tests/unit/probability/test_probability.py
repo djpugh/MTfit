@@ -42,7 +42,7 @@ class ProbabilityTestCase(TestCase):
             probability._C_LIB_TESTS = True
             probability._C_LIB = True
             return True
-        except:
+        except Exception:
             return False
 
     def test_polarity_ln_pdf(self):

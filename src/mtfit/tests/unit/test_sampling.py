@@ -132,13 +132,13 @@ class FileSampleTestCase(unittest.TestCase):
         for filename in output_files:
             try:
                 os.remove(filename)
-            except:
+            except Exception:
                 pass
         output_files = glob.glob('*.mat*')
         for filename in output_files:
             try:
                 os.remove(filename)
-            except:
+            except Exception:
                 pass
 
     def test___init__(self):

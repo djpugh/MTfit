@@ -567,7 +567,7 @@ def SDR_SDR(strike, dip, rake):
         d2[np.abs(strike-s2) < 1] = d1[np.abs(strike-s2) < 1]
         s2[np.abs(strike-s2) < 1] = s1[np.abs(strike-s2) < 1]
         return s2, d2, r2
-    except:
+    except Exception:
         if np.abs(strike-s1) < 1:
             return (s2, d2, r2)
         else:
@@ -809,7 +809,7 @@ def toa_vec(azimuth, plunge, radians=False):
         return np.matrix([np.cos(azimuth)*np.sin(plunge),
                           np.sin(azimuth)*np.sin(plunge),
                           np.cos(plunge)])
-    except:
+    except Exception:
         return np.array([np.cos(azimuth)*np.sin(plunge),
                          np.sin(azimuth)*np.sin(plunge),
                          np.cos(plunge)])
@@ -993,9 +993,9 @@ def MT6_biaxes(MT6, c=isotropic_c(lambda_=1, mu=1)):
         lambda2mu = (
             3*(c[0]+c[6]+c[11])+4*(c[15]+c[18]+c[20])+2*(c[1]+c[2]+c[7]))/15
         mu = ((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15
-        l = lambda2mu-2*mu
+        lambda_ = lambda2mu-2*mu
         T, N, P, E = MT6_TNPE(MT6)
-        isotropic = (l+mu)*E[1]/mu-l*(E[0]+E[2])/(2*mu)
+        isotropic = (lambda_+mu)*E[1]/mu-lambda_*(E[0]+E[2])/(2*mu)
         if is_isotropic_c(c):
             explosion = isotropic
         else:
@@ -1008,8 +1008,7 @@ def MT6_biaxes(MT6, c=isotropic_c(lambda_=1, mu=1)):
                 return E[1]
             explosion = fsolve(isotropic_solve, isotropic)
 
-        explosion6 = np.squeeze(
-            explosion)*np.array([[1], [1], [1], [0], [0], [0]])
+        explosion6 = np.squeeze(explosion)*np.array([[1], [1], [1], [0], [0], [0]])
         if explosion6.shape != MT6.shape:
             explosion6 = explosion6.T
         T, N, P, E = MT6_TNPE(MT6c_D6(np.squeeze(MT6-explosion6), c))

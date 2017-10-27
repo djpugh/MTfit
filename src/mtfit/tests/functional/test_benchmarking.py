@@ -4,11 +4,11 @@ Module containing benchmarking tests for the different algorithms and example da
 """
 try:
     from .inversion import Inversion,ForwardTask
-except:
+except Exception:
     from inversion import Inversion,ForwardTask
 try:
     from .sampling import convert_keys_to_unicode
-except:
+except Exception:
     from sampling import convert_keys_to_unicode
 import sys,time,os,cPickle
 import numpy as np
@@ -50,7 +50,7 @@ def algorithm_benchmarks(event_file,scatter_file=None,algorithm=None,plot=False,
         if mat_version =='7.3':
             try:
                 from hdf5storage import savemat
-            except:
+            except Exception:
                 from scipy.io import savemat
                 mat_version='7'
         else:

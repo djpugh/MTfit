@@ -159,7 +159,7 @@ def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0):
         # Combine probabilities
         try:
             ln_p = cprobability.ln_prod(ln_p)
-        except:
+        except Exception:
             ln_p = np.sum(ln_p, 0)
     if isinstance(ln_p, np.ndarray):
         ln_p[np.isnan(ln_p)] = -np.inf
@@ -362,7 +362,7 @@ def amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x, percentage_e
         # Combine probabilities
         try:
             ln_p = cprobability.ln_prod(ln_p)
-        except:
+        except Exception:
             ln_p = np.sum(ln_p, 0)
     if isinstance(ln_p, np.ndarray):
         ln_p[np.isnan(ln_p)] = -np.inf
@@ -943,7 +943,7 @@ def dkl_estimate(ln_pdf, V, N):
         if not _C_LIB:
             raise Exception()
         return cprobability.dkl_uniform(ln_pdf.copy(), V, dV)
-    except:
+    except Exception:
         ind = ln_pdf > -np.inf
         ln_pdf = ln_pdf[ind].copy()-ln_pdf.max()
         pdf = np.exp(ln_pdf)

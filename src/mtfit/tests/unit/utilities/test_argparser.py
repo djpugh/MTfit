@@ -47,7 +47,7 @@ class ParserTestCase(TestCase):
         #             extension_tests.append(
         #                 extension_test_plugins[plugin_name]()[2])
         #             test_names.append(plugin_name)
-        #         except:
+        #         except Exception:
         #             pass
         example_mtfit_script = """#!/bin/bash
         ##mtfit qsub script
@@ -77,11 +77,11 @@ class ParserTestCase(TestCase):
         try:
             try:
                 os.remove('Test.i')
-            except:
+            except Exception:
                 pass
             try:
                 os.remove('Test2.i')
-            except:
+            except Exception:
                 pass
             # data_file -d
 
@@ -538,19 +538,19 @@ class ParserTestCase(TestCase):
                 self.assertTrue(options['recover'])
                 try:
                     os.remove('Test.inv')
-                except:
+                except Exception:
                     pass
                 try:
                     os.remove('Test.scatangle')
-                except:
+                except Exception:
                     pass
                 try:
                     os.remove('Test.p123')
-                except:
+                except Exception:
                     pass
                 try:
                     os.remove('Test.p124')
-                except:
+                except Exception:
                     pass
                 _ARGPARSE = False
                 if argparser._PYQSUB:
@@ -558,11 +558,11 @@ class ParserTestCase(TestCase):
             if not _ARGPARSE:
                 try:
                     os.remove('Test.i')
-                except:
+                except Exception:
                     pass
                 try:
                     os.remove('Test2.i')
-                except:
+                except Exception:
                     pass
                 print "\n\n------------OPTPARSE----------------\n\n"
                 # data_file -d
@@ -1013,19 +1013,19 @@ class ParserTestCase(TestCase):
                 self.assertTrue(options['recover'])
                 try:
                     os.remove('Test.inv')
-                except:
+                except Exception:
                     pass
                 try:
                     os.remove('Test.scatangle')
-                except:
+                except Exception:
                     pass
                 try:
                     os.remove('Test.p123')
-                except:
+                except Exception:
                     pass
                 try:
                     os.remove('Test.p124')
-                except:
+                except Exception:
                     pass
                 _ARGPARSE = _argparse
                 if argparser._PYQSUB:
@@ -1388,7 +1388,7 @@ def run_tests(verbosity=2):
             if fname not in old_files[file_type] and fname not in keep:
                 try:
                     os.remove(fname)
-                except:
+                except Exception:
                     pass
 
 

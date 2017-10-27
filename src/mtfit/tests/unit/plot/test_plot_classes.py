@@ -150,7 +150,7 @@ class MTDataTestCase(unittest.TestCase):
         self.assertEqual(self.MTData.u[0], 0)
         try:
             self.assertEqual(self.MTData.strike[0], 90)
-        except:
+        except Exception:
             self.assertEqual(self.MTData.strike[0], 270)
 
     def test__get_converted(self):

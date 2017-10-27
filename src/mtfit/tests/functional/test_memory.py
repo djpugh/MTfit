@@ -35,7 +35,7 @@ class _MemoryTestCase(unittest.TestCase):
     def test_data_initialisation(self):
         try:
             from .mem_report import size_report
-        except:
+        except Exception:
             from mem_report import size_report
 
         size_report(float=1.0,np_matrix=np.matrix([[1.0]]))
@@ -104,7 +104,7 @@ class _MemoryTestCase(unittest.TestCase):
     def test_polarity_probability_calculations(self):
         try:
             from .mem_report import size_report
-        except:
+        except Exception:
             from mem_report import size_report
         for n_loc_samples in [1,100,500,1000,2000,5000]:
             for n_samples in [1,100,500]:             
@@ -144,7 +144,7 @@ class _MemoryTestCase(unittest.TestCase):
     def test_amp_rat_probability_calculations(self):
         try:
             from .mem_report import size_report
-        except:
+        except Exception:
             from mem_report import size_report
         for n_loc_samples in [1,100,500,1000,2000]:
             for n_samples in [1,100,500]:             
