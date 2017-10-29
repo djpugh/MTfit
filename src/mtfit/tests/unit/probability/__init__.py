@@ -18,11 +18,11 @@ def run_tests(verbosity=2):
     if verbosity > 1:
         print('Running probability/probability.py Tests')
         print(spacer)
-        _run_tests(probability_test_suite(verbosity), verbosity)
+        return _run_tests(probability_test_suite(verbosity), verbosity)
     else:
         print('Running unit tests')
         print(spacer)
-        _run_tests(test_suite(verbosity), verbosity)
+        return _run_tests(test_suite(verbosity), verbosity)
 
 
 def debug_tests(verbosity=2):
