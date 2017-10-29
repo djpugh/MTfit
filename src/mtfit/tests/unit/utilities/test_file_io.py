@@ -7,7 +7,6 @@ Tests for src/utils/file_io.py
 
 import unittest
 import os
-import multiprocessing
 import glob
 import cPickle
 
