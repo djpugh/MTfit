@@ -55,6 +55,7 @@ def setup_package():
                   requires=['numpy', 'scipy'],
                   install_requires=['numpy>=1.7.0', 'scipy', 'cython>=0.20.2', 'setuptools', 'pyqsub>=1.0.2'],
                   provides=['mtfit'],
+                  test_suite='mtfit.tests.test_suite',
                   description='mtfit: Bayesian Moment Tensor Inversion Code',
                   long_description=long_description,
                   package_data={'': ['*.rst', 'examples/README', 'examples/command_line.sh', 'examples/command_line.bat', '*.pyx', '*.pxd', '*.c',

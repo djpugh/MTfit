@@ -2,10 +2,12 @@ import os
 import sys
 import unittest
 import glob
+import subprocess
 
 
 # this needs to be run in the repository with the examples
-sys.path.insert(0, os.abspath(os.relpath(__file__), '../../../../examples'))
+examples_path = '.'
+sys.path.insert(0, examples_path)
 try:
     from double_couple import run as double_couple_run
     from location_uncertainty import run as location_uncertainty_run
@@ -120,14 +122,14 @@ class ExamplesTestCase(unittest.TestCase):
         relative_event_run(test=True)
 
     def test_command_line(self):
-        import sys
-        script='command_line.sh'
-        if 'win' in sys.platform:
-            script='command_line.bat'
+        script = 'command_line.sh'
+        if sys.platform.startswith('win'):
+            script = 'command_line.bat'
             return
-        cwd=os.getcwd() 
-        os.chmod(os.path.split(__file__)[0]+os.path.sep+script,777)
-        self.assertFalse(subprocess.call([os.path.split(__file__)[0]+os.path.sep+script]))#Returns 0
+        script_path = os.path.join(examples_path, script)
+        os.chmod(script_path, 777)
+        self.assertEqual(subprocess.call([script_path]), 0)  # Returns 0
+
 
 def test_suite(verbosity=2):
     return unittest.TestSuite([unittest.TestLoader().loadTestsFromTestCase(ExamplesTestCase)])
