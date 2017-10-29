@@ -1380,26 +1380,40 @@ S003,110,10,1,0.05"""
             os.remove('mtfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
-        # self.assertTrue(self.inversion.algorithm.pdf_sample.n,str(self.inversion.algorithm.pdf_sample.n))
+
+    def test__mcmc_multiple_forward_location_uncertainty(self):
+        try:
+            os.remove('mtfitOutput_joint_inversionMT.mat')
+        except Exception:
+            pass
+        data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162", "S0083"], 'Azimuth': np.matrix([[90.0], [270.0], [180.]]), 'TakeOffAngle': np.matrix([[30.0], [60.0], [35.]])},
+                                              'Measured': np.matrix([[1], [1], [-1]]), 'Error': np.matrix([[0.1], [0.5], [0.02]])}}
+        self.inversion = Inversion([data, data], algorithm='McMC', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, multiple_events=True, convert=False)
+        self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
-        self.inversion.location_pdf_files = ['test.scatangle', 'test.scatangle']
+        self.inversion.location_pdf_files = ['test.scatangle']
         self.inversion.algorithm.max_time = 10
         self.inversion._mcmc_multiple_forward()
         try:
             os.remove('test.scatangle')
         except Exception:
             pass
-        data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
-                                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])},
-                'PRMSQAmplitude': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
-                                   'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])}}
         self.assertTrue(os.path.exists('mtfitOutput_joint_inversionMT.mat'))
         try:
             os.remove('mtfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
-        self.tearDown()
+
+    def test__mcmc_multiple_forward_amplitude(self):
+        try:
+            os.remove('mtfitOutput_joint_inversionMT.mat')
+        except Exception:
+            pass
+        data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
+                                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])},
+                'PRMSQAmplitude': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
+                                   'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])}}
         self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5,
                                    phy_mem=1, max_time=10, relative_amplitude=True, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
@@ -1409,10 +1423,22 @@ S003,110,10,1,0.05"""
             os.remove('mtfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
+
+    def test__mcmc_multiple_forward_amplitude_location_uncertainty(self):
+        try:
+            os.remove('mtfitOutput_joint_inversionMT.mat')
+        except Exception:
+            pass
+        data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
+                                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])},
+                'PRMSQAmplitude': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
+                                   'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])}}
+        self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5,
+                                   phy_mem=1, max_time=10, relative_amplitude=True, convert=False)
+        self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
-        self.inversion.location_pdf_files = [
-            'test.scatangle', 'test.scatangle']
+        self.inversion.location_pdf_files = ['test.scatangle']
         self.inversion.algorithm.max_time = 10
         self.inversion._mcmc_multiple_forward()
         try:
@@ -1424,7 +1450,6 @@ S003,110,10,1,0.05"""
             os.remove('mtfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
-        # self.assertTrue(len(self.inversion.algorithm.pdf_sample))
 
     def test__MATLAB_output(self):
         self.tearDown()
@@ -1474,9 +1499,9 @@ S003,110,10,1,0.05"""
             f.write(self.station_angles())
         self.inversion = Inversion({'PPolarity': {'Stations': {'Name': ['S0649', "S0162", "S0083"], 'Azimuth': np.matrix([[90.0], [270.0], [180.]]), 'TakeOffAngle': np.matrix([[30.0], [60.0], [35.]])},
                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.001], [0.002]])}},
-                                   algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=10, output_format='hyp', convert=False)
+                                   algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=2, output_format='hyp', convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 2
         self.inversion.forward()
         try:
             os.remove('test.scatangle')
