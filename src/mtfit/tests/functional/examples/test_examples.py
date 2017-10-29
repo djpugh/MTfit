@@ -1,9 +1,28 @@
-import subprocess
 import os
+import sys
+import unittest
+import glob
 
-from mtfit.inversion import Inversion
+
+# this needs to be run in the repository with the examples
+sys.path.insert(0, os.abspath(os.relpath(__file__), '../../../../examples'))
+try:
+    from double_couple import run as double_couple_run
+    from location_uncertainty import run as location_uncertainty_run
+    from make_csv_file import run as make_csv_file_run
+    from mpi import run as mpi_run
+    from p_polarity import run as p_polarity_run
+    from p_sh_amplitude_ratio import run as p_sh_amplitude_ratio_run
+    from time_inversion import run as time_inversion_run
+    from synthetic_event import run as synthetic_event_run
+    from krafla_event import run as krafla_event_run
+    from relative_event import run as relative_event_run
+    in_repo = True
+except ImportError:
+    in_repo = False
 
 
+@unittest.skipIf(not in_repo)
 class ExamplesTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -88,19 +107,14 @@ class ExamplesTestCase(unittest.TestCase):
         self.assertTrue(os.path.exists('./Time_Inversion_Example_OutputDC.mat'))
 
     def test_synthetic_event_run(self):
-        #Test it runs without errors
+        # Test it runs without errors
         synthetic_event_run(test=True)
-        synthetic_event_run(case='ar',test=True)
+        synthetic_event_run(case='ar', test=True)
 
     def test_krafla_event_run(self):
-        #Test it runs without errors
+        # Test it runs without errors
         krafla_event_run(test=True)
-        krafla_event_run(case='ppolarityprob',test=True)
-
-    def test_time_inversion_run(self):
-        time_inversion_run(test=True)
-        self.assertTrue(os.path.exists('./Time_Inversion_Example_OutputMT.mat'))
-        self.assertTrue(os.path.exists('./Time_Inversion_Example_OutputDC.mat'))
+        krafla_event_run(case='ppolarityprob', test=True)
 
     def test_relative_event_run(self):
         relative_event_run(test=True)
@@ -115,16 +129,15 @@ class ExamplesTestCase(unittest.TestCase):
         os.chmod(os.path.split(__file__)[0]+os.path.sep+script,777)
         self.assertFalse(subprocess.call([os.path.split(__file__)[0]+os.path.sep+script]))#Returns 0
 
-
 def test_suite(verbosity=2):
-    return unittest.TestSuite([unittest.TestLoader().loadTestsFromTestCase(__ExamplesTestCase)])
+    return unittest.TestSuite([unittest.TestLoader().loadTestsFromTestCase(ExamplesTestCase)])
 
 
 def run_tests(verbosity=2):
     """Runs algorithm module tests."""
-    suite=_test_suite(verbosity)
+    suite = test_suite(verbosity)
     return unittest.TextTestRunner(verbosity=4).run(suite)
 
 
-if  __name__=='__main__':
-    run_tests(verbosity)
+if __name__ == '__main__':
+    run_tests(2)
