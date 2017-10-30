@@ -3,7 +3,6 @@ import glob
 import os
 
 from mtfit.extensions.scatangle import parse_scatangle
-from mtfit.extensions.scatangle import cscatangle
 
 
 class ScatangleTestCase(unittest.TestCase):
@@ -16,12 +15,12 @@ class ScatangleTestCase(unittest.TestCase):
             if fname not in self.existing_scatangle_files:
                 try:
                     os.remove(fname)
-                except:
+                except Exception:
                     print('Cannot remove {}'.format(fname))
         import gc
         try:
             os.remove('test.scatangle')
-        except:
+        except Exception:
             pass
         gc.collect()
 
@@ -96,16 +95,10 @@ class ScatangleTestCase(unittest.TestCase):
         self.assertEqual(sorted(A[0].keys()), ['Azimuth', 'Name', 'TakeOffAngle'])
         open('test.scatangle', 'w').write('\n'.join([self.station_angles() for i in range(40)]))
         AC, BC = parse_scatangle('test.scatangle', bin_size=1)
-        cscatangle = False
-        APy, BPy = parse_scatangle('test.scatangle', bin_size=1)
+        APy, BPy = parse_scatangle('test.scatangle', bin_size=1, _use_c=False)
         self.assertEqual(len(APy), 1)
         self.assertEqual(len(AC), 1)
         self.assertEqual(BPy, BC)
-        try:
-            from mtfit.extensions import cscatangle as _cscatangle
-            cscatangle = _cscatangle
-        except ImportError:
-            pass
         os.remove('test.scatangle')
 
 

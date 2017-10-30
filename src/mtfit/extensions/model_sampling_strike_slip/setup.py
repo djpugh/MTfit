@@ -7,7 +7,7 @@ or python setup.py install
 """
 try:
     from setuptools import setup
-except:
+except Exception:
     from distutils.core import setup
 
 

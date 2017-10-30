@@ -533,6 +533,9 @@ class MultipleEventsForwardTask(object):
         self.location_sample_size = location_sample_size
         self._marginalise_relative = marginalise_relative
         self._combine = combine
+        # Need to implement marginalisation of scale factor for self._marginalise_relative and location_samples
+        if self._marginalise_relative and self.location_sample_size > 1:
+            raise NotImplementedError('Marginalisation of location samples on relative data not implemented yet')
         self.extension_data = extension_data
         if self._relative and not self._combine and self._return_zero:
             self._combine = True
@@ -820,22 +823,26 @@ class MultipleEventsForwardTask(object):
             try:
                 for key in extension_scale.keys():
                     extension_scale[key] = np.array([{'mu': extension_scale[key][:, i], 'ln_p': ln_p_total[:, i], 'sigma': extension_scale_uncertainty[key][:, i]} for i in range(extension_scale[key].shape[1])])
-            except:
+            except Exception:
                 extension_scale = {}
             p_total = np.exp(ln_p_total+ln_scale)
             # Marginalise
             p_total = np.matrix(np.sum(p_total, 0))
             ln_p_total = np.log(p_total)-ln_scale
-        elif self._relative:
-            scale_factor = scale_factor.squeeze(0)
-            scale_factor_uncertainty = scale_factor_uncertainty.squeeze(0)
+        elif self._relative:  # marginalise_relative is true
+            if scale_factor.shape[0] == 1:
+                scale_factor = scale_factor.squeeze(0)
+                scale_factor_uncertainty = scale_factor_uncertainty.squeeze(0)
+            elif scale_factor.shape[1] == 1:
+                scale_factor = scale_factor.squeeze(1)
+                scale_factor_uncertainty = scale_factor_uncertainty.squeeze(1)
             scale_factor = np.array([{'mu': scale_factor[i, :, :], 'sigma': scale_factor_uncertainty[i, :, :]} for i in range(scale_factor.shape[0])])
             try:
                 for key in extension_scale.keys():
                     extension_scale[key] = extension_scale[key].squeeze(0)
                     extension_scale_uncertainty[key] = extension_scale_uncertainty[key].squeeze(0)
                     extension_scale[key] = np.array([{'mu': extension_scale[key][i, :, :], 'ln_p': ln_p_total[:, i], 'sigma': extension_scale_uncertainty[key][i, :, :]} for i in range(extension_scale[key].shape[0])])
-            except:
+            except Exception:
                 extension_scale = {}
         else:
             scale_factor = False
@@ -1333,7 +1340,7 @@ class Inversion(object):
         if not len(data) and not data_file:
             try:
                 data_file = sys.argv[1]
-            except:
+            except Exception:
                 pass
         # Set MPI parameters
         self._MPI = kwargs.get('mpi', False)
@@ -1343,7 +1350,7 @@ class Inversion(object):
                 from mpi4py import MPI
                 self.comm = MPI.COMM_WORLD
                 self._print('Running mtfit using MPI')
-            except:
+            except Exception:
                 self._MPI = False
         # Set DC parameters
         if self.dc:
@@ -1404,7 +1411,7 @@ class Inversion(object):
             _VERBOSITY = 4
         try:
             kwargs.pop('debug')
-        except:
+        except Exception:
             pass
         # Handle location PDFs
         if location_pdf_file_path:
@@ -1511,11 +1518,11 @@ class Inversion(object):
         try:
             with open(filename, 'rb') as f:
                 data = pickle.load(f)
-        except:
+        except Exception:
             try:
                 with open(filename, 'r') as f:
                     data = pickle.load(f)
-            except:
+            except Exception:
                 data = False
                 # Parser plug-in extensions.
                 parser_names, parsers = get_extensions('mtfit.parsers', {'.csv': parse_csv, '.hyp': parse_hyp})
@@ -1524,20 +1531,20 @@ class Inversion(object):
                         ext = os.path.splitext(filename)[1]
                         data = parsers[ext](filename)
                     # Else try all the parsers
-                    except:
+                    except Exception:
                         for parser in parsers.values():
                             try:
                                 data = parser(filename)
-                            except:
+                            except Exception:
                                 pass
                 except Exception:
                     # If errors then try to parse csv and then parse hyp
                     try:
                         data = parse_csv(filename)
-                    except:
+                    except Exception:
                         try:
                             data = parse_hyp(filename)
-                        except:
+                        except Exception:
                             print 'Parsers available are: ', parsers.keys()
                             traceback.print_exc()
                 if isinstance(data, bool):
@@ -1565,14 +1572,14 @@ class Inversion(object):
                 ext = os.path.splitext(filename)[1]
                 return parsers[ext](filename)
             # Else try with all the parsers
-            except:
+            except Exception:
                 for parser in parsers.values():
                     try:
                         return parser(filename)
-                    except:
+                    except Exception:
                         pass
                 return False
-        except:
+        except Exception:
             if len(parser_names) == 0:  # If not built correctly, can load scatangle file
                 return parse_scatangle(filename)
             traceback.print_exc()
@@ -1676,7 +1683,7 @@ class Inversion(object):
         # Get number of location PDF samples
         try:
             number_location_samples = len(self.location_sample_multipliers)
-        except:
+        except Exception:
             number_location_samples = self.number_location_samples
         if not number_location_samples:
             number_location_samples = 1
@@ -1715,7 +1722,7 @@ class Inversion(object):
         self.number_samples = int(number_samples)
         try:
             self.kwargs['number_samples'] = self.number_samples
-        except:
+        except Exception:
             pass
 
     def _worker_params(self, parallel=True, n=0, phy_mem=0):
@@ -1767,7 +1774,7 @@ class Inversion(object):
             try:
                 import psutil
                 self._floatmem = mem_scale*psutil.virtual_memory().available/n
-            except:
+            except Exception:
                 phy_mem = 8
                 self._floatmem = mem_scale*phy_mem*(1024*1024*1024.)
         else:
@@ -1789,7 +1796,7 @@ class Inversion(object):
         """Closes pool and exits, allowing object to be deleted."""
         try:
             self._close_pool()
-        except:
+        except Exception:
             traceback.print_exc()
 
         gc.collect()
@@ -1803,7 +1810,7 @@ class Inversion(object):
                 self.pool.close()
                 del self.pool
             self.pool = False
-        except:
+        except Exception:
             traceback.print_exc()
 
         gc.collect()
@@ -1840,14 +1847,14 @@ class Inversion(object):
                 # No files read
                 try:
                     output = read_binary_output(mt_fid, version=binary_file_version)
-                except:
+                except Exception:
                     continue
                 if isinstance(output, list) and len(output) == 1:
                     output = output[0]
             else:
                 try:
                     binary_output = read_binary_output(mt_fid)
-                except:
+                except Exception:
                     continue
                 if isinstance(binary_output, list) and len(binary_output) == 1:
                     binary_output = binary_output[0]
@@ -1878,14 +1885,14 @@ class Inversion(object):
                 if not len(output):
                     try:
                         output = read_sf_output(fid)
-                    except:
+                    except Exception:
                         continue
                     if isinstance(output, list) and len(output) == 1:
                         output = output[0]
                 else:
                     try:
                         scale_factors_output = read_sf_output(fid)
-                    except:
+                    except Exception:
                         continue
                     if isinstance(scale_factors_output, list) and len(scale_factors_output) == 1:
                         scale_factors_output = scale_factors_output[0]
@@ -1920,7 +1927,7 @@ class Inversion(object):
                         else:
                             V = (np.pi*np.pi*np.pi)
                         output[i]['dkl'] = dkl_estimate(output[i]['ln_pdf'], V, output[i]['total_number_samples'])
-                    except:
+                    except Exception:
                         pass
                     output[i]['dV'] = 1
         else:
@@ -1934,7 +1941,7 @@ class Inversion(object):
                 else:
                     V = (np.pi*np.pi*np.pi)
                 output['dkl'] = dkl_estimate(output['ln_pdf'], V, output['total_number_samples'])
-            except:
+            except Exception:
                 pass
         if os.path.splitext(fid)[0].split('.')[-1] == str(0):
             fid = '.'.join(os.path.splitext(fid)[0].split('.')[:-1])+os.path.splitext(fid)[1]
@@ -2009,7 +2016,7 @@ class Inversion(object):
             try:
                 if out_data[0] and out_data[0]['Events']['Probability'].shape[-1]*len([key for key in out_data[0]['Events'].keys() if 'MTSpace' in key]) < 20000000:
                     kwargs['version'] = '7'
-            except:
+            except Exception:
                 out_data[0] = False
         # output data
         output_data_names, output_data_formats = get_extensions('mtfit.output_formats', {'matlab': MATLAB_output, 'pickle': pickle_output, 'hyp': hyp_output})
@@ -2109,7 +2116,7 @@ class Inversion(object):
         else:
             try:
                 fid = self._path+os.path.sep+str(event['UID'])+source+'.mat'
-            except:
+            except Exception:
                 fid = self._path+os.path.sep+'mtfitOutput'+source+'.mat'
         # Add rank to MPI file output (so they don't overwrite)
         if self._MPI and single and self.mpi_output:
@@ -2178,12 +2185,12 @@ class Inversion(object):
                 gc.collect()
                 self._print('Recover option enabled and in progress file exists, returning to this point')  # How to handle mcmc?
                 return True
-            except:
+            except Exception:
                 return False
         elif not self._recover:
             try:
                 os.remove(fid.split('.mat')[0]+'_in_progress.mat')
-            except:
+            except Exception:
                 pass
             return False
 
@@ -2205,7 +2212,7 @@ class Inversion(object):
             self._print('\n\nEvent '+str(i+1)+'\n--------\n')
             try:
                 self._print('UID: '+str(event['UID'])+'\n')
-            except:
+            except Exception:
                 self._print('No UID\n')
             # Do recovery test
             if self._recover_test(fid):
@@ -2238,7 +2245,7 @@ class Inversion(object):
                                     ' accepted samples: '+str((float(result['algorithm_output_data']['accepted'])/float(result['algorithm_output_data']['total_number_samples']))*100)[:4]+'%')
                         try:
                             self.output(result['event_data'], result['fid'], result['algorithm_output_data'], result['location_samples'], result['location_sample_multipliers'], output_format=self.output_format)
-                        except:
+                        except Exception:
                             self._print('Output Error')
                             traceback.print_exc()
 
@@ -2262,7 +2269,8 @@ class Inversion(object):
                     except Exception:
                         self._print('Output Error')
                         traceback.print_exc()
-
+            except NotImplementedError as e:
+                raise e
             except Exception:
                 traceback.print_exc()
         # Get pool results
@@ -2277,7 +2285,7 @@ class Inversion(object):
                             ' accepted samples: '+str(accepted)[:4]+'%')
                 try:
                     self.output(result['event_data'], result['fid'], result['algorithm_output_data'], result['location_samples'], result['location_sample_multipliers'], output_format=self.output_format)
-                except:
+                except Exception:
                     self._print('Output Error')
                     traceback.print_exc()
 
@@ -2345,6 +2353,8 @@ class Inversion(object):
                     relative_amplitude.append(relative_amplitude_i)
                     percentage_error_relative_amplitude.append(percentage_error_relative_amplitude_i)
                     relative_amplitude_stations.append(relative_amplitude_stations_i)
+            except NotImplementedError as e:
+                raise e
             except Exception:
                 traceback.print_exc()
         self._print('\n\nJoint Inversion: '+str(self.number_events)+' Events\n--------\n')
@@ -2373,7 +2383,9 @@ class Inversion(object):
                 try:
                     self.output(result['event_data'], result['fid'], result['algorithm_output_data'], result['location_samples'], result['location_sample_multipliers'],
                                 output_format=self.output_format)
-                except:
+                except NotImplementedError as e:
+                    raise e
+                except Exception:
                     self._print('Output Error')
                     traceback.print_exc()
 
@@ -2389,10 +2401,13 @@ class Inversion(object):
                     self.output(self.data, fid, result['algorithm_output_data'], a_polarity=a_polarity, error_polarity=error_polarity, a1_amplitude_ratio=a1_amplitude_ratio,
                                 a2_amplitude_ratio=a2_amplitude_ratio, amplitude_ratio=amplitude_ratio, percentage_error1_amplitude_ratio=percentage_error1_amplitude_ratio,
                                 percentage_error2_amplitude_ratio=percentage_error2_amplitude_ratio, output_format=self.output_format)
+                except NotImplementedError as e:
+                    raise e
                 except Exception:
                     self._print('Output Error')
                     traceback.print_exc()
-
+        except NotImplementedError as e:
+            raise e
         except Exception:
             traceback.print_exc()
 
@@ -2417,7 +2432,7 @@ class Inversion(object):
             self._print('\n\nEvent '+str(i+1)+'\n--------\n')
             try:
                 self._print('UID: '+str(event['UID'])+'\n')
-            except:
+            except Exception:
                 self._print('No UID\n')
             # Recover test
             if self._recover_test(fid):
@@ -2493,7 +2508,7 @@ class Inversion(object):
                             _start_time = False
                             try:
                                 _start_time = self.algorithm.start_time
-                            except:
+                            except Exception:
                                 pass
                             MTs, ignored_end = self._parse_job_result(False)  # Get new random MTs
                             self.algorithm.iteration = _iteration
@@ -2684,7 +2699,7 @@ class Inversion(object):
                         _start_time = False
                         try:
                             _start_time = self.algorithm.start_time
-                        except:
+                        except Exception:
                             pass
                         # Get new random MTs
                         MTs, ignored_end = self._parse_job_result(False)
@@ -3205,7 +3220,7 @@ def station_angles(stations, phase, radians=False):
     try:
         azimuth = np.matrix(stations['Azimuth'])
         takeoff_angle = np.matrix(stations['TakeOffAngle'])
-    except:
+    except Exception:
         azimuth = stations[0]  # stations is angle tuple
         takeoff_angle = stations[1]
     # Transpose to correct orientation if necessary
@@ -3554,7 +3569,7 @@ def combine_mpi_output(filepath='', output_format='matlab', parallel=False, mpi=
         try:
             from mpi4py import MPI
             comm = MPI.COMM_WORLD
-        except:
+        except Exception:
             mpi = False
     # Set filepath to folder
     if os.path.isdir(filepath):

@@ -19,7 +19,7 @@ import warnings
 try:
     import pyqsub  # python module for cluster job submission using qsub.
     _PYQSUB = True
-except:
+except Exception:
     _PYQSUB = False
 
 from .inversion import Inversion
@@ -138,7 +138,7 @@ def run(args=None):
                 # could add extra changeable MPI python handling here (and
                 # elsewhere?)
                 import mpi4py  # noqa F401
-            except:
+            except Exception:
                 raise ImportError('MPI module mpi4py not found, unable to run in mpi')
             # restart python as mpirun
             options['_mpi_call'] = True

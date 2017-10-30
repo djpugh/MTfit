@@ -26,15 +26,16 @@ def run_tests(verbosity=2):
     if verbosity > 1:
         print('Running convert/moment_tensor_conversion.py Tests')
         print(spacer)
-        _run_tests(moment_tensor_conversion_test_suite(verbosity), verbosity)
+        test_result = _run_tests(moment_tensor_conversion_test_suite(verbosity), verbosity)
         print(spacer)
         print('Running convert/cmoment_tensor_conversion.py Tests')
         print(spacer)
-        _run_tests(cmoment_tensor_conversion_test_suite(verbosity), verbosity)
+        test_result = _run_tests(cmoment_tensor_conversion_test_suite(verbosity), verbosity, test_result=test_result)
     else:
         print('Running unit tests')
         print(spacer)
-        _run_tests(test_suite(verbosity), verbosity)
+        test_result = _run_tests(test_suite(verbosity), verbosity)
+    return test_result
 
 
 def debug_tests(verbosity=3):

@@ -1,10 +1,10 @@
 from mtfit.tests.unit import run_tests as run_unit_tests
-# from mtfit.tests.functional import run_tests as run_functional_tests
+from mtfit.tests.unit import test_suite as unit_test_suite
+
+
+def test_suite():
+    return unit_test_suite(2)
+
 
 if __name__ == "__main__":
     results = run_unit_tests(1)
-
-    # if passed:
-    #     run_functional_tests(1)
-    # else:
-    #     raise Exception('Tests failed')

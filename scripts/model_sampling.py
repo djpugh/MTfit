@@ -167,7 +167,7 @@ def check_memory(model_mapping):
         if free_memory > 2*total_memory:
             return True
         return False
-    except:
+    except Exception:
         if 2*total_memory < 6000:
             return True
         return False

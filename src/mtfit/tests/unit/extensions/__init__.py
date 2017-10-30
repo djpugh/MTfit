@@ -25,11 +25,12 @@ def run_tests(verbosity=2):
     if verbosity > 1:
         print('Running extensions/scatangle.py Tests')
         print(spacer)
-        _run_tests(scatangle_test_suite(verbosity), verbosity)
+        test_result = _run_tests(scatangle_test_suite(verbosity), verbosity)
     else:
         print('Running unit tests')
         print(spacer)
-        _run_tests(test_suite(verbosity), verbosity)
+        test_result = _run_tests(test_suite(verbosity), verbosity)
+    return test_result
 
 
 def debug_tests(verbosity=2):

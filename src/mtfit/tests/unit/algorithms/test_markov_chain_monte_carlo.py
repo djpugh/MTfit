@@ -452,7 +452,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
                 try:
                     self.mcmc_algorithm.xi.pop('g0')
                     self.mcmc_algorithm.xi.pop('d0')
-                except:
+                except Exception:
                     pass
             else:
                 self.mcmc_algorithm.dc = False
@@ -903,7 +903,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
                 try:
                     self.mcmc_algorithm.xi.pop('g0')
                     self.mcmc_algorithm.xi.pop('d0')
-                except:
+                except Exception:
                     pass
             self.mcmc_algorithm.gaussian_jump_params = True
             self.mcmc_algorithm.new_sample()

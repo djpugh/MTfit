@@ -140,7 +140,7 @@ class JobPool(object):
             if len([u for u in os.environ.keys() if 'PBS_' in u]):
                 try:
                     number_workers = int(os.environ['PBS_NUM_PPN'])
-                except:
+                except Exception:
                     pass
         self.number_workers = number_workers
         self.single_life = single_life

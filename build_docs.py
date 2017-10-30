@@ -345,7 +345,7 @@ def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit.pdf')):
         raise Exception('Fatal Error in PDF generation')
     try:
         os.mkdir('./docs/pdf')
-    except:
+    except Exception:
         pass
     shutil.move('./docs/latex/mtfit.pdf', output_path)
 
@@ -380,7 +380,7 @@ def setup_gh_pages():
     for item in contents:
         if '.git' in item or '.venv' in item or '.tox' in item:
             continue
-        if 'src' in item or 'docs' in item or 'examples' in item:
+        if 'src' in item or 'docs' in item or 'examples' in item or 'wheelhouse' in item:
             # ignored in .gitignore
             continue
         if os.path.isdir(item):
@@ -588,7 +588,7 @@ def make_plot_docs():
 
     try:
         from mtfit.utilities.argparser import MTplot_parser
-    except:
+    except Exception:
         # Haven't installed the package so add src to the system path
         sys.path.insert(0, 'src')
         from mtfit.utilities.argparser import MTplot_parser
@@ -684,7 +684,7 @@ def setup_extensions():
     try:
         from mtfit.utilities.extensions import get_extensions
         from mtfit.extensions import rst_table, rst_docs, __doc1__
-    except:
+    except Exception:
         # Haven't installed the package so add src to the system path
         sys.path.insert(0, 'src')
         from mtfit.utilities.extensions import get_extensions
@@ -725,7 +725,7 @@ The entry points are:
 def setup_extensions_source_code():
     try:
         from mtfit.utilities.extensions import get_extensions
-    except:
+    except Exception:
         # Haven't installed the package so add src to the system path
         sys.path.insert(0, 'src')
         from mtfit.utilities.extensions import get_extensions

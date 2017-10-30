@@ -30,19 +30,20 @@ def run_tests(verbosity=2):
     if verbosity > 1:
         print('Running src/plot/core.py Tests')
         print(spacer)
-        _run_tests(core_test_suite(verbosity), verbosity)
+        test_result = _run_tests(core_test_suite(verbosity), verbosity)
         print(spacer)
         print('Running src/plot/plot_classes.py Tests')
         print(spacer)
-        _run_tests(plot_classes_test_suite(verbosity), verbosity)
+        test_result = _run_tests(plot_classes_test_suite(verbosity), verbosity, test_result=test_result)
         print(spacer)
         print('Running src/plot/spherical_projection.py Tests')
         print(spacer)
-        _run_tests(spherical_projection_test_suite(verbosity), verbosity)
+        test_result = _run_tests(spherical_projection_test_suite(verbosity), verbosity, test_result=test_result)
     else:
         print('Running unit tests')
         print(spacer)
-        _run_tests(test_suite(verbosity), verbosity)
+        test_result = _run_tests(test_suite(verbosity), verbosity)
+    return test_result
 
 
 def debug_tests(verbosity=3):
