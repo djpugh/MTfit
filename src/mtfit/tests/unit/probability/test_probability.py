@@ -669,30 +669,21 @@ class ProbabilityTestCase(TestCase):
         self.assertAlmostEqual(polarity_ln_pdf(
             np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, 0.1)[0, 0], -2.40794561)
         # test for two station p missing
-        self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(
-            np.expand_dims(P, 1), 1)*A, M, sigma, np.array([0.2, 0.1]))[0, 0], -2.52572864)
+        self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, np.array([0.2, 0.1]))[0, 0], -2.52572864)
 
         if self.enable_c_lib():
             P = np.array([1, -1])
-            self.assertTrue((polarity_ln_pdf(np.expand_dims(
-                np.expand_dims(P, 1), 1)*A, M, sigma)[0, 0] == np.log(0)+np.log(1)))
-            self.assertAlmostEqual(polarity_ln_pdf(
-                np.expand_dims(np.expand_dims(P, 1), 1)*A, M2, sigma)[0, 0], -3.78318433, 5)
-            self.assertAlmostEqual(len(polarity_ln_pdf(
-                np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3])).shape), 2)
-            self.assertAlmostEqual(polarity_ln_pdf(np.array(
-                np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]))[0, 0], -45.35532285, 1)
-            self.assertAlmostEqual(polarity_ln_pdf(np.array(
-                np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), 0.1)[0, 1], -5.28884939, 5)
-            self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array(
-                [0.2, 0.5, 0.3]), np.array([0.1, 0.2, 0.3]))[0, 0], -5.11390762, 5)
-            ln_p = polarity_ln_pdf(Ap, MT, ErrorPolarity)
+            self.assertTrue((polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, _use_c=True)[0, 0] == np.log(0)+np.log(1)))
+            self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M2, sigma, _use_c=True)[0, 0], -3.78318433, 5)
+            self.assertAlmostEqual(len(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), _use_c=True).shape), 2)
+            self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), _use_c=True)[0, 0], -45.35532285, 1)
+            self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), 0.1, _use_c=True)[0, 1], -5.28884939, 5)
+            self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), np.array([0.1, 0.2, 0.3]), _use_c=True)[0, 0], -5.11390762, 5)
+            ln_p = polarity_ln_pdf(Ap, MT, ErrorPolarity, _use_c=True)
             self.assertEqual(ln_p[0, 0], -np.inf)
-            self.assertAlmostEqual(polarity_ln_pdf(
-                np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, 0.1)[0, 0], -2.40794561)
+            self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, 0.1, _use_c=True)[0, 0], -2.40794561)
             # test for two station p missing
-            self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(
-                np.expand_dims(P, 1), 1)*A, M, sigma, np.array([0.2, 0.1]))[0, 0], -2.52572864)
+            self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, np.array([0.2, 0.1]), _use_c=True)[0, 0], -2.52572864)
         else:
             print('C Library tests not run')
 

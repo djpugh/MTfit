@@ -144,12 +144,12 @@ class FileSampleTestCase(unittest.TestCase):
     def test___init__(self):
         self.assertEqual(self.FileSample.fname, 'test_in_progress.mat')
         self.assertEqual(self.FileSample.n, 0)
-        self.assertEqual(self.FileSample.i, 1)
+        self.assertEqual(self.FileSample._i, 1)
 
     def test_recover(self):
         self.test_append()
         self.__setattr__('FileSample', FileSample('test'))
-        self.assertEqual(self.FileSample.i, 3)
+        self.assertEqual(self.FileSample._i, 3)
         self.assertEqual(self.FileSample.n, 50)
         self.assertEqual(self.FileSample.non_zero_samples, 2)
 

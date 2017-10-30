@@ -533,6 +533,9 @@ class MultipleEventsForwardTask(object):
         self.location_sample_size = location_sample_size
         self._marginalise_relative = marginalise_relative
         self._combine = combine
+        # Need to implement marginalisation of scale factor for self._marginalise_relative and location_samples
+        if self._marginalise_relative and self.location_sample_size > 1:
+            raise NotImplementedError('Marginalisation of location samples on relative data not implemented yet')
         self.extension_data = extension_data
         if self._relative and not self._combine and self._return_zero:
             self._combine = True
@@ -826,9 +829,13 @@ class MultipleEventsForwardTask(object):
             # Marginalise
             p_total = np.matrix(np.sum(p_total, 0))
             ln_p_total = np.log(p_total)-ln_scale
-        elif self._relative:
-            scale_factor = scale_factor.squeeze(0)
-            scale_factor_uncertainty = scale_factor_uncertainty.squeeze(0)
+        elif self._relative:  # marginalise_relative is true
+            if scale_factor.shape[0] == 1:
+                scale_factor = scale_factor.squeeze(0)
+                scale_factor_uncertainty = scale_factor_uncertainty.squeeze(0)
+            elif scale_factor.shape[1] == 1:
+                scale_factor = scale_factor.squeeze(1)
+                scale_factor_uncertainty = scale_factor_uncertainty.squeeze(1)
             scale_factor = np.array([{'mu': scale_factor[i, :, :], 'sigma': scale_factor_uncertainty[i, :, :]} for i in range(scale_factor.shape[0])])
             try:
                 for key in extension_scale.keys():
@@ -2262,7 +2269,8 @@ class Inversion(object):
                     except Exception:
                         self._print('Output Error')
                         traceback.print_exc()
-
+            except NotImplementedError as e:
+                raise e
             except Exception:
                 traceback.print_exc()
         # Get pool results
@@ -2345,6 +2353,8 @@ class Inversion(object):
                     relative_amplitude.append(relative_amplitude_i)
                     percentage_error_relative_amplitude.append(percentage_error_relative_amplitude_i)
                     relative_amplitude_stations.append(relative_amplitude_stations_i)
+            except NotImplementedError as e:
+                raise e
             except Exception:
                 traceback.print_exc()
         self._print('\n\nJoint Inversion: '+str(self.number_events)+' Events\n--------\n')
@@ -2373,6 +2383,8 @@ class Inversion(object):
                 try:
                     self.output(result['event_data'], result['fid'], result['algorithm_output_data'], result['location_samples'], result['location_sample_multipliers'],
                                 output_format=self.output_format)
+                except NotImplementedError as e:
+                    raise e
                 except Exception:
                     self._print('Output Error')
                     traceback.print_exc()
@@ -2389,10 +2401,13 @@ class Inversion(object):
                     self.output(self.data, fid, result['algorithm_output_data'], a_polarity=a_polarity, error_polarity=error_polarity, a1_amplitude_ratio=a1_amplitude_ratio,
                                 a2_amplitude_ratio=a2_amplitude_ratio, amplitude_ratio=amplitude_ratio, percentage_error1_amplitude_ratio=percentage_error1_amplitude_ratio,
                                 percentage_error2_amplitude_ratio=percentage_error2_amplitude_ratio, output_format=self.output_format)
+                except NotImplementedError as e:
+                    raise e
                 except Exception:
                     self._print('Output Error')
                     traceback.print_exc()
-
+        except NotImplementedError as e:
+            raise e
         except Exception:
             traceback.print_exc()
 

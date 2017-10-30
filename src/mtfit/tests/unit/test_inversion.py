@@ -1388,11 +1388,13 @@ S003,110,10,1,0.05"""
             pass
         data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162", "S0083"], 'Azimuth': np.matrix([[90.0], [270.0], [180.]]), 'TakeOffAngle': np.matrix([[30.0], [60.0], [35.]])},
                                               'Measured': np.matrix([[1], [1], [-1]]), 'Error': np.matrix([[0.1], [0.5], [0.02]])}}
+        data2 = data.copy()
+        data2['UID'] = 'TestB'
         self.inversion = Inversion([data, data], algorithm='McMC', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, multiple_events=True, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
-        self.inversion.location_pdf_files = ['test.scatangle']
+        self.inversion.location_pdf_files = ['test.scatangle', 'test.scatangle']
         self.inversion.algorithm.max_time = 10
         self.inversion._mcmc_multiple_forward()
         try:
@@ -1433,12 +1435,14 @@ S003,110,10,1,0.05"""
                                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])},
                 'PRMSQAmplitude': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
                                    'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])}}
+        data2 = data.copy()
+        data2['UID'] = 'TestB'
         self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5,
                                    phy_mem=1, max_time=10, relative_amplitude=True, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
-        self.inversion.location_pdf_files = ['test.scatangle']
+        self.inversion.location_pdf_files = ['test.scatangle', 'test.scatangle']
         self.inversion.algorithm.max_time = 10
         self.inversion._mcmc_multiple_forward()
         try:
@@ -1867,12 +1871,12 @@ class MiscTestCase(TestCase):
 def test_suite(verbosity=2):
     global VERBOSITY
     VERBOSITY = verbosity
-    suite = [#unittest.TestLoader().loadTestsFromTestCase(McMCForwardTaskTestCase),
-             #unittest.TestLoader().loadTestsFromTestCase(MultipleEventsMcMCForwardTaskTestCase),
-             #unittest.TestLoader().loadTestsFromTestCase(MultipleEventsForwardTaskTestCase),
-             #unittest.TestLoader().loadTestsFromTestCase(ForwardTaskTestCase),
+    suite = [unittest.TestLoader().loadTestsFromTestCase(McMCForwardTaskTestCase),
+             unittest.TestLoader().loadTestsFromTestCase(MultipleEventsMcMCForwardTaskTestCase),
+             unittest.TestLoader().loadTestsFromTestCase(MultipleEventsForwardTaskTestCase),
+             unittest.TestLoader().loadTestsFromTestCase(ForwardTaskTestCase),
              unittest.TestLoader().loadTestsFromTestCase(InversionTestCase),
-             #unittest.TestLoader().loadTestsFromTestCase(MiscTestCase),
+             unittest.TestLoader().loadTestsFromTestCase(MiscTestCase),
              ]
     suite = unittest.TestSuite(suite)
     return suite

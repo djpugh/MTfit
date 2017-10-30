@@ -278,7 +278,7 @@ class FileSample(Sample):
             fname = 'mtfit_run'
         self.fname = fname.split('.mat')[0]+'_in_progress.mat'
         self.n = 0
-        self.i = 1
+        self._i = 1
         self.non_zero_samples = 0
         self.pdf = LnPDF()
         self.moment_tensor = np.matrix([[]])
@@ -289,7 +289,7 @@ class FileSample(Sample):
             try:
                 self.n = data['n']
                 self.non_zero_samples = data['non_zero_samples']
-                self.i = data['i']
+                self._i = data['i']
             except Exception:
                 pass
 
@@ -338,18 +338,18 @@ class FileSample(Sample):
         if moment_tensors.shape[0]*moment_tensors.shape[1] > 0:  # Check there are samples
             if len(ln_pdf.nonzero()) != moment_tensors.shape[1]:
                 raise ValueError('Moment Tensor shape[2] and ln_pdf shape[2] must be the same')
-            self.savemat(self.fname, {'MTSpace_'+str(self.i): moment_tensors}, appendmat=not self.file_safe, store_python_metadata=True)
+            self.savemat(self.fname, {'MTSpace_'+str(self._i): moment_tensors}, appendmat=not self.file_safe, store_python_metadata=True)
             if not isinstance(scale_factor, bool):
                 # dict with p mu and s
-                self.savemat(self.fname, {'scale_factor_'+str(self.i): convert_keys_to_unicode(list(scale_factor))}, appendmat=not self.file_safe, store_python_metadata=True)
+                self.savemat(self.fname, {'scale_factor_'+str(self._i): convert_keys_to_unicode(list(scale_factor))}, appendmat=not self.file_safe, store_python_metadata=True)
             if isinstance(extensions_scale_factor, dict) and len(extensions_scale_factor):
                 # dict with p mu and s
-                self.savemat(self.fname, {'extensions_scale_factor_'+str(self.i): extensions_scale_factor}, appendmat=not self.file_safe, store_python_metadata=True)
-            self.savemat(self.fname, {'LnPDF_'+str(self.i): ln_pdf[:, ln_pdf.nonzero()]}, appendmat=not self.file_safe, store_python_metadata=True)
+                self.savemat(self.fname, {'extensions_scale_factor_'+str(self._i): extensions_scale_factor}, appendmat=not self.file_safe, store_python_metadata=True)
+            self.savemat(self.fname, {'LnPDF_'+str(self._i): ln_pdf[:, ln_pdf.nonzero()]}, appendmat=not self.file_safe, store_python_metadata=True)
             self.non_zero_samples += len(ln_pdf.nonzero())
             self.savemat(self.fname, {'non_zero_samples': self.non_zero_samples}, appendmat=not self.file_safe, store_python_metadata=True)
-            self.i += 1
-        self.savemat(self.fname, {'i': self.i}, appendmat=not self.file_safe, store_python_metadata=True)
+            self._i += 1
+        self.savemat(self.fname, {'i': self._i}, appendmat=not self.file_safe, store_python_metadata=True)
         self.savemat(self.fname, {'n': self.n}, appendmat=not self.file_safe, store_python_metadata=True)
         if self.file_safe:
             shutil.copy(self.fname, old_fname)
