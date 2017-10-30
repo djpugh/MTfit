@@ -378,7 +378,7 @@ class MarginalisedMarkovChainMonteCarlo(BaseAlgorithm):
                     self.alpha = self._old_alpha[:]
                 ratio = np.sqrt(self._old_ratio)
                 self._old_ratio = ratio
-            except:
+            except Exception:
                 ratio = 0
         elif not rate:
             # revert to old alpha and change ratio
@@ -389,7 +389,7 @@ class MarginalisedMarkovChainMonteCarlo(BaseAlgorithm):
                     self.alpha = self._old_alpha[:]
                 ratio = self._old_ratio*self._old_ratio
                 self._old_ratio = ratio
-            except:
+            except Exception:
                 ratio = 0
         return ratio
 
@@ -411,12 +411,12 @@ class MarginalisedMarkovChainMonteCarlo(BaseAlgorithm):
         if self._debug:
             try:
                 output.update({'time': self._t1-self.t0})
-            except:
+            except Exception:
                 pass
             output.update({'debug_output': self._debug_output})
         try:
             output.pop('ln_bayesian_evidence')
-        except:
+        except Exception:
             pass
         gc.collect()
         return output, output_string
@@ -1119,7 +1119,7 @@ class MarginalisedMetropolisHastingsGaussianTape(MarginalisedMetropolisHastings)
             # Try c functions (quicker)
             from .cmarkov_chain_monte_carlo import convert_sample as c_convert_sample
             return c_convert_sample(x['gamma'], x['delta'], x['kappa'], x['h'], x['sigma'])
-        except:
+        except Exception:
             return MT33_MT6(Tape_MT33(**x))
 
     def _6sphere_random_mt(self):
@@ -1315,7 +1315,7 @@ class IterativeTransDMetropolisHastingsGaussianTape(IterativeMetropolisHastingsG
             try:
                 x.pop('g0')
                 x.pop('d0')
-            except:
+            except Exception:
                 pass
             if self.dc:  # dc to mt
                 # set random gamma beta

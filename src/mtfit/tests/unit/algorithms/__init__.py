@@ -28,19 +28,20 @@ def run_tests(verbosity=2):
     if verbosity > 1:
         print('Running mtfit/algorithms/base.py Tests')
         print(spacer)
-        _run_tests(base_test_suite(verbosity), verbosity)
+        test_result = _run_tests(base_test_suite(verbosity), verbosity)
         print(spacer)
         print('Running mtfit/algorithms/monte_carlo.py Tests')
         print(spacer)
-        _run_tests(monte_carlo_test_suite(verbosity), verbosity)
+        test_result = _run_tests(monte_carlo_test_suite(verbosity), verbosity, test_result=test_result)
         print(spacer)
         print('Running mtfit/algorithms/markov_chain_monte_carlo.py Tests')
         print(spacer)
-        _run_tests(markov_chain_monte_carlo_test_suite(verbosity), verbosity)
+        test_result = _run_tests(markov_chain_monte_carlo_test_suite(verbosity), verbosity, test_result=test_result)
     else:
         print('Running unit tests')
         print(spacer)
-        _run_tests(test_suite(verbosity), verbosity)
+        test_result = _run_tests(test_suite(verbosity), verbosity)
+    return test_result
 
 
 def debug_tests(verbosity=3):

@@ -58,25 +58,25 @@ class RunTestCase(unittest.TestCase):
         uid = "20120620223428431"
         try:
             os.remove(uid+'.inv')
-        except:
+        except Exception:
             pass
         try:
             os.remove(uid+'DC.0.pkl')
-        except:
+        except Exception:
             pass
         out = [0, 2, 4, 5, 7, 9, 11]
         for i in out:
             try:
                 os.remove(uid+'DC.'+str(i)+'.mt')
-            except:
+            except Exception:
                 pass
             try:
                 os.remove(uid+'DC.'+str(i)+'.hyp')
-            except:
+            except Exception:
                 pass
         try:
             os.remove(uid+'DC.mat')
-        except:
+        except Exception:
             pass
 
 

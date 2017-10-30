@@ -81,7 +81,7 @@ class MATLABOutputTask(object):
         if self.version == '7.3':
             try:
                 from hdf5storage import savemat
-            except:
+            except Exception:
                 self.version = '7'
         if self.version != '7.3':
             from scipy.io import savemat  # noqa F811
@@ -259,7 +259,7 @@ def _parse_hyp_events(events_list, polarity_error_multiplier=3.):
                 sec = line[7]
                 try:
                     event_dict['UID'] = line[2]+line[3]+line[4]+line[5]+line[6]+sec.split('.')[0]+sec.split('.')[1][:-1]
-                except:
+                except Exception:
                     pass
             # Phase flag
             if line[0] == 'PHASE':
@@ -405,11 +405,11 @@ def _parse_csv_events(events_list):
             'Name': [], 'TakeOffAngle': [], 'Azimuth': []}, 'Measured': [], 'Error': []}
         # Loop over lines
         for line in event:
-            l = line.split(',')
-            if len(l[0]) and not sum([len(u) for u in l[1:]]):
+            split_line = line.split(',')
+            if len(split_line[0]) and not sum([len(u) for u in split_line[1:]]):
                 # Try tp get UID
-                if 'UID' in l[0]:
-                    event_dict['UID'] = l[0].split(
+                if 'UID' in split_line[0]:
+                    event_dict['UID'] = split_line[0].split(
                         'UID')[1].lstrip(':').lstrip('=').strip()
                 else:
                     # End of event
@@ -419,28 +419,28 @@ def _parse_csv_events(events_list):
                         key_dict['Measured'] = np.matrix(key_dict['Measured'])
                         key_dict['Error'] = np.matrix(key_dict['Error'])
                         event_dict[key] = key_dict
-                    key = l[0].strip()
+                    key = split_line[0].strip()
                     key_dict = {'Stations': {
                         'Name': [], 'TakeOffAngle': [], 'Azimuth': []}, 'Measured': [], 'Error': []}
-            elif 'Name' in l:
+            elif 'Name' in split_line:
                 # Try to read header file and get key pieces
-                l = ','.join(l).lower().split(',')
-                name_index = l.index('name')
-                measured_index = l.index('measured')
-                azimuth_index = l.index('azimuth')
-                take_off_angle_index = l.index('takeoffangle')
-                error_index = l.index('error')
+                split_line = ','.join(split_line).lower().split(',')
+                name_index = split_line.index('name')
+                measured_index = split_line.index('measured')
+                azimuth_index = split_line.index('azimuth')
+                take_off_angle_index = split_line.index('takeoffangle')
+                error_index = split_line.index('error')
             else:
                 # Append item to list
-                key_dict['Stations']['Name'].append(l[name_index])
-                key_dict['Stations']['TakeOffAngle'].append([float(l[take_off_angle_index].strip())])
-                key_dict['Stations']['Azimuth'].append([float(l[azimuth_index].strip())])
+                key_dict['Stations']['Name'].append(split_line[name_index])
+                key_dict['Stations']['TakeOffAngle'].append([float(split_line[take_off_angle_index].strip())])
+                key_dict['Stations']['Azimuth'].append([float(split_line[azimuth_index].strip())])
                 measured = []
-                for _measured in l[measured_index].split():
+                for _measured in split_line[measured_index].split():
                     measured.append(float(_measured.strip()))
                 key_dict['Measured'].append(measured)
                 error = []
-                for err in l[error_index].split():
+                for err in split_line[error_index].split():
                     error.append(float(err.strip()))
                 key_dict['Error'].append(error)
         # Sort output into correct structs
@@ -561,7 +561,7 @@ def _convert_mt_space_to_struct(output_data, i=False):
         d2 = output_data['D2'+end]
         r2 = output_data['R2'+end]
         converted = True
-    except:
+    except Exception:
         converted = False
     # Add Number of samples and converted flag
     binary_output = struct.pack('QQQ?', file_version, output_data['total_number_samples'],
@@ -569,12 +569,12 @@ def _convert_mt_space_to_struct(output_data, i=False):
     # Try to add Bayesian evidence
     try:
         binary_output += struct.pack('1d', output_data['ln_bayesian_evidence'])
-    except:
+    except Exception:
         binary_output += struct.pack('1d', np.nan)  # No Bayesian evidence
     # Try to add Dkl
     try:
         binary_output += struct.pack('1d', output_data['dkl'])
-    except:
+    except Exception:
         binary_output += struct.pack('1d', np.nan)  # No Dkl
     # Loop over MTs
     for i in range(output_data['moment_tensor_space'+end].shape[1]):
@@ -602,18 +602,17 @@ def _convert_mt_space_to_struct(output_data, i=False):
         sf_output = struct.pack('QQQ', output_data['total_number_samples'], len(
             output_data['scale_factors']), n_events)
         for i, sf in enumerate(output_data['scale_factors']):
-            sf_output += struct.pack(
-                'dd', output_data['probability'][0, i], output_data['ln_pdf'][0, i])
+            sf_output += struct.pack('dd', output_data['probability'][0, i], output_data['ln_pdf'][0, i])
             # Add data for each event - Loops over off diagonal elements
             k = 0
-            l = 1
+            _l = 1
             for j in range(int(n_events*(n_events-1)/2.)):
                 sf_output += struct.pack('dd',
-                                         sf['mu'][k, l], sf['sigma'][k, l])
-                l += 1
-                if l >= n_events:
+                                         sf['mu'][k, _l], sf['sigma'][k, _l])
+                _l += 1
+                if _l >= n_events:
                     k += 1
-                    l = k+1
+                    _l = k+1
     # Return output
     return binary_output, sf_output
 
@@ -658,7 +657,7 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
         lines = []
         try:
             lines.append(['NLLOC', event_data['UID']])
-        except:
+        except Exception:
             lines.append(['NLLOC'])
         lines.append(['SIGNATURE', 'mtfit', __version__+'/'+datetime.now().isoformat()])
         lines.append(['COMMENT', 'mtfit inversion'])
@@ -698,7 +697,7 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
         source_line_index = lines.index(
             [line for line in lines if line[0] == 'FOCALMECH'][0])
         lines.pop(source_line_index)
-    except:
+    except Exception:
         pass
     # Make source line
     if dc:
@@ -837,7 +836,7 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
             for j, observations_dict in enumerate(observations_dicts):
                 try:
                     number_stations = len(observations_dict['Stations']['Name'])
-                except:
+                except Exception:
                     continue
                 _stations = np.matrix(np.zeros((number_stations, 4), dtype=np.object))
                 _stations[:, 0] = np.matrix(observations_dict['Stations']['Name']).T
@@ -852,7 +851,7 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
                 _stations[:, 3] = np.zeros((len(observations_dict['Stations']['Name']), 1))
                 try:
                     stations = np.append(stations, _stations, 0)
-                except:
+                except Exception:
                     pass
                 stations = np.array(stations)
             # Remove duplicate stations
@@ -887,7 +886,7 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
     event = {'NSamples': output_data.pop('total_number_samples'), 'dV': output_data.pop('dV'), 'Probability': output_data.pop('probability')}
     try:
         event['UID'] = event_data['UID']
-    except:
+    except Exception:
         pass
     output_data_keys = output_data.keys()
     # Handle multiple events data types
@@ -906,7 +905,7 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
         event = {'NSamples': 0}
     try:
         event['ln_pdf'] = event['ln_pdf']._ln_pdf
-    except:
+    except Exception:
         pass
     # Create mdict and sdict and return
     mdict = {'Events': event, 'Stations': all_stations, 'Other': other}
@@ -951,7 +950,7 @@ def hyp_output_dicts(event_data, inversion_options=False, output_data=False, loc
                     maxMT = unique_columns(output_data['moment_tensor_space_'+str(i+1)][:, ind])
                     if maxMT.shape[1] > 1:
                         maxMT = maxMT[:, 0]
-                except:
+                except Exception:
                     maxMT = np.matrix([[0], [0], [0], [0], [0], [0]])
             # Get hyp output data
             output_contents.append('\n'.join(_generate_hyp_output_data(ev_data, inversion_options, output_data, maxMT))+'\n\n')
@@ -1043,7 +1042,7 @@ def MATLAB_output(output_data, fid='mtfitOutput.mat', pool=False, version='7.3',
         if sdict:
             try:
                 MATLABOutputTask(os.path.splitext(fid)[0]+'StationDistribution.mat', sdict, st_ver)()
-            except:
+            except Exception:
                 traceback.print_exc()
         output_string += 'Saved to {}\n'.format(fid)
     return output_string, fid
@@ -1408,7 +1407,7 @@ def _parse_matlab_output(data):
                     ev_data[key_map[key]] = data['Events'][key][0, 0]
             try:
                 st = _parse_matlab_stations(data['Stations'][0, int(ind)-1])
-            except:
+            except Exception:
                 st = {}
             events.append(ev_data)
             stations.append(st)
@@ -1416,7 +1415,7 @@ def _parse_matlab_output(data):
     # Single Event
     try:
         stations = _parse_matlab_stations(data['Stations'])
-    except:
+    except Exception:
         stations = {}
     events = {}
     try:
@@ -1428,7 +1427,7 @@ def _parse_matlab_output(data):
                     events[key] = events[key][0]
             else:
                 events[key] = data['Events'][key][0, 0]
-    except:
+    except Exception:
         events = convert_keys_from_unicode(data['Events'])
     if events['Probability'].max() == 0:
         events['Probability'] = np.exp(events['ln_pdf']-events['ln_pdf'].max())
@@ -1478,7 +1477,7 @@ def read_hyp_output(filename):
     """
     try:
         hyp_data = parse_hyp(os.path.splitext(filename)[0]+'.hyp')
-    except:
+    except Exception:
         hyp_data = {}
     events = read_binary_output(os.path.splitext(filename)[0]+'.mt')
     key_map = {'takeoffangle': 'takeoff_angle'}
@@ -1490,7 +1489,7 @@ def read_hyp_output(filename):
             if key.lower() in key_map.keys():
                 new_key = key_map[key.lower()]
             stations[new_key] = stations.pop(key)
-    except:
+    except Exception:
         stations = {}
     return events, stations
 
@@ -1603,7 +1602,7 @@ def unique_columns(data, counts=False, index=False):
         for u, j in enumerate(indx):
             try:
                 counts.append(indx[u+1]-j)
-            except:
+            except Exception:
                 counts.append(1)
         output.append(np.array(counts))
     if index:

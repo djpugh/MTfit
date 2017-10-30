@@ -55,6 +55,7 @@ def setup_package():
                   requires=['numpy', 'scipy'],
                   install_requires=['numpy>=1.7.0', 'scipy', 'cython>=0.20.2', 'setuptools', 'pyqsub>=1.0.2'],
                   provides=['mtfit'],
+                  test_suite='mtfit.tests.test_suite',
                   description='mtfit: Bayesian Moment Tensor Inversion Code',
                   long_description=long_description,
                   package_data={'': ['*.rst', 'examples/README', 'examples/command_line.sh', 'examples/command_line.bat', '*.pyx', '*.pxd', '*.c',
@@ -63,7 +64,6 @@ def setup_package():
                                      'docs/html/_downloads/*.*', 'docs/html/_modules/*.*', 'docs/html/_modules/mtfit/*.*', 'docs/html/_sources/*.*', 'docs/html/_static/*.*']}
                   )
     kwargs['extras_require'] = {'MATLAB -v7.3': ['h5py', 'hdf5storage'], 'HTML documentation': ['sphinx>=1.3.1'], 'Cluster': ['pyqsub>=1.0.2'], 'Plotting': ['matplotlib>=1.4.0']}
-    kwargs['test_suite'] = 'test_suite'
     kwargs['entry_points'] = {}
     kwargs['entry_points'] = {'console_scripts': ['mtfit = mtfit.run:run', 'MTplot = mtfit.plot.core:run'],
                               'mtfit.parsers': ['.csv = mtfit.utilities.file_io:parse_csv', '.hyp = mtfit.utilities.file_io:parse_hyp'],

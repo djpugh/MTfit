@@ -12,11 +12,10 @@ Provides test functions for running and debugging unit tests.
 import unittest
 import sys
 import time
-from unittest import result
 from unittest.signals import registerResult
 try:
     import ipdb
-except:
+except Exception:
     import pdb as ipdb
 
 import numpy as np
@@ -51,10 +50,11 @@ class TextTestResult(unittest.TextTestResult):
 class TextTestRunner(unittest.TextTestRunner):
     resultclass = TextTestResult
 
-    def run(self, test):
+    def run(self, test, test_result=None):
         "Run the given test case or test suite."
         # Monkey patch on unittest class to add not implemented errors into run
-        test_result = self._makeResult()
+        if test_result is None:
+            test_result = self._makeResult()
         registerResult(test_result)
         test_result.failfast = self.failfast
         test_result.buffer = self.buffer
@@ -112,7 +112,7 @@ class TextTestRunner(unittest.TextTestRunner):
             self.stream.writeln(" (%s)" % (", ".join(infos),))
         else:
             self.stream.write("\n")
-        return result
+        return test_result
 
 
 class TestCase(unittest.TestCase):
@@ -182,7 +182,7 @@ class TestCase(unittest.TestCase):
                 raise AssertionError(e1.message+' or '+e2.message)
 
 
-def run_tests(suite, verbosity=2):
+def run_tests(suite, verbosity=2, test_result=None):
     """Run the test suite tests
     Args
         suite: unittest.TestSuite - input test suite.
@@ -190,14 +190,15 @@ def run_tests(suite, verbosity=2):
     sys.stdout.flush()
     sys.stderr.flush()
     test_runner = TextTestRunner(verbosity=verbosity)
-    test_runner.run(suite)
+    test_result = test_runner.run(suite, test_result)
     test_runner.stream.flush()
     try:
         test_runner.stream.stream.flush()
-    except:
+    except Exception:
         pass
     sys.stdout.flush()
     sys.stderr.flush()
+    return test_result
 
 
 def debug_tests(suite, _print=True):
@@ -251,7 +252,7 @@ def debug_tests(suite, _print=True):
                         from IPython.core.ultratb import VerboseTB
                         vtb = VerboseTB(call_pdb=1)
                         vtb(*sys.exc_info())
-                    except:
+                    except Exception:
                         import traceback
                         print('\n')
                         traceback.print_exc()

@@ -7,7 +7,6 @@ Tests for src/utils/file_io.py
 
 import unittest
 import os
-import multiprocessing
 import glob
 import cPickle
 
@@ -48,31 +47,31 @@ class IOTestCase(TestCase):
             if fname not in self.existing_csv_files:
                 try:
                     os.remove(fname)
-                except:
+                except Exception:
                     print 'Cannot remove ', fname
         for fname in glob.glob('*.hyp'):
             if fname not in self.existing_hyp_files:
                 try:
                     os.remove(fname)
-                except:
+                except Exception:
                     print 'Cannot remove ', fname
         for fname in glob.glob('*.out'):
             if fname not in self.existing_out_files:
                 try:
                     os.remove(fname)
-                except:
+                except Exception:
                     print 'Cannot remove ', fname
         for fname in glob.glob('*.mat'):
             if fname not in self.existing_mat_files:
                 try:
                     os.remove(fname)
-                except:
+                except Exception:
                     print 'Cannot remove ', fname
         for fname in glob.glob('*.scatangle'):
             if fname not in self.existing_scatangle_files:
                 try:
                     os.remove(fname)
-                except:
+                except Exception:
                     print 'Cannot remove ', fname
 
     def station_angles(self):
@@ -407,11 +406,11 @@ END_NLLOC
                                    1., 2.], [2., 1.]]), 'ln_pdf': np.matrix([0, 0.7, 0]), 'probability': np.matrix([[1., 2.]]), 'total_number_samples': 400})
         try:
             os.remove('mtfitOUTPUTTEST.hyp')
-        except:
+        except Exception:
             pass
         try:
             os.remove('mtfitOUTPUTTEST.mt')
-        except:
+        except Exception:
             pass
         self.assertFalse(os.path.exists('mtfitOUTPUTTEST.hyp'))
         self.assertFalse(os.path.exists('mtfitOUTPUTTEST.mt'))
@@ -420,11 +419,11 @@ END_NLLOC
         self.assertTrue(os.path.exists('mtfitOUTPUTTEST.mt'))
         try:
             os.remove('mtfitOUTPUTTEST.hyp')
-        except:
+        except Exception:
             pass
         try:
             os.remove('mtfitOUTPUTTEST.mt')
-        except:
+        except Exception:
             pass
         event['hyp_file'].pop(14)
         a, b, c = hyp_output_dicts(event, False, {'moment_tensor_space': np.matrix([[1., -0.51969334, 3.], [2., 0.22610635, 3.], [1., 0.29358698, 3.], [2., 0.58532165, 3.], [1., -0.27015115, 3.], [2., -0.42073549, 3.]]),
@@ -433,11 +432,11 @@ END_NLLOC
                                                   'v': np.array([0.2, 0.2, 0.2]), 'S2': np.array([0.2, 0.2, 0.2]), 'D2': np.array([0.2, 0.2, 0.2]), 'R2': np.array([0.2, 0.2, 0.2]), 'ln_bayesian_evidence': 1.+10})
         try:
             os.remove('mtfitOUTPUTTEST.hyp')
-        except:
+        except Exception:
             pass
         try:
             os.remove('mtfitOUTPUTTEST.mt')
-        except:
+        except Exception:
             pass
         self.assertFalse(os.path.exists('mtfitOUTPUTTEST.hyp'))
         self.assertFalse(os.path.exists('mtfitOUTPUTTEST.mt'))
@@ -446,11 +445,11 @@ END_NLLOC
         self.assertTrue(os.path.exists('mtfitOUTPUTTEST.mt'))
         try:
             os.remove('mtfitOUTPUTTEST.hyp')
-        except:
+        except Exception:
             pass
         try:
             os.remove('mtfitOUTPUTTEST.mt')
-        except:
+        except Exception:
             pass
 
     def test_read_binary_output(self):
@@ -462,11 +461,11 @@ END_NLLOC
         a, b, c = hyp_output_dicts(event, False, x)
         try:
             os.remove('mtfitOUTPUTTEST.hyp')
-        except:
+        except Exception:
             pass
         try:
             os.remove('mtfitOUTPUTTEST.mt')
-        except:
+        except Exception:
             pass
         self.assertFalse(os.path.exists('mtfitOUTPUTTEST.hyp'))
         self.assertFalse(os.path.exists('mtfitOUTPUTTEST.mt'))
@@ -480,11 +479,11 @@ END_NLLOC
         self.assertEqual(y[0]['dkl'], x['dkl'])
         try:
             os.remove('mtfitOUTPUTTEST.hyp')
-        except:
+        except Exception:
             pass
         try:
             os.remove('mtfitOUTPUTTEST.mt')
-        except:
+        except Exception:
             pass
         x = {'moment_tensor_space': np.matrix([[1., -0.51969334, 3.], [2., 0.22610635, 3.], [1., 0.29358698, 3.], [2., 0.58532165, 3.], [1., -0.27015115, 3.], [2., -0.42073549, 3.]]),
              'probability': np.matrix([[1., 2., 1.]]), 'dkl': 2.4, 'ln_pdf': np.matrix([0, 0.7, 0]), 'total_number_samples': 400, 'g': np.array([0.1, 0.2, 0.3]), 'd': np.array([0.2, 0.2, 0.2]), 'k': np.array([0.2, 0.2, 0.2]),
@@ -493,11 +492,11 @@ END_NLLOC
         a, b, c = hyp_output_dicts(event, False, x)
         try:
             os.remove('mtfitOUTPUTTEST.hyp')
-        except:
+        except Exception:
             pass
         try:
             os.remove('mtfitOUTPUTTEST.mt')
-        except:
+        except Exception:
             pass
         self.assertFalse(os.path.exists('mtfitOUTPUTTEST.hyp'))
         self.assertFalse(os.path.exists('mtfitOUTPUTTEST.mt'))
@@ -512,11 +511,11 @@ END_NLLOC
         self.assertEqual(y[0]['dkl'], x['dkl'])
         try:
             os.remove('mtfitOUTPUTTEST.hyp')
-        except:
+        except Exception:
             pass
         try:
             os.remove('mtfitOUTPUTTEST.mt')
-        except:
+        except Exception:
             pass
 
     def test_read_pickle_output(self):

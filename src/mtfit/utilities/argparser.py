@@ -259,7 +259,7 @@ def _get_env_defaults(test=False, extension_defaults={}, extension_default_types
             try:
                 key = line.split(':')[0]
                 attr = ':'.join(line.split(':')[1:]).rstrip()
-            except:
+            except Exception:
                 if len(line):
                     error = True
                     ok = False
@@ -273,7 +273,7 @@ def _get_env_defaults(test=False, extension_defaults={}, extension_default_types
                                 try:
                                     attr = tp(attr)
                                     ok = True
-                                except:
+                                except Exception:
                                     pass
                         if not ok:
                             error = True
@@ -1058,7 +1058,7 @@ def mtfit_parser(input_args=False, test=False):
     if options['file_sample'] and not options['qsub']:
         try:
             from hdf5storage import savemat, loadmat  # noqa F401
-        except:
+        except Exception:
             parser.error('file_sample option requires hdf5storage and h5py modules')
     if options['file_sample'] and 'mcmc' in options['algorithm']:
         parser.error('file_sample option not supported for mcmc algorithms.')

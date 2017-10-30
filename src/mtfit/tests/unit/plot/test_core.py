@@ -26,7 +26,7 @@ class CoreTestCase(unittest.TestCase):
         run(['-p=faultplane', '-d=plottest.out'])
         try:
             os.remove('plottest.out')
-        except:
+        except Exception:
             pass
 
     def test_plots(self):
@@ -149,7 +149,7 @@ class CoreTestCase(unittest.TestCase):
             raise ValueError('save_file option has not worked')
         try:
             os.remove('mtfit_plot_save_test.png')
-        except:
+        except Exception:
             pass
 
 

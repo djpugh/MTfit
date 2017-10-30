@@ -62,7 +62,7 @@ def _6sphere_prior(g, d):
     return 1.
 
 
-def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0):
+def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0, _use_c=None):
     """
     Calculate the probability of a positive polarity
 
@@ -98,9 +98,9 @@ def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0):
     # to avoid zero divison errors
     sigma[sigma == 0] = _SMALL_NUMBER
     try:
-        if not _C_LIB:
+        if not _C_LIB or (_use_c is not None and not _use_c):
             raise ImportError(CPROBABILITY_MODULE_EXCEPTION)
-        if sys.platform.startswith('win') and not _C_LIB_TESTS:
+        if sys.platform.startswith('win') and not _use_c:
             # Raise an exception due to windows C_LIB using VS2008 VC math.h
             # which has no erf
             raise Exception('Windows')
@@ -159,14 +159,14 @@ def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0):
         # Combine probabilities
         try:
             ln_p = cprobability.ln_prod(ln_p)
-        except:
+        except Exception:
             ln_p = np.sum(ln_p, 0)
     if isinstance(ln_p, np.ndarray):
         ln_p[np.isnan(ln_p)] = -np.inf
     return ln_p
 
 
-def polarity_probability_ln_pdf(a, mt, positive_probability, negative_probability, incorrect_polarity_probability=0.0):
+def polarity_probability_ln_pdf(a, mt, positive_probability, negative_probability, incorrect_polarity_probability=0.0, _use_c=None):
     """
     Calculate the probability of a given theoretical amplitude giving an
     observed polarity probability.
@@ -212,7 +212,7 @@ def polarity_probability_ln_pdf(a, mt, positive_probability, negative_probabilit
     if not isinstance(mt, np.ndarray) or mt.ndim != 2:
         raise TypeError('Variable: mt is expected to be a two-dimensional numpy array of moment tensor six vectors')
     try:
-        if not _C_LIB:
+        if not _C_LIB or (_use_c is not None and not _use_c):
             raise ImportError(CPROBABILITY_MODULE_EXCEPTION)
         # Run using C library
         # Handle incorrect polarity probability
@@ -275,7 +275,7 @@ def polarity_probability_ln_pdf(a, mt, positive_probability, negative_probabilit
     return ln_p
 
 
-def amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x, percentage_error_y):
+def amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x, percentage_error_y, _use_c=None):
     """
     Calculate the probability of a given theoretical amplitude ratio giving
     an observed ratio
@@ -331,7 +331,7 @@ def amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x, percentage_e
     percentage_error_x = np.abs(percentage_error_x)
     percentage_error_y = np.abs(percentage_error_y)
     try:
-        if not _C_LIB:
+        if not _C_LIB or (_use_c is not None and not _use_c):
             raise ImportError(CPROBABILITY_MODULE_EXCEPTION)
         ln_p = cprobability.amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x,
                                                    percentage_error_y)
@@ -362,14 +362,14 @@ def amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x, percentage_e
         # Combine probabilities
         try:
             ln_p = cprobability.ln_prod(ln_p)
-        except:
+        except Exception:
             ln_p = np.sum(ln_p, 0)
     if isinstance(ln_p, np.ndarray):
         ln_p[np.isnan(ln_p)] = -np.inf
     return ln_p
 
 
-def relative_amplitude_ratio_ln_pdf(x_1, x_2, mt_1, mt_2, a_1, a_2, percentage_error_1, percentage_error_2):
+def relative_amplitude_ratio_ln_pdf(x_1, x_2, mt_1, mt_2, a_1, a_2, percentage_error_1, percentage_error_2, _use_c=None):
     """
     Calculate the probability of a given theoretical relative amplitude
     ratio giving an observed ratio.
@@ -432,7 +432,7 @@ def relative_amplitude_ratio_ln_pdf(x_1, x_2, mt_1, mt_2, a_1, a_2, percentage_e
     percentage_error_1 = np.abs(percentage_error_1)
     percentage_error_2 = np.abs(percentage_error_2)
     try:
-        if not _C_LIB or not _C_LIB_TESTS:
+        if not _C_LIB or not _C_LIB_TESTS or (_use_c is not None and not _use_c):
             raise ImportError(CPROBABILITY_MODULE_EXCEPTION)
         # raise ValueError('C code returning incorrect result for probabilities')
         ln_p, scale, scale_uncertainty = cprobability.relative_amplitude_ratio_ln_pdf(np.ascontiguousarray(x_1),
@@ -943,7 +943,7 @@ def dkl_estimate(ln_pdf, V, N):
         if not _C_LIB:
             raise Exception()
         return cprobability.dkl_uniform(ln_pdf.copy(), V, dV)
-    except:
+    except Exception:
         ind = ln_pdf > -np.inf
         ln_pdf = ln_pdf[ind].copy()-ln_pdf.max()
         pdf = np.exp(ln_pdf)

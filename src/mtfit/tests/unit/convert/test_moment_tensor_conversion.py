@@ -50,7 +50,7 @@ from mtfit.convert import c21_cvoigt
 try:
     from mtfit.convert import cmoment_tensor_conversion
     _CYTHON = True
-except:
+except Exception:
     _CYTHON = False
 
 
@@ -172,7 +172,7 @@ class MomentTensorConvertTestCase(TestCase):
             try:
                 self.assertAlmostEquals(np.abs(first), np.pi, *args)
                 return self.assertAlmostEquals(-first, second, *args)
-            except:
+            except Exception:
                 raise e1
 
     def test_MT33_MT6(self):
@@ -261,7 +261,7 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertAlmostEquals(Ddc, self.Ddc)
         try:
             self.assertAlmostEquals(Kdc, self.Kdc)
-        except:
+        except Exception:
             self.assertAlmostEquals(Kdc-np.pi, self.Kdc)
         self.assertAlmostEquals(Hdc, self.Hdc)
         self.assertAlmostEquals(Odc, self.Odc)
@@ -275,7 +275,7 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertAlmostEquals(D[1], self.Ddc)
         try:
             self.assertAlmostEquals(K[1], self.Kdc)
-        except:
+        except Exception:
             self.assertAlmostEquals(K[1]-np.pi, self.Kdc)
         self.assertAlmostEquals(H[1], self.Hdc)
         self.assertAlmostEquals(O[1], self.Odc)
@@ -288,7 +288,7 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(Sdc, self.S1dc)
             self.assertAlmostEquals(Ddc, self.D1dc)
             self.assertAlmostEquals(Rdc, self.R1dc)
-        except:
+        except Exception:
             self.assertAlmostEquals(Sdc, self.S2dc)
             self.assertAlmostEquals(Ddc, self.D2dc)
             self.assertAlmostEquals(Rdc, self.R2dc)
@@ -296,7 +296,7 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(Smt, self.S1mt)
             self.assertAlmostEquals(Dmt, self.D1mt)
             self.assertAlmostEquals(Rmt, self.R1mt)
-        except:
+        except Exception:
             self.assertAlmostEquals(Smt, self.S2mt)
             self.assertAlmostEquals(Dmt, self.D2mt)
             self.assertAlmostEquals(Rmt, self.R2mt)
@@ -306,7 +306,7 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(s[0], self.S1mt)
             self.assertAlmostEquals(d[0], self.D1mt)
             self.assertAlmostEquals(r[0], self.R1mt)
-        except:
+        except Exception:
             self.assertAlmostEquals(s[0], self.S2mt)
             self.assertAlmostEquals(d[0], self.D2mt)
             self.assertAlmostEquals(r[0], self.R2mt)
@@ -314,7 +314,7 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(s[1], self.S1dc)
             self.assertAlmostEquals(d[1], self.D1dc)
             self.assertAlmostEquals(r[1], self.R1dc)
-        except:
+        except Exception:
             self.assertAlmostEquals(s[1], self.S2dc)
             self.assertAlmostEquals(d[1], self.D2dc)
             self.assertAlmostEquals(r[1], self.R2dc)
@@ -329,7 +329,7 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(Sdc, self.S1dc)
             self.assertAlmostEquals(Ddc, self.D1dc)
             self.assertAlmostEquals(Rdc, self.R1dc)
-        except:
+        except Exception:
             self.assertAlmostEquals(Sdc, self.S2dc)
             self.assertAlmostEquals(Ddc, self.D2dc)
             self.assertAlmostEquals(Rdc, self.R2dc)
@@ -337,7 +337,7 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(Smt, self.S1mt)
             self.assertAlmostEquals(Dmt, self.D1mt)
             self.assertAlmostEquals(Rmt, self.R1mt)
-        except:
+        except Exception:
             self.assertAlmostEquals(Smt, self.S2mt)
             self.assertAlmostEquals(Dmt, self.D2mt)
             self.assertAlmostEquals(Rmt, self.R2mt)
@@ -347,7 +347,7 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(s[0], self.S1mt)
             self.assertAlmostEquals(d[0], self.D1mt)
             self.assertAlmostEquals(r[0], self.R1mt)
-        except:
+        except Exception:
             self.assertAlmostEquals(s[0], self.S2mt)
             self.assertAlmostEquals(d[0], self.D2mt)
             self.assertAlmostEquals(r[0], self.R2mt)
@@ -355,7 +355,7 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(s[1], self.S1dc)
             self.assertAlmostEquals(d[1], self.D1dc)
             self.assertAlmostEquals(r[1], self.R1dc)
-        except:
+        except Exception:
             self.assertAlmostEquals(s[1], self.S2dc)
             self.assertAlmostEquals(d[1], self.D2dc)
             self.assertAlmostEquals(r[1], self.R2dc)
@@ -1710,15 +1710,15 @@ class MomentTensorConvertTestCase(TestCase):
         Td, Nd, Pd, Ed = MT6_TNPE(D6)
         try:
             self.assertAlmostEquals(Td, self.Tmt)
-        except:
+        except Exception:
             self.assertAlmostEquals(Td, -self.Tmt)
         try:
             self.assertAlmostEquals(Nd, self.Nmt)
-        except:
+        except Exception:
             self.assertAlmostEquals(Nd, -self.Nmt)
         try:
             self.assertAlmostEquals(Pd, self.Pmt)
-        except:
+        except Exception:
             self.assertAlmostEquals(Pd, -self.Pmt)
         with self.assertRaises(AssertionError):
             self.assertAlmostEquals(Ed, self.Emt)
@@ -1731,15 +1731,15 @@ class MomentTensorConvertTestCase(TestCase):
         Td, Nd, Pd, Ed = MT6_TNPE(D6)
         try:
             self.assertAlmostEquals(Td, self.Tmt)
-        except:
+        except Exception:
             self.assertAlmostEquals(Td, -self.Tmt)
         try:
             self.assertAlmostEquals(Nd, self.Nmt)
-        except:
+        except Exception:
             self.assertAlmostEquals(Nd, -self.Nmt)
         try:
             self.assertAlmostEquals(Pd, self.Pmt)
-        except:
+        except Exception:
             self.assertAlmostEquals(Pd, -self.Pmt)
         with self.assertRaises(AssertionError):
             self.assertAlmostEquals(Ed, self.Emt)

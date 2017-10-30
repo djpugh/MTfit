@@ -32,27 +32,28 @@ def run_tests(verbosity=2):
     if verbosity > 1:
         print('Running utilities/unittest_utils.py Tests')
         print(spacer)
-        _run_tests(unittest_utils_test_suite(verbosity), verbosity)
+        test_result = _run_tests(unittest_utils_test_suite(verbosity), verbosity)
         print('\n'+spacer)
         print('Running utilities/argparser.py Tests')
         print(spacer)
-        _run_tests(argparser_test_suite(verbosity), verbosity)
+        test_result = _run_tests(argparser_test_suite(verbosity), verbosity, test_result=test_result)
         print('\n'+spacer)
         print('Running utilities/exception_handler.py Tests')
         print(spacer)
-        _run_tests(extensions_test_suite(verbosity), verbosity)
+        test_result = _run_tests(extensions_test_suite(verbosity), verbosity, test_result=test_result)
         print('\n'+spacer)
         print('Running utilities/file_io.py Tests')
         print(spacer)
-        _run_tests(file_io_test_suite(verbosity), verbosity)
+        test_result = _run_tests(file_io_test_suite(verbosity), verbosity, test_result=test_result)
         print('\n'+spacer)
         print('Running utilities/multiprocessing_helper.py Tests')
         print(spacer)
-        _run_tests(multiprocessing_helper_test_suite(verbosity), verbosity)
+        test_result = _run_tests(multiprocessing_helper_test_suite(verbosity), verbosity, test_result=test_result)
     else:
         print('Running unit tests')
         print(spacer)
-        _run_tests(test_suite(verbosity), verbosity)
+        test_result = _run_tests(test_suite(verbosity), verbosity)
+    return test_result
 
 
 def debug_tests(verbosity=2):
