@@ -2864,13 +2864,14 @@ def polarity_matrix(data, location_samples=False):
     if location_samples:
         original_samples = [u.copy() for u in location_samples]
     # Get polarity data
-    for key in [u for u in data.keys() if 'polarity' in u.lower() and 'prob' not in u.lower()]:
+    for key in sorted([u for u in data.keys() if 'polarity' in u.lower() and 'prob' not in u.lower()]):
         mode = key.lower().split('polarity')[0]
         if location_samples:
             location_samples = [u.copy() for u in original_samples]
-            selected_stations = list(set(location_samples[0]['Name']) & set(data[key]['Stations']['Name']))
+            selected_stations = sorted(list(set(location_samples[0]['Name']) & set(data[key]['Stations']['Name'])))
+            n_stations = len(selected_stations)
             indices = [location_samples[0]['Name'].index(u) for u in selected_stations]
-            angles = np.zeros((len(selected_stations), len(location_samples), 6))
+            angles = np.zeros((n_stations, len(location_samples), 6))
             for i, sample in enumerate(location_samples):
                 sample['Name'] = operator.itemgetter(*indices)(sample['Name'])
                 sample['TakeOffAngle'] = sample['TakeOffAngle'][indices]
@@ -2889,7 +2890,8 @@ def polarity_matrix(data, location_samples=False):
                 _incorrect_polarity_prob = np.array([0])
         else:
             # Otherwise get angles and measured directly
-            angles = np.zeros((np.prod(data[key]['Stations']['TakeOffAngle'].shape), 1, 6))
+            n_stations = np.prod(data[key]['Stations']['TakeOffAngle'].shape)
+            angles = np.zeros((n_stations, 1, 6))
             angles[:, 0, :] = station_angles(data[key]['Stations'], mode)
             measured = data[key]['Measured']
             _error = np.array(data[key]['Error']).flatten()
@@ -2910,6 +2912,9 @@ def polarity_matrix(data, location_samples=False):
         else:
             a = np.append(a, np.multiply(angles, measured), 0)
             error = np.append(error, _error, 0)
+            if len(_incorrect_polarity_prob) != n_stations:
+                # Make sure this is the same length as the data as we are appending it
+                _incorrect_polarity_prob = np.kron(_incorrect_polarity_prob, np.ones(n_stations))
             incorrect_polarity_prob = np.append(incorrect_polarity_prob, _incorrect_polarity_prob, 0)
     # Set incorrect polarity prob if default
     if np.sum(np.abs(incorrect_polarity_prob)) == 0:
@@ -2940,12 +2945,12 @@ def polarity_probability_matrix(data, location_samples=False):
     if location_samples:
         original_samples = [u.copy() for u in location_samples]
     # Loop over polarity prob data
-    for key in [u for u in data.keys() if 'polarity' in u.lower() and 'prob' in u.lower()]:
+    for key in sorted([u for u in data.keys() if 'polarity' in u.lower() and 'prob' in u.lower()]):
         mode = key.lower().split('polarity')[0]
         # If location samples, then select stations appropriately
         if location_samples:
             location_samples = [u.copy() for u in original_samples]
-            selected_stations = list(set(location_samples[0]['Name']) & set(data[key]['Stations']['Name']))
+            selected_stations = sorted(list(set(location_samples[0]['Name']) & set(data[key]['Stations']['Name'])))
             indices = [location_samples[0]['Name'].index(u) for u in selected_stations]
             angles = np.zeros((len(selected_stations), len(location_samples), 6))
             for i, sample in enumerate(location_samples):
@@ -3012,7 +3017,7 @@ def amplitude_ratio_matrix(data, location_samples=False):
     if location_samples:
         original_samples = [u.copy() for u in location_samples]
     # Loop over data and get amplitude ratio data
-    for key in [u for u in data.keys() if 'amplituderatio' in u.lower() or 'amplitude_ratio' in u.lower()]:
+    for key in sorted([u for u in data.keys() if 'amplituderatio' in u.lower() or 'amplitude_ratio' in u.lower()]):
         phase = key.replace('_', '').lower().split('amplituderatio')[0]
         phase = phase.rstrip('rms')
         phase = phase.rstrip('q')
@@ -3020,7 +3025,7 @@ def amplitude_ratio_matrix(data, location_samples=False):
         # If location samples, get intersection stations and data
         if location_samples:
             location_samples = [u.copy() for u in original_samples]
-            selected_stations = list(set(location_samples[0]['Name']) & set(data[key]['Stations']['Name']))
+            selected_stations = sorted(list(set(location_samples[0]['Name']) & set(data[key]['Stations']['Name'])))
             indices = [location_samples[0]['Name'].index(u) for u in selected_stations]
             angles1 = np.zeros((len(selected_stations), len(location_samples), 6))
             angles2 = np.zeros((len(selected_stations), len(location_samples), 6))
@@ -3086,7 +3091,7 @@ def relative_amplitude_ratio_matrix(data, location_samples=False):
     if location_samples:
         original_samples = [u.copy() for u in location_samples]
     # Loop over data and get amplitude data
-    for key in [u for u in data.keys() if 'amplitude' in u.lower() and 'ratio' not in u.lower()]:
+    for key in sorted([u for u in data.keys() if 'amplitude' in u.lower() and 'ratio' not in u.lower()]):
         phase = key.replace('_', '').lower().split('amplitude')[0]
         phase = phase.rstrip('q')
         phase = phase.rstrip('rms')
@@ -3094,7 +3099,7 @@ def relative_amplitude_ratio_matrix(data, location_samples=False):
         # If location samples, get intersection stations and data
         if location_samples:
             location_samples = [u.copy() for u in original_samples]
-            selected_stations = list(set(location_samples[0]['Name']) & set(data[key]['Stations']['Name']))
+            selected_stations = sorted(list(set(location_samples[0]['Name']) & set(data[key]['Stations']['Name'])))
             indices = [location_samples[0]['Name'].index(u) for u in selected_stations]
             angles = np.zeros((len(selected_stations), len(location_samples), 6))
             for i, sample in enumerate(location_samples):
