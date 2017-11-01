@@ -23,15 +23,11 @@ import multiprocessing
 import traceback
 import logging
 import copy
-import cPickle
-
-
-from math import ceil
-
 try:
     import cPickle as pickle
 except ImportError:
     import pickle
+from math import ceil
 
 
 import numpy as np
@@ -368,7 +364,7 @@ class ForwardTask(object):
                 # Print end memory usage (Verbosity >=3)
                 if _VERBOSITY >= 3:
                     import memory_profiler
-                    print 'end usage {}'.format(memory_profiler.memory_usage())
+                    print('end usage {}'.format(memory_profiler.memory_usage()))
                 # Check results
                 if _return:
                     # Flag for nan errors if _DEBUG is set
@@ -733,7 +729,7 @@ class MultipleEventsForwardTask(object):
                                     scale_factor = np.ascontiguousarray(scale_factor[:, non_zero_indices, :, :])
                                     scale_factor_uncertainty = np.ascontiguousarray(scale_factor_uncertainty[:, non_zero_indices, :, :])
                     except Exception as e:
-                        print 'Relative Amplitude Ratio Exception', e
+                        print('Relative Amplitude Ratio Exception {}'.format(e))
                         # Exception in cprobabilities combined PDF - print error message
                         if _VERBOSITY >= 4:
                             traceback.print_exc()
@@ -793,8 +789,8 @@ class MultipleEventsForwardTask(object):
                                                 extension_scale_uncertainty[key] = np.ascontiguousarray(extension_scale_uncertainty[key][:, non_zero_indices, :, :])
                                 else:
                                     raise KeyError('Extension {} function not found.'.format(key))
-                            except Exception:
-                                print 'Exception for relative extension: {} - {}'.format(key)
+                            except Exception as e:
+                                print('Exception for relative extension: {} - {}'.format(key, e))
 
         # Delete attributes if not reusing and force garbage collection
         if not self._reuse:
@@ -1021,7 +1017,7 @@ class MultipleEventsMcMCForwardTask(McMCForwardTask):
         # Output data
         output_data, output_string = self.algorithm.output(self.normalise, self.convert, 0)
         # Print output string
-        print output_string
+        print(output_string)
         return {'algorithm_output_data': output_data, 'event_data': self.event_data, 'location_samples': self.location_samples,
                 'location_sample_multipliers': self.location_sample_multipliers}
 
@@ -1064,7 +1060,7 @@ class CombineMpiOutputTask(object):
             resultCode: 10 if successful.
 
         """
-        print '\n\tCombining {}'.format(self.uid)
+        print('\n\tCombining {}'.format(self.uid))
         # Get hyp, mt and sf files
         hypfiles = glob.glob(self.uid+'.*.hyp')
         fids = glob.glob(self.uid+'.*.mt')
@@ -1294,7 +1290,7 @@ class Inversion(object):
             parallel (bool):[True] Run the inversion in parallel using multiprocessing
             n (int):[0] Number of workers, default is to use as many as returned by multiprocessing.cpu_count
             phy_mem (int):[8] Estimated physical memory to use (used for determining array sizes, it is likely that more memory will be used, and if so no errors are forced).
-                 *On python versions <2.7.4 there is a bug (http://bugs.python.org/issue13555) with cPickle that limits the total number of samples when running in parallel, so large (>20GB) phy_mem allocations per process are ignored.*
+                 *On python versions <2.7.4 there is a bug (http://bugs.python.org/issue13555) with pickle that limits the total number of samples when running in parallel, so large (>20GB) phy_mem allocations per process are ignored.*
             dc (bool):[False] Boolean flag as to run inversion constrained to double-couple or allowed to explore the full moment tensor space.
 
         Keyword Arguments:
@@ -1503,7 +1499,7 @@ class Inversion(object):
         """MPI safe print (rank 0 only unless forced)"""
         # If MPI, only print if rank 0
         if not(self._MPI) or (self._MPI and self.comm.Get_rank() == 0 and not force):
-            print string
+            print(string)
 
     def _load(self, filename):
         """
@@ -1545,10 +1541,10 @@ class Inversion(object):
                         try:
                             data = parse_hyp(filename)
                         except Exception:
-                            print 'Parsers available are: ', parsers.keys()
+                            print('Parsers available are: {}'.format(','.join(list(parsers.keys()))))
                             traceback.print_exc()
                 if isinstance(data, bool):
-                    print "No data available using available parsers:\n\t"+'\n\t'.join(parser_names)
+                    print("No data available using available parsers:\n\t"+'\n\t'.join(parser_names))
         return data
 
     def _read_location(self, filename):
@@ -1704,8 +1700,8 @@ class Inversion(object):
         if self._MPI:
             number_samples /= 2
         if self.parallel and not self._MPI and sys.version_info[:2] <= (2, 7, 4) and (number_samples*6*self.number_events*8*8 < 2**30):
-            # Check for cPickle bug #13555 http://bugs.python.org/issue13555 which seems linked to multiprocessing issue #17560 http://bugs.python.org/issue17560
-            # cannot pickle files longer than 2**31 (32 bit encoding used for cPickle length)
+            # Check for pickle bug #13555 http://bugs.python.org/issue13555 which seems linked to multiprocessing issue #17560 http://bugs.python.org/issue17560
+            # cannot pickle files longer than 2**31 (32 bit encoding used for pickle length)
             # Possible fix https://stackoverflow.com/questions/15118344/system-error-while-running-subprocesses-using-multiprocessing
             number_samples = min([((2**30)/(6*8*8*self.number_events)), number_samples])
         # Bodge to prevent memory usage above limit
@@ -1836,7 +1832,7 @@ class Inversion(object):
         old_results_format = self.results_format
         # Check kwargs for update format
         self.results_format = kwargs.get('results_format', old_results_format)
-        print '---------Combining MPI Output-----------'
+        print('---------Combining MPI Output-----------')
         output = {}
         # Loop over fids
         for i, mpi_fid in enumerate(fids):
@@ -1919,7 +1915,7 @@ class Inversion(object):
         if isinstance(output, list):
             for i, out in enumerate(output):
                 if len(output):
-                    print output[i]['total_number_samples']
+                    print(output[i]['total_number_samples'])
                     output[i]['ln_bayesian_evidence'] = ln_bayesian_evidence(output[i], output[i]['total_number_samples'])
                     try:
                         if np.max(output[i]['g'])-np.min(output[i]['g']) < 0.000001 and np.abs(np.mean(output[i]['g'])) < 0.000001 and np.max(output[i]['d'])-np.min(output[i]['d']) < 0.000001 and np.abs(np.mean(output[i]['d'])) < 0.000001:
@@ -1993,7 +1989,7 @@ class Inversion(object):
             if not self._MPI or (self._MPI and (self.mpi_output or(not isinstance(self.comm, bool) and self.comm.Get_rank()))) == 0:
                 if self._MPI and self.mpi_output:
                     output_string.replace('-mtfit Forward Model Output-', '-mtfit Forward Model Output Process '+str(self.comm.Get_rank())+'-')
-                print output_string,
+                print(output_string)
         try:
             if (not isinstance(output_data, dict) or not len(output_data['probability'])) and not kwargs.get('station_only', False):
                 return
@@ -2464,7 +2460,7 @@ class Inversion(object):
                 # Run ForwardTasks
                 if self.pool:
                     # initialise all tasks
-                    for i in xrange(self.pool.number_workers):
+                    for i in range(self.pool.number_workers):
                         MTs, end = self._parse_job_result(False)
                         self.pool.task(MTs, a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio,
                                        percentage_error2_amplitude_ratio, a_polarity_probability, polarity_probability, self.location_sample_multipliers,
@@ -2571,7 +2567,7 @@ class Inversion(object):
                         self._print('Error with fids '+str(fids)+' type:'+str(type(fids)))
                     if self.comm.Get_rank() == 0:
                         with open(os.path.splitext(fid)[0]+'.pkl', 'wb') as f:
-                            cPickle.dump({'fids': fids, 'event_data': event}, f)
+                            pickle.dump({'fids': fids, 'event_data': event}, f)
             except Exception:
                 traceback.print_exc()
 
@@ -2657,7 +2653,7 @@ class Inversion(object):
             # Run forward model using MultipleEventsForwardTask
             if self.pool:
                 # initialise all tasks
-                for i in xrange(self.pool.number_workers):
+                for i in range(self.pool.number_workers):
                     MTs, end = self._parse_job_result(False)
                     self.pool.custom_task(MultipleEventsForwardTask, MTs, a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio,
                                           percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio, a_polarity_probability, polarity_probability, a_relative_amplitude,
@@ -2743,7 +2739,7 @@ class Inversion(object):
             # Output results
             if (self._MPI and not self.mpi_output and self.comm.Get_rank() == 0) or (self._MPI and self.mpi_output) or not self._MPI:
                 try:
-                    print fid
+                    print(fid)
                     self.output(self.data, fid, a_polarity=a_polarity, error_polarity=error_polarity, a1_amplitude_ratio=a1_amplitude_ratio, a2_amplitude_ratio=a2_amplitude_ratio, amplitude_ratio=amplitude_ratio, percentage_error1_amplitude_ratio=percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio=percentage_error2_amplitude_ratio, output_format=output_format)
                 except Exception:
                     self._print('Output Error')
@@ -2760,7 +2756,7 @@ class Inversion(object):
                     self._print('Error with fids '+str(fids)+' type:'+str(type(fids)))
                 if self.comm.Get_rank() == 0:
                     with open(os.path.splitext(fid)[0]+'.pkl', 'wb') as f:
-                        cPickle.dump({'fids': fids, 'event_data': event}, f)
+                        pickle.dump({'fids': fids, 'event_data': event}, f)
         except Exception:
             traceback.print_exc()
 
@@ -3321,14 +3317,14 @@ def polarity_misfit_check(mt, data={}, data_file=False, inversion_options=['PPol
     for i, event in enumerate(inversion.data):
         # Check data
         if not event:
-            print 'No Data'
+            print('No Data')
             continue
         # Set algorithm
         inversion._set_algorithm()
         try:
             event = inversion._trim_data(event)
         except ValueError:
-            print 'No Data'
+            print('No Data')
             continue
         # Get observed polarities/inversion_options in data
         observed_polarity = False
@@ -3380,13 +3376,13 @@ def probability_mt_check(mt, data={}, data_file=False, location_pdf_file_path=Fa
     results = []
     for i, event in enumerate(inversion.data):
         if not event:
-            print 'No Data'
+            print('No Data')
             continue
         inversion._set_algorithm()
         try:
                 event = inversion._trim_data(event)
         except ValueError:
-            print 'No Data'
+            print('No Data')
             continue
         (a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio,
          percentage_error2_amplitude_ratio, a_polarity_probability, polarity_probability, incorrect_polarity_probability) = inversion._station_angles(event, i)
@@ -3422,14 +3418,14 @@ def polarity_mt_check(mt, data={}, data_file=False, location_pdf_file_path=False
     results = []
     for i, event in enumerate(inversion.data):
         if not event:
-            print 'No Data'
+            print('No Data')
             continue
         # Set algorithms
         inversion._set_algorithm()
         try:
             event = inversion._trim_data(event)
         except ValueError:
-            print 'No Data'
+            print('No Data')
             continue
         # Get angles and data
         (a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio,
@@ -3468,14 +3464,14 @@ def polarity_probability_mt_check(mt, data={}, data_file=False, location_pdf_fil
     results = []
     for i, event in enumerate(inversion.data):
         if not event:
-            print 'No Data'
+            print('No Data')
             continue
         # Set algorithms
         inversion._set_algorithm()
         try:
             event = inversion._trim_data(event)
         except ValueError:
-            print 'No Data'
+            print('No Data')
             continue
         # Get angles and data
         (a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio,
@@ -3519,14 +3515,14 @@ def amplitude_ratio_probability_mt_check(mt, data={}, data_file=False, location_
     results = []
     for i, event in enumerate(inversion.data):
         if not event:
-            print 'No Data'
+            print('No Data')
             continue
         # Set algorithms
         inversion._set_algorithm()
         try:
                 event = inversion._trim_data(event)
         except ValueError:
-            print 'No Data'
+            print('No Data')
             continue
         # Get angles and data
         (a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio,
@@ -3583,8 +3579,8 @@ def combine_mpi_output(filepath='', output_format='matlab', parallel=False, mpi=
     hypfiles = glob.glob(filepath+'*.hyp')
     # Get UIDs
     UIDs = sorted(list(set(['.'.join(os.path.splitext(u)[0].split('.')[:-1]) for u in hypfiles if len('.'.join(os.path.splitext(u)[0].split('.')[:-1]))])))
-    print '---------Combining Files------------'
-    print '\t{}\n\n'.format('\n\t'.join(UIDs))
+    print('---------Combining Files------------')
+    print('\t{}\n\n'.format('\n\t'.join(UIDs)))
     # Run combination
     # Run in parallel
     if parallel:
@@ -3635,15 +3631,15 @@ def bin_angle_coefficient_samples(a_polarity, a1_amplitude_ratio, a2_amplitude_r
     if epsilon > 0:
         import time
         if cprobability:
-            print 'C'
+            print('C')
             t0 = time.time()
             a_polarity, a1_amplitude_ratio, a2_amplitude_ratio, a_polarity_prob, extension_data, multipliers = cprobability.bin_angle_coefficient_samples(a_polarity, a1_amplitude_ratio,
                                                                                                                                                           a2_amplitude_ratio, a_polarity_prob,
                                                                                                                                                           location_sample_multipliers, extension_data,
                                                                                                                                                           epsilon)
-            print 'Ctime = {}'.format(time.time()-t0)
+            print('Ctime = {}'.format(time.time()-t0))
         else:
-            print 'Py'
+            print('Py')
             t0 = time.time()
             multipliers = []
             no_pop = np.ones((len(location_sample_multipliers),), dtype=bool)
@@ -3667,7 +3663,7 @@ def bin_angle_coefficient_samples(a_polarity, a1_amplitude_ratio, a2_amplitude_r
                             multiplier += location_sample_multipliers[j]
                             no_pop[j] = 0
                 multipliers.append(multiplier)
-            print 'Pytime = {}'.format(time.time()-t0)
+            print('Pytime = {}'.format(time.time()-t0))
             if not isinstance(a_polarity, bool):
                 a_polarity = a_polarity[:, no_pop, :]
             if not isinstance(a1_amplitude_ratio, bool):
@@ -3680,5 +3676,5 @@ def bin_angle_coefficient_samples(a_polarity, a1_amplitude_ratio, a2_amplitude_r
                 for k in extension_data[key].keys():
                     if k[:2] == 'a_' or k[0] == 'a' and k[2] == '_':
                         extension_data[key][k] = extension_data[key][k][:, no_pop, :]
-        print 'Epsilon = {} reduced {} samples to {} records.'.format(epsilon, len(location_sample_multipliers), len(multipliers))
+        print('Epsilon = {} reduced {} samples to {} records.'.format(epsilon, len(location_sample_multipliers), len(multipliers)))
     return a_polarity, a1_amplitude_ratio, a2_amplitude_ratio, a_polarity_prob, extension_data, multipliers
