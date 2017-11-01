@@ -4,6 +4,10 @@ import glob
 import time
 import sys
 import gc
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 import numpy as np
 
@@ -1021,10 +1025,9 @@ S003,110,10,1,0.05"""
         open('csvtest.csv', 'w').write(csv)
 
     def _test_inv_file(self):
-        import cPickle
         data = {'UID': '1', 'PPolarity': {'Stations': {'Name': ['S001', 'S002'], 'Azimuth': np.matrix([[120.0], [140.0]]), 'TakeOffAngle': np.matrix(
             [[65.0], [22.0]])}, 'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.01], [0.02]])}}
-        cPickle.dump(data, open('invtest.inv', 'wb'))
+        pickle.dump(data, open('invtest.inv', 'wb'))
 
     def test__load(self):
         self._test_csv_file()
@@ -1490,8 +1493,7 @@ S003,110,10,1,0.05"""
         except Exception:
             pass
         self.assertTrue(os.path.exists('mtfitOutputMT.out'))
-        import cPickle
-        cPickle.load(open('mtfitOutputMT.out', 'rb'))
+        pickle.load(open('mtfitOutputMT.out', 'rb'))
         try:
             os.remove('mtfitOutputMT.out')
         except Exception:

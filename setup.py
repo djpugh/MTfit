@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-"""Setup script for mtfit
-*********************************
+"""
+Setup script for mtfit
+***********************
 Call from command line as: python setup.py install if on unix
 or python setup.py install
 """
@@ -101,7 +102,7 @@ def setup_package():
 def setup_help():
     # Run setup with cmd args (DEFAULT)
     if '--help' in sys.argv or '-h' in sys.argv:
-        print """setup.py script for mtfit
+        print("""setup.py script for mtfit
 
 mtfit can be installed from the source by calling:
 
@@ -115,7 +116,7 @@ This will install the module to the user site-packages directory. Alternatively,
 
      $ python setup.py install --prefix=/path/to/top_level_directory
 
-"""
+""")
 
 
 def build_extensions():
@@ -144,8 +145,6 @@ def _clean_package():
 
 def cython_build():
     setup_package(test=False, build=False, develop=True)
-    sys.stdout = sys.__stdout__
-    sys.stderr = sys.__stderr__
 
 
 if __name__ == "__main__":

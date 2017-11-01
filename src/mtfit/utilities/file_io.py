@@ -641,8 +641,8 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
         if maxMT.shape[1] > 1:
             maxMT = maxMT[:, 0]
         maxMT_tape = MT6_Tape(maxMT)
-    except Exception as e:
-        print e
+    except Exception:
+        traceback.print_exc()
     if all(maxMT == 0):
         maxMT_tape = [0, 0, 0, 0, 0]
     # Check if its a DC
@@ -713,15 +713,13 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
     nobs = 0
     # Run polarity misfit checks
     for i in range(phase_line_index+2, end_phase_line_index+1):
-        if len(line) < 24:
+        if len(lines[i]) < 24:
             continue
         if _polarity_misfit_check(nlloc_polarity_dict[lines[i][5].lower()], float(lines[i][23]), float(lines[i][24]), lines[i][4], maxMT):
             mf += 1
-            lines[i][5] = nlloc_polarity_inv_dict[
-                lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].lower()
+            lines[i][5] = nlloc_polarity_inv_dict[lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].lower()
         else:
-            lines[i][5] = nlloc_polarity_inv_dict[
-                lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].upper()
+            lines[i][5] = nlloc_polarity_inv_dict[lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].upper()
 
         if lines[i][5] != '?':
             nobs += 1

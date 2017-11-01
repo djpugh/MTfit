@@ -8,7 +8,11 @@ Tests for src/utils/file_io.py
 import unittest
 import os
 import glob
-import cPickle
+
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 import numpy as np
 
@@ -219,7 +223,7 @@ END_NLLOC
         self.assertTrue(os.path.exists('csvtest.csv'))
         csv2inv('csvtest.csv')
         self.assertTrue(os.path.exists('csvtest.inv'))
-        d = cPickle.load(open('csvtest.inv', 'rb'))
+        d = pickle.load(open('csvtest.inv', 'rb'))
         self.assertEqual(len(d), 2)
         self.assertEqual(d[0]['UID'], '123')
         self.assertEqual(

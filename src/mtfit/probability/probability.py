@@ -564,7 +564,7 @@ def combine_mu(mu, s):
             values
     """
     # Loop over each sample
-    for i in xrange(mu.shape[0]):
+    for i in range(mu.shape[0]):
         if i == 0:
             # First sample so initialise the mean and standard debiation
             combined_mu = mu[i, :]
