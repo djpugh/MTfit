@@ -52,31 +52,31 @@ class IOTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
         for fname in glob.glob('*.hyp'):
             if fname not in self.existing_hyp_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
         for fname in glob.glob('*.out'):
             if fname not in self.existing_out_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
         for fname in glob.glob('*.mat'):
             if fname not in self.existing_mat_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
         for fname in glob.glob('*.scatangle'):
             if fname not in self.existing_scatangle_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
 
     def station_angles(self):
         out = "504.7\n"
