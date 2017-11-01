@@ -1734,8 +1734,10 @@ class MiscTestCase(TestCase):
         A, Error, IncorrectPolarityProb = polarity_matrix(data)
         self.assertAlmostEquals(A, np.array([[[9.37349864e-34, 2.50000000e-01, 7.50000000e-01, 2.16489014e-17, 3.74969972e-17, 6.12372436e-01]], [[-2.53084463e-32, -7.50000000e-01, -2.50000000e-01, -1.94840113e-16, 1.12490991e-16, 6.12372436e-01]], [
                                 [9.37349864e-34, 2.50000000e-01, 7.50000000e-01, 2.16489014e-17, 3.74969972e-17, 6.12372436e-01]], [[-2.53084463e-32, -7.50000000e-01, -2.50000000e-01, -1.94840113e-16, 1.12490991e-16, 6.12372436e-01]]]))
-        self.assertEqual(IncorrectPolarityProb[1], 0.1)
-        self.assertEqual(IncorrectPolarityProb[0], 0)
+        self.assertEqual(IncorrectPolarityProb[1], 0.2)
+        self.assertEqual(IncorrectPolarityProb[0], 0.1)
+        self.assertEqual(IncorrectPolarityProb[2], 0)
+        self.assertEqual(IncorrectPolarityProb[3], 0)
 
     def test_amplitude_ratio_matrix(self):
         data = {'P/SHRMSAmplitudeRatio': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0]), 'Name': ['S01', 'S02']},
@@ -1756,8 +1758,7 @@ class MiscTestCase(TestCase):
                                        'Measured': np.matrix([[1, 2], [-1, 3]]), 'Error': np.matrix([[0.001, 0.001], [0.001, 0.02]])}}
         location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
             [31.0, 61.0, 12.1])}, {'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([92.0, 272.0, 122.1]), 'TakeOffAngle':np.array([32.0, 62.0, 13.1])}]
-        A1, A2, amplitude_ratio, Error1, Error2 = amplitude_ratio_matrix(
-            data, location_samples)
+        A1, A2, amplitude_ratio, Error1, Error2 = amplitude_ratio_matrix(data, location_samples)
         A1test = np.array([[[8.07958974e-05,   2.65183423e-01,   7.34735781e-01,  # P/SH S01
                              -6.54610306e-03,  -1.08962046e-02,   6.24243141e-01],  # P/SH S01 Sample 1
                             [3.42024915e-04,   2.80472402e-01,   7.19185573e-01,

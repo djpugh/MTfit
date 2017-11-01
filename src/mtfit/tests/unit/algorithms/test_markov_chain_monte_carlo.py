@@ -227,6 +227,12 @@ class MarginalisedMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
 
     def test_acceptance(self):
         self.mcmc_algorithm.initialise()
+        self.mcmc_algorithm.xi = {'h': 0.7972501404226121, 'sigma': 0.3034672053613414,
+                                  'kappa': 5.562484106876691, 'gamma': -0.4613373190200656,
+                                  'delta': -0.3559523484353853}
+        self.mcmc_algorithm.xi_1 = {'h': np.array([0.62021735]), 'sigma': np.array([1.08204009]),
+                                    'kappa': np.array([5.51100894]), 'gamma': np.array([-0.45280446]),
+                                    'delta': np.array([-0.43080595])}
         if cmarkov_chain_monte_carlo:
             acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
