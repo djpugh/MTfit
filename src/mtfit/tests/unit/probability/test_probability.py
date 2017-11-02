@@ -927,9 +927,9 @@ class LnPDFTestCase(unittest.TestCase):
         del self.ln_pdf
 
     def test_shape(self):
-        self.assertEqual(self.ln_pdf.shape, (1L, 0L))
+        self.assertEqual(self.ln_pdf.shape, (1, 0))
         self.ln_pdf._set_ln_pdf(np.matrix([1, 2.]))
-        self.assertEqual(self.ln_pdf.shape, (1L, 2L))
+        self.assertEqual(self.ln_pdf.shape, (1, 2))
 
     def test__set_dv(self):
         self.ln_pdf._set_dv(2)

@@ -168,7 +168,7 @@ class MomentTensorConvertTestCase(TestCase):
     def assertSigmaEquals(self, first, second, *args):
         try:
             return self.assertAlmostEquals(first, second, *args)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(np.abs(first), np.pi, *args)
                 return self.assertAlmostEquals(-first, second, *args)
@@ -569,7 +569,7 @@ class MomentTensorConvertTestCase(TestCase):
         [S1mt, D1mt, R1mt] = SDR_SDR(self.S2mt, self.D2mt, self.R2mt)
         try:
             self.assertAlmostEquals(S1dc, self.S1dc)
-        except AssertionError, e:
+        except AssertionError as e:
             if self.S1dc in [0, np.pi]:
                 self.assertAlmostEquals(S1dc, np.mod(self.S1dc+np.pi, 2*np.pi))
             else:
@@ -586,7 +586,7 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertSigmaEquals(R[0], self.R1mt)
         try:
             self.assertAlmostEquals(S[1], self.S1dc)
-        except AssertionError, e:
+        except AssertionError as e:
             if self.S1dc in [0, np.pi]:
                 self.assertAlmostEquals(S[1], np.mod(self.S1dc+np.pi, 2*np.pi))
             else:
@@ -618,7 +618,7 @@ class MomentTensorConvertTestCase(TestCase):
         [S1mt, D1mt, R1mt] = SDR_SDR(self.S2mt, self.D2mt, self.R2mt)
         try:
             self.assertAlmostEquals(S1dc, self.S1dc)
-        except AssertionError, e:
+        except AssertionError as e:
             if self.S1dc in [0, np.pi]:
                 self.assertAlmostEquals(S1dc, np.mod(self.S1dc+np.pi, 2*np.pi))
             else:
@@ -635,7 +635,7 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertSigmaEquals(R[0], self.R1mt)
         try:
             self.assertAlmostEquals(S[1], self.S1dc)
-        except AssertionError, e:
+        except AssertionError as e:
             if self.S1dc in [0, np.pi]:
                 self.assertAlmostEquals(S[1], np.mod(self.S1dc+np.pi, 2*np.pi))
             else:
@@ -669,40 +669,40 @@ class MomentTensorConvertTestCase(TestCase):
         try:
             self.assertVectorEquals(N1dc, self.N1dc)
             self.assertVectorEquals(N2dc, self.N2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2dc, self.N1dc)
                 self.assertVectorEquals(N1dc, self.N2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertVectorEquals(N1mt, self.N1mt)
             self.assertVectorEquals(N2mt, self.N2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2mt, self.N1mt)
                 self.assertVectorEquals(N1mt, self.N2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [N1, N2] = SDSD_FP(np.array([self.S1mt, self.S1dc]), np.array(
             [self.D1mt, self.D1dc]), np.array([self.S2mt, self.S2dc]), np.array([self.D2mt, self.D2dc]))
         try:
             self.assertVectorEquals(N1[:, 1], self.N1dc)
             self.assertVectorEquals(N2[:, 1], self.N2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2[:, 1], self.N1dc)
                 self.assertVectorEquals(N1[:, 1], self.N2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertVectorEquals(N1[:, 0], self.N1mt)
             self.assertVectorEquals(N2[:, 0], self.N2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2[:, 0], self.N1mt)
                 self.assertVectorEquals(N1[:, 0], self.N2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
 
     def test_SDR_FP(self):
@@ -712,80 +712,80 @@ class MomentTensorConvertTestCase(TestCase):
         try:
             self.assertVectorEquals(N1dc, self.N1dc)
             self.assertVectorEquals(N2dc, self.N2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2dc, self.N1dc)
                 self.assertVectorEquals(N1dc, self.N2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertVectorEquals(N1mt, self.N1mt)
             self.assertVectorEquals(N2mt, self.N2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2mt, self.N1mt)
                 self.assertVectorEquals(N1mt, self.N2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [N1, N2] = SDR_FP(np.array([self.S1mt, self.S1dc]), np.array(
             [self.D1mt, self.D1dc]), np.array([self.R1mt, self.R1dc]))
         try:
             self.assertVectorEquals(N1[:, 1], self.N1dc)
             self.assertVectorEquals(N2[:, 1], self.N2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2[:, 1], self.N1dc)
                 self.assertVectorEquals(N1[:, 1], self.N2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertVectorEquals(N1[:, 0], self.N1mt)
             self.assertVectorEquals(N2[:, 0], self.N2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2[:, 0], self.N1mt)
                 self.assertVectorEquals(N1[:, 0], self.N2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [N1dc, N2dc] = SDR_FP(self.S2dc, self.D2dc, self.R2dc)
         [N1mt, N2mt] = SDR_FP(self.S2mt, self.D2mt, self.R2mt)
         try:
             self.assertVectorEquals(N1dc, self.N1dc)
             self.assertVectorEquals(N2dc, self.N2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2dc, self.N1dc)
                 self.assertVectorEquals(N1dc, self.N2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertVectorEquals(N1mt, self.N1mt)
             self.assertVectorEquals(N2mt, self.N2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2mt, self.N1mt)
                 self.assertVectorEquals(N1mt, self.N2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [N1, N2] = SDR_FP(np.array([self.S2mt, self.S2dc]), np.array(
             [self.D2mt, self.D2dc]), np.array([self.R2mt, self.R2dc]))
         try:
             self.assertVectorEquals(N1[:, 1], self.N1dc)
             self.assertVectorEquals(N2[:, 1], self.N2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2[:, 1], self.N1dc)
                 self.assertVectorEquals(N1[:, 1], self.N2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertVectorEquals(N1[:, 0], self.N1mt)
             self.assertVectorEquals(N2[:, 0], self.N2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertVectorEquals(N2[:, 0], self.N1mt)
                 self.assertVectorEquals(N1[:, 0], self.N2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
 
     def test_SDR_SDSD(self):
@@ -797,26 +797,26 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(S2dc, self.S2dc)
             self.assertAlmostEquals(D1dc, self.D1dc)
             self.assertAlmostEquals(D2dc, self.D2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2dc, self.S1dc)
                 self.assertAlmostEquals(S1dc, self.S2dc)
                 self.assertAlmostEquals(D2dc, self.D1dc)
                 self.assertAlmostEquals(D1dc, self.D2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertAlmostEquals(S1mt, self.S1mt)
             self.assertAlmostEquals(S2mt, self.S2mt)
             self.assertAlmostEquals(D1mt, self.D1mt)
             self.assertAlmostEquals(D2mt, self.D2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2mt, self.S1mt)
                 self.assertAlmostEquals(S1mt, self.S2mt)
                 self.assertAlmostEquals(D2mt, self.D1mt)
                 self.assertAlmostEquals(D1mt, self.D2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [S1, D1, S2, D2] = SDR_SDSD(np.array([self.S1mt, self.S1dc]), np.array(
             [self.D1mt, self.D1dc]), np.array([self.R1mt, self.R1dc]))
@@ -825,33 +825,33 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(S2[1], self.S2dc)
             self.assertAlmostEquals(D1[1], self.D1dc)
             self.assertAlmostEquals(D2[1], self.D2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2[1], self.S1dc)
                 self.assertAlmostEquals(S1[1], self.S2dc)
                 self.assertAlmostEquals(D2[1], self.D1dc)
                 self.assertAlmostEquals(D1[1], self.D2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertAlmostEquals(S1[0], self.S1mt)
             self.assertAlmostEquals(S2[0], self.S2mt)
             self.assertAlmostEquals(D1[0], self.D1mt)
             self.assertAlmostEquals(D2[0], self.D2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2[0], self.S1mt)
                 self.assertAlmostEquals(S1[0], self.S2mt)
                 self.assertAlmostEquals(D2[0], self.D1mt)
                 self.assertAlmostEquals(D1[0], self.D2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [S1dc, D1dc, S2dc, D2dc] = SDR_SDSD(self.S2dc, self.D2dc, self.R2dc)
         [S1mt, D1mt, S2mt, D2mt] = SDR_SDSD(self.S2mt, self.D2mt, self.R2mt)
         try:
             try:
                 self.assertAlmostEquals(S1dc, self.S1dc)
-            except AssertionError, e:
+            except AssertionError as e:
                 if self.S1dc in [0, np.pi]:
                     self.assertAlmostEquals(
                         S1dc, np.mod(self.S1dc+np.pi, 2*np.pi))
@@ -859,7 +859,7 @@ class MomentTensorConvertTestCase(TestCase):
                     raise e
             try:
                 self.assertAlmostEquals(S2dc, self.S2dc)
-            except AssertionError, e:
+            except AssertionError as e:
                 if self.S2dc in [0, np.pi]:
                     self.assertAlmostEquals(
                         S2dc, np.mod(self.S2dc+np.pi, 2*np.pi))
@@ -867,11 +867,11 @@ class MomentTensorConvertTestCase(TestCase):
                     raise e
             self.assertAlmostEquals(D1dc, self.D1dc)
             self.assertAlmostEquals(D2dc, self.D2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 try:
                     self.assertAlmostEquals(S2dc, self.S1dc)
-                except AssertionError, e:
+                except AssertionError as e:
                     if self.S1dc in [0, np.pi]:
                         self.assertAlmostEquals(
                             S2dc, np.mod(self.S1dc+np.pi, 2*np.pi))
@@ -879,7 +879,7 @@ class MomentTensorConvertTestCase(TestCase):
                         raise e
                 try:
                     self.assertAlmostEquals(S1dc, self.S2dc)
-                except AssertionError, e:
+                except AssertionError as e:
                     if self.S2dc in [0, np.pi]:
                         self.assertAlmostEquals(
                             S1dc, np.mod(self.S2dc+np.pi, 2*np.pi))
@@ -887,27 +887,27 @@ class MomentTensorConvertTestCase(TestCase):
                         raise e
                 self.assertAlmostEquals(D2dc, self.D1dc)
                 self.assertAlmostEquals(D1dc, self.D2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertAlmostEquals(S1mt, self.S1mt)
             self.assertAlmostEquals(S2mt, self.S2mt)
             self.assertAlmostEquals(D1mt, self.D1mt)
             self.assertAlmostEquals(D2mt, self.D2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2mt, self.S1mt)
                 self.assertAlmostEquals(S1mt, self.S2mt)
                 self.assertAlmostEquals(D2mt, self.D1mt)
                 self.assertAlmostEquals(D1mt, self.D2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [S1, D1, S2, D2] = SDR_SDSD(np.array([self.S2mt, self.S2dc]), np.array(
             [self.D2mt, self.D2dc]), np.array([self.R2mt, self.R2dc]))
         try:
             try:
                 self.assertAlmostEquals(S1[1], self.S1dc)
-            except AssertionError, e:
+            except AssertionError as e:
                 if self.S1dc in [0, np.pi]:
                     self.assertAlmostEquals(
                         S1[1], np.mod(self.S1dc+np.pi, 2*np.pi))
@@ -915,7 +915,7 @@ class MomentTensorConvertTestCase(TestCase):
                     raise e
             try:
                 self.assertAlmostEquals(S2[1], self.S2dc)
-            except AssertionError, e:
+            except AssertionError as e:
                 if self.S2dc in [0, np.pi]:
                     self.assertAlmostEquals(
                         S2[1], np.mod(self.S2dc+np.pi, 2*np.pi))
@@ -923,11 +923,11 @@ class MomentTensorConvertTestCase(TestCase):
                     raise e
             self.assertAlmostEquals(D1[1], self.D1dc)
             self.assertAlmostEquals(D2[1], self.D2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 try:
                     self.assertAlmostEquals(S2[1], self.S1dc)
-                except AssertionError, e:
+                except AssertionError as e:
                     if self.S1dc in [0, np.pi]:
                         self.assertAlmostEquals(
                             S2[1], np.mod(self.S1dc+np.pi, 2*np.pi))
@@ -935,7 +935,7 @@ class MomentTensorConvertTestCase(TestCase):
                         raise e
                 try:
                     self.assertAlmostEquals(S1[1], self.S2dc)
-                except AssertionError, e:
+                except AssertionError as e:
                     if self.S2dc in [0, np.pi]:
                         self.assertAlmostEquals(
                             S1[1], np.mod(self.S2dc+np.pi, 2*np.pi))
@@ -943,20 +943,20 @@ class MomentTensorConvertTestCase(TestCase):
                         raise e
                 self.assertAlmostEquals(D2[1], self.D1dc)
                 self.assertAlmostEquals(D1[1], self.D2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertAlmostEquals(S1[0], self.S1mt)
             self.assertAlmostEquals(S2[0], self.S2mt)
             self.assertAlmostEquals(D1[0], self.D1mt)
             self.assertAlmostEquals(D2[0], self.D2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2[0], self.S1mt)
                 self.assertAlmostEquals(S1[0], self.S2mt)
                 self.assertAlmostEquals(D2[0], self.D1mt)
                 self.assertAlmostEquals(D1[0], self.D2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
 
     def test_FP_SDSD(self):
@@ -968,26 +968,26 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(S2dc, self.S2dc)
             self.assertAlmostEquals(D1dc, self.D1dc)
             self.assertAlmostEquals(D2dc, self.D2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2dc, self.S1dc)
                 self.assertAlmostEquals(S1dc, self.S2dc)
                 self.assertAlmostEquals(D2dc, self.D1dc)
                 self.assertAlmostEquals(D1dc, self.D2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertAlmostEquals(S1mt, self.S1mt)
             self.assertAlmostEquals(S2mt, self.S2mt)
             self.assertAlmostEquals(D1mt, self.D1mt)
             self.assertAlmostEquals(D2mt, self.D2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2mt, self.S1mt)
                 self.assertAlmostEquals(S1mt, self.S2mt)
                 self.assertAlmostEquals(D2mt, self.D1mt)
                 self.assertAlmostEquals(D1mt, self.D2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [S1, D1, S2, D2] = FP_SDSD(
             np.append(self.N1mt, self.N1dc, 1), np.append(self.N2mt, self.N2dc, 1))
@@ -996,26 +996,26 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(S2[1], self.S2dc)
             self.assertAlmostEquals(D1[1], self.D1dc)
             self.assertAlmostEquals(D2[1], self.D2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2[1], self.S1dc)
                 self.assertAlmostEquals(S1[1], self.S2dc)
                 self.assertAlmostEquals(D2[1], self.D1dc)
                 self.assertAlmostEquals(D1[1], self.D2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertAlmostEquals(S1[0], self.S1mt)
             self.assertAlmostEquals(S2[0], self.S2mt)
             self.assertAlmostEquals(D1[0], self.D1mt)
             self.assertAlmostEquals(D2[0], self.D2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2[0], self.S1mt)
                 self.assertAlmostEquals(S1[0], self.S2mt)
                 self.assertAlmostEquals(D2[0], self.D1mt)
                 self.assertAlmostEquals(D1[0], self.D2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [S1dc, D1dc, S2dc, D2dc] = FP_SDSD(self.N2dc, self.N1dc)
         [S1mt, D1mt, S2mt, D2mt] = FP_SDSD(self.N2mt, self.N1mt)
@@ -1024,26 +1024,26 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(S2dc, self.S2dc)
             self.assertAlmostEquals(D1dc, self.D1dc)
             self.assertAlmostEquals(D2dc, self.D2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2dc, self.S1dc)
                 self.assertAlmostEquals(S1dc, self.S2dc)
                 self.assertAlmostEquals(D2dc, self.D1dc)
                 self.assertAlmostEquals(D1dc, self.D2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertAlmostEquals(S1mt, self.S1mt)
             self.assertAlmostEquals(S2mt, self.S2mt)
             self.assertAlmostEquals(D1mt, self.D1mt)
             self.assertAlmostEquals(D2mt, self.D2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2mt, self.S1mt)
                 self.assertAlmostEquals(S1mt, self.S2mt)
                 self.assertAlmostEquals(D2mt, self.D1mt)
                 self.assertAlmostEquals(D1mt, self.D2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         [S1, D1, S2, D2] = FP_SDSD(
             np.append(self.N2mt, self.N2dc, 1), np.append(self.N1mt, self.N1dc, 1))
@@ -1052,26 +1052,26 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(S2[1], self.S2dc)
             self.assertAlmostEquals(D1[1], self.D1dc)
             self.assertAlmostEquals(D2[1], self.D2dc)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2[1], self.S1dc)
                 self.assertAlmostEquals(S1[1], self.S2dc)
                 self.assertAlmostEquals(D2[1], self.D1dc)
                 self.assertAlmostEquals(D1[1], self.D2dc)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
         try:
             self.assertAlmostEquals(S1[0], self.S1mt)
             self.assertAlmostEquals(S2[0], self.S2mt)
             self.assertAlmostEquals(D1[0], self.D1mt)
             self.assertAlmostEquals(D2[0], self.D2mt)
-        except AssertionError, e1:
+        except AssertionError as e1:
             try:
                 self.assertAlmostEquals(S2[0], self.S1mt)
                 self.assertAlmostEquals(S1[0], self.S2mt)
                 self.assertAlmostEquals(D2[0], self.D1mt)
                 self.assertAlmostEquals(D1[0], self.D2mt)
-            except AssertionError, e2:
+            except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
 
     def test_Tape_MT33(self):
@@ -1164,7 +1164,7 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertAlmostEquals(
                         result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     if key in ['S1', 'D1']:
                         new_key = key.replace('1', '2')
                     else:
@@ -1172,11 +1172,11 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertAlmostEquals(
                             result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         try:
                             self.assertAlmostEquals(
                                 result_mt[key]-180, self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                        except AssertionError, e3:
+                        except AssertionError as e3:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
@@ -1184,7 +1184,7 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertSigmaEquals(
                         result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     if key in ['R1']:
                         new_key = key.replace('1', '2')
                     else:
@@ -1192,7 +1192,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
@@ -1200,18 +1200,18 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertSigmaEquals(
                         result_mt[key], self.__getattribute__(new_key.upper()+'mt'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     try:
                         self.assertSigmaEquals(
                             result_mt[key]-np.pi, self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
             else:
                 try:
                     self.assertAlmostEquals(
                         result_mt[key], self.__getattribute__(new_key.upper()+'mt'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     raise AssertionError('Key:'+str(key)+'\n'+e.message)
         result_dc = output_convert(self.DC6)
         for key in result_dc.keys():
@@ -1222,7 +1222,7 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertAlmostEquals(
                         result_dc[key], self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     if key in ['S1', 'D1']:
                         new_key = key.replace('1', '2')
                     else:
@@ -1230,11 +1230,11 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertAlmostEquals(
                             result_dc[key], self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         try:
                             self.assertAlmostEquals(
                                 result_dc[key]-180, self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                        except AssertionError, e3:
+                        except AssertionError as e3:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
@@ -1242,7 +1242,7 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertSigmaEquals(
                         result_dc[key]*np.pi/180., self.__getattribute__(new_key.upper()+'dc'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     if key in ['R1']:
                         new_key = key.replace('1', '2')
                     else:
@@ -1250,7 +1250,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result_dc[key]*np.pi/180., self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
@@ -1258,18 +1258,18 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertSigmaEquals(
                         result_dc[key], self.__getattribute__(new_key.upper()+'dc'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     try:
                         self.assertSigmaEquals(
                             result_dc[key]-np.pi, self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
             else:
                 try:
                     self.assertAlmostEquals(
                         result_dc[key], self.__getattribute__(new_key.upper()+'dc'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     raise AssertionError('Key:'+str(key)+'\n'+e.message)
         result = output_convert(np.append(self.MT6, self.DC6, 1))
         for key in result.keys():
@@ -1284,7 +1284,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertAlmostEquals(
                             result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         if key in ['S1', 'D1']:
                             new_key = key.replace('1', '2')
                         else:
@@ -1292,11 +1292,11 @@ class MomentTensorConvertTestCase(TestCase):
                         try:
                             self.assertAlmostEquals(
                                 result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             try:
                                 self.assertAlmostEquals(
                                     result[key][0]-180, self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                            except AssertionError, e3:
+                            except AssertionError as e3:
                                 raise AssertionError(
                                     'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
@@ -1304,7 +1304,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         if key in ['R1']:
                             new_key = key.replace('1', '2')
                         else:
@@ -1312,7 +1312,7 @@ class MomentTensorConvertTestCase(TestCase):
                         try:
                             self.assertSigmaEquals(
                                 result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
@@ -1320,20 +1320,20 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result[key][0], self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         try:
                             self.assertSigmaEquals(
                                 result[key][0]-np.pi, self.__getattribute__(new_key.upper()+'mt'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
                 else:
                     try:
                         self.assertAlmostEquals(
                             result[key][0], self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         raise AssertionError('Key:'+str(key)+'\n'+e.message)
-            except AssertionError, e:
+            except AssertionError as e:
                 raise AssertionError('Key:'+str(key)+'\n'+e.message)
             try:
                 self.assertAlmostEquals(
@@ -1343,7 +1343,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertAlmostEquals(
                             result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         if key in ['S1', 'D1']:
                             new_key = key.replace('1', '2')
                         else:
@@ -1351,11 +1351,11 @@ class MomentTensorConvertTestCase(TestCase):
                         try:
                             self.assertAlmostEquals(
                                 result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             try:
                                 self.assertAlmostEquals(
                                     result[key][1]-180, self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                            except AssertionError, e3:
+                            except AssertionError as e3:
                                 raise AssertionError(
                                     'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
@@ -1363,7 +1363,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         if key in ['R1']:
                             new_key = key.replace('1', '2')
                         else:
@@ -1371,7 +1371,7 @@ class MomentTensorConvertTestCase(TestCase):
                         try:
                             self.assertSigmaEquals(
                                 result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
@@ -1379,20 +1379,20 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result[key][1], self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         try:
                             self.assertSigmaEquals(
                                 result[key][1]-np.pi, self.__getattribute__(new_key.upper()+'dc'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
                 else:
                     try:
                         self.assertAlmostEquals(
                             result[key][1], self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         raise AssertionError('Key:'+str(key)+'\n'+e.message)
-            except AssertionError, e:
+            except AssertionError as e:
                 raise AssertionError('Key:'+str(key)+'\n'+e.message)
 
     def test_output_convert_cython(self):
@@ -1408,7 +1408,7 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertAlmostEquals(
                         result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     if key in ['S1', 'D1']:
                         new_key = key.replace('1', '2')
                     else:
@@ -1416,11 +1416,11 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertAlmostEquals(
                             result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         try:
                             self.assertAlmostEquals(
                                 result_mt[key]-180, self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                        except AssertionError, e3:
+                        except AssertionError as e3:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
@@ -1428,7 +1428,7 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertSigmaEquals(
                         result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     if key in ['R1']:
                         new_key = key.replace('1', '2')
                     else:
@@ -1436,7 +1436,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
@@ -1444,18 +1444,18 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertSigmaEquals(
                         result_mt[key], self.__getattribute__(new_key.upper()+'mt'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     try:
                         self.assertSigmaEquals(
                             result_mt[key]-np.pi, self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
             else:
                 try:
                     self.assertAlmostEquals(
                         result_mt[key], self.__getattribute__(new_key.upper()+'mt'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     raise AssertionError('Key:'+str(key)+'\n'+e.message)
         result_dc = output_convert(self.DC6)
         for key in result_dc.keys():
@@ -1466,7 +1466,7 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertAlmostEquals(
                         result_dc[key], self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     if key in ['S1', 'D1']:
                         new_key = key.replace('1', '2')
                     else:
@@ -1474,11 +1474,11 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertAlmostEquals(
                             result_dc[key], self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         try:
                             self.assertAlmostEquals(
                                 result_dc[key]-180, self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                        except AssertionError, e3:
+                        except AssertionError as e3:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
@@ -1486,7 +1486,7 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertSigmaEquals(
                         result_dc[key]*np.pi/180., self.__getattribute__(new_key.upper()+'dc'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     if key in ['R1']:
                         new_key = key.replace('1', '2')
                     else:
@@ -1494,7 +1494,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result_dc[key]*np.pi/180., self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
@@ -1502,18 +1502,18 @@ class MomentTensorConvertTestCase(TestCase):
                 try:
                     self.assertSigmaEquals(
                         result_dc[key], self.__getattribute__(new_key.upper()+'dc'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     try:
                         self.assertSigmaEquals(
                             result_dc[key]-np.pi, self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e2:
+                    except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
             else:
                 try:
                     self.assertAlmostEquals(
                         result_dc[key], self.__getattribute__(new_key.upper()+'dc'), 5)
-                except AssertionError, e:
+                except AssertionError as e:
                     raise AssertionError('Key:'+str(key)+'\n'+e.message)
         result = output_convert(np.append(self.MT6, self.DC6, 1))
         for key in result.keys():
@@ -1528,7 +1528,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertAlmostEquals(
                             result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         if key in ['S1', 'D1']:
                             new_key = key.replace('1', '2')
                         else:
@@ -1536,11 +1536,11 @@ class MomentTensorConvertTestCase(TestCase):
                         try:
                             self.assertAlmostEquals(
                                 result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             try:
                                 self.assertAlmostEquals(
                                     result[key][0]-180, self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                            except AssertionError, e3:
+                            except AssertionError as e3:
                                 raise AssertionError(
                                     'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
@@ -1548,7 +1548,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         if key in ['R1']:
                             new_key = key.replace('1', '2')
                         else:
@@ -1556,7 +1556,7 @@ class MomentTensorConvertTestCase(TestCase):
                         try:
                             self.assertSigmaEquals(
                                 result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
@@ -1564,20 +1564,20 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result[key][0], self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         try:
                             self.assertSigmaEquals(
                                 result[key][0]-np.pi, self.__getattribute__(new_key.upper()+'mt'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
                 else:
                     try:
                         self.assertAlmostEquals(
                             result[key][0], self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         raise AssertionError('Key:'+str(key)+'\n'+e.message)
-            except AssertionError, e:
+            except AssertionError as e:
                 raise AssertionError('Key:'+str(key)+'\n'+e.message)
             try:
                 self.assertAlmostEquals(
@@ -1587,7 +1587,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertAlmostEquals(
                             result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         if key in ['S1', 'D1']:
                             new_key = key.replace('1', '2')
                         else:
@@ -1595,11 +1595,11 @@ class MomentTensorConvertTestCase(TestCase):
                         try:
                             self.assertAlmostEquals(
                                 result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             try:
                                 self.assertAlmostEquals(
                                     result[key][1]-180, self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                            except AssertionError, e3:
+                            except AssertionError as e3:
                                 raise AssertionError(
                                     'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
@@ -1607,7 +1607,7 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         if key in ['R1']:
                             new_key = key.replace('1', '2')
                         else:
@@ -1615,7 +1615,7 @@ class MomentTensorConvertTestCase(TestCase):
                         try:
                             self.assertSigmaEquals(
                                 result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
@@ -1623,20 +1623,20 @@ class MomentTensorConvertTestCase(TestCase):
                     try:
                         self.assertSigmaEquals(
                             result[key][1], self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         try:
                             self.assertSigmaEquals(
                                 result[key][1]-np.pi, self.__getattribute__(new_key.upper()+'dc'), 5)
-                        except AssertionError, e2:
+                        except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
                 else:
                     try:
                         self.assertAlmostEquals(
                             result[key][1], self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError, e:
+                    except AssertionError as e:
                         raise AssertionError('Key:'+str(key)+'\n'+e.message)
-            except AssertionError, e:
+            except AssertionError as e:
                 raise AssertionError('Key:'+str(key)+'\n'+e.message)
 
     def test_MT6_biaxes(self):
