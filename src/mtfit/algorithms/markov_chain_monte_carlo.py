@@ -15,6 +15,7 @@ import time
 import gc
 import copy
 import logging
+import sys
 
 
 import numpy as np
@@ -1519,30 +1520,34 @@ class IterativeMultipleTryMetropolisHastingsGaussianTape(IterativeMetropolisHast
                         int(1.1*self._number_samples), self._number_samples+1)])
                 return xi_1, ln_pi_1, False, index
             else:
+                if sys.version_info.major > 2:
+                    is_uniform = self._prior.__name__ == 'uniform_prior'
+                else:
+                    is_uniform = self._prior.func_name == 'uniform_prior'
                 # Mutliple events
                 if self.number_events > 1:
                     if hasattr(self, 'dc_prior') and isinstance(self.dc_prior, (float, int)):
                         self.dc_prior = np.array([self.dc_prior])
                     if isinstance(ln_pi_1, np.ndarray):
                         xi_1, ln_pi_1, index = me_acceptance_check(xi_1, self.xi, self.alpha, np.asarray(ln_pi_1).flatten(),
-                                                                   self.ln_likelihood_xi, self._prior.func_name == 'uniform_prior',
+                                                                   self.ln_likelihood_xi, is_uniform,
                                                                    gaussian_jump=getattr(self, 'gaussian_jump_params', False),
                                                                    dc_prior=getattr(self, 'dc_prior', np.array([0.])))  # dc prior ignored if not transd
                     else:
                         xi_1, ln_pi_1, index = me_acceptance_check(xi_1, self.xi, self.alpha, np.asarray(ln_pi_1._ln_pdf).flatten(),
-                                                                   self.ln_likelihood_xi, self._prior.func_name == 'uniform_prior',
+                                                                   self.ln_likelihood_xi, is_uniform,
                                                                    gaussian_jump=getattr(self, 'gaussian_jump_params', False),
                                                                    dc_prior=getattr(self, 'dc_prior', np.array([0.])))
                 # Single events
                 else:
                     if isinstance(ln_pi_1, np.ndarray):
                         xi_1, ln_pi_1, index = acceptance_check(xi_1, self.xi, self.alpha, np.asarray(ln_pi_1).flatten(),
-                                                                self.ln_likelihood_xi, self._prior.func_name == 'uniform_prior',
+                                                                self.ln_likelihood_xi, is_uniform,
                                                                 gaussian_jump=getattr(self, 'gaussian_jump_params', False),
                                                                 dc_prior=getattr(self, 'dc_prior', 0.))
                     else:
                         xi_1, ln_pi_1, index = acceptance_check(xi_1, self.xi, self.alpha, np.asarray(ln_pi_1._ln_pdf).flatten(),
-                                                                self.ln_likelihood_xi, self._prior.func_name == 'uniform_prior',
+                                                                self.ln_likelihood_xi, is_uniform,
                                                                 gaussian_jump=getattr(self, 'gaussian_jump_params', False),
                                                                 dc_prior=getattr(self, 'dc_prior', 0.))
             # No accepted samples, so increase the number of test samples if in

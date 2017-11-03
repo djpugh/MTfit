@@ -2825,7 +2825,7 @@ class Inversion(object):
                     # Remove data_type not in inversion options
                     if key not in self.inversion_options and key not in ['UID']:
                         data.pop(key)
-            if not len(data) or data.keys() == ['UID']:
+            if not len(data) or list(data.keys()) == ['UID']:
                 raise ValueError('No data remaining for the selected inversion options:\n\t'+'\n\t'.join(self.inversion_options))
             else:
                 return data

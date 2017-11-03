@@ -1106,7 +1106,7 @@ S003,110,10,1,0.05"""
         self.assertFalse(self.inversion.pool)
 
     def test__trim_data(self):
-        self.assertTrue(self.inversion.data[0].keys() == ['PPolarity'])
+        self.assertTrue(list(self.inversion.data[0].keys()) == ['PPolarity'])
         self.inversion.inversion_options = ['PAmplitude']
         try:
             self.inversion._trim_data(self.inversion.data[0])

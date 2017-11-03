@@ -15,6 +15,7 @@ Basic algorithm class for mtfit
 
 import logging
 import types
+import sys
 
 import numpy as np
 
@@ -92,7 +93,10 @@ class BaseAlgorithm(object):
             model_names, model = get_extensions('MTfit.sample_distribution', {'clvd': self.random_clvd})
             try:
                 try:
-                    self.random_model = getattr(self, model[self._model].func_name)
+                    if sys.version_info.major > 3:
+                        self.random_model = getattr(self, model[self._model].__name__)
+                    else:
+                        self.random_model = getattr(self, model[self._model].func_name)
                 except AttributeError:
                     self.random_model = types.MethodType(model[self._model], self)
             except Exception:
@@ -114,16 +118,20 @@ class BaseAlgorithm(object):
 
         # Check sampling_prior distribution selection
         if not kwargs.get('sampling_prior', '6sphere') in sampling_prior_names:
-            kwargs['sampling_prior'] = self.default_sampling_priors.keys()[0]
+            kwargs['sampling_prior'] = list(self.default_sampling_priors.keys())[0]
         try:
-            self._prior = sampling_prior[kwargs.get('sampling_prior', self.default_sampling_priors.keys()[0])]
+            self._prior = sampling_prior[kwargs.get('sampling_prior', list(self.default_sampling_priors.keys())[0])]
         except Exception:
             logger.exception('Error setting prior: {}, using default: {}\n'.format(
-                kwargs.get('sampling_prior', self.default_sampling_priors.keys()[0]),
-                self.default_sampling_priors.keys()[0]))
-            self._prior = sampling_prior[self.default_sampling_priors.keys()[0]]
+                kwargs.get('sampling_prior', list(self.default_sampling_priors.keys())[0]),
+                list(self.default_sampling_priors.keys())[0]))
+            self._prior = sampling_prior[list(self.default_sampling_priors.keys())[0]]
         try:
-            self.random_mt = getattr(self, sampling[kwargs.get('sampling', '6sphere')].func_name)
+            if sys.version_info.major > 2:
+                self.random_mt = getattr(self, sampling[kwargs.get('sampling', '6sphere')].__name__)
+            else:
+                self.random_mt = getattr(self, sampling[kwargs.get('sampling', '6sphere')].func_name)
+
         except AttributeError:
             self.random_mt = types.MethodType(sampling[kwargs.get('sampling', '6sphere')], self)
         if file_sample:
