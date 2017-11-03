@@ -226,12 +226,10 @@ END_NLLOC
         d = pickle.load(open('csvtest.inv', 'rb'))
         self.assertEqual(len(d), 2)
         self.assertEqual(d[0]['UID'], '123')
-        self.assertEqual(
-            d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
+        self.assertEqual(d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
         self.assertEqual(d[0]['PPolarity']['Measured'][0, 0], 1)
         self.assertEqual(d[0]['PPolarity']['Measured'][1, 0], -1)
-        self.assertEqual(
-            sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
+        self.assertEqual(sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 0], 0.05)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 1], 0.04)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][1, 0], 0.01)
@@ -245,12 +243,10 @@ END_NLLOC
         d = parse_csv('csvtest.csv')
         self.assertEqual(len(d), 2)
         self.assertEqual(d[0]['UID'], '123')
-        self.assertEqual(
-            d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
+        self.assertEqual(d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
         self.assertEqual(d[0]['PPolarity']['Measured'][0, 0], 1)
         self.assertEqual(d[0]['PPolarity']['Measured'][1, 0], -1)
-        self.assertEqual(
-            sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
+        self.assertEqual(sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 0], 0.05)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 1], 0.04)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][1, 0], 0.01)
@@ -261,12 +257,10 @@ END_NLLOC
         d = _parse_csv_events(self.csv_events())
         self.assertEqual(len(d), 2)
         self.assertEqual(d[0]['UID'], '123')
-        self.assertEqual(
-            d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
+        self.assertEqual(d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
         self.assertEqual(d[0]['PPolarity']['Measured'][0, 0], 1)
         self.assertEqual(d[0]['PPolarity']['Measured'][1, 0], -1)
-        self.assertEqual(
-            sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
+        self.assertEqual(sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 0], 0.05)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 1], 0.04)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][1, 0], 0.01)
