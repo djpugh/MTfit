@@ -572,40 +572,16 @@ class UtilsTestCase(TestCase):
                           [0, 0, 0, 0, 0, 0, 0]])
         unique = unique_columns(data)
         self.assertEqual(unique.shape, (6, 4))
-        self.assertTrue((unique == np.matrix([[2, 1, 0, 0],
-                                              [-1, 0, 0, 0],
-                                              [-1, -1, 0, 0],
-                                              [0, 0, 1, 0],
-                                              [0, 0, 0, 1],
-                                              [0, 0, 0, 0]])).all())
         unique, counts = unique_columns(data, counts=True)
         self.assertEqual(unique.shape, (6, 4))
-        self.assertTrue((unique == np.matrix([[2, 1, 0, 0],
-                                              [-1, 0, 0, 0],
-                                              [-1, -1, 0, 0],
-                                              [0, 0, 1, 0],
-                                              [0, 0, 0, 1],
-                                              [0, 0, 0, 0]])).all())
-        self.assertTrue((counts == [1, 2, 3, 1]).all())
+        self.assertEqual(set(counts), set([1, 2, 3]))
         unique, counts, index = unique_columns(data, counts=True, index=True)
         self.assertEqual(unique.shape, (6, 4))
-        self.assertTrue((unique == np.matrix([[2, 1, 0, 0],
-                                              [-1, 0, 0, 0],
-                                              [-1, -1, 0, 0],
-                                              [0, 0, 1, 0],
-                                              [0, 0, 0, 1],
-                                              [0, 0, 0, 0]])).all())
-        self.assertTrue((counts == [1, 2, 3, 1]).all())
-        self.assertTrue((index == [3, 0, 2, 1]).all())
+        self.assertEqual(set(counts), set([1, 2, 3]))
+        self.assertEqual(set(index), set([3, 0, 2, 1]))
         unique, index = unique_columns(data, counts=False, index=True)
         self.assertEqual(unique.shape, (6, 4))
-        self.assertTrue((unique == np.matrix([[2, 1, 0, 0],
-                                              [-1, 0, 0, 0],
-                                              [-1, -1, 0, 0],
-                                              [0, 0, 1, 0],
-                                              [0, 0, 0, 1],
-                                              [0, 0, 0, 0]])).all())
-        self.assertTrue((index == [3, 0, 2, 1]).all())
+        self.assertEqual(set(index), set([3, 0, 2, 1]))
 
     def test_convert_keys_to_unicode(self):
         test = {'a': 1, 'b': {'c': 2}}
@@ -613,7 +589,7 @@ class UtilsTestCase(TestCase):
         if sys.version_info.major > 2:
             self.assertTrue(all([isinstance(u, str) for u in result.keys()]))
             self.assertTrue(all([isinstance(u, str) for u in result['b'].keys()]))
-        else:           
+        else:
             self.assertTrue(all([isinstance(u, unicode) for u in result.keys()]))
             self.assertTrue(all([isinstance(u, unicode) for u in result['b'].keys()]))
 
@@ -650,6 +626,7 @@ def run_tests(verbosity=2):
 def debug_tests(verbosity=2):
     """Runs tests with debugging on errors"""
     _debug_tests(test_suite(verbosity))
+
 
 if __name__ == "__main__":
     # Run tests
