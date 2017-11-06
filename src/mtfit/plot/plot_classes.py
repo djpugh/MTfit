@@ -1711,7 +1711,7 @@ class _FocalSpherePlot(_BasePlot):
             station_markersize = self.station_markersize
             self.station_markersize = 3
             self.text = False
-            self.station_distribution_pdf /= self.station_distribution_pdf.max()
+            self.station_distribution_pdf = self.station_distribution_pdf/self.station_distribution_pdf.max()
             self.station_distribution_pdf = np.array(np.matrix(np.squeeze(self.station_distribution_pdf)))
             zeros = 0*self.station_distribution_pdf
             r = np.append(np.append(0.8*self.station_distribution_pdf+0.2, zeros, 0), zeros, 0).T

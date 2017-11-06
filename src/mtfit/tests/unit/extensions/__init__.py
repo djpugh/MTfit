@@ -15,8 +15,7 @@ __all__ = ['run_tests']
 
 
 def test_suite(verbosity=2):
-    return unittest.TestSuite([scatangle_test_suite(verbosity),
-                               ])
+    return unittest.TestSuite([scatangle_test_suite(verbosity)])
 
 
 def run_tests(verbosity=2):
