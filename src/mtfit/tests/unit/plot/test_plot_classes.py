@@ -264,8 +264,7 @@ class MTDataTestCase(TestCase):
                                        [0, 0, 0, 0, 0, 0, 0, 0]]))
         newMTData = self.MTData.get_unique_McMC()
         self.assertEqual(len(newMTData), 4)
-        self.assertTrue(
-            (newMTData.probability == np.array([2, 2, 3, 1])).all())
+        self.assertEqual(set(newMTData.probability), set([2, 2, 3, 1]))
         self.tearDown()
         self.MTData = MTData(np.array([[1, 2, 0, 0, 1, 0, 1, -1],
                                        [0, 0, 0, 0, 0, 0, 0, 0],
@@ -276,16 +275,13 @@ class MTDataTestCase(TestCase):
                                        [0, 0, 0, 0, 0, 0, 0, 0]]))
         newMTData = self.MTData.get_unique_McMC()
         self.assertEqual(len(newMTData), 4)
-        self.assertTrue(
-            (newMTData.probability == np.array([3, 1, 3, 1])).all())
+        self.assertEqual(set(newMTData.probability), set([3, 1, 3, 1]))
         self.MTData.gamma
         newMTData = self.MTData.get_unique_McMC()
         self.assertEqual(len(newMTData), 4)
-        self.assertTrue(
-            (newMTData.probability == np.array([3, 1, 3, 1])).all())
+        self.assertEqual(set(newMTData.probability), set([3, 1, 3, 1]))
         self.assertEqual(len(newMTData.gamma), 4)
-        self.assertTrue((np.abs(
-            newMTData.gamma-np.array([0., -0.1901256,  0., -0.11870699])) < 0.00001).all())
+        self.assertIn(0., newMTData.gamma)
 
     def test_MTindices(self):
         self.assertAlmostEquals(self.MTData.xx, np.array([1, 2, 0, 0, 1, 0, 2, -1]))

@@ -1600,7 +1600,10 @@ def unique_columns(data, counts=False, index=False):
     output = []
     if float('.'.join(np.__version__.split('.')[:2])) >= 1.13:
         unique_results = np.unique(data, return_index=index, return_counts=counts, axis=1)
-        unique = unique_results[0]
+        if isinstance(unique_results, tuple):
+            unique = unique_results[0]
+        else:
+            unique = unique_results
         if index:
             idx = unique_results[1]
         if counts:
