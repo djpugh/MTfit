@@ -179,7 +179,10 @@ class TestCase(unittest.TestCase):
             try:
                 return self.assertAlmostEquals(-first/first_norm, second/second_norm, *args)
             except AssertionError as e2:
-                raise AssertionError(e1.message+' or '+e2.message)
+                if sys.version_info.major > 2:
+                    raise AssertionError('{} or {}'.format(e1.args, e2.args))
+                else:
+                    raise AssertionError(e1.message+' or '+e2.message)
 
 
 def run_tests(suite, verbosity=2, test_result=None):
