@@ -2821,7 +2821,7 @@ class Inversion(object):
         """
         # Check inverion options
         if self.inversion_options:
-            for key in data.keys():
+            for key in list(data.keys()):
                     # Remove data_type not in inversion options
                     if key not in self.inversion_options and key not in ['UID']:
                         data.pop(key)

@@ -578,6 +578,7 @@ def _convert_mt_space_to_struct(output_data, i=False):
         binary_output += struct.pack('1d', np.nan)  # No Dkl
     # Loop over MTs
     for i in range(output_data['moment_tensor_space'+end].shape[1]):
+        # This seems slow in python 3
         # Add MT data
         if output_data['probability'].ndim == 2:
             p = output_data['probability'][0, i]
@@ -593,8 +594,7 @@ def _convert_mt_space_to_struct(output_data, i=False):
                                      output_data['moment_tensor_space'+end][5, i]/sqrt2)
         if converted:
             # Add converted data
-            binary_output += struct.pack('13d', g[i], d[i], k[i], h[i], s[i], u[i], v[
-                                         i], s1[i], d1[i], r1[i], s2[i], d2[i], r2[i])
+            binary_output += struct.pack('13d', g[i], d[i], k[i], h[i], s[i], u[i], v[i], s1[i], d1[i], r1[i], s2[i], d2[i], r2[i])
     # Handle scale_factors
     if sys.version_info.major > 2:
         sf_output = b''
@@ -1600,24 +1600,35 @@ def convert_keys_from_unicode(dictionary,):
 def unique_columns(data, counts=False, index=False):
     """Get unique columns in an array (used for max probability MT)"""
     output = []
-    data = np.array(data).T
-    ind = np.lexsort(data.T)
-    uniq = data[
-        ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))]].T
-    output.append(np.matrix(uniq))
+    if float('.'.join(np.__version__.split('.')[:2])) >= 1.13:
+        unique_results = np.unique(data, return_index=index, return_counts=counts, axis=1)
+        unique = unique_results[0]
+        if index:
+            idx = unique_results[1]
+        if counts:
+            unique_counts = unique_results[-1]
+    else:
+        data = np.array(data).T
+        ind = np.lexsort(data.T)
+        data = np.squeeze(data)
+        if len(ind.shape) > 1:
+            ind = np.squeeze(ind)
+        unique = data[ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))]].T
+        if counts:
+            indx = np.nonzero(np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1))))[0]
+            unique_counts = []
+            for u, j in enumerate(indx):
+                try:
+                    unique_counts.append(indx[u+1]-j)
+                except Exception:
+                    unique_counts.append(1)
+        if index:
+            idx = ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))]
+    output.append(np.matrix(unique))
     if counts:
-        indx = np.nonzero(
-            np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1))))[0]
-        counts = []
-        for u, j in enumerate(indx):
-            try:
-                counts.append(indx[u+1]-j)
-            except Exception:
-                counts.append(1)
-        output.append(np.array(counts))
+        output.append(np.array(unique_counts))
     if index:
-        output.append(
-            ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))])
+        output.append(idx)
     if len(output) == 1:
         return output[0]
     else:

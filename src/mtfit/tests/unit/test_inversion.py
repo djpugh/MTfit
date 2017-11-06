@@ -1502,7 +1502,8 @@ S003,110,10,1,0.05"""
                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.001], [0.002]])}},
                                    algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=2, output_format='hyp', convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 2
+        self.inversion.number_samples = 1000
+        self.inversion.algorithm.max_time = 0.5
         self.inversion.forward()
         try:
             os.remove('test.scatangle')
