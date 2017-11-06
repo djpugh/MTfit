@@ -8,6 +8,7 @@ Tests for src/utils/file_io.py
 import unittest
 import os
 import glob
+import sys
 
 try:
     import cPickle as pickle
@@ -609,17 +610,25 @@ class UtilsTestCase(TestCase):
     def test_convert_keys_to_unicode(self):
         test = {'a': 1, 'b': {'c': 2}}
         result = convert_keys_to_unicode(test)
-        self.assertTrue(all([type(u) == unicode for u in result.keys()]))
-        self.assertTrue(all([type(u) == unicode for u in result['b'].keys()]))
+        if sys.version_info.major > 2:
+            self.assertTrue(all([isinstance(u, str) for u in result.keys()]))
+            self.assertTrue(all([isinstance(u, str) for u in result['b'].keys()]))
+        else:           
+            self.assertTrue(all([isinstance(u, unicode) for u in result.keys()]))
+            self.assertTrue(all([isinstance(u, unicode) for u in result['b'].keys()]))
 
     def test_convert_keys_from_unicode(self):
         test = {'a': 1, 'b': {'c': 2}}
         result = convert_keys_to_unicode(test)
-        self.assertTrue(all([type(u) == unicode for u in result.keys()]))
-        self.assertTrue(all([type(u) == unicode for u in result['b'].keys()]))
+        if sys.version_info.major > 2:
+            self.assertTrue(all([isinstance(u, str) for u in result.keys()]))
+            self.assertTrue(all([isinstance(u, str) for u in result['b'].keys()]))
+        else:
+            self.assertTrue(all([isinstance(u, unicode) for u in result.keys()]))
+            self.assertTrue(all([isinstance(u, unicode) for u in result['b'].keys()]))
         result = convert_keys_from_unicode(result)
-        self.assertTrue(all([type(u) == str for u in result.keys()]))
-        self.assertTrue(all([type(u) == str for u in result['b'].keys()]))
+        self.assertTrue(all([isinstance(u, str) for u in result.keys()]))
+        self.assertTrue(all([isinstance(u, str) for u in result['b'].keys()]))
 
 
 def test_suite(verbosity=2):
