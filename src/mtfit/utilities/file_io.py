@@ -602,16 +602,14 @@ def _convert_mt_space_to_struct(output_data, i=False):
         sf_output = ''
     if 'scale_factors' in output_data:
         n_events = output_data['scale_factors']['mu'].shape[1]
-        sf_output = struct.pack('QQQ', output_data['total_number_samples'], len(
-            output_data['scale_factors']), n_events)
+        sf_output = struct.pack('QQQ', output_data['total_number_samples'], len(output_data['scale_factors']), n_events)
         for i, sf in enumerate(output_data['scale_factors']):
             sf_output += struct.pack('dd', output_data['probability'][0, i], output_data['ln_pdf'][0, i])
             # Add data for each event - Loops over off diagonal elements
             k = 0
             _l = 1
             for j in range(int(n_events*(n_events-1)/2.)):
-                sf_output += struct.pack('dd',
-                                         sf['mu'][k, _l], sf['sigma'][k, _l])
+                sf_output += struct.pack('dd', sf['mu'][k, _l], sf['sigma'][k, _l])
                 _l += 1
                 if _l >= n_events:
                     k += 1
