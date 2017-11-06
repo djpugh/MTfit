@@ -564,7 +564,7 @@ def combine_mu(mu, s):
             values
     """
     # Loop over each sample
-    for i in xrange(mu.shape[0]):
+    for i in range(mu.shape[0]):
         if i == 0:
             # First sample so initialise the mean and standard debiation
             combined_mu = mu[i, :]
@@ -1091,6 +1091,10 @@ class LnPDF(object):
         """x.__div__(y) <==> x/y"""
         return self._arithmetic(other, np.divide)
 
+    def __truediv__(self, other):
+        """x.__div__(y) <==> x/y"""
+        return self.__div__(other)
+
     def __add__(self, other):
         """x.__add__(y) <==> x+y"""
         return self._arithmetic(other, operator.__add__)
@@ -1114,6 +1118,10 @@ class LnPDF(object):
     def __rdiv__(self, other):
         """x.__rdiv__(2) <==> 2/x"""
         return LnPDF(ln_pdf=(other/self._ln_pdf), dV=self.dV)
+
+    def __rtruediv__(self, other):
+        """x.__rdiv__(2) <==> 2/x"""
+        return self.__rdiv__(other)
 
     def __abs__(self):
         """x.__abs__() <==> abs(x)"""

@@ -28,6 +28,8 @@ from scipy import __version__ as __scipy_version__
 import numpy as np
 from cpython cimport bool
 
+from ..utilities.unittest_utils import TestCase
+
 
 cdef DTYPE_t PI2=2*pi
 cdef DTYPE_t sqrt3=sqrt(3)
@@ -500,7 +502,7 @@ cpdef DTYPE_t c_norm(list c):
 
 # Test functions - Not Documented
 
-class cMomentTensorConvertTestCase(unittest.TestCase):
+class cMomentTensorConvertTestCase(TestCase):
     def test_cTape_MT6(self):
         cdef DTYPE_t[::1] m=np.empty((6))
         cTape_MT6(&m[0],0.12,0.43,0.76,0.63,0.75)

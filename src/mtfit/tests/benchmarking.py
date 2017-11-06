@@ -6,7 +6,10 @@ Module containing benchmarking tests for the different algorithms and example da
 import sys
 import time
 import os
-import cPickle
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 import numpy as np
 
@@ -202,7 +205,7 @@ def plot_benchmarks(results):
 def _write_default_event():
     data_file = os.path.abspath('./benchmarkingevent.inv')
     with open(data_file, 'wb') as f:
-        cPickle.dump(_default_event(), f)
+        pickle.dump(_default_event(), f)
     return data_file
 
 

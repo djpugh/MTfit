@@ -5,67 +5,10 @@ import numpy as np
 from mtfit.plot.plot_classes import MTData
 from mtfit.utilities.unittest_utils import run_tests as _run_tests
 from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
+from mtfit.utilities.unittest_utils import TestCase
 
 
-class MTDataTestCase(unittest.TestCase):
-
-    def assertAlmostEqual(self, first, second, places=None, msg=None, delta=None):
-        if type(first) in [type(np.matrix([])), type(np.array([]))] and type(second) in [list]:
-            second = np.array(second)
-        if type(second) in [type(np.matrix([])), type(np.array([]))] and type(first) in [list]:
-            first = np.array(first)
-        if type(first) in [type(np.matrix([])), type(np.array([]))] and type(second) in [type(np.matrix([])), type(np.array([]))]:
-            self.assertEqual(
-                first.shape, second.shape, 'Array sizes do not match')
-            for i in range(first.shape[0]):
-                if len(first.shape) > 1:
-                    for j in range(first.shape[1]):
-                        if len(first.shape) > 2:
-                            for k in range(first.shape[2]):
-                                try:
-                                    self.assertAlmostEqual(
-                                        first[i, j, k], second[i, j, k], places, msg, delta)
-                                except TypeError:
-                                    if places:
-                                        self.assertAlmostEqual(
-                                            first[i, j, k], second[i, j, k], places)
-                                    else:
-                                        self.assertAlmostEqual(
-                                            first[i, j, k], second[i, j, k])
-
-                        else:
-                            try:
-                                self.assertAlmostEqual(
-                                    first[i, j], second[i, j], places, msg, delta)
-                            except TypeError:
-                                if places:
-                                    self.assertAlmostEqual(
-                                        first[i, j], second[i, j], places)
-                                else:
-                                    self.assertAlmostEqual(
-                                        first[i, j], second[i, j])
-                else:
-                    try:
-                        self.assertAlmostEqual(
-                            first[i], second[i], places, msg, delta)
-                    except TypeError:
-                        if places:
-                            self.assertAlmostEqual(first[i], second[i], places)
-                        else:
-                            self.assertAlmostEqual(first[i], second[i])
-            return
-        elif type(first) == type(second) and type(first) == dict:
-            self.assertEqual(
-                sorted(first.keys()), sorted(second.keys()), 'Dictionary keys do not match')
-            for key in first.keys():
-                self.assertAlmostEqual(first[key], second[key])
-            return
-        else:
-            super(MTDataTestCase, self).assertAlmostEqual(
-                first, second, places, msg, delta)
-
-    def assertAlmostEquals(self, *args, **kwargs):
-        return self.assertAlmostEqual(*args, **kwargs)
+class MTDataTestCase(TestCase):
 
     def setUp(self):
         self.MTData = MTData(np.array([[1, 2, 0, 0, 1, 0, 2, -1],
@@ -107,12 +50,11 @@ class MTDataTestCase(unittest.TestCase):
         newMTData = self.MTData[:, 0:4]
         self.assertTrue(isinstance(newMTData, MTData))
         self.assertEqual(len(newMTData), 4)
-        self.assertTrue(
-            'u' in newMTData.__dict__.keys() and 'strike' in newMTData.__dict__.keys())
+        self.assertTrue('u' in newMTData.__dict__.keys() and 'strike' in newMTData.__dict__.keys())
         self.MTData.mean_orientation
         newMTData = self.MTData[:, 0:4]
-        self.assertFalse('mean_strike' in newMTData.__dict__.keys() or 'mean_dip' in newMTData.__dict__.keys() or 'mean_rake' in newMTData.__dict__.keys(
-        ) or 'mean_normal' in newMTData.__dict__.keys() or 'var_clustered_rake1' in newMTData.__dict__.keys() or 'cov_clustered_N1' in newMTData.__dict__.keys())
+        self.assertFalse('mean_strike' in newMTData.__dict__.keys() or 'mean_dip' in newMTData.__dict__.keys() or 'mean_rake' in newMTData.__dict__.keys() or
+                         'mean_normal' in newMTData.__dict__.keys() or 'var_clustered_rake1' in newMTData.__dict__.keys() or 'cov_clustered_N1' in newMTData.__dict__.keys())
 
     def test___setitem__(self):
         og = self.MTData.gamma[0]
@@ -175,13 +117,11 @@ class MTDataTestCase(unittest.TestCase):
                      ('N2', np.matrix([[1/np.sqrt(2)], [0], [-1/np.sqrt(2)]])), ('kappa', np.pi/2), ('h', np.cos(np.pi/4)), ('sigma', -np.pi/2), ('phi1', np.array([[1/np.sqrt(2)], [0.], [1/np.sqrt(2)]])), ('phi2', np.array([[1/np.sqrt(2)], [0.], [-1/np.sqrt(2)]])), ('area_displacement', 1.0), ('explosion', 0.0)]
         for attr, value in test_data:
             if attr in ['T', 'N', 'P', 'E', 'N1', 'N2']:
-                self.assertTrue(
-                    (self.MTData[:, 0]._convert(attr) == value).all())
+                self.assertTrue((self.MTData[:, 0]._convert(attr) == value).all())
             else:
                 if attr in ['strike1', 'strike2', 'dip1', 'dip2', 'rake1', 'rake2', 'strike', 'dip', 'rake']:
                     try:
-                        self.assertAlmostEquals(
-                            self.MTData[:, 0]._convert(attr), value, 10)
+                        self.assertAlmostEquals(self.MTData[:, 0]._convert(attr), value, 10)
                     except AssertionError:
                         if '1' in attr:
                             alt_attr = attr.replace('1', '2')
@@ -190,11 +130,9 @@ class MTDataTestCase(unittest.TestCase):
                         if alt_attr[-1] not in ['1', '2']:
                             alt_attr += '2'
                         value = dict(test_data)[alt_attr]
-                        self.assertAlmostEquals(
-                            self.MTData[:, 0]._convert(attr), value, 10)
+                        self.assertAlmostEquals(self.MTData[:, 0]._convert(attr), value, 10)
                 else:
-                    self.assertAlmostEquals(
-                        self.MTData[:, 0]._convert(attr), value, 10)
+                    self.assertAlmostEquals(self.MTData[:, 0]._convert(attr), value, 10)
         self.MTData._set_ln_pdf([0.1, 0.2, 0.3, 0.2, 0.1, 0.4, 0.6, 0.8])
         self.MTData.total_number_samples = 10000
         self.assertAlmostEquals(self.MTData.ln_bayesian_evidence, -6.764305312122505)
@@ -326,8 +264,7 @@ class MTDataTestCase(unittest.TestCase):
                                        [0, 0, 0, 0, 0, 0, 0, 0]]))
         newMTData = self.MTData.get_unique_McMC()
         self.assertEqual(len(newMTData), 4)
-        self.assertTrue(
-            (newMTData.probability == np.array([2, 2, 3, 1])).all())
+        self.assertEqual(set(newMTData.probability), set([2, 2, 3, 1]))
         self.tearDown()
         self.MTData = MTData(np.array([[1, 2, 0, 0, 1, 0, 1, -1],
                                        [0, 0, 0, 0, 0, 0, 0, 0],
@@ -338,16 +275,13 @@ class MTDataTestCase(unittest.TestCase):
                                        [0, 0, 0, 0, 0, 0, 0, 0]]))
         newMTData = self.MTData.get_unique_McMC()
         self.assertEqual(len(newMTData), 4)
-        self.assertTrue(
-            (newMTData.probability == np.array([3, 1, 3, 1])).all())
+        self.assertEqual(set(newMTData.probability), set([3, 1, 3, 1]))
         self.MTData.gamma
         newMTData = self.MTData.get_unique_McMC()
         self.assertEqual(len(newMTData), 4)
-        self.assertTrue(
-            (newMTData.probability == np.array([3, 1, 3, 1])).all())
+        self.assertEqual(set(newMTData.probability), set([3, 1, 3, 1]))
         self.assertEqual(len(newMTData.gamma), 4)
-        self.assertTrue((np.abs(
-            newMTData.gamma-np.array([0., -0.1901256,  0., -0.11870699])) < 0.00001).all())
+        self.assertIn(0., newMTData.gamma)
 
     def test_MTindices(self):
         self.assertAlmostEquals(self.MTData.xx, np.array([1, 2, 0, 0, 1, 0, 2, -1]))

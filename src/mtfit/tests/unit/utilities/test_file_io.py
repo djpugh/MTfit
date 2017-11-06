@@ -8,7 +8,12 @@ Tests for src/utils/file_io.py
 import unittest
 import os
 import glob
-import cPickle
+import sys
+
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 import numpy as np
 
@@ -48,31 +53,31 @@ class IOTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
         for fname in glob.glob('*.hyp'):
             if fname not in self.existing_hyp_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
         for fname in glob.glob('*.out'):
             if fname not in self.existing_out_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
         for fname in glob.glob('*.mat'):
             if fname not in self.existing_mat_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
         for fname in glob.glob('*.scatangle'):
             if fname not in self.existing_scatangle_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove ', fname)
 
     def station_angles(self):
         out = "504.7\n"
@@ -219,15 +224,13 @@ END_NLLOC
         self.assertTrue(os.path.exists('csvtest.csv'))
         csv2inv('csvtest.csv')
         self.assertTrue(os.path.exists('csvtest.inv'))
-        d = cPickle.load(open('csvtest.inv', 'rb'))
+        d = pickle.load(open('csvtest.inv', 'rb'))
         self.assertEqual(len(d), 2)
         self.assertEqual(d[0]['UID'], '123')
-        self.assertEqual(
-            d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
+        self.assertEqual(d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
         self.assertEqual(d[0]['PPolarity']['Measured'][0, 0], 1)
         self.assertEqual(d[0]['PPolarity']['Measured'][1, 0], -1)
-        self.assertEqual(
-            sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
+        self.assertEqual(sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 0], 0.05)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 1], 0.04)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][1, 0], 0.01)
@@ -241,12 +244,10 @@ END_NLLOC
         d = parse_csv('csvtest.csv')
         self.assertEqual(len(d), 2)
         self.assertEqual(d[0]['UID'], '123')
-        self.assertEqual(
-            d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
+        self.assertEqual(d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
         self.assertEqual(d[0]['PPolarity']['Measured'][0, 0], 1)
         self.assertEqual(d[0]['PPolarity']['Measured'][1, 0], -1)
-        self.assertEqual(
-            sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
+        self.assertEqual(sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 0], 0.05)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 1], 0.04)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][1, 0], 0.01)
@@ -257,12 +258,10 @@ END_NLLOC
         d = _parse_csv_events(self.csv_events())
         self.assertEqual(len(d), 2)
         self.assertEqual(d[0]['UID'], '123')
-        self.assertEqual(
-            d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
+        self.assertEqual(d[0]['PPolarity']['Stations']['Name'], ['S001', 'S002'])
         self.assertEqual(d[0]['PPolarity']['Measured'][0, 0], 1)
         self.assertEqual(d[0]['PPolarity']['Measured'][1, 0], -1)
-        self.assertEqual(
-            sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
+        self.assertEqual(sorted(d[0].keys()), ['P/SHRMSAmplitudeRatio', 'PPolarity', 'UID'])
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 0], 0.05)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][0, 1], 0.04)
         self.assertEqual(d[0]['P/SHRMSAmplitudeRatio']['Error'][1, 0], 0.01)
@@ -573,55 +572,39 @@ class UtilsTestCase(TestCase):
                           [0, 0, 0, 0, 0, 0, 0]])
         unique = unique_columns(data)
         self.assertEqual(unique.shape, (6, 4))
-        self.assertTrue((unique == np.matrix([[2, 1, 0, 0],
-                                              [-1, 0, 0, 0],
-                                              [-1, -1, 0, 0],
-                                              [0, 0, 1, 0],
-                                              [0, 0, 0, 1],
-                                              [0, 0, 0, 0]])).all())
         unique, counts = unique_columns(data, counts=True)
         self.assertEqual(unique.shape, (6, 4))
-        self.assertTrue((unique == np.matrix([[2, 1, 0, 0],
-                                              [-1, 0, 0, 0],
-                                              [-1, -1, 0, 0],
-                                              [0, 0, 1, 0],
-                                              [0, 0, 0, 1],
-                                              [0, 0, 0, 0]])).all())
-        self.assertTrue((counts == [1, 2, 3, 1]).all())
+        self.assertEqual(set(counts), set([1, 2, 3]))
         unique, counts, index = unique_columns(data, counts=True, index=True)
         self.assertEqual(unique.shape, (6, 4))
-        self.assertTrue((unique == np.matrix([[2, 1, 0, 0],
-                                              [-1, 0, 0, 0],
-                                              [-1, -1, 0, 0],
-                                              [0, 0, 1, 0],
-                                              [0, 0, 0, 1],
-                                              [0, 0, 0, 0]])).all())
-        self.assertTrue((counts == [1, 2, 3, 1]).all())
-        self.assertTrue((index == [3, 0, 2, 1]).all())
+        self.assertEqual(set(counts), set([1, 2, 3]))
+        self.assertEqual(set(index), set([3, 0, 2, 1]))
         unique, index = unique_columns(data, counts=False, index=True)
         self.assertEqual(unique.shape, (6, 4))
-        self.assertTrue((unique == np.matrix([[2, 1, 0, 0],
-                                              [-1, 0, 0, 0],
-                                              [-1, -1, 0, 0],
-                                              [0, 0, 1, 0],
-                                              [0, 0, 0, 1],
-                                              [0, 0, 0, 0]])).all())
-        self.assertTrue((index == [3, 0, 2, 1]).all())
+        self.assertEqual(set(index), set([3, 0, 2, 1]))
 
     def test_convert_keys_to_unicode(self):
         test = {'a': 1, 'b': {'c': 2}}
         result = convert_keys_to_unicode(test)
-        self.assertTrue(all([type(u) == unicode for u in result.keys()]))
-        self.assertTrue(all([type(u) == unicode for u in result['b'].keys()]))
+        if sys.version_info.major > 2:
+            self.assertTrue(all([isinstance(u, str) for u in result.keys()]))
+            self.assertTrue(all([isinstance(u, str) for u in result['b'].keys()]))
+        else:
+            self.assertTrue(all([isinstance(u, unicode) for u in result.keys()]))
+            self.assertTrue(all([isinstance(u, unicode) for u in result['b'].keys()]))
 
     def test_convert_keys_from_unicode(self):
         test = {'a': 1, 'b': {'c': 2}}
         result = convert_keys_to_unicode(test)
-        self.assertTrue(all([type(u) == unicode for u in result.keys()]))
-        self.assertTrue(all([type(u) == unicode for u in result['b'].keys()]))
+        if sys.version_info.major > 2:
+            self.assertTrue(all([isinstance(u, str) for u in result.keys()]))
+            self.assertTrue(all([isinstance(u, str) for u in result['b'].keys()]))
+        else:
+            self.assertTrue(all([isinstance(u, unicode) for u in result.keys()]))
+            self.assertTrue(all([isinstance(u, unicode) for u in result['b'].keys()]))
         result = convert_keys_from_unicode(result)
-        self.assertTrue(all([type(u) == str for u in result.keys()]))
-        self.assertTrue(all([type(u) == str for u in result['b'].keys()]))
+        self.assertTrue(all([isinstance(u, str) for u in result.keys()]))
+        self.assertTrue(all([isinstance(u, str) for u in result['b'].keys()]))
 
 
 def test_suite(verbosity=2):
@@ -643,6 +626,7 @@ def run_tests(verbosity=2):
 def debug_tests(verbosity=2):
     """Runs tests with debugging on errors"""
     _debug_tests(test_suite(verbosity))
+
 
 if __name__ == "__main__":
     # Run tests

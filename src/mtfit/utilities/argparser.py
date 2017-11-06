@@ -715,7 +715,7 @@ def _mtfit_argparser(input_args=None, test=False):
         for arg in arguments:
             kwargs = {key: value for (key, value) in arg.items() if key != 'flags'}
             parser.add_argument(*arg['flags'], **kwargs)
-        for (name, extension) in cmd_opts.iteritems():
+        for (name, extension) in cmd_opts.items():
             group = parser.add_argument_group(name.capitalize(), description="\nCommands for the extension "+name)
             (group, extension_parser_check) = extension(group, _ARGPARSE, defaults)
             extension_parser_checks.append(extension_parser_check)
@@ -752,7 +752,7 @@ def _mtfit_argparser(input_args=None, test=False):
             kwargs = {
                 key: value for (key, value) in arg.items() if key != 'flags'}
             parser.add_option(*arg['flags'], **kwargs)
-        for (name, extension) in cmd_opts.iteritems():
+        for (name, extension) in cmd_opts.items():
             group = optparse.OptionGroup(
                 parser, name, description="\nCommands for the extension "+name)
             (group, extension_parser_check) = extension(

@@ -12,6 +12,7 @@ module containing basic Sample object for storing samples from the source pdf.
 # Applications for commercial use should be made to Schlumberger or the University of Cambridge.
 
 import os
+import sys
 import shutil
 
 
@@ -24,6 +25,10 @@ from .probability.probability import _6sphere_prior
 from .utilities.file_io import convert_keys_to_unicode
 from .utilities.file_io import unique_columns
 from .convert import output_convert
+
+# Because long doesn't exist in python 3 our isinstance tests fail
+if sys.version_info.major >= 3:
+    long = int
 
 
 __all__ = ['Sample', 'FileSample', 'ln_bayesian_evidence', '_convert', '_6sphere_prior']

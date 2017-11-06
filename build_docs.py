@@ -259,7 +259,7 @@ If there are any errors please see the documentation and if necessary contact th
 def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
     if 'setup.py' not in os.listdir('.'):
         raise ValueError('Needs to be run in the top of the repository')
-    print '\n\n==============================\n\nBuilding Documentation\n\n==============================\n\n'
+    print('\n\n==============================\n\nBuilding Documentation\n\n==============================\n\n')
     get_run()
     try:
         get_cli_and_man()
@@ -283,17 +283,17 @@ def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
             build_epub()
         if html:
             build_html()
-        print "*********************************\n\nDocumentation Build Succeeded\n\n*********************************"
+        print("*********************************\n\nDocumentation Build Succeeded\n\n*********************************")
     except Exception:
         traceback.print_exc()
-        print "*********************************\n\nDocumentation Build Failed\n\n*********************************"
+        print("*********************************\n\nDocumentation Build Failed\n\n*********************************")
     if gh_pages:
-        print "*********************************\n\nSetting up gh-pages\n\n*********************************"
+        print("*********************************\n\nSetting up gh-pages\n\n*********************************")
         setup_gh_pages()
 
 
 def build_html(output_path=os.path.abspath('./docs/html/')):
-            print "------------------------------\n\nHTML Build\n\n------------------------------"
+            print("------------------------------\n\nHTML Build\n\n------------------------------")
             try:
                 sphinx.main(['sphinx', '-b', 'html', '-a', os.path.abspath('./docs/source/'), output_path])
             except SystemExit:
@@ -301,7 +301,7 @@ def build_html(output_path=os.path.abspath('./docs/html/')):
 
 
 def build_man_pages(output_path=os.path.abspath('./docs/man/')):
-            print "------------------------------\n\nMan Build\n\n------------------------------"
+            print("------------------------------\n\nMan Build\n\n------------------------------")
             try:
                 sphinx.main(['sphinx', '-b', 'man', '-a', os.path.abspath('./docs/source/'), output_path])
             except SystemExit:
@@ -309,7 +309,7 @@ def build_man_pages(output_path=os.path.abspath('./docs/man/')):
 
 
 def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit.pdf')):
-    print "------------------------------\n\nLaTeX Build\n\n------------------------------"
+    print("------------------------------\n\nLaTeX Build\n\n------------------------------")
     try:
         sphinx.main(['sphinx', '-b', 'latex', '-a', os.path.abspath('./docs/source/'), os.path.abspath('./docs/latex/')])
     except SystemExit:
@@ -333,13 +333,13 @@ def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit.pdf')):
         tex.insert(tex.index('\\endabstract\n'), tex.pop(tex.index('\\sphinxtableofcontents\n')))
     with open('mtfit.tex', 'w') as f:
         f.write(''.join(tex))
-    print "------------------------------\n\nPDF Build\n\n------------------------------"
+    print("------------------------------\n\nPDF Build\n\n------------------------------")
     # Two compiles to update toc
     p = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'mtfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     (bout, berr) = p.communicate()
     p2 = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'mtfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     (b2out, b2err) = p2.communicate()
-    print bout
+    print(bout)
     os.chdir('../../')
     if 'fatal error occured' in bout.lower()+b2out.lower():
         raise Exception('Fatal Error in PDF generation')
@@ -351,7 +351,7 @@ def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit.pdf')):
 
 
 def build_epub(output_path=os.path.abspath('./docs/epub/')):
-    print "------------------------------\n\nepub Build\n\n------------------------------"
+    print("------------------------------\n\nepub Build\n\n------------------------------")
     try:
         sphinx.main(['sphinx', '-b', 'epub', '-a', os.path.abspath('./docs/source/'), output_path])
     except SystemExit:
@@ -361,21 +361,21 @@ def build_epub(output_path=os.path.abspath('./docs/epub/')):
 def setup_gh_pages():
     # Copy docs/html to tempfolder
     from mtfit import __version__
-    print "------------------------------\n\nMaking Temporary Directory\n\n------------------------------"
+    print("------------------------------\n\nMaking Temporary Directory\n\n------------------------------")
     temp_dir = tempfile.mkdtemp()
-    print temp_dir
+    print(temp_dir)
     shutil.copytree('./docs/html', os.path.join(temp_dir, 'html'))
     # Checkout gh-pages branch
     # Need to stash any current work
     import git
     repo = git.Repo('.')
-    print "------------------------------\n\nStashing Changes\n\n------------------------------"
+    print("------------------------------\n\nStashing Changes\n\n------------------------------")
     repo.git.stash('save')
-    print "------------------------------\n\nSwitching Branch to gh-pages\n\n------------------------------"
+    print("------------------------------\n\nSwitching Branch to gh-pages\n\n------------------------------")
     current_branch = repo.active_branch.name
     repo.git.checkout('gh-pages')
     # Clean folder and copy html into folder
-    print "------------------------------\n\nCleaning Working Set\n\n------------------------------"
+    print("------------------------------\n\nCleaning Working Set\n\n------------------------------")
     contents = glob.glob('./*')
     for item in contents:
         if '.git' in item or '.venv' in item or '.tox' in item:
@@ -387,20 +387,20 @@ def setup_gh_pages():
             shutil.rmtree(item)
         else:
             os.remove(item)
-    print "------------------------------\n\nCopying Documentation from Temporary Directory\n\n------------------------------"
+    print("------------------------------\n\nCopying Documentation from Temporary Directory\n\n------------------------------")
     copy_recursively(os.path.join(temp_dir, 'html'), os.path.abspath('./'))
-    print "------------------------------\n\nRemoving Temporary Directory\n\n------------------------------"
+    print("------------------------------\n\nRemoving Temporary Directory\n\n------------------------------")
     shutil.rmtree(temp_dir)
-    print "------------------------------\n\nCommitting Documentation to gh-pages\n\n------------------------------"
+    print("------------------------------\n\nCommitting Documentation to gh-pages\n\n------------------------------")
     # Commit the changes
     repo.git.add('*')
     repo.git.commit('-m', 'Documentation {}'.format(__version__))
     # Checkout old branch
-    print "------------------------------\n\nReturning to {} Branch\n\n------------------------------".format(current_branch)
+    print("------------------------------\n\nReturning to {} Branch\n\n------------------------------".format(current_branch))
     repo.git.checkout(current_branch)
-    print "------------------------------\n\nUnstashing Changes\n\n------------------------------"
+    print("------------------------------\n\nUnstashing Changes\n\n------------------------------")
     repo.git.stash('pop')
-    print "------------------------------\n\nCleaning Working Directory\n\n------------------------------"
+    print("------------------------------\n\nCleaning Working Directory\n\n------------------------------")
     doctrees = glob.glob('*.doctree')
     for item in doctrees:
         os.remove(item)

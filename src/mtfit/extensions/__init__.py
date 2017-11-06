@@ -7,7 +7,7 @@ see https://pythonhosted.org/setuptools/pkg_resources.html) to be called by the 
 There are several different EntryPoints available in mtfit::
 
 """
-# TO SEE THIS DOCUMENTATION USE print mtfit.extensions.__doc__
+# TO SEE THIS DOCUMENTATION USE print(mtfit.extensions.__doc__)
 
 # from .scatangle import tests as scatangle_tests
 from .scatangle import cmd_opts as scatangle_cmd_opts
@@ -270,7 +270,7 @@ An example of these functions is taken from :download:`extensions/scatangle.py <
                     try:
                         os.remove(fname)
                     except Exception:
-                        print 'Cannot remove ',fname
+                        print('Cannot remove ',fname)
             import gc
             try:
                 os.remove('test.scatangle')
@@ -299,16 +299,16 @@ An example of these functions is taken from :download:`extensions/scatangle.py <
             import time
             t0=time.time()
             A,B=parse_scatangle('test.scatangle',bin_size=1)
-            print 'C',time.time()-t0
+            print('C',time.time()-t0)
             t0=time.time()
             _CYTHON=False
             A,B=parse_scatangle('test.scatangle',bin_size=1)
-            print 'NoC',time.time()-t0
+            print('NoC',time.time()-t0)
             _CYTHON=True
             os.remove('test.scatangle')
 
     def parser_tests(self,_parser,defaults,argparse):
-        print 'bin_scatangles --bin-scatangle and --bin-scatangle-size check'
+        print('bin_scatangles --bin-scatangle and --bin-scatangle-size check')
         options,options_map=_parser(['Test.i'],test=True)
         self.assertTrue(options['bin_scatangle']==defaults['bin_scatangle'])
         self.assertEqual(options['bin_scatangle_size'],defaults['bin_size'])
@@ -348,7 +348,7 @@ _tests_doc = """This entry point is used for any extensions to add tests to the 
 
 The function is called as:
 
-    test_suite,debug_test_suite,parser_test_function=tests()
+    test_suite,parser_test_function=tests()
 
 Where test_suite is the unittest.TestSuite containing the TestSuite, created as:
 
@@ -362,9 +362,9 @@ from each unittest.TestCase.debug_test_suite is a single ~unittest.TestSuite con
 
 from each unittest.TestCase. parser_test_function is a single function to test the parser handling and checking.
 
-An example of these functions is taken from :download:`extensions/scatangle.py <../../src/mtfit/extensions/scatangle.py>`:
+An example of these functions is taken from :download:`mtfit/tests/unit/extensions/test_scatangle.py <../../src/mtfit/test/unit/extensions/test_scatangle.py>`:
 
-    class __ScatangleTestCase(unittest.TestCase):
+    class ScatangleTestCase(unittest.TestCase):
         def setUp(self):
             global _DEBUG
             self.__setattr__('existing_scatangle_files', glob.glob('*.scatangle'))
@@ -374,7 +374,7 @@ An example of these functions is taken from :download:`extensions/scatangle.py <
                     try:
                         os.remove(fname)
                     except Exception:
-                        print 'Cannot remove ',fname
+                        print('Cannot remove {}'.format(fname))
             import gc
             try:
                 os.remove('test.scatangle')
@@ -401,16 +401,16 @@ An example of these functions is taken from :download:`extensions/scatangle.py <
             import time
             t0=time.time()
             A,B=parse_scatangle('test.scatangle',bin_size=1)
-            print 'C',time.time()-t0
+            print('C',time.time()-t0)
             t0=time.time()
             _CYTHON=False
             A,B=parse_scatangle('test.scatangle',bin_size=1)
-            print 'NoC',time.time()-t0
+            print('NoC',time.time()-t0)
             _CYTHON=True
             os.remove('test.scatangle')
 
     def parser_tests(self,_parser,defaults,argparse):
-        print 'bin_scatangles --bin-scatangle and --bin-scatangle-size check'
+        print('bin_scatangles --bin-scatangle and --bin-scatangle-size check')
         options,options_map=_parser(['Test.i'],test=True)
         self.assertTrue(options['bin_scatangle']==defaults['bin_scatangle'])
         self.assertEqual(options['bin_scatangle_size'],defaults['bin_size'])

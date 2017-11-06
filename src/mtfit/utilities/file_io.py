@@ -578,6 +578,7 @@ def _convert_mt_space_to_struct(output_data, i=False):
         binary_output += struct.pack('1d', np.nan)  # No Dkl
     # Loop over MTs
     for i in range(output_data['moment_tensor_space'+end].shape[1]):
+        # This seems slow in python 3
         # Add MT data
         if output_data['probability'].ndim == 2:
             p = output_data['probability'][0, i]
@@ -593,22 +594,22 @@ def _convert_mt_space_to_struct(output_data, i=False):
                                      output_data['moment_tensor_space'+end][5, i]/sqrt2)
         if converted:
             # Add converted data
-            binary_output += struct.pack('13d', g[i], d[i], k[i], h[i], s[i], u[i], v[
-                                         i], s1[i], d1[i], r1[i], s2[i], d2[i], r2[i])
+            binary_output += struct.pack('13d', g[i], d[i], k[i], h[i], s[i], u[i], v[i], s1[i], d1[i], r1[i], s2[i], d2[i], r2[i])
     # Handle scale_factors
-    sf_output = ''
+    if sys.version_info.major > 2:
+        sf_output = b''
+    else:
+        sf_output = ''
     if 'scale_factors' in output_data:
         n_events = output_data['scale_factors']['mu'].shape[1]
-        sf_output = struct.pack('QQQ', output_data['total_number_samples'], len(
-            output_data['scale_factors']), n_events)
+        sf_output = struct.pack('QQQ', output_data['total_number_samples'], len(output_data['scale_factors']), n_events)
         for i, sf in enumerate(output_data['scale_factors']):
             sf_output += struct.pack('dd', output_data['probability'][0, i], output_data['ln_pdf'][0, i])
             # Add data for each event - Loops over off diagonal elements
             k = 0
             _l = 1
             for j in range(int(n_events*(n_events-1)/2.)):
-                sf_output += struct.pack('dd',
-                                         sf['mu'][k, _l], sf['sigma'][k, _l])
+                sf_output += struct.pack('dd', sf['mu'][k, _l], sf['sigma'][k, _l])
                 _l += 1
                 if _l >= n_events:
                     k += 1
@@ -641,8 +642,8 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
         if maxMT.shape[1] > 1:
             maxMT = maxMT[:, 0]
         maxMT_tape = MT6_Tape(maxMT)
-    except Exception as e:
-        print e
+    except Exception:
+        traceback.print_exc()
     if all(maxMT == 0):
         maxMT_tape = [0, 0, 0, 0, 0]
     # Check if its a DC
@@ -713,15 +714,13 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
     nobs = 0
     # Run polarity misfit checks
     for i in range(phase_line_index+2, end_phase_line_index+1):
-        if len(line) < 24:
+        if len(lines[i]) < 24:
             continue
         if _polarity_misfit_check(nlloc_polarity_dict[lines[i][5].lower()], float(lines[i][23]), float(lines[i][24]), lines[i][4], maxMT):
             mf += 1
-            lines[i][5] = nlloc_polarity_inv_dict[
-                lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].lower()
+            lines[i][5] = nlloc_polarity_inv_dict[lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].lower()
         else:
-            lines[i][5] = nlloc_polarity_inv_dict[
-                lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].upper()
+            lines[i][5] = nlloc_polarity_inv_dict[lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].upper()
 
         if lines[i][5] != '?':
             nobs += 1
@@ -888,7 +887,7 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
         event['UID'] = event_data['UID']
     except Exception:
         pass
-    output_data_keys = output_data.keys()
+    output_data_keys = list(output_data.keys())
     # Handle multiple events data types
     if not station_output:
         for key in output_data_keys:
@@ -963,9 +962,14 @@ def hyp_output_dicts(event_data, inversion_options=False, output_data=False, loc
         output_contents = ['\n'.join(_generate_hyp_output_data(event_data, inversion_options, output_data))+'\n']
         # Get mt and scale_factor outputs
         binary, sf = _convert_mt_space_to_struct(output_data)
+        # Need to convert this to a string if using python 3
         output_mt = [binary]
         output_sf = [sf]
-    return '\n'.join(output_contents), ''.join(output_mt), ''.join(output_sf)
+    if sys.version_info.major > 2:
+        binary_spacer = b''
+    else:
+        binary_spacer = ''
+    return '\n'.join(output_contents), binary_spacer.join(output_mt), binary_spacer.join(output_sf)
 
 #
 # Output file formats
@@ -1534,6 +1538,8 @@ def convert_keys_to_unicode(dictionary,):
     Returns
         dictionary: Converted dictionary.
     """
+    if sys.version_info.major > 2:
+        return dictionary
     if isinstance(dictionary, list):
         new_list = []
         for item in dictionary:
@@ -1566,6 +1572,8 @@ def convert_keys_from_unicode(dictionary,):
     Returns
         dictionary: Converted dictionary.
     """
+    if sys.version_info.major > 2:
+        return dictionary
     if isinstance(dictionary, list):
         new_list = []
         for item in dictionary:
@@ -1590,24 +1598,38 @@ def convert_keys_from_unicode(dictionary,):
 def unique_columns(data, counts=False, index=False):
     """Get unique columns in an array (used for max probability MT)"""
     output = []
-    data = np.array(data).T
-    ind = np.lexsort(data.T)
-    uniq = data[
-        ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))]].T
-    output.append(np.matrix(uniq))
+    if float('.'.join(np.__version__.split('.')[:2])) >= 1.13:
+        unique_results = np.unique(data, return_index=index, return_counts=counts, axis=1)
+        if isinstance(unique_results, tuple):
+            unique = unique_results[0]
+        else:
+            unique = unique_results
+        if index:
+            idx = unique_results[1]
+        if counts:
+            unique_counts = unique_results[-1]
+    else:
+        data = np.array(data).T
+        ind = np.lexsort(data.T)
+        data = np.squeeze(data)
+        if len(ind.shape) > 1:
+            ind = np.squeeze(ind)
+        unique = data[ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))]].T
+        if counts:
+            indx = np.nonzero(np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1))))[0]
+            unique_counts = []
+            for u, j in enumerate(indx):
+                try:
+                    unique_counts.append(indx[u+1]-j)
+                except Exception:
+                    unique_counts.append(1)
+        if index:
+            idx = ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))]
+    output.append(np.matrix(unique))
     if counts:
-        indx = np.nonzero(
-            np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1))))[0]
-        counts = []
-        for u, j in enumerate(indx):
-            try:
-                counts.append(indx[u+1]-j)
-            except Exception:
-                counts.append(1)
-        output.append(np.array(counts))
+        output.append(np.array(unique_counts))
     if index:
-        output.append(
-            ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))])
+        output.append(idx)
     if len(output) == 1:
         return output[0]
     else:

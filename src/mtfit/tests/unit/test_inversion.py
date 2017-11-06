@@ -4,6 +4,10 @@ import glob
 import time
 import sys
 import gc
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 import numpy as np
 
@@ -50,7 +54,7 @@ class McMCForwardTaskTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         del self.mcmc_forward_task
 
     def test___call__(self):
@@ -118,7 +122,7 @@ class MultipleEventsMcMCForwardTaskTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         del self.multiple_events_mcmc_forward_task
 
     def test___call__(self):
@@ -728,7 +732,7 @@ class ForwardTaskTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         del self.forward_task
         del self.MTs
         global _CYTHON_TESTS
@@ -832,7 +836,6 @@ class ForwardTaskTestCase(TestCase):
             _COMBINED_TESTS = False
             _CYTHON_TESTS = False
             _CYTHON = True
-            # print 'COMBINED', _CYTHON and not _CYTHON_TESTS and not
             # _COMBINED_TESTS,_CYTHON,_CYTHON_TESTS, _COMBINED_TESTS
             del self.forward_task
             location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
@@ -874,8 +877,6 @@ class ForwardTaskTestCase(TestCase):
             a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio = amplitude_ratio_matrix(
                 data, location_samples)
 
-            # print 'CYTHON', _CYTHON and not _CYTHON_TESTS and not
-            # _COMBINED_TESTS,_CYTHON,_CYTHON_TESTS, _COMBINED_TESTS
             self.forward_task = ForwardTask(self.MTs, a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio,
                                             percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio, a_polarity_prob, polarity_prob,
                                             [1, 1], incorrect_polarity_prob)
@@ -901,15 +902,13 @@ class ForwardTaskTestCase(TestCase):
                                             'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.001, 0.02], [0.001, 0.02]])}}
             a_polarity_prob, polarity_prob, incorrect_polarity_prob = polarity_probability_matrix(data)
             a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio = amplitude_ratio_matrix(data, location_samples)
-            # print 'PYTHON', _CYTHON and not _CYTHON_TESTS and not
-            # _COMBINED_TESTS,_CYTHON,_CYTHON_TESTS, _COMBINED_TESTS
             self.forward_task = ForwardTask(self.MTs, a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio,
                                             percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio, a_polarity_prob, polarity_prob,
                                             [1, 1], incorrect_polarity_prob)
             t0 = time.time()
             resulto = self.forward_task()
             python_times.append(time.time()-t0)
-        print ' Combined Time', sum(combined_times)/float(len(combined_times)), 'Cython Time', sum(cython_times)/float(len(cython_times)), 'Python Time', sum(python_times)/float(len(python_times)), ' ',
+        print(' Combined Time = {}, Cython Time = {}, Python Time = {}'.format(sum(combined_times)/float(len(combined_times)), sum(cython_times)/float(len(cython_times)), sum(python_times)/float(len(python_times))))
 
     def test_location_sample_multiplier(self):
         location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
@@ -972,7 +971,7 @@ class InversionTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         import gc
         try:
             del self.inversion
@@ -1021,10 +1020,9 @@ S003,110,10,1,0.05"""
         open('csvtest.csv', 'w').write(csv)
 
     def _test_inv_file(self):
-        import cPickle
         data = {'UID': '1', 'PPolarity': {'Stations': {'Name': ['S001', 'S002'], 'Azimuth': np.matrix([[120.0], [140.0]]), 'TakeOffAngle': np.matrix(
             [[65.0], [22.0]])}, 'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.01], [0.02]])}}
-        cPickle.dump(data, open('invtest.inv', 'wb'))
+        pickle.dump(data, open('invtest.inv', 'wb'))
 
     def test__load(self):
         self._test_csv_file()
@@ -1108,7 +1106,7 @@ S003,110,10,1,0.05"""
         self.assertFalse(self.inversion.pool)
 
     def test__trim_data(self):
-        self.assertTrue(self.inversion.data[0].keys() == ['PPolarity'])
+        self.assertTrue(list(self.inversion.data[0].keys()) == ['PPolarity'])
         self.inversion.inversion_options = ['PAmplitude']
         try:
             self.inversion._trim_data(self.inversion.data[0])
@@ -1151,7 +1149,7 @@ S003,110,10,1,0.05"""
         try:
             from hdf5storage import loadmat   # nopqa E401
         except Exception:
-            print 'Cannot run _file_sample test as required hdf5storage and h5py modules'
+            print('Cannot run _file_sample test as required hdf5storage and h5py modules')
             return
         self.inversion = Inversion({'UID': 'RecoverTest', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162", "S0083"], 'Azimuth': np.matrix([[90.0], [270.0], [180.]]), 'TakeOffAngle': np.matrix([[30.0], [60.0], [35.]])},
                                                                         'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.5], [0.02]])}},
@@ -1490,8 +1488,7 @@ S003,110,10,1,0.05"""
         except Exception:
             pass
         self.assertTrue(os.path.exists('mtfitOutputMT.out'))
-        import cPickle
-        cPickle.load(open('mtfitOutputMT.out', 'rb'))
+        pickle.load(open('mtfitOutputMT.out', 'rb'))
         try:
             os.remove('mtfitOutputMT.out')
         except Exception:
@@ -1505,7 +1502,8 @@ S003,110,10,1,0.05"""
                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.001], [0.002]])}},
                                    algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=2, output_format='hyp', convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 2
+        self.inversion.number_samples = 1000
+        self.inversion.algorithm.max_time = 0.5
         self.inversion.forward()
         try:
             os.remove('test.scatangle')
@@ -1634,13 +1632,13 @@ class MiscTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         for fname in glob.glob('*.hyp'):
             if fname not in self.existing_hyp_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
 
     def station_angles(self):
         out = "504.7\n"
