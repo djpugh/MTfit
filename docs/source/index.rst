@@ -9,7 +9,7 @@
 mtfit: Bayesian Source Inversion
 *********************************
 
-*Bayesian Moment Tensor Inversion Code by David J Pugh (Bullard Laboratories, Department of Earth Sciences, University of Cambridge)*
+*Bayesian Moment Tensor Inversion Code by David J Pugh*
 
 
 .. toctree::
@@ -40,11 +40,22 @@ mtfit: Bayesian Source Inversion
 
 :mod:`mtfit` also works with the automated Bayesian polarity approach described in :ref:`Pugh et al, 2016b <Pugh-2016b>` as an alternative method of estimating polarity probabilities. This is available as the :mod:`autopol` Python module.
 
+The source code is available from `GitHub <https://github.com/djpugh/MTfit>`_.
+
+Issues are tracked at the `GitHub repository <https://github.com/djpugh/MTfit/issues>`_. Please raise a new issue or feature request `here <https://github.com/djpugh/MTfit/issues/new>`_. 
+
 .. only:: html
    
    This documentation is available as a :download:`PDF<../pdf/mtfit.pdf>` and an :download:`epub<../epub/mtfit.epub>` file
 
-   The source code is available from `GitHub <https://github.com/djpugh/MTfit>`_
+Please note that this code is provided as-is, and no guarantee is given that this code will perform in the desired way. Additional development and support is carried out in the developer's free time.
+
+**Restricted:  For Non-Commercial Use Only**
+This code is protected intellectual property and is available solely for teaching
+and non-commercially funded academic research purposes.
+Applications for commercial use should be made to Schlumberger or the University of Cambridge.
+
+
 
 ---------------------------------------
 
