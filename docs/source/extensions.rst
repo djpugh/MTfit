@@ -212,12 +212,12 @@ An example of these functions is taken from :download:`extensions/scatangle.py <
                 if fname not in self.existing_scatangle_files:
                     try:
                         os.remove(fname)
-                    except:
+                    except Exception:
                         print 'Cannot remove ',fname
             import gc
             try:
                 os.remove('test.scatangle')
-            except:
+            except Exception:
                 pass
             gc.collect()
 
