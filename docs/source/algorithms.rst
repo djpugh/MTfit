@@ -1,4 +1,4 @@
-mtfit.Algorithms: Search Algorithms
+mtfit.algorithms: Search Algorithms
 ===================================
 
 These algorithms and their effects are explored in :ref:`Pugh (2015)<Pugh-2015t>`, which expands in further detail on the topics covered here.
