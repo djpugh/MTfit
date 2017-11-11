@@ -29,12 +29,7 @@ def run(test=False):
     if test:
         max_samples = 1000
     # Set-up inversion object:
-    if test:
-        import sys
-        sys.path.insert(0, '../src')
-        from mtfit.inversion import Inversion
-    else:
-        from mtfit.inversion import Inversion
+    from mtfit.inversion import Inversion
     # Inversion
 
     # Create the inversion object with the set parameters..
@@ -49,27 +44,22 @@ def run(test=False):
     # Change UID (and output file name)
     data['UID'] = 'P_SH_Amplitude_Ratio_Example_Time_Output'
 
+    # Time sampling
+
+    # runs the inversion for a given time period.
+    algorithm = 'time'
     if test:
         # Run inversion for test
         max_time = 10
-        algorithm = 'time'
-        # Create the inversion object with the set parameters..
-        inversion_object = Inversion(data, algorithm=algorithm, parallel=parallel,
-                                     phy_mem=phy_mem, dc=dc, max_time=max_time, convert=True)
-        inversion_object.forward()
     else:
-        # Time sampling
-
-        # runs the inversion for a given time period.
-        algorithm = 'time'
         # Length of time to run for in seconds.
         max_time = 300
-        # Create the inversion object with the set parameters..
-        inversion_object = Inversion(data, algorithm=algorithm, parallel=parallel,
-                                     phy_mem=phy_mem, dc=dc, max_time=max_time, convert=True)
-        # Run the forward model based inversion
-        inversion_object.forward()
-        # End
+    # Create the inversion object with the set parameters..
+    inversion_object = Inversion(data, algorithm=algorithm, parallel=parallel,
+                                 phy_mem=phy_mem, dc=dc, max_time=max_time, convert=True)
+    # Run the forward model based inversion
+    inversion_object.forward()
+    # Run End
 
 
 if __name__ == "__main__":

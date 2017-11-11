@@ -77,8 +77,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/synthetic_event.py
         :language: python
-        :start-after: #P Polarity Inversion
-        :end-before: #End
+        :start-after: # P Polarity Inversion
+        :end-before: # End
         :dedent: 8
 
 The chosen algorithm is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``100 000`` samples for the double-couple case and ``10 000 000`` for the full moment tensor inversion. 
@@ -146,8 +146,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/synthetic_event.py
         :language: python
-        :start-after: #Amplitude Ratio Inversion
-        :end-before: #End
+        :start-after: # Amplitude Ratio Inversion
+        :end-before: # End
         :dedent: 8
 
 The chosen algorithm is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``100 000`` samples for the double-couple case and ``50 000 000`` for the full moment tensor inversion. 
@@ -245,8 +245,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/krafla_event.py
         :language: python
-        :start-after: #P Polarity Inversion
-        :end-before: #End
+        :start-after: # P Polarity Inversion
+        :end-before: # End
         :dedent: 8
 
 In this example the :func:`mtfit.__core__.mtfit`  function is used instead of creating the inversion object directly. Again, the chosen algorithm is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``100 000`` samples for the double-couple case and ``1 000 000`` for the full moment tensor inversion. The location uncertainty distribution is binned (``--bin_scatangle``), which runs before the main inversion is carried out. This uses the :doc:`source-scatangle` extension to both parse and bin the location PDF distribution.
@@ -304,8 +304,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/krafla_event.py
         :language: python
-        :start-after: #Polarity Probability Inversion
-        :end-before: #End
+        :start-after: # Polarity Probability Inversion
+        :end-before: # End
         :dedent: 8
 
 In this example the :func:`mtfit.__core__.mtfit`  function is used instead of creating the inversion object directly. The chosen algorithm is the ``mcmc`` algorithm (see :ref:`McMCsampling`) for a chain length of ``100 000`` samples for both the double-couple case and the full moment tensor inversion. Additionally a trans-dimensional McMC approach is run, allowing comparison between the two.
@@ -447,8 +447,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/relative_event.py
         :language: python
-        :start-after: #P Polarity and Relative P Amplitude Inversion
-        :end-before: #End
+        :start-after: # P Polarity and Relative P Amplitude Inversion
+        :end-before: # End
         :dedent: 4
 
 In this example the :class:`mtfit.inversion.Inversion`  class is created directly. The chosen algorithm for the double-couple inversion is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``10 000 000`` samples for the double-couple case. A large sample size is required when running the joint inversion because if the probabilities of obtaining a non-zero probability sample for both events is less than or equal to the product of the probabilities of obtaining a non-zero probability sample for the events individually, i.e if the fraction of non-zero probability samples for event 1 is :math:`f_1` and the fraction for event 2 is :math:`f_2`, then the fraction for the joint samping :math:`f_j \leq f_1.f_2`. Consequently it soon becomes infeasible to run the monte-carlo sampling algorithm for the full moment tensor case.
