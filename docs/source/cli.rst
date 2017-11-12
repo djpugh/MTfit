@@ -15,8 +15,8 @@ Command line usage::
     [-j DIMENSION_JUMP_PROB] [-y {grid}] [-u MIN_ACCEPTANCE_RATE]
     [-v MAX_ACCEPTANCE_RATE] [-w ACCEPTANCE_RATE_WINDOW]
     [-W WARNINGS] [-z LEARNING_LENGTH] [--version] [--mpi_call]
-    [--output-format {hyp,pickle,matlab}]
-    [--results-format {hyp,full_pdf}] [--no-dist]
+    [--output-format {matlab,pickle,hyp}]
+    [--results-format {full_pdf,hyp}] [--no-dist]
     [--dc-prior DC_PRIOR] [--sampling SAMPLING]
     [--sample-models SAMPLE_DISTRIBUTION]
     [--sampling-prior SAMPLING_PRIOR] [--no-normalise] [--convert]
@@ -639,8 +639,8 @@ show program's version number and exit
 
 ::
 
-  --output-format {hyp,pickle,matlab}, --output_format {hyp,pickle,matlab},
-  --outputformat {hyp,pickle,matlab}, --format {hyp,pickle,matlab}
+  --output-format {matlab,pickle,hyp}, --output_format {matlab,pickle,hyp},
+  --outputformat {matlab,pickle,hyp}, --format {matlab,pickle,hyp}
 
 
 Output file format [default=matlab]
@@ -650,8 +650,8 @@ Output file format [default=matlab]
 
 ::
 
-  --results-format {hyp,full_pdf}, --results_format {hyp,full_pdf},
-  --resultsformat {hyp,full_pdf}
+  --results-format {full_pdf,hyp}, --results_format {full_pdf,hyp},
+  --resultsformat {full_pdf,hyp}
 
 
 Output results data format (extensible)

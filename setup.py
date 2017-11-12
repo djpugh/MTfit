@@ -73,7 +73,6 @@ def setup_package():
                               'mtfit.output_data_formats': ['full_pdf=mtfit.utilities.file_io:full_pdf_output_dicts', 'hyp=mtfit.utilities.file_io:hyp_output_dicts'],
                               'mtfit.cmd_defaults': ['scatangle=mtfit.extensions.scatangle:cmd_defaults'],
                               'mtfit.cmd_opts': ['scatangle=mtfit.extensions.scatangle:cmd_opts'],
-                              'mtfit.tests': ['scatangle=mtfit.extensions.scatangle:tests'],
                               'mtfit.pre_inversion': ['scatangle=mtfit.extensions.scatangle:pre_inversion']
                               }
     kwargs['include_dirs'] = [np.get_include()]
