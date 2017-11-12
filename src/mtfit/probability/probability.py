@@ -987,6 +987,13 @@ class LnPDF(object):
         else:
             self._set_dv(1)
 
+    def __getstate__(self):
+        return self._ln_pdf, self.dV
+
+    def __setstate__(self, ln_pdf, dV):
+        self._set_ln_pdf(ln_pdf)
+        self._set_dv(dV)
+
     def __getattr__(self, key):
         """x.__getattr__(y) <==> x.y"""
         # Handles cases not picked up by __getattribute__
