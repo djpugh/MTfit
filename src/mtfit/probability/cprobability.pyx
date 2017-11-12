@@ -1496,7 +1496,7 @@ def log0test():
     return log(0)==-inf
 
 def combined_ln_pdf(mt_arr,a_polarity,error_polarity,a1_amplitude_ratio,a2_amplitude_ratio,amplitude_ratio,percentage_error1_amplitude_ratio,percentage_error2_amplitude_ratio,a_polarity_prob,polarity_prob,incorrect_polarity_prob=0,generate_samples=0,cutoff=1000000000,dc=False,marginalised=False,location_samples_multipliers=np.array([0.])):
-    if incorrect_polarity_prob==0:
+    if isinstance(incorrect_polarity_prob, int) and incorrect_polarity_prob == 0:
         incorrect_polarity_prob=np.array([0.])
     generate_mts=False  
     cdef Py_ssize_t umax=0#Station Sample
