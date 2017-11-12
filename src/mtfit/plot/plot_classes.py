@@ -2888,7 +2888,8 @@ class _RiedeselJordanPlot(_FocalSpherePlot):
                     x, y, z, lower=True, full_sphere=False, back_project=True)
             c = color
             markersize = markersize_kw
-            if attr != 'mt' and np.all(self.mt == getattr(self, attr)):
+            # Raising Deprecation Warning
+            if (isinstance(attr, str) and attr != 'mt') and np.all(self.mt == getattr(self, attr)):
                 c = 'w'
                 markersize = markersize_kw/2
             self._scatter_plot(

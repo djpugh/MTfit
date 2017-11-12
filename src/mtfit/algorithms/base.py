@@ -118,7 +118,7 @@ class BaseAlgorithm(object):
 
         # Check sampling_prior distribution selection
         if not kwargs.get('sampling_prior', '6sphere') in sampling_prior_names:
-            kwargs['sampling_prior'] = list(self.default_sampling_priors.keys())[0]
+            kwargs['sampling_prior'] = sorted(list(self.default_sampling_priors.keys()), reverse=True)[0]
         try:
             self._prior = sampling_prior[kwargs.get('sampling_prior', list(self.default_sampling_priors.keys())[0])]
         except Exception:
