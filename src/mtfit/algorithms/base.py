@@ -75,7 +75,6 @@ class BaseAlgorithm(object):
                 MTfit.sample_distribution entry_point
         """
         self.number_samples = number_samples
-        self.total_number_samples = 0
         self.dc = dc
         self.mcmc = False
         self.basic_cdc = kwargs.get('basic_cdc', False)

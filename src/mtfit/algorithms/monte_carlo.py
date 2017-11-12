@@ -71,15 +71,9 @@ class BaseMonteCarloRandomSample(BaseAlgorithm):
         else:
             return super(BaseMonteCarloRandomSample, self).random_sample()
 
-    def __getattr__(self, key):
-        """
-        Get object attributes
-        total_number_samples is passed to pdf object
-        """
-        if key == 'total_number_samples':
-            return self.pdf_sample.n
-        else:
-            return super(BaseMonteCarloRandomSample, self).__getattr__(key)
+    @property
+    def total_number_samples(self):
+        return self.pdf_sample.n
 
     def check_finished(self, end):
         return end

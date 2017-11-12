@@ -907,7 +907,7 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
     except Exception:
         pass
     # Create mdict and sdict and return
-    if not np.prod(all_stations.shape):
+    if (isinstance(all_stations, list) and not len(all_stations)) or (isinstance(all_stations, np.ndarray) and not np.prod(all_stations.shape)):
         all_stations = []
     mdict = {'Events': event, 'Stations': all_stations, 'Other': other}
     sdict = {'StationDistribution': station_distribution}
