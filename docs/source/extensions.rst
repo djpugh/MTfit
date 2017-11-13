@@ -197,6 +197,86 @@ Where ``test_suite`` is the :class:`unittest.TestSuite` containing the TestSuite
 
 from each :class:`unittest.TestCase`.
 
+    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(__ExtensionTestCase))
+
+from each :class:`unittest.TestCase`. ``parser_test_function`` is a single function to test the parser handling and checking.
+
+An example of these functions is taken from :download:`extensions/scatangle.py <../../src/mtfit/extensions/scatangle.py>`::
+
+    class __ScatangleTestCase(unittest.TestCase):
+        def setUp(self):
+            global _DEBUG
+            self.__setattr__('existing_scatangle_files', glob.glob('*.scatangle'))
+        def tearDown(self):
+            for fname in glob.glob('*.scatangle'):
+                if fname not in self.existing_scatangle_files:
+                    try:
+                        os.remove(fname)
+                    except Exception:
+                        print('Cannot remove ',fname)
+            import gc
+            try:
+                os.remove('test.scatangle')
+            except Exception:
+                pass
+            gc.collect()
+
+        def station_angles(self):
+            .
+            .
+            .
+            .
+        def test_parse_scatangle(self):
+            open('test.scatangle','w').write(self.station_angles())
+            A,B=parse_scatangle('test.scatangle')
+            self.assertEqual(B,[504.7, 504.7])
+            self.assertEqual(len(A),2)
+            self.assertEqual(sorted(A[0].keys()),['Azimuth','Name','TakeOffAngle'])
+            A,B=parse_scatangle('test.scatangle',bin_size=1)
+            self.assertEqual(B,[1009.4])
+            self.assertEqual(len(A),1)
+            self.assertEqual(sorted(A[0].keys()),['Azimuth','Name','TakeOffAngle'])
+            open('test.scatangle','w').write('\n'.join([self.station_angles() \
+                    for i in range(40)]))
+            global _CYTHON
+            import time
+            t0=time.time()
+            A,B=parse_scatangle('test.scatangle',bin_size=1)
+            print('C',time.time()-t0)
+            t0=time.time()
+            _CYTHON=False
+            A,B=parse_scatangle('test.scatangle',bin_size=1)
+            print('NoC',time.time()-t0)
+            _CYTHON=True
+            os.remove('test.scatangle')
+
+    def parser_tests(self,_parser,defaults,argparse):
+        print('bin_scatangles --bin-scatangle and --bin-scatangle-size check')
+        options,options_map=_parser(['Test.i'],test=True)
+        self.assertTrue(options['bin_scatangle']==defaults['bin_scatangle'])
+        self.assertEqual(options['bin_scatangle_size'],defaults['bin_size'])
+        options,options_map=_parser(['--bin_scatangle'],test=True)
+        self.assertTrue(options['bin_scatangle'])
+        self.assertEqual(options['bin_scatangle_size'],defaults['bin_size'])
+        options,options_map=_parser(['--bin_scatangle','--bin-size=2.0'],test=True)
+        self.assertTrue(options['bin_scatangle'])
+        self.assertEqual(options['bin_scatangle_size'],2.0)
+
+    def _debug_test_suite():
+        suite=unittest.TestSuite()
+        suite.addTests(unittest.TestLoader().loadTestsFromTestCase(__ScatangleTestCase))
+        return suite
+
+    def _test_suite():
+        tests=[]
+        tests.append(unittest.TestLoader().loadTestsFromTestCase(__ScatangleTestCase))
+        return unittest.TestSuite(tests)
+
+    def tests():
+        return(_test_suite(),_debug_test_suite(),parser_tests)
+
+Where :func:`tests` is the entry point function.
+
 A test suite for an extension can be installed using :mod:`setuptools` by adding the ``mtfit.tests`` entry point to the extension ``setup.py`` script::
 
     setup(...

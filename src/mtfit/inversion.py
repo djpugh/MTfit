@@ -159,8 +159,11 @@ class ForwardTask(object):
         global _DEBUG
         try:
             if _VERBOSITY >= 3:
-                import memory_profiler
-                logger.info('Memory Usage - Initial: {}'.format(memory_profiler.memory_usage()))
+                try:
+                    import memory_profiler
+                    logger.info('Memory Usage - Initial: {}'.format(memory_profiler.memory_usage()))
+                except ImportError:
+                    memory_profiler = False
             if self.generate_samples or len(self.mt):
                 _return = False  # set _return flag to False before starting
                 if cprobability and not _CYTHON_TESTS and not _COMBINED_TESTS:
@@ -362,8 +365,7 @@ class ForwardTask(object):
                     del self.location_sample_multipliers
                     gc.collect()
                 # Print end memory usage (Verbosity >=3)
-                if _VERBOSITY >= 3:
-                    import memory_profiler
+                if _VERBOSITY >= 3 and memory_profiler:
                     print('end usage {}'.format(memory_profiler.memory_usage()))
                 # Check results
                 if _return:
