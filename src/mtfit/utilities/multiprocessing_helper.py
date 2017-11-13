@@ -83,9 +83,10 @@ class Worker(multiprocessing.Process):
                 if isinstance(next_task, PoisonPill):
                     break
                 answer = next_task()
-                for key, value in answer.items():
-                    if isinstance(value, LnPDF):
-                        answer[key] = {'ln_pdf': value.__getstate__()}
+                if isinstance(answer, dict):
+                    for key, value in answer.items():
+                        if isinstance(value, LnPDF):
+                            answer[key] = {'ln_pdf': value.__getstate__()}
                 self.result_queue.put(answer)
                 if self.single_life:
                     break
