@@ -83,9 +83,10 @@ class Worker(multiprocessing.Process):
                 if isinstance(next_task, PoisonPill):
                     break
                 answer = next_task()
-                for key, value in answer.items():
-                    if isinstance(value, LnPDF):
-                        answer[key] = {'ln_pdf': value.__getstate__()}
+                if isinstance(answer, dict):
+                    for key, value in answer.items():
+                        if isinstance(value, LnPDF):
+                            answer[key] = {'ln_pdf_obj': value.__getstate__()}
                 self.result_queue.put(answer)
                 if self.single_life:
                     break
@@ -234,9 +235,9 @@ class JobPool(object):
         if isinstance(result, dict):
             for key, value in result.items():
                 if isinstance(value, dict):
-                    if value.keys() == ['ln_pdf']:
+                    if list(value.keys()) == ['ln_pdf_obj']:
                         # This is a ln_pdf object so rebuild
-                        result[key] = LnPDF(value['ln_pdf'][0], dV=value['ln_pdf'][1])
+                        result[key] = LnPDF(value['ln_pdf_obj'][0], dV=value['ln_pdf_obj'][1])
                     else:
                         result[key] = self.rebuild_ln_pdf(value)
         elif isinstance(result, list):

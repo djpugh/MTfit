@@ -66,7 +66,7 @@ def run(case='PPolarity', parallel=True, test=False):
     if case.lower() == 'ppolarity':
         # P Polarity Inversion
         # print output data
-        print data['PPolarity']
+        print(data['PPolarity'])
         data['UID'] += '_ppolarity'
         # Set inversion parameters
         # Use an iteration random sampling algorithm
@@ -123,7 +123,7 @@ def run(case='PPolarity', parallel=True, test=False):
     elif case.lower() == 'ppolarityprob':
         # Polarity Probability Inversion
         # print output data
-        print data['PPolarityProb']
+        print(data['PPolarityProb'])
         data['UID'] += '_ppolarityprob'
         # Set inversion parameters
         # Use an mcmc sampling algorithm

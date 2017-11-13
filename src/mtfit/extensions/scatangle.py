@@ -97,7 +97,8 @@ def parse_scatangle(filename, number_location_samples=0, bin_size=0, _use_c=True
 
     """
     # Read file
-    station_file = open(filename, 'r').readlines()
+    with open(filename, 'r') as f:
+        station_file = f.readlines()
     multipliers = []
     sample_records = []
     record = {'Name': [], 'Azimuth': [], 'TakeOffAngle': []}
@@ -191,7 +192,8 @@ def _output_scatangle(filename, samples, probabilities):
         for j, st in enumerate(sample['Name']):
             output.append(st+'\t'+str(float(sample['Azimuth'][j]))+'\t'+str(float(sample['TakeOffAngle'][j])))
         output.append('')
-    open(filename, 'w').write('\n'.join(output))
+    with open(filename, 'w') as f:
+        f.write('\n'.join(output))
 
 
 def bin_scatangle(filename, number_location_samples=0, bin_size=1):
