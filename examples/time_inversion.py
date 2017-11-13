@@ -11,9 +11,9 @@ def run(test=False):
     from example_data import time_inversion_data
     data = time_inversion_data()
 
-    print "Running Time limited example\n\n\tInput data dictionary:"
+    print("Running Time limited example\n\n\tInput data dictionary:")
     # Print data
-    print data
+    print(data)
 
     # print 'Data is pickled to Double_Couple_Example.inv'
     # import cPickle
@@ -31,12 +31,7 @@ def run(test=False):
         max_time = 10
 
     # Set-up inversion object:
-    if test:
-        import sys
-        sys.path.insert(0, '../src')
-        from mtfit.inversion import Inversion
-    else:
-        from mtfit.inversion import Inversion
+    from mtfit.inversion import Inversion
     # Inversion
     # Create the inversion object with the set parameters.
     inversion_object = Inversion(data, algorithm=algorithm, parallel=parallel,

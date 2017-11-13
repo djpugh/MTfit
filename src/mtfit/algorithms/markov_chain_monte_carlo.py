@@ -318,11 +318,9 @@ class MarginalisedMarkovChainMonteCarlo(BaseAlgorithm):
                 self._init_nonzero = [False for i in range(self.number_events)]
                 self._initialiser.number_events = self.number_events
 
-    def __getattribute__(self, key):
-        if key == 'total_number_samples':
-            return self._tried
-        else:
-            return super(MarginalisedMarkovChainMonteCarlo, self).__getattribute__(key)
+    @property
+    def total_number_samples(self):
+        return self._tried
 
     def acceptance_rate(self):
         """

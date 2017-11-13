@@ -76,7 +76,7 @@ The entry points are:
 
 These entry points can be accessed by adding some arguments to the :mod:`setuptools` module ``setup.py`` script::
 
-     kwargs['entry_points']={'entry_point_name':['key = function']}
+     kwargs['entry_points']={'entry_point_name': ['key = function']}
 
 Where ``kwargs`` is the keyword dictionary passed to the :mod:`setuptools` :py:func:`setup` function, and the ``entry_point_name`` is the desired entry point in the other package.
 The ``key`` is the description of the :py:func:`function`, used for selecting it in the code (this should be described by the package), and the :py:func:`function` is the desired function to be called when this key is selected.
@@ -95,7 +95,7 @@ This entry point handles command line options for extensions that have been adde
 
 The function is called as::
 
-    parser_group,parser_check=cmd_opts(parser_group,argparse=[True/False],defaults)
+    parser_group, parser_check = cmd_opts(parser_group, argparse=[True/False], defaults)
 
 Where the ``parser_group`` is the :mod:`argparse` or :mod:`optparse` parser group depending on if :mod:`argparse` is installed (Python version 2.7 or later), defaults are the command line defaults (with corresponding entry points :ref:`entry_point-1`), and ``parser_check`` is the function called to check/process the parsers results.
 
@@ -109,7 +109,6 @@ An example cmd_opts function is::
                     os.path.sep+'*'+options['angle_extension'])
             if not type(options['location_pdf_file_path'])==list:
               options['location_pdf_file_path']=[options['location_pdf_file_path']]
-            #flags=['no_data_file_ok','no_location_update']
             flags=['no_location_update']
         return options,flags
 
@@ -141,7 +140,7 @@ These command line options will be added to the options mtfit is called with so 
 The command line options for an extension can be installed using :mod:`setuptools` by adding the ``mtfit.cmd_opts`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={'mtfit.cmd_opts':['extension = mymodule:cmd_opts']}
+          entry_points = {'mtfit.cmd_opts': ['extension = mymodule:cmd_opts']}
           ...)
 
 
@@ -154,19 +153,20 @@ This entry point handles the default values and types for the command line optio
 
 The function is called as::
 
-    plugin_defaults,plugin_default_types=cmd_defaults()
+    plugin_defaults, plugin_default_types = cmd_defaults()
 
 Where both are dicts, and should contain defaults for the :ref:`entry_point-0`, although they can also update the normal :doc:`cli` defaults and default types. Both dictionaries are used for updating the defaults from the default file (see :doc:`setup`).
 
 An example cmd_defaults function is::
 
     PARSER_DEFAULTS={
-              'bin_scatangle':False,
-              'bin_size':1.0,
+              'bin_scatangle': False,
+              'bin_size': 1.0,
               }
-    PARSER_DEFAULT_TYPES={'bin_scatangle':[bool],'bin_size':[float]}
+    PARSER_DEFAULT_TYPES = {'bin_scatangle': [bool], 'bin_size': [float]}
+
     def cmd_defaults():
-        return(PARSER_DEFAULTS,PARSER_DEFAULT_TYPES)
+        return(PARSER_DEFAULTS, PARSER_DEFAULT_TYPES)
 
 This is taken from :download:`extensions/scatangle.py <../../src/mtfit/extensions/scatangle.py>`.
 
@@ -174,7 +174,7 @@ This is taken from :download:`extensions/scatangle.py <../../src/mtfit/extension
 The default command line options for an extension can be installed using :mod:`setuptools` by adding the ``mtfit.cmd_defaults`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={'mtfit.cmd_defaults':['extension = mymodule:cmd_defaults']}
+          entry_points = {'mtfit.cmd_defaults': ['extension = mymodule:cmd_defaults']}
           ...)
 
 
@@ -187,7 +187,7 @@ This entry point is used for any extensions to add tests to the test suite, whic
 
 The function is called as::
 
-    test_suite,debug_test_suite,parser_test_function=tests()
+    test_suite = tests()
 
 Where ``test_suite`` is the :class:`unittest.TestSuite` containing the TestSuite, created as::
 
@@ -195,7 +195,7 @@ Where ``test_suite`` is the :class:`unittest.TestSuite` containing the TestSuite
     tests.append(unittest.TestLoader().loadTestsFromTestCase(__ExtensionTestCase))
     test_suite=unittest.TestSuite(tests)
 
-from each :class:`unittest.TestCase`.``debug_test_suite`` is a single :class:`~unittest.TestSuite` containing the tests, added as::
+from each :class:`unittest.TestCase`.
 
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(__ExtensionTestCase))
 
@@ -212,12 +212,12 @@ An example of these functions is taken from :download:`extensions/scatangle.py <
                 if fname not in self.existing_scatangle_files:
                     try:
                         os.remove(fname)
-                    except:
-                        print 'Cannot remove ',fname
+                    except Exception:
+                        print('Cannot remove ',fname)
             import gc
             try:
                 os.remove('test.scatangle')
-            except:
+            except Exception:
                 pass
             gc.collect()
 
@@ -242,16 +242,16 @@ An example of these functions is taken from :download:`extensions/scatangle.py <
             import time
             t0=time.time()
             A,B=parse_scatangle('test.scatangle',bin_size=1)
-            print 'C',time.time()-t0
+            print('C',time.time()-t0)
             t0=time.time()
             _CYTHON=False
             A,B=parse_scatangle('test.scatangle',bin_size=1)
-            print 'NoC',time.time()-t0
+            print('NoC',time.time()-t0)
             _CYTHON=True
             os.remove('test.scatangle')
 
     def parser_tests(self,_parser,defaults,argparse):
-        print 'bin_scatangles --bin-scatangle and --bin-scatangle-size check'
+        print('bin_scatangles --bin-scatangle and --bin-scatangle-size check')
         options,options_map=_parser(['Test.i'],test=True)
         self.assertTrue(options['bin_scatangle']==defaults['bin_scatangle'])
         self.assertEqual(options['bin_scatangle_size'],defaults['bin_size'])
@@ -280,10 +280,10 @@ Where :func:`tests` is the entry point function.
 A test suite for an extension can be installed using :mod:`setuptools` by adding the ``mtfit.tests`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={'mtfit.tests':['extension = mymodule:tests']}
+          entry_points = {'mtfit.tests': ['extension = mymodule:tests']}
           ...)
 
-(N.B. the different test suites can be empty, and the ``parser_test_function`` can just be a pass function).
+(N.B. the different test suites can be empty).
 
 
 
@@ -296,7 +296,7 @@ This entry point provides an opportunity to call a function before the :class:`m
 
 The plugin is called as::
 
-        kwargs=pre_inversion(**kwargs)
+        kwargs = pre_inversion(**kwargs)
 
 And can change the kwargs passed to the  :class:`~mtfit.inversion.Inversion` object to create it.
 
@@ -305,10 +305,10 @@ The function should just return the initial kwargs if the command line option to
 An pre_inversion function can be installed using :mod:`setuptools` by adding the ``mtfit.pre_inversion`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
-                'mtfit.pre_inversion':['my_fancy_function = mymodule:main_function'],
-                'mtfit.cmd_opts':['extension = mymodule:cmd_opts'],
-                'mtfit.cmd_defaults':['extension = mymodule:cmd_defaults']}
+          entry_points = {
+                'mtfit.pre_inversion': ['my_fancy_function = mymodule:main_function'],
+                'mtfit.cmd_opts': ['extension = mymodule:cmd_opts'],
+                'mtfit.cmd_defaults': ['extension = mymodule:cmd_defaults']}
           ...)
 
 Where the :ref:`mtfit.cmd_opts <entry_point-0>` and :ref:`mtfit.cmd_defaults <entry_point-1>` entry points  have been included.
@@ -330,10 +330,10 @@ The function should just return nothing if the command line option to select it 
 An post_inversion function can be installed using :mod:`setuptools` by adding the ``mtfit.post_inversion`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
-                'mtfit.post_inversion':['my_fancy_function = mymodule:main_function'],
-                'mtfit.cmd_opts':['extension = mymodule:cmd_opts'],
-                'mtfit.cmd_defaults':['extension = mymodule:cmd_defaults']}
+          entry_points = {
+                'mtfit.post_inversion': ['my_fancy_function = mymodule:main_function'],
+                'mtfit.cmd_opts': ['extension = mymodule:cmd_opts'],
+                'mtfit.cmd_defaults': ['extension = mymodule:cmd_defaults']}
           ...)
 
 Where the :ref:`mtfit.cmd_opts <entry_point-0>` and :ref:`mtfit.cmd_defaults <entry_point-1>`  entry points have been included.
@@ -348,8 +348,8 @@ This entry point allows functions that can replace the main call to the :class:`
 
 The plugin is called as::
 
-        result=ext(**kwargs)
-        if result !=1
+        result = ext(**kwargs)
+        if result != 1
             return result
 
 Where kwargs are all the command line options that have been set.
@@ -366,10 +366,10 @@ and the function should check if the appropriate option has been selected on the
 An extension function can be installed using :mod:`setuptools` by adding the ``mtfit.extensions`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
-                'mtfit.extensions':['my_fancy_function = mymodule:main_function'],
-                'mtfit.cmd_opts':['extension = mymodule:cmd_opts'],
-                'mtfit.cmd_defaults':['extension = mymodule:cmd_defaults']}
+          entry_points = {
+                'mtfit.extensions': ['my_fancy_function = mymodule:main_function'],
+                'mtfit.cmd_opts': ['extension = mymodule:cmd_opts'],
+                'mtfit.cmd_defaults': ['extension = mymodule:cmd_defaults']}
           ...)
 
 Where the :ref:`mtfit.cmd_opts <entry_point-0>` and :ref:`mtfit.cmd_defaults <entry_point-1>` entry points  have been included.
@@ -383,17 +383,17 @@ mtfit.parsers
 
 The :ref:`mtfit.parsers <entry_point-6>` entry point allows additional input file parsers to be added. The CSV parser is added using this in the ``setup.py`` script::
 
-    kwargs['entry_points']={'mtfit.parsers':['.csv = mtfit.inversion:parse_csv']}
+    kwargs['entry_points'] = {'mtfit.parsers': ['.csv = mtfit.inversion:parse_csv']}
 
 :mod:`mtfit` expects to call the plugin (if the data-file extension matches) as::
 
-    data=plugin(filename)
+    data = plugin(filename)
 
 
 A parser for a new file format can be installed using :mod:`setuptools` by adding the ``mtfit.parsers`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.parsers':
                     ['.my_format = mymodule.all_parsers:my_format_parser_function']
                 }
@@ -402,7 +402,7 @@ A parser for a new file format can be installed using :mod:`setuptools` by addin
 
 The parser is called using::
 
-    data=my_new_format_parser_function(filename)
+    data = my_new_format_parser_function(filename)
 
 Where the ``filename`` is the data filename and ``data`` is the data dictionary (see :ref:`creating-data-dictionary-label`).
 
@@ -424,7 +424,7 @@ Where number_station_samples is the number of samples to use (i.e subsampling if
 A parser for a new format can be installed using  :mod:`setuptools` by adding the ``mtfit.location_pdf_parsers`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.location_pdf_parsers':
                     ['.my_format = mymodule.all_parsers:my_format_parser_function']
             }
@@ -440,13 +440,13 @@ Where the ``filename`` is the location :term:`PDF` filename and ``number_locatio
 
 The expected format for the location_samples and location_probability return values are::
 
-    location_samples=[
-        {'Name':['S01','S02',...],'Azimuth':np.matrix([[121.],[37.],...]),
-            'TakeOffAngle':np.matrix([[88.],[12.],...])},
-         {'Name':['S01','S02',...],'Azimuth':np.matrix([[120.],[36.],...]),
-            'TakeOffAngle':np.matrix([[87.],[11.],...])}
+    location_samples = [
+        {'Name': ['S01', 'S02', ...], 'Azimuth': np.matrix([[121.], [37.], ...]),
+            'TakeOffAngle': np.matrix([[88.], [12.], ...])},
+         {'Name': ['S01', 'S02', ...],'Azimuth': np.matrix([[120.], [36.], ...]),
+            'TakeOffAngle': np.matrix([[87.], [11.], ...])}
         ]
-    location_probability=[0.8,1.2,...]
+    location_probability=[0.8,1.2, ...]
 
 These are then used in a :term:`Monte Carlo method` approach to include the location uncertainty in the inversion (see :doc:`bayes`).
 
@@ -461,7 +461,7 @@ mtfit.output_data_formats
 A parser for a new output data format can be installed using :mod:`setuptools` by adding the ``mtfit.output_data_formats`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.output_data_formats':
                     ['my_format = mymodule.all_parsers:my_output_data_function']
                 }
@@ -469,9 +469,9 @@ A parser for a new output data format can be installed using :mod:`setuptools` b
 
 The parser is called using::
 
-    output_data=my_output_data_function(event_data,self.inversion_options,
-        output_data,location_samples,location_sample_multipliers,
-        self.multiple_events,self._diagnostic_output,*args,**kwargs)
+    output_data = my_output_data_function(event_data, self.inversion_options,
+        output_data, location_samples, location_sample_multipliers,
+        self.multiple_events, self._diagnostic_output, *args, **kwargs)
 
 Where the ``event_data`` is the dictionary of event data, ``self.inversion_options`` are the inversion options set using the ``-i`` command line argument (see :doc:`cli`), the location_sample parameters are the :term:`PDF`
  samples described above, and the ``multiple_events`` and ``_diagnostic_output`` are corresponding boolean flags.
@@ -500,7 +500,7 @@ The format is set using the ``--format`` command line argument (see :doc:`cli`) 
 A new format can be installed using  :mod:`setuptools` by adding the ``mtfit.output_formats`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.output_formats':
                     ['my_format = mymodule.all_parsers:my_output_format_function']
                 }
@@ -508,8 +508,8 @@ A new format can be installed using  :mod:`setuptools` by adding the ``mtfit.out
 
 The parser is called using::
 
-    output_string,fname=my_output_format_function(output_data,
-            fname,pool,*args,**kwargs)
+    output_string, fname = my_output_format_function(output_data,
+            fname, pool, *args, **kwargs)
 
 Where the ``fname`` is the output filename and ``output_data`` is the output data from the output data parser (see :ref:entry_point-8`). ``pool`` is the :class:`mtfit.inversion.JobPool`.
 
@@ -524,7 +524,7 @@ mtfit.process_data_types
 A function to process the data from the input data to the correct format for an :ref:`mtfit.data_types <entry_point11>` extension. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.process_data_types`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.process_data_types':
                     ['my_data_type = mymodule.all_parsers:my_data_type_preparation']
                 }
@@ -532,7 +532,7 @@ A function to process the data from the input data to the correct format for an 
 
 The function is called using::
 
-    extension_data_dict=extension_function(event)
+    extension_data_dict = extension_function(event)
 
 where event is the data dictionary (keys correspond to different data types and the settings of the inversion_options parameter).
 The function returns a dict, with the station coefficients having keys ``a_***``  or ``aX_***`` where ``X`` is a single identifying digit. These station coefficients are a 3rd rank numpy array, with the middle index corresponding to the location samples.
@@ -545,7 +545,7 @@ mtfit.data_types
 A function to evaluate the forward model likelihood for a new data-type. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.data_types`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.data_types':
                     ['my_data_type = mymodule.all_parsers:my_data_type_likelihood']
                 }
@@ -555,16 +555,16 @@ The inputs are prepared using an :ref:`mtfit.process_data_types <entry_point10>`
 
 The function is called using::
 
-    ln_pdf=extension_function=(self.mt,**self.ext_data[key])
+    ln_pdf = extension_function(self.mt, **self.ext_data[key])
 
 where ``self.ext_data[key]`` is the data prepared by the :ref:`mtfit.process_data_types <entry_point10>` function for this extension. The ``mt`` variable is a numpy array of moment tensor six vectors in the form::
 
-    self.mt=np.array([[m11,...],
-                      [m22,...],
-                      [m33,...],
-                      [sqrt(2)*m12,...],
-                      [sqrt(2)*m13,...],
-                      [sqrt(2)*m23,...]])
+    self.mt = np.array([[m11, ...],
+                        [m22, ...],
+                        [m33, ...],
+                        [sqrt(2)*m12, ...],
+                        [sqrt(2)*m13, ...],
+                        [sqrt(2)*m23, ...]])
 
 The station coefficients for the extension should be named as ``a_***`` or ``aX_***`` where ``X`` is a single identifying digit, and be a 3rd rank numpy array, with the middle index corresponding to the location samples.
 The function returns a :class:`mtfit.probability.LnPDF` for the moment tensors provided. If the function does not exist, an error is raised, and the result ignored.
@@ -579,7 +579,7 @@ Relative inversions can also be handled, but the extension name requires ``relat
 
 Relative functions are called using::
 
-    ln_pdf,scale,scale_uncertainty=extension_function](self.mt,ext_data_1,ext_data_2)
+    ln_pdf, scale, scale_uncertainty = extension_function(self.mt, ext_data_1, ext_data_2)
 
 Where ``ext_data_*`` is the extension data for each event as a dictionary. This dictionary, generated using the :ref:`mtfit.process_data_types <entry_point10>` function for this extension, should also contain a list of the receivers with observations, ordered in the same order as the numpy array of the data, as this is used for station indexing.
 
@@ -594,7 +594,7 @@ mtfit.parallel_algorithms
 This extension provides an entry point for customising the search algorithm. This can be installed using :mod:`setuptools` by adding the ``mtfit.parallel_algorithms`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.parallel_algorithms':
                     ['my_new_algorithm = mymodule:my_new_algorithm_class']
                 }
@@ -606,26 +606,26 @@ The ``mtfit.parallel_algorithms`` entry point is for algorithms to replace the s
 
 The algorithm is initialised as::
 
-    algorithm=extension_algorithm(**kwargs)
+    algorithm = extension_algorithm(**kwargs)
 
 where ``kwargs`` are the input arguments for the inversion object, and a few additional parameters such as the number of samples (``number_samples``), which is the number of samples per iteration, accounting for memory. Additional ``kwargs`` can be added using the :ref:`mtfit.cmd_opts<entry_point-0>` entry point.
 
 The algorithm will be initialised, and expected to return the moment tensors to check in the forward model, and ``end=True``::
 
-    mts,end=self.algorithm.initialise()
+    mts, end = self.algorithm.initialise()
 
 ``end`` is a boolean flag to determine whether the end of the search has been reached, and mts is the numpy array of moment tensors in the form::
 
-    mts=np.array([[m11,...],
-                  [m22,...],
-                  [m33,...],
-                  [sqrt(2)*m12,...],
-                  [sqrt(2)*m13,...],
-                  [sqrt(2)*m23,...]])
+    mts = np.array([[m11, ...],
+                    [m22, ...],
+                    [m33, ...],
+                    [sqrt(2)*m12, ...],
+                    [sqrt(2)*m13, ...],
+                    [sqrt(2)*m23, ...]])
 
 After initialisation, the results are returned from the :class:`mtfit.inversion.ForwardTask` object as a dictionary which should be parsed using the :func:`iterate` function::
 
-    mts,end=self.algorithm.iterate({'moment_tensors':mts,'ln_pdf':ln_p_total,'n':N})
+    mts, end = self.algorithm.iterate({'moment_tensors': mts, 'ln_pdf': ln_p_total, 'n': N})
 
 The forward models can be run in parallel, either using :mod:`multiprocessing` or using MPI to pass the ``end`` flag. Consequently, these algorithms have no ordering, so can not depend on previous samples - to add an algorithm that is, it is necessary to use the :ref:`mtfit.directed_algorithms<entry_point13>` entry point.
 
@@ -638,7 +638,7 @@ mtfit.directed_algorithms
 This extension provides an entry point for customising the search algorithm. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.directed_algorithms`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.directed_algorithms':
                     ['my_new_algorithm = mymodule:my_new_algorithm_class']
                 }
@@ -650,26 +650,26 @@ The ``mtfit.directed_algorithms`` entry point is for algorithms to replace the M
 
 The algorithm is initialised as::
 
-    algorithm=extension_algorithm(**kwargs)
+    algorithm = extension_algorithm(**kwargs)
 
 where ``kwargs`` are the input arguments for the inversion object, and a few additional parameters such as the number of samples (``number_samples``), which is the number of samples per iteration, accounting for memory. Additional ``kwargs`` can be added using the :ref:`mtfit.cmd_opts<entry_point-0>` entry point.
 
 The algorithm will be initialised, and expected to return the moment tensors to check in the forward model, and ``end=True``::
 
-    mts,end=self.algorithm.initialise()
+    mts, end = self.algorithm.initialise()
 
 ``end`` is a boolean flag to determine whether the end of the search has been reached, and ``mts`` is the numpy array of moment tensors in the form::
 
-    mts=np.array([[m11,...],
-                  [m22,...],
-                  [m33,...],
-                  [sqrt(2)*m12,...],
-                  [sqrt(2)*m13,...],
-                  [sqrt(2)*m23,...]])
+    mts = np.array([[m11, ...],
+                    [m22, ...],
+                    [m33, ...],
+                    [sqrt(2)*m12, ...],
+                    [sqrt(2)*m13, ...],
+                    [sqrt(2)*m23, ...]])
 
 After initialisation, the results are returned from the :class:`mtfit.inversion.ForwardTask` object as a dictionary which should be parsed using the iterate function::
 
-    mts,end=self.algorithm.iterate({'moment_tensors':mts,'ln_pdf':ln_p_total,'n':N})
+    mts, end = self.algorithm.iterate({'moment_tensors': mts,'ln_pdf': ln_p_total, 'n': N})
 
 The forward models are run in order, so can depend on previous samples - to add an algorithm that does not need this, use the :ref:`mtfit.parallel_algorithms<entry_point12>` entry point.
 
@@ -682,7 +682,7 @@ mtfit.sampling
 This extension provides an entry point for customising the moment tensor sampling used by the search algorithm. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.sampling`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.sampling':
                     ['my_extension_name = mymodule:my_source_sampling']
                 }
@@ -690,12 +690,12 @@ This extension provides an entry point for customising the moment tensor samplin
 
 The function should return a numpy array or matrix of normalised moment tensor six vectors in the form::
 
-    mts=np.array([[m11,...],
-                  [m22,...],
-                  [m33,...],
-                  [sqrt(2)*m12,...],
-                  [sqrt(2)*m13,...],
-                  [sqrt(2)*m23,...]])
+    mts = np.array([[m11, ...],
+                    [m22, ...],
+                    [m33, ...],
+                    [sqrt(2)*m12, ...],
+                    [sqrt(2)*m13, ...],
+                    [sqrt(2)*m23, ...]])
 
 If an alternate sampling is desired for the McMC case (ie. a different model), it is necessary to extend the algorithm class using the ``mtfit.directed_algorithms`` entry point.
 
@@ -708,7 +708,7 @@ mtfit.sampling_prior
 This extension provides an entry point for customising the prior distribution of moment tensors used by the search algorithm. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.sampling_prior`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.sampling_prior':
                     ['my_extension_name = mymodule:my_sampling_prior']
                 }
@@ -717,15 +717,15 @@ This extension provides an entry point for customising the prior distribution of
 Different functions should be chosen for the Monte Carlo algorithms compared to the Markov chain Monte Carlo algorithms. In the Monte Carlo case, the prior is used to calculate the Bayesian evidence, and depends on the source type parameters.
 It must reflect the prior distribution on the source samples as a Monte Carlo type integration is used to calculate it, and should return a float from two input floats::
 
-    prior=prior_func(gamma,delta)
+    prior = prior_func(gamma, delta)
 
 In the Markov chain Monte Carlo case, the function should return the prior of a sample, dependent on the selected model, again as a float. It is called as::
 
-    prior=uniform_prior(xi,dc=None,basic_cdc=False,max_poisson=0,min_poisson=0)
+    prior = uniform_prior(xi, dc=None, basic_cdc=False, max_poisson=0, min_poisson=0)
 
 where xi is a dictionary of the sample parameters e.g.::
 
-    xi={'gamma':0.1,'delta':0.3,'kappa':pi/2,'h':0.5,'sigma':0}
+    xi = {'gamma': 0.1, 'delta': 0.3, 'kappa': pi/2, 'h': 0.5, 'sigma': 0}
 
 If an alternate sampling is desired for the Markov chain Monte Carlo case (ie. a different model), it is necessary to extend the algorithm class using the ``mtfit.directed_algorithms`` entry point.
 
@@ -738,7 +738,7 @@ mtfit.sample_distribution
 This extension provides an entry point for customising the source sampling used by the Monte Carlo search algorithm. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.sample_distribution`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.sample_distribution':
                     ['my_extension_name = mymodule:my_random_model_func']
                 }
@@ -746,12 +746,12 @@ This extension provides an entry point for customising the source sampling used 
 
 The model must generate a random sample according in the form of a numpy matrix or array::
 
-    mts=np.array([[m11,...],
-                  [m22,...],
-                  [m33,...],
-                  [sqrt(2)*m12,...],
-                  [sqrt(2)*m13,...],
-                  [sqrt(2)*m23,...]])
+    mts = np.array([[m11, ...],
+                    [m22, ...],
+                    [m33, ...],
+                    [sqrt(2)*m12, ...],
+                    [sqrt(2)*m13, ...],
+                    [sqrt(2)*m23, ...]])
 
 If an alternate sampling is desired for the Markov chain Monte Carlo case (ie. a different model), it is necessary to extend the algorithm class using the ``mtfit.directed_algorithms`` entry point.
 
@@ -764,7 +764,7 @@ mtfit.plot
 This extension provides an entry point for customising the plot type the for mtfit.plot.MTplot object. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.plot`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.plot':
                     ['plottype = mymodule:my_plot_class']
                 }
@@ -784,7 +784,7 @@ mtfit.plot_read
 This extension provides an entry point for customising the input file parser for reading data for the mtfit.plot.MTplot object. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.plot_read`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.plot_read':
                     ['.file_extension = mymodule:my_read_function']
                 }
@@ -802,7 +802,7 @@ mtfit.documentation
 This extension provides an entry point for customising the search algorithm. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.documentation`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.documentation':
                     ['my_extension_name = mymodule:my_rst_docs']
                 }
@@ -821,7 +821,7 @@ mtfit.source_code
 This extension provides an entry point for customising the search algorithm. This can be installed can be installed using :mod:`setuptools` by adding the ``mtfit.source_code`` entry point to the extension ``setup.py`` script::
 
     setup(...
-          entry_points={
+          entry_points = {
                 'mtfit.source_code':
                     ['my_extension_name = mymodule:my_rst_source_code_docs']
                 }

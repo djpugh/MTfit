@@ -24,89 +24,79 @@ except ImportError:
     in_repo = False
 
 
-@unittest.skipIf(not in_repo)
+@unittest.skipIf(not in_repo, 'Not in examples folder')
 class ExamplesTestCase(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        cls.error_files = []
+
     def setUp(self):
-        self.csv_files = glob.glob('*.csv')
-        self.inv_files = glob.glob('*.inv')
-        self.mat_files = glob.glob('*.mat')
-        self.log_files = glob.glob('*.log')
-        self.mat_e_files = glob.glob('*.mat~')
-        self.scatangle_files = glob.glob('*.scatangle')
+        # Get mat, inv etc files at start
+        self.existing_files = self.check_files()
 
     def tearDown(self):
-        for filename in glob.glob('*.csv'):
-            if filename not in self.csv_files:
-                try:
+        # Remove new files
+        new_files = self.check_files()
+        for filename in new_files:
+            if filename in self.existing_files and filename not in self.error_files:
+                continue
+            try:
+                if os.path.exists(filename):
                     os.remove(filename)
-                except Exception:
-                    pass
-        for filename in glob.glob('*.inv'):
-            if filename not in self.inv_files:
-                try:
-                    os.remove(filename)
-                except Exception:
-                    pass
-        for filename in glob.glob('*.mat'):
-            if filename not in self.mat_files:
-                try:
-                    os.remove(filename)
-                except Exception:
-                    pass
-        for filename in glob.glob('*.log'):
-            if filename not in self.log_files:
-                try:
-                    os.remove(filename)
-                except Exception:
-                    pass
-        for filename in glob.glob('*.mat~'):
-            if filename not in self.mat_e_files:
-                try:
-                    os.remove(filename)
-                except Exception:
-                    pass
-        for filename in glob.glob('*.scatangle'):
-            if filename not in self.scatangle_files:
-                try:
-                    os.remove(filename)
-                except Exception:
-                    pass
-        del self.csv_files
-        del self.inv_files
-        del self.mat_files
-        del self.log_files
-        del self.mat_e_files
+            except Exception:
+                self.error_files.append(filename)
 
-    def test_double_couple_run(self):
-        double_couple_run(test=True)
-        self.assertTrue(os.path.exists('./Double_Couple_Example_OutputDC.mat'))
+    def check_files(self):
 
-    def test_location_uncertainty_run(self):
-        location_uncertainty_run(test=True)
-        self.assertTrue(os.path.exists('./Location_Uncertainty_Example_OutputMT.mat'))
+        files = glob.glob('*.inv')
+        files += glob.glob('*.mat')
+        files += glob.glob('*.mat~')
+        files += glob.glob('*.mt')
+        files += glob.glob('*.hyp')
+        files += glob.glob('*.scatangle')
+        files += glob.glob('*.csv')
+        return files
 
-    def test_make_csv_file_run(self):
-        self.assertTrue(make_csv_file_run(test=True))
-        self.assertTrue(os.path.exists('./csv_example_file.csv'))
+    def test_p_polarity(self):
+        p_polarity_run(True)
+        self.assertTrue(os.path.exists('P_Polarity_Example_OutputMT.mat'))
+        self.assertTrue(os.path.exists('P_Polarity_Example_Dense_OutputMT.mat'))
 
-    def test_mpi_run(self):
-        mpi_run()
+    def test_p_sh_amplitude_ratio(self):
+        p_sh_amplitude_ratio_run(True)
+        self.assertTrue(os.path.exists('P_SH_Amplitude_Ratio_Example_OutputMT.mat'))
+        self.assertTrue(os.path.exists('P_SH_Amplitude_Ratio_Example_Time_OutputMT.mat'))
 
-    def test_p_polarity_run(self):
-        p_polarity_run(test=True)
-        self.assertTrue(os.path.exists('./P_Polarity_Example_OutputMT.mat'))
-        self.assertTrue(os.path.exists('./P_Polarity_Example_Dense_OutputMT.mat'))
+    def test_double_couple(self):
+        double_couple_run(True)
+        self.assertTrue(os.path.exists('Double_Couple_Example.inv'))
+        self.assertTrue(os.path.exists('Double_Couple_Example_OutputDC.mat'))
 
-    def test_p_sh_amplitude_ratio_run(self):
-        p_sh_amplitude_ratio_run(test=True)
-        self.assertTrue(os.path.exists('./P_SH_Amplitude_Ratio_Example_OutputMT.mat'))
-        self.assertTrue(os.path.exists('./P_SH_Amplitude_Ratio_Example_Time_OutputMT.mat'))
-
-    def test_time_inversion_run(self):
+    def test_time_inversion(self):
         time_inversion_run(test=True)
         self.assertTrue(os.path.exists('./Time_Inversion_Example_OutputMT.mat'))
         self.assertTrue(os.path.exists('./Time_Inversion_Example_OutputDC.mat'))
+
+    def test_mpi(self):
+        mpi_run()
+
+    def test_make_csv_file(self):
+        self.assertTrue(make_csv_file_run(test=True))
+        self.assertTrue(os.path.exists('./csv_example_file.csv'))
+
+    def test_location_uncertainty(self):
+        location_uncertainty_run(test=True)
+        self.assertTrue(os.path.exists('./Location_Uncertainty_Example_OutputMT.mat'))
+
+    def test_command_line(self):
+        script = 'command_line.sh'
+        if sys.platform.startswith('win'):
+            script = 'command_line.bat'
+            return
+        script_path = os.path.join(examples_path, script)
+        os.chmod(script_path, 777)
+        self.assertEqual(subprocess.call([script_path]), 0)  # Returns 0
 
     def test_synthetic_event_run(self):
         # Test it runs without errors
@@ -120,15 +110,6 @@ class ExamplesTestCase(unittest.TestCase):
 
     def test_relative_event_run(self):
         relative_event_run(test=True)
-
-    def test_command_line(self):
-        script = 'command_line.sh'
-        if sys.platform.startswith('win'):
-            script = 'command_line.bat'
-            return
-        script_path = os.path.join(examples_path, script)
-        os.chmod(script_path, 777)
-        self.assertEqual(subprocess.call([script_path]), 0)  # Returns 0
 
 
 def test_suite(verbosity=2):

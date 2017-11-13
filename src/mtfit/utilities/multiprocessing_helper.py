@@ -16,12 +16,16 @@ import gc
 import os
 
 
+from ..probability import LnPDF
+
 #
 # Job return codes
 #
-
-
 RETURN_CODES = [10, 20]
+
+
+class PoisonPill(object):
+    pass
 
 
 #
@@ -76,10 +80,12 @@ class Worker(multiprocessing.Process):
         while True:
             try:
                 next_task = self.task_queue.get()
-                if next_task is None:
+                if isinstance(next_task, PoisonPill):
                     break
-
                 answer = next_task()
+                for key, value in answer.items():
+                    if isinstance(value, LnPDF):
+                        answer[key] = {'ln_pdf': value.__getstate__()}
                 self.result_queue.put(answer)
                 if self.single_life:
                     break
@@ -220,8 +226,22 @@ class JobPool(object):
         result = self.results.get()
         self.number_jobs -= 1
         # Check if result is in return codes (errors or otherwise)
-        if result in RETURN_CODES:
+        if isinstance(result, int) and result in RETURN_CODES:
             result = self.result()
+        return self.rebuild_ln_pdf(result)
+
+    def rebuild_ln_pdf(self, result):
+        if isinstance(result, dict):
+            for key, value in result.items():
+                if isinstance(value, dict):
+                    if value.keys() == ['ln_pdf']:
+                        # This is a ln_pdf object so rebuild
+                        result[key] = LnPDF(value['ln_pdf'][0], dV=value['ln_pdf'][1])
+                    else:
+                        result[key] = self.rebuild_ln_pdf(value)
+        elif isinstance(result, list):
+            for i, res in enumerate(result):
+                result[i] = self.rebuild_ln_pdf(res)
         return result
 
     def all_results(self):
@@ -249,7 +269,7 @@ class JobPool(object):
         self.clean_workers()
         for i in range(self.number_workers):
             # Add poison pill
-            self.tasks.put(None)
+            self.tasks.put(PoisonPill())
         # Join workers to main thread
         for w in self.workers:
             w.join()
