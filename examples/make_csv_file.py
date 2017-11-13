@@ -9,10 +9,10 @@ def run(test=False):
     # Get data:
     from example_data import csv_data
     data = csv_data()
-    if isinstance(data, list):
+    if not isinstance(data, list):
         data = [data]
     # make csv file
-    print '\nMaking CSV example file:'
+    print('\nMaking CSV example file:')
     fname = 'csv_example_file.csv'
     import random  # To show header order doesn't matter
     output = []
@@ -40,35 +40,29 @@ def run(test=False):
         f.write('\n'.join(output))
 
     # Output text
-    print '\nSaved CSV example to: '+fname+'\n\n'
-    print 'CSV Example File:\n----------------------------------'
-    print '\n'.join(output)
-    print '-------------------------------------------\n'
-    print 'Events are split by blank lines.'
-    print 'Header order does not matter since the header line shows where the information is.'
-    print 'The UID and data-type information are stored in the first column.'
-    print '\nThis CSV file contains '+str(len(data))+' events:'
+    print('\nSaved CSV example to: '+fname+'\n\n')
+    print('CSV Example File:\n----------------------------------')
+    print('\n'.join(output))
+    print('-------------------------------------------\n')
+    print('Events are split by blank lines.')
+    print('Header order does not matter since the header line shows where the information is.')
+    print('The UID and data-type information are stored in the first column.')
+    print('\nThis CSV file contains '+str(len(data))+' events:')
     for i, ev in enumerate(data):
         def ordinal(n):
             return "%d%s" % (n, "tsnrhtdd"[(n/10 % 10 != 1)*(n % 10 < 4)*n % 10::4])
         if 'UID' in ev:
-            print '\tThe '+str(ordinal(i+1))+' has UID: '+ev['UID']+' and data types: '+', '.join([key for key in ev.keys() if key != 'UID'])
+            print('\tThe '+str(ordinal(i+1))+' has UID: '+ev['UID']+' and data types: '+', '.join([key for key in ev.keys() if key != 'UID']))
         else:
-            print '\tThe '+str(ordinal(i+1))+' has no UID and data types: '+', '.join([key for key in ev.keys() if key != 'UID'])
+            print('\tThe '+str(ordinal(i+1))+' has no UID and data types: '+', '.join([key for key in ev.keys() if key != 'UID']))
 
     # Test event load
-    print '\n\nChecking that the csv data parses and is the same as the original data'
+    print('\n\nChecking that the csv data parses and is the same as the original data')
 
-    # Set-up inversion object:
-    if test:
-        import sys
-        sys.path.insert(0, '../src/mtfit')
-        import inversion
-    else:
-        from mtfit import inversion
+    from mtfit import inversion
     loaded_data = inversion.parse_csv(fname)
     data_check = check_data(loaded_data, data)
-    print '\n\tLoaded data same as original data: ', data_check
+    print('\n\tLoaded data same as original data: ' + data_check)
     return data_check
 
 
@@ -79,11 +73,11 @@ def check_data(loaded_data, original_data):
     import numpy as np
     output = True
     if not isinstance(loaded_data, original_data.__class__):
-        print 'Different type: ', type(loaded_data), type(original_data)
+        print('Different type: {}, {}'.format(type(loaded_data), type(original_data)))
         return False
     if isinstance(loaded_data, list):
         if len(loaded_data) != len(original_data):
-            print 'Different size: ', len(loaded_data), len(original_data)
+            print('Different size: {}, {}'.format(len(loaded_data), len(original_data)))
             return False
         for i, l_i in enumerate(loaded_data):
             output = (output and check_data(l_i, original_data[i]))
@@ -91,7 +85,7 @@ def check_data(loaded_data, original_data):
                 return False
     elif isinstance(loaded_data, dict):
         if sorted(loaded_data.keys()) != sorted(original_data.keys()):
-            print 'Different keys: ', sorted(loaded_data.keys()), sorted(original_data.keys())
+            print('Different keys: {}, {}'.format(sorted(loaded_data.keys()), sorted(original_data.keys())))
             return False
         for key in loaded_data.keys():
             output = (output and check_data(loaded_data[key], original_data[key]))
@@ -100,11 +94,11 @@ def check_data(loaded_data, original_data):
     elif isinstance(loaded_data, np.ndarray):
         output = (output and (loaded_data == original_data).all())
         if not output:
-            print 'Different values: ', loaded_data, original_data, loaded_data == original_data
+            print('Different values: {}, {}'.format(loaded_data, original_data, loaded_data == original_data))
     else:
         output = (output and loaded_data == original_data)
         if not output:
-            print 'Different values: ', loaded_data, original_data, loaded_data == original_data
+            print('Different values: {}, {}'.format(loaded_data, original_data, loaded_data == original_data))
     return output
 
 

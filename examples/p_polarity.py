@@ -11,9 +11,9 @@ def run(test=False):
     from example_data import p_polarity_data
     data = p_polarity_data()
 
-    print "Running P Polarity example\n\n\tInput data dictionary:"
+    print("Running P Polarity example\n\n\tInput data dictionary:")
     # Print data
-    print data
+    print(data)
 
     # Set inversion parameters
     # uses an iterative random sampling approach (see :ref:`iterative-sampling-label`).
