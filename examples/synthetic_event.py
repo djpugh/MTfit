@@ -7,12 +7,7 @@ Commented example script for inversion of a synthetic event, with more in depth 
 
 def run(case='PPolarity', parallel=True, test=False):
     # Import inversion
-    try:
-        from mtfit.inversion import Inversion
-    except:
-        import sys
-        sys.path.insert(0, '../src')
-        from mtfit.inversion import Inversion
+    from mtfit.inversion import Inversion
     # Get Data
     from example_data import synthetic_event
     data = synthetic_event()

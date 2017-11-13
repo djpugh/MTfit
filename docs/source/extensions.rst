@@ -213,7 +213,7 @@ An example of these functions is taken from :download:`extensions/scatangle.py <
                     try:
                         os.remove(fname)
                     except Exception:
-                        print 'Cannot remove ',fname
+                        print('Cannot remove ',fname)
             import gc
             try:
                 os.remove('test.scatangle')
@@ -242,16 +242,16 @@ An example of these functions is taken from :download:`extensions/scatangle.py <
             import time
             t0=time.time()
             A,B=parse_scatangle('test.scatangle',bin_size=1)
-            print 'C',time.time()-t0
+            print('C',time.time()-t0)
             t0=time.time()
             _CYTHON=False
             A,B=parse_scatangle('test.scatangle',bin_size=1)
-            print 'NoC',time.time()-t0
+            print('NoC',time.time()-t0)
             _CYTHON=True
             os.remove('test.scatangle')
 
     def parser_tests(self,_parser,defaults,argparse):
-        print 'bin_scatangles --bin-scatangle and --bin-scatangle-size check'
+        print('bin_scatangles --bin-scatangle and --bin-scatangle-size check')
         options,options_map=_parser(['Test.i'],test=True)
         self.assertTrue(options['bin_scatangle']==defaults['bin_scatangle'])
         self.assertEqual(options['bin_scatangle_size'],defaults['bin_size'])
