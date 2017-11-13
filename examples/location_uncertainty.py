@@ -11,9 +11,9 @@ def run(test=False):
     from example_data import location_uncertainty_data, location_uncertainty_angles
     data = location_uncertainty_data()
 
-    print "Running Location Uncertainty example\n\n\tInput data dictionary:"
+    print("Running Location Uncertainty example\n\n\tInput data dictionary:")
     # Print data
-    print data
+    print(data)
 
     # save location_uncertainty_angles
     with open('Location_Uncertainty.scatangle', 'w') as f:

@@ -907,6 +907,8 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
     except Exception:
         pass
     # Create mdict and sdict and return
+    if (isinstance(all_stations, list) and not len(all_stations)) or (isinstance(all_stations, np.ndarray) and not np.prod(all_stations.shape)):
+        all_stations = []
     mdict = {'Events': event, 'Stations': all_stations, 'Other': other}
     sdict = {'StationDistribution': station_distribution}
     if not len(sdict['StationDistribution']):
@@ -1036,8 +1038,7 @@ def MATLAB_output(output_data, fid='mtfitOutput.mat', pool=False, version='7.3',
         # cPickle length)
         output_string += 'Using jobPool to save file to {}\n'.format(fid)
         if mdict:
-            pool.custom_task(
-                MATLABOutputTask, os.path.splitext(fid)[0]+'.mat', mdict, version)
+            pool.custom_task(MATLABOutputTask, os.path.splitext(fid)[0]+'.mat', mdict, version)
         if sdict:
             pool.custom_task(MATLABOutputTask, os.path.splitext(fid)[0]+'StationDistribution.mat', sdict, st_ver)
     else:

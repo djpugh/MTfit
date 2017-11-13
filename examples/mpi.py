@@ -16,9 +16,9 @@ def run():
         print "\n\n=============================Warning=============================\n\nMPI example cannot be run without mpi4py installed "
         return
 
-    print "Running MPI example\n\n\tInput data dictionary:"
+    print("Running MPI example\n\n\tInput data dictionary:")
     # Print data
-    print data
+    print(data)
     # Output Data
     # pickle data using cPickle
     import cPickle
