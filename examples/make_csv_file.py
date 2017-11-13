@@ -62,7 +62,7 @@ def run(test=False):
     from mtfit import inversion
     loaded_data = inversion.parse_csv(fname)
     data_check = check_data(loaded_data, data)
-    print('\n\tLoaded data same as original data: ' + data_check)
+    print('\n\tLoaded data same as original data: {}'.format(data_check))
     return data_check
 
 

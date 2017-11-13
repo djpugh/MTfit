@@ -3,7 +3,10 @@
 
 Commented example script for Double-Couple inversion
 """
-import cPickle
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 
 def run(test=False):
@@ -12,12 +15,12 @@ def run(test=False):
     from example_data import double_couple_data
     from mtfit.inversion import Inversion
     data = double_couple_data()
-    print "Running Double-Couple example\n\n\tInput data dictionary:"
+    print("Running Double-Couple example\n\n\tInput data dictionary:")
     # Print data
-    print data
-    print 'Data is pickled to Double_Couple_Example.inv'
+    print(data)
+    print('Data is pickled to Double_Couple_Example.inv')
     with open('Double_Couple_Example.inv', 'wb') as f:
-        cPickle.dump(data, f)
+        pickle.dump(data, f)
     # Set parameters
     algorithm = 'iterate'  # uses an iterative random sampling approach
     parallel = False  # Runs on a dingle thread.

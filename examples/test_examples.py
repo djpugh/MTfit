@@ -3,6 +3,7 @@ import sys
 import unittest
 import glob
 import subprocess
+import traceback
 
 
 # this needs to be run in the repository with the examples
@@ -21,6 +22,7 @@ try:
     from relative_event import run as relative_event_run
     in_repo = True
 except ImportError:
+    traceback.print_exc()
     in_repo = False
 
 
@@ -56,6 +58,7 @@ class ExamplesTestCase(unittest.TestCase):
         files += glob.glob('*.hyp')
         files += glob.glob('*.scatangle')
         files += glob.glob('*.csv')
+        files += glob.glob('*.out')
         return files
 
     def test_p_polarity(self):
