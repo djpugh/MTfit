@@ -11,7 +11,7 @@ Python and many of its modules are open source, allowing easy development and re
 
 mtfit has been used in several studies, including those reported by :ref:`Wilks et al. 2015 <Wilks-2015>`, :ref:`Greenfield and White 2015 <Greenfield-2015>`, :ref:`Mildon et al. 2015 <Watson-2015>`, and :ref:`Pugh et al. 2015 <Pugh-2016a>`.
 
-The polarity probability estimates can be calculated using the Python module :mod:`autopol` (:ref:`Pugh, 2016a <Pugh-2016a>`).
+The polarity probability estimates can be calculated using the approach described in:ref:`Pugh, 2016a <Pugh-2016a>`.
 
 .. :ref:`Pugh et al. (2015f) <Pugh-2015f>` presents a short overview of mtfit, drawn mainly from the information in this documentation. goes into more detail than the paper, 
 This manual describes how to install and run :mod:`mtfit` in chapters :latex:`\ref{setup::doc}` and :latex:`\ref{run::doc}`. 
