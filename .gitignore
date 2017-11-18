@@ -7,6 +7,7 @@ build
 *.scatangle
 *.pyd
 *.log
+*.out
 *.mat
 docs/epub/*
 docs/latex/*
