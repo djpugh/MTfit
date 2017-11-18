@@ -45,4 +45,7 @@ cp -r /mtfit ~/mtfit
 cd ~/mtfit
 pip3.6 install -r requirements.txt
 
-tox -e py27, py35, py36, examples
+tox -e py27
+tox -e py35
+tox -e py36
+tox -e examples
