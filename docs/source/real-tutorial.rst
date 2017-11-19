@@ -206,7 +206,7 @@ Krafla Event
 
      *Beachball plot of the effect of the location uncertainty on the receivers (dots, darker are higher probability locations) (Plotted using MTplot MATLAB code)*
 
-  A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using `NonLinLoc <http://alomax.free.fr/nlloc>`_ is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (From :mod:`autopol`) are used separately to invert for the source, along with including the location data. This event is shown in :ref:`Pugh et al. 2016a<Pugh-2016a>` and investigated in more detail in :ref:`Watson et al. 2015<Watson-2015>`.
+  A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using `NonLinLoc <http://alomax.free.fr/nlloc>`_ is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (calculated using the approach described in :ref:`Pugh et al. 2016a<Pugh-2016a>` and implemented in :ref:rom :mod:`autopol`) are used separately to invert for the source, along with including the location data. This event is shown in :ref:`Pugh et al. 2016a<Pugh-2016a>` and investigated in more detail in :ref:`Watson et al. 2015<Watson-2015>`.
 
 
 .. only:: latex
@@ -221,7 +221,7 @@ Krafla Event
 
      *Beachball plot of the effect of the location uncertainty on the receivers (dots, darker are higher probability locations) (Plotted using MTplot MATLAB code)*
 
-  A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using `NonLinLoc <http://alomax.free.fr/nlloc>`_ is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (From :mod:`autopol`) are used separately to invert for the source, along with including the location data (Fig. :ref:`5.4 <krafla-event-location-uncertainty>`). This event is shown in :ref:`Pugh et al. 2016a<Pugh-2016a>` and investigated in more detail in :ref:`Watson et al. 2015<Watson-2015>`.
+  A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using `NonLinLoc <http://alomax.free.fr/nlloc>`_ is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (calculated using the approach described in :ref:`Pugh et al. 2016a<Pugh-2016a>` and implemented in :ref:rom :mod:`autopol`) are used separately to invert for the source, along with including the location data (Fig. :ref:`5.4 <krafla-event-location-uncertainty>`). This event is shown in :ref:`Pugh et al. 2016a<Pugh-2016a>` and investigated in more detail in :ref:`Watson et al. 2015<Watson-2015>`.
 
 
 .. _real-p-polarity:
@@ -292,7 +292,7 @@ These inversions will take longer to run than the previous examples, due to the 
 Krafla P Polarity Probability Inversion
 -----------------------------------------
 
-There are 21 P-polarity arrivals for the synthetic event, but more observations, and a better understanding of the uncertainties on the polarities can be obtained using the automated Bayesian polarity probabilities generated using :mod:`autopol` (:ref:`Pugh et al., 2016b<Pugh-2016b>`, :ref:`Pugh, 2016a <Pugh-2016ax>`). Nevertheless, much of this example is the same as the :ref:`real-p-polarity` example.
+There are 21 P-polarity arrivals for the synthetic event, but more observations, and a better understanding of the uncertainties on the polarities can be obtained using the automated Bayesian polarity probabilities generated using the approach described in :ref:`Pugh et al., 2016b<Pugh-2016b>`, :ref:`Pugh, 2016a <Pugh-2016ax>`. Nevertheless, much of this example is the same as the :ref:`real-p-polarity` example.
 
 :download:`examples/krafla_event.py<../../examples/krafla_event.py>` contains a script for the double-couple and full moment tensor inversion of the source. It can be run as::
 

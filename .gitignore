@@ -7,6 +7,7 @@ build
 *.scatangle
 *.pyd
 *.log
+*.out
 *.mat
 docs/epub/*
 docs/latex/*
@@ -24,3 +25,8 @@ env/*
 .venv/*
 \.venv/
 .vagrant/*
+src/mtfit/algorithms/cmarkov_chain_monte_carlo\.c
+
+src/mtfit/convert/cmoment_tensor_conversion\.c
+
+src/mtfit/extensions/cscatangle\.c
