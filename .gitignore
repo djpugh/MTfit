@@ -25,3 +25,8 @@ env/*
 .venv/*
 \.venv/
 .vagrant/*
+src/mtfit/algorithms/cmarkov_chain_monte_carlo\.c
+
+src/mtfit/convert/cmoment_tensor_conversion\.c
+
+src/mtfit/extensions/cscatangle\.c
