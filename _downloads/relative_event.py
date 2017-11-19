@@ -7,12 +7,7 @@ Commented example script for inversion of a pair of colocated synthetic events i
 
 def run(parallel=True, test=False):
     # Import inversion
-    try:
-        from mtfit.inversion import Inversion
-    except:
-        import sys
-        sys.path.insert(0, '../src')
-        from mtfit.inversion import Inversion
+    from mtfit.inversion import Inversion
     # Get Data
     from example_data import relative_data
     data = relative_data()

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                0+untagged.15.g53a39ba
+                1.0.0
               </div>
             
           
@@ -128,6 +128,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
             
@@ -209,6 +210,7 @@
 <span class="c1"># Applications for commercial use should be made to Schlumberger or the University of Cambridge.</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 
 
@@ -221,6 +223,10 @@
 <span class="kn">from</span> <span class="nn">.utilities.file_io</span> <span class="k">import</span> <span class="n">convert_keys_to_unicode</span>
 <span class="kn">from</span> <span class="nn">.utilities.file_io</span> <span class="k">import</span> <span class="n">unique_columns</span>
 <span class="kn">from</span> <span class="nn">.convert</span> <span class="k">import</span> <span class="n">output_convert</span>
+
+<span class="c1"># Because long doesn&#39;t exist in python 3 our isinstance tests fail</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">long</span> <span class="o">=</span> <span class="nb">int</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sample&#39;</span><span class="p">,</span> <span class="s1">&#39;FileSample&#39;</span><span class="p">,</span> <span class="s1">&#39;ln_bayesian_evidence&#39;</span><span class="p">,</span> <span class="s1">&#39;_convert&#39;</span><span class="p">,</span> <span class="s1">&#39;_6sphere_prior&#39;</span><span class="p">]</span>
@@ -417,7 +423,7 @@
                     <span class="n">output_string</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
                     <span class="n">output</span><span class="p">[</span><span class="s1">&#39;dkl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dkl_estimate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ln_pdf</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
                     <span class="n">output_string</span> <span class="o">+=</span> <span class="s1">&#39;PDF Kullback-Leibler Divergence Estimate (Dkl): &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;dkl&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ln_pdf&#39;</span><span class="p">],</span> <span class="n">LnPDF</span><span class="p">):</span>
                 <span class="n">output</span><span class="p">[</span><span class="s1">&#39;ln_pdf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;ln_pdf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">_ln_pdf</span>
@@ -468,14 +474,14 @@
             <span class="kn">from</span> <span class="nn">hdf5storage</span> <span class="k">import</span> <span class="n">loadmat</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span> <span class="o">=</span> <span class="n">savemat</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">loadmat</span> <span class="o">=</span> <span class="n">loadmat</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;hdf5storage module missing - required for FileSample sample type&#39;</span><span class="p">)</span>
         <span class="c1"># Set default filename</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;mtfit_run&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fname</span> <span class="o">=</span> <span class="n">fname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.mat&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;_in_progress.mat&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">non_zero_samples</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pdf</span> <span class="o">=</span> <span class="n">LnPDF</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">moment_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[]])</span>
@@ -486,8 +492,8 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">non_zero_samples</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;non_zero_samples&#39;</span><span class="p">]</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">moment_tensors</span><span class="p">,</span> <span class="n">ln_pdf</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">extensions_scale_factor</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -535,18 +541,18 @@
         <span class="k">if</span> <span class="n">moment_tensors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">moment_tensors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Check there are samples</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ln_pdf</span><span class="o">.</span><span class="n">nonzero</span><span class="p">())</span> <span class="o">!=</span> <span class="n">moment_tensors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Moment Tensor shape[2] and ln_pdf shape[2] must be the same&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;MTSpace_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">):</span> <span class="n">moment_tensors</span><span class="p">},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;MTSpace_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">):</span> <span class="n">moment_tensors</span><span class="p">},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
                 <span class="c1"># dict with p mu and s</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;scale_factor_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">):</span> <span class="n">convert_keys_to_unicode</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">))},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;scale_factor_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">):</span> <span class="n">convert_keys_to_unicode</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">))},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">extensions_scale_factor</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">extensions_scale_factor</span><span class="p">):</span>
                 <span class="c1"># dict with p mu and s</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;extensions_scale_factor_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">):</span> <span class="n">extensions_scale_factor</span><span class="p">},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;LnPDF_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">):</span> <span class="n">ln_pdf</span><span class="p">[:,</span> <span class="n">ln_pdf</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()]},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;extensions_scale_factor_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">):</span> <span class="n">extensions_scale_factor</span><span class="p">},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;LnPDF_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">):</span> <span class="n">ln_pdf</span><span class="p">[:,</span> <span class="n">ln_pdf</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()]},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">non_zero_samples</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ln_pdf</span><span class="o">.</span><span class="n">nonzero</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;non_zero_samples&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_zero_samples</span><span class="p">},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">savemat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">},</span> <span class="n">appendmat</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">,</span> <span class="n">store_python_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_safe</span><span class="p">:</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="n">old_fname</span><span class="p">)</span>
@@ -585,7 +591,7 @@
         <span class="n">output</span><span class="p">,</span> <span class="n">output_string</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">FileSample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">output_string</span>
 
@@ -667,7 +673,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+      Last updated on Nov 19, 2017 (version 1.0.0).
 
     </p>
   </div>
@@ -689,7 +695,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0+untagged.15.g53a39ba',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

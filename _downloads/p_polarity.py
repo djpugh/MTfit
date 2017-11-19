@@ -11,9 +11,9 @@ def run(test=False):
     from example_data import p_polarity_data
     data = p_polarity_data()
 
-    print "Running P Polarity example\n\n\tInput data dictionary:"
+    print("Running P Polarity example\n\n\tInput data dictionary:")
     # Print data
-    print data
+    print(data)
 
     # Set inversion parameters
     # uses an iterative random sampling approach (see :ref:`iterative-sampling-label`).
@@ -31,12 +31,7 @@ def run(test=False):
         max_samples = 1000
 
     # Set-up inversion object:
-    if test:
-        import sys
-        sys.path.insert(0, '../')
-        from mtfit.inversion import Inversion
-    else:
-        from mtfit.inversion import Inversion
+    from mtfit.inversion import Inversion
     # Inversion
     # Create the inversion object with the set parameters..
     inversion_object = Inversion(data, algorithm=algorithm, parallel=parallel,

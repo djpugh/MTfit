@@ -8,7 +8,7 @@ python make_csv_file.py
 mtfit --version
 
 @echo "Running mtfit from command line:\n"
-@echo "mtfit --data_file=csv_example*.inv --algorithm=iterate --max_samples=100000 -b  --inversionoptions=PPolarity"
+@echo "mtfit --data_file=csv_example*.csv --algorithm=iterate --max_samples=100000 -b  --inversionoptions=PPolarity"
 :: Run mtfit from the command line. Options are:
 ::    --data_file=csv_example*.inv - use the data files matching csv_example*.inv 
 ::    --algorithm=iterate - use the iterative algorithm

@@ -11,9 +11,9 @@ def run(test=False):
     from example_data import location_uncertainty_data, location_uncertainty_angles
     data = location_uncertainty_data()
 
-    print "Running Location Uncertainty example\n\n\tInput data dictionary:"
+    print("Running Location Uncertainty example\n\n\tInput data dictionary:")
     # Print data
-    print data
+    print(data)
 
     # save location_uncertainty_angles
     with open('Location_Uncertainty.scatangle', 'w') as f:
@@ -31,12 +31,7 @@ def run(test=False):
         max_time = 10
         phy_mem = 0.01
     # Set-up inversion object:
-    if test:
-        import sys
-        sys.path.insert(0, '../src')
-        from mtfit.inversion import Inversion
-    else:
-        from mtfit.inversion import Inversion
+    from mtfit.inversion import Inversion
     # Inversion
     # Location uncertainty path
     location_pdf_file_path = 'Location_Uncertainty.scatangle'

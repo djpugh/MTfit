@@ -13,18 +13,21 @@ def run():
     try:
         import mpi4py
     except Exception:
-        print "\n\n=============================Warning=============================\n\nMPI example cannot be run without mpi4py installed "
+        print("\n\n=============================Warning=============================\n\nMPI example cannot be run without mpi4py installed ")
         return
 
-    print "Running MPI example\n\n\tInput data dictionary:"
+    print("Running MPI example\n\n\tInput data dictionary:")
     # Print data
-    print data
+    print(data)
     # Output Data
     # pickle data using cPickle
-    import cPickle
+    try:
+        import cPickle as pickle
+    except ImportError:
+        import pickle
     # data saved to MPI_Example.inv using cPickle
     with open('MPI_Example.inv', 'wb') as f:
-        cPickle.dump(f, data)
+        pickle.dump(f, data)
     # Inversion
     # Use subprocess to call mtfit
     import subprocess

@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0+untagged.15.g53a39ba
+                1.0.0
               </div>
             
           
@@ -112,6 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">15. References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../glossary.html">16. Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../source.html">17. Source Code</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
             
@@ -201,15 +202,11 @@
 <span class="kn">import</span> <span class="nn">traceback</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">cPickle</span>
-
-
-<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">ceil</span>
-
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">cPickle</span> <span class="k">as</span> <span class="nn">pickle</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">ceil</span>
 
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -341,8 +338,11 @@
         <span class="k">global</span> <span class="n">_DEBUG</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">_VERBOSITY</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="kn">import</span> <span class="nn">memory_profiler</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Memory Usage - Initial: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">memory_profiler</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()))</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">import</span> <span class="nn">memory_profiler</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Memory Usage - Initial: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">memory_profiler</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()))</span>
+                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                    <span class="n">memory_profiler</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_samples</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mt</span><span class="p">):</span>
                 <span class="n">_return</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># set _return flag to False before starting</span>
                 <span class="k">if</span> <span class="n">cprobability</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_CYTHON_TESTS</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_COMBINED_TESTS</span><span class="p">:</span>
@@ -544,9 +544,8 @@
                     <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">location_sample_multipliers</span>
                     <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
                 <span class="c1"># Print end memory usage (Verbosity &gt;=3)</span>
-                <span class="k">if</span> <span class="n">_VERBOSITY</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
-                    <span class="kn">import</span> <span class="nn">memory_profiler</span>
-                    <span class="nb">print</span> <span class="s1">&#39;end usage </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">memory_profiler</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">())</span>
+                <span class="k">if</span> <span class="n">_VERBOSITY</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">memory_profiler</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;end usage </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">memory_profiler</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()))</span>
                 <span class="c1"># Check results</span>
                 <span class="k">if</span> <span class="n">_return</span><span class="p">:</span>
                     <span class="c1"># Flag for nan errors if _DEBUG is set</span>
@@ -711,6 +710,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">location_sample_size</span> <span class="o">=</span> <span class="n">location_sample_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_marginalise_relative</span> <span class="o">=</span> <span class="n">marginalise_relative</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_combine</span> <span class="o">=</span> <span class="n">combine</span>
+        <span class="c1"># Need to implement marginalisation of scale factor for self._marginalise_relative and location_samples</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marginalise_relative</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">location_sample_size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Marginalisation of location samples on relative data not implemented yet&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">extension_data</span> <span class="o">=</span> <span class="n">extension_data</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_relative</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combine</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return_zero</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_combine</span> <span class="o">=</span> <span class="kc">True</span>
@@ -908,7 +910,7 @@
                                     <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">[:,</span> <span class="n">non_zero_indices</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
                                     <span class="n">scale_factor_uncertainty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">scale_factor_uncertainty</span><span class="p">[:,</span> <span class="n">non_zero_indices</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
                     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                        <span class="nb">print</span> <span class="s1">&#39;Relative Amplitude Ratio Exception&#39;</span><span class="p">,</span> <span class="n">e</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Relative Amplitude Ratio Exception </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
                         <span class="c1"># Exception in cprobabilities combined PDF - print error message</span>
                         <span class="k">if</span> <span class="n">_VERBOSITY</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
                             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
@@ -968,8 +970,8 @@
                                                 <span class="n">extension_scale_uncertainty</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">extension_scale_uncertainty</span><span class="p">[</span><span class="n">key</span><span class="p">][:,</span> <span class="n">non_zero_indices</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
                                 <span class="k">else</span><span class="p">:</span>
                                     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Extension </span><span class="si">{}</span><span class="s1"> function not found.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-                            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                                <span class="nb">print</span> <span class="s1">&#39;Exception for relative extension: </span><span class="si">{}</span><span class="s1"> - </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exception for relative extension: </span><span class="si">{}</span><span class="s1"> - </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
 
         <span class="c1"># Delete attributes if not reusing and force garbage collection</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reuse</span><span class="p">:</span>
@@ -998,22 +1000,26 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">extension_scale</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                     <span class="n">extension_scale</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span> <span class="n">extension_scale</span><span class="p">[</span><span class="n">key</span><span class="p">][:,</span> <span class="n">i</span><span class="p">],</span> <span class="s1">&#39;ln_p&#39;</span><span class="p">:</span> <span class="n">ln_p_total</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="n">extension_scale_uncertainty</span><span class="p">[</span><span class="n">key</span><span class="p">][:,</span> <span class="n">i</span><span class="p">]}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">extension_scale</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">extension_scale</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">p_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_p_total</span><span class="o">+</span><span class="n">ln_scale</span><span class="p">)</span>
             <span class="c1"># Marginalise</span>
             <span class="n">p_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p_total</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
             <span class="n">ln_p_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p_total</span><span class="p">)</span><span class="o">-</span><span class="n">ln_scale</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_relative</span><span class="p">:</span>
-            <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">scale_factor</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-            <span class="n">scale_factor_uncertainty</span> <span class="o">=</span> <span class="n">scale_factor_uncertainty</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_relative</span><span class="p">:</span>  <span class="c1"># marginalise_relative is true</span>
+            <span class="k">if</span> <span class="n">scale_factor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">scale_factor</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">scale_factor_uncertainty</span> <span class="o">=</span> <span class="n">scale_factor_uncertainty</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">scale_factor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">scale_factor</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">scale_factor_uncertainty</span> <span class="o">=</span> <span class="n">scale_factor_uncertainty</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span> <span class="n">scale_factor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="n">scale_factor_uncertainty</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">extension_scale</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                     <span class="n">extension_scale</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">extension_scale</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                     <span class="n">extension_scale_uncertainty</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">extension_scale_uncertainty</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                     <span class="n">extension_scale</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span> <span class="n">extension_scale</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="s1">&#39;ln_p&#39;</span><span class="p">:</span> <span class="n">ln_p_total</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="n">extension_scale_uncertainty</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">extension_scale</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">extension_scale</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">scale_factor</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1192,7 +1198,7 @@
         <span class="c1"># Output data</span>
         <span class="n">output_data</span><span class="p">,</span> <span class="n">output_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normalise</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Print output string</span>
-        <span class="nb">print</span> <span class="n">output_string</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">output_string</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;algorithm_output_data&#39;</span><span class="p">:</span> <span class="n">output_data</span><span class="p">,</span> <span class="s1">&#39;event_data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_data</span><span class="p">,</span> <span class="s1">&#39;location_samples&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">location_samples</span><span class="p">,</span>
                 <span class="s1">&#39;location_sample_multipliers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">location_sample_multipliers</span><span class="p">}</span>
 
@@ -1235,7 +1241,7 @@
 <span class="sd">            resultCode: 10 if successful.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span> <span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">Combining </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uid</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">Combining </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uid</span><span class="p">))</span>
         <span class="c1"># Get hyp, mt and sf files</span>
         <span class="n">hypfiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uid</span><span class="o">+</span><span class="s1">&#39;.*.hyp&#39;</span><span class="p">)</span>
         <span class="n">fids</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uid</span><span class="o">+</span><span class="s1">&#39;.*.mt&#39;</span><span class="p">)</span>
@@ -1465,7 +1471,7 @@
 <span class="sd">            parallel (bool):[True] Run the inversion in parallel using multiprocessing</span>
 <span class="sd">            n (int):[0] Number of workers, default is to use as many as returned by multiprocessing.cpu_count</span>
 <span class="sd">            phy_mem (int):[8] Estimated physical memory to use (used for determining array sizes, it is likely that more memory will be used, and if so no errors are forced).</span>
-<span class="sd">                 *On python versions &lt;2.7.4 there is a bug (http://bugs.python.org/issue13555) with cPickle that limits the total number of samples when running in parallel, so large (&gt;20GB) phy_mem allocations per process are ignored.*</span>
+<span class="sd">                 *On python versions &lt;2.7.4 there is a bug (http://bugs.python.org/issue13555) with pickle that limits the total number of samples when running in parallel, so large (&gt;20GB) phy_mem allocations per process are ignored.*</span>
 <span class="sd">            dc (bool):[False] Boolean flag as to run inversion constrained to double-couple or allowed to explore the full moment tensor space.</span>
 
 <span class="sd">        Keyword Arguments:</span>
@@ -1511,7 +1517,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">data_file</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">data_file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">pass</span>
         <span class="c1"># Set MPI parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mpi&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -1521,7 +1527,7 @@
                 <span class="kn">from</span> <span class="nn">mpi4py</span> <span class="k">import</span> <span class="n">MPI</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Running mtfit using MPI&#39;</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># Set DC parameters</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dc</span><span class="p">:</span>
@@ -1582,7 +1588,7 @@
             <span class="n">_VERBOSITY</span> <span class="o">=</span> <span class="mi">4</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="c1"># Handle location PDFs</span>
         <span class="k">if</span> <span class="n">location_pdf_file_path</span><span class="p">:</span>
@@ -1674,7 +1680,7 @@
         <span class="sd">&quot;&quot;&quot;MPI safe print (rank 0 only unless forced)&quot;&quot;&quot;</span>
         <span class="c1"># If MPI, only print if rank 0</span>
         <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force</span><span class="p">):</span>
-            <span class="nb">print</span> <span class="n">string</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1689,11 +1695,11 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                     <span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="c1"># Parser plug-in extensions.</span>
                 <span class="n">parser_names</span><span class="p">,</span> <span class="n">parsers</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="s1">&#39;mtfit.parsers&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;.csv&#39;</span><span class="p">:</span> <span class="n">parse_csv</span><span class="p">,</span> <span class="s1">&#39;.hyp&#39;</span><span class="p">:</span> <span class="n">parse_hyp</span><span class="p">})</span>
@@ -1702,24 +1708,24 @@
                         <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
                         <span class="n">data</span> <span class="o">=</span> <span class="n">parsers</span><span class="p">[</span><span class="n">ext</span><span class="p">](</span><span class="n">filename</span><span class="p">)</span>
                     <span class="c1"># Else try all the parsers</span>
-                    <span class="k">except</span><span class="p">:</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="k">for</span> <span class="n">parser</span> <span class="ow">in</span> <span class="n">parsers</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
                             <span class="k">try</span><span class="p">:</span>
                                 <span class="n">data</span> <span class="o">=</span> <span class="n">parser</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-                            <span class="k">except</span><span class="p">:</span>
+                            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                                 <span class="k">pass</span>
                 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="c1"># If errors then try to parse csv and then parse hyp</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">data</span> <span class="o">=</span> <span class="n">parse_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-                    <span class="k">except</span><span class="p">:</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="k">try</span><span class="p">:</span>
                             <span class="n">data</span> <span class="o">=</span> <span class="n">parse_hyp</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-                        <span class="k">except</span><span class="p">:</span>
-                            <span class="nb">print</span> <span class="s1">&#39;Parsers available are: &#39;</span><span class="p">,</span> <span class="n">parsers</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parsers available are: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">parsers</span><span class="o">.</span><span class="n">keys</span><span class="p">()))))</span>
                             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-                    <span class="nb">print</span> <span class="s2">&quot;No data available using available parsers:</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parser_names</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No data available using available parsers:</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parser_names</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">data</span>
 
     <span class="k">def</span> <span class="nf">_read_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
@@ -1743,14 +1749,14 @@
                 <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
                 <span class="k">return</span> <span class="n">parsers</span><span class="p">[</span><span class="n">ext</span><span class="p">](</span><span class="n">filename</span><span class="p">)</span>
             <span class="c1"># Else try with all the parsers</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">parser</span> <span class="ow">in</span> <span class="n">parsers</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="k">return</span> <span class="n">parser</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-                    <span class="k">except</span><span class="p">:</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="k">pass</span>
                 <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parser_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># If not built correctly, can load scatangle file</span>
                 <span class="k">return</span> <span class="n">parse_scatangle</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
@@ -1854,7 +1860,7 @@
         <span class="c1"># Get number of location PDF samples</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">number_location_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">location_sample_multipliers</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">number_location_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_location_samples</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">number_location_samples</span><span class="p">:</span>
             <span class="n">number_location_samples</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1875,8 +1881,8 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span><span class="p">:</span>
             <span class="n">number_samples</span> <span class="o">/=</span> <span class="mi">2</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="ow">and</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">number_samples</span><span class="o">*</span><span class="mi">6</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">number_events</span><span class="o">*</span><span class="mi">8</span><span class="o">*</span><span class="mi">8</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">30</span><span class="p">):</span>
-            <span class="c1"># Check for cPickle bug #13555 http://bugs.python.org/issue13555 which seems linked to multiprocessing issue #17560 http://bugs.python.org/issue17560</span>
-            <span class="c1"># cannot pickle files longer than 2**31 (32 bit encoding used for cPickle length)</span>
+            <span class="c1"># Check for pickle bug #13555 http://bugs.python.org/issue13555 which seems linked to multiprocessing issue #17560 http://bugs.python.org/issue17560</span>
+            <span class="c1"># cannot pickle files longer than 2**31 (32 bit encoding used for pickle length)</span>
             <span class="c1"># Possible fix https://stackoverflow.com/questions/15118344/system-error-while-running-subprocesses-using-multiprocessing</span>
             <span class="n">number_samples</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([((</span><span class="mi">2</span><span class="o">**</span><span class="mi">30</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="mi">8</span><span class="o">*</span><span class="mi">8</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">number_events</span><span class="p">)),</span> <span class="n">number_samples</span><span class="p">])</span>
         <span class="c1"># Bodge to prevent memory usage above limit</span>
@@ -1893,7 +1899,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">number_samples</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;number_samples&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_worker_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -1945,7 +1951,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="kn">import</span> <span class="nn">psutil</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_floatmem</span> <span class="o">=</span> <span class="n">mem_scale</span><span class="o">*</span><span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span><span class="o">.</span><span class="n">available</span><span class="o">/</span><span class="n">n</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">phy_mem</span> <span class="o">=</span> <span class="mi">8</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_floatmem</span> <span class="o">=</span> <span class="n">mem_scale</span><span class="o">*</span><span class="n">phy_mem</span><span class="o">*</span><span class="p">(</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mf">1024.</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1967,7 +1973,7 @@
         <span class="sd">&quot;&quot;&quot;Closes pool and exits, allowing object to be deleted.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_close_pool</span><span class="p">()</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
         <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
@@ -1981,7 +1987,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
                 <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
         <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
@@ -2007,7 +2013,7 @@
         <span class="n">old_results_format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_format</span>
         <span class="c1"># Check kwargs for update format</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_format</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;results_format&#39;</span><span class="p">,</span> <span class="n">old_results_format</span><span class="p">)</span>
-        <span class="nb">print</span> <span class="s1">&#39;---------Combining MPI Output-----------&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;---------Combining MPI Output-----------&#39;</span><span class="p">)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="c1"># Loop over fids</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mpi_fid</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fids</span><span class="p">):</span>
@@ -2018,14 +2024,14 @@
                 <span class="c1"># No files read</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">output</span> <span class="o">=</span> <span class="n">read_binary_output</span><span class="p">(</span><span class="n">mt_fid</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">binary_file_version</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="k">continue</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">binary_output</span> <span class="o">=</span> <span class="n">read_binary_output</span><span class="p">(</span><span class="n">mt_fid</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="k">continue</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">binary_output</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">binary_output</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">binary_output</span> <span class="o">=</span> <span class="n">binary_output</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -2056,14 +2062,14 @@
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">output</span> <span class="o">=</span> <span class="n">read_sf_output</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
-                    <span class="k">except</span><span class="p">:</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="k">continue</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">scale_factors_output</span> <span class="o">=</span> <span class="n">read_sf_output</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
-                    <span class="k">except</span><span class="p">:</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="k">continue</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale_factors_output</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">scale_factors_output</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="n">scale_factors_output</span> <span class="o">=</span> <span class="n">scale_factors_output</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -2090,7 +2096,7 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">out</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
-                    <span class="nb">print</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;total_number_samples&#39;</span><span class="p">]</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;total_number_samples&#39;</span><span class="p">])</span>
                     <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;ln_bayesian_evidence&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ln_bayesian_evidence</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;total_number_samples&#39;</span><span class="p">])</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;g&#39;</span><span class="p">])</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;g&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">0.000001</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;g&#39;</span><span class="p">]))</span> <span class="o">&lt;</span> <span class="mf">0.000001</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;d&#39;</span><span class="p">])</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;d&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">0.000001</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;d&#39;</span><span class="p">]))</span> <span class="o">&lt;</span> <span class="mf">0.000001</span><span class="p">:</span>
@@ -2098,7 +2104,7 @@
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">V</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
                         <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;dkl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dkl_estimate</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;ln_pdf&#39;</span><span class="p">],</span> <span class="n">V</span><span class="p">,</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;total_number_samples&#39;</span><span class="p">])</span>
-                    <span class="k">except</span><span class="p">:</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="k">pass</span>
                     <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;dV&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
@@ -2112,7 +2118,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">V</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
                 <span class="n">output</span><span class="p">[</span><span class="s1">&#39;dkl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dkl_estimate</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ln_pdf&#39;</span><span class="p">],</span> <span class="n">V</span><span class="p">,</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;total_number_samples&#39;</span><span class="p">])</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">pass</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fid</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
             <span class="n">fid</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fid</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fid</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
@@ -2164,7 +2170,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mpi_output</span> <span class="ow">or</span><span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comm</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">())))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mpi_output</span><span class="p">:</span>
                     <span class="n">output_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-mtfit Forward Model Output-&#39;</span><span class="p">,</span> <span class="s1">&#39;-mtfit Forward Model Output Process &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">())</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
-                <span class="nb">print</span> <span class="n">output_string</span><span class="p">,</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">output_string</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_data</span><span class="p">[</span><span class="s1">&#39;probability&#39;</span><span class="p">]))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;station_only&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
                 <span class="k">return</span>
@@ -2187,7 +2193,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">out_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">out_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Events&#39;</span><span class="p">][</span><span class="s1">&#39;Probability&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">([</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">out_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Events&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;MTSpace&#39;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">20000000</span><span class="p">:</span>
                     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;7&#39;</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">out_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># output data</span>
         <span class="n">output_data_names</span><span class="p">,</span> <span class="n">output_data_formats</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="s1">&#39;mtfit.output_formats&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;matlab&#39;</span><span class="p">:</span> <span class="n">MATLAB_output</span><span class="p">,</span> <span class="s1">&#39;pickle&#39;</span><span class="p">:</span> <span class="n">pickle_output</span><span class="p">,</span> <span class="s1">&#39;hyp&#39;</span><span class="p">:</span> <span class="n">hyp_output</span><span class="p">})</span>
@@ -2287,7 +2293,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">])</span><span class="o">+</span><span class="n">source</span><span class="o">+</span><span class="s1">&#39;.mat&#39;</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">+</span><span class="s1">&#39;mtfitOutput&#39;</span><span class="o">+</span><span class="n">source</span><span class="o">+</span><span class="s1">&#39;.mat&#39;</span>
         <span class="c1"># Add rank to MPI file output (so they don&#39;t overwrite)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="ow">and</span> <span class="n">single</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mpi_output</span><span class="p">:</span>
@@ -2356,12 +2362,12 @@
                 <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Recover option enabled and in progress file exists, returning to this point&#39;</span><span class="p">)</span>  <span class="c1"># How to handle mcmc?</span>
                 <span class="k">return</span> <span class="kc">True</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recover</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fid</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.mat&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;_in_progress.mat&#39;</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="k">return</span> <span class="kc">False</span>
 
@@ -2383,7 +2389,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Event &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">--------</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;UID: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;No UID</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="c1"># Do recovery test</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recover_test</span><span class="p">(</span><span class="n">fid</span><span class="p">):</span>
@@ -2416,7 +2422,7 @@
                                     <span class="s1">&#39; accepted samples: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;algorithm_output_data&#39;</span><span class="p">][</span><span class="s1">&#39;accepted&#39;</span><span class="p">])</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;algorithm_output_data&#39;</span><span class="p">][</span><span class="s1">&#39;total_number_samples&#39;</span><span class="p">]))</span><span class="o">*</span><span class="mi">100</span><span class="p">)[:</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;%&#39;</span><span class="p">)</span>
                         <span class="k">try</span><span class="p">:</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;event_data&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;fid&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;algorithm_output_data&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;location_samples&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;location_sample_multipliers&#39;</span><span class="p">],</span> <span class="n">output_format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">)</span>
-                        <span class="k">except</span><span class="p">:</span>
+                        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Output Error&#39;</span><span class="p">)</span>
                             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
@@ -2440,7 +2446,8 @@
                     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Output Error&#39;</span><span class="p">)</span>
                         <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
-
+            <span class="k">except</span> <span class="ne">NotImplementedError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
         <span class="c1"># Get pool results</span>
@@ -2455,7 +2462,7 @@
                             <span class="s1">&#39; accepted samples: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">accepted</span><span class="p">)[:</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;%&#39;</span><span class="p">)</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;event_data&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;fid&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;algorithm_output_data&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;location_samples&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;location_sample_multipliers&#39;</span><span class="p">],</span> <span class="n">output_format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Output Error&#39;</span><span class="p">)</span>
                     <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
@@ -2523,6 +2530,8 @@
                     <span class="n">relative_amplitude</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">relative_amplitude_i</span><span class="p">)</span>
                     <span class="n">percentage_error_relative_amplitude</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">percentage_error_relative_amplitude_i</span><span class="p">)</span>
                     <span class="n">relative_amplitude_stations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">relative_amplitude_stations_i</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">NotImplementedError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Joint Inversion: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_events</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Events</span><span class="se">\n</span><span class="s1">--------</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -2551,7 +2560,9 @@
                 <span class="k">try</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;event_data&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;fid&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;algorithm_output_data&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;location_samples&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;location_sample_multipliers&#39;</span><span class="p">],</span>
                                 <span class="n">output_format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">NotImplementedError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">e</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Output Error&#39;</span><span class="p">)</span>
                     <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
@@ -2567,10 +2578,13 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;algorithm_output_data&#39;</span><span class="p">],</span> <span class="n">a_polarity</span><span class="o">=</span><span class="n">a_polarity</span><span class="p">,</span> <span class="n">error_polarity</span><span class="o">=</span><span class="n">error_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="o">=</span><span class="n">a1_amplitude_ratio</span><span class="p">,</span>
                                 <span class="n">a2_amplitude_ratio</span><span class="o">=</span><span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">amplitude_ratio</span><span class="o">=</span><span class="n">amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error1_amplitude_ratio</span><span class="o">=</span><span class="n">percentage_error1_amplitude_ratio</span><span class="p">,</span>
                                 <span class="n">percentage_error2_amplitude_ratio</span><span class="o">=</span><span class="n">percentage_error2_amplitude_ratio</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">NotImplementedError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">e</span>
                 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Output Error&#39;</span><span class="p">)</span>
                     <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
-
+        <span class="k">except</span> <span class="ne">NotImplementedError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
@@ -2595,7 +2609,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Event &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">--------</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;UID: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;No UID</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="c1"># Recover test</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recover_test</span><span class="p">(</span><span class="n">fid</span><span class="p">):</span>
@@ -2627,7 +2641,7 @@
                 <span class="c1"># Run ForwardTasks</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">:</span>
                     <span class="c1"># initialise all tasks</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">number_workers</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">number_workers</span><span class="p">):</span>
                         <span class="n">MTs</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_job_result</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">task</span><span class="p">(</span><span class="n">MTs</span><span class="p">,</span> <span class="n">a_polarity</span><span class="p">,</span> <span class="n">error_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error1_amplitude_ratio</span><span class="p">,</span>
                                        <span class="n">percentage_error2_amplitude_ratio</span><span class="p">,</span> <span class="n">a_polarity_probability</span><span class="p">,</span> <span class="n">polarity_probability</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">location_sample_multipliers</span><span class="p">,</span>
@@ -2671,7 +2685,7 @@
                             <span class="n">_start_time</span> <span class="o">=</span> <span class="kc">False</span>
                             <span class="k">try</span><span class="p">:</span>
                                 <span class="n">_start_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">start_time</span>
-                            <span class="k">except</span><span class="p">:</span>
+                            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                                 <span class="k">pass</span>
                             <span class="n">MTs</span><span class="p">,</span> <span class="n">ignored_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_job_result</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Get new random MTs</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">iteration</span> <span class="o">=</span> <span class="n">_iteration</span>
@@ -2734,7 +2748,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Error with fids &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">fids</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; type:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">fids</span><span class="p">)))</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fid</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                            <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;fids&#39;</span><span class="p">:</span> <span class="n">fids</span><span class="p">,</span> <span class="s1">&#39;event_data&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">},</span> <span class="n">f</span><span class="p">)</span>
+                            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;fids&#39;</span><span class="p">:</span> <span class="n">fids</span><span class="p">,</span> <span class="s1">&#39;event_data&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">},</span> <span class="n">f</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
@@ -2820,7 +2834,7 @@
             <span class="c1"># Run forward model using MultipleEventsForwardTask</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">:</span>
                 <span class="c1"># initialise all tasks</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">number_workers</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">number_workers</span><span class="p">):</span>
                     <span class="n">MTs</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_job_result</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">custom_task</span><span class="p">(</span><span class="n">MultipleEventsForwardTask</span><span class="p">,</span> <span class="n">MTs</span><span class="p">,</span> <span class="n">a_polarity</span><span class="p">,</span> <span class="n">error_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">amplitude_ratio</span><span class="p">,</span>
                                           <span class="n">percentage_error1_amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error2_amplitude_ratio</span><span class="p">,</span> <span class="n">a_polarity_probability</span><span class="p">,</span> <span class="n">polarity_probability</span><span class="p">,</span> <span class="n">a_relative_amplitude</span><span class="p">,</span>
@@ -2862,7 +2876,7 @@
                         <span class="n">_start_time</span> <span class="o">=</span> <span class="kc">False</span>
                         <span class="k">try</span><span class="p">:</span>
                             <span class="n">_start_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">start_time</span>
-                        <span class="k">except</span><span class="p">:</span>
+                        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                             <span class="k">pass</span>
                         <span class="c1"># Get new random MTs</span>
                         <span class="n">MTs</span><span class="p">,</span> <span class="n">ignored_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_job_result</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -2906,7 +2920,7 @@
             <span class="c1"># Output results</span>
             <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">mpi_output</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mpi_output</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MPI</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="nb">print</span> <span class="n">fid</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">a_polarity</span><span class="o">=</span><span class="n">a_polarity</span><span class="p">,</span> <span class="n">error_polarity</span><span class="o">=</span><span class="n">error_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="o">=</span><span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="o">=</span><span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">amplitude_ratio</span><span class="o">=</span><span class="n">amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error1_amplitude_ratio</span><span class="o">=</span><span class="n">percentage_error1_amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error2_amplitude_ratio</span><span class="o">=</span><span class="n">percentage_error2_amplitude_ratio</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="n">output_format</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Output Error&#39;</span><span class="p">)</span>
@@ -2923,7 +2937,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="s1">&#39;Error with fids &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">fids</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; type:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">fids</span><span class="p">)))</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fid</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                        <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;fids&#39;</span><span class="p">:</span> <span class="n">fids</span><span class="p">,</span> <span class="s1">&#39;event_data&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">},</span> <span class="n">f</span><span class="p">)</span>
+                        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;fids&#39;</span><span class="p">:</span> <span class="n">fids</span><span class="p">,</span> <span class="s1">&#39;event_data&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">},</span> <span class="n">f</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
@@ -2988,11 +3002,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Check inverion options</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inversion_options</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
                     <span class="c1"># Remove data_type not in inversion options</span>
                     <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inversion_options</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">]:</span>
                         <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No data remaining for the selected inversion options:</span><span class="se">\n\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inversion_options</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">data</span>
@@ -3027,13 +3041,14 @@
     <span class="k">if</span> <span class="n">location_samples</span><span class="p">:</span>
         <span class="n">original_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">location_samples</span><span class="p">]</span>
     <span class="c1"># Get polarity data</span>
-    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;polarity&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;prob&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()]:</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;polarity&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;prob&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()]):</span>
         <span class="n">mode</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;polarity&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">location_samples</span><span class="p">:</span>
             <span class="n">location_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">original_samples</span><span class="p">]</span>
-            <span class="n">selected_stations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">]))</span>
+            <span class="n">selected_stations</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])))</span>
+            <span class="n">n_stations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_stations</span><span class="p">)</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">selected_stations</span><span class="p">]</span>
-            <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_stations</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">location_samples</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
+            <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_stations</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">location_samples</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">location_samples</span><span class="p">):</span>
                 <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="o">*</span><span class="n">indices</span><span class="p">)(</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span>
                 <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">][</span><span class="n">indices</span><span class="p">]</span>
@@ -3052,7 +3067,8 @@
                 <span class="n">_incorrect_polarity_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Otherwise get angles and measured directly</span>
-            <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+            <span class="n">n_stations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_stations</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
             <span class="n">angles</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">station_angles</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">],</span> <span class="n">mode</span><span class="p">)</span>
             <span class="n">measured</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Measured&#39;</span><span class="p">]</span>
             <span class="n">_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Error&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -3073,6 +3089,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">measured</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">_error</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_incorrect_polarity_prob</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_stations</span><span class="p">:</span>
+                <span class="c1"># Make sure this is the same length as the data as we are appending it</span>
+                <span class="n">_incorrect_polarity_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">_incorrect_polarity_prob</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_stations</span><span class="p">))</span>
             <span class="n">incorrect_polarity_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">incorrect_polarity_prob</span><span class="p">,</span> <span class="n">_incorrect_polarity_prob</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="c1"># Set incorrect polarity prob if default</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">incorrect_polarity_prob</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -3103,12 +3122,12 @@
     <span class="k">if</span> <span class="n">location_samples</span><span class="p">:</span>
         <span class="n">original_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">location_samples</span><span class="p">]</span>
     <span class="c1"># Loop over polarity prob data</span>
-    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;polarity&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;prob&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()]:</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;polarity&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;prob&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()]):</span>
         <span class="n">mode</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;polarity&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="c1"># If location samples, then select stations appropriately</span>
         <span class="k">if</span> <span class="n">location_samples</span><span class="p">:</span>
             <span class="n">location_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">original_samples</span><span class="p">]</span>
-            <span class="n">selected_stations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">]))</span>
+            <span class="n">selected_stations</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])))</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">selected_stations</span><span class="p">]</span>
             <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_stations</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">location_samples</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">location_samples</span><span class="p">):</span>
@@ -3175,7 +3194,7 @@
     <span class="k">if</span> <span class="n">location_samples</span><span class="p">:</span>
         <span class="n">original_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">location_samples</span><span class="p">]</span>
     <span class="c1"># Loop over data and get amplitude ratio data</span>
-    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;amplituderatio&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;amplitude_ratio&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()]:</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;amplituderatio&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;amplitude_ratio&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()]):</span>
         <span class="n">phase</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;amplituderatio&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">phase</span> <span class="o">=</span> <span class="n">phase</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;rms&#39;</span><span class="p">)</span>
         <span class="n">phase</span> <span class="o">=</span> <span class="n">phase</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
@@ -3183,7 +3202,7 @@
         <span class="c1"># If location samples, get intersection stations and data</span>
         <span class="k">if</span> <span class="n">location_samples</span><span class="p">:</span>
             <span class="n">location_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">original_samples</span><span class="p">]</span>
-            <span class="n">selected_stations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">]))</span>
+            <span class="n">selected_stations</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])))</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">selected_stations</span><span class="p">]</span>
             <span class="n">angles1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_stations</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">location_samples</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
             <span class="n">angles2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_stations</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">location_samples</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
@@ -3249,7 +3268,7 @@
     <span class="k">if</span> <span class="n">location_samples</span><span class="p">:</span>
         <span class="n">original_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">location_samples</span><span class="p">]</span>
     <span class="c1"># Loop over data and get amplitude data</span>
-    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;amplitude&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;ratio&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()]:</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;amplitude&#39;</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;ratio&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">lower</span><span class="p">()]):</span>
         <span class="n">phase</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;amplitude&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">phase</span> <span class="o">=</span> <span class="n">phase</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
         <span class="n">phase</span> <span class="o">=</span> <span class="n">phase</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;rms&#39;</span><span class="p">)</span>
@@ -3257,7 +3276,7 @@
         <span class="c1"># If location samples, get intersection stations and data</span>
         <span class="k">if</span> <span class="n">location_samples</span><span class="p">:</span>
             <span class="n">location_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">original_samples</span><span class="p">]</span>
-            <span class="n">selected_stations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">]))</span>
+            <span class="n">selected_stations</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Stations&#39;</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">])))</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">location_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">selected_stations</span><span class="p">]</span>
             <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_stations</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">location_samples</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">location_samples</span><span class="p">):</span>
@@ -3383,7 +3402,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">azimuth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">stations</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">])</span>
         <span class="n">takeoff_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">stations</span><span class="p">[</span><span class="s1">&#39;TakeOffAngle&#39;</span><span class="p">])</span>
-    <span class="k">except</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="n">azimuth</span> <span class="o">=</span> <span class="n">stations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># stations is angle tuple</span>
         <span class="n">takeoff_angle</span> <span class="o">=</span> <span class="n">stations</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="c1"># Transpose to correct orientation if necessary</span>
@@ -3479,14 +3498,14 @@
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inversion</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
         <span class="c1"># Check data</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">event</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="c1"># Set algorithm</span>
         <span class="n">inversion</span><span class="o">.</span><span class="n">_set_algorithm</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">event</span> <span class="o">=</span> <span class="n">inversion</span><span class="o">.</span><span class="n">_trim_data</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="c1"># Get observed polarities/inversion_options in data</span>
         <span class="n">observed_polarity</span> <span class="o">=</span> <span class="kc">False</span>
@@ -3538,13 +3557,13 @@
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inversion</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">event</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="n">inversion</span><span class="o">.</span><span class="n">_set_algorithm</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
                 <span class="n">event</span> <span class="o">=</span> <span class="n">inversion</span><span class="o">.</span><span class="n">_trim_data</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="p">(</span><span class="n">a_polarity</span><span class="p">,</span> <span class="n">error_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error1_amplitude_ratio</span><span class="p">,</span>
          <span class="n">percentage_error2_amplitude_ratio</span><span class="p">,</span> <span class="n">a_polarity_probability</span><span class="p">,</span> <span class="n">polarity_probability</span><span class="p">,</span> <span class="n">incorrect_polarity_probability</span><span class="p">)</span> <span class="o">=</span> <span class="n">inversion</span><span class="o">.</span><span class="n">_station_angles</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
@@ -3580,14 +3599,14 @@
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inversion</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">event</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="c1"># Set algorithms</span>
         <span class="n">inversion</span><span class="o">.</span><span class="n">_set_algorithm</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">event</span> <span class="o">=</span> <span class="n">inversion</span><span class="o">.</span><span class="n">_trim_data</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="c1"># Get angles and data</span>
         <span class="p">(</span><span class="n">a_polarity</span><span class="p">,</span> <span class="n">error_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error1_amplitude_ratio</span><span class="p">,</span>
@@ -3626,14 +3645,14 @@
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inversion</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">event</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="c1"># Set algorithms</span>
         <span class="n">inversion</span><span class="o">.</span><span class="n">_set_algorithm</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">event</span> <span class="o">=</span> <span class="n">inversion</span><span class="o">.</span><span class="n">_trim_data</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="c1"># Get angles and data</span>
         <span class="p">(</span><span class="n">a_polarity</span><span class="p">,</span> <span class="n">error_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error1_amplitude_ratio</span><span class="p">,</span>
@@ -3677,14 +3696,14 @@
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inversion</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">event</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="c1"># Set algorithms</span>
         <span class="n">inversion</span><span class="o">.</span><span class="n">_set_algorithm</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
                 <span class="n">event</span> <span class="o">=</span> <span class="n">inversion</span><span class="o">.</span><span class="n">_trim_data</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;No Data&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Data&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="c1"># Get angles and data</span>
         <span class="p">(</span><span class="n">a_polarity</span><span class="p">,</span> <span class="n">error_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">amplitude_ratio</span><span class="p">,</span>
@@ -3732,7 +3751,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">mpi4py</span> <span class="k">import</span> <span class="n">MPI</span>
             <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">mpi</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="c1"># Set filepath to folder</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
@@ -3741,8 +3760,8 @@
     <span class="n">hypfiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">filepath</span><span class="o">+</span><span class="s1">&#39;*.hyp&#39;</span><span class="p">)</span>
     <span class="c1"># Get UIDs</span>
     <span class="n">UIDs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">u</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">hypfiles</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">u</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))])))</span>
-    <span class="nb">print</span> <span class="s1">&#39;---------Combining Files------------&#39;</span>
-    <span class="nb">print</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="si">{}</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">UIDs</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;---------Combining Files------------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">{}</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">UIDs</span><span class="p">)))</span>
     <span class="c1"># Run combination</span>
     <span class="c1"># Run in parallel</span>
     <span class="k">if</span> <span class="n">parallel</span><span class="p">:</span>
@@ -3793,15 +3812,15 @@
     <span class="k">if</span> <span class="n">epsilon</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">time</span>
         <span class="k">if</span> <span class="n">cprobability</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;C&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
             <span class="n">a_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">a_polarity_prob</span><span class="p">,</span> <span class="n">extension_data</span><span class="p">,</span> <span class="n">multipliers</span> <span class="o">=</span> <span class="n">cprobability</span><span class="o">.</span><span class="n">bin_angle_coefficient_samples</span><span class="p">(</span><span class="n">a_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span>
                                                                                                                                                           <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">a_polarity_prob</span><span class="p">,</span>
                                                                                                                                                           <span class="n">location_sample_multipliers</span><span class="p">,</span> <span class="n">extension_data</span><span class="p">,</span>
                                                                                                                                                           <span class="n">epsilon</span><span class="p">)</span>
-            <span class="nb">print</span> <span class="s1">&#39;Ctime = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ctime = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;Py&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Py&#39;</span><span class="p">)</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
             <span class="n">multipliers</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">no_pop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">location_sample_multipliers</span><span class="p">),),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
@@ -3825,7 +3844,7 @@
                             <span class="n">multiplier</span> <span class="o">+=</span> <span class="n">location_sample_multipliers</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
                             <span class="n">no_pop</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="n">multipliers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">multiplier</span><span class="p">)</span>
-            <span class="nb">print</span> <span class="s1">&#39;Pytime = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pytime = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">))</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a_polarity</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
                 <span class="n">a_polarity</span> <span class="o">=</span> <span class="n">a_polarity</span><span class="p">[:,</span> <span class="n">no_pop</span><span class="p">,</span> <span class="p">:]</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -3838,7 +3857,7 @@
                 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">extension_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                     <span class="k">if</span> <span class="n">k</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;a_&#39;</span> <span class="ow">or</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span> <span class="ow">and</span> <span class="n">k</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
                         <span class="n">extension_data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">extension_data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">k</span><span class="p">][:,</span> <span class="n">no_pop</span><span class="p">,</span> <span class="p">:]</span>
-        <span class="nb">print</span> <span class="s1">&#39;Epsilon = </span><span class="si">{}</span><span class="s1"> reduced </span><span class="si">{}</span><span class="s1"> samples to </span><span class="si">{}</span><span class="s1"> records.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">location_sample_multipliers</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">multipliers</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epsilon = </span><span class="si">{}</span><span class="s1"> reduced </span><span class="si">{}</span><span class="s1"> samples to </span><span class="si">{}</span><span class="s1"> records.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">location_sample_multipliers</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">multipliers</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">a_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">a_polarity_prob</span><span class="p">,</span> <span class="n">extension_data</span><span class="p">,</span> <span class="n">multipliers</span>
 </pre></div>
 
@@ -3855,7 +3874,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+      Last updated on Nov 19, 2017 (version 1.0.0).
 
     </p>
   </div>
@@ -3877,7 +3896,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0+untagged.15.g53a39ba',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

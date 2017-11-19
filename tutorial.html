@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0+untagged.15.g53a39ba
+                1.0.0
               </div>
             
           
@@ -126,6 +126,7 @@
 <li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
             
@@ -214,18 +215,15 @@
 <span id="creating-data-dictionary-label"></span><h2>3.1. Creating a Data Dictionary<a class="headerlink" href="#creating-a-data-dictionary" title="Permalink to this headline">¶</a></h2>
 <p>The input data dictionary (see <a class="reference internal" href="run.html#input-data-label"><span class="std std-ref">Input Data</span></a>) can either be pickled or not pickled. The structure is simple:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">:{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">]]),</span>
-<span class="go">                     &#39;Error&#39;:np.matrix([[0.01],[0.02],[0.4],[0.1]]),</span>
-<span class="go">                     &#39;Stations&#39;:{&#39;Name&#39;:[&#39;Station1&#39;,&#39;Station2&#39;,&#39;Station3&#39;,</span>
-<span class="go">                                        &#39;Station4&#39;],</span>
-<span class="go">                                 &#39;Azimuth&#39;:np.matrix([[248.0],[122.3],</span>
-<span class="go">                                                        [182.3],[35.2]]),</span>
-<span class="go">                                 &#39;TakeOffAngle&#39;:np.matrix([[24.5],[22.8],</span>
-<span class="go">                                                            [74.5],[54.3]]),</span>
-<span class="go">                                }</span>
-<span class="go">                     },</span>
-<span class="go">          &#39;UID&#39;:&#39;Event1&#39;</span>
-<span class="go">          }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]),</span>
+<span class="go">                          &#39;Error&#39;: np.matrix([[0.01], [0.02], [0.4], [0.1]]),</span>
+<span class="go">                          &#39;Stations&#39;:{&#39;Name&#39;: [&#39;Station1&#39;, &#39;Station2&#39;, &#39;Station3&#39;,</span>
+<span class="go">                                               &#39;Station4&#39;],</span>
+<span class="go">                                      &#39;Azimuth&#39;: np.matrix([[248.0], [122.3],</span>
+<span class="go">                                                            [182.3], [35.2]]),</span>
+<span class="go">                                      &#39;TakeOffAngle&#39;: np.matrix([[24.5], [22.8],</span>
+<span class="go">                                                                 [74.5], [54.3]])}},</span>
+<span class="go">          &#39;UID&#39;: &#39;Event1&#39;}</span>
 </pre></div>
 </div>
 <p>This has created a data dictionary for <code class="docutils literal"><span class="pre">Event1</span></code> with P Polarity observations at 4 stations:</p>
@@ -251,15 +249,15 @@
 </pre></div>
 </div>
 <p>If there were more observations such as P/SH Amplitude Ratios, the data dictionary above would need to be updated:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;P/SHAmplitudeRatio&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1242</span><span class="p">,</span><span class="mi">1113</span><span class="p">],[</span><span class="mi">742</span><span class="p">,</span><span class="mi">2341</span><span class="p">],</span>
-<span class="go">                                    [421,112],[120,87]]),</span>
-<span class="go">                     &#39;Error&#39;:np.matrix([[102,743],[66,45],[342,98],[14,11]]),</span>
-<span class="go">                     &#39;Stations&#39;:{&#39;Name&#39;:[&#39;Station5&#39;,&#39;Station6&#39;,</span>
-<span class="go">                                    &#39;Station7&#39;,&#39;Station8&#39;],</span>
-<span class="go">                                 &#39;Azimuth&#39;:np.matrix([[163.0],[345.3],</span>
-<span class="go">                                    [25.3],[99.2]]),</span>
-<span class="go">                                 &#39;TakeOffAngle&#39;:np.matrix([[51.5],[76.8],</span>
-<span class="go">                                    [22.5],[11.3]]),</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;P/SHAmplitudeRatio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1242</span><span class="p">,</span> <span class="mi">1113</span><span class="p">],</span> <span class="p">[</span><span class="mi">742</span><span class="p">,</span> <span class="mi">2341</span><span class="p">],</span>
+<span class="go">                                                         [421, 112], [120, 87]]),</span>
+<span class="go">                     &#39;Error&#39;: np.matrix([[102, 743], [66, 45], [342, 98], [14, 11]]),</span>
+<span class="go">                     &#39;Stations&#39;: {&#39;Name&#39;: [&#39;Station5&#39;, &#39;Station6&#39;,</span>
+<span class="go">                                    &#39;Station7&#39;, &#39;Station8&#39;],</span>
+<span class="go">                                 &#39;Azimuth&#39;: np.matrix([[163.0], [345.3],</span>
+<span class="go">                                                       [25.3], [99.2]]),</span>
+<span class="go">                                 &#39;TakeOffAngle&#39;: np.matrix([[51.5], [76.8],</span>
+<span class="go">                                                            [22.5], [11.3]]),</span>
 <span class="go">                                }</span>
 <span class="go">                     }</span>
 </pre></div>
@@ -306,13 +304,13 @@
 <p>The amplitude ratio <code class="docutils literal"><span class="pre">Measured</span></code> and <code class="docutils literal"><span class="pre">Error</span></code> numpy matrices have the observations of the ratio numerator and denominator at each station, i.e. in this case, <code class="docutils literal"><span class="pre">Station5</span></code> has P Amplitude is <code class="docutils literal"><span class="pre">1242</span></code> and SH Amplitude is <code class="docutils literal"><span class="pre">1113</span></code>, along with P error <code class="docutils literal"><span class="pre">102</span></code> and SH error <code class="docutils literal"><span class="pre">743</span></code>. The split into numerator and denominator is required because the appropriate <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> is the ratio PDF (see <a class="reference internal" href="probability.html#ratio-pdf-label"><span class="std std-ref">Amplitude Ratio PDF</span></a>).</p>
 <p>This dictionary can either be provided as a construction argument for the <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mtfit</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inversion_object</span><span class="o">=</span><span class="n">mtfit</span><span class="o">.</span><span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inversion_object</span> <span class="o">=</span> <span class="n">mtfit</span><span class="o">.</span><span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Or read in from the command line:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cPickle</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Event1.inv&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Event1.inv&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>This has created a pickled dictionary called <code class="docutils literal"><span class="pre">Event1.inv</span></code> in the current directory. To perform the inversion, open a shell in the same directory:</p>
@@ -341,7 +339,15 @@
 </div></blockquote>
 <p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create the inversion object with the set parameters..</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span> <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span>
+                             <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Run the forward model based inversion</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>The output file is <code class="docutils literal"><span class="pre">P_Polarity_Example_OutputMT.mat</span></code>.</p>
 <p>The source PDF can be plotted:</p>
 <div class="figure align-center" id="id3">
@@ -373,7 +379,17 @@ To run the script:</p>
 </div></blockquote>
 <p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span>
+<span class="c1"># Create the inversion object with the set parameters..</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span> <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span>
+                             <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Run the forward model based inversion</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>The output file is <code class="docutils literal"><span class="pre">P_SH_Amplitude_Ratio_Example_OutputMT.mat</span></code>.</p>
 <p>It is also possible to run the inversion for as many samples as possible in a given time (output file is <code class="docutils literal"><span class="pre">P_Polarity_Example_Time_OutputMT.mat</span></code>) by setting the parameters:</p>
 <blockquote>
@@ -384,7 +400,23 @@ To run the script:</p>
 </div></blockquote>
 <p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span>
+<span class="n">ns</span> <span class="n">the</span> <span class="n">inversion</span> <span class="k">for</span> <span class="n">a</span> <span class="n">given</span> <span class="n">time</span> <span class="n">period</span><span class="o">.</span>
+<span class="n">rithm</span> <span class="o">=</span> <span class="s1">&#39;time&#39;</span>
+<span class="n">est</span><span class="p">:</span>
+<span class="c1"># Run inversion for test</span>
+<span class="n">max_time</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="p">:</span>
+<span class="c1"># Length of time to run for in seconds.</span>
+<span class="n">max_time</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">eate</span> <span class="n">the</span> <span class="n">inversion</span> <span class="nb">object</span> <span class="k">with</span> <span class="n">the</span> <span class="nb">set</span> <span class="n">parameters</span><span class="o">..</span>
+<span class="n">rsion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                         <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span> <span class="n">max_time</span><span class="o">=</span><span class="n">max_time</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">n</span> <span class="n">the</span> <span class="n">forward</span> <span class="n">model</span> <span class="n">based</span> <span class="n">inversion</span>
+<span class="n">rsion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="double-couple-inversion">
 <span id="dc-inv-label"></span><h2>3.4. Double-Couple Inversion<a class="headerlink" href="#double-couple-inversion" title="Permalink to this headline">¶</a></h2>
@@ -399,7 +431,7 @@ To run the script:</p>
 </div>
 <p>The inversion is run from a data file, which is the pickled (<a class="reference external" href="https://docs.python.org/2/library/pickle.html#module-pickle" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">pickle</span></code></a>/<a class="reference external" href="https://docs.python.org/2/library/pickle.html#module-cPickle" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">cPickle</span></code></a>) data dictionary:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cPickle</span>
-<span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Double_Couple_Example.inv&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+<span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Double_Couple_Example.inv&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>The inversion parameters used are:</p>
@@ -415,11 +447,20 @@ To run the script:</p>
 <p>Since the double-couple space has fewer dimensions than the moment tensor space, fewer samples are required for good coverage of the space, so only 100,000 samples are used.</p>
 <p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data_file</span><span class="o">=</span><span class="s1">&#39;Double_Couple_Example.inv&#39;</span><span class="p">,</span>
+                             <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
+                             <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Run the forward model based inversion</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="time-limited-inversion">
 <span id="time-inversion-label"></span><h2>3.5. Time Limited Inversion<a class="headerlink" href="#time-limited-inversion" title="Permalink to this headline">¶</a></h2>
-<p>A different algorithm for the inverson can be set using the algorithm option. In this case the time constrained algorithm is used (for other options see <a class="reference internal" href="algorithms.html"><span class="doc">mtfit.Algorithms: Search Algorithms</span></a>). An example script for running a time constrained inversion is <a class="reference download internal" href="_downloads/time_inversion.py" download=""><code class="xref download docutils literal"><span class="pre">examples/time_inversion.py</span></code></a>.
+<p>A different algorithm for the inverson can be set using the algorithm option. In this case the time constrained algorithm is used (for other options see <a class="reference internal" href="algorithms.html"><span class="doc">mtfit.algorithms: Search Algorithms</span></a>). An example script for running a time constrained inversion is <a class="reference download internal" href="_downloads/time_inversion.py" download=""><code class="xref download docutils literal"><span class="pre">examples/time_inversion.py</span></code></a>.
 To run the script:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ python time_inversion.py
 </pre></div>
@@ -446,11 +487,29 @@ To run the script:</p>
 <p>The <code class="docutils literal"><span class="pre">P/SHRMSAmplitudeRatio</span></code> and the <code class="docutils literal"><span class="pre">P/SHAmplitudeRatio</span></code> are not independent, and so cannot both be used in this inversion.</p>
 <p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span> <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span>
+                             <span class="n">max_time</span><span class="o">=</span><span class="n">max_time</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Run the forward model based inversion</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>The output file is <code class="docutils literal"><span class="pre">Time_Inversion_Example_OutputMT.mat</span></code>.</p>
 <p>It is also possible to run the inversion for the double-couple constrained inversion (output file is <code class="docutils literal"><span class="pre">Time_Inversion_Example_OutputDC.mat</span></code>):</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">dc</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span> <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span>
+                             <span class="n">max_time</span><span class="o">=</span><span class="n">max_time</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Run the forward model based inversion</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="parallel-mpi-inversion">
 <span id="mpi-label"></span><h2>3.6. Parallel MPI Inversion<a class="headerlink" href="#parallel-mpi-inversion" title="Permalink to this headline">¶</a></h2>
@@ -465,10 +524,26 @@ To run the script:</p>
 <p>The script <a class="reference download internal" href="_downloads/mpi.py" download=""><code class="xref download docutils literal"><span class="pre">examples/mpi.py</span></code></a> is an example script for running using <a class="reference internal" href="glossary.html#term-mpi"><span class="xref std std-term">MPI</span></a> (It will test if <a class="reference external" href="http://mpi4py.scipy.org/">mpi4py</a>  is installed)</p>
 <p>The data file is pickled using <a class="reference external" href="https://docs.python.org/2/library/pickle.html#module-cPickle" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">cPickle</span></code></a>:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># pickle data using cPickle</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">cPickle</span> <span class="kn">as</span> <span class="nn">pickle</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">pickle</span>
+<span class="c1"># data saved to MPI_Example.inv using cPickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;MPI_Example.inv&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>And then <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#module-subprocess" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">subprocess</span></code></a> is used to call the inversion:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Use subprocess to call mtfit</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;mtfit&#39;</span><span class="p">,</span> <span class="s1">&#39;-M&#39;</span><span class="p">,</span> <span class="s1">&#39;--data_file=MPI_Example.inv&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;--algorithm=iterate&#39;</span><span class="p">,</span> <span class="s1">&#39;--max_samples=100000&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>This is equivalent to (see <a class="reference internal" href="cli.html"><span class="doc">command line options</span></a> for more information on the command line options):</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ mtfit -M --data_file=MPI_Example.inv --algorithm=iterate --max_samples=100000
 </pre></div>
@@ -656,11 +731,34 @@ To run the script:</p>
 </div></blockquote>
 <p>The <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Location uncertainty path</span>
+<span class="n">location_pdf_file_path</span> <span class="o">=</span> <span class="s1">&#39;Location_Uncertainty.scatangle&#39;</span>
+<span class="c1"># Create the inversion object with the set parameters..</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">location_pdf_file_path</span><span class="o">=</span><span class="n">location_pdf_file_path</span><span class="p">,</span>
+                             <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
+                             <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">max_time</span><span class="o">=</span><span class="n">max_time</span><span class="p">,</span>
+                             <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Run the forward model based inversion</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>The output file is <code class="docutils literal"><span class="pre">Location_Uncertainty_Example_OutputMT.mat</span></code>.</p>
 <p>Including the location uncertainty in an inversion is slower, since fewer samples are used in a given time. Setting the number of station samples parameter to a smaller number can reduce this:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Reduce the number of station samples to increase the</span>
+<span class="c1"># number of moment tensor samples tried</span>
+<span class="n">number_station_samples</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="c1"># Create the inversion object with the set parameters..</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">location_pdf_file_path</span><span class="o">=</span><span class="n">location_pdf_file_path</span><span class="p">,</span>
+                             <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
+                             <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">max_time</span><span class="o">=</span><span class="n">max_time</span><span class="p">,</span>
+                             <span class="n">number_station_samples</span><span class="o">=</span><span class="n">number_station_samples</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Run the forward model based inversion</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>This tries more samples, however it has a worse sampling of the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> than before. Taking this to extremes, reducing the <code class="docutils literal"><span class="pre">number_location_samples</span></code> to <code class="docutils literal"><span class="pre">100</span></code> improves the number of samples tried but reduces the quality of the location uncertainty sampling.</p>
 <p>The method of including location uncertainty can also be used to include <strong>velocity model</strong> uncertainty by drawing location samples from a range of models and combining (see <a class="reference download internal" href="_downloads/model_sampling.py" download=""><code class="xref download docutils literal"><span class="pre">scripts/model_sampling.py</span></code></a>).</p>
 </div>
@@ -751,7 +849,7 @@ mtfit --data_file<span class="o">=</span>csv_example*.csv --algorithm<span class
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+      Last updated on Nov 19, 2017 (version 1.0.0).
 
     </p>
   </div>
@@ -773,7 +871,7 @@ mtfit --data_file<span class="o">=</span>csv_example*.csv --algorithm<span class
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0+untagged.15.g53a39ba',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

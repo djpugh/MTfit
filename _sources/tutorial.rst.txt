@@ -58,18 +58,15 @@ Creating a Data Dictionary
 The input data dictionary (see :ref:`input-data-label`) can either be pickled or not pickled. The structure is simple::
 
     >>> import numpy as np
-    >>> data={'PPolarity':{'Measured':np.matrix([[-1],[-1],[1],[1]]),
-                         'Error':np.matrix([[0.01],[0.02],[0.4],[0.1]]),
-                         'Stations':{'Name':['Station1','Station2','Station3',
-                                            'Station4'],
-                                     'Azimuth':np.matrix([[248.0],[122.3],
-                                                            [182.3],[35.2]]),
-                                     'TakeOffAngle':np.matrix([[24.5],[22.8],
-                                                                [74.5],[54.3]]),
-                                    }
-                         },
-              'UID':'Event1'
-              } 
+    >>> data = {'PPolarity': {'Measured': np.matrix([[-1], [-1], [1], [1]]),
+                              'Error': np.matrix([[0.01], [0.02], [0.4], [0.1]]),
+                              'Stations':{'Name': ['Station1', 'Station2', 'Station3',
+                                                   'Station4'],
+                                          'Azimuth': np.matrix([[248.0], [122.3],
+                                                                [182.3], [35.2]]),
+                                          'TakeOffAngle': np.matrix([[24.5], [22.8],
+                                                                     [74.5], [54.3]])}},
+              'UID': 'Event1'} 
 
 This has created a data dictionary for ``Event1`` with P Polarity observations at 4 stations::
 
@@ -96,15 +93,15 @@ This has created a data dictionary for ``Event1`` with P Polarity observations a
 
 If there were more observations such as P/SH Amplitude Ratios, the data dictionary above would need to be updated::
 
-    >>>     data['P/SHAmplitudeRatio']={'Measured':np.matrix([[1242,1113],[742,2341],
-                                        [421,112],[120,87]]),
-                         'Error':np.matrix([[102,743],[66,45],[342,98],[14,11]]),
-                         'Stations':{'Name':['Station5','Station6',
-                                        'Station7','Station8'],
-                                     'Azimuth':np.matrix([[163.0],[345.3],
-                                        [25.3],[99.2]]),
-                                     'TakeOffAngle':np.matrix([[51.5],[76.8],
-                                        [22.5],[11.3]]),
+    >>> data['P/SHAmplitudeRatio'] = {'Measured': np.matrix([[1242, 1113], [742, 2341],
+                                                             [421, 112], [120, 87]]),
+                         'Error': np.matrix([[102, 743], [66, 45], [342, 98], [14, 11]]),
+                         'Stations': {'Name': ['Station5', 'Station6',
+                                        'Station7', 'Station8'],
+                                     'Azimuth': np.matrix([[163.0], [345.3],
+                                                           [25.3], [99.2]]),
+                                     'TakeOffAngle': np.matrix([[51.5], [76.8],
+                                                                [22.5], [11.3]]),
                                     }
                          }
 
@@ -152,13 +149,13 @@ The amplitude ratio ``Measured`` and ``Error`` numpy matrices have the observati
 This dictionary can either be provided as a construction argument for the :class:`~mtfit.inversion.Inversion` object::
     
     >>> import mtfit
-    >>> inversion_object=mtfit.Inversion(data)
+    >>> inversion_object = mtfit.Inversion(data)
     >>> inversion_object.forward()
 
 Or read in from the command line::
     
     >>> import cPickle
-    >>> cPickle.dump(data,open('Event1.inv','wb'))
+    >>> cPickle.dump(data, open('Event1.inv', 'wb'))
 
 This has created a pickled dictionary called ``Event1.inv`` in the current directory. To perform the inversion, open a shell in the same directory::
 
@@ -194,8 +191,8 @@ The :class:`~mtfit.inversion.Inversion` object is created and then the forward m
     .. literalinclude:: ../../examples/p_polarity.py
         :language: python
         :dedent: 4
-        :start-after: #Inversion
-        :end-before: #Run1 End
+        :start-after: # Inversion
+        :end-before: # Run1 End
 
 The output file is ``P_Polarity_Example_OutputMT.mat``.
 
@@ -273,8 +270,8 @@ The :class:`~mtfit.inversion.Inversion` object is created and then the forward m
     .. literalinclude:: ../../examples/p_sh_amplitude_ratio.py
         :language: python
         :dedent: 4
-        :start-after: #Inversion
-        :end-before: #Run1 End
+        :start-after: # Inversion
+        :end-before: # Run1 End
 
 The output file is ``P_SH_Amplitude_Ratio_Example_OutputMT.mat``.
 
@@ -288,8 +285,8 @@ The :class:`~mtfit.inversion.Inversion` object is created and then the forward m
     .. literalinclude:: ../../examples/p_sh_amplitude_ratio.py
         :language: python
         :dedent: 8
-        :start-after: #Time sampling
-        :end-before: #End
+        :start-after: # Time sampling
+        :end-before: # Run End
 
 .. _dc-inv-label:
 
@@ -309,7 +306,7 @@ To run the script::
 The inversion is run from a data file, which is the pickled (:mod:`pickle`/:mod:`cPickle`) data dictionary::
 
     import cPickle
-    cPickle.dump(data,open('Double_Couple_Example.inv','wb'))
+    cPickle.dump(data, open('Double_Couple_Example.inv', 'wb'))
 
 The inversion parameters used are:
 
@@ -326,8 +323,8 @@ The :class:`~mtfit.inversion.Inversion` object is created and then the forward m
     .. literalinclude:: ../../examples/double_couple.py
         :language: python
         :dedent: 4
-        :start-after: #Inversion
-        :end-before: #End
+        :start-after: # Inversion
+        :end-before: # End
 
 .. _time-inversion-label:
 
@@ -363,8 +360,8 @@ The :class:`~mtfit.inversion.Inversion` object is created and then the forward m
     .. literalinclude:: ../../examples/time_inversion.py
         :language: python
         :dedent: 4
-        :start-after: #Inversion
-        :end-before: #Run1 End
+        :start-after: # Inversion
+        :end-before: # Run1 End
 
 The output file is ``Time_Inversion_Example_OutputMT.mat``.
 
@@ -373,8 +370,8 @@ It is also possible to run the inversion for the double-couple constrained inver
     .. literalinclude:: ../../examples/time_inversion.py
         :language: python
         :dedent: 4
-        :start-after: #DC Inversion
-        :end-before: #DC End
+        :start-after: # DC Inversion
+        :end-before: # DC End
 
 .. _mpi-label:
 
@@ -395,8 +392,8 @@ The data file is pickled using :mod:`cPickle`:
     .. literalinclude:: ../../examples/mpi.py
         :language: python
         :dedent: 4
-        :start-after: #Output Data
-        :end-before: #Inversion
+        :start-after: # Output Data
+        :end-before: # Inversion
 
     
 And then :mod:`subprocess` is used to call the inversion:
@@ -404,8 +401,8 @@ And then :mod:`subprocess` is used to call the inversion:
     .. literalinclude:: ../../examples/mpi.py
         :language: python
         :dedent: 4
-        :start-after: #Inversion
-        :end-before: #Equivalent to:
+        :start-after: # Inversion
+        :end-before: # Equivalent to:
 
 This is equivalent to (see :doc:`command line options <cli>` for more information on the command line options)::
 
@@ -615,8 +612,8 @@ The :class:`~mtfit.inversion.Inversion` object is created and then the forward m
     .. literalinclude:: ../../examples/location_uncertainty.py
         :language: python
         :dedent: 4
-        :start-after: #Inversion
-        :end-before: #Run1 End
+        :start-after: # Inversion
+        :end-before: # Run1 End
 
 The output file is ``Location_Uncertainty_Example_OutputMT.mat``.
 
@@ -625,8 +622,8 @@ Including the location uncertainty in an inversion is slower, since fewer sample
     .. literalinclude:: ../../examples/location_uncertainty.py
         :language: python
         :dedent: 4
-        :start-after: #Run1 End
-        :end-before: #End
+        :start-after: # Run1 End
+        :end-before: # End
 
 This tries more samples, however it has a worse sampling of the location :term:`PDF` than before. Taking this to extremes, reducing the ``number_location_samples`` to ``100`` improves the number of samples tried but reduces the quality of the location uncertainty sampling.
 

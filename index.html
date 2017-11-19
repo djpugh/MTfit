@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0+untagged.15.g53a39ba
+                1.0.0
               </div>
             
           
@@ -112,6 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
             
@@ -180,12 +181,19 @@
 </div>
 <div class="section" id="mtfit-bayesian-source-inversion">
 <h1>mtfit: Bayesian Source Inversion<a class="headerlink" href="#mtfit-bayesian-source-inversion" title="Permalink to this headline">¶</a></h1>
-<p><em>Bayesian Moment Tensor Inversion Code by David J Pugh (Bullard Laboratories, Department of Earth Sciences, University of Cambridge)</em></p>
+<p><em>Bayesian Moment Tensor Inversion Code by David J Pugh</em></p>
 <div class="toctree-wrapper compound">
 </div>
 <p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> is a Bayesian forward model inversion code for moment tensor and double-couple source inversion using different data types, based on the Bayesian approach presented in <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al, 2016a</span></a> and  <a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh, 2015</span></a>. The code has been developed as part of a PhD project (<a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh, 2015</span></a>). The solutions are estimated using polarity and amplitude ratio data, although the code is extensible (see <a class="reference internal" href="extensions.html"><span class="doc">Extending mtfit</span></a>) so it is possible to include other data-types in this framework. <code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> can incorporate uncertainty estimates both in the data (noise etc.) and the model (and location) in the resultant posterior PDF. There are three sampling approaches that have been developed, with different advantages (<a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh et al, 2015c</span></a>, and it is also possible to use the approach for relative amplitude inversion as well (<a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh et al, 2015e</span></a>).</p>
-<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> also works with the automated Bayesian polarity approach described in <a class="reference internal" href="references.html#pugh-2016b"><span class="std std-ref">Pugh et al, 2016b</span></a> as an alternative method of estimating polarity probabilities. This is available as the <code class="xref py py-mod docutils literal"><span class="pre">autopol</span></code> Python module.</p>
+<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> also works with the automated Bayesian polarity approach described in <a class="reference internal" href="references.html#pugh-2016b"><span class="std std-ref">Pugh et al, 2016b</span></a> as an alternative method of estimating polarity probabilities. This is written as the <code class="xref py py-mod docutils literal"><span class="pre">autopol</span></code> Python module, and may be available on request.</p>
+<p>The source code is available from <a class="reference external" href="https://github.com/djpugh/MTfit">GitHub</a>.</p>
+<p>Issues are tracked at the <a class="reference external" href="https://github.com/djpugh/MTfit/issues">GitHub repository</a>. Please raise a new issue or feature request <a class="reference external" href="https://github.com/djpugh/MTfit/issues/new">here</a>.</p>
 <p>This documentation is available as a <a class="reference download internal" href="_downloads/mtfit.pdf" download=""><code class="xref download docutils literal"><span class="pre">PDF</span></code></a> and an <a class="reference download internal" href="_downloads/mtfit.epub" download=""><code class="xref download docutils literal"><span class="pre">epub</span></code></a> file</p>
+<p>Please note that this code is provided as-is, and no guarantee is given that this code will perform in the desired way. Additional development and support is carried out in the developer's free time.</p>
+<p><strong>Restricted:  For Non-Commercial Use Only</strong>
+This code is protected intellectual property and is available solely for teaching
+and non-commercially funded academic research purposes.
+Applications for commercial use should be made to Schlumberger or the University of Cambridge.</p>
 <hr class="docutils" />
 <div class="line-block">
 <div class="line"><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a> | <a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a> |</div>
@@ -213,7 +221,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+      Last updated on Nov 19, 2017 (version 1.0.0).
 
     </p>
   </div>
@@ -235,7 +243,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0+untagged.15.g53a39ba',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                0+untagged.15.g53a39ba
+                1.0.0
               </div>
             
           
@@ -128,6 +128,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
             
@@ -216,7 +217,7 @@
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">pyqsub</span>  <span class="c1"># python module for cluster job submission using qsub.</span>
     <span class="n">_PYQSUB</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="k">except</span><span class="p">:</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
     <span class="n">_PYQSUB</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="kn">from</span> <span class="nn">.inversion</span> <span class="k">import</span> <span class="n">Inversion</span>
@@ -288,7 +289,7 @@
         <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="n">pre_inversions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">kwargs</span> <span class="o">=</span> <span class="n">plugin</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_mpi_call&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-            <span class="nb">print</span> <span class="s1">&#39;Running mtfit.&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Running mtfit.&#39;</span><span class="p">)</span>
         <span class="c1"># Effectively</span>
         <span class="c1"># inversion = Inversion(data, data_file, location_pdf_file_path, algorithm, parallel, n, phy_mem, dc, **kwargs)</span>
         <span class="c1"># but allowing the pre inversion plugin to change the kwargs</span>
@@ -335,11 +336,11 @@
                 <span class="c1"># could add extra changeable MPI python handling here (and</span>
                 <span class="c1"># elsewhere?)</span>
                 <span class="kn">import</span> <span class="nn">mpi4py</span>  <span class="c1"># noqa F401</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;MPI module mpi4py not found, unable to run in mpi&#39;</span><span class="p">)</span>
             <span class="c1"># restart python as mpirun</span>
             <span class="n">options</span><span class="p">[</span><span class="s1">&#39;_mpi_call&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="nb">print</span> <span class="s1">&#39;Running mtfit using mpirun&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Running mtfit using mpirun&#39;</span><span class="p">)</span>
             <span class="n">optstring</span> <span class="o">=</span> <span class="n">pyqsub</span><span class="o">.</span><span class="n">make_optstr</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">options_map</span><span class="p">)</span>
             <span class="n">mpiargs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mpirun&quot;</span><span class="p">,</span> <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]),</span> <span class="s2">&quot;mtfit&quot;</span><span class="p">]</span>
             <span class="n">mpiargs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">optstring</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
@@ -372,7 +373,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+      Last updated on Nov 19, 2017 (version 1.0.0).
 
     </p>
   </div>
@@ -394,7 +395,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0+untagged.15.g53a39ba',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

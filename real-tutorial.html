@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0+untagged.15.g53a39ba
+                1.0.0
               </div>
             
           
@@ -127,6 +127,7 @@
 <li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
             
@@ -292,7 +293,54 @@
 <p>Adding a <code class="docutils literal"><span class="pre">-l</span></code> flag will run the inversion in a single thread.</p>
 <p>The important part of the script is:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># print output data</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">])</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">&#39;_ppolarity&#39;</span>
+<span class="c1"># Set inversion parameters</span>
+<span class="c1"># Use an iteration random sampling algorithm</span>
+<span class="n">algorithm</span> <span class="o">=</span> <span class="s1">&#39;iterate&#39;</span>
+<span class="c1"># Run in parallel if set on command line</span>
+<span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel</span>
+<span class="c1"># uses a soft memory limit of 1Gb of RAM for estimating the sample sizes</span>
+<span class="c1"># (This is only a soft limit, so no errors are thrown if the memory usage</span>
+<span class="c1">#       increases above this)</span>
+<span class="n">phy_mem</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># Run in double-couple space only</span>
+<span class="n">dc</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Run for one hundred thousand samples</span>
+<span class="n">max_samples</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="c1"># Set to only use P Polarity data</span>
+<span class="n">inversion_options</span> <span class="o">=</span> <span class="s1">&#39;PPolarity&#39;</span>
+<span class="c1"># Set the convert flag to convert the output to other source parameterisations</span>
+<span class="n">convert</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
+                             <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">)</span>
+<span class="c1"># Run the forward model</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+<span class="c1"># Run the full moment tensor inversion</span>
+<span class="c1"># Increase the max samples due to the larger source space to 10 million samples</span>
+<span class="n">max_samples</span> <span class="o">=</span> <span class="mi">10000000</span>
+<span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="ow">not</span> <span class="n">dc</span><span class="p">,</span>
+                             <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">)</span>
+<span class="c1"># Run the forward model</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+<span class="c1"># Equivalent to pickling the data:</span>
+<span class="c1">#  &gt;&gt;&gt; from example_data import synthetic_event</span>
+<span class="c1">#  &gt;&gt;&gt; data=synthetic_event()</span>
+<span class="c1">#  &gt;&gt;&gt; import cPickle</span>
+<span class="c1">#  &gt;&gt;&gt; cPickle.dump(data,open(&#39;synthetic_event_data.inv&#39;,&#39;wb&#39;))</span>
+<span class="c1"># And then calling from the command line</span>
+<span class="c1">#  mtfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \</span>
+<span class="c1">#    --inversion-options=PPolarity --convert synthetic_event_data.inv</span>
+<span class="c1">#  mtfit --algorithm=iterate --pmem=1 --max-samples=10000000  \</span>
+<span class="c1">#    --inversion-options=PPolarity --convert synthetic_event_data.inv</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>The chosen algorithm is the <code class="docutils literal"><span class="pre">iterate</span></code> algorithm (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>) for <code class="docutils literal"><span class="pre">100</span> <span class="pre">000</span></code> samples for the double-couple case and <code class="docutils literal"><span class="pre">10</span> <span class="pre">000</span> <span class="pre">000</span></code> for the full moment tensor inversion.
 <code class="docutils literal"><span class="pre">100</span> <span class="pre">000</span></code> samples in the double-couple space corresponds to approximately <code class="docutils literal"><span class="pre">50</span></code> samples in each parameter (strike, dip cosine, and rake).
 While this more dense samplings are possible, this produces a good sampling of the posterior PDF quickly, especially when run in parallel.</p>
@@ -336,7 +384,59 @@ $ mtfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
 <p>Adding a <code class="docutils literal"><span class="pre">-l</span></code> flag will run the inversion in a single thread.</p>
 <p>The important part of the script is:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># print output data</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;P/SHRMSAmplitudeRatio&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;P/SVRMSAmplitudeRatio&#39;</span><span class="p">])</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">&#39;_ar&#39;</span>
+<span class="c1"># Set inversion parameters</span>
+<span class="c1"># Use an iteration random sampling algorithm</span>
+<span class="n">algorithm</span> <span class="o">=</span> <span class="s1">&#39;iterate&#39;</span>
+<span class="c1"># Run in parallel if set on command line</span>
+<span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel</span>
+<span class="c1"># uses a soft memory limit of 1Gb of RAM for estimating the sample sizes</span>
+<span class="c1"># (This is only a soft limit, so no errors are thrown if the memory usage</span>
+<span class="c1">#     increases above this)</span>
+<span class="n">phy_mem</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># Run in double-couple space only</span>
+<span class="n">dc</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Run for one hundred thousand samples</span>
+<span class="n">max_samples</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="c1"># Set to only use P Polarity data</span>
+<span class="n">inversion_options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">,</span> <span class="s1">&#39;P/SHRMSAmplitudeRatio&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;P/SVRMSAmplitudeRatio&#39;</span><span class="p">]</span>
+<span class="c1"># Set the convert flag to convert the output to other source parameterisations</span>
+<span class="n">convert</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
+                             <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">)</span>
+<span class="c1"># Run the forward model</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+<span class="c1"># Run the full moment tensor inversion</span>
+<span class="c1"># Increase the max samples due to the larger source space to 50 million samples</span>
+<span class="n">max_samples</span> <span class="o">=</span> <span class="mi">50000000</span>
+<span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="ow">not</span> <span class="n">dc</span><span class="p">,</span>
+                             <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">)</span>
+<span class="c1"># Run the forward model</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+<span class="c1"># Equivalent to pickling the data:</span>
+<span class="c1">#  &gt;&gt;&gt; from example_data import synthetic_event</span>
+<span class="c1">#  &gt;&gt;&gt; data=synthetic_event()</span>
+<span class="c1">#  &gt;&gt;&gt; import cPickle</span>
+<span class="c1">#  &gt;&gt;&gt; cPickle.dump(data,open(&#39;synthetic_event_data.inv&#39;,&#39;wb&#39;))</span>
+<span class="c1"># And then calling from the command line</span>
+<span class="c1">#  mtfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \</span>
+<span class="c1">#    --inversion-options=PPolarity,P/SHRMSAmplitudeRatio,P/SVRMSAmplitudeRatio \</span>
+<span class="c1">#    --convert synthetic_event_data.inv</span>
+<span class="c1">#  mtfit --algorithm=iterate --pmem=1 --max-samples=50000000  \</span>
+<span class="c1">#    --inversion-options=PPolarity,P/SHRMSAmplitudeRatio,P/SVRMSAmplitudeRatio \</span>
+<span class="c1">#    --convert synthetic_event_data.inv</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>The chosen algorithm is the <code class="docutils literal"><span class="pre">iterate</span></code> algorithm (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>) for <code class="docutils literal"><span class="pre">100</span> <span class="pre">000</span></code> samples for the double-couple case and <code class="docutils literal"><span class="pre">50</span> <span class="pre">000</span> <span class="pre">000</span></code> for the full moment tensor inversion.
 <code class="docutils literal"><span class="pre">100</span> <span class="pre">000</span></code> samples in the double-couple space corresponds to approximately <code class="docutils literal"><span class="pre">50</span></code> samples in each parameter (strike, dip cosine, and rake).
 While this more dense samplings are possible, this produces a good sampling of the posterior PDF quickly, especially when run in parallel.</p>
@@ -374,7 +474,7 @@ $ mtfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
 <a class="reference internal image-reference" href="_images/krafla_event_location_uncertainty.png"><img alt="Beachball plot of the krafla location uncertainty" src="_images/krafla_event_location_uncertainty.png" style="width: 90%;" /></a>
 <p class="caption"><span class="caption-text"><em>Beachball plot of the effect of the location uncertainty on the receivers (dots, darker are higher probability locations) (Plotted using MTplot MATLAB code)</em></span></p>
 </div>
-<p>A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using <a class="reference external" href="http://alomax.free.fr/nlloc">NonLinLoc</a> is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (From <code class="xref py py-mod docutils literal"><span class="pre">autopol</span></code>) are used separately to invert for the source, along with including the location data. This event is shown in <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. 2016a</span></a> and investigated in more detail in <a class="reference internal" href="references.html#watson-2015"><span class="std std-ref">Watson et al. 2015</span></a>.</p>
+<p>A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using <a class="reference external" href="http://alomax.free.fr/nlloc">NonLinLoc</a> is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (calculated using the approach described in <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. 2016a</span></a> and implemented in :ref:rom <code class="xref py py-mod docutils literal"><span class="pre">autopol</span></code>) are used separately to invert for the source, along with including the location data. This event is shown in <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. 2016a</span></a> and investigated in more detail in <a class="reference internal" href="references.html#watson-2015"><span class="std std-ref">Watson et al. 2015</span></a>.</p>
 <div class="section" id="krafla-p-polarity-inversion">
 <span id="real-p-polarity"></span><h3>4.2.1. Krafla P Polarity Inversion<a class="headerlink" href="#krafla-p-polarity-inversion" title="Permalink to this headline">¶</a></h3>
 <p>There are 21 P-polarity arrivals for the synthetic event, and the locations of these receivers are shown in the figure on the right. There is quite a large depth uncertainty, leading to a large variation in take-off angles (also shown in the figure on the right)</p>
@@ -477,7 +577,63 @@ $ mtfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
 <p>Adding a <code class="docutils literal"><span class="pre">-l</span></code> flag will run the inversion in a single thread.</p>
 <p>The important part of the script is:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># print output data</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">])</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">&#39;_ppolarity&#39;</span>
+<span class="c1"># Set inversion parameters</span>
+<span class="c1"># Use an iteration random sampling algorithm</span>
+<span class="n">algorithm</span> <span class="o">=</span> <span class="s1">&#39;iterate&#39;</span>
+<span class="c1"># Run in parallel if set on command line</span>
+<span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel</span>
+<span class="c1"># uses a soft memory limit of 1Gb of RAM for estimating the sample sizes</span>
+<span class="c1"># (This is only a soft limit, so no errors are thrown if the memory usage</span>
+<span class="c1">#         increases above this)</span>
+<span class="n">phy_mem</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># Run in double-couple space only</span>
+<span class="n">dc</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Run for one hundred thousand samples</span>
+<span class="n">max_samples</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="c1"># Set to only use P Polarity data</span>
+<span class="n">inversion_options</span> <span class="o">=</span> <span class="s1">&#39;PPolarity&#39;</span>
+<span class="c1"># Set the convert flag to convert the output to other source parameterisations</span>
+<span class="n">convert</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Set location uncertainty file path</span>
+<span class="n">location_pdf_file_path</span> <span class="o">=</span> <span class="s1">&#39;krafla_event.scatangle&#39;</span>
+<span class="c1"># Handle location uncertainty</span>
+<span class="c1"># Set number of location samples to use (randomly sampled from PDF) as this</span>
+<span class="c1">#    reduces calculation time</span>
+<span class="c1"># (each location sample is equivalent to running an additional event)</span>
+<span class="n">number_location_samples</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="c1"># Bin Scatangle File</span>
+<span class="n">bin_scatangle</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Use mtfit.__core__.mtfit function</span>
+<span class="n">mtfit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">location_pdf_file_path</span><span class="o">=</span><span class="n">location_pdf_file_path</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span>
+      <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
+      <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">,</span> <span class="n">bin_scatangle</span><span class="o">=</span><span class="n">bin_scatangle</span><span class="p">,</span>
+      <span class="n">number_location_samples</span><span class="o">=</span><span class="n">number_location_samples</span><span class="p">)</span>
+<span class="c1"># Change max_samples for MT inversion</span>
+<span class="n">max_samples</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">mtfit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">location_pdf_file_path</span><span class="o">=</span><span class="n">location_pdf_file_path</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span>
+      <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span>
+      <span class="n">dc</span><span class="o">=</span><span class="ow">not</span> <span class="n">dc</span><span class="p">,</span> <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">,</span>
+      <span class="n">bin_scatangle</span><span class="o">=</span><span class="n">bin_scatangle</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="o">=</span><span class="n">number_location_samples</span><span class="p">)</span>
+<span class="c1"># Equivalent to pickling the data and outputting the location uncertainty:</span>
+<span class="c1">#  &gt;&gt;&gt; from example_data import krafla_event,krafla_location</span>
+<span class="c1">#  &gt;&gt;&gt; data=krafla_event()</span>
+<span class="c1">#  &gt;&gt;&gt; open(&#39;krafla_event.scatangle&#39;,&#39;w&#39;).write(krafla_location())</span>
+<span class="c1">#  &gt;&gt;&gt; import cPickle</span>
+<span class="c1">#  &gt;&gt;&gt; cPickle.dump(data,open(&#39;krafla_event.inv&#39;,&#39;wb&#39;))</span>
+<span class="c1"># And then calling from the command line</span>
+<span class="c1">#  mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \</span>
+<span class="c1">#    --pmem=1 --double-couple --max-samples=100000 \</span>
+<span class="c1">#    --inversion-options=PPolarity --convert --bin-scatangle krafla_event.inv</span>
+<span class="c1">#  mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \</span>
+<span class="c1">#    --pmem=1 --max-samples=10000000  --inversion-options=PPolarity --convert \</span>
+<span class="c1">#    --bin-scatangle krafla_event.inv</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>In this example the <code class="xref py py-func docutils literal"><span class="pre">mtfit.__core__.mtfit()</span></code>  function is used instead of creating the inversion object directly. Again, the chosen algorithm is the <code class="docutils literal"><span class="pre">iterate</span></code> algorithm (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>) for <code class="docutils literal"><span class="pre">100</span> <span class="pre">000</span></code> samples for the double-couple case and <code class="docutils literal"><span class="pre">1</span> <span class="pre">000</span> <span class="pre">000</span></code> for the full moment tensor inversion. The location uncertainty distribution is binned (<code class="docutils literal"><span class="pre">--bin_scatangle</span></code>), which runs before the main inversion is carried out. This uses the <a class="reference internal" href="source-scatangle.html"><span class="doc">mtfit.extensions.scatangle</span></a> extension to both parse and bin the location PDF distribution.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -507,7 +663,7 @@ $ mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
 </div>
 <div class="section" id="krafla-p-polarity-probability-inversion">
 <span id="real-p-polarity-probability"></span><h3>4.2.2. Krafla P Polarity Probability Inversion<a class="headerlink" href="#krafla-p-polarity-probability-inversion" title="Permalink to this headline">¶</a></h3>
-<p>There are 21 P-polarity arrivals for the synthetic event, but more observations, and a better understanding of the uncertainties on the polarities can be obtained using the automated Bayesian polarity probabilities generated using <code class="xref py py-mod docutils literal"><span class="pre">autopol</span></code> (<a class="reference internal" href="references.html#pugh-2016b"><span class="std std-ref">Pugh et al., 2016b</span></a>, <span class="xref std std-ref">Pugh, 2016a</span>). Nevertheless, much of this example is the same as the <a class="reference internal" href="#real-p-polarity"><span class="std std-ref">Krafla P Polarity Inversion</span></a> example.</p>
+<p>There are 21 P-polarity arrivals for the synthetic event, but more observations, and a better understanding of the uncertainties on the polarities can be obtained using the automated Bayesian polarity probabilities generated using the approach described in <a class="reference internal" href="references.html#pugh-2016b"><span class="std std-ref">Pugh et al., 2016b</span></a>, <span class="xref std std-ref">Pugh, 2016a</span>. Nevertheless, much of this example is the same as the <a class="reference internal" href="#real-p-polarity"><span class="std std-ref">Krafla P Polarity Inversion</span></a> example.</p>
 <p><a class="reference download internal" href="_downloads/krafla_event.py" download=""><code class="xref download docutils literal"><span class="pre">examples/krafla_event.py</span></code></a> contains a script for the double-couple and full moment tensor inversion of the source. It can be run as:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ python krafla_event.py case=ppolarityprob
 </pre></div>
@@ -515,7 +671,66 @@ $ mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
 <p>Adding a <code class="docutils literal"><span class="pre">-l</span></code> flag will run the inversion in a single thread.</p>
 <p>The important part of the script is:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># print output data</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;PPolarityProb&#39;</span><span class="p">])</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">&#39;_ppolarityprob&#39;</span>
+<span class="c1"># Set inversion parameters</span>
+<span class="c1"># Use an mcmc sampling algorithm</span>
+<span class="n">algorithm</span> <span class="o">=</span> <span class="s1">&#39;mcmc&#39;</span>
+<span class="c1"># Set parallel to false as running McMC</span>
+<span class="n">parallel</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="c1"># uses a soft memory limit of 0.5Gb of RAM for estimating the sample sizes</span>
+<span class="c1"># (This is only a soft limit, so no errors are thrown if the memory usage</span>
+<span class="c1">#     increases above this)</span>
+<span class="n">phy_mem</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="c1"># Run both inversions</span>
+<span class="n">dc_mt</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Run for one hundred thousand samples</span>
+<span class="n">chain_length</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="c1"># Set to only use P Polarity data</span>
+<span class="n">inversion_options</span> <span class="o">=</span> <span class="s1">&#39;PPolarityProb&#39;</span>
+<span class="c1"># Set the convert flag to convert the output to other source parameterisations</span>
+<span class="n">convert</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Set location uncertainty file path</span>
+<span class="n">location_pdf_file_path</span> <span class="o">=</span> <span class="s1">&#39;krafla_event.scatangle&#39;</span>
+<span class="c1"># Handle location uncertainty</span>
+<span class="c1"># Set number of location samples to use (randomly sampled from PDF) as this</span>
+<span class="c1">#    reduces calculation time</span>
+<span class="c1"># (each location sample is equivalent to running an additional event)</span>
+<span class="n">number_location_samples</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="c1"># Bin Scatangle File</span>
+<span class="n">bin_scatangle</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Use mtfit.__core__.mtfit function</span>
+<span class="n">mtfit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">location_pdf_file_path</span><span class="o">=</span><span class="n">location_pdf_file_path</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span>
+      <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span>
+      <span class="n">chain_length</span><span class="o">=</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">,</span> <span class="n">bin_scatangle</span><span class="o">=</span><span class="n">bin_scatangle</span><span class="p">,</span>
+      <span class="n">dc_mt</span><span class="o">=</span><span class="n">dc_mt</span><span class="p">,</span> <span class="n">number_location_samples</span><span class="o">=</span><span class="n">number_location_samples</span><span class="p">)</span>
+<span class="c1"># Trans-Dimensional inversion</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">&#39;_transd&#39;</span>
+<span class="c1"># Use a transdmcmc sampling algorithm</span>
+<span class="n">algorithm</span> <span class="o">=</span> <span class="s1">&#39;transdmcmc&#39;</span>
+<span class="c1"># Use mtfit.__core__.mtfit function</span>
+<span class="n">mtfit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">location_pdf_file_path</span><span class="o">=</span><span class="n">location_pdf_file_path</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span>
+      <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span>
+      <span class="n">chain_length</span><span class="o">=</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">,</span> <span class="n">bin_scatangle</span><span class="o">=</span><span class="n">bin_scatangle</span><span class="p">,</span>
+      <span class="n">number_location_samples</span><span class="o">=</span><span class="n">number_location_samples</span><span class="p">)</span>
+<span class="c1"># Equivalent to pickling the data and outputting the location uncertainty:</span>
+<span class="c1">#  &gt;&gt;&gt; from example_data import krafla_event,krafla_location</span>
+<span class="c1">#  &gt;&gt;&gt; data=krafla_event()</span>
+<span class="c1">#  &gt;&gt;&gt; open(&#39;krafla_event.scatangle&#39;,&#39;w&#39;).write(krafla_location())</span>
+<span class="c1">#  &gt;&gt;&gt; import cPickle</span>
+<span class="c1">#  &gt;&gt;&gt; cPickle.dump(data,open(&#39;krafla_event_data.inv&#39;,&#39;wb&#39;))</span>
+<span class="c1"># And then calling from the command line</span>
+<span class="c1"># mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=mcmc -b \</span>
+<span class="c1">#    --pmem=1 --double-couple --max-samples=100000 \</span>
+<span class="c1">#    --inversion-options=PPolarityProb --convert --bin-scatangle \</span>
+<span class="c1">#    krafla_event.inv</span>
+<span class="c1"># mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=transdmcmc \</span>
+<span class="c1">#    --pmem=1 --max-samples=100000  --inversion-options=PPolarityProb \</span>
+<span class="c1">#    --convert --bin-scatangle krafla_event.inv</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>In this example the <code class="xref py py-func docutils literal"><span class="pre">mtfit.__core__.mtfit()</span></code>  function is used instead of creating the inversion object directly. The chosen algorithm is the <code class="docutils literal"><span class="pre">mcmc</span></code> algorithm (see <a class="reference internal" href="algorithms.html#mcmcsampling"><span class="std std-ref">Markov chain Monte Carlo sampling</span></a>) for a chain length of <code class="docutils literal"><span class="pre">100</span> <span class="pre">000</span></code> samples for both the double-couple case and the full moment tensor inversion. Additionally a trans-dimensional McMC approach is run, allowing comparison between the two.</p>
 <p>The location uncertainty distribution is binned (<code class="docutils literal"><span class="pre">--bin_scatangle</span></code>), which runs before the main inversion is carried out. This uses the <a class="reference internal" href="source-scatangle.html"><span class="doc">mtfit.extensions.scatangle</span></a> extension to both parse and bin the location PDF distribution.</p>
 <div class="admonition warning">
@@ -626,7 +841,63 @@ ln_bayesian_evidences, provided as args.</p>
 <p>Adding a <code class="docutils literal"><span class="pre">-l</span></code> flag will run the inversion in a single thread.</p>
 <p>The important part of the script is:</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Set inversion parameters</span>
+<span class="c1"># Use an iteration random sampling algorithm</span>
+<span class="n">algorithm</span> <span class="o">=</span> <span class="s1">&#39;iterate&#39;</span>
+<span class="c1"># Run in parallel if set on command line</span>
+<span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel</span>
+<span class="c1"># uses a soft memory limit of 1Gb of RAM for estimating the sample sizes</span>
+<span class="c1"># (This is only a soft limit, so no errors are thrown if the memory usage</span>
+<span class="c1">#       increases above this)</span>
+<span class="n">phy_mem</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># Run in double-couple space only</span>
+<span class="n">dc</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Run for 10 million samples - quite coarse for relative inversion of two events</span>
+<span class="n">max_samples</span> <span class="o">=</span> <span class="mi">10000000</span>
+<span class="c1"># Set to only use P Polarity data</span>
+<span class="n">inversion_options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">,</span> <span class="s1">&#39;PAmplitude&#39;</span><span class="p">]</span>
+<span class="c1"># Set the convert flag to convert the output to other source parameterisations</span>
+<span class="n">convert</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                             <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
+                             <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">,</span> <span class="n">multiple_events</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                             <span class="n">relative_amplitude</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Run the forward model</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+<span class="c1"># Run the full moment tensor inversion</span>
+<span class="c1"># Use mcmc algorithm for full mt space as random sampling can require a</span>
+<span class="c1"># prohibitive number of samples</span>
+<span class="n">algorithm</span> <span class="o">=</span> <span class="s1">&#39;mcmc&#39;</span>
+<span class="c1"># Set McMC parameters</span>
+<span class="n">burn_length</span> <span class="o">=</span> <span class="mi">30000</span>
+<span class="n">chain_length</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">min_acceptance_rate</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">max_acceptance_rate</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="c1"># Create the inversion object with the set parameters.</span>
+<span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                             <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span> <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="ow">not</span> <span class="n">dc</span><span class="p">,</span>
+                             <span class="n">chain_length</span><span class="o">=</span><span class="n">chain_length</span><span class="p">,</span> <span class="n">max_acceptance_rate</span><span class="o">=</span><span class="n">max_acceptance_rate</span><span class="p">,</span>
+                             <span class="n">min_acceptance_rate</span><span class="o">=</span><span class="n">min_acceptance_rate</span><span class="p">,</span> <span class="n">burn_length</span><span class="o">=</span><span class="n">burn_length</span><span class="p">,</span>
+                             <span class="n">convert</span><span class="o">=</span><span class="n">convert</span><span class="p">,</span> <span class="n">multiple_events</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">relative_amplitude</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Run the forward model</span>
+<span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+<span class="c1"># Equivalent to pickling the data:</span>
+<span class="c1">#  &gt;&gt;&gt; from example_data import relative_event</span>
+<span class="c1">#  &gt;&gt;&gt; data=relative_event()</span>
+<span class="c1">#  &gt;&gt;&gt; import cPickle</span>
+<span class="c1">#  &gt;&gt;&gt; cPickle.dump(data,open(&#39;relative_event_data.inv&#39;,&#39;wb&#39;))</span>
+<span class="c1"># And then calling from the command line</span>
+<span class="c1">#  mtfit --algorithm=iterate --pmem=1 --double-couple --max-samples=10000000 \</span>
+<span class="c1">#    --inversion-options=PPolarity,PAmplitude --convert --relative \</span>
+<span class="c1">#    --multiple-events relative_event_data.inv</span>
+<span class="c1">#  mtfit --algorithm=mcmc --pmem=1 --chain-length=100000  \</span>
+<span class="c1">#    --burn_in=30000 --min_acceptance_rate=0.1 \</span>
+<span class="c1">#    --max_acceptance_rate=0.3 --inversion-options=PPolarity,PAmplitude \</span>
+<span class="c1">#    --convert --relative --multiple-events relative_event_data.inv</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>In this example the <a class="reference internal" href="inversion.html#mtfit.inversion.Inversion" title="mtfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">mtfit.inversion.Inversion</span></code></a>  class is created directly. The chosen algorithm for the double-couple inversion is the <code class="docutils literal"><span class="pre">iterate</span></code> algorithm (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>) for <code class="docutils literal"><span class="pre">10</span> <span class="pre">000</span> <span class="pre">000</span></code> samples for the double-couple case. A large sample size is required when running the joint inversion because if the probabilities of obtaining a non-zero probability sample for both events is less than or equal to the product of the probabilities of obtaining a non-zero probability sample for the events individually, i.e if the fraction of non-zero probability samples for event 1 is <span class="math">\(f_1\)</span> and the fraction for event 2 is <span class="math">\(f_2\)</span>, then the fraction for the joint samping <span class="math">\(f_j \leq f_1.f_2\)</span>. Consequently it soon becomes infeasible to run the monte-carlo sampling algorithm for the full moment tensor case.</p>
 <p>The full moment tensor inversion uses the <code class="docutils literal"><span class="pre">mcmc</span></code> algorithm to reduce the dependence of the result on the sample size. The burn in length is set to <code class="docutils literal"><span class="pre">30</span> <span class="pre">000</span></code> and the chain length to <code class="docutils literal"><span class="pre">100</span> <span class="pre">000</span></code>, while the targeted  acceptance rate window is reduced from the normal McMC selection (0.3 - 0.5), instead targetting between 0.1 and 0.3.</p>
 <div class="admonition warning">
@@ -688,7 +959,7 @@ $ mtfit --algorithm=mcmc --pmem=1 --chain-length=100000  \
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+      Last updated on Nov 19, 2017 (version 1.0.0).
 
     </p>
   </div>
@@ -710,7 +981,7 @@ $ mtfit --algorithm=mcmc --pmem=1 --chain-length=100000  \
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0+untagged.15.g53a39ba',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

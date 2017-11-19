@@ -122,7 +122,7 @@ def get_samples(model_mapping, N):
     i = 0
     while i < N:
         if not i % 100:
-            print str(i)+' samples'
+            print(str(i)+' samples')
         model = random_model_sample(model_mapping)
         if load_in_to_memory:
             new_record = random_record(models[model])
@@ -167,7 +167,7 @@ def check_memory(model_mapping):
         if free_memory > 2*total_memory:
             return True
         return False
-    except:
+    except Exception:
         if 2*total_memory < 6000:
             return True
         return False

@@ -77,8 +77,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/synthetic_event.py
         :language: python
-        :start-after: #P Polarity Inversion
-        :end-before: #End
+        :start-after: # P Polarity Inversion
+        :end-before: # End
         :dedent: 8
 
 The chosen algorithm is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``100 000`` samples for the double-couple case and ``10 000 000`` for the full moment tensor inversion. 
@@ -146,8 +146,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/synthetic_event.py
         :language: python
-        :start-after: #Amplitude Ratio Inversion
-        :end-before: #End
+        :start-after: # Amplitude Ratio Inversion
+        :end-before: # End
         :dedent: 8
 
 The chosen algorithm is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``100 000`` samples for the double-couple case and ``50 000 000`` for the full moment tensor inversion. 
@@ -206,7 +206,7 @@ Krafla Event
 
      *Beachball plot of the effect of the location uncertainty on the receivers (dots, darker are higher probability locations) (Plotted using MTplot MATLAB code)*
 
-  A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using `NonLinLoc <http://alomax.free.fr/nlloc>`_ is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (From :mod:`autopol`) are used separately to invert for the source, along with including the location data. This event is shown in :ref:`Pugh et al. 2016a<Pugh-2016a>` and investigated in more detail in :ref:`Watson et al. 2015<Watson-2015>`.
+  A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using `NonLinLoc <http://alomax.free.fr/nlloc>`_ is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (calculated using the approach described in :ref:`Pugh et al. 2016a<Pugh-2016a>` and implemented in :ref:rom :mod:`autopol`) are used separately to invert for the source, along with including the location data. This event is shown in :ref:`Pugh et al. 2016a<Pugh-2016a>` and investigated in more detail in :ref:`Watson et al. 2015<Watson-2015>`.
 
 
 .. only:: latex
@@ -221,7 +221,7 @@ Krafla Event
 
      *Beachball plot of the effect of the location uncertainty on the receivers (dots, darker are higher probability locations) (Plotted using MTplot MATLAB code)*
 
-  A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using `NonLinLoc <http://alomax.free.fr/nlloc>`_ is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (From :mod:`autopol`) are used separately to invert for the source, along with including the location data (Fig. :ref:`5.4 <krafla-event-location-uncertainty>`). This event is shown in :ref:`Pugh et al. 2016a<Pugh-2016a>` and investigated in more detail in :ref:`Watson et al. 2015<Watson-2015>`.
+  A strongly non-double-couple event, with manually picked P and S arrival times and P polarities, and then located using `NonLinLoc <http://alomax.free.fr/nlloc>`_ is used as an example for inversions with real data. In this case the S arrivals were hard to measure an amplitude for, so amplitude ratios are ignored. Instead, polarities and polarity probabilities (calculated using the approach described in :ref:`Pugh et al. 2016a<Pugh-2016a>` and implemented in :ref:rom :mod:`autopol`) are used separately to invert for the source, along with including the location data (Fig. :ref:`5.4 <krafla-event-location-uncertainty>`). This event is shown in :ref:`Pugh et al. 2016a<Pugh-2016a>` and investigated in more detail in :ref:`Watson et al. 2015<Watson-2015>`.
 
 
 .. _real-p-polarity:
@@ -245,8 +245,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/krafla_event.py
         :language: python
-        :start-after: #P Polarity Inversion
-        :end-before: #End
+        :start-after: # P Polarity Inversion
+        :end-before: # End
         :dedent: 8
 
 In this example the :func:`mtfit.__core__.mtfit`  function is used instead of creating the inversion object directly. Again, the chosen algorithm is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``100 000`` samples for the double-couple case and ``1 000 000`` for the full moment tensor inversion. The location uncertainty distribution is binned (``--bin_scatangle``), which runs before the main inversion is carried out. This uses the :doc:`source-scatangle` extension to both parse and bin the location PDF distribution.
@@ -292,7 +292,7 @@ These inversions will take longer to run than the previous examples, due to the 
 Krafla P Polarity Probability Inversion
 -----------------------------------------
 
-There are 21 P-polarity arrivals for the synthetic event, but more observations, and a better understanding of the uncertainties on the polarities can be obtained using the automated Bayesian polarity probabilities generated using :mod:`autopol` (:ref:`Pugh et al., 2016b<Pugh-2016b>`, :ref:`Pugh, 2016a <Pugh-2016ax>`). Nevertheless, much of this example is the same as the :ref:`real-p-polarity` example.
+There are 21 P-polarity arrivals for the synthetic event, but more observations, and a better understanding of the uncertainties on the polarities can be obtained using the automated Bayesian polarity probabilities generated using the approach described in :ref:`Pugh et al., 2016b<Pugh-2016b>`, :ref:`Pugh, 2016a <Pugh-2016ax>`. Nevertheless, much of this example is the same as the :ref:`real-p-polarity` example.
 
 :download:`examples/krafla_event.py<../../examples/krafla_event.py>` contains a script for the double-couple and full moment tensor inversion of the source. It can be run as::
 
@@ -304,8 +304,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/krafla_event.py
         :language: python
-        :start-after: #Polarity Probability Inversion
-        :end-before: #End
+        :start-after: # Polarity Probability Inversion
+        :end-before: # End
         :dedent: 8
 
 In this example the :func:`mtfit.__core__.mtfit`  function is used instead of creating the inversion object directly. The chosen algorithm is the ``mcmc`` algorithm (see :ref:`McMCsampling`) for a chain length of ``100 000`` samples for both the double-couple case and the full moment tensor inversion. Additionally a trans-dimensional McMC approach is run, allowing comparison between the two.
@@ -447,8 +447,8 @@ The important part of the script is:
     
     .. literalinclude:: ../../examples/relative_event.py
         :language: python
-        :start-after: #P Polarity and Relative P Amplitude Inversion
-        :end-before: #End
+        :start-after: # P Polarity and Relative P Amplitude Inversion
+        :end-before: # End
         :dedent: 4
 
 In this example the :class:`mtfit.inversion.Inversion`  class is created directly. The chosen algorithm for the double-couple inversion is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``10 000 000`` samples for the double-couple case. A large sample size is required when running the joint inversion because if the probabilities of obtaining a non-zero probability sample for both events is less than or equal to the product of the probabilities of obtaining a non-zero probability sample for the events individually, i.e if the fraction of non-zero probability samples for event 1 is :math:`f_1` and the fraction for event 2 is :math:`f_2`, then the fraction for the joint samping :math:`f_j \leq f_1.f_2`. Consequently it soon becomes infeasible to run the monte-carlo sampling algorithm for the full moment tensor case.

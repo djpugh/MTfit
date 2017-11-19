@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0+untagged.15.g53a39ba
+                1.0.0
               </div>
             
           
@@ -112,6 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../references.html">15. References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">16. Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source.html">17. Source Code</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
             
@@ -1889,7 +1890,7 @@
             <span class="n">station_markersize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">station_markersize</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">station_markersize</span> <span class="o">=</span> <span class="mi">3</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">station_distribution_pdf</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">station_distribution_pdf</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">station_distribution_pdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">station_distribution_pdf</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">station_distribution_pdf</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">station_distribution_pdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">station_distribution_pdf</span><span class="p">)))</span>
             <span class="n">zeros</span> <span class="o">=</span> <span class="mi">0</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">station_distribution_pdf</span>
             <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.8</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">station_distribution_pdf</span><span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">zeros</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">zeros</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
@@ -3066,7 +3067,8 @@
                     <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">full_sphere</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">back_project</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">c</span> <span class="o">=</span> <span class="n">color</span>
             <span class="n">markersize</span> <span class="o">=</span> <span class="n">markersize_kw</span>
-            <span class="k">if</span> <span class="n">attr</span> <span class="o">!=</span> <span class="s1">&#39;mt&#39;</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mt</span> <span class="o">==</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)):</span>
+            <span class="c1"># Raising Deprecation Warning</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">attr</span> <span class="o">!=</span> <span class="s1">&#39;mt&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mt</span> <span class="o">==</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)):</span>
                 <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
                 <span class="n">markersize</span> <span class="o">=</span> <span class="n">markersize_kw</span><span class="o">/</span><span class="mi">2</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_scatter_plot</span><span class="p">(</span>
@@ -3459,7 +3461,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+      Last updated on Nov 19, 2017 (version 1.0.0).
 
     </p>
   </div>
@@ -3481,7 +3483,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0+untagged.15.g53a39ba',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

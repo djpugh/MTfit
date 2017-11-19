@@ -78,7 +78,7 @@ For a more comprehensive set of references please see :ref:`Pugh (2015) <Pugh-20
 
 .. _Pugh-2015f: 
     
-    Pugh, D J, White, R S and Christie, P A F, 2017 **MTINV: A Bayesian Approach to Moment Tensor Inversion**, *SRL Electron. Seismol.*, *in prep*.
+    Pugh, D J, White, R S and Christie, P A F, 2017 **MTfit: A Bayesian Approach to Moment Tensor Inversion**, *SRL Electron. Seismol.*, *in prep*.
 
 .. _Reasenberg-1985:
     

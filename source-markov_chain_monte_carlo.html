@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                0+untagged.15.g53a39ba
+                1.0.0
               </div>
             
           
@@ -132,6 +132,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
             
@@ -218,6 +219,7 @@
 <span class="kn">import</span> <span class="nn">gc</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -520,11 +522,9 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_init_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_events</span><span class="p">)]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_initialiser</span><span class="o">.</span><span class="n">number_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_events</span>
 
-    <span class="k">def</span> <span class="nf">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;total_number_samples&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tried</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">MarginalisedMarkovChainMonteCarlo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">total_number_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tried</span>
 
     <span class="k">def</span> <span class="nf">acceptance_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -581,7 +581,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_old_alpha</span><span class="p">[:]</span>
                 <span class="n">ratio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_old_ratio</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_old_ratio</span> <span class="o">=</span> <span class="n">ratio</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">ratio</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">rate</span><span class="p">:</span>
             <span class="c1"># revert to old alpha and change ratio</span>
@@ -592,7 +592,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_old_alpha</span><span class="p">[:]</span>
                 <span class="n">ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_old_ratio</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_old_ratio</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_old_ratio</span> <span class="o">=</span> <span class="n">ratio</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">ratio</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">ratio</span>
 
@@ -614,12 +614,12 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">output</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">t0</span><span class="p">})</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="n">output</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;debug_output&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debug_output</span><span class="p">})</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">output</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ln_bayesian_evidence&#39;</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">output_string</span>
@@ -1322,7 +1322,7 @@
             <span class="c1"># Try c functions (quicker)</span>
             <span class="kn">from</span> <span class="nn">.cmarkov_chain_monte_carlo</span> <span class="k">import</span> <span class="n">convert_sample</span> <span class="k">as</span> <span class="n">c_convert_sample</span>
             <span class="k">return</span> <span class="n">c_convert_sample</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;gamma&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;delta&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;kappa&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">])</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">MT33_MT6</span><span class="p">(</span><span class="n">Tape_MT33</span><span class="p">(</span><span class="o">**</span><span class="n">x</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_6sphere_random_mt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1518,7 +1518,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">x</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;g0&#39;</span><span class="p">)</span>
                 <span class="n">x</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;d0&#39;</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dc</span><span class="p">:</span>  <span class="c1"># dc to mt</span>
                 <span class="c1"># set random gamma beta</span>
@@ -1722,30 +1722,34 @@
                         <span class="nb">int</span><span class="p">(</span><span class="mf">1.1</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_samples</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_samples</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
                 <span class="k">return</span> <span class="n">xi_1</span><span class="p">,</span> <span class="n">ln_pi_1</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">index</span>
             <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">is_uniform</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;uniform_prior&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">is_uniform</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="o">.</span><span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;uniform_prior&#39;</span>
                 <span class="c1"># Mutliple events</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_events</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;dc_prior&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dc_prior</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">dc_prior</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">dc_prior</span><span class="p">])</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ln_pi_1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
                         <span class="n">xi_1</span><span class="p">,</span> <span class="n">ln_pi_1</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">me_acceptance_check</span><span class="p">(</span><span class="n">xi_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ln_pi_1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
-                                                                   <span class="bp">self</span><span class="o">.</span><span class="n">ln_likelihood_xi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="o">.</span><span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;uniform_prior&#39;</span><span class="p">,</span>
+                                                                   <span class="bp">self</span><span class="o">.</span><span class="n">ln_likelihood_xi</span><span class="p">,</span> <span class="n">is_uniform</span><span class="p">,</span>
                                                                    <span class="n">gaussian_jump</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;gaussian_jump_params&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
                                                                    <span class="n">dc_prior</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;dc_prior&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">])))</span>  <span class="c1"># dc prior ignored if not transd</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">xi_1</span><span class="p">,</span> <span class="n">ln_pi_1</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">me_acceptance_check</span><span class="p">(</span><span class="n">xi_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ln_pi_1</span><span class="o">.</span><span class="n">_ln_pdf</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
-                                                                   <span class="bp">self</span><span class="o">.</span><span class="n">ln_likelihood_xi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="o">.</span><span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;uniform_prior&#39;</span><span class="p">,</span>
+                                                                   <span class="bp">self</span><span class="o">.</span><span class="n">ln_likelihood_xi</span><span class="p">,</span> <span class="n">is_uniform</span><span class="p">,</span>
                                                                    <span class="n">gaussian_jump</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;gaussian_jump_params&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
                                                                    <span class="n">dc_prior</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;dc_prior&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">])))</span>
                 <span class="c1"># Single events</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ln_pi_1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
                         <span class="n">xi_1</span><span class="p">,</span> <span class="n">ln_pi_1</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">acceptance_check</span><span class="p">(</span><span class="n">xi_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ln_pi_1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
-                                                                <span class="bp">self</span><span class="o">.</span><span class="n">ln_likelihood_xi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="o">.</span><span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;uniform_prior&#39;</span><span class="p">,</span>
+                                                                <span class="bp">self</span><span class="o">.</span><span class="n">ln_likelihood_xi</span><span class="p">,</span> <span class="n">is_uniform</span><span class="p">,</span>
                                                                 <span class="n">gaussian_jump</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;gaussian_jump_params&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
                                                                 <span class="n">dc_prior</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;dc_prior&#39;</span><span class="p">,</span> <span class="mf">0.</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">xi_1</span><span class="p">,</span> <span class="n">ln_pi_1</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">acceptance_check</span><span class="p">(</span><span class="n">xi_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ln_pi_1</span><span class="o">.</span><span class="n">_ln_pdf</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
-                                                                <span class="bp">self</span><span class="o">.</span><span class="n">ln_likelihood_xi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="o">.</span><span class="n">func_name</span> <span class="o">==</span> <span class="s1">&#39;uniform_prior&#39;</span><span class="p">,</span>
+                                                                <span class="bp">self</span><span class="o">.</span><span class="n">ln_likelihood_xi</span><span class="p">,</span> <span class="n">is_uniform</span><span class="p">,</span>
                                                                 <span class="n">gaussian_jump</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;gaussian_jump_params&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
                                                                 <span class="n">dc_prior</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;dc_prior&#39;</span><span class="p">,</span> <span class="mf">0.</span><span class="p">))</span>
             <span class="c1"># No accepted samples, so increase the number of test samples if in</span>
@@ -2424,7 +2428,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Oct 26, 2017 (version 0+untagged.15.g53a39ba).
+      Last updated on Nov 19, 2017 (version 1.0.0).
 
     </p>
   </div>
@@ -2446,7 +2450,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0+untagged.15.g53a39ba',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
