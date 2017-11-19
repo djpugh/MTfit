@@ -57,7 +57,7 @@ def setup_package():
                       'Intended Audience :: Science/Research',
                       'License :: Free for non-commercial use',
                       'Operating System :: Microsoft :: Windows',
-                      'Operating System :: Mac :: Mac OS X',
+                      'Operating System :: MacOS :: MacOS X',
                       'Operating System :: POSIX',
                       'Programming Language :: Cython',
                       'Topic :: Scientific/Engineering',
