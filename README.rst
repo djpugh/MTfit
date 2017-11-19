@@ -13,7 +13,11 @@ Applications for commercial use should be made to Schlumberger or the University
 Installing mtfit
 *********************************
 
-mtfit can be installed simply by calling::
+mtfit is available on `PyPI` and can be installed using:
+
+    >>pip install mtfit
+
+Alternative this repository can be cloned and the package then installed simply by calling::
     
     >>python setup.py install
 

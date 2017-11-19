@@ -2,9 +2,14 @@
 Installing mtfit
 **********************************
 
-:mod:`mtfit` is available in several formats, including as a ``tar.gz`` file, a ``zip`` file, a Windows ``msi`` installer. Additionally the git repository can be cloned.
+:mod:`mtfit` is available from `PyPI` and can be installed using ::
 
-Apart from the Windows installer, all the other formats require installing from the source (after unpacking the compressed files e.g. ``tar.gz``).  
+    $ pip install mtfit
+
+
+:mod:`mtfit` is available in several formats, including as a ``tar.gz`` file, a ``zip`` file, and as ``wheels`. Additionally the git repository can be cloned.
+
+Apart from the wheels, all the other formats require installing from the source (after unpacking the compressed files e.g. ``tar.gz``).  
 
 :mod:`mtfit` can be installed from the source by calling::
 
