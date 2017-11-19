@@ -98,8 +98,13 @@ class ExamplesTestCase(unittest.TestCase):
             script = 'command_line.bat'
             return
         script_path = os.path.join(examples_path, script)
+        if not os.path.exists(script_path):
+            raise unittest.SkipTest('{} not found'.format(script_path))
         os.chmod(script_path, 777)
-        self.assertEqual(subprocess.call([script_path]), 0)  # Returns 0
+        if not sys.platform.startswith('win'):
+            self.assertEqual(subprocess.call(['bash', script_path]), 0)  # Returns 0
+        else:
+            self.assertEqual(subprocess.call([script_path]), 0)  # Returns 0
 
     def test_synthetic_event_run(self):
         # Test it runs without errors
@@ -126,4 +131,6 @@ def run_tests(verbosity=2):
 
 
 if __name__ == '__main__':
-    run_tests(2)
+    res = run_tests(2)
+    if not res.wasSuccessful():
+        raise ValueError('Tests failed')
