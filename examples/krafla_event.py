@@ -7,12 +7,7 @@ Commented example script for inversion of a krafla event, with more in depth exp
 
 def run(case='PPolarity', parallel=True, test=False):
     # Import inversion
-    try:
-        from mtfit.core import run as mtfit
-    except:
-        import sys
-        sys.path.insert(0, '../src/mtfit')
-        from run import run as mtfit
+    from mtfit import mtfit
 
     if test:
 
@@ -40,7 +35,7 @@ def run(case='PPolarity', parallel=True, test=False):
                   convert=convert, bin_scatangle=bin_scatangle, number_location_samples=number_location_samples)
             mtfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm, parallel=parallel,
                   inversion_options=inversion_options, phy_mem=phy_mem, dc=not dc, max_samples=max_samples,
-                  convert=convert, bin_scatangle=bin_scatangle,number_location_samples=number_location_samples)
+                  convert=convert, bin_scatangle=bin_scatangle, number_location_samples=number_location_samples)
         elif case.lower() == 'ppolarityprob':
             data['UID'] += '_ppolarityprob'
             algorithm = 'mcmc'
@@ -71,7 +66,7 @@ def run(case='PPolarity', parallel=True, test=False):
     if case.lower() == 'ppolarity':
         # P Polarity Inversion
         # print output data
-        print data['PPolarity']
+        print(data['PPolarity'])
         data['UID'] += '_ppolarity'
         # Set inversion parameters
         # Use an iteration random sampling algorithm
@@ -128,7 +123,7 @@ def run(case='PPolarity', parallel=True, test=False):
     elif case.lower() == 'ppolarityprob':
         # Polarity Probability Inversion
         # print output data
-        print data['PPolarityProb']
+        print(data['PPolarityProb'])
         data['UID'] += '_ppolarityprob'
         # Set inversion parameters
         # Use an mcmc sampling algorithm

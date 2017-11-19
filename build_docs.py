@@ -4,8 +4,15 @@ import traceback
 import sphinx
 import subprocess
 import shutil
+import tempfile
+import glob
+
 
 from examples.example_data import synthetic_event, krafla_event
+
+# Build from tox, build everything - add man pages so that they can be installed with scripts?
+# Build epub and pdf
+# Link to pdf from html page
 
 mtfit_documentation = """
 *********************************
@@ -13,9 +20,18 @@ mtfit
 *********************************
 
 Bayesian Moment Tensor Inversion Code by David J Pugh
-mtfit is based on the bayesian approach presented in #########
+mtfit is based on the bayesian approach presented in Pugh, D J, 2015,
+Bayesian Source Inversion of Microseismic Events, PhD Thesis, Department of Earth Sciences,
+University of Cambridge.
 
 The code can be called from the command line directly or from within python itself (see below)
+
+
+**Restricted:  For Non-Commercial Use Only**
+This code is protected intellectual property and is available solely for teaching
+and non-commercially funded academic research purposes.
+
+Applications for commercial use should be made to Schlumberger or the University of Cambridge.
 
 
 Input Data
@@ -195,14 +211,14 @@ Running from the command line
 To run from the command line on  linux/*nix  it is necessary to make sure that the mtfit script installed is on the path,
 or to set up a manual alias/script, e.g. for bash::
 
-    $ python -c "import mtfit;mtfit.__run__()" $*
+    $ python -c "import mtfit;mtfit.run.mtfit()" $*
 
 
 On windows using powershell add the following commandlet to your profile (for information on customizing your powershell profile see: http://www.howtogeek.com/50236/customizing-your-powershell-profile/)::
 
     function mtfit{
         $script={
-            python -c "import mtfit;mtfit.__run__()" $args
+            python -c "import mtfit;mtfit.run.mtfit()" $args
         }
         Invoke-Command -ScriptBlock $script -ArgumentList $args
     }
@@ -240,21 +256,187 @@ If there are any errors please see the documentation and if necessary contact th
 """
 
 
-def build_docs(html=True, manpages=True, pdf=True, epub=True):
-
+def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
+    if 'setup.py' not in os.listdir('.'):
+        raise ValueError('Needs to be run in the top of the repository')
+    print('\n\n==============================\n\nBuilding Documentation\n\n==============================\n\n')
+    get_run()
     try:
-        from mtfit.utilities.argparser import mtfit_parser
-        from mtfit.utilities.extensions import get_extensions
-        from mtfit.extensions import rst_table, rst_docs, __doc1__
-    except:
-        # Haven't installed the package so add src to the system path
-        sys.path.insert(0, 'src')
-        from mtfit.utilities.argparser import mtfit_parser
-        from mtfit.utilities.extensions import get_extensions
-        from mtfit.extensions import rst_table, rst_docs, __doc1__
-    old_working_directory = os.path.abspath(os.getcwd())
-    os.chdir(os.path.split(__file__)[0])
-    print '\n\n==============================\n\nBuilding Documentation\n\n==============================\n\n'
+        get_cli_and_man()
+    except Exception:
+        traceback.print_exc()
+    setup_examples()
+    # Make rst
+    # Add to extensions rst
+    setup_extensions()
+    # Source code extension
+    make_plot_docs()
+    if html:
+        pdf = True
+        epub = True
+    try:
+        if manpages:
+            build_man_pages()
+        if pdf:
+            build_pdf()
+        if epub:
+            build_epub()
+        if html:
+            build_html()
+        print("*********************************\n\nDocumentation Build Succeeded\n\n*********************************")
+    except Exception:
+        traceback.print_exc()
+        print("*********************************\n\nDocumentation Build Failed\n\n*********************************")
+    if gh_pages:
+        print("*********************************\n\nSetting up gh-pages\n\n*********************************")
+        setup_gh_pages()
+
+
+def build_html(output_path=os.path.abspath('./docs/html/')):
+            print("------------------------------\n\nHTML Build\n\n------------------------------")
+            try:
+                sphinx.main(['sphinx', '-b', 'html', '-a', os.path.abspath('./docs/source/'), output_path])
+            except SystemExit:
+                pass
+
+
+def build_man_pages(output_path=os.path.abspath('./docs/man/')):
+            print("------------------------------\n\nMan Build\n\n------------------------------")
+            try:
+                sphinx.main(['sphinx', '-b', 'man', '-a', os.path.abspath('./docs/source/'), output_path])
+            except SystemExit:
+                pass
+
+
+def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit.pdf')):
+    print("------------------------------\n\nLaTeX Build\n\n------------------------------")
+    try:
+        sphinx.main(['sphinx', '-b', 'latex', '-a', os.path.abspath('./docs/source/'), os.path.abspath('./docs/latex/')])
+    except SystemExit:
+        pass
+    os.chdir('./docs/latex/')
+    try:
+        os.remove('mtfit.toc')
+    except Exception:
+        pass
+    try:
+        os.remove('mtfit.aux')
+    except Exception:
+        pass
+    try:
+        os.remove('mtfit.idx')
+    except Exception:
+        pass
+    # modify table of contents location
+    tex = open('mtfit.tex').readlines()
+    if '\\endabstract\n' in tex:
+        tex.insert(tex.index('\\endabstract\n'), tex.pop(tex.index('\\sphinxtableofcontents\n')))
+    with open('mtfit.tex', 'w') as f:
+        f.write(''.join(tex))
+    print("------------------------------\n\nPDF Build\n\n------------------------------")
+    # Two compiles to update toc
+    p = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'mtfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    (bout, berr) = p.communicate()
+    p2 = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'mtfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    (b2out, b2err) = p2.communicate()
+    print(bout)
+    os.chdir('../../')
+    if 'fatal error occured' in bout.lower()+b2out.lower():
+        raise Exception('Fatal Error in PDF generation')
+    try:
+        os.mkdir('./docs/pdf')
+    except Exception:
+        pass
+    shutil.move('./docs/latex/mtfit.pdf', output_path)
+
+
+def build_epub(output_path=os.path.abspath('./docs/epub/')):
+    print("------------------------------\n\nepub Build\n\n------------------------------")
+    try:
+        sphinx.main(['sphinx', '-b', 'epub', '-a', os.path.abspath('./docs/source/'), output_path])
+    except SystemExit:
+        pass
+
+
+def setup_gh_pages():
+    # Copy docs/html to tempfolder
+    from mtfit import __version__
+    print("------------------------------\n\nMaking Temporary Directory\n\n------------------------------")
+    temp_dir = tempfile.mkdtemp()
+    print(temp_dir)
+    shutil.copytree('./docs/html', os.path.join(temp_dir, 'html'))
+    # Checkout gh-pages branch
+    # Need to stash any current work
+    import git
+    repo = git.Repo('.')
+    print("------------------------------\n\nStashing Changes\n\n------------------------------")
+    repo.git.stash('save')
+    print("------------------------------\n\nSwitching Branch to gh-pages\n\n------------------------------")
+    current_branch = repo.active_branch.name
+    repo.git.checkout('gh-pages')
+    # Clean folder and copy html into folder
+    print("------------------------------\n\nCleaning Working Set\n\n------------------------------")
+    contents = glob.glob('./*')
+    for item in contents:
+        if '.git' in item or '.venv' in item or '.tox' in item:
+            continue
+        if 'src' in item or 'docs' in item or 'examples' in item or 'wheelhouse' in item:
+            # ignored in .gitignore
+            continue
+        if os.path.isdir(item):
+            shutil.rmtree(item)
+        else:
+            os.remove(item)
+    print("------------------------------\n\nCopying Documentation from Temporary Directory\n\n------------------------------")
+    copy_recursively(os.path.join(temp_dir, 'html'), os.path.abspath('./'))
+    print("------------------------------\n\nRemoving Temporary Directory\n\n------------------------------")
+    shutil.rmtree(temp_dir)
+    print("------------------------------\n\nCommitting Documentation to gh-pages\n\n------------------------------")
+    # Commit the changes
+    repo.git.add('*')
+    repo.git.commit('-m', 'Documentation {}'.format(__version__))
+    # Checkout old branch
+    print("------------------------------\n\nReturning to {} Branch\n\n------------------------------".format(current_branch))
+    repo.git.checkout(current_branch)
+    print("------------------------------\n\nUnstashing Changes\n\n------------------------------")
+    repo.git.stash('pop')
+    print("------------------------------\n\nCleaning Working Directory\n\n------------------------------")
+    doctrees = glob.glob('*.doctree')
+    for item in doctrees:
+        os.remove(item)
+    invs = glob.glob('*.inv')
+    for item in invs:
+        os.remove(item)
+    jss = glob.glob('*.js')
+    for item in jss:
+        os.remove(item)
+
+
+def copy_recursively(source_folder, destination_folder):
+    for root, dirs, files in os.walk(source_folder):
+        for item in dirs:
+            if item[0] == '.':
+                continue
+            src_path = os.path.join(root, item)
+            dst_path = os.path.join(destination_folder, os.path.relpath(src_path, source_folder))
+            if destination_folder not in dst_path:
+                raise ValueError('Error joining paths - {} not in {}'.format(dst_path, destination_folder))
+            if not os.path.exists(dst_path):
+                os.mkdir(dst_path)
+        for item in files:
+            if item[0] == '.':
+                continue
+            try:
+                src_path = os.path.join(root, item)
+                dst_path = os.path.join(destination_folder, os.path.relpath(src_path, source_folder))
+                if destination_folder not in dst_path:
+                    raise ValueError('Error joining paths - {} not in {}'.format(dst_path, destination_folder))
+                shutil.copyfile(src_path, dst_path)
+            except Exception:
+                pass
+
+
+def get_run():
     with open('./docs/source/run_base.rst') as f:
         run = f.read()
     run += '\n.. _input-data-label:\n\nInput Data'+mtfit_documentation.split('Input Data')[1].split('Command line flags')[0].replace('Output', '\n.. _MATLAB-output-label:\n\nOutput')
@@ -263,91 +445,100 @@ def build_docs(html=True, manpages=True, pdf=True, epub=True):
     run = run.replace('mpi4py', ':mod:`mpi4py`')
     with open('./docs/source/run.rst', 'w') as f:
         f.write(run)
+
+
+def get_cli_and_man():
+    from mtfit.utilities.argparser import mtfit_parser
+    old_stdout = sys.stdout
     try:
-        try:
-            sys.stdout = open('./docs/source/cli.rst', 'w')
-            mtfit_parser(['-h'])
-            sys.stdout.close()
-            sys.stdout = sys.__stdout__
-        except SystemExit:
-            sys.stdout.close()
-            sys.stdout = sys.__stdout__
-        except Exception:
-            sys.stdout.close()
-            sys.stdout = sys.__stdout__
-            traceback.print_exc()
-        cli = open('./docs/source/cli.rst').read()
-        cli = cli.replace('usage: ', '********************************\nmtfit command line options\n********************************\nCommand line usage::\n')
-        cli = cli.replace('MTfit - Moment Tensor', '#A~A~A~A')
-        cli = cli.replace('positional arguments:', '#B~B~B~BPositional Arguments:\n============================\n')
-        cli = cli.replace('optional arguments:', 'Optional Arguments:\n============================\n')
-        cli = cli.replace('Cluster:', 'Cluster:\n============================\n')
-        cli = cli.replace('scatangle:', 'Scatangle:\n============================\n')
-        cli = cli.replace('Scatangle:', 'Scatangle:\n============================\n')
-        cli = cli.replace('Commands for the extension scatangle', ' ')
-        cli = cli.replace('form:', 'form::')
-        cli = cli.replace('e.g.:', 'e.g.::')
-        # Handle splitting of cli args and descrptions
-        cli = cli.split('#A~A~A~A')[0]+cli.split('#B~B~B~B')[1]
-        man = cli.replace('********************************\nmtfit command line options\n********************************\nCommand line usage::\n', '\nCommand Line Options\n==================================\n\nUsage:\n\n\t')
-        man = mtfit_documentation+'\n\n\n'+man
-        with open('./docs/source/man.rst', 'w') as f:
-            f.write(man)
-        cli_lines = cli.split('\n')
-        flag_indices = [i for i, u in enumerate(cli_lines) if len(u) > 3 and u[0] == ' ' and u[2] != ' ']
-        same_line_indices = [i for i, u in enumerate(cli_lines) if len(u) > 25 and u[0] == ' ' and u[2] != ' ' and u[24] != ' ' and u[20:24] == '    ']
-        mod_cli_lines = []
-        flag = False
-        code = False
-        list_flag = False
-        for i, u in enumerate(cli_lines):
-            if code and not len(u.rstrip()):
-                code = False
-                mod_cli_lines.append('')
-            if u == '&&':
-                u = ''
-            if not code and i in flag_indices:
-                if not flag:
-                    flag = True
-                    mod_cli_lines.append('---------------------------')
-                    mod_cli_lines.append('')
-                    mod_cli_lines.append('::')
-                    mod_cli_lines.append('')
-            if not code and i in same_line_indices:
-                flag = False
-                mod_cli_lines.append(u[0:24].rstrip())
-                mod_cli_lines.append('')
-                mod_cli_lines.append(u[24:])
-            elif not code and i in flag_indices:
-                mod_cli_lines.append(u)
-            else:
-                if flag:
-                    flag = False
-                    mod_cli_lines.append('')
-                if code:
-                    mod_cli_lines.append('    '+u.lstrip())
-                elif len(u.lstrip()) and u.lstrip()[0:2] == '* ':
-                    list_flag = True
-                    mod_cli_lines.append('  '+u.lstrip())
-                elif list_flag and len(u.lstrip()) and not u.lstrip()[0:2] == '* ':
-                    mod_cli_lines[-1] += u.lstrip()
-                elif list_flag and not len(u.lstrip()):
-                    list_flag = False
-                    mod_cli_lines.append(u.lstrip())
-                else:
-                    mod_cli_lines.append(u.lstrip())
-                    if u[-2:] == '::':
-                        code = True
-                        mod_cli_lines.append('')
-        cli = '\n'.join(mod_cli_lines)
-        cli += '\n.. only:: not latex\n\n    :doc:`run`'
-        cli = cli.replace('DO NOT USE - only for', '.. warning::\n\n\tDo not use - automatically set when')
-
-        with open('./docs/source/cli.rst', 'w') as f:
-            f.write(cli)
+        sys.stdout = open('./docs/source/cli.rst', 'w')
+        mtfit_parser(['-h'])
+        sys.stdout.close()
+        sys.stdout = old_stdout
+    except SystemExit:
+        sys.stdout.close()
+        sys.stdout = old_stdout
     except Exception:
+        sys.stdout.close()
+        sys.stdout = old_stdout
         traceback.print_exc()
+    with open('./docs/source/cli.rst') as f:
+        cli = f.read()
+    cli = cli.replace('usage: ', '********************************\nmtfit command line options\n********************************\nCommand line usage::\n')
+    cli = cli.replace('MTfit - Moment Tensor', '#A~A~A~A')
+    cli = cli.replace('positional arguments:', '#B~B~B~BPositional Arguments:\n============================\n')
+    cli = cli.replace('optional arguments:', 'Optional Arguments:\n============================\n')
+    cli = cli.replace('Cluster:', 'Cluster:\n============================\n')
+    cli = cli.replace('scatangle:', 'Scatangle:\n============================\n')
+    cli = cli.replace('Scatangle:', 'Scatangle:\n============================\n')
+    cli = cli.replace('Commands for the extension scatangle', ' ')
+    cli = cli.replace('form:', 'form::')
+    cli = cli.replace('e.g.:', 'e.g.::')
+    # Handle splitting of cli args and descrptions
+    cli = cli.split('#A~A~A~A')[0]+cli.split('#B~B~B~B')[1]
+    generate_man_page(cli)
+    cli_lines = cli.split('\n')
+    flag_indices = [i for i, u in enumerate(cli_lines) if len(u) > 3 and u[0] == ' ' and u[2] != ' ']
+    same_line_indices = [i for i, u in enumerate(cli_lines) if len(u) > 25 and u[0] == ' ' and u[2] != ' ' and u[24] != ' ' and u[20:24] == '    ']
+    mod_cli_lines = []
+    flag = False
+    code = False
+    list_flag = False
+    for i, u in enumerate(cli_lines):
+        if code and not len(u.rstrip()):
+            code = False
+            mod_cli_lines.append('')
+        if u == '&&':
+            u = ''
+        if not code and i in flag_indices:
+            if not flag:
+                flag = True
+                mod_cli_lines.append('---------------------------')
+                mod_cli_lines.append('')
+                mod_cli_lines.append('::')
+                mod_cli_lines.append('')
+        if not code and i in same_line_indices:
+            flag = False
+            mod_cli_lines.append(u[0:24].rstrip())
+            mod_cli_lines.append('')
+            mod_cli_lines.append(u[24:])
+        elif not code and i in flag_indices:
+            mod_cli_lines.append(u)
+        else:
+            if flag:
+                flag = False
+                mod_cli_lines.append('')
+            if code:
+                mod_cli_lines.append('    '+u.lstrip())
+            elif len(u.lstrip()) and u.lstrip()[0:2] == '* ':
+                list_flag = True
+                mod_cli_lines.append('  '+u.lstrip())
+            elif list_flag and len(u.lstrip()) and not u.lstrip()[0:2] == '* ':
+                mod_cli_lines[-1] += u.lstrip()
+            elif list_flag and not len(u.lstrip()):
+                list_flag = False
+                mod_cli_lines.append(u.lstrip())
+            else:
+                mod_cli_lines.append(u.lstrip())
+                if u[-2:] == '::':
+                    code = True
+                    mod_cli_lines.append('')
+    cli = '\n'.join(mod_cli_lines)
+    cli += '\n.. only:: not latex\n\n    :doc:`run`'
+    cli = cli.replace('DO NOT USE - only for', '.. warning::\n\n\tDo not use - automatically set when')
 
+    with open('./docs/source/cli.rst', 'w') as f:
+        f.write(cli)
+
+
+def generate_man_page(cli):
+    man = cli.replace('********************************\nmtfit command line options\n********************************\nCommand line usage::\n', '\nCommand Line Options\n==================================\n\nUsage:\n\n\t')
+    man = mtfit_documentation+'\n\n\n'+man
+    with open('./docs/source/man.rst', 'w') as f:
+        f.write(man)
+
+
+def setup_examples():
     char_width = 70
     try:
         out = ">>> from example_data import synthetic_event\n>>> data=synthetic_event()\n>>> print data['PPolarity']\n"+",\n\t'S0".join(str(synthetic_event()['PPolarity']).split(", 'K"))
@@ -391,146 +582,31 @@ def build_docs(html=True, manpages=True, pdf=True, epub=True):
             f.write('\n'.join(fixed_output))
     except Exception:
         pass
-    # Make rst
-    # Add to extensions rst
-    ext_doc_names, ext_docs = get_extensions('mtfit.documentation')
-    if len(ext_doc_names):
-        # Have extension documentation so add extensions as toc including entry_points
-        entry_points_file = 'entry_points'
-        entry_points = """*********************************
-mtfit Entry Points
-*********************************
-
-"""
-        for ext in ext_doc_names:
-            with open('./docs/source/'+ext+'.rst', 'w') as f:
-                f.write(ext_docs[ext])
-    else:
-        entry_points_file = 'extensions'
-        entry_points = """*********************************
-Extending mtfit
-*********************************
-
-"""
-    try:
-        entry_points += """mtfit has been written with the view that it is desirable to be able to easily extend the code. This is done using `entry points <https://pythonhosted.org/setuptools/pkg_resources.html#entry-points>`_ from the `setuptools <https://pythonhosted.org/setuptools>`_ module.
-
-The entry points are:
-
-"""
-        entry_points = entry_points.replace('The entry points are:', 'The entry points are:\n\n.. only:: latex\n\n    .. tabularcolumns:: |l|L|\n\n'+rst_table+'\n\n'+__doc1__.replace('extensions/scatangle.py', ':download:`extensions/scatangle.py <../../src/mtfit/extensions/scatangle.py>`').replace('setup.py', '``setup.py``')+'\n\n'+rst_docs)
-        with open('./docs/source/'+entry_points_file+'.rst', 'w') as f:
-            f.write(entry_points)
-    except Exception:
-        traceback.print_exc()
-    # Source code extension
-    ext_source_code_names, ext_source_code = get_extensions('mtfit.source_code')
-    extensions_source_code = """
-    mtfit.extensions
-====================
-
-Contents
-***********
-.. toctree::
-   :maxdepth: 1
-
-   mtfit.extensions.scatangle<source-scatangle>"""+'\n    '.join([u.replace('_', ' ').capitalize()+' <'+ext+'>' for ext in ext_source_code_names])+"""
-
-For the extensions documentation see :ref:`extensions`"""
-    with open('./docs/source/source-extensions.rst', 'w') as f:
-        f.write(extensions_source_code)
-    for ext in ext_source_code_names:
-        with open('./docs/source/'+ext+'.rst', 'w') as f:
-            f.write(ext_source_code[ext])
-    make_plot_docs()
-    try:
-        if html:
-            print "------------------------------\n\nHTML Build\n\n------------------------------"
-            try:
-                sphinx.main(['sphinx', '-b', 'html', '-a', os.path.abspath('./docs/source/'), os.path.abspath('./docs/html/')])
-            except SystemExit:
-                pass
-        if manpages:
-            print "------------------------------\n\nman pages Build\n\n------------------------------"
-            try:
-                sphinx.main(['sphinx', '-b', 'man', '-a', os.path.abspath('./docs/source/'), os.path.abspath('./docs/man/')])
-            except SystemExit:
-                pass
-        if pdf:
-            print "------------------------------\n\nLaTeX Build\n\n------------------------------"
-            try:
-                sphinx.main(['sphinx', '-b', 'latex', '-a', os.path.abspath('./docs/source/'), os.path.abspath('./docs/latex/')])
-            except SystemExit:
-                pass
-            os.chdir('./docs/latex/')
-            try:
-                os.remove('mtfit.toc')
-            except Exception:
-                pass
-            try:
-                os.remove('mtfit.aux')
-            except Exception:
-                pass
-            try:
-                os.remove('mtfit.idx')
-            except Exception:
-                pass
-            # modify table of contents location
-            tex = open('mtfit.tex').readlines()
-            if '\\endabstract\n' in tex:
-                tex.insert(tex.index('\\endabstract\n'), tex.pop(tex.index('\\tableofcontents\n')))
-            open('mtfit.tex', 'w').write(''.join(tex))
-            print "------------------------------\n\nPDF Build\n\n------------------------------"
-            # Two compiles to update toc
-            p = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'mtfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            (bout, berr) = p.communicate()
-            p2 = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'mtfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            (b2out, b2err) = p2.communicate()
-            print bout
-            os.chdir('../../')
-            if 'fatal error occured' in bout.lower()+b2out.lower():
-                raise Exception('Fatal Error in PDF generation')
-            try:
-                os.mkdir('./docs/pdf')
-            except:
-                pass
-            shutil.move('./docs/latex/mtfit.pdf', './docs/pdf/mtfit_documentation.pdf')
-        if epub:
-            print "------------------------------\n\nepub Build\n\n------------------------------"
-            try:
-                sphinx.main(['sphinx', '-b', 'epub', '-a', os.path.abspath('./docs/source/'), os.path.abspath('./docs/epub/')])
-            except SystemExit:
-                pass
-        print "*********************************\n\nDocumentation Build Succeeded\n\n*********************************"
-    except Exception:
-        traceback.print_exc()
-        print "*********************************\n\nDocumentation Build Failed\n\n*********************************"
-    os.chdir(old_working_directory)
-    return
 
 
 def make_plot_docs():
 
     try:
         from mtfit.utilities.argparser import MTplot_parser
-    except:
+    except Exception:
         # Haven't installed the package so add src to the system path
         sys.path.insert(0, 'src')
         from mtfit.utilities.argparser import MTplot_parser
     path = './docs/source/'
     try:
+        old_stdout = sys.stdout
         try:
             with open(path+'mtplotcli.rst', 'w') as f:
                 sys.stdout = f
                 MTplot_parser(['-h'])
                 sys.stdout.close()
-                sys.stdout = sys.__stdout__
+                sys.stdout = old_stdout
         except SystemExit:
             sys.stdout.close()
-            sys.stdout = sys.__stdout__
+            sys.stdout = old_stdout
         except Exception:
             sys.stdout.close()
-            sys.stdout = sys.__stdout__
+            sys.stdout = old_stdout
             traceback.print_exc()
         with open(path+'mtplotcli.rst') as f:
             cli = f.read()
@@ -604,6 +680,78 @@ def make_plot_docs():
         traceback.print_exc()
 
 
+def setup_extensions():
+    try:
+        from mtfit.utilities.extensions import get_extensions
+        from mtfit.extensions import rst_table, rst_docs, __doc1__
+    except Exception:
+        # Haven't installed the package so add src to the system path
+        sys.path.insert(0, 'src')
+        from mtfit.utilities.extensions import get_extensions
+        from mtfit.extensions import rst_table, rst_docs, __doc1__
+    ext_doc_names, ext_docs = get_extensions('mtfit.documentation')
+    if len(ext_doc_names):
+        # Have extension documentation so add extensions as toc including entry_points
+        entry_points_file = 'entry_points'
+        entry_points = """*********************************
+mtfit Entry Points
+*********************************
+
+"""
+        for ext in ext_doc_names:
+            with open('./docs/source/'+ext+'.rst', 'w') as f:
+                f.write(ext_docs[ext])
+    else:
+        entry_points_file = 'extensions'
+        entry_points = """*********************************
+Extending mtfit
+*********************************
+
+"""
+    try:
+        entry_points += """mtfit has been written with the view that it is desirable to be able to easily extend the code. This is done using `entry points <https://pythonhosted.org/setuptools/pkg_resources.html#entry-points>`_ from the `setuptools <https://pythonhosted.org/setuptools>`_ module.
+
+The entry points are:
+
+"""
+        entry_points = entry_points.replace('The entry points are:', 'The entry points are:\n\n.. only:: latex\n\n    .. tabularcolumns:: |l|L|\n\n'+rst_table+'\n\n'+__doc1__.replace('extensions/scatangle.py', ':download:`extensions/scatangle.py <../../src/mtfit/extensions/scatangle.py>`').replace('setup.py', '``setup.py``')+'\n\n'+rst_docs)
+        with open('./docs/source/'+entry_points_file+'.rst', 'w') as f:
+            f.write(entry_points)
+    except Exception:
+        traceback.print_exc()
+    setup_extensions_source_code()
+
+
+def setup_extensions_source_code():
+    try:
+        from mtfit.utilities.extensions import get_extensions
+    except Exception:
+        # Haven't installed the package so add src to the system path
+        sys.path.insert(0, 'src')
+        from mtfit.utilities.extensions import get_extensions
+    ext_source_code_names, ext_source_code = get_extensions('mtfit.source_code')
+    extensions_source_code = """
+    mtfit.extensions
+====================
+
+Contents
+***********
+.. toctree::
+   :maxdepth: 1
+
+   mtfit.extensions.scatangle<source-scatangle>"""+'\n    '.join([ext.replace('_', ' ').capitalize()+' <'+ext+'>' for ext in ext_source_code_names])+"""
+
+For the extensions documentation see :ref:`extensions`"""
+    with open('./docs/source/source-extensions.rst', 'w') as f:
+        f.write(extensions_source_code)
+    for ext in ext_source_code_names:
+        with open('./docs/source/'+ext+'.rst', 'w') as f:
+            f.write(ext_source_code[ext])
+
 
 if __name__ == "__main__":
-    build_docs()
+    if len(sys.argv) > 1 and sys.argv[1].lower() in ['true', 't', '1']:
+        gh_pages = True
+    else:
+        gh_pages = False
+    build_docs(gh_pages=gh_pages)

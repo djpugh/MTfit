@@ -4,9 +4,18 @@ mtfit
 *********************************
 
 Bayesian Moment Tensor Inversion Code by David J Pugh
-mtfit is based on the bayesian approach presented in #########
+mtfit is based on the bayesian approach presented in Pugh, D J, 2015,
+Bayesian Source Inversion of Microseismic Events, PhD Thesis, Department of Earth Sciences,
+University of Cambridge.
 
 The code can be called from the command line directly or from within python itself (see below)
+
+
+**Restricted:  For Non-Commercial Use Only**
+This code is protected intellectual property and is available solely for teaching
+and non-commercially funded academic research purposes.
+
+Applications for commercial use should be made to Schlumberger or the University of Cambridge.
 
 
 Input Data
@@ -186,14 +195,14 @@ Running from the command line
 To run from the command line on  linux/*nix  it is necessary to make sure that the mtfit script installed is on the path,
 or to set up a manual alias/script, e.g. for bash::
 
-    $ python -c "import mtfit;mtfit.__run__()" $*
+    $ python -c "import mtfit;mtfit.run.mtfit()" $*
 
 
 On windows using powershell add the following commandlet to your profile (for information on customizing your powershell profile see: http://www.howtogeek.com/50236/customizing-your-powershell-profile/)::
 
     function mtfit{
         $script={
-            python -c "import mtfit;mtfit.__run__()" $args
+            python -c "import mtfit;mtfit.run.mtfit()" $args
         }
         Invoke-Command -ScriptBlock $script -ArgumentList $args
     }
@@ -249,8 +258,8 @@ Usage:
              [-j DIMENSION_JUMP_PROB] [-y {grid}] [-u MIN_ACCEPTANCE_RATE]
              [-v MAX_ACCEPTANCE_RATE] [-w ACCEPTANCE_RATE_WINDOW]
              [-W WARNINGS] [-z LEARNING_LENGTH] [--version] [--mpi_call]
-             [--output-format {hyp,pickle,matlab}]
-             [--results-format {hyp,full_pdf}] [--no-dist]
+             [--output-format {matlab,pickle,hyp}]
+             [--results-format {full_pdf,hyp}] [--no-dist]
              [--dc-prior DC_PRIOR] [--sampling SAMPLING]
              [--sample-models SAMPLE_DISTRIBUTION]
              [--sampling-prior SAMPLING_PRIOR] [--no-normalise] [--convert]
@@ -644,14 +653,14 @@ Optional Arguments:
   --mpi_call            DO NOT USE - only for spawning mpi subprocess
                          
                          
-  --output-format {hyp,pickle,matlab}, --output_format {hyp,pickle,matlab},
-  --outputformat {hyp,pickle,matlab}, --format {hyp,pickle,matlab}
+  --output-format {matlab,pickle,hyp}, --output_format {matlab,pickle,hyp},
+  --outputformat {matlab,pickle,hyp}, --format {matlab,pickle,hyp}
 
                         Output file format [default=matlab]
                          
                          
-  --results-format {hyp,full_pdf}, --results_format {hyp,full_pdf},
-  --resultsformat {hyp,full_pdf}
+  --results-format {full_pdf,hyp}, --results_format {full_pdf,hyp},
+  --resultsformat {full_pdf,hyp}
 
                         Output results data format (extensible)
                         [default=full_pdf]

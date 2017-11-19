@@ -2,7 +2,7 @@
 extensions.py
 ******************
 
-Utility functions for handling MTINV extensions.
+Utility functions for handling mtfit extensions.
 
 Simple functions that are used throughout the module
 """
@@ -36,7 +36,7 @@ def get_extensions(group, defaults=False):
     funcs = {}
     # Defaults
     if type(defaults) == dict:
-        for (plugin_name, plugin) in defaults.iteritems():
+        for (plugin_name, plugin) in defaults.items():
             if plugin_name not in names:
                 funcs[plugin_name] = plugin
                 names.append(plugin_name)

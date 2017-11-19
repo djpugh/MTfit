@@ -1,5 +1,6 @@
 import unittest
 from types import MethodType
+import sys
 
 import numpy as np
 
@@ -49,8 +50,10 @@ class BaseAlgorithmTestCase(unittest.TestCase):
     def test_clvd_sampling(self):
         self.tearDown()
         self.setUp(sample_distribution='clvd')
-        self.assertEqual(
-            self.base_algorithm.random_model, self.base_algorithm.random_clvd)
+        if sys.version_info.major > 2:
+            self.assertEqual(self.base_algorithm.random_model.__name__, self.base_algorithm.random_clvd.__name__)
+        else:
+            self.assertEqual(self.base_algorithm.random_model, self.base_algorithm.random_clvd)
 
     def test_random_mt(self):
         self.assertTrue(self.base_algorithm.random_mt().shape,

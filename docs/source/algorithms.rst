@@ -1,4 +1,4 @@
-mtfit.Algorithms: Search Algorithms
+mtfit.algorithms: Search Algorithms
 ===================================
 
 These algorithms and their effects are explored in :ref:`Pugh (2015)<Pugh-2015t>`, which expands in further detail on the topics covered here.
@@ -84,11 +84,11 @@ The algorithm used in :mod:`mtfit` is:
     +----+---------------------------------------------------------------------------------------------------------------------------+
     |5   |Determine sample :math:`\mathbf{x}_\mathrm{t+1}`.                                                                          |
     +----+---------------------------------------------------------------------------------------------------------------------------+
-    |6   |If in learning period:                                                                                                      |
+    |6   |If in learning period:                                                                                                     |
     |    +---+-----------------------------------------------------------------------------------------------------------------------+
     |    |(a)|If sufficient samples (> 100) have been obtained, update transition PDF parameters to target ideal acceptance rate.    |
     |    +---+-----------------------------------------------------------------------------------------------------------------------+
-    |    |(b)|Return to 2 until end of learning period and discard learning samples.                                                   |
+    |    |(b)|Return to 2 until end of learning period and discard learning samples.                                                 |
     |    +---+-----------------------------------------------------------------------------------------------------------------------+
     |    | Otherwise return to 2 until sufficient samples are drawn.                                                                 |
     +----+---------------------------------------------------------------------------------------------------------------------------+
@@ -110,11 +110,11 @@ The algorithm used in :mod:`mtfit` is:
     +----+---------------------------------------------------------------------------------------------------------------------------+
     |5   |Determine sample :math:`\mathbf{x}_\mathrm{t+1}`.                                                                          |
     +----+---------------------------------------------------------------------------------------------------------------------------+
-    |6(a)|If in learning period:                                                                                                      |
+    |6(a)|If in learning period:                                                                                                     |
     |    +---------------------------------------------------------------------------------------------------------------------------+
     |    |  \i If sufficient samples (> 100) have been obtained, update transition PDF parameters to target ideal acceptance rate.   |
     |    +---------------------------------------------------------------------------------------------------------------------------+
-    |    |  \ii Return to 2 until end of learning period and discard learning samples.                                                 |
+    |    |  \ii Return to 2 until end of learning period and discard learning samples.                                               |
     +----+---------------------------------------------------------------------------------------------------------------------------+
     |6(b)|Otherwise return to 2 until sufficient samples are drawn.                                                                  |
     +----+---------------------------------------------------------------------------------------------------------------------------+
@@ -227,11 +227,11 @@ The algorithm used is:
     +----+---------------------------------------------------------------------------------------------------------------------------+
     |5   |Determine sample :math:`\mathbf{x}_\mathrm{t+1}`.                                                                          |
     +----+---------------------------------------------------------------------------------------------------------------------------+
-    |6   |If in learning period:                                                                                                      |
+    |6   |If in learning period:                                                                                                     |
     |    +---+-----------------------------------------------------------------------------------------------------------------------+
     |    |(a)|If sufficient samples (> 100) have been obtained, update transition PDF parameters to target ideal acceptance rate.    |
     |    +---+-----------------------------------------------------------------------------------------------------------------------+
-    |    |(b)|Return to 2 until end of learning period and discard learning samples.                                                   |
+    |    |(b)|Return to 2 until end of learning period and discard learning samples.                                                 |
     |    +---+-----------------------------------------------------------------------------------------------------------------------+
     |    |Otherwise return to 2 until sufficient samples are drawn.                                                                  |
     +----+---------------------------------------------------------------------------------------------------------------------------+
@@ -258,11 +258,11 @@ The algorithm used is:
     +----+----------------------------------------------------------------------------------------------------------------------------+
     |5   |Determine sample :math:`\mathbf{x}_\mathrm{t+1}`.                                                                           |
     +----+----------------------------------------------------------------------------------------------------------------------------+
-    |6(a)|If in learning period:                                                                                                       |
+    |6(a)|If in learning period:                                                                                                      |
     |    +----------------------------------------------------------------------------------------------------------------------------+
     |    |  \i   If sufficient samples (> 100) have been obtained, update transition PDF parameters to target ideal acceptance rate.  |
     |    +----------------------------------------------------------------------------------------------------------------------------+
-    |    |  \ii  Return to 2 until end of learning period and discard learning samples.                                                 |
+    |    |  \ii  Return to 2 until end of learning period and discard learning samples.                                               |
     +----+----------------------------------------------------------------------------------------------------------------------------+
     |6(b)|Otherwise return to 2 until sufficient samples are drawn.                                                                   |
     +----+----------------------------------------------------------------------------------------------------------------------------+

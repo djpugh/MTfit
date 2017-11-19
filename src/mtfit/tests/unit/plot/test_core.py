@@ -26,7 +26,7 @@ class CoreTestCase(unittest.TestCase):
         run(['-p=faultplane', '-d=plottest.out'])
         try:
             os.remove('plottest.out')
-        except:
+        except Exception:
             pass
 
     def test_plots(self):
@@ -143,13 +143,13 @@ class CoreTestCase(unittest.TestCase):
         print('Parameter hist')
         MTplot(multiMTs, 'parameter', hex_bin=0, parameter='gamma')
         print('Parameter hist')
-        MTplot(multiMTs, 'parameter', save_file='MTINV_plot_save_test.png',
+        MTplot(multiMTs, 'parameter', save_file='mtfit_plot_save_test.png',
                hex_bin=0, parameter='gamma')
-        if not os.path.exists('MTINV_plot_save_test.png'):
+        if not os.path.exists('mtfit_plot_save_test.png'):
             raise ValueError('save_file option has not worked')
         try:
-            os.remove('MTINV_plot_save_test.png')
-        except:
+            os.remove('mtfit_plot_save_test.png')
+        except Exception:
             pass
 
 

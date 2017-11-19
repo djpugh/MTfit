@@ -31,11 +31,11 @@ except Exception:
 try:
     import argparse  # noqa F401
     _argparse = True  # noqa F811
-except:
+except Exception:
     _argparse = False
 
 
-def parse_scatangle(filename, number_location_samples=0, bin_size=0):
+def parse_scatangle(filename, number_location_samples=0, bin_size=0, _use_c=True):
     """
     Read station angles scatter file
 
@@ -97,7 +97,8 @@ def parse_scatangle(filename, number_location_samples=0, bin_size=0):
 
     """
     # Read file
-    station_file = open(filename, 'r').readlines()
+    with open(filename, 'r') as f:
+        station_file = f.readlines()
     multipliers = []
     sample_records = []
     record = {'Name': [], 'Azimuth': [], 'TakeOffAngle': []}
@@ -115,7 +116,7 @@ def parse_scatangle(filename, number_location_samples=0, bin_size=0):
         elif len(line.rstrip().rstrip('\r').split()) == 1:
             try:
                 multiplier = float(line.rstrip().rstrip('\r'))
-            except:
+            except Exception:
                 multiplier = 1.0
         else:
             record['Name'].append(line.split()[0])
@@ -145,7 +146,7 @@ def parse_scatangle(filename, number_location_samples=0, bin_size=0):
     new_multipliers = []
     if bin_size:
         old_size = len(sample_records)
-        if cscatangle:
+        if cscatangle and _use_c:
             logging.info('C code used')
             t0 = time.time()
             sample_records, multipliers = cscatangle.bin_scatangle(sample_records, np.array(multipliers), bin_size)
@@ -191,7 +192,8 @@ def _output_scatangle(filename, samples, probabilities):
         for j, st in enumerate(sample['Name']):
             output.append(st+'\t'+str(float(sample['Azimuth'][j]))+'\t'+str(float(sample['TakeOffAngle'][j])))
         output.append('')
-    open(filename, 'w').write('\n'.join(output))
+    with open(filename, 'w') as f:
+        f.write('\n'.join(output))
 
 
 def bin_scatangle(filename, number_location_samples=0, bin_size=1):
@@ -286,7 +288,7 @@ def bin_scatangle_files(files, number_location_samples=0, bin_scatangle_size=1.0
         try:
             from mpi4py import MPI
             comm = MPI.COMM_WORLD
-        except:
+        except Exception:
             mpi = False
     # Otherwise create jobpool if running in parallel
     elif parallel:
@@ -423,7 +425,7 @@ def pre_inversion(**kwargs):
         try:
             kwargs['location_pdf_file_path'] = bin_scatangle_files(kwargs.get('location_pdf_file_path'), **kwargs)
             kwargs.pop('number_location_samples')
-        except:
+        except Exception:
             pass
     return kwargs
 

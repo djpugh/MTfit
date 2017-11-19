@@ -14,6 +14,7 @@ from mtfit.utilities.unittest_utils import run_tests as _run_tests
 from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
 from mtfit.utilities.multiprocessing_helper import Worker
 from mtfit.utilities.multiprocessing_helper import JobPool
+from mtfit.utilities.multiprocessing_helper import PoisonPill
 from mtfit.tests.unit.utilities.multiprocessing_test_classes import TestTask
 from mtfit.tests.unit.utilities.multiprocessing_test_classes import TestTask2
 
@@ -27,7 +28,7 @@ class WorkerTestCase(TestCase):
         self.worker.start()
 
     def tearDown(self):
-        self.task_queue.put(None)
+        self.task_queue.put(PoisonPill())
         if self.worker.is_alive():
             self.worker.join()
         del self.worker

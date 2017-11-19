@@ -94,7 +94,7 @@ class MTData(object):
 
         Args
             MTs: numpy array of moment tensor six vectors with shape (6,n).
-                Alternatively, the input can be a dictionary from the MTINV output.
+                Alternatively, the input can be a dictionary from the mtfit output.
 
 
         Keyword Args
@@ -1711,7 +1711,7 @@ class _FocalSpherePlot(_BasePlot):
             station_markersize = self.station_markersize
             self.station_markersize = 3
             self.text = False
-            self.station_distribution_pdf /= self.station_distribution_pdf.max()
+            self.station_distribution_pdf = self.station_distribution_pdf/self.station_distribution_pdf.max()
             self.station_distribution_pdf = np.array(np.matrix(np.squeeze(self.station_distribution_pdf)))
             zeros = 0*self.station_distribution_pdf
             r = np.append(np.append(0.8*self.station_distribution_pdf+0.2, zeros, 0), zeros, 0).T
@@ -2888,7 +2888,8 @@ class _RiedeselJordanPlot(_FocalSpherePlot):
                     x, y, z, lower=True, full_sphere=False, back_project=True)
             c = color
             markersize = markersize_kw
-            if attr != 'mt' and np.all(self.mt == getattr(self, attr)):
+            # Raising Deprecation Warning
+            if (isinstance(attr, str) and attr != 'mt') and np.all(self.mt == getattr(self, attr)):
                 c = 'w'
                 markersize = markersize_kw/2
             self._scatter_plot(
@@ -3265,4 +3266,4 @@ class_mapping = {'amplitude': _AmplitudePlot, 'beachball': _AmplitudePlot,
                  'radiation': _RadiationPlot, 'faultplane': _FaultPlanePlot,
                  'lune': _LunePlot, 'hudson': _HudsonPlot, 'riedeseljordan': _RiedeselJordanPlot,
                  'tape': _TapePlot, 'parameter': _ParameterHistPlot}
-class_mapping = get_extensions(group='MTINV.MTplot', defaults=class_mapping)[1]
+class_mapping = get_extensions(group='mtfit.plot', defaults=class_mapping)[1]

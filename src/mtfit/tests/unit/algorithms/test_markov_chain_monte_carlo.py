@@ -5,6 +5,7 @@ import numpy as np
 
 from mtfit.utilities.unittest_utils import run_tests as _run_tests
 from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
+from mtfit.utilities.unittest_utils import TestCase
 
 from mtfit.algorithms.markov_chain_monte_carlo import IterativeMetropolisHastingsGaussianTape
 from mtfit.algorithms.markov_chain_monte_carlo import IterativeTransDMetropolisHastingsGaussianTape
@@ -24,7 +25,7 @@ except ImportError:
 VERBOSITY = 2
 
 
-class IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
+class IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase(TestCase):
 
     def setUp(self):
         self.mcmc_algorithm = IterativeMultipleTryMetropolisHastingsGaussianTape()
@@ -56,7 +57,7 @@ class IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase(unittest.TestCa
         self.assertEqual(index, 0)
 
 
-class MarginalisedMarkovChainMonteCarloTestCase(unittest.TestCase):
+class MarginalisedMarkovChainMonteCarloTestCase(TestCase):
 
     def setUp(self):
         self.mcmc_algorithm = MarginalisedMarkovChainMonteCarlo(learning_length=0)
@@ -150,7 +151,7 @@ class MarginalisedMarkovChainMonteCarloTestCase(unittest.TestCase):
         self.assertFalse(end)
 
 
-class MarginalisedMetropolisHastingsTestCase(unittest.TestCase):
+class MarginalisedMetropolisHastingsTestCase(TestCase):
 
     def setUp(self):
         self.mcmc_algorithm = MarginalisedMetropolisHastings()
@@ -163,7 +164,7 @@ class MarginalisedMetropolisHastingsTestCase(unittest.TestCase):
         self.assertEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), 1.0)
 
 
-class MarginalisedMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
+class MarginalisedMetropolisHastingsGaussianTapeTestCase(TestCase):
 
     def setUp(self):
         self.mcmc_algorithm = MarginalisedMetropolisHastingsGaussianTape()
@@ -227,6 +228,12 @@ class MarginalisedMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
 
     def test_acceptance(self):
         self.mcmc_algorithm.initialise()
+        self.mcmc_algorithm.xi = {'h': 0.7972501404226121, 'sigma': 0.3034672053613414,
+                                  'kappa': 5.562484106876691, 'gamma': -0.4613373190200656,
+                                  'delta': -0.3559523484353853}
+        self.mcmc_algorithm.xi_1 = {'h': np.array([0.62021735]), 'sigma': np.array([1.08204009]),
+                                    'kappa': np.array([5.51100894]), 'gamma': np.array([-0.45280446]),
+                                    'delta': np.array([-0.43080595])}
         if cmarkov_chain_monte_carlo:
             acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
@@ -341,7 +348,7 @@ class MarginalisedMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
 
 
-class IterativeMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
+class IterativeMetropolisHastingsGaussianTapeTestCase(TestCase):
 
     def setUp(self):
         self.mcmc_algorithm = IterativeMetropolisHastingsGaussianTape()
@@ -389,7 +396,7 @@ class IterativeMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
         self.assertEqual(self.mcmc_algorithm.pdf_sample.ln_pdf.shape, (1, 2))
 
 
-class IterativeTransDMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
+class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
 
     def setUp(self):
         self.mcmc_algorithm = IterativeTransDMetropolisHastingsGaussianTape()
@@ -452,7 +459,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
                 try:
                     self.mcmc_algorithm.xi.pop('g0')
                     self.mcmc_algorithm.xi.pop('d0')
-                except:
+                except Exception:
                     pass
             else:
                 self.mcmc_algorithm.dc = False
@@ -903,7 +910,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
                 try:
                     self.mcmc_algorithm.xi.pop('g0')
                     self.mcmc_algorithm.xi.pop('d0')
-                except:
+                except Exception:
                     pass
             self.mcmc_algorithm.gaussian_jump_params = True
             self.mcmc_algorithm.new_sample()
@@ -1347,7 +1354,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(unittest.TestCase):
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
 
 
-class McMCAlgorithmCreatorTestCase(unittest.TestCase):
+class McMCAlgorithmCreatorTestCase(TestCase):
 
     def test___new__(self):
         obj = McMCAlgorithmCreator()

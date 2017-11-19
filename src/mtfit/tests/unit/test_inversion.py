@@ -4,6 +4,10 @@ import glob
 import time
 import sys
 import gc
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 import numpy as np
 
@@ -50,7 +54,7 @@ class McMCForwardTaskTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         del self.mcmc_forward_task
 
     def test___call__(self):
@@ -118,7 +122,7 @@ class MultipleEventsMcMCForwardTaskTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         del self.multiple_events_mcmc_forward_task
 
     def test___call__(self):
@@ -728,7 +732,7 @@ class ForwardTaskTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         del self.forward_task
         del self.MTs
         global _CYTHON_TESTS
@@ -817,6 +821,7 @@ class ForwardTaskTestCase(TestCase):
         self.assertAlmostEquals(resulto['ln_pdf']._ln_pdf, resultc['ln_pdf']._ln_pdf, 2)
 
     def test_run_times(self):
+        raise unittest.SkipTest('Test run times not setup correctly for c vs python')
         combined_times = []
         cython_times = []
         python_times = []
@@ -832,7 +837,6 @@ class ForwardTaskTestCase(TestCase):
             _COMBINED_TESTS = False
             _CYTHON_TESTS = False
             _CYTHON = True
-            # print 'COMBINED', _CYTHON and not _CYTHON_TESTS and not
             # _COMBINED_TESTS,_CYTHON,_CYTHON_TESTS, _COMBINED_TESTS
             del self.forward_task
             location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
@@ -874,8 +878,6 @@ class ForwardTaskTestCase(TestCase):
             a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio = amplitude_ratio_matrix(
                 data, location_samples)
 
-            # print 'CYTHON', _CYTHON and not _CYTHON_TESTS and not
-            # _COMBINED_TESTS,_CYTHON,_CYTHON_TESTS, _COMBINED_TESTS
             self.forward_task = ForwardTask(self.MTs, a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio,
                                             percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio, a_polarity_prob, polarity_prob,
                                             [1, 1], incorrect_polarity_prob)
@@ -901,15 +903,13 @@ class ForwardTaskTestCase(TestCase):
                                             'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.001, 0.02], [0.001, 0.02]])}}
             a_polarity_prob, polarity_prob, incorrect_polarity_prob = polarity_probability_matrix(data)
             a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio = amplitude_ratio_matrix(data, location_samples)
-            # print 'PYTHON', _CYTHON and not _CYTHON_TESTS and not
-            # _COMBINED_TESTS,_CYTHON,_CYTHON_TESTS, _COMBINED_TESTS
             self.forward_task = ForwardTask(self.MTs, a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio,
                                             percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio, a_polarity_prob, polarity_prob,
                                             [1, 1], incorrect_polarity_prob)
             t0 = time.time()
             resulto = self.forward_task()
             python_times.append(time.time()-t0)
-        print ' Combined Time', sum(combined_times)/float(len(combined_times)), 'Cython Time', sum(cython_times)/float(len(cython_times)), 'Python Time', sum(python_times)/float(len(python_times)), ' ',
+        print(' Combined Time = {}, Cython Time = {}, Python Time = {}'.format(sum(combined_times)/float(len(combined_times)), sum(cython_times)/float(len(cython_times)), sum(python_times)/float(len(python_times))))
 
     def test_location_sample_multiplier(self):
         location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
@@ -972,7 +972,7 @@ class InversionTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         import gc
         try:
             del self.inversion
@@ -1021,10 +1021,9 @@ S003,110,10,1,0.05"""
         open('csvtest.csv', 'w').write(csv)
 
     def _test_inv_file(self):
-        import cPickle
         data = {'UID': '1', 'PPolarity': {'Stations': {'Name': ['S001', 'S002'], 'Azimuth': np.matrix([[120.0], [140.0]]), 'TakeOffAngle': np.matrix(
             [[65.0], [22.0]])}, 'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.01], [0.02]])}}
-        cPickle.dump(data, open('invtest.inv', 'wb'))
+        pickle.dump(data, open('invtest.inv', 'wb'))
 
     def test__load(self):
         self._test_csv_file()
@@ -1108,7 +1107,7 @@ S003,110,10,1,0.05"""
         self.assertFalse(self.inversion.pool)
 
     def test__trim_data(self):
-        self.assertTrue(self.inversion.data[0].keys() == ['PPolarity'])
+        self.assertTrue(list(self.inversion.data[0].keys()) == ['PPolarity'])
         self.inversion.inversion_options = ['PAmplitude']
         try:
             self.inversion._trim_data(self.inversion.data[0])
@@ -1151,7 +1150,7 @@ S003,110,10,1,0.05"""
         try:
             from hdf5storage import loadmat   # nopqa E401
         except Exception:
-            print 'Cannot run _file_sample test as required hdf5storage and h5py modules'
+            print('Cannot run _file_sample test as required hdf5storage and h5py modules')
             return
         self.inversion = Inversion({'UID': 'RecoverTest', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162", "S0083"], 'Azimuth': np.matrix([[90.0], [270.0], [180.]]), 'TakeOffAngle': np.matrix([[30.0], [60.0], [35.]])},
                                                                         'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.5], [0.02]])}},
@@ -1380,7 +1379,18 @@ S003,110,10,1,0.05"""
             os.remove('mtfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
-        # self.assertTrue(self.inversion.algorithm.pdf_sample.n,str(self.inversion.algorithm.pdf_sample.n))
+
+    def test__mcmc_multiple_forward_location_uncertainty(self):
+        try:
+            os.remove('mtfitOutput_joint_inversionMT.mat')
+        except Exception:
+            pass
+        data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162", "S0083"], 'Azimuth': np.matrix([[90.0], [270.0], [180.]]), 'TakeOffAngle': np.matrix([[30.0], [60.0], [35.]])},
+                                              'Measured': np.matrix([[1], [1], [-1]]), 'Error': np.matrix([[0.1], [0.5], [0.02]])}}
+        data2 = data.copy()
+        data2['UID'] = 'TestB'
+        self.inversion = Inversion([data, data], algorithm='McMC', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, multiple_events=True, convert=False)
+        self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
         self.inversion.location_pdf_files = ['test.scatangle', 'test.scatangle']
@@ -1390,16 +1400,21 @@ S003,110,10,1,0.05"""
             os.remove('test.scatangle')
         except Exception:
             pass
-        data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
-                                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])},
-                'PRMSQAmplitude': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
-                                   'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])}}
         self.assertTrue(os.path.exists('mtfitOutput_joint_inversionMT.mat'))
         try:
             os.remove('mtfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
-        self.tearDown()
+
+    def test__mcmc_multiple_forward_amplitude(self):
+        try:
+            os.remove('mtfitOutput_joint_inversionMT.mat')
+        except Exception:
+            pass
+        data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
+                                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])},
+                'PRMSQAmplitude': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
+                                   'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])}}
         self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5,
                                    phy_mem=1, max_time=10, relative_amplitude=True, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
@@ -1409,10 +1424,24 @@ S003,110,10,1,0.05"""
             os.remove('mtfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
+
+    def test__mcmc_multiple_forward_amplitude_location_uncertainty(self):
+        try:
+            os.remove('mtfitOutput_joint_inversionMT.mat')
+        except Exception:
+            pass
+        data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
+                                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])},
+                'PRMSQAmplitude': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
+                                   'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])}}
+        data2 = data.copy()
+        data2['UID'] = 'TestB'
+        self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5,
+                                   phy_mem=1, max_time=10, relative_amplitude=True, convert=False)
+        self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
-        self.inversion.location_pdf_files = [
-            'test.scatangle', 'test.scatangle']
+        self.inversion.location_pdf_files = ['test.scatangle', 'test.scatangle']
         self.inversion.algorithm.max_time = 10
         self.inversion._mcmc_multiple_forward()
         try:
@@ -1424,7 +1453,6 @@ S003,110,10,1,0.05"""
             os.remove('mtfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
-        # self.assertTrue(len(self.inversion.algorithm.pdf_sample))
 
     def test__MATLAB_output(self):
         self.tearDown()
@@ -1461,8 +1489,7 @@ S003,110,10,1,0.05"""
         except Exception:
             pass
         self.assertTrue(os.path.exists('mtfitOutputMT.out'))
-        import cPickle
-        cPickle.load(open('mtfitOutputMT.out', 'rb'))
+        pickle.load(open('mtfitOutputMT.out', 'rb'))
         try:
             os.remove('mtfitOutputMT.out')
         except Exception:
@@ -1474,9 +1501,10 @@ S003,110,10,1,0.05"""
             f.write(self.station_angles())
         self.inversion = Inversion({'PPolarity': {'Stations': {'Name': ['S0649', "S0162", "S0083"], 'Azimuth': np.matrix([[90.0], [270.0], [180.]]), 'TakeOffAngle': np.matrix([[30.0], [60.0], [35.]])},
                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.001], [0.002]])}},
-                                   algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=10, output_format='hyp', convert=False)
+                                   algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=2, output_format='hyp', convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion._floatmem = 160000
+        self.inversion.max_time = 0.1
         self.inversion.forward()
         try:
             os.remove('test.scatangle')
@@ -1605,13 +1633,13 @@ class MiscTestCase(TestCase):
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
         for fname in glob.glob('*.hyp'):
             if fname not in self.existing_hyp_files:
                 try:
                     os.remove(fname)
                 except Exception:
-                    print 'Cannot remove ', fname
+                    print('Cannot remove {}'.format(fname))
 
     def station_angles(self):
         out = "504.7\n"
@@ -1705,8 +1733,10 @@ class MiscTestCase(TestCase):
         A, Error, IncorrectPolarityProb = polarity_matrix(data)
         self.assertAlmostEquals(A, np.array([[[9.37349864e-34, 2.50000000e-01, 7.50000000e-01, 2.16489014e-17, 3.74969972e-17, 6.12372436e-01]], [[-2.53084463e-32, -7.50000000e-01, -2.50000000e-01, -1.94840113e-16, 1.12490991e-16, 6.12372436e-01]], [
                                 [9.37349864e-34, 2.50000000e-01, 7.50000000e-01, 2.16489014e-17, 3.74969972e-17, 6.12372436e-01]], [[-2.53084463e-32, -7.50000000e-01, -2.50000000e-01, -1.94840113e-16, 1.12490991e-16, 6.12372436e-01]]]))
-        self.assertEqual(IncorrectPolarityProb[1], 0.1)
-        self.assertEqual(IncorrectPolarityProb[0], 0)
+        self.assertEqual(IncorrectPolarityProb[1], 0.2)
+        self.assertEqual(IncorrectPolarityProb[0], 0.1)
+        self.assertEqual(IncorrectPolarityProb[2], 0)
+        self.assertEqual(IncorrectPolarityProb[3], 0)
 
     def test_amplitude_ratio_matrix(self):
         data = {'P/SHRMSAmplitudeRatio': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0]), 'Name': ['S01', 'S02']},
@@ -1727,8 +1757,7 @@ class MiscTestCase(TestCase):
                                        'Measured': np.matrix([[1, 2], [-1, 3]]), 'Error': np.matrix([[0.001, 0.001], [0.001, 0.02]])}}
         location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
             [31.0, 61.0, 12.1])}, {'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([92.0, 272.0, 122.1]), 'TakeOffAngle':np.array([32.0, 62.0, 13.1])}]
-        A1, A2, amplitude_ratio, Error1, Error2 = amplitude_ratio_matrix(
-            data, location_samples)
+        A1, A2, amplitude_ratio, Error1, Error2 = amplitude_ratio_matrix(data, location_samples)
         A1test = np.array([[[8.07958974e-05,   2.65183423e-01,   7.34735781e-01,  # P/SH S01
                              -6.54610306e-03,  -1.08962046e-02,   6.24243141e-01],  # P/SH S01 Sample 1
                             [3.42024915e-04,   2.80472402e-01,   7.19185573e-01,
@@ -1842,12 +1871,12 @@ class MiscTestCase(TestCase):
 def test_suite(verbosity=2):
     global VERBOSITY
     VERBOSITY = verbosity
-    suite = [#unittest.TestLoader().loadTestsFromTestCase(McMCForwardTaskTestCase),
-             #unittest.TestLoader().loadTestsFromTestCase(MultipleEventsMcMCForwardTaskTestCase),
-             #unittest.TestLoader().loadTestsFromTestCase(MultipleEventsForwardTaskTestCase),
-             #unittest.TestLoader().loadTestsFromTestCase(ForwardTaskTestCase),
+    suite = [unittest.TestLoader().loadTestsFromTestCase(McMCForwardTaskTestCase),
+             unittest.TestLoader().loadTestsFromTestCase(MultipleEventsMcMCForwardTaskTestCase),
+             unittest.TestLoader().loadTestsFromTestCase(MultipleEventsForwardTaskTestCase),
+             unittest.TestLoader().loadTestsFromTestCase(ForwardTaskTestCase),
              unittest.TestLoader().loadTestsFromTestCase(InversionTestCase),
-             #unittest.TestLoader().loadTestsFromTestCase(MiscTestCase),
+             unittest.TestLoader().loadTestsFromTestCase(MiscTestCase),
              ]
     suite = unittest.TestSuite(suite)
     return suite

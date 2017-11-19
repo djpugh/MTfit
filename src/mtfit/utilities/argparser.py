@@ -259,7 +259,7 @@ def _get_env_defaults(test=False, extension_defaults={}, extension_default_types
             try:
                 key = line.split(':')[0]
                 attr = ':'.join(line.split(':')[1:]).rstrip()
-            except:
+            except Exception:
                 if len(line):
                     error = True
                     ok = False
@@ -273,7 +273,7 @@ def _get_env_defaults(test=False, extension_defaults={}, extension_default_types
                                 try:
                                     attr = tp(attr)
                                     ok = True
-                                except:
+                                except Exception:
                                     pass
                         if not ok:
                             error = True
@@ -715,7 +715,7 @@ def _mtfit_argparser(input_args=None, test=False):
         for arg in arguments:
             kwargs = {key: value for (key, value) in arg.items() if key != 'flags'}
             parser.add_argument(*arg['flags'], **kwargs)
-        for (name, extension) in cmd_opts.iteritems():
+        for (name, extension) in cmd_opts.items():
             group = parser.add_argument_group(name.capitalize(), description="\nCommands for the extension "+name)
             (group, extension_parser_check) = extension(group, _ARGPARSE, defaults)
             extension_parser_checks.append(extension_parser_check)
@@ -752,7 +752,7 @@ def _mtfit_argparser(input_args=None, test=False):
             kwargs = {
                 key: value for (key, value) in arg.items() if key != 'flags'}
             parser.add_option(*arg['flags'], **kwargs)
-        for (name, extension) in cmd_opts.iteritems():
+        for (name, extension) in cmd_opts.items():
             group = optparse.OptionGroup(
                 parser, name, description="\nCommands for the extension "+name)
             (group, extension_parser_check) = extension(
@@ -1058,7 +1058,7 @@ def mtfit_parser(input_args=False, test=False):
     if options['file_sample'] and not options['qsub']:
         try:
             from hdf5storage import savemat, loadmat  # noqa F401
-        except:
+        except Exception:
             parser.error('file_sample option requires hdf5storage and h5py modules')
     if options['file_sample'] and 'mcmc' in options['algorithm']:
         parser.error('file_sample option not supported for mcmc algorithms.')

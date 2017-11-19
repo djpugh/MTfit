@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-"""Setup script for mtfit
-*********************************
+"""
+Setup script for mtfit
+***********************
 Call from command line as: python setup.py install if on unix
 or python setup.py install
 """
@@ -50,11 +51,27 @@ def setup_package():
                   cmdclass=versioneer.get_cmdclass(),
                   author=__author__,
                   author_email=__email__,
+                  classifiers=[
+                      'Environment :: Console',
+                      'Development Status :: 4 - Beta',
+                      'Intended Audience :: Science/Research',
+                      'License :: Free for non-commercial use',
+                      'Operating System :: Microsoft :: Windows',
+                      'Operating System :: Mac :: Mac OS X',
+                      'Operating System :: POSIX',
+                      'Programming Language :: Cython',
+                      'Topic :: Scientific/Engineering',
+                      'Programming Language :: Python :: 2',
+                      'Programming Language :: Python :: 2.7',
+                      'Programming Language :: Python :: 3',
+                      'Programming Language :: Python :: 3.5',
+                      'Programming Language :: Python :: 3.6'],
                   packages=find_packages('src'),
                   package_dir={'': 'src'},
                   requires=['numpy', 'scipy'],
                   install_requires=['numpy>=1.7.0', 'scipy', 'cython>=0.20.2', 'setuptools', 'pyqsub>=1.0.2'],
                   provides=['mtfit'],
+                  test_suite='mtfit.tests.test_suite',
                   description='mtfit: Bayesian Moment Tensor Inversion Code',
                   long_description=long_description,
                   package_data={'': ['*.rst', 'examples/README', 'examples/command_line.sh', 'examples/command_line.bat', '*.pyx', '*.pxd', '*.c',
@@ -63,7 +80,6 @@ def setup_package():
                                      'docs/html/_downloads/*.*', 'docs/html/_modules/*.*', 'docs/html/_modules/mtfit/*.*', 'docs/html/_sources/*.*', 'docs/html/_static/*.*']}
                   )
     kwargs['extras_require'] = {'MATLAB -v7.3': ['h5py', 'hdf5storage'], 'HTML documentation': ['sphinx>=1.3.1'], 'Cluster': ['pyqsub>=1.0.2'], 'Plotting': ['matplotlib>=1.4.0']}
-    kwargs['test_suite'] = 'test_suite'
     kwargs['entry_points'] = {}
     kwargs['entry_points'] = {'console_scripts': ['mtfit = mtfit.run:run', 'MTplot = mtfit.plot.core:run'],
                               'mtfit.parsers': ['.csv = mtfit.utilities.file_io:parse_csv', '.hyp = mtfit.utilities.file_io:parse_hyp'],
@@ -72,7 +88,6 @@ def setup_package():
                               'mtfit.output_data_formats': ['full_pdf=mtfit.utilities.file_io:full_pdf_output_dicts', 'hyp=mtfit.utilities.file_io:hyp_output_dicts'],
                               'mtfit.cmd_defaults': ['scatangle=mtfit.extensions.scatangle:cmd_defaults'],
                               'mtfit.cmd_opts': ['scatangle=mtfit.extensions.scatangle:cmd_opts'],
-                              'mtfit.tests': ['scatangle=mtfit.extensions.scatangle:tests'],
                               'mtfit.pre_inversion': ['scatangle=mtfit.extensions.scatangle:pre_inversion']
                               }
     kwargs['include_dirs'] = [np.get_include()]
@@ -101,7 +116,7 @@ def setup_package():
 def setup_help():
     # Run setup with cmd args (DEFAULT)
     if '--help' in sys.argv or '-h' in sys.argv:
-        print """setup.py script for mtfit
+        print("""setup.py script for mtfit
 
 mtfit can be installed from the source by calling:
 
@@ -115,7 +130,7 @@ This will install the module to the user site-packages directory. Alternatively,
 
      $ python setup.py install --prefix=/path/to/top_level_directory
 
-"""
+""")
 
 
 def build_extensions():
@@ -144,8 +159,6 @@ def _clean_package():
 
 def cython_build():
     setup_package(test=False, build=False, develop=True)
-    sys.stdout = sys.__stdout__
-    sys.stderr = sys.__stderr__
 
 
 if __name__ == "__main__":

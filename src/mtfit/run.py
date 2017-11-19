@@ -19,7 +19,7 @@ import warnings
 try:
     import pyqsub  # python module for cluster job submission using qsub.
     _PYQSUB = True
-except:
+except Exception:
     _PYQSUB = False
 
 from .inversion import Inversion
@@ -91,7 +91,7 @@ def mtfit(data={}, data_file=False, location_pdf_file_path=False, algorithm='Tim
         for plugin in pre_inversions.values():
             kwargs = plugin(**kwargs)
         if not kwargs.get('_mpi_call', False):
-            print 'Running mtfit.'
+            print('Running mtfit.')
         # Effectively
         # inversion = Inversion(data, data_file, location_pdf_file_path, algorithm, parallel, n, phy_mem, dc, **kwargs)
         # but allowing the pre inversion plugin to change the kwargs
@@ -138,11 +138,11 @@ def run(args=None):
                 # could add extra changeable MPI python handling here (and
                 # elsewhere?)
                 import mpi4py  # noqa F401
-            except:
+            except Exception:
                 raise ImportError('MPI module mpi4py not found, unable to run in mpi')
             # restart python as mpirun
             options['_mpi_call'] = True
-            print 'Running mtfit using mpirun'
+            print('Running mtfit using mpirun')
             optstring = pyqsub.make_optstr(options, options_map)
             mpiargs = ["mpirun", "-n", str(options['n']), "mtfit"]
             mpiargs.extend(optstring.split())

@@ -62,7 +62,7 @@ def _read(filename, file_format=False, station_distribution=False, *args, **kwar
     """
     default_formats = {'.hyp': read_hyp_output, '.mt': read_hyp_output, '.mat': read_matlab_output,
                        '.out': read_pickle_output, '.pkl': read_pickle_output, '.scatangle': read_scatangle_output}
-    parser_names, parsers = get_extensions('MTINV.plot_read', default_formats)
+    parser_names, parsers = get_extensions('mtfit.plot_read', default_formats)
     if not file_format:
         file_format = os.path.splitext(filename)[-1]
     return parsers[file_format](filename, station_distribution=station_distribution, *args, **kwargs)

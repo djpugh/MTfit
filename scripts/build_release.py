@@ -9,7 +9,7 @@ import argparse
 
 from git import Repo, InvalidGitRepositoryError
 
-from MTINV import __version__
+from mtfit import __version__
 
 
 class DirtyRepository(Exception):
@@ -42,7 +42,7 @@ def build_release():
         sys.stderr.write(std_err)
         try:
             proc.kill()
-        except:
+        except Exception:
             pass
         add_and_commit(repo, "Documentation build")
         # Check if merging (git flow or otherwise?) - merge into master and then tag master and then merge master into develop

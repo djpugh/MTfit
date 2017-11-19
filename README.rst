@@ -1,7 +1,8 @@
-The documentation is available in mtfit/docs/ (including HTML and PDF documentation).
+The documentation is available at `https://djpugh.github.io/MTfit/ <https://djpugh.github.io/MTfit/>`_ and can be built using `sphinx` from the source in mtfit/docs/, or using the `build_docs.py`.
 
 The documentation includes tutorials and explanations of mtfit and the approaches used.
 
+Please note that this code is provided as-is, and no guarantee is given that this code will perform in the desired way. Additional development and support is carried out in the developer's free time.
 
 **Restricted:  For Non-Commercial Use Only**
 This code is protected intellectual property and is available solely for teaching

@@ -81,7 +81,7 @@ class MATLABOutputTask(object):
         if self.version == '7.3':
             try:
                 from hdf5storage import savemat
-            except:
+            except Exception:
                 self.version = '7'
         if self.version != '7.3':
             from scipy.io import savemat  # noqa F811
@@ -259,7 +259,7 @@ def _parse_hyp_events(events_list, polarity_error_multiplier=3.):
                 sec = line[7]
                 try:
                     event_dict['UID'] = line[2]+line[3]+line[4]+line[5]+line[6]+sec.split('.')[0]+sec.split('.')[1][:-1]
-                except:
+                except Exception:
                     pass
             # Phase flag
             if line[0] == 'PHASE':
@@ -405,11 +405,11 @@ def _parse_csv_events(events_list):
             'Name': [], 'TakeOffAngle': [], 'Azimuth': []}, 'Measured': [], 'Error': []}
         # Loop over lines
         for line in event:
-            l = line.split(',')
-            if len(l[0]) and not sum([len(u) for u in l[1:]]):
+            split_line = line.split(',')
+            if len(split_line[0]) and not sum([len(u) for u in split_line[1:]]):
                 # Try tp get UID
-                if 'UID' in l[0]:
-                    event_dict['UID'] = l[0].split(
+                if 'UID' in split_line[0]:
+                    event_dict['UID'] = split_line[0].split(
                         'UID')[1].lstrip(':').lstrip('=').strip()
                 else:
                     # End of event
@@ -419,28 +419,28 @@ def _parse_csv_events(events_list):
                         key_dict['Measured'] = np.matrix(key_dict['Measured'])
                         key_dict['Error'] = np.matrix(key_dict['Error'])
                         event_dict[key] = key_dict
-                    key = l[0].strip()
+                    key = split_line[0].strip()
                     key_dict = {'Stations': {
                         'Name': [], 'TakeOffAngle': [], 'Azimuth': []}, 'Measured': [], 'Error': []}
-            elif 'Name' in l:
+            elif 'Name' in split_line:
                 # Try to read header file and get key pieces
-                l = ','.join(l).lower().split(',')
-                name_index = l.index('name')
-                measured_index = l.index('measured')
-                azimuth_index = l.index('azimuth')
-                take_off_angle_index = l.index('takeoffangle')
-                error_index = l.index('error')
+                split_line = ','.join(split_line).lower().split(',')
+                name_index = split_line.index('name')
+                measured_index = split_line.index('measured')
+                azimuth_index = split_line.index('azimuth')
+                take_off_angle_index = split_line.index('takeoffangle')
+                error_index = split_line.index('error')
             else:
                 # Append item to list
-                key_dict['Stations']['Name'].append(l[name_index])
-                key_dict['Stations']['TakeOffAngle'].append([float(l[take_off_angle_index].strip())])
-                key_dict['Stations']['Azimuth'].append([float(l[azimuth_index].strip())])
+                key_dict['Stations']['Name'].append(split_line[name_index])
+                key_dict['Stations']['TakeOffAngle'].append([float(split_line[take_off_angle_index].strip())])
+                key_dict['Stations']['Azimuth'].append([float(split_line[azimuth_index].strip())])
                 measured = []
-                for _measured in l[measured_index].split():
+                for _measured in split_line[measured_index].split():
                     measured.append(float(_measured.strip()))
                 key_dict['Measured'].append(measured)
                 error = []
-                for err in l[error_index].split():
+                for err in split_line[error_index].split():
                     error.append(float(err.strip()))
                 key_dict['Error'].append(error)
         # Sort output into correct structs
@@ -561,7 +561,7 @@ def _convert_mt_space_to_struct(output_data, i=False):
         d2 = output_data['D2'+end]
         r2 = output_data['R2'+end]
         converted = True
-    except:
+    except Exception:
         converted = False
     # Add Number of samples and converted flag
     binary_output = struct.pack('QQQ?', file_version, output_data['total_number_samples'],
@@ -569,15 +569,16 @@ def _convert_mt_space_to_struct(output_data, i=False):
     # Try to add Bayesian evidence
     try:
         binary_output += struct.pack('1d', output_data['ln_bayesian_evidence'])
-    except:
+    except Exception:
         binary_output += struct.pack('1d', np.nan)  # No Bayesian evidence
     # Try to add Dkl
     try:
         binary_output += struct.pack('1d', output_data['dkl'])
-    except:
+    except Exception:
         binary_output += struct.pack('1d', np.nan)  # No Dkl
     # Loop over MTs
     for i in range(output_data['moment_tensor_space'+end].shape[1]):
+        # This seems slow in python 3
         # Add MT data
         if output_data['probability'].ndim == 2:
             p = output_data['probability'][0, i]
@@ -593,27 +594,26 @@ def _convert_mt_space_to_struct(output_data, i=False):
                                      output_data['moment_tensor_space'+end][5, i]/sqrt2)
         if converted:
             # Add converted data
-            binary_output += struct.pack('13d', g[i], d[i], k[i], h[i], s[i], u[i], v[
-                                         i], s1[i], d1[i], r1[i], s2[i], d2[i], r2[i])
+            binary_output += struct.pack('13d', g[i], d[i], k[i], h[i], s[i], u[i], v[i], s1[i], d1[i], r1[i], s2[i], d2[i], r2[i])
     # Handle scale_factors
-    sf_output = ''
+    if sys.version_info.major > 2:
+        sf_output = b''
+    else:
+        sf_output = ''
     if 'scale_factors' in output_data:
         n_events = output_data['scale_factors']['mu'].shape[1]
-        sf_output = struct.pack('QQQ', output_data['total_number_samples'], len(
-            output_data['scale_factors']), n_events)
+        sf_output = struct.pack('QQQ', output_data['total_number_samples'], len(output_data['scale_factors']), n_events)
         for i, sf in enumerate(output_data['scale_factors']):
-            sf_output += struct.pack(
-                'dd', output_data['probability'][0, i], output_data['ln_pdf'][0, i])
+            sf_output += struct.pack('dd', output_data['probability'][0, i], output_data['ln_pdf'][0, i])
             # Add data for each event - Loops over off diagonal elements
             k = 0
-            l = 1
+            _l = 1
             for j in range(int(n_events*(n_events-1)/2.)):
-                sf_output += struct.pack('dd',
-                                         sf['mu'][k, l], sf['sigma'][k, l])
-                l += 1
-                if l >= n_events:
+                sf_output += struct.pack('dd', sf['mu'][k, _l], sf['sigma'][k, _l])
+                _l += 1
+                if _l >= n_events:
                     k += 1
-                    l = k+1
+                    _l = k+1
     # Return output
     return binary_output, sf_output
 
@@ -642,8 +642,8 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
         if maxMT.shape[1] > 1:
             maxMT = maxMT[:, 0]
         maxMT_tape = MT6_Tape(maxMT)
-    except Exception as e:
-        print e
+    except Exception:
+        traceback.print_exc()
     if all(maxMT == 0):
         maxMT_tape = [0, 0, 0, 0, 0]
     # Check if its a DC
@@ -658,10 +658,10 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
         lines = []
         try:
             lines.append(['NLLOC', event_data['UID']])
-        except:
+        except Exception:
             lines.append(['NLLOC'])
-        lines.append(['SIGNATURE', 'MTINV', __version__+'/'+datetime.now().isoformat()])
-        lines.append(['COMMENT', 'MTINV inversion'])
+        lines.append(['SIGNATURE', 'mtfit', __version__+'/'+datetime.now().isoformat()])
+        lines.append(['COMMENT', 'mtfit inversion'])
         lines.append(['GRID', 'None'])
         lines.append(['SEARCH', 'None'])
         lines.append(['HYPOCENTER', 'x', '?', 'y', '?', 'z', '?',
@@ -698,7 +698,7 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
         source_line_index = lines.index(
             [line for line in lines if line[0] == 'FOCALMECH'][0])
         lines.pop(source_line_index)
-    except:
+    except Exception:
         pass
     # Make source line
     if dc:
@@ -714,15 +714,13 @@ def _generate_hyp_output_data(event_data, inversion_options=False, output_data=F
     nobs = 0
     # Run polarity misfit checks
     for i in range(phase_line_index+2, end_phase_line_index+1):
-        if len(line) < 24:
+        if len(lines[i]) < 24:
             continue
         if _polarity_misfit_check(nlloc_polarity_dict[lines[i][5].lower()], float(lines[i][23]), float(lines[i][24]), lines[i][4], maxMT):
             mf += 1
-            lines[i][5] = nlloc_polarity_inv_dict[
-                lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].lower()
+            lines[i][5] = nlloc_polarity_inv_dict[lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].lower()
         else:
-            lines[i][5] = nlloc_polarity_inv_dict[
-                lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].upper()
+            lines[i][5] = nlloc_polarity_inv_dict[lines[i][4].upper()[0]][nlloc_polarity_dict[lines[i][5].lower()]].upper()
 
         if lines[i][5] != '?':
             nobs += 1
@@ -837,7 +835,7 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
             for j, observations_dict in enumerate(observations_dicts):
                 try:
                     number_stations = len(observations_dict['Stations']['Name'])
-                except:
+                except Exception:
                     continue
                 _stations = np.matrix(np.zeros((number_stations, 4), dtype=np.object))
                 _stations[:, 0] = np.matrix(observations_dict['Stations']['Name']).T
@@ -852,7 +850,7 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
                 _stations[:, 3] = np.zeros((len(observations_dict['Stations']['Name']), 1))
                 try:
                     stations = np.append(stations, _stations, 0)
-                except:
+                except Exception:
                     pass
                 stations = np.array(stations)
             # Remove duplicate stations
@@ -887,9 +885,9 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
     event = {'NSamples': output_data.pop('total_number_samples'), 'dV': output_data.pop('dV'), 'Probability': output_data.pop('probability')}
     try:
         event['UID'] = event_data['UID']
-    except:
+    except Exception:
         pass
-    output_data_keys = output_data.keys()
+    output_data_keys = list(output_data.keys())
     # Handle multiple events data types
     if not station_output:
         for key in output_data_keys:
@@ -906,9 +904,11 @@ def full_pdf_output_dicts(event_data, inversion_options=False, output_data=False
         event = {'NSamples': 0}
     try:
         event['ln_pdf'] = event['ln_pdf']._ln_pdf
-    except:
+    except Exception:
         pass
     # Create mdict and sdict and return
+    if (isinstance(all_stations, list) and not len(all_stations)) or (isinstance(all_stations, np.ndarray) and not np.prod(all_stations.shape)):
+        all_stations = []
     mdict = {'Events': event, 'Stations': all_stations, 'Other': other}
     sdict = {'StationDistribution': station_distribution}
     if not len(sdict['StationDistribution']):
@@ -951,7 +951,7 @@ def hyp_output_dicts(event_data, inversion_options=False, output_data=False, loc
                     maxMT = unique_columns(output_data['moment_tensor_space_'+str(i+1)][:, ind])
                     if maxMT.shape[1] > 1:
                         maxMT = maxMT[:, 0]
-                except:
+                except Exception:
                     maxMT = np.matrix([[0], [0], [0], [0], [0], [0]])
             # Get hyp output data
             output_contents.append('\n'.join(_generate_hyp_output_data(ev_data, inversion_options, output_data, maxMT))+'\n\n')
@@ -964,16 +964,21 @@ def hyp_output_dicts(event_data, inversion_options=False, output_data=False, loc
         output_contents = ['\n'.join(_generate_hyp_output_data(event_data, inversion_options, output_data))+'\n']
         # Get mt and scale_factor outputs
         binary, sf = _convert_mt_space_to_struct(output_data)
+        # Need to convert this to a string if using python 3
         output_mt = [binary]
         output_sf = [sf]
-    return '\n'.join(output_contents), ''.join(output_mt), ''.join(output_sf)
+    if sys.version_info.major > 2:
+        binary_spacer = b''
+    else:
+        binary_spacer = ''
+    return '\n'.join(output_contents), binary_spacer.join(output_mt), binary_spacer.join(output_sf)
 
 #
 # Output file formats
 #
 
 
-def MATLAB_output(output_data, fid='MTINVOutput.mat', pool=False, version='7.3', *args, **kwargs):
+def MATLAB_output(output_data, fid='mtfitOutput.mat', pool=False, version='7.3', *args, **kwargs):
     """
     Outputs event results to fid as .mat
 
@@ -984,7 +989,7 @@ def MATLAB_output(output_data, fid='MTINVOutput.mat', pool=False, version='7.3',
 
     Args
         output_data: data dictionary for the event_data.
-        fid:['MTINVOutput.mat'] Filename for output.
+        fid:['mtfitOutput.mat'] Filename for output.
         pool:[False] Use Jobpool for parallel output.
         version:[7.3] MATLAB file type to use (v 7.3 requires hdf5storage and h5py).
 
@@ -1033,8 +1038,7 @@ def MATLAB_output(output_data, fid='MTINVOutput.mat', pool=False, version='7.3',
         # cPickle length)
         output_string += 'Using jobPool to save file to {}\n'.format(fid)
         if mdict:
-            pool.custom_task(
-                MATLABOutputTask, os.path.splitext(fid)[0]+'.mat', mdict, version)
+            pool.custom_task(MATLABOutputTask, os.path.splitext(fid)[0]+'.mat', mdict, version)
         if sdict:
             pool.custom_task(MATLABOutputTask, os.path.splitext(fid)[0]+'StationDistribution.mat', sdict, st_ver)
     else:
@@ -1043,13 +1047,13 @@ def MATLAB_output(output_data, fid='MTINVOutput.mat', pool=False, version='7.3',
         if sdict:
             try:
                 MATLABOutputTask(os.path.splitext(fid)[0]+'StationDistribution.mat', sdict, st_ver)()
-            except:
+            except Exception:
                 traceback.print_exc()
         output_string += 'Saved to {}\n'.format(fid)
     return output_string, fid
 
 
-def pickle_output(output_data, fid='MTINVOutput.out', pool=False, *args, **kwargs):
+def pickle_output(output_data, fid='mtfitOutput.out', pool=False, *args, **kwargs):
     """
     Outputs event results to fid as .out (default)
 
@@ -1059,7 +1063,7 @@ def pickle_output(output_data, fid='MTINVOutput.out', pool=False, *args, **kwarg
 
     Args
         output_data: data dictionary for the event_data.
-        fid:['MTINVOutput.out'] Filename for output.
+        fid:['mtfitOutput.out'] Filename for output.
         pool:[False] Use Jobpool for parallel output.
 
     Returns
@@ -1093,7 +1097,7 @@ def pickle_output(output_data, fid='MTINVOutput.out', pool=False, *args, **kwarg
     return output_string, fid
 
 
-def hyp_output(output_data, fid='MTINVOutput.hyp', pool=False, *args, **kwargs):
+def hyp_output(output_data, fid='mtfitOutput.hyp', pool=False, *args, **kwargs):
     """
     Outputs event results to fid as .hyp (default)
 
@@ -1103,7 +1107,7 @@ def hyp_output(output_data, fid='MTINVOutput.hyp', pool=False, *args, **kwargs):
 
     Args
         output_data: data dictionary for the event_data.
-        fid:['MTINVOutput.hyp'] Filename for output.
+        fid:['mtfitOutput.hyp'] Filename for output.
         pool:[False] Use Jobpool for parallel output.
 
     Returns
@@ -1408,7 +1412,7 @@ def _parse_matlab_output(data):
                     ev_data[key_map[key]] = data['Events'][key][0, 0]
             try:
                 st = _parse_matlab_stations(data['Stations'][0, int(ind)-1])
-            except:
+            except Exception:
                 st = {}
             events.append(ev_data)
             stations.append(st)
@@ -1416,7 +1420,7 @@ def _parse_matlab_output(data):
     # Single Event
     try:
         stations = _parse_matlab_stations(data['Stations'])
-    except:
+    except Exception:
         stations = {}
     events = {}
     try:
@@ -1428,7 +1432,7 @@ def _parse_matlab_output(data):
                     events[key] = events[key][0]
             else:
                 events[key] = data['Events'][key][0, 0]
-    except:
+    except Exception:
         events = convert_keys_from_unicode(data['Events'])
     if events['Probability'].max() == 0:
         events['Probability'] = np.exp(events['ln_pdf']-events['ln_pdf'].max())
@@ -1478,7 +1482,7 @@ def read_hyp_output(filename):
     """
     try:
         hyp_data = parse_hyp(os.path.splitext(filename)[0]+'.hyp')
-    except:
+    except Exception:
         hyp_data = {}
     events = read_binary_output(os.path.splitext(filename)[0]+'.mt')
     key_map = {'takeoffangle': 'takeoff_angle'}
@@ -1490,7 +1494,7 @@ def read_hyp_output(filename):
             if key.lower() in key_map.keys():
                 new_key = key_map[key.lower()]
             stations[new_key] = stations.pop(key)
-    except:
+    except Exception:
         stations = {}
     return events, stations
 
@@ -1535,6 +1539,8 @@ def convert_keys_to_unicode(dictionary,):
     Returns
         dictionary: Converted dictionary.
     """
+    if sys.version_info.major > 2:
+        return dictionary
     if isinstance(dictionary, list):
         new_list = []
         for item in dictionary:
@@ -1567,6 +1573,8 @@ def convert_keys_from_unicode(dictionary,):
     Returns
         dictionary: Converted dictionary.
     """
+    if sys.version_info.major > 2:
+        return dictionary
     if isinstance(dictionary, list):
         new_list = []
         for item in dictionary:
@@ -1591,24 +1599,38 @@ def convert_keys_from_unicode(dictionary,):
 def unique_columns(data, counts=False, index=False):
     """Get unique columns in an array (used for max probability MT)"""
     output = []
-    data = np.array(data).T
-    ind = np.lexsort(data.T)
-    uniq = data[
-        ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))]].T
-    output.append(np.matrix(uniq))
+    if float('.'.join(np.__version__.split('.')[:2])) >= 1.13:
+        unique_results = np.unique(data, return_index=index, return_counts=counts, axis=1)
+        if isinstance(unique_results, tuple):
+            unique = unique_results[0]
+        else:
+            unique = unique_results
+        if index:
+            idx = unique_results[1]
+        if counts:
+            unique_counts = unique_results[-1]
+    else:
+        data = np.array(data).T
+        ind = np.lexsort(data.T)
+        data = np.squeeze(data)
+        if len(ind.shape) > 1:
+            ind = np.squeeze(ind)
+        unique = data[ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))]].T
+        if counts:
+            indx = np.nonzero(np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1))))[0]
+            unique_counts = []
+            for u, j in enumerate(indx):
+                try:
+                    unique_counts.append(indx[u+1]-j)
+                except Exception:
+                    unique_counts.append(1)
+        if index:
+            idx = ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))]
+    output.append(np.matrix(unique))
     if counts:
-        indx = np.nonzero(
-            np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1))))[0]
-        counts = []
-        for u, j in enumerate(indx):
-            try:
-                counts.append(indx[u+1]-j)
-            except:
-                counts.append(1)
-        output.append(np.array(counts))
+        output.append(np.array(unique_counts))
     if index:
-        output.append(
-            ind[np.concatenate(([True], np.any(data[ind[1:]] != data[ind[:-1]], axis=1)))])
+        output.append(idx)
     if len(output) == 1:
         return output[0]
     else:

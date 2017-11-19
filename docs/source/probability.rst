@@ -58,7 +58,7 @@ The difficulty in estimating :math:`\sigma_{y}` is increased further when polari
     ============================
 
 :ref:`Pugh et al, 2016b <Pugh-2016b>` introduces an alternate method for estimating the polarity, using an automated Bayesian probability estimate. This approach results in estimates of the postive and negative polarity probabilities.
-:mod:`autopol` provides a Python module for calculating these values (:ref:`Pugh, 2016a <Pugh-2016a>`), and is available from the SGR GitLab. These observations can be included in  :mod:`mtfit`, although the data independence must be preserved. The :term:`PDF` is:
+:mod:`autopol` provides a Python module for calculating these values (:ref:`Pugh, 2016a <Pugh-2016a>`), and may be available on request. These observations can be included in  :mod:`mtfit`, although the data independence must be preserved. The :term:`PDF` is:
 
 .. math::
 
