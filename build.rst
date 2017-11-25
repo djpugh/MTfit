@@ -1,6 +1,7 @@
 Building a release
 ******************
 
+* Build the c extensions and commit
 * Tag the release with a release message and push to github
 * Build the distribution wheels (use vagrant to build the linux wheels) (N.B. be careful with the c files built from cython)
 * Build the documentation using::
