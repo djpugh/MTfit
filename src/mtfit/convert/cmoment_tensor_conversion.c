@@ -17826,15 +17826,15 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
     goto __pyx_L10_try_end;
     __pyx_L3_error:;
-    __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-    __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-    __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
-    __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
+    __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
+    __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
+    __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
 
     /* "mtfit\convert\cmoment_tensor_conversion.pyx":593
  *             self.assertAlmostEqual(results[11],48.1896851042214)
