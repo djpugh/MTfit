@@ -144,7 +144,7 @@ def build_extensions():
             for ext in exts:
                 if os.path.exists(filename+ext):
                     os.remove(filename+ext)
-    elif 'sdist' in sys.argv or 'develop' in sys.argv:
+    elif 'develop' in sys.argv:
         print('------\nBUILDING EXTENSIONS\n-----\n')
         argv = [sys.executable, "setup.py", "build_ext", "--inplace"]
         subprocess.check_call(argv)
