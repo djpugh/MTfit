@@ -1,10 +1,10 @@
 
 *********************************
-mtfit
+MTfit
 *********************************
 
 Bayesian Moment Tensor Inversion Code by David J Pugh
-mtfit is based on the bayesian approach presented in Pugh, D J, 2015,
+MTfit is based on the bayesian approach presented in Pugh, D J, 2015,
 Bayesian Source Inversion of Microseismic Events, PhD Thesis, Department of Earth Sciences,
 University of Cambridge.
 
@@ -21,10 +21,10 @@ Applications for commercial use should be made to Schlumberger or the University
 Input Data
 ==================================
 
-There are several different input data types, and it is also possible to add additional parsers using the ``mtfit.parsers`` entry point.
+There are several different input data types, and it is also possible to add additional parsers using the ``MTfit.parsers`` entry point.
 
 
-The required data structure for running mtfit is very simple, the inversion expects a python dictionary of the data in the format::
+The required data structure for running MTfit is very simple, the inversion expects a python dictionary of the data in the format::
 
     >>> data={'PPolarity':{'Measured':numpy.matrix([[-1],[-1]...]),
                          'Error':numpy.matrix([[0.01],[0.02],...]),
@@ -38,9 +38,9 @@ The required data structure for running mtfit is very simple, the inversion expe
               'UID':'Event1'
               }
 
-For more information on the data keywords and how to set them up, see :class:`~mtfit.inversion.Inversion` docstrings.
+For more information on the data keywords and how to set them up, see :class:`~MTfit.inversion.Inversion` docstrings.
 
-The data dictionary can be passed directly to the :class:`~mtfit.inversion.Inversion` object (simple if running within python), or from a binary pickled object, these can be made by simply using pickle (or cPickle)::
+The data dictionary can be passed directly to the :class:`~MTfit.inversion.Inversion` object (simple if running within python), or from a binary pickled object, these can be made by simply using pickle (or cPickle)::
 
     >>> pickle.dump(data,open(filename,'wb'))
 
@@ -82,7 +82,7 @@ There is a hyp format parser which reads hyp files as defined by `NonLinLoc <htt
 Output
 ==================================
 
-The default output is to output a MATLAB file containing 2 structures and a cell array, although there are two other possible formats, and others can be added (see mtfit.extensions).
+The default output is to output a MATLAB file containing 2 structures and a cell array, although there are two other possible formats, and others can be added (see MTfit.extensions).
 The ``Events`` structure has the following fieldnames: ``MTspace`` and ``Probability``.
 
     * ``MTspace`` - The moment tensor samples as a 6 by n vector of the form::
@@ -150,7 +150,7 @@ if Converted is true then each sample also contains::
     dip2 (double)
     rake2 (double)
 
-If there are multiple events saved, then the next event starts immediately after the last with the same format. The output binary file can be re-read into python using mtfit.inversion.read_binary_output.
+If there are multiple events saved, then the next event starts immediately after the last with the same format. The output binary file can be re-read into python using MTfit.inversion.read_binary_output.
 
 
 
@@ -163,7 +163,7 @@ The code is written to run in parallel using multiprocessing, it will initialise
 A single thread mode can be forced using:
 
     * -l, --singlethread, --single, --single_thread flag on the command line
-    * parallel=False keyword in the mtfit.inversion.Inversion object initialisation
+    * parallel=False keyword in the MTfit.inversion.Inversion object initialisation
 
 It is also possible to run this code on a cluster using qsub [requires pyqsub]. This can be called from the commandline using a flag:
 
@@ -184,7 +184,7 @@ Command line flags
 
 To obtain a list of the command line flags use the -h flag::
 
-    $ mtfit -h
+    $ MTfit -h
 
 This will provide a list of the arguments and their usage.
 
@@ -192,17 +192,17 @@ This will provide a list of the arguments and their usage.
 Running from the command line
 ==================================
 
-To run from the command line on  linux/*nix  it is necessary to make sure that the mtfit script installed is on the path,
+To run from the command line on  linux/*nix  it is necessary to make sure that the MTfit script installed is on the path,
 or to set up a manual alias/script, e.g. for bash::
 
-    $ python -c "import mtfit;mtfit.run.mtfit()" $*
+    $ python -c "import MTfit;MTfit.run.MTfit()" $*
 
 
 On windows using powershell add the following commandlet to your profile (for information on customizing your powershell profile see: http://www.howtogeek.com/50236/customizing-your-powershell-profile/)::
 
-    function mtfit{
+    function MTfit{
         $script={
-            python -c "import mtfit;mtfit.run.mtfit()" $args
+            python -c "import MTfit;MTfit.run.MTfit()" $args
         }
         Invoke-Command -ScriptBlock $script -ArgumentList $args
     }
@@ -215,13 +215,13 @@ Running from within python
 
 To run from within python, (assuming the module is on your PYTHONPATH) first::
 
-    >>> import mtfit
+    >>> import MTfit
 
-Then to run the inversion it is necessary to set up an mtfit.inversion.Inversion object::
+Then to run the inversion it is necessary to set up an MTfit.inversion.Inversion object::
 
-    >>> myInversion=mtfit.Inversion(**kwargs)
+    >>> myInversion=MTfit.Inversion(**kwargs)
 
-For more information on the arguments for initialising the inversion object, see the mtfit.inversion.Inversion docstrings
+For more information on the arguments for initialising the inversion object, see the MTfit.inversion.Inversion docstrings
 
 
 Running Module Tests
@@ -229,8 +229,8 @@ Running Module Tests
 
 There is a unittest suite for this module that can be run from the python interpreter::
 
-    >>> import mtfit
-    >>> mtfit.run_tests()
+    >>> import MTfit
+    >>> MTfit.run_tests()
 
 Or during setup:
 
@@ -246,7 +246,7 @@ Command Line Options
 
 Usage:
 
-	mtfit [-h] [-d DATAFILE] [-s LOCATION_PDF_FILE_PATH]
+	MTfit [-h] [-d DATAFILE] [-s LOCATION_PDF_FILE_PATH]
              [-a {iterate,time,mcmc,transdmcmc}] [-l] [-n N] [-m MEM] [-c]
              [-b] [--nstations NUMBER_STATIONS]
              [--nanglesamples NUMBER_LOCATION_SAMPLES] [-f] [--not_file_safe]
@@ -481,7 +481,7 @@ Optional Arguments:
                          
                          
   -o FID, --out FID, --fid FID, --outputfile FID, --outfile FID
-                        Set output file basename [default=mtfitOutput]
+                        Set output file basename [default=MTfitOutput]
                          
                          
   -x MAX_SAMPLES, --samples MAX_SAMPLES, --maxsamples MAX_SAMPLES,
@@ -558,24 +558,24 @@ Optional Arguments:
                         check (-Q)
                          
                          
-  -T, --test, --test    Run mtfit Test suite (if combined with -q runs test
+  -T, --test, --test    Run MTfit Test suite (if combined with -q runs test
                         suite on cluster
                          
                          
   -Q [QUALITY_CHECK], --quality [QUALITY_CHECK]
-                        Run mtfit with quality checks enabled [default=False].
+                        Run MTfit with quality checks enabled [default=False].
                         Checks if an event has a percentage of non-zero
                         samples lower than the flag - values from 0-100.
                          
                          
-  -D, --debug           Run mtfit with debugging enabled.
+  -D, --debug           Run MTfit with debugging enabled.
                          
                          
   -V VERBOSITY, --verbosity VERBOSITY
                         Set verbosity level for non-fatal errors [default=0].
                          
                          
-  -g, --diagnostics     Run mtfit with diagnostic output. Outputs the full
+  -g, --diagnostics     Run MTfit with diagnostic output. Outputs the full
                         chain and sampling - wil make a large file.
                          
                          
@@ -754,9 +754,9 @@ Cluster:
 ============================
 
   
-  Commands for using mtfit on a cluster environment using qsub/PBS
+  Commands for using MTfit on a cluster environment using qsub/PBS
 
-  -q, --qsub, --pbs     Flag to set mtfit to submit to cluster
+  -q, --qsub, --pbs     Flag to set MTfit to submit to cluster
                          
                          
   --nodes QSUB_NODES    Set number of nodes to use for job submission.
@@ -778,7 +778,7 @@ Cluster:
                         -M. [default=bae]
                          
                          
-  --name QSUB_N         Set PBS -N job name options. [default=mtfit]
+  --name QSUB_N         Set PBS -N job name options. [default=MTfit]
                          
                          
   --walltime QSUB_WALLTIME

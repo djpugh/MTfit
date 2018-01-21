@@ -5,13 +5,13 @@ Plotting classes
 MTplot class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes.MTplot
+.. autoclass:: MTfit.plot.plot_classes.MTplot
    :members:   
 
 MTData class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes.MTData
+.. autoclass:: MTfit.plot.plot_classes.MTData
    :members:  
 
 
@@ -19,7 +19,7 @@ MTData class
 _BasePlot class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes._BasePlot
+.. autoclass:: MTfit.plot.plot_classes._BasePlot
    :members:
    :private-members:
    :special-members:
@@ -28,7 +28,7 @@ _BasePlot class
 _FocalSpherePlot class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes._FocalSpherePlot
+.. autoclass:: MTfit.plot.plot_classes._FocalSpherePlot
    :members:
    :inherited-members:
    :private-members:
@@ -37,7 +37,7 @@ _FocalSpherePlot class
 _AmplitudePlot class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes._AmplitudePlot
+.. autoclass:: MTfit.plot.plot_classes._AmplitudePlot
    :members:
    :inherited-members:
    :private-members:
@@ -46,7 +46,7 @@ _AmplitudePlot class
 _FaultPlanePlot class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes._FaultPlanePlot
+.. autoclass:: MTfit.plot.plot_classes._FaultPlanePlot
    :members:
    :inherited-members:
    :private-members:
@@ -55,7 +55,7 @@ _FaultPlanePlot class
 _RiedeselJordanPlot class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes._RiedeselJordanPlot
+.. autoclass:: MTfit.plot.plot_classes._RiedeselJordanPlot
    :members:
    :inherited-members:
    :private-members:
@@ -64,7 +64,7 @@ _RiedeselJordanPlot class
 _RadiationPlot class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes._RadiationPlot
+.. autoclass:: MTfit.plot.plot_classes._RadiationPlot
    :members:
    :inherited-members:
    :private-members:
@@ -73,7 +73,7 @@ _RadiationPlot class
 _HudsonPlot class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes._HudsonPlot
+.. autoclass:: MTfit.plot.plot_classes._HudsonPlot
    :members:
    :inherited-members:
    :private-members:
@@ -82,7 +82,7 @@ _HudsonPlot class
 _LunePlot class
 =========================
 
-.. autoclass:: mtfit.plot.plot_classes._LunePlot
+.. autoclass:: MTfit.plot.plot_classes._LunePlot
    :members:
    :inherited-members:
    :private-members:

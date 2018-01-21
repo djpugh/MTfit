@@ -8,8 +8,8 @@ Tests for src/convert/cmoment_tensor_conversion.py
 import unittest
 
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 
 
 class cMomentTensorConvertSkipTestCase(unittest.TestCase):
@@ -47,7 +47,7 @@ class cMomentTensorConvertSkipTestCase(unittest.TestCase):
 
 def test_suite(verbosity=2):
     try:
-        from mtfit.convert.cmoment_tensor_conversion import cMomentTensorConvertTestCase
+        from MTfit.convert.cmoment_tensor_conversion import cMomentTensorConvertTestCase
         suite = [unittest.TestLoader().loadTestsFromTestCase(cMomentTensorConvertTestCase)]
     except ImportError:
         suite = [unittest.TestLoader().loadTestsFromTestCase(cMomentTensorConvertSkipTestCase)]

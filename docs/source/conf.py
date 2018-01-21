@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# mtfit documentation build configuration file, created by
+# MTfit documentation build configuration file, created by
 # sphinx-quickstart on Fri Jun 20 19:35:22 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -15,7 +15,7 @@
 import os
 
 
-from mtfit import __version__
+from MTfit import __version__
 __author__ = 'David Pugh'
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -55,7 +55,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'mtfit'
+project = u'MTfit'
 copyright = u'2017, '+__author__
 
 # The version info for the project you're documenting, acts as replacement for
@@ -141,14 +141,14 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = 'mtfit documentation'
+html_title = 'MTfit documentation'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = 'figures/mtfitsphinx.png'
+html_logo = 'figures/MTfitsphinx.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -207,7 +207,7 @@ html_last_updated_fmt = '%b %d, %Y (version '+str(__version__)+')'
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'mtfitdoc'
+htmlhelp_basename = 'MTfitdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -227,12 +227,12 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('latex', 'mtfit.tex', u'mtfit: A Bayesian Method for Source Inversion',
+  ('latex', 'MTfit.tex', u'MTfit: A Bayesian Method for Source Inversion',
    __author__, 'custom_manual'),
 ]
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-latex_logo = "figures/mtfitbanner.png"
+latex_logo = "figures/MTfitbanner.png"
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
@@ -258,7 +258,7 @@ latex_additional_files=['./_static/custom_manual.cls']
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('man', 'mtfit', u'mtfit: A Bayesian Method for Source Inversion',
+    ('man', 'MTfit', u'MTfit: A Bayesian Method for Source Inversion',
      [ __author__], 1),
     ('manMTplot', 'MTplot', u'MTplot: Python Source Plotting',
      [ __author__], 1)
@@ -274,8 +274,8 @@ man_show_urls = True
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'mtfit', u'mtfit: A Bayesian Method for Source Inversion',
-    __author__, 'mtfit', 'One line description of project.',
+  ('index', 'MTfit', u'MTfit: A Bayesian Method for Source Inversion',
+    __author__, 'MTfit', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -295,13 +295,13 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'mtfit'
+epub_title = u'MTfit'
 epub_author = __author__
 epub_publisher = __author__
 epub_copyright = copyright
 
 # The basename for the epub file. It defaults to the project name.
-#epub_basename = u'mtfit'
+#epub_basename = u'MTfit'
 
 # The HTML theme for the epub output. Since the default themes are not optimized
 # for small screen space, using the same theme for HTML and epub output is

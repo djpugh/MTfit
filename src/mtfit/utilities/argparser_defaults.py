@@ -2,7 +2,7 @@
 argparser_defaults.py
 ***********************
 
-Dictionaries of mtfit and MTPlot argparser defaults and
+Dictionaries of MTfit and MTPlot argparser defaults and
 default types
 
 """
@@ -18,7 +18,7 @@ from distutils.version import StrictVersion
 
 from matplotlib import __version__ as matplotlib_version
 #
-# mtfit defaults
+# MTfit defaults
 #
 # Parameters for command line argument parser
 # Defaults are set in this dictionary and updated by site and user defaults

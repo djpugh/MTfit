@@ -3,11 +3,11 @@ import os
 
 import numpy as np
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.utilities.file_io import pickle_output
-from mtfit.plot.core import run
-from mtfit.plot.core import MTplot
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.file_io import pickle_output
+from MTfit.plot.core import run
+from MTfit.plot.core import MTplot
 
 VERBOSITY = 2
 
@@ -143,12 +143,12 @@ class CoreTestCase(unittest.TestCase):
         print('Parameter hist')
         MTplot(multiMTs, 'parameter', hex_bin=0, parameter='gamma')
         print('Parameter hist')
-        MTplot(multiMTs, 'parameter', save_file='mtfit_plot_save_test.png',
+        MTplot(multiMTs, 'parameter', save_file='MTfit_plot_save_test.png',
                hex_bin=0, parameter='gamma')
-        if not os.path.exists('mtfit_plot_save_test.png'):
+        if not os.path.exists('MTfit_plot_save_test.png'):
             raise ValueError('save_file option has not worked')
         try:
-            os.remove('mtfit_plot_save_test.png')
+            os.remove('MTfit_plot_save_test.png')
         except Exception:
             pass
 

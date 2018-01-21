@@ -1,8 +1,4 @@
-"""mtfit Example scripts"""
-
-import unittest
-import glob
-import os
+"""MTfit Example scripts"""
 
 
 from .double_couple import run as double_couple_run

@@ -2,11 +2,11 @@
 Bayesian Approach
 **************************
 
-The Bayesian approach used by :mod:`mtfit` is based on the approach described in :ref:`Pugh et al, 2016a <Pugh-2016a>`
+The Bayesian approach used by :mod:`MTfit` is based on the approach described in :ref:`Pugh et al, 2016a <Pugh-2016a>`
 
 Bayes Theory
 ---------------------------
-Inversion approaches fit model parameters to observed data, to find the best fitting parameters. In :mod:`mtfit`, the probability of the data being correct is evaluated for the possible sources. The resulting estimates of the :term:`PDF` can be combined for all the data to approximate the true :term:`PDF` for the source. This :term:`PDF` can be considered to describe the probability of the observed data for a given source, the likelihood, :math:`p\left(\mathrm{data}\,|\mathrm{\, model}\right)`. However the value of interest in such an inversion is the probability of the model given the observed data, the posterior :term:`PDF`. This can be evaluated from the likelihood using Bayes' Theory (:ref:`Bayes and Price, 1763 <Bayes-1763>` , :ref:`Laplace, 1812 <Laplace-1812>` , :ref:`Sivia, 2000<Sivia-2000>`) is given simply by: 
+Inversion approaches fit model parameters to observed data, to find the best fitting parameters. In :mod:`MTfit`, the probability of the data being correct is evaluated for the possible sources. The resulting estimates of the :term:`PDF` can be combined for all the data to approximate the true :term:`PDF` for the source. This :term:`PDF` can be considered to describe the probability of the observed data for a given source, the likelihood, :math:`p\left(\mathrm{data}\,|\mathrm{\, model}\right)`. However the value of interest in such an inversion is the probability of the model given the observed data, the posterior :term:`PDF`. This can be evaluated from the likelihood using Bayes' Theory (:ref:`Bayes and Price, 1763 <Bayes-1763>` , :ref:`Laplace, 1812 <Laplace-1812>` , :ref:`Sivia, 2000<Sivia-2000>`) is given simply by: 
 
 .. math::
 
@@ -49,7 +49,7 @@ Posterior PDF
     
     The likelihoods for the two different data types are described in chapter :latex:`\ref{probability::doc}`.
 
-The posterior PDFs for the data used in :mod:`mtfit` are, for a known Earth model:
+The posterior PDFs for the data used in :mod:`MTfit` are, for a known Earth model:
 
 .. math::
 

@@ -1,4 +1,4 @@
-mtfit.algorithms.base
+MTfit.algorithms.base
 =====================
 
-.. literalinclude:: ../../src/mtfit/algorithms/base.py
+.. literalinclude:: ../../src/MTfit/algorithms/base.py

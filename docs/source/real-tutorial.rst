@@ -1,14 +1,14 @@
 *************************************
-Tutorial: Using mtfit with Real Data
+Tutorial: Using MTfit with Real Data
 *************************************
 
 .. only:: not latex
 
-    The :doc:`previous <tutorial>` section has introduced many of the different options available in :mod:`mtfit`. This section explains the reasoning behind the choice of these parameters using a synthetic and real example.
+    The :doc:`previous <tutorial>` section has introduced many of the different options available in :mod:`MTfit`. This section explains the reasoning behind the choice of these parameters using a synthetic and real example.
 
 .. only:: latex
     
-    The previous chapter has introduced many of the different options available in :mod:`mtfit`. This chapter explains the reasoning behind the choice of these parameters using synthetic and real examples.
+    The previous chapter has introduced many of the different options available in :mod:`MTfit`. This chapter explains the reasoning behind the choice of these parameters using synthetic and real examples.
 
 
 .. only:: not latex
@@ -100,12 +100,12 @@ This script is equivalent to pickling the data::
 
 And then calling from the command line (Assuming parallel running: ``-l`` flag to run on a single processor)::
 
-    $ mtfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \
+    $ MTfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \
         --inversion-options=PPolarity --convert synthetic_event_data.inv
-    $ mtfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
+    $ MTfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
         --inversion-options=PPolarity --convert synthetic_event_data.inv
 
-These inversions should not take long to run (running on a single core of an i5 processor, the two inversions take 2 and 72 seconds respectively), although the conversions using :mod:`mtfit.MTconvert` can add to this time, but will reduce the time when plotting the results. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``synthetic_example_event_ppolarityDC.mat`` and ``synthetic_example_event_ppolarityMT.mat`` respectively.
+These inversions should not take long to run (running on a single core of an i5 processor, the two inversions take 2 and 72 seconds respectively), although the conversions using :mod:`MTfit.MTconvert` can add to this time, but will reduce the time when plotting the results. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``synthetic_example_event_ppolarityDC.mat`` and ``synthetic_example_event_ppolarityMT.mat`` respectively.
 
 .. only:: latex
     
@@ -169,14 +169,14 @@ This script is equivalent to pickling the data::
 
 And then calling from the command line (Assuming parallel running: ``-l`` flag to run on a single processor)::
 
-    $ mtfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \
+    $ MTfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \
         --inversion-options=PPolarity,P/SHRMSAmplitudeRatio,P/SVRMSAmplitudeRatio \
         --convert synthetic_event_data.inv
-    $ mtfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
+    $ MTfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
         --inversion-options=PPolarity,P/SHRMSAmplitudeRatio,P/SVRMSAmplitudeRatio \
         --convert synthetic_event_data.inv
 
-These inversions should not take long to run (running on a single core of an i5 processor, the two inversions take 20 and 436 seconds respectively), although the conversions using :mod:`mtfit.MTconvert` can add to this time, but will reduce the time when plotting the results. These run times are longer than for only polarity data, both because of the additional data, and the increased complexity of the :ref:`ratio-pdf-label`. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``synthetic_example_event_arDC.mat`` and ``synthetic_example_event_arMT.mat`` respectively.
+These inversions should not take long to run (running on a single core of an i5 processor, the two inversions take 20 and 436 seconds respectively), although the conversions using :mod:`MTfit.MTconvert` can add to this time, but will reduce the time when plotting the results. These run times are longer than for only polarity data, both because of the additional data, and the increased complexity of the :ref:`ratio-pdf-label`. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``synthetic_example_event_arDC.mat`` and ``synthetic_example_event_arMT.mat`` respectively.
 
 .. only:: latex
     
@@ -249,7 +249,7 @@ The important part of the script is:
         :end-before: # End
         :dedent: 8
 
-In this example the :func:`mtfit.__core__.mtfit`  function is used instead of creating the inversion object directly. Again, the chosen algorithm is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``100 000`` samples for the double-couple case and ``1 000 000`` for the full moment tensor inversion. The location uncertainty distribution is binned (``--bin_scatangle``), which runs before the main inversion is carried out. This uses the :doc:`source-scatangle` extension to both parse and bin the location PDF distribution.
+In this example the :func:`MTfit.__core__.MTfit`  function is used instead of creating the inversion object directly. Again, the chosen algorithm is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``100 000`` samples for the double-couple case and ``1 000 000`` for the full moment tensor inversion. The location uncertainty distribution is binned (``--bin_scatangle``), which runs before the main inversion is carried out. This uses the :doc:`source-scatangle` extension to both parse and bin the location PDF distribution.
 
 .. warning::
 
@@ -264,14 +264,14 @@ This script is equivalent to pickling the data::
 
 And then calling from the command line (Assuming parallel running: ``-l`` flag to run on a single processor)::
 
-    $ mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
+    $ MTfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
         --pmem=1 --double-couple --max-samples=100000 --inversion-options=PPolarity \
         --convert --bin-scatangle krafla_event_data.inv
-    $ mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
+    $ MTfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
         --pmem=1 --max-samples=10000000  --inversion-options=PPolarity --convert \
         --bin-scatangle krafla_event_data.inv
         
-These inversions will take longer to run than the previous examples, due to the location uncertainty (running using 8 cores, the two inversions take 4 and 11 minutes respectively), although the conversions using :mod:`mtfit.MTconvert` can add to this time, but will reduce the time when plotting the results. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``krafla_event_ppolarityDC.mat`` and ``krafla_event_ppolarityMT.mat`` respectively.
+These inversions will take longer to run than the previous examples, due to the location uncertainty (running using 8 cores, the two inversions take 4 and 11 minutes respectively), although the conversions using :mod:`MTfit.MTconvert` can add to this time, but will reduce the time when plotting the results. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``krafla_event_ppolarityDC.mat`` and ``krafla_event_ppolarityMT.mat`` respectively.
 
 .. only:: latex
     
@@ -308,7 +308,7 @@ The important part of the script is:
         :end-before: # End
         :dedent: 8
 
-In this example the :func:`mtfit.__core__.mtfit`  function is used instead of creating the inversion object directly. The chosen algorithm is the ``mcmc`` algorithm (see :ref:`McMCsampling`) for a chain length of ``100 000`` samples for both the double-couple case and the full moment tensor inversion. Additionally a trans-dimensional McMC approach is run, allowing comparison between the two.
+In this example the :func:`MTfit.__core__.MTfit`  function is used instead of creating the inversion object directly. The chosen algorithm is the ``mcmc`` algorithm (see :ref:`McMCsampling`) for a chain length of ``100 000`` samples for both the double-couple case and the full moment tensor inversion. Additionally a trans-dimensional McMC approach is run, allowing comparison between the two.
 
 .. only:: latex
 
@@ -331,14 +331,14 @@ This script is equivalent to pickling the data::
 
 And then calling from the command line::
 
-      $ mtfit --location_pdf_file_path=krafla_event.scatangle -l --algorithm=mcmc -b \
+      $ MTfit --location_pdf_file_path=krafla_event.scatangle -l --algorithm=mcmc -b \
           --pmem=1 --double-couple --max-samples=100000 --inversion-options=PPolarityProb \
           --convert --bin-scatangle krafla_event_data.inv
-      $ mtfit --location_pdf_file_path=krafla_event.scatangle -l --algorithm=transdmcmc \
+      $ MTfit --location_pdf_file_path=krafla_event.scatangle -l --algorithm=transdmcmc \
           --pmem=1 --max-samples=100000  --inversion-options=PPolarityProb --convert \
           --bin-scatangle krafla_event_data.inv
             
-These inversions will take longer to run than the previous examples, both due to the location uncertainty, the McMC algorithms, and the non-parallel running (running on a single process on an i5 processor, the  inversions take 7 hours), although the conversions using :mod:`mtfit.MTconvert` can add to this time, but will reduce the time when plotting the results. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``krafla_event_ppolarityDC.mat`` and ``krafla_event_ppolarityMT.mat`` respectively. 
+These inversions will take longer to run than the previous examples, both due to the location uncertainty, the McMC algorithms, and the non-parallel running (running on a single process on an i5 processor, the  inversions take 7 hours), although the conversions using :mod:`MTfit.MTconvert` can add to this time, but will reduce the time when plotting the results. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``krafla_event_ppolarityDC.mat`` and ``krafla_event_ppolarityMT.mat`` respectively. 
 
 .. only:: latex
     
@@ -393,7 +393,7 @@ The Bayesian evidence estimates the evidence for the model given the posterior P
 
   \mathrm{p}\left(data|model\right)=\int_\mathrm{x}\mathrm{p}\left(data|x\right)\mathrm{p}\left(x|model\right)\mathrm{d}x.
 
-Since :mod:`mtfit` produces random samples of the source PDF, so the Bayesian evidence is calculated as a sum over the samples:
+Since :mod:`MTfit` produces random samples of the source PDF, so the Bayesian evidence is calculated as a sum over the samples:
 
 .. math::
 
@@ -401,7 +401,7 @@ Since :mod:`mtfit` produces random samples of the source PDF, so the Bayesian ev
 
 but care must be taken with the choice of the prior parameterisation. This must correspond to the same parameterisation in which the Monte Carlo samples were drawn, either directly or by correcting both the prior distribution and the :math:`\delta x` values. A Monte Carlo approach can be affected by small sample sizes in the integration, which is sometimes the case when the source PDF is dominated by a few very large probability samples.
 
-:mod:`mtfit` produces a Bayesian evidence estimate for a constrained inversion. These can be combined for the DC and MT models, with :math:`\mathcal{B}` corresponding to a Bayesian evidence estimate:
+:mod:`MTfit` produces a Bayesian evidence estimate for a constrained inversion. These can be combined for the DC and MT models, with :math:`\mathcal{B}` corresponding to a Bayesian evidence estimate:
 
 .. math::
 
@@ -421,14 +421,14 @@ For the examples shown above, the model probability estimates from the Bayesian 
 |:ref:`Krafla P Polarity<real-p-polarity>`                     |:math:`0.0008`        |:math:`0.9992`        |
 +--------------------------------------------------------------+----------------------+----------------------+
 
-These can be calculated using the :func:`mtfit.probability.model_probabilities` function, which takes the logarithm of the Bayesian evidence for each model type as an argument:
+These can be calculated using the :func:`MTfit.probability.model_probabilities` function, which takes the logarithm of the Bayesian evidence for each model type as an argument:
 
-.. autofunction:: mtfit.probability.model_probabilities
+.. autofunction:: MTfit.probability.model_probabilities
 
 
 The normal McMC approach cannot be used to estimate the model probabilities, however the trans-dimensional example is consistent with the :ref:`Krafla P Polarity<real-p-polarity>` model probabilities as that produces an estimate :math:`p_\mathrm{DC}=0`.
 
-:mod:`mtfit` also calculates the Kullback-Liebler divergence of the resultant PDF from the sampling prior, which is a measure of how much difference there is between the resultant PDF and the prior information. This is outputted during the inversion approach (when using Monte Carlo random sampling), and saved to the output file.
+:mod:`MTfit` also calculates the Kullback-Liebler divergence of the resultant PDF from the sampling prior, which is a measure of how much difference there is between the resultant PDF and the prior information. This is outputted during the inversion approach (when using Monte Carlo random sampling), and saved to the output file.
 
 
 .. _relative-inversion:
@@ -436,7 +436,7 @@ The normal McMC approach cannot be used to estimate the model probabilities, how
 Joint Inversion
 ======================
 
-:mod:`mtfit` can also carry out joint invesions and include relative amplitude data (:ref:`Pugh et al., 2015t <Pugh-2015t>`). This examples uses data from two co-located synthetic events with overlapping receivers.  
+:mod:`MTfit` can also carry out joint invesions and include relative amplitude data (:ref:`Pugh et al., 2015t <Pugh-2015t>`). This examples uses data from two co-located synthetic events with overlapping receivers.  
 :download:`examples/relative_event.py<../../examples/relative_event.py>` contains a script for the double-couple and full moment tensor inversion of the source. It can be run as::
 
     $ python relative_event.py
@@ -451,7 +451,7 @@ The important part of the script is:
         :end-before: # End
         :dedent: 4
 
-In this example the :class:`mtfit.inversion.Inversion`  class is created directly. The chosen algorithm for the double-couple inversion is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``10 000 000`` samples for the double-couple case. A large sample size is required when running the joint inversion because if the probabilities of obtaining a non-zero probability sample for both events is less than or equal to the product of the probabilities of obtaining a non-zero probability sample for the events individually, i.e if the fraction of non-zero probability samples for event 1 is :math:`f_1` and the fraction for event 2 is :math:`f_2`, then the fraction for the joint samping :math:`f_j \leq f_1.f_2`. Consequently it soon becomes infeasible to run the monte-carlo sampling algorithm for the full moment tensor case.
+In this example the :class:`MTfit.inversion.Inversion`  class is created directly. The chosen algorithm for the double-couple inversion is the ``iterate`` algorithm (see :ref:`MCsampling`) for ``10 000 000`` samples for the double-couple case. A large sample size is required when running the joint inversion because if the probabilities of obtaining a non-zero probability sample for both events is less than or equal to the product of the probabilities of obtaining a non-zero probability sample for the events individually, i.e if the fraction of non-zero probability samples for event 1 is :math:`f_1` and the fraction for event 2 is :math:`f_2`, then the fraction for the joint samping :math:`f_j \leq f_1.f_2`. Consequently it soon becomes infeasible to run the monte-carlo sampling algorithm for the full moment tensor case.
 
 The full moment tensor inversion uses the ``mcmc`` algorithm to reduce the dependence of the result on the sample size. The burn in length is set to ``30 000`` and the chain length to ``100 000``, while the targeted  acceptance rate window is reduced from the normal McMC selection (0.3 - 0.5), instead targetting between 0.1 and 0.3.
 
@@ -468,16 +468,16 @@ This script is equivalent to pickling the data::
 
 And then calling from the command line::
 
-      $ mtfit --algorithm=iterate --pmem=1 --double-couple --max-samples=10000000 \
+      $ MTfit --algorithm=iterate --pmem=1 --double-couple --max-samples=10000000 \
           --inversion-options=PPolarity,PAmplitude --convert --relative \
           --multiple-events relative_event_data.inv
 
-      $ mtfit --algorithm=mcmc --pmem=1 --chain-length=100000  \
+      $ MTfit --algorithm=mcmc --pmem=1 --chain-length=100000  \
           --burn_in=30000 --min_acceptance_rate=0.1 \
           --max_acceptance_rate=0.3 --inversion-options=PPolarity,PAmplitude \
           --convert --relative --multiple-events relative_event_data.inv
             
-These inversions will take longer to run than the previous examples, due to the increased sample size required for the joint PDF. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``mtfitOutput_joint_inversionDC.mat`` and ``mtfitOutput_joint_inversionMT.mat`` respectively.
+These inversions will take longer to run than the previous examples, due to the increased sample size required for the joint PDF. The solutions are outputted as a MATLAB file for the DC and MT solutions respectively, with name ``MTfitOutput_joint_inversionDC.mat`` and ``MTfitOutput_joint_inversionMT.mat`` respectively.
 
 .. only:: not latex
 
@@ -494,7 +494,7 @@ These inversions will take longer to run than the previous examples, due to the 
 
 .. only:: latex
     
-    Fig. :ref:`5.8<joint-event>` shows the results plotted using the plot module of :mod:`mtfit`.
+    Fig. :ref:`5.8<joint-event>` shows the results plotted using the plot module of :mod:`MTfit`.
 
     .. _joint-event:
 

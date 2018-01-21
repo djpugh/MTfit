@@ -1,4 +1,4 @@
-mtfit.algorithms.monte_carlo
+MTfit.algorithms.monte_carlo
 ============================
 
-.. literalinclude:: ../../src/mtfit/algorithms/monte_carlo.py
+.. literalinclude:: ../../src/MTfit/algorithms/monte_carlo.py

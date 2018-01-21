@@ -25,17 +25,17 @@ from matplotlib import __version__ as matplotlib_version
 from mpl_toolkits.mplot3d import proj3d
 from matplotlib.patches import FancyArrowPatch
 
-from mtfit.inversion import station_angles
-from mtfit.convert import MT33_MT6, toa_vec, tk_uv, E_tk, TNP_SDR, MT6_TNPE, E_GD, TP_FP, normal_SD, SDR_SDR, MT6_biaxes, E_uv
-from mtfit.utilities.extensions import get_extensions
+from MTfit.inversion import station_angles
+from MTfit.convert import MT33_MT6, toa_vec, tk_uv, E_tk, TNP_SDR, MT6_TNPE, E_GD, TP_FP, normal_SD, SDR_SDR, MT6_biaxes, E_uv
+from MTfit.utilities.extensions import get_extensions
 try:
-    from mtfit.sampling import unique_columns, _6sphere_prior, ln_bayesian_evidence
+    from MTfit.sampling import unique_columns, _6sphere_prior, ln_bayesian_evidence
 except Exception:
     pass  # SCIPY ERROR -CAN'T USE
 
 from .spherical_projection import equal_area, equal_angle
 
-logger = logging.getLogger('mtfit.plot')
+logger = logging.getLogger('MTfit.plot')
 
 # Default colors and colormaps
 DEFAULT_COLOR = 'purple'
@@ -94,7 +94,7 @@ class MTData(object):
 
         Args
             MTs: numpy array of moment tensor six vectors with shape (6,n).
-                Alternatively, the input can be a dictionary from the mtfit output.
+                Alternatively, the input can be a dictionary from the MTfit output.
 
 
         Keyword Args
@@ -3266,4 +3266,4 @@ class_mapping = {'amplitude': _AmplitudePlot, 'beachball': _AmplitudePlot,
                  'radiation': _RadiationPlot, 'faultplane': _FaultPlanePlot,
                  'lune': _LunePlot, 'hudson': _HudsonPlot, 'riedeseljordan': _RiedeselJordanPlot,
                  'tape': _TapePlot, 'parameter': _ParameterHistPlot}
-class_mapping = get_extensions(group='mtfit.plot', defaults=class_mapping)[1]
+class_mapping = get_extensions(group='MTfit.plot', defaults=class_mapping)[1]

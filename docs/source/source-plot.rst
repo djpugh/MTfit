@@ -1,4 +1,4 @@
-mtfit.plot
+MTfit.plot
 ==========
 
 Contents
@@ -6,8 +6,8 @@ Contents
 .. toctree::
    :maxdepth: 1
 
-   mtfit.plot.core<source-plot_core>
-   mtfit.plot.spherical_projection<source-spherical_projection>
-   mtfit.plot.plot_classes<source-plot_classes>
+   MTfit.plot.core<source-plot_core>
+   MTfit.plot.spherical_projection<source-spherical_projection>
+   MTfit.plot.plot_classes<source-plot_classes>
 
 For the plotting documentation see :doc:`mtplot`

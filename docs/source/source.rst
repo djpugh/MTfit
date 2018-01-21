@@ -1,8 +1,8 @@
 *********************************
-mtfit Source Code
+MTfit Source Code
 *********************************
 
-Explore the source code for the :mod:`mtfit` module
+Explore the source code for the :mod:`MTfit` module
 
 Contents:
 =================================
@@ -10,12 +10,12 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   mtfit.inversion <source-inversion>
-   mtfit.algorithms <source-algorithms>
-   mtfit.probability <source-probability>
-   mtfit.sampling <source-sampling>
-   mtfit.run <source-run>
-   mtfit.utilities <source-utilities>
-   mtfit.extensions <source-extensions>
-   mtfit.convert <source-convert>
-   mtfit.plot <source-plot>
+   MTfit.inversion <source-inversion>
+   MTfit.algorithms <source-algorithms>
+   MTfit.probability <source-probability>
+   MTfit.sampling <source-sampling>
+   MTfit.run <source-run>
+   MTfit.utilities <source-utilities>
+   MTfit.extensions <source-extensions>
+   MTfit.convert <source-convert>
+   MTfit.plot <source-plot>

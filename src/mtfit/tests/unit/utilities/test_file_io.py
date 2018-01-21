@@ -17,25 +17,25 @@ except ImportError:
 
 import numpy as np
 
-from mtfit.utilities.unittest_utils import TestCase
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.utilities.file_io import csv2inv
-from mtfit.utilities.file_io import parse_csv
-from mtfit.utilities.file_io import _parse_csv_events
-from mtfit.utilities.file_io import parse_hyp
-from mtfit.utilities.file_io import full_pdf_output_dicts
-from mtfit.utilities.file_io import hyp_output_dicts
-from mtfit.utilities.file_io import hyp_output
-from mtfit.utilities.file_io import read_binary_output
-from mtfit.utilities.file_io import read_pickle_output
-from mtfit.utilities.file_io import pickle_output
-from mtfit.utilities.file_io import MATLAB_output
-from mtfit.utilities.file_io import read_matlab_output
-from mtfit.utilities.file_io import read_scatangle_output
-from mtfit.utilities.file_io import unique_columns
-from mtfit.utilities.file_io import convert_keys_to_unicode
-from mtfit.utilities.file_io import convert_keys_from_unicode
+from MTfit.utilities.unittest_utils import TestCase
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.file_io import csv2inv
+from MTfit.utilities.file_io import parse_csv
+from MTfit.utilities.file_io import _parse_csv_events
+from MTfit.utilities.file_io import parse_hyp
+from MTfit.utilities.file_io import full_pdf_output_dicts
+from MTfit.utilities.file_io import hyp_output_dicts
+from MTfit.utilities.file_io import hyp_output
+from MTfit.utilities.file_io import read_binary_output
+from MTfit.utilities.file_io import read_pickle_output
+from MTfit.utilities.file_io import pickle_output
+from MTfit.utilities.file_io import MATLAB_output
+from MTfit.utilities.file_io import read_matlab_output
+from MTfit.utilities.file_io import read_scatangle_output
+from MTfit.utilities.file_io import unique_columns
+from MTfit.utilities.file_io import convert_keys_to_unicode
+from MTfit.utilities.file_io import convert_keys_from_unicode
 
 
 class IOTestCase(TestCase):
@@ -404,24 +404,24 @@ END_NLLOC
         a, b, c = hyp_output_dicts(event, False, {'moment_tensor_space': np.matrix([[1., 2.], [2., 1.], [1., 2.], [2., 1.], [
                                    1., 2.], [2., 1.]]), 'ln_pdf': np.matrix([0, 0.7, 0]), 'probability': np.matrix([[1., 2.]]), 'total_number_samples': 400})
         try:
-            os.remove('mtfitOUTPUTTEST.hyp')
+            os.remove('MTfitOUTPUTTEST.hyp')
         except Exception:
             pass
         try:
-            os.remove('mtfitOUTPUTTEST.mt')
+            os.remove('MTfitOUTPUTTEST.mt')
         except Exception:
             pass
-        self.assertFalse(os.path.exists('mtfitOUTPUTTEST.hyp'))
-        self.assertFalse(os.path.exists('mtfitOUTPUTTEST.mt'))
-        fid, out_str = hyp_output([a, b], fid='mtfitOUTPUTTEST.hyp')
-        self.assertTrue(os.path.exists('mtfitOUTPUTTEST.hyp'))
-        self.assertTrue(os.path.exists('mtfitOUTPUTTEST.mt'))
+        self.assertFalse(os.path.exists('MTfitOUTPUTTEST.hyp'))
+        self.assertFalse(os.path.exists('MTfitOUTPUTTEST.mt'))
+        fid, out_str = hyp_output([a, b], fid='MTfitOUTPUTTEST.hyp')
+        self.assertTrue(os.path.exists('MTfitOUTPUTTEST.hyp'))
+        self.assertTrue(os.path.exists('MTfitOUTPUTTEST.mt'))
         try:
-            os.remove('mtfitOUTPUTTEST.hyp')
+            os.remove('MTfitOUTPUTTEST.hyp')
         except Exception:
             pass
         try:
-            os.remove('mtfitOUTPUTTEST.mt')
+            os.remove('MTfitOUTPUTTEST.mt')
         except Exception:
             pass
         event['hyp_file'].pop(14)
@@ -430,24 +430,24 @@ END_NLLOC
                                                   'h': np.array([0.2, 0.2, 0.2]), 's': np.array([0.2, 0.2, 0.2]), 'S1': np.array([0.2, 0.2, 0.2]), 'D1': np.array([0.2, 0.2, 0.2]), 'R1': np.array([0.2, 0.2, 0.2]), 'u': np.array([0.2, 0.2, 0.2]),
                                                   'v': np.array([0.2, 0.2, 0.2]), 'S2': np.array([0.2, 0.2, 0.2]), 'D2': np.array([0.2, 0.2, 0.2]), 'R2': np.array([0.2, 0.2, 0.2]), 'ln_bayesian_evidence': 1.+10})
         try:
-            os.remove('mtfitOUTPUTTEST.hyp')
+            os.remove('MTfitOUTPUTTEST.hyp')
         except Exception:
             pass
         try:
-            os.remove('mtfitOUTPUTTEST.mt')
+            os.remove('MTfitOUTPUTTEST.mt')
         except Exception:
             pass
-        self.assertFalse(os.path.exists('mtfitOUTPUTTEST.hyp'))
-        self.assertFalse(os.path.exists('mtfitOUTPUTTEST.mt'))
-        fid, out_str = hyp_output([a, b], fid='mtfitOUTPUTTEST.hyp')
-        self.assertTrue(os.path.exists('mtfitOUTPUTTEST.hyp'))
-        self.assertTrue(os.path.exists('mtfitOUTPUTTEST.mt'))
+        self.assertFalse(os.path.exists('MTfitOUTPUTTEST.hyp'))
+        self.assertFalse(os.path.exists('MTfitOUTPUTTEST.mt'))
+        fid, out_str = hyp_output([a, b], fid='MTfitOUTPUTTEST.hyp')
+        self.assertTrue(os.path.exists('MTfitOUTPUTTEST.hyp'))
+        self.assertTrue(os.path.exists('MTfitOUTPUTTEST.mt'))
         try:
-            os.remove('mtfitOUTPUTTEST.hyp')
+            os.remove('MTfitOUTPUTTEST.hyp')
         except Exception:
             pass
         try:
-            os.remove('mtfitOUTPUTTEST.mt')
+            os.remove('MTfitOUTPUTTEST.mt')
         except Exception:
             pass
 
@@ -459,29 +459,29 @@ END_NLLOC
             [0, 0.7]), 'probability': np.matrix([[1., 2.]]), 'total_number_samples': 400}
         a, b, c = hyp_output_dicts(event, False, x)
         try:
-            os.remove('mtfitOUTPUTTEST.hyp')
+            os.remove('MTfitOUTPUTTEST.hyp')
         except Exception:
             pass
         try:
-            os.remove('mtfitOUTPUTTEST.mt')
+            os.remove('MTfitOUTPUTTEST.mt')
         except Exception:
             pass
-        self.assertFalse(os.path.exists('mtfitOUTPUTTEST.hyp'))
-        self.assertFalse(os.path.exists('mtfitOUTPUTTEST.mt'))
-        fid, out_str = hyp_output([a, b], fid='mtfitOUTPUTTEST.hyp')
-        y = read_binary_output('mtfitOUTPUTTEST.mt')
-        self.assertTrue(os.path.exists('mtfitOUTPUTTEST.hyp'))
-        self.assertTrue(os.path.exists('mtfitOUTPUTTEST.mt'))
+        self.assertFalse(os.path.exists('MTfitOUTPUTTEST.hyp'))
+        self.assertFalse(os.path.exists('MTfitOUTPUTTEST.mt'))
+        fid, out_str = hyp_output([a, b], fid='MTfitOUTPUTTEST.hyp')
+        y = read_binary_output('MTfitOUTPUTTEST.mt')
+        self.assertTrue(os.path.exists('MTfitOUTPUTTEST.hyp'))
+        self.assertTrue(os.path.exists('MTfitOUTPUTTEST.mt'))
         self.assertEqual(sorted(y[0].keys()), sorted(x.keys()))
         self.assertTrue(
             (y[0]['moment_tensor_space'] == x['moment_tensor_space']).all())
         self.assertEqual(y[0]['dkl'], x['dkl'])
         try:
-            os.remove('mtfitOUTPUTTEST.hyp')
+            os.remove('MTfitOUTPUTTEST.hyp')
         except Exception:
             pass
         try:
-            os.remove('mtfitOUTPUTTEST.mt')
+            os.remove('MTfitOUTPUTTEST.mt')
         except Exception:
             pass
         x = {'moment_tensor_space': np.matrix([[1., -0.51969334, 3.], [2., 0.22610635, 3.], [1., 0.29358698, 3.], [2., 0.58532165, 3.], [1., -0.27015115, 3.], [2., -0.42073549, 3.]]),
@@ -490,30 +490,30 @@ END_NLLOC
              'v': np.array([0.2, 0.2, 0.2]), 'S2': np.array([0.2, 0.2, 0.2]), 'D2': np.array([0.2, 0.2, 0.2]), 'R2': np.array([0.2, 0.2, 0.2]), 'ln_bayesian_evidence': 1.+10.}
         a, b, c = hyp_output_dicts(event, False, x)
         try:
-            os.remove('mtfitOUTPUTTEST.hyp')
+            os.remove('MTfitOUTPUTTEST.hyp')
         except Exception:
             pass
         try:
-            os.remove('mtfitOUTPUTTEST.mt')
+            os.remove('MTfitOUTPUTTEST.mt')
         except Exception:
             pass
-        self.assertFalse(os.path.exists('mtfitOUTPUTTEST.hyp'))
-        self.assertFalse(os.path.exists('mtfitOUTPUTTEST.mt'))
-        fid, out_str = hyp_output([a, b], fid='mtfitOUTPUTTEST.hyp')
-        y = read_binary_output('mtfitOUTPUTTEST.mt')
-        self.assertTrue(os.path.exists('mtfitOUTPUTTEST.hyp'))
-        self.assertTrue(os.path.exists('mtfitOUTPUTTEST.mt'))
+        self.assertFalse(os.path.exists('MTfitOUTPUTTEST.hyp'))
+        self.assertFalse(os.path.exists('MTfitOUTPUTTEST.mt'))
+        fid, out_str = hyp_output([a, b], fid='MTfitOUTPUTTEST.hyp')
+        y = read_binary_output('MTfitOUTPUTTEST.mt')
+        self.assertTrue(os.path.exists('MTfitOUTPUTTEST.hyp'))
+        self.assertTrue(os.path.exists('MTfitOUTPUTTEST.mt'))
         self.assertEqual(sorted(y[0].keys()), sorted(x.keys()))
         self.assertTrue((y[0]['g'] == x['g']).all())
         self.assertEqual(
             y[0]['ln_bayesian_evidence'], x['ln_bayesian_evidence'])
         self.assertEqual(y[0]['dkl'], x['dkl'])
         try:
-            os.remove('mtfitOUTPUTTEST.hyp')
+            os.remove('MTfitOUTPUTTEST.hyp')
         except Exception:
             pass
         try:
-            os.remove('mtfitOUTPUTTEST.mt')
+            os.remove('MTfitOUTPUTTEST.mt')
         except Exception:
             pass
 

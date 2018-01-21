@@ -151,7 +151,7 @@ class Sample(object):
         # Gets normalised and unnormalised pdfs
         ln_pdf = self.ln_pdf.output(normalise)
         un_normalised_ln_pdf = self.ln_pdf.output(normalise=False)
-        output_string = '\n------------mtfit Forward Model Output------------\n\n'
+        output_string = '\n------------MTfit Forward Model Output------------\n\n'
         # Check if any non-zero samples
         if not np.prod(ln_pdf._ln_pdf.shape):
             output_string += 'No Non-Zero probability samples\n\n'
@@ -257,12 +257,12 @@ class FileSample(Sample):
     NEEDS hdf5 (MATLAB -v7.3) storage
     """
 
-    def __init__(self, fname='mtfit_run', file_safe=True, *args, **kwargs):
+    def __init__(self, fname='MTfit_run', file_safe=True, *args, **kwargs):
         """
         FileSample initialisation
 
         Args
-            fname:['mtfit_run'] Filename for storage.
+            fname:['MTfit_run'] Filename for storage.
             file_safe:[True] Boolean flag for file safe output (i.e. write and move).
 
         Returns
@@ -280,7 +280,7 @@ class FileSample(Sample):
             raise ImportError('hdf5storage module missing - required for FileSample sample type')
         # Set default filename
         if not isinstance(fname, str):
-            fname = 'mtfit_run'
+            fname = 'MTfit_run'
         self.fname = fname.split('.mat')[0]+'_in_progress.mat'
         self.n = 0
         self._i = 1
@@ -403,7 +403,7 @@ def ln_bayesian_evidence(output, n_samples, prior=_6sphere_prior):
     Bayesian evidence calculation for the output
 
     The priors are accessible as a pkg_resource, along with the sampling distribution
-    (mtfit.algorithms.__base__), so new sampling priors can be added.
+    (MTfit.algorithms.__base__), so new sampling priors can be added.
     If the sampling is from the prior distribution, the prior in thisfunction is
     just the uniform prior.
 

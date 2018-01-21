@@ -1,4 +1,4 @@
-mtfit.algorithms: Search Algorithms
+MTfit.algorithms: Search Algorithms
 ===================================
 
 These algorithms and their effects are explored in :ref:`Pugh (2015)<Pugh-2015t>`, which expands in further detail on the topics covered here.
@@ -12,7 +12,7 @@ These algorithms and their effects are explored in :ref:`Pugh (2015)<Pugh-2015t>
        * :ref:`Random Monte Carlo sampling <MCsampling>`
        * :ref:`Markov chain Monte Carlo sampling <McMCsampling>`
 
-.. automodule:: mtfit.algorithms
+.. automodule:: MTfit.algorithms
 
 .. _MCsampling:
 
@@ -66,7 +66,7 @@ The acceptance is the probability that the new sample in the chain, :math:`\math
     \mathbf{x}_t & probability=1-\alpha
     \end{cases}.
 
-The algorithm used in :mod:`mtfit` is:
+The algorithm used in :mod:`MTfit` is:
 
 .. only:: not latex
 

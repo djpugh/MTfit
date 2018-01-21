@@ -1,5 +1,5 @@
-from mtfit.tests.unit import run_tests as run_unit_tests
-from mtfit.tests.unit import test_suite as unit_test_suite
+from MTfit.tests.unit import run_tests as run_unit_tests
+from MTfit.tests.unit import test_suite as unit_test_suite
 
 
 def test_suite():

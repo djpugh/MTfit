@@ -1,2 +1,2 @@
 #!/usr/bin/env python
-python -c "import mtfit;mtfit.plot.run()" $args
+python -c "import MTfit;MTfit.plot.run()" $args

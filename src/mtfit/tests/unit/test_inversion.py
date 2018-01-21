@@ -11,21 +11,21 @@ except ImportError:
 
 import numpy as np
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.utilities.unittest_utils import TestCase
-from mtfit.inversion import McMCForwardTask
-from mtfit.inversion import ForwardTask
-from mtfit.inversion import MultipleEventsMcMCForwardTask
-from mtfit.inversion import MultipleEventsForwardTask
-from mtfit.inversion import Inversion
-from mtfit.inversion import polarity_matrix
-from mtfit.inversion import polarity_probability_matrix
-from mtfit.inversion import amplitude_ratio_matrix
-from mtfit.inversion import relative_amplitude_ratio_matrix
-from mtfit.inversion import _intersect_stations
-from mtfit.inversion import station_angles
-from mtfit.extensions.scatangle import parse_scatangle
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.unittest_utils import TestCase
+from MTfit.inversion import McMCForwardTask
+from MTfit.inversion import ForwardTask
+from MTfit.inversion import MultipleEventsMcMCForwardTask
+from MTfit.inversion import MultipleEventsForwardTask
+from MTfit.inversion import Inversion
+from MTfit.inversion import polarity_matrix
+from MTfit.inversion import polarity_probability_matrix
+from MTfit.inversion import amplitude_ratio_matrix
+from MTfit.inversion import relative_amplitude_ratio_matrix
+from MTfit.inversion import _intersect_stations
+from MTfit.inversion import station_angles
+from MTfit.extensions.scatangle import parse_scatangle
 
 
 class McMCForwardTaskTestCase(TestCase):
@@ -983,11 +983,11 @@ class InversionTestCase(TestCase):
         except Exception:
             pass
         try:
-            os.remove('mtfitOutputMT.mat')
+            os.remove('MTfitOutputMT.mat')
         except Exception:
             pass
         try:
-            os.remove('mtfitOutputMTStationDistribution.mat')
+            os.remove('MTfitOutputMTStationDistribution.mat')
         except Exception:
             pass
         try:
@@ -999,7 +999,7 @@ class InversionTestCase(TestCase):
         except Exception:
             pass
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
         gc.collect()
@@ -1119,7 +1119,7 @@ S003,110,10,1,0.05"""
         self.inversion.fid = 'Test'
         self.assertEqual(self.inversion._fid({'UID': 'A01'}, 1), 'Test1MT.mat')
         self.inversion.fid = False
-        self.assertEqual(self.inversion._fid({}, 1), self.inversion._path+os.path.sep+'mtfitOutputMT.mat')
+        self.assertEqual(self.inversion._fid({}, 1), self.inversion._path+os.path.sep+'MTfitOutputMT.mat')
 
     def test__recover_test(self):
         self.assertFalse(self.inversion._recover_test('RecoverTestMT'))
@@ -1322,7 +1322,7 @@ S003,110,10,1,0.05"""
             pass
         self.assertTrue(len(self.inversion.algorithm.pdf_sample))
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
 
@@ -1366,7 +1366,7 @@ S003,110,10,1,0.05"""
 
     def test__mcmc_multiple_forward(self):
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
         data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162", "S0083"], 'Azimuth': np.matrix([[90.0], [270.0], [180.]]), 'TakeOffAngle': np.matrix([[30.0], [60.0], [35.]])},
@@ -1374,15 +1374,15 @@ S003,110,10,1,0.05"""
         self.inversion = Inversion([data, data], algorithm='McMC', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, multiple_events=True, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         self.inversion._mcmc_multiple_forward()
-        self.assertTrue(os.path.exists('mtfitOutput_joint_inversionMT.mat'))
+        self.assertTrue(os.path.exists('MTfitOutput_joint_inversionMT.mat'))
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
 
     def test__mcmc_multiple_forward_location_uncertainty(self):
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
         data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162", "S0083"], 'Azimuth': np.matrix([[90.0], [270.0], [180.]]), 'TakeOffAngle': np.matrix([[30.0], [60.0], [35.]])},
@@ -1400,15 +1400,15 @@ S003,110,10,1,0.05"""
             os.remove('test.scatangle')
         except Exception:
             pass
-        self.assertTrue(os.path.exists('mtfitOutput_joint_inversionMT.mat'))
+        self.assertTrue(os.path.exists('MTfitOutput_joint_inversionMT.mat'))
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
 
     def test__mcmc_multiple_forward_amplitude(self):
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
         data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
@@ -1419,15 +1419,15 @@ S003,110,10,1,0.05"""
                                    phy_mem=1, max_time=10, relative_amplitude=True, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         self.inversion._mcmc_multiple_forward()
-        self.assertTrue(os.path.exists('mtfitOutput_joint_inversionMT.mat'))
+        self.assertTrue(os.path.exists('MTfitOutput_joint_inversionMT.mat'))
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
 
     def test__mcmc_multiple_forward_amplitude_location_uncertainty(self):
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
         data = {'UID': 'TestA', 'PPolarity': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
@@ -1448,9 +1448,9 @@ S003,110,10,1,0.05"""
             os.remove('test.scatangle')
         except Exception:
             pass
-        self.assertTrue(os.path.exists('mtfitOutput_joint_inversionMT.mat'))
+        self.assertTrue(os.path.exists('MTfitOutput_joint_inversionMT.mat'))
         try:
-            os.remove('mtfitOutput_joint_inversionMT.mat')
+            os.remove('MTfitOutput_joint_inversionMT.mat')
         except Exception:
             pass
 
@@ -1468,9 +1468,9 @@ S003,110,10,1,0.05"""
             os.remove('test.scatangle')
         except Exception:
             pass
-        self.assertTrue(os.path.exists('mtfitOutputMT.mat'))
+        self.assertTrue(os.path.exists('MTfitOutputMT.mat'))
         try:
-            os.remove('mtfitOutputMT.mat')
+            os.remove('MTfitOutputMT.mat')
         except Exception:
             pass
 
@@ -1488,10 +1488,10 @@ S003,110,10,1,0.05"""
             os.remove('test.scatangle')
         except Exception:
             pass
-        self.assertTrue(os.path.exists('mtfitOutputMT.out'))
-        pickle.load(open('mtfitOutputMT.out', 'rb'))
+        self.assertTrue(os.path.exists('MTfitOutputMT.out'))
+        pickle.load(open('MTfitOutputMT.out', 'rb'))
         try:
-            os.remove('mtfitOutputMT.out')
+            os.remove('MTfitOutputMT.out')
         except Exception:
             pass
 
@@ -1510,14 +1510,14 @@ S003,110,10,1,0.05"""
             os.remove('test.scatangle')
         except Exception:
             pass
-        self.assertTrue(os.path.exists('mtfitOutputMT.hyp'))
+        self.assertTrue(os.path.exists('MTfitOutputMT.hyp'))
         try:
-            os.remove('mtfitOutputMT.hyp')
+            os.remove('MTfitOutputMT.hyp')
         except Exception:
             pass
-        self.assertTrue(os.path.exists('mtfitOutputMT.mt'))
+        self.assertTrue(os.path.exists('MTfitOutputMT.mt'))
         try:
-            os.remove('mtfitOutputMT.mt')
+            os.remove('MTfitOutputMT.mt')
         except Exception:
             pass
 

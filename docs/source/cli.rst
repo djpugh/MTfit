@@ -1,9 +1,9 @@
 ********************************
-mtfit command line options
+MTfit command line options
 ********************************
 Command line usage::
 
-    mtfit [-h] [-d DATAFILE] [-s LOCATION_PDF_FILE_PATH]
+    MTfit [-h] [-d DATAFILE] [-s LOCATION_PDF_FILE_PATH]
     [-a {iterate,time,mcmc,transdmcmc}] [-l] [-n N] [-m MEM] [-c]
     [-b] [--nstations NUMBER_STATIONS]
     [--nanglesamples NUMBER_LOCATION_SAMPLES] [-f] [--not_file_safe]
@@ -331,7 +331,7 @@ measurements.
 
   -o FID, --out FID, --fid FID, --outputfile FID, --outfile FID
 
-Set output file basename [default=mtfitOutput]
+Set output file basename [default=MTfitOutput]
 
 
 ---------------------------
@@ -476,7 +476,7 @@ check (-Q)
 
   -T, --test, --test
 
-Run mtfit Test suite (if combined with -q runs test
+Run MTfit Test suite (if combined with -q runs test
 suite on cluster
 
 
@@ -486,7 +486,7 @@ suite on cluster
 
   -Q [QUALITY_CHECK], --quality [QUALITY_CHECK]
 
-Run mtfit with quality checks enabled [default=False].
+Run MTfit with quality checks enabled [default=False].
 Checks if an event has a percentage of non-zero
 samples lower than the flag - values from 0-100.
 
@@ -497,7 +497,7 @@ samples lower than the flag - values from 0-100.
 
   -D, --debug
 
-Run mtfit with debugging enabled.
+Run MTfit with debugging enabled.
 
 
 ---------------------------
@@ -515,7 +515,7 @@ Set verbosity level for non-fatal errors [default=0].
 
   -g, --diagnostics
 
-Run mtfit with diagnostic output. Outputs the full
+Run MTfit with diagnostic output. Outputs the full
 chain and sampling - wil make a large file.
 
 
@@ -822,7 +822,7 @@ Cluster:
 
 ::
 
-  Commands for using mtfit on a cluster environment using qsub/PBS
+  Commands for using MTfit on a cluster environment using qsub/PBS
 
 
 ---------------------------
@@ -831,7 +831,7 @@ Cluster:
 
   -q, --qsub, --pbs
 
-Flag to set mtfit to submit to cluster
+Flag to set MTfit to submit to cluster
 
 
 ---------------------------
@@ -888,7 +888,7 @@ Set PBS -m mail options. Requires email address using
 
   --name QSUB_N
 
-Set PBS -N job name options. [default=mtfit]
+Set PBS -N job name options. [default=MTfit]
 
 
 ---------------------------

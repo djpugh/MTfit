@@ -13,7 +13,7 @@ def run(test=False):
     # test flag is to improve run speed when testing
     # Get data:
     from example_data import double_couple_data
-    from mtfit.inversion import Inversion
+    from MTfit.inversion import Inversion
     data = double_couple_data()
     print("Running Double-Couple example\n\n\tInput data dictionary:")
     # Print data

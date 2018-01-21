@@ -31,7 +31,7 @@ def run(test=False):
         max_time = 10
         phy_mem = 0.01
     # Set-up inversion object:
-    from mtfit.inversion import Inversion
+    from MTfit.inversion import Inversion
     # Inversion
     # Location uncertainty path
     location_pdf_file_path = 'Location_Uncertainty.scatangle'
