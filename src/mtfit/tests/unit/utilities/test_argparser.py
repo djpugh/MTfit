@@ -57,7 +57,6 @@ class ParserTestCase(TestCase):
         #PBS -l nodes=16:ppn=8
         #PBS -l pmem=2Gb
         #PBS -q batch
-        #PBS -M DPugh3@slb.com
         #PBS -m bae
         python -c "import MTfit; MTfit.__run__()" --number_location_samples=25 --inversionoptions="PPolarity,P/SHQRMSAmplitudeRatio,P/SVRQMSAmplitudeRatio" --compareconstrained --algorithm=time --anglescatterfilepath="""+os.path.abspath('./')+os.path.sep+"Test.scatangle --numberworkers=128 --time=36000.0 --datafile="+os.path.abspath('./')+os.path.sep+" --nstations=0\n"
         example_MTfit_script2 = """#!/bin/bash
@@ -69,7 +68,6 @@ class ParserTestCase(TestCase):
         #PBS -l nodes=16:ppn=8
         #PBS -l pmem=2Gb
         #PBS -q batch
-        #PBS -M DPugh3@slb.com
         #PBS -m bae
         python -c "import MTfit; MTfit.__run__()" --number_location_samples=250 --inversionoptions="PPolarity,P/SHQRMSAmplitudeRatio,P/SVRQMSAmplitudeRatio" --algorithm=time --anglescatterfilepath="""+os.path.abspath('./')+os.path.sep+"Test.scatangle --numberworkers=128 --time=36000.0 --datafile="+os.path.abspath('./')+os.path.sep+" --nstations=0\n"
 
@@ -112,7 +110,6 @@ class ParserTestCase(TestCase):
                     ["--datafile=*.i"], test=True)
                 self.assertEqual(
                     options['data_file'], [os.path.abspath('Test.i')])
-                # import ipdb;ipdb.set_trace()
                 options, options_map = MTfit_parser(["--invext=i"], test=True)
                 self.assertEqual(
                     options['data_file'], [os.path.abspath('Test.i')])

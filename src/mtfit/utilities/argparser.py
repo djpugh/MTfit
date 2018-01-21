@@ -884,7 +884,7 @@ def MTfit_parser(input_args=False, test=False):
             # sort by ascending job no
             pbs_files.sort(key=lambda x: x.split('.p')[1], reverse=True)
             for pbs_file in pbs_files:
-                if '##MTfit qsub script' in open(pbs_file).read().lower():
+                if '##mtfit qsub script' in open(pbs_file).read().lower():
                     if not options['_mpi_call']:
                         log('Recovering Run: '+pbs_file)
                     # MTfit Script therefore read, parse and act
