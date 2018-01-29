@@ -1,5 +1,5 @@
-mtfit.utilities.file_io
+MTfit.utilities.file_io
 =======================
 
 
-.. literalinclude:: ../../src/mtfit/utilities/file_io.py
+.. literalinclude:: ../../src/MTfit/utilities/file_io.py

@@ -27,7 +27,7 @@ Optional Arguments:
                          
                          
   -d DATAFILE, --datafile DATAFILE, --data_file DATAFILE
-                        MTplot can read the output data from mtfit
+                        MTplot can read the output data from MTfit
                          
                          
   -p PLOT_TYPE, --plot_type PLOT_TYPE, --plottype PLOT_TYPE,

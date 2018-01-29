@@ -2,7 +2,7 @@
 extensions.py
 ******************
 
-Utility functions for handling mtfit extensions.
+Utility functions for handling MTfit extensions.
 
 Simple functions that are used throughout the module
 """

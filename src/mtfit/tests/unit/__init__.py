@@ -1,16 +1,16 @@
 import unittest
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.tests.unit.utilities import test_suite as utilities_test_suite
-from mtfit.tests.unit.extensions import test_suite as extensions_test_suite
-from mtfit.tests.unit.algorithms import test_suite as algorithms_test_suite
-from mtfit.tests.unit.probability import test_suite as probability_test_suite
-from mtfit.tests.unit.test_sampling import test_suite as sampling_test_suite
-from mtfit.tests.unit.test_inversion import test_suite as inversion_test_suite
-from mtfit.tests.unit.test_run import test_suite as run_test_suite
-from mtfit.tests.unit.convert import test_suite as convert_test_suite
-from mtfit.tests.unit.plot import test_suite as plot_test_suite
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.tests.unit.utilities import test_suite as utilities_test_suite
+from MTfit.tests.unit.extensions import test_suite as extensions_test_suite
+from MTfit.tests.unit.algorithms import test_suite as algorithms_test_suite
+from MTfit.tests.unit.probability import test_suite as probability_test_suite
+from MTfit.tests.unit.test_sampling import test_suite as sampling_test_suite
+from MTfit.tests.unit.test_inversion import test_suite as inversion_test_suite
+from MTfit.tests.unit.test_run import test_suite as run_test_suite
+from MTfit.tests.unit.convert import test_suite as convert_test_suite
+from MTfit.tests.unit.plot import test_suite as plot_test_suite
 
 __all__ = ['run_tests']
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Setup script for mtfit
+Setup script for MTfit
 ***********************
 Call from command line as: python setup.py install if on unix
 or python setup.py install
@@ -46,7 +46,7 @@ def setup_package():
     # Extensions
     build_extensions()
     version = versioneer.get_version()
-    kwargs = dict(name='mtfit',
+    kwargs = dict(name='MTfit',
                   version=version,
                   cmdclass=versioneer.get_cmdclass(),
                   author=__author__,
@@ -70,25 +70,25 @@ def setup_package():
                   package_dir={'': 'src'},
                   requires=['numpy', 'scipy'],
                   install_requires=['numpy>=1.7.0', 'scipy', 'cython>=0.20.2', 'setuptools', 'pyqsub>=1.0.2'],
-                  provides=['mtfit'],
-                  test_suite='mtfit.tests.test_suite',
-                  description='mtfit: Bayesian Moment Tensor Inversion Code',
+                  provides=['MTfit'],
+                  test_suite='MTfit.tests.test_suite',
+                  description='MTfit: Bayesian Moment Tensor Inversion Code',
                   long_description=long_description,
                   package_data={'': ['*.rst', 'examples/README', 'examples/command_line.sh', 'examples/command_line.bat', '*.pyx', '*.pxd', '*.c',
                                      'extensions/example_parser/*', 'extensions/model_sampling_strike_slip/*', 'extensions/model_sampling_clvd/*',
                                      'docs/man/*', 'docs/epub/*.epub', 'docs/pdf/*', 'docs/html/*.*', 'docs/html/.doctrees/*.*', 'docs/html/_images/*.*',
-                                     'docs/html/_downloads/*.*', 'docs/html/_modules/*.*', 'docs/html/_modules/mtfit/*.*', 'docs/html/_sources/*.*', 'docs/html/_static/*.*']}
+                                     'docs/html/_downloads/*.*', 'docs/html/_modules/*.*', 'docs/html/_modules/MTfit/*.*', 'docs/html/_sources/*.*', 'docs/html/_static/*.*']}
                   )
     kwargs['extras_require'] = {'MATLAB -v7.3': ['h5py', 'hdf5storage'], 'HTML documentation': ['sphinx>=1.3.1'], 'Cluster': ['pyqsub>=1.0.2'], 'Plotting': ['matplotlib>=1.4.0']}
     kwargs['entry_points'] = {}
-    kwargs['entry_points'] = {'console_scripts': ['mtfit = mtfit.run:run', 'MTplot = mtfit.plot.core:run'],
-                              'mtfit.parsers': ['.csv = mtfit.utilities.file_io:parse_csv', '.hyp = mtfit.utilities.file_io:parse_hyp'],
-                              'mtfit.location_pdf_parsers': ['.scatangle = mtfit.extensions.scatangle:location_pdf_parser'],
-                              'mtfit.output_formats': ['matlab=mtfit.utilities.file_io:MATLAB_output', 'pickle=mtfit.utilities.file_io:pickle_output', 'hyp=mtfit.utilities.file_io:hyp_output'],
-                              'mtfit.output_data_formats': ['full_pdf=mtfit.utilities.file_io:full_pdf_output_dicts', 'hyp=mtfit.utilities.file_io:hyp_output_dicts'],
-                              'mtfit.cmd_defaults': ['scatangle=mtfit.extensions.scatangle:cmd_defaults'],
-                              'mtfit.cmd_opts': ['scatangle=mtfit.extensions.scatangle:cmd_opts'],
-                              'mtfit.pre_inversion': ['scatangle=mtfit.extensions.scatangle:pre_inversion']
+    kwargs['entry_points'] = {'console_scripts': ['MTfit = MTfit.run:run', 'MTplot = MTfit.plot.core:run'],
+                              'MTfit.parsers': ['.csv = MTfit.utilities.file_io:parse_csv', '.hyp = MTfit.utilities.file_io:parse_hyp'],
+                              'MTfit.location_pdf_parsers': ['.scatangle = MTfit.extensions.scatangle:location_pdf_parser'],
+                              'MTfit.output_formats': ['matlab=MTfit.utilities.file_io:MATLAB_output', 'pickle=MTfit.utilities.file_io:pickle_output', 'hyp=MTfit.utilities.file_io:hyp_output'],
+                              'MTfit.output_data_formats': ['full_pdf=MTfit.utilities.file_io:full_pdf_output_dicts', 'hyp=MTfit.utilities.file_io:hyp_output_dicts'],
+                              'MTfit.cmd_defaults': ['scatangle=MTfit.extensions.scatangle:cmd_defaults'],
+                              'MTfit.cmd_opts': ['scatangle=MTfit.extensions.scatangle:cmd_opts'],
+                              'MTfit.pre_inversion': ['scatangle=MTfit.extensions.scatangle:pre_inversion']
                               }
     kwargs['include_dirs'] = [np.get_include()]
     extra_compile_args = ['-O3', '-march=native']
@@ -97,28 +97,28 @@ def setup_package():
         extra_compile_args = []
         libraries = []
     if _CYTHON and 'build_ext' in sys.argv:
-        kwargs['ext_modules'] = [Extension('mtfit.probability.cprobability', sources=['src/mtfit/probability/cprobability.pyx'], libraries=libraries, extra_compile_args=extra_compile_args),
-                                 Extension('mtfit.convert.cmoment_tensor_conversion', sources=[
-                                           'src/mtfit/convert/cmoment_tensor_conversion.pyx'], libraries=libraries, extra_compile_args=extra_compile_args),
-                                 Extension('mtfit.extensions.cscatangle', sources=[
-                                           'src/mtfit/extensions/cscatangle.pyx'], libraries=libraries, extra_compile_args=extra_compile_args),
-                                 Extension('mtfit.algorithms.cmarkov_chain_monte_carlo', sources=['src/mtfit/algorithms/cmarkov_chain_monte_carlo.pyx'], libraries=libraries, extra_compile_args=extra_compile_args)]
+        kwargs['ext_modules'] = [Extension('MTfit.probability.cprobability', sources=['src/MTfit/probability/cprobability.pyx'], libraries=libraries, extra_compile_args=extra_compile_args),
+                                 Extension('MTfit.convert.cmoment_tensor_conversion', sources=[
+                                           'src/MTfit/convert/cmoment_tensor_conversion.pyx'], libraries=libraries, extra_compile_args=extra_compile_args),
+                                 Extension('MTfit.extensions.cscatangle', sources=[
+                                           'src/MTfit/extensions/cscatangle.pyx'], libraries=libraries, extra_compile_args=extra_compile_args),
+                                 Extension('MTfit.algorithms.cmarkov_chain_monte_carlo', sources=['src/MTfit/algorithms/cmarkov_chain_monte_carlo.pyx'], libraries=libraries, extra_compile_args=extra_compile_args)]
         kwargs['cmdclass'] = {"build_ext": build_ext}
     else:
-        kwargs['ext_modules'] = [Extension('mtfit.probability.cprobability', sources=['src/mtfit/probability/cprobability.c'], libraries=libraries, extra_compile_args=extra_compile_args),
-                                 Extension('mtfit.convert.cmoment_tensor_conversion', sources=[
-                                           'src/mtfit/convert/cmoment_tensor_conversion.c'], libraries=libraries, extra_compile_args=extra_compile_args),
-                                 Extension('mtfit.extensions.cscatangle', sources=['src/mtfit/extensions/cscatangle.c'], libraries=libraries, extra_compile_args=extra_compile_args),
-                                 Extension('mtfit.algorithms.cmarkov_chain_monte_carlo', sources=['src/mtfit/algorithms/cmarkov_chain_monte_carlo.c'], libraries=libraries, extra_compile_args=extra_compile_args)]
+        kwargs['ext_modules'] = [Extension('MTfit.probability.cprobability', sources=['src/MTfit/probability/cprobability.c'], libraries=libraries, extra_compile_args=extra_compile_args),
+                                 Extension('MTfit.convert.cmoment_tensor_conversion', sources=[
+                                           'src/MTfit/convert/cmoment_tensor_conversion.c'], libraries=libraries, extra_compile_args=extra_compile_args),
+                                 Extension('MTfit.extensions.cscatangle', sources=['src/MTfit/extensions/cscatangle.c'], libraries=libraries, extra_compile_args=extra_compile_args),
+                                 Extension('MTfit.algorithms.cmarkov_chain_monte_carlo', sources=['src/MTfit/algorithms/cmarkov_chain_monte_carlo.c'], libraries=libraries, extra_compile_args=extra_compile_args)]
     setup(**kwargs)
 
 
 def setup_help():
     # Run setup with cmd args (DEFAULT)
     if '--help' in sys.argv or '-h' in sys.argv:
-        print("""setup.py script for mtfit
+        print("""setup.py script for MTfit
 
-mtfit can be installed from the source by calling:
+MTfit can be installed from the source by calling:
 
     $ python setup.py install
 
@@ -140,11 +140,11 @@ def build_extensions():
             exts = ['c', 'pyd']
         else:
             exts = ['c', 'so']
-        for filename in ['src/mtfit/probablity/cprobability.', 'src/mtfit/algorithms/cmarkov_chain_monte_carlo.', 'src/mtfit/extensions/cscatangle.', 'src/mtfit/convert/cmoment_tensor_conversion.']:
+        for filename in ['src/MTfit/probablity/cprobability.', 'src/MTfit/algorithms/cmarkov_chain_monte_carlo.', 'src/MTfit/extensions/cscatangle.', 'src/MTfit/convert/cmoment_tensor_conversion.']:
             for ext in exts:
                 if os.path.exists(filename+ext):
                     os.remove(filename+ext)
-    elif 'sdist' in sys.argv or 'develop' in sys.argv:
+    elif 'develop' in sys.argv:
         print('------\nBUILDING EXTENSIONS\n-----\n')
         argv = [sys.executable, "setup.py", "build_ext", "--inplace"]
         subprocess.check_call(argv)

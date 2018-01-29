@@ -40,9 +40,9 @@ fi
 
 pip3.6 install -U tox cython
 
-rm -rf ~/mtfit
-rsync -av --exclude='.tox/*' --exclude='build/*' --exclude='wheelhouse/*' --exclude='.vagrant/*' /mtfit/ ~/mtfit/
-cd ~/mtfit
+rm -rf ~/MTfit
+rsync -av --exclude='.tox/*' --exclude='build/*' --exclude='wheelhouse/*' --exclude='.vagrant/*' /MTfit/ ~/MTfit/
+cd ~/MTfit
 # Setup for linux
 sed -i 's/\r//g' examples/command_line.sh
 pip3.6 install -r requirements.txt

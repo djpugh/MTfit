@@ -2,7 +2,7 @@
 probability.py
 **************
 
-Probability module for mtfit, handles all probability calculations and
+Probability module for MTfit, handles all probability calculations and
 contains the base LnPDF class for acting on probabilities.
 
 LnPDF object acts as a wrapper around a numpy matrix, allowing some

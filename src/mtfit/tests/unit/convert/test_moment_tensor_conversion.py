@@ -9,46 +9,46 @@ import unittest
 
 import numpy as np
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.utilities.unittest_utils import TestCase
-from mtfit.convert import moment_tensor_conversion as mtc
-from mtfit.convert import MT33_MT6
-from mtfit.convert import MT6_MT33
-from mtfit.convert import MT6_TNPE
-from mtfit.convert import MT33_TNPE
-from mtfit.convert import MT6_Tape
-from mtfit.convert import TNP_SDR
-from mtfit.convert import TP_FP
-from mtfit.convert import FP_SDR
-from mtfit.convert import E_tk
-from mtfit.convert import tk_uv
-from mtfit.convert import E_GD
-from mtfit.convert import GD_basic_cdc
-from mtfit.convert import basic_cdc_GD
-from mtfit.convert import GD_E
-from mtfit.convert import SDR_TNP
-from mtfit.convert import SDR_SDR
-from mtfit.convert import FP_TNP
-from mtfit.convert import SDSD_FP
-from mtfit.convert import SDR_FP
-from mtfit.convert import SDR_SDSD
-from mtfit.convert import FP_SDSD
-from mtfit.convert import Tape_MT33
-from mtfit.convert import Tape_MT6
-from mtfit.convert import Tape_TNPE
-from mtfit.convert import normal_SD
-from mtfit.convert import toa_vec
-from mtfit.convert import output_convert
-from mtfit.convert import MT6_biaxes
-from mtfit.convert import MT6c_D6
-from mtfit.convert import isotropic_c
-from mtfit.convert import c_norm
-from mtfit.convert import is_isotropic_c
-from mtfit.convert import c21_cvoigt
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.unittest_utils import TestCase
+from MTfit.convert import moment_tensor_conversion as mtc
+from MTfit.convert import MT33_MT6
+from MTfit.convert import MT6_MT33
+from MTfit.convert import MT6_TNPE
+from MTfit.convert import MT33_TNPE
+from MTfit.convert import MT6_Tape
+from MTfit.convert import TNP_SDR
+from MTfit.convert import TP_FP
+from MTfit.convert import FP_SDR
+from MTfit.convert import E_tk
+from MTfit.convert import tk_uv
+from MTfit.convert import E_GD
+from MTfit.convert import GD_basic_cdc
+from MTfit.convert import basic_cdc_GD
+from MTfit.convert import GD_E
+from MTfit.convert import SDR_TNP
+from MTfit.convert import SDR_SDR
+from MTfit.convert import FP_TNP
+from MTfit.convert import SDSD_FP
+from MTfit.convert import SDR_FP
+from MTfit.convert import SDR_SDSD
+from MTfit.convert import FP_SDSD
+from MTfit.convert import Tape_MT33
+from MTfit.convert import Tape_MT6
+from MTfit.convert import Tape_TNPE
+from MTfit.convert import normal_SD
+from MTfit.convert import toa_vec
+from MTfit.convert import output_convert
+from MTfit.convert import MT6_biaxes
+from MTfit.convert import MT6c_D6
+from MTfit.convert import isotropic_c
+from MTfit.convert import c_norm
+from MTfit.convert import is_isotropic_c
+from MTfit.convert import c21_cvoigt
 
 try:
-    from mtfit.convert import cmoment_tensor_conversion
+    from MTfit.convert import cmoment_tensor_conversion
     _CYTHON = True
 except Exception:
     _CYTHON = False

@@ -3,22 +3,22 @@ import copy
 
 import numpy as np
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.utilities.unittest_utils import TestCase
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.unittest_utils import TestCase
 
-from mtfit.algorithms.markov_chain_monte_carlo import IterativeMetropolisHastingsGaussianTape
-from mtfit.algorithms.markov_chain_monte_carlo import IterativeTransDMetropolisHastingsGaussianTape
-from mtfit.algorithms.markov_chain_monte_carlo import IterativeMultipleTryMetropolisHastingsGaussianTape
-from mtfit.algorithms.markov_chain_monte_carlo import MarginalisedMarkovChainMonteCarlo
-from mtfit.algorithms.markov_chain_monte_carlo import MarginalisedMetropolisHastings
-from mtfit.algorithms.markov_chain_monte_carlo import MarginalisedMetropolisHastingsGaussianTape
-from mtfit.algorithms.markov_chain_monte_carlo import IterativeMultipleTryTransDMetropolisHastingsGaussianTape
-from mtfit.algorithms.markov_chain_monte_carlo import McMCAlgorithmCreator
+from MTfit.algorithms.markov_chain_monte_carlo import IterativeMetropolisHastingsGaussianTape
+from MTfit.algorithms.markov_chain_monte_carlo import IterativeTransDMetropolisHastingsGaussianTape
+from MTfit.algorithms.markov_chain_monte_carlo import IterativeMultipleTryMetropolisHastingsGaussianTape
+from MTfit.algorithms.markov_chain_monte_carlo import MarginalisedMarkovChainMonteCarlo
+from MTfit.algorithms.markov_chain_monte_carlo import MarginalisedMetropolisHastings
+from MTfit.algorithms.markov_chain_monte_carlo import MarginalisedMetropolisHastingsGaussianTape
+from MTfit.algorithms.markov_chain_monte_carlo import IterativeMultipleTryTransDMetropolisHastingsGaussianTape
+from MTfit.algorithms.markov_chain_monte_carlo import McMCAlgorithmCreator
 
 
 try:
-    from mtfit.algorithms import cmarkov_chain_monte_carlo
+    from MTfit.algorithms import cmarkov_chain_monte_carlo
 except ImportError:
     cmarkov_chain_monte_carlo = False
 
@@ -1379,7 +1379,7 @@ def test_suite(verbosity=2):
              unittest.TestLoader().loadTestsFromTestCase(IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase)]
     suite = unittest.TestSuite(suite)
     try:
-        from mtfit.algorithms.cmarkov_chain_monte_carlo import test_suite as cmarkov_chain_monte_carlo_test_suite
+        from MTfit.algorithms.cmarkov_chain_monte_carlo import test_suite as cmarkov_chain_monte_carlo_test_suite
         suite = unittest.TestSuite([suite, cmarkov_chain_monte_carlo_test_suite(verbosity)])
     except ImportError:
         pass

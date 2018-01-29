@@ -2,7 +2,7 @@
 Plotting the Moment Tensor
 *********************************
 
-:mod:`mtfit` has a plotting submodule that can be used to represent the source. There are several different plot types, shown below, and MTplot can be used both from the command line, and from within the python interpreter.
+:mod:`MTfit` has a plotting submodule that can be used to represent the source. There are several different plot types, shown below, and MTplot can be used both from the command line, and from within the python interpreter.
 
 This section describes how to use the plotting tools and shows the different plot types:
 
@@ -13,7 +13,7 @@ This section describes how to use the plotting tools and shows the different plo
     * :ref:`Lune<lune>`
     * :ref:`Hudson<hudson>`
 
-These are plotted using `matplotlib <http://matplotlib.org/>`_, using a class based system. The main plotting class is the :class:`MTplot` class, which stores the figure and handles the plotting, and each axes plotted is shown using a plot class from :mod:`mtfit.plot.plot_classes`. The plotting methods are designed to enable easy plotting without much user input, but also allow more complex plots to be made.
+These are plotted using `matplotlib <http://matplotlib.org/>`_, using a class based system. The main plotting class is the :class:`MTplot` class, which stores the figure and handles the plotting, and each axes plotted is shown using a plot class from :mod:`MTfit.plot.plot_classes`. The plotting methods are designed to enable easy plotting without much user input, but also allow more complex plots to be made.
 The :ref:`examples section <mtplot-examples>` shows two examples of using the plotting submodule.
 
 The source code is shown in :doc:`source-plot_classes`.
@@ -44,8 +44,8 @@ Linux
 Add this python script to a directory on the $PATH environmental variable::
 
     #!/usr/bin/env python
-    import mtfit
-    mtfit.plot.__run__()
+    import MTfit
+    MTfit.plot.__run__()
 
 and make sure it is executable.
 
@@ -56,7 +56,7 @@ Add the linux script (above) to the path or if using powershell edit the powersh
 
     function MTplot{
         $script={
-            python -c "import mtfit;mtfit.plot.__run__()" $args
+            python -c "import MTfit;MTfit.plot.__run__()" $args
             }
         Invoke-Command -ScriptBlock $script -ArgumentList $args
         }
@@ -70,18 +70,18 @@ There are several command line options available, these can be found by calling:
 
     $ MTplot -h
 
-The command line defaults can be set using the same defaults file as for mtfit (see :doc:`run`). 
+The command line defaults can be set using the same defaults file as for MTfit (see :doc:`run`). 
 
 Using MTplot from the Python interpreter
 ==========================================
 
 Although MTplot can be run from the command line, it is much more powerful to run it from within the python interpreter.
-To run MTplot from the python interpreter, create the :class:`~mtfit.plot.plot_classes.MTplot` object::
+To run MTplot from the python interpreter, create the :class:`~MTfit.plot.plot_classes.MTplot` object::
 
-    >>> from mtfit.plot import MTplot
+    >>> from MTfit.plot import MTplot
     >>> MTplot(MTs,plot_type='beachball',stations={},plot=True,*args,**kwargs)
 
-See :ref:`Making the MTplot class <mtplotclass>` for more information on the  :class:`~mtfit.plot.plot_classes.MTplot` object.
+See :ref:`Making the MTplot class <mtplotclass>` for more information on the  :class:`~MTfit.plot.plot_classes.MTplot` object.
 
 
 .. _input-data-label:
@@ -89,9 +89,9 @@ See :ref:`Making the MTplot class <mtplotclass>` for more information on the  :c
 Input Data
 ==================================
 
-:func:`mtfit.plot.__core__.read` can read the three default output formats (MATLAB, hyp and pickle) for mtfit results. 
+:func:`MTfit.plot.__core__.read` can read the three default output formats (MATLAB, hyp and pickle) for MTfit results. 
 
-Additional parsers can be installed using the `mtfit.plot_read` entry point described in :doc:`extensions`.
+Additional parsers can be installed using the `MTfit.plot_read` entry point described in :doc:`extensions`.
 
 
 .. _mtplotclass:
@@ -102,7 +102,7 @@ MTplot Class
 The MTplot class is used to handle plotting the moment tensors. The moment tensors are stored as an :ref:`MTData<mtdataclass>` class.
 
 
-.. autoclass:: mtfit.plot.plot_classes.MTplot
+.. autoclass:: MTfit.plot.plot_classes.MTplot
    :members:   
 
 -------------------
@@ -114,7 +114,7 @@ MTData Class
 
 The MTData class is used for storing and converting the moment tensors for plotting.
 
-.. autoclass:: mtfit.plot.plot_classes.MTData
+.. autoclass:: MTfit.plot.plot_classes.MTData
    :members:  
 
 .. _beachball:
@@ -122,13 +122,13 @@ The MTData class is used for storing and converting the moment tensors for plott
 Beachball plot
 ==========================
 
-The simplest plot is a beachball plot using the :class:`mtfit.plot.plot_classes._AmplitudePlot` class.
+The simplest plot is a beachball plot using the :class:`MTfit.plot.plot_classes._AmplitudePlot` class.
 
 Using the MTplot function, it can be made with the following commands::
 
-    >>> import mtfit
+    >>> import MTfit
     >>> import numpy as np
-    >>> mtfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'beachball',
+    >>> MTfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'beachball',
             fault_plane=True)
 
 This plots the equal area projection of the source (a double-couple).
@@ -139,7 +139,7 @@ Stations can be included as a dictionary, with the azimuths and takeoff angles i
                   'azimuth':np.array([120.,5.,250.,75.]),
                   'takeoff_angle':np.array([30.,60.,45.,10.]),
                   'polarity':np.array([1,0,1,-1])}
-    >>> mtfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'beachball',
+    >>> MTfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'beachball',
                 stations=stations,fault_plane=True)
 
 If the polarity probabilities have been used in the inversion, the probabilities can be plotted on the receivers, by setting the stations ``polarity`` array as an array of the larger polarity probabilities, with negative polarity probabilities corresponding to polarities in the negative direction, e.g.::
@@ -148,23 +148,23 @@ If the polarity probabilities have been used in the inversion, the probabilities
                   'azimuth':np.array([120.,5.,250.,75.]),
                   'takeoff_angle':np.array([30.,60.,45.,10.]),
                   'polarity':np.array([0.8,0.5,0.7,-0.9])}
-    >>> mtfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'beachball',
+    >>> MTfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'beachball',
                 stations=stations,fault_plane=True)
 
 To tweak the plot further, the plot class can be used directly::
 
-    >>> import mtfit
+    >>> import MTfit
     >>> import numpy as np
-    >>> X=mtfit.plot.plot_classes._AmplitudePlot(False,False,
+    >>> X=MTfit.plot.plot_classes._AmplitudePlot(False,False,
             np.array([[1],[0],[-1],[0],[0],[0]]),'beachball',
             stations=stations,fault_plane=True)
     >>> X.plot()
 
 The first two arguments correspond to the subplot_spec and matplotlib figure to be used - if these are False, then a new figure is created. 
 
-It uses the :class:`mtfit.plot.plot_classes._AmplitudePlot` class:
+It uses the :class:`MTfit.plot.plot_classes._AmplitudePlot` class:
 
-.. autoclass:: mtfit.plot.plot_classes._AmplitudePlot
+.. autoclass:: MTfit.plot.plot_classes._AmplitudePlot
    :members:  plot
 
 .. _faultplane:
@@ -172,13 +172,13 @@ It uses the :class:`mtfit.plot.plot_classes._AmplitudePlot` class:
 Fault Plane plot
 ==========================
 
-A similar plot to the amplitude beachball plot is the fault plane plot, made using the :class:`mtfit.plot.plot_classes._FaultPlanePlot` class.
+A similar plot to the amplitude beachball plot is the fault plane plot, made using the :class:`MTfit.plot.plot_classes._FaultPlanePlot` class.
 
 Using the MTplot function, it can be made with the following commands::
 
-    >>> import mtfit
+    >>> import MTfit
     >>> import numpy as np
-    >>> mtfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'faultplane',
+    >>> MTfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'faultplane',
             fault_plane=True)
 
 This plots the equal area projection of the source (a double-couple).
@@ -187,9 +187,9 @@ Stations can be included as a dictionary, like with the beachball plot.
 
 The fault plane plot also can plot the solutions for multiple moment tensors, so the input array can be longer::
 
-    >>> import mtfit
+    >>> import MTfit
     >>> import numpy as np
-    >>> mtfit.plot.MTplot(np.array([[ 1,0.9, 1.1,0.4],
+    >>> MTfit.plot.MTplot(np.array([[ 1,0.9, 1.1,0.4],
                                     [ 0,0.1,-0.1,0.6],
                                     [-1, -1,  -1, -1],
                                     [ 0,  0,   0,  0],
@@ -202,9 +202,9 @@ There are additional initialisation arguments, such as ``show_max_likelihood`` a
 Additionally, if  the probability argument is set, the fault planes are coloured by the probability, with more likely planes darker.
 
 
-It uses the :class:`mtfit.plot.plot_classes._FaultPlanePlot` class:
+It uses the :class:`MTfit.plot.plot_classes._FaultPlanePlot` class:
 
-.. autoclass:: mtfit.plot.plot_classes._FaultPlanePlot
+.. autoclass:: MTfit.plot.plot_classes._FaultPlanePlot
    :members:  plot
 
 .. _rjplot:
@@ -216,9 +216,9 @@ The Riedesel-Jordan plot is more complicated, and is described in :ref:`Riedesel
 
 Using the MTplot function, it can be made with the following commands::
 
-    >>> import mtfit
+    >>> import MTfit
     >>> import numpy as np
-    >>> mtfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'riedeseljordan')
+    >>> MTfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'riedeseljordan')
 
 This plots the equal area projection of the source (a double-couple).
 
@@ -226,9 +226,9 @@ Stations cannot be shown on this plot.
 
 The Riedesel-Jordan plot cannot plot the solutions for multiple moment tensors, so the input array can only be one moment tensor.
 
-It uses the :class:`mtfit.plot.plot_classes._RiedeselJordanPlot` class:
+It uses the :class:`MTfit.plot.plot_classes._RiedeselJordanPlot` class:
 
-.. autoclass:: mtfit.plot.plot_classes._RiedeselJordanPlot
+.. autoclass:: MTfit.plot.plot_classes._RiedeselJordanPlot
    :members:  plot
 
 
@@ -241,9 +241,9 @@ The radiation plot shows the same pattern as the beachball plot, except the shap
 
 Using the MTplot function, it can be made with the following commands::
 
-    >>> import mtfit
+    >>> import MTfit
     >>> import numpy as np
-    >>> mtfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'radiation')
+    >>> MTfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'radiation')
 
 This plots the equal area projection of the source (a double-couple).
 
@@ -251,9 +251,9 @@ Stations cannot be shown on this plot.
 
 The radiation plot cannot plot the solutions for multiple moment tensors, so the input array can only be one moment tensor.
 
-It uses the :class:`mtfit.plot.plot_classes._RadiationPlot` class:
+It uses the :class:`MTfit.plot.plot_classes._RadiationPlot` class:
 
-.. autoclass:: mtfit.plot.plot_classes._RadiationPlot
+.. autoclass:: MTfit.plot.plot_classes._RadiationPlot
    :members:  plot
 
 .. _hudson:
@@ -265,9 +265,9 @@ The Hudson plot is a source type plot, described in :ref:`Hudson et al. (1989)<H
 
 Using the MTplot function, it can be made with the following commands::
 
-    >>> import mtfit
+    >>> import MTfit
     >>> import numpy as np
-    >>> mtfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'hudson')
+    >>> MTfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'hudson')
 
 This plots the u-v plot of the source (a double-couple).
 
@@ -275,9 +275,9 @@ Stations cannot be shown on this plot.
 
 The Hudson plot can plot the solutions for multiple moment tensors, so the input array can be longer. Additionally, it can also plot a histogram of the PDF, if the probability argument is set.
 
-It uses the :class:`mtfit.plot.plot_classes._HudsonPlot` class:
+It uses the :class:`MTfit.plot.plot_classes._HudsonPlot` class:
 
-.. autoclass:: mtfit.plot.plot_classes._HudsonPlot
+.. autoclass:: MTfit.plot.plot_classes._HudsonPlot
    :members:  plot
 
 .. _lune:
@@ -289,17 +289,17 @@ The Lune plot is a source type plot, described in :ref:`Tape and Tape (2012)<Tap
 
 Using the MTplot function, it can be made with the following commands::
 
-    >>> import mtfit
+    >>> import MTfit
     >>> import numpy as np
-    >>> mtfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'lune')
+    >>> MTfit.plot.MTplot(np.array([[1],[0],[-1],[0],[0],[0]]),'lune')
 
 Stations cannot be shown on this plot.
 
 The Lune plot can plot the solutions for multiple moment tensors, so the input array can be longer. Additionally, it can also plot a histogram of the PDF, if the probability argument is set.
 
-It uses the :class:`mtfit.plot.plot_classes._LunePlot` class:
+It uses the :class:`MTfit.plot.plot_classes._LunePlot` class:
 
-.. autoclass:: mtfit.plot.plot_classes._LunePlot
+.. autoclass:: MTfit.plot.plot_classes._LunePlot
    :members:  plot
 
 .. _mtplot-examples:
@@ -311,15 +311,15 @@ This section shows a pair of simple examples and their results.
 
 The first example is to plot the data from :ref:`Krafla P Polarity example<real-p-polarity>`::
 
-    import mtfit
+    import MTfit
     import numpy as np
     #Load Data    
-    st_dist=mtfit.plot.read('krafla_event_ppolarityDCStationDistribution.mat',
+    st_dist=MTfit.plot.read('krafla_event_ppolarityDCStationDistribution.mat',
         station_distribution=True)
-    DCs,DCstations=mtfit.plot.read('krafla_event_ppolarityDC.mat')
-    MTs,MTstations=mtfit.plot.read('krafla_event_ppolarityMT.mat')
+    DCs,DCstations=MTfit.plot.read('krafla_event_ppolarityDC.mat')
+    MTs,MTstations=MTfit.plot.read('krafla_event_ppolarityMT.mat')
     #Plot
-    plot=mtfit.plot.MTplot([np.array([1,0,-1,0,0,0]),DCs,MTs],
+    plot=MTfit.plot.MTplot([np.array([1,0,-1,0,0,0]),DCs,MTs],
         stations=[DCstations,DCstations,MTstations],
         station_distribution=[st_dist,False,False],
         plot_type=['faultplane','faultplane','hudson'],fault_plane=[False,True,False],
@@ -353,23 +353,23 @@ The first example is to plot the data from :ref:`Krafla P Polarity example<real-
 
 The second example shows the different plot types::
 
-    import mtfit
+    import MTfit
     import numpy as np
     import scipy.stats as sp
     #Generate Data    
     n=100
-    DCs=mtfit.MTconvert.Tape_MT6(np.zeros(n),np.zeros(n),np.pi+0.1*np.random.randn(n),
+    DCs=MTfit.MTconvert.Tape_MT6(np.zeros(n),np.zeros(n),np.pi+0.1*np.random.randn(n),
             0.5+0.01*np.random.randn(n),0.1*np.random.randn(n))
     probDCs=np.random.rand(n)
     n=10000
     g=-np.pi/12+0.01*np.random.randn(n)
     d=np.pi/3+0.1*np.random.randn(n)
-    MTs=mtfit.MTconvert.Tape_MT6(g,d,np.pi+0.1*np.random.randn(n),
+    MTs=MTfit.MTconvert.Tape_MT6(g,d,np.pi+0.1*np.random.randn(n),
             0.5+0.01*np.random.randn(n),0.1*np.random.randn(n))
     probMTs=sp.norm.pdf(g,-np.pi/12,0.01)*sp.norm.pdf(d,np.pi/3,0.1)
     plot_sources=[np.array([1,0,1,-1,0,0]),DCs,MTs,MTs,np.array([1,0,1,-1,0,0])]
     #Plot
-    plot=mtfit.plot.MTplot(plot_sources,
+    plot=MTfit.plot.MTplot(plot_sources,
         plot_type=['beachball','faultplane','hudson','lune','riedeseljordan'],
         probability=[False,probDCs,probMTs,probMTs,False],
         colormap=['bwr','bwr','viridis','viridis','bwr'],

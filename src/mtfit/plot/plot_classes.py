@@ -25,17 +25,17 @@ from matplotlib import __version__ as matplotlib_version
 from mpl_toolkits.mplot3d import proj3d
 from matplotlib.patches import FancyArrowPatch
 
-from mtfit.inversion import station_angles
-from mtfit.convert import MT33_MT6, toa_vec, tk_uv, E_tk, TNP_SDR, MT6_TNPE, E_GD, TP_FP, normal_SD, SDR_SDR, MT6_biaxes, E_uv
-from mtfit.utilities.extensions import get_extensions
+from MTfit.inversion import station_angles
+from MTfit.convert import MT33_MT6, toa_vec, tk_uv, E_tk, TNP_SDR, MT6_TNPE, E_GD, TP_FP, normal_SD, SDR_SDR, MT6_biaxes, E_uv
+from MTfit.utilities.extensions import get_extensions
 try:
-    from mtfit.sampling import unique_columns, _6sphere_prior, ln_bayesian_evidence
+    from MTfit.sampling import unique_columns, _6sphere_prior, ln_bayesian_evidence
 except Exception:
     pass  # SCIPY ERROR -CAN'T USE
 
 from .spherical_projection import equal_area, equal_angle
 
-logger = logging.getLogger('mtfit.plot')
+logger = logging.getLogger('MTfit.plot')
 
 # Default colors and colormaps
 DEFAULT_COLOR = 'purple'
@@ -94,7 +94,7 @@ class MTData(object):
 
         Args
             MTs: numpy array of moment tensor six vectors with shape (6,n).
-                Alternatively, the input can be a dictionary from the mtfit output.
+                Alternatively, the input can be a dictionary from the MTfit output.
 
 
         Keyword Args
@@ -893,7 +893,7 @@ class MTplot(object):
         # default is to plot, but can be stopped by adding plot=False to MTplot
         # initialisation arguments
         if plot:
-            self.plot()
+            self.plot(**kwargs)
 
     def _prep_data(self, param, name):
         """
@@ -1082,7 +1082,19 @@ class _BasePlot(object):
         if MTs:
             self.MTs = MTs
         self._convert()
-        handle = self._ax_plot(*args, **kwargs)
+        # Let's remove kwargs that aren't valid
+        plot_kwargs = {u: v for u, v in kwargs.items() if u not in ['nodal_line', 'fault_plane', 'TNP',
+                                                                    'axis_lines', 'projection', 'lower',
+                                                                    'full_sphere', 'show_stations', 'station_distribution',
+                                                                    'show_zero_polarity', 'station_markersize', 'station_colors',
+                                                                    'show_mean', 'max_number_planes', 'probability_cutoff',
+                                                                    'grid_lines', 'marginalised', 'hex_bin', 'type_label',
+                                                                    'zorder', 'weights', 'parameter', 'hex_extent',
+                                                                    'show_max_likelihood', 'probability',
+                                                                    'resolution', 'markersize', 'fontsize',
+                                                                    'text', 'colormap', 'linewidth',
+                                                                    'hex_bin']}
+        handle = self._ax_plot(*args, **plot_kwargs)
         self._background(handle)
         if self.show:
             self.fig.show()
@@ -1243,23 +1255,32 @@ class _BasePlot(object):
 
     def _2d_surf_plot(self, x, y, c, zorder=0, **kwargs):
         """2d surface plot (see _surf_plot documentation)"""
+        kwargs.pop('colormap', None)
+        kwargs.pop('bins', None)
         return self.ax.pcolormesh(x, y, c, cmap=self.colormap, shading='flat', zorder=zorder, **kwargs)
 
     def _2d_scatter_plot(self, x, y, c, marker='.', markersize=10, zorder=0, **kwargs):
         """2d scatter plot (see _scatter_plot documentation)"""
+        kwargs.pop('color', None)
+        kwargs.pop('bins', None)
         return self.ax.scatter(x, y, markersize*markersize, color=c, marker=marker, zorder=zorder, **kwargs)
 
     def _2d_line_plot(self, x, y, c, linestyle, linewidth, zorder=0, **kwargs):
         """2d line plot (see _line_plot documentation)"""
+        kwargs.pop('color', None)
+        kwargs.pop('bins', None)
         return self.ax.plot(x, y, color=c, linestyle=linestyle, linewidth=linewidth, zorder=zorder, **kwargs)
 
     def _2d_text(self, x, y, text, fontsize, zorder=2, **kwargs):
         """2d text plot (see _text_plot documentation)"""
+        kwargs.pop('bins', None)
         return self.ax.text(x, y, text, fontsize=fontsize, zorder=zorder, **kwargs)
     # 3D
 
     def _3d_surf_plot(self, x, y, z, c, zorder=0, **kwargs):
         """3d surface plot (see _surf_plot documentation)"""
+        kwargs.pop('colormap', None)
+        kwargs.pop('bins', None)
         try:
             return self.ax.plot_surface(x, y, z, facecolors=self.colormap(c), rstride=1, cstride=1,
                                         linewidth=0, antialiased=False, zorder=zorder, **kwargs)
@@ -1269,15 +1290,19 @@ class _BasePlot(object):
 
     def _3d_scatter_plot(self, x, y, z, c, marker='.', markersize=10, zorder=0, **kwargs):
         """3d scatter plot (see _scatter_plot documentation)"""
+        kwargs.pop('color', None)
+        kwargs.pop('bins', None)
         return self.ax.scatter(x, y, z, color=c, marker=marker, **kwargs)
 
     def _3d_line_plot(self, x, y, z, c, linestyle, linewidth, zorder=0, **kwargs):
         """3d line plot (see _line_plot documentation)"""
+        kwargs.pop('color', None)
+        kwargs.pop('bins', None)
         return self.ax.plot(x, y, z, kwargs.get('markersize', 2)**2, color=c, linestyle=linestyle, linewidth=linewidth, zorder=zorder, **kwargs)
 
     def _3d_text(self, x, y, z, text, fontsize, zorder=2, **kwargs):
-        """3d text plot (see _text_plot documentation)
-        """
+        """3d text plot (see _text_plot documentation)"""
+        kwargs.pop('bins', None)
         return self.ax.text(x, y, z, text, fontsize=fontsize, zorder=zorder, **kwargs)
 
 
@@ -2184,6 +2209,8 @@ class _HistPlot(_BasePlot):
         # bins can be a range- arguments are passed to plt.hist
         if c is not None:
             kwargs['weights'] = c
+        if bins is not None and len(bins) == 0:
+            bins = None
         return self.ax.hist(data, bins, **kwargs)
 
     def _max_2d_for_hist(self, data_x, data_y, c, bins):
@@ -3138,9 +3165,9 @@ class _ParameterHistPlot(_HistPlot):
             except Exception:
                 pass
         else:
-            kwargs['bins'] = kwargs.get('bins', np.linspace(*self.parameter_limits[self.parameter], num=100))
+            kwargs['bins'] = kwargs.get('bins', np.linspace(*self.parameter_limits[self.parameter], num=100)[0])
             try:
-                kwargs['bins'] = np.linspace(*self.parameter_limits[self.parameter], num=kwargs['bins']),
+                kwargs['bins'] = np.linspace(*self.parameter_limits[self.parameter], num=kwargs['bins'])
             except Exception:
                 pass
         return super(_ParameterHistPlot, self)._ax_plot(*args, **kwargs)
@@ -3254,8 +3281,9 @@ class _TapePlot(_HistPlot):
             args: args passed to the _ParameterHistPlot._ax_plot functions (e.g. set local parameters to be different from initialisation values)
             kwargs: kwargs passed to the _ParameterHistPlot._ax_plot functions (e.g. set local parameters to be different from initialisation values)
         """
+        bins = kwargs.get('bins', None)
         for plot_class in self.parameter_classes:
-            plot_class(*args, **kwargs)
+            plot_class(*args, bins=bins)
         self.fig.patch.set_facecolor('w')
         if self.show:
             self.fig.show()
@@ -3266,4 +3294,4 @@ class_mapping = {'amplitude': _AmplitudePlot, 'beachball': _AmplitudePlot,
                  'radiation': _RadiationPlot, 'faultplane': _FaultPlanePlot,
                  'lune': _LunePlot, 'hudson': _HudsonPlot, 'riedeseljordan': _RiedeselJordanPlot,
                  'tape': _TapePlot, 'parameter': _ParameterHistPlot}
-class_mapping = get_extensions(group='mtfit.plot', defaults=class_mapping)[1]
+class_mapping = get_extensions(group='MTfit.plot', defaults=class_mapping)[1]

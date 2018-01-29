@@ -1,6 +1,6 @@
-The documentation is available at `https://djpugh.github.io/MTfit/ <https://djpugh.github.io/MTfit/>`_ and can be built using `sphinx` from the source in mtfit/docs/, or using the `build_docs.py`.
+The documentation is available at `https://djpugh.github.io/MTfit/ <https://djpugh.github.io/MTfit/>`_ and can be built using `sphinx` from the source in MTfit/docs/, or using the `build_docs.py`.
 
-The documentation includes tutorials and explanations of mtfit and the approaches used.
+The documentation includes tutorials and explanations of MTfit and the approaches used.
 
 Please note that this code is provided as-is, and no guarantee is given that this code will perform in the desired way. Additional development and support is carried out in the developer's free time.
 
@@ -10,14 +10,18 @@ and non-commercially funded academic research purposes.
 Applications for commercial use should be made to Schlumberger or the University of Cambridge.
 
 
-Installing mtfit
+Installing MTfit
 *********************************
 
-mtfit can be installed simply by calling::
+MTfit is available on `PyPI` and can be installed using:
+
+    >>pip install MTfit
+
+Alternative this repository can be cloned and the package then installed simply by calling::
     
     >>python setup.py install
 
-mtfit is dependent on numpy and scipy, and for MATLAB -v7.3 support also requires h5py.
+MTfit is dependent on numpy and scipy, and for MATLAB -v7.3 support also requires h5py.
 Cluster support will be automatically installed via pyqsub from github
 MPI support requires mpi4py built against a valid MPI distribution.
 

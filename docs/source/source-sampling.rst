@@ -1,5 +1,5 @@
-mtfit.sampling
+MTfit.sampling
 ==============
 
 
-.. literalinclude:: ../../src/mtfit/sampling.py
+.. literalinclude:: ../../src/MTfit/sampling.py

@@ -1,5 +1,5 @@
-mtfit.utilities.extensions
+MTfit.utilities.extensions
 ==========================
 
 
-.. literalinclude:: ../../src/mtfit/utilities/extensions.py
+.. literalinclude:: ../../src/MTfit/utilities/extensions.py

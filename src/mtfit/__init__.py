@@ -8,7 +8,7 @@ Applications for commercial use should be made to Schlumberger or the University
 
 from ._version import get_versions
 __version__ = get_versions()['version']
-from .run import mtfit  # noqa F401
+from .run import MTfit  # noqa F401
 
 __all__ = ['algorithms', 'convert', 'extensions', 'plot', 'utilities', 'inversion', 'probability', 'sampling']
 

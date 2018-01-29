@@ -59,7 +59,7 @@ def run(test=False):
     # Test event load
     print('\n\nChecking that the csv data parses and is the same as the original data')
 
-    from mtfit import inversion
+    from MTfit import inversion
     loaded_data = inversion.parse_csv(fname)
     data_check = check_data(loaded_data, data)
     print('\n\tLoaded data same as original data: {}'.format(data_check))

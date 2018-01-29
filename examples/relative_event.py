@@ -7,7 +7,7 @@ Commented example script for inversion of a pair of colocated synthetic events i
 
 def run(parallel=True, test=False):
     # Import inversion
-    from mtfit.inversion import Inversion
+    from MTfit.inversion import Inversion
     # Get Data
     from example_data import relative_data
     data = relative_data()
@@ -83,10 +83,10 @@ def run(parallel=True, test=False):
     #  >>> import cPickle
     #  >>> cPickle.dump(data,open('relative_event_data.inv','wb'))
     # And then calling from the command line
-    #  mtfit --algorithm=iterate --pmem=1 --double-couple --max-samples=10000000 \
+    #  MTfit --algorithm=iterate --pmem=1 --double-couple --max-samples=10000000 \
     #    --inversion-options=PPolarity,PAmplitude --convert --relative \
     #    --multiple-events relative_event_data.inv
-    #  mtfit --algorithm=mcmc --pmem=1 --chain-length=100000  \
+    #  MTfit --algorithm=mcmc --pmem=1 --chain-length=100000  \
     #    --burn_in=30000 --min_acceptance_rate=0.1 \
     #    --max_acceptance_rate=0.3 --inversion-options=PPolarity,PAmplitude \
     #    --convert --relative --multiple-events relative_event_data.inv

@@ -1,12 +1,12 @@
-.. figure:: figures/mtfitbanner.png
+.. figure:: figures/MTfitbanner.png
    :figwidth: 50 %
    :width: 90%
    :align: center
-   :alt: mtfit: A Bayesian approach to source inversion.  
+   :alt: MTfit: A Bayesian approach to source inversion.  
 
 
 *********************************
-mtfit: Bayesian Source Inversion
+MTfit: Bayesian Source Inversion
 *********************************
 
 *Bayesian Moment Tensor Inversion Code by David J Pugh*
@@ -18,7 +18,7 @@ mtfit: Bayesian Source Inversion
    :hidden:
    
    Installing <setup>
-   Running mtfit <run>
+   Running MTfit <run>
    Tutorial <tutorial>
    Tutorial: Real Data Examples <real-tutorial>
    Bayesian Approach <bayes>
@@ -36,9 +36,9 @@ mtfit: Bayesian Source Inversion
    Source Code <source>
    GitHub Repository <https://github.com/djpugh/MTfit>
 
-:mod:`mtfit` is a Bayesian forward model inversion code for moment tensor and double-couple source inversion using different data types, based on the Bayesian approach presented in :ref:`Pugh et al, 2016a <Pugh-2016a>` and  :ref:`Pugh, 2015 <Pugh-2015t>`. The code has been developed as part of a PhD project (:ref:`Pugh, 2015 <Pugh-2015t>`). The solutions are estimated using polarity and amplitude ratio data, although the code is extensible (see :doc:`extensions`) so it is possible to include other data-types in this framework. :mod:`mtfit` can incorporate uncertainty estimates both in the data (noise etc.) and the model (and location) in the resultant posterior PDF. There are three sampling approaches that have been developed, with different advantages (:ref:`Pugh et al, 2015c <Pugh-2015t>`, and it is also possible to use the approach for relative amplitude inversion as well (:ref:`Pugh et al, 2015e <Pugh-2015t>`).
+:mod:`MTfit` is a Bayesian forward model inversion code for moment tensor and double-couple source inversion using different data types, based on the Bayesian approach presented in :ref:`Pugh et al, 2016a <Pugh-2016a>` and  :ref:`Pugh, 2015 <Pugh-2015t>`. The code has been developed as part of a PhD project (:ref:`Pugh, 2015 <Pugh-2015t>`). The solutions are estimated using polarity and amplitude ratio data, although the code is extensible (see :doc:`extensions`) so it is possible to include other data-types in this framework. :mod:`MTfit` can incorporate uncertainty estimates both in the data (noise etc.) and the model (and location) in the resultant posterior PDF. There are three sampling approaches that have been developed, with different advantages (:ref:`Pugh et al, 2015c <Pugh-2015t>`, and it is also possible to use the approach for relative amplitude inversion as well (:ref:`Pugh et al, 2015e <Pugh-2015t>`).
 
-:mod:`mtfit` also works with the automated Bayesian polarity approach described in :ref:`Pugh et al, 2016b <Pugh-2016b>` as an alternative method of estimating polarity probabilities. This is written as the :mod:`autopol` Python module, and may be available on request.
+:mod:`MTfit` also works with the automated Bayesian polarity approach described in :ref:`Pugh et al, 2016b <Pugh-2016b>` as an alternative method of estimating polarity probabilities. This is written as the :mod:`autopol` Python module, and may be available on request.
 
 The source code is available from `GitHub <https://github.com/djpugh/MTfit>`_.
 
@@ -46,7 +46,7 @@ Issues are tracked at the `GitHub repository <https://github.com/djpugh/MTfit/is
 
 .. only:: html
    
-   This documentation is available as a :download:`PDF<../pdf/mtfit.pdf>` and an :download:`epub<../epub/mtfit.epub>` file
+   This documentation is available as a :download:`PDF<../pdf/MTfit.pdf>` and an :download:`epub<../epub/MTfit.epub>` file
 
 Please note that this code is provided as-is, and no guarantee is given that this code will perform in the desired way. Additional development and support is carried out in the developer's free time.
 

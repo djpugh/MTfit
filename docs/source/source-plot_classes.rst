@@ -1,5 +1,5 @@
-mtfit.plot.plot_classes
+MTfit.plot.plot_classes
 =======================
 
 
-.. literalinclude:: ../../src/mtfit/plot/plot_classes.py
+.. literalinclude:: ../../src/MTfit/plot/plot_classes.py

@@ -7,13 +7,13 @@ Tests for src/utilities
 
 import unittest
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.tests.unit.utilities.test_unittest_utils import test_suite as unittest_utils_test_suite
-from mtfit.tests.unit.utilities.test_argparser import test_suite as argparser_test_suite
-from mtfit.tests.unit.utilities.test_file_io import test_suite as file_io_test_suite
-from mtfit.tests.unit.utilities.test_multiprocessing_helper import test_suite as multiprocessing_helper_test_suite
-from mtfit.tests.unit.utilities.test_extensions import test_suite as extensions_test_suite
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.tests.unit.utilities.test_unittest_utils import test_suite as unittest_utils_test_suite
+from MTfit.tests.unit.utilities.test_argparser import test_suite as argparser_test_suite
+from MTfit.tests.unit.utilities.test_file_io import test_suite as file_io_test_suite
+from MTfit.tests.unit.utilities.test_multiprocessing_helper import test_suite as multiprocessing_helper_test_suite
+from MTfit.tests.unit.utilities.test_extensions import test_suite as extensions_test_suite
 
 __all__ = ['run_tests']
 

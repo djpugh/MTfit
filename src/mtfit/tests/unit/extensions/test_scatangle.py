@@ -2,7 +2,7 @@ import unittest
 import glob
 import os
 
-from mtfit.extensions.scatangle import parse_scatangle
+from MTfit.extensions.scatangle import parse_scatangle
 
 
 class ScatangleTestCase(unittest.TestCase):

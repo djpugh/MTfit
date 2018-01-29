@@ -1,5 +1,5 @@
-mtfit.plot.spherical_projection
+MTfit.plot.spherical_projection
 ===============================
 
 
-.. literalinclude:: ../../src/mtfit/plot/spherical_projection.py
+.. literalinclude:: ../../src/MTfit/plot/spherical_projection.py

@@ -1,12 +1,17 @@
 **********************************
-Installing mtfit
+Installing MTfit
 **********************************
 
-:mod:`mtfit` is available in several formats, including as a ``tar.gz`` file, a ``zip`` file, a Windows ``msi`` installer. Additionally the git repository can be cloned.
+:mod:`MTfit` is available from `PyPI` and can be installed using ::
 
-Apart from the Windows installer, all the other formats require installing from the source (after unpacking the compressed files e.g. ``tar.gz``).  
+    $ pip install MTfit
 
-:mod:`mtfit` can be installed from the source by calling::
+
+:mod:`MTfit` is available in several formats, including as a ``tar.gz`` file, a ``zip`` file, and as ``wheels`. Additionally the git repository can be cloned.
+
+Apart from the wheels, all the other formats require installing from the source (after unpacking the compressed files e.g. ``tar.gz``).  
+
+:mod:`MTfit` can be installed from the source by calling::
 
     $ python setup.py install
 
@@ -21,7 +26,7 @@ or::
 Requirements
 ===================================
 
-:mod:`mtfit` requires three modules
+:mod:`MTfit` requires three modules
 
 * `NumPy <http://www.numpy.org>`_
 * `SciPy <http://www.scipy.org>`_
@@ -31,7 +36,7 @@ Requirements
 Optional requirements
 ----------------------------------
 
-Additionally there are several optional requirements which allow additional features in :mod:`mtfit`.
+Additionally there are several optional requirements which allow additional features in :mod:`MTfit`.
 
 HDF5 (Matlab -v7.3)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -78,19 +83,19 @@ It can be built in the source directory::
 
 and after installation::
     
-    >>mtfit.build_docs()
+    >>MTfit.build_docs()
 
 Running the Test Suite
 ==================================
-:mod:`mtfit` comes with a complete test suite which can be run in the source directory::
+:mod:`MTfit` comes with a complete test suite which can be run in the source directory::
 
     $ python setup.py build
     $ python setup.py test
 
 and after installation from the python interpreter::
     
-    >>> import mtfit
-    >>> mtfit.run_tests()
+    >>> import MTfit
+    >>> MTfit.run_tests()
 
 
 

@@ -2,7 +2,7 @@
 argparser.py
 *************
 
-Command line argument parser code for mtfit
+Command line argument parser code for MTfit
 
 """
 
@@ -196,33 +196,33 @@ class OptparseIndentedHelpFormatterWithNewLines(optparse.IndentedHelpFormatter):
         return "".join(result)
 
 
-def get_mtfit_defaults(test=False, extension_defaults={}, extension_default_types={}):
-    return _get_env_defaults(test, extension_defaults, extension_default_types, "mtfit")
+def get_MTfit_defaults(test=False, extension_defaults={}, extension_default_types={}):
+    return _get_env_defaults(test, extension_defaults, extension_default_types, "MTfit")
 
 
 def get_MTplot_defaults(test=False, extension_defaults={}, extension_default_types={}):
     return _get_env_defaults(test, extension_defaults, extension_default_types, "MTplot")
 
 
-def _get_env_defaults(test=False, extension_defaults={}, extension_default_types={}, app="mtfit"):
+def _get_env_defaults(test=False, extension_defaults={}, extension_default_types={}, app="MTfit"):
     """
     Gets environment defaults either from file or otherwise. Looks in the following locations in this order, with
     later files overriding the defaults:
-        1. ~/mtfitdefaults (MTplotdefaults for MTplot)
+        1. ~/MTfitdefaults (MTplotdefaults for MTplot)
         2. At the location specified by the MTFITDEFAULTSPATH (or MTPLOTDEFAULTSPATH)
         3. for a defaults file in the current working directory
 
     Default Format is simple on each line key:attr.
-    Keys are given in the mtfit.utilities.argparser_defaults module
+    Keys are given in the MTfit.utilities.argparser_defaults module
     """
-    mtfit_flag = False
+    MTfit_flag = False
     if app.lower() == "mtplot":
         defaults_fname = ".MTplotdefaults"
         env_variable = "MTPLOTDEFAULTSPATH"
     else:
-        defaults_fname = ".mtfitdefaults"
+        defaults_fname = ".MTfitdefaults"
         env_variable = "MTFITDEFAULTSPATH"
-        mtfit_flag = True
+        MTfit_flag = True
     default_files = []
 
     if 'win32' in sys.platform:
@@ -235,7 +235,7 @@ def _get_env_defaults(test=False, extension_defaults={}, extension_default_types
         default_files.append(os.environ[env_variable])
     if os.path.exists(os.getcwd()+os.path.sep+defaults_fname):
         default_files.append(os.getcwd()+os.path.sep+defaults_fname)
-    if mtfit_flag:
+    if MTfit_flag:
         defaults = MTFIT_PARSER_DEFAULTS.copy()
         default_types = MTFIT_PARSER_DEFAULT_TYPES.copy()
     else:
@@ -286,7 +286,7 @@ def _get_env_defaults(test=False, extension_defaults={}, extension_default_types
                     output_string += 'Error parsing defaults key {} not in default keys\n'.format(key)
 
         if error:
-            if mtfit_flag:
+            if MTfit_flag:
                 keys = MTFIT_PARSER_DEFAULTS.keys()
             else:
                 keys = MTPLOT_PARSER_DEFAULTS.keys()
@@ -428,10 +428,10 @@ def _search(file_name, extension='scatangle', n=12, it=1, imax=7):
         return _search(file_name, extension, n+1, it+1, imax)
     return scatter[0]
 
-# mtfit
+# MTfit
 
 
-def _mtfit_argparser(input_args=None, test=False):
+def _MTfit_argparser(input_args=None, test=False):
     """
     Return arguments parsed from command line
 
@@ -580,24 +580,24 @@ def _mtfit_argparser(input_args=None, test=False):
     options_map = {}
     algorithm_options = ["iterate", "time", "mcmc", "transdmcmc"]
     output_options = ['matlab', 'pickle', 'hyp']
-    output_formats = get_extensions('mtfit.output_formats')[0]
+    output_formats = get_extensions('MTfit.output_formats')[0]
     output_options.extend(output_formats)
     output_options = list(set(output_options))
     output_data_options = ['full_pdf', 'hyp']
-    output_data_formats = get_extensions('mtfit.output_data_formats')[0]
+    output_data_formats = get_extensions('MTfit.output_data_formats')[0]
     output_data_options.extend(output_data_formats)
     output_data_options = list(set(output_data_options))
     # Get extension defaults
     cmd_defaults = {}
     cmd_default_types = {}
-    results = evaluate_extensions('mtfit.cmd_defaults', default_cmd_defaults)
+    results = evaluate_extensions('MTfit.cmd_defaults', default_cmd_defaults)
     for result in results:
         cmd_defaults.update(result[0])
         cmd_default_types.update(result[1])
-    # Try loading mtfitdefaults from env var or ~/.mtfitdefaults
-    defaults = get_mtfit_defaults(test, cmd_defaults, cmd_default_types)
+    # Try loading MTfitdefaults from env var or ~/.MTfitdefaults
+    defaults = get_MTfit_defaults(test, cmd_defaults, cmd_default_types)
     # Get extension options
-    cmd_opt_names, cmd_opts = get_extensions('mtfit.cmd_opts', default_cmd_opts)
+    cmd_opt_names, cmd_opts = get_extensions('MTfit.cmd_opts', default_cmd_opts)
     extension_parser_checks = []
     arguments = [
         dict(flags=["-d", "--datafile", "--data_file"], help=data_file_help,
@@ -627,7 +627,7 @@ def _mtfit_argparser(input_args=None, test=False):
         dict(flags=["-i", "--inversionoptions", "--inversion_options"], default=defaults[
              'inversion_options'], help=inversion_options_help, dest="inversion_options"),
         dict(flags=["-o", "--out", "--fid", "--outputfile", "--outfile"], default=defaults[
-             'output_file'], help="Set output file basename [default=mtfitOutput]", dest="fid"),
+             'output_file'], help="Set output file basename [default=MTfitOutput]", dest="fid"),
         dict(flags=["-x", "--samples", "--maxsamples", "--max_samples", "--chain_length", "--max-samples", "--chain-length", "--chainlength"], default=False, type=int, help="Iteration algorithm: Set maximum number of samples to use [default=" +
              str(defaults['max_iteration_samples'])+"]. McMC algorithms: Set chain length [default="+str(defaults['mcmc_chain_length'])+"], trans-d McMC [default="+str(defaults['transdmcmc_chain_length'])+"]", dest="max_samples"),
         dict(flags=["-t", "--time", "--maxtime", "--max_time"], default=defaults['max_time'], type=float,
@@ -653,15 +653,15 @@ def _mtfit_argparser(input_args=None, test=False):
         dict(flags=['-X', '--min_number_check_samples', '--min_number_initialisation_samples'], default=False, type=int,
              help="Minimum number of samples for McMC initialiser, or the minimum number of samples required when using quality check (-Q)", dest='min_number_initialisation_samples'),
         dict(flags=["-T", "--test", "--test"], default=defaults['test'], action='store_true',
-             help="Run mtfit Test suite (if combined with -q runs test suite on cluster", dest="test"),
+             help="Run MTfit Test suite (if combined with -q runs test suite on cluster", dest="test"),
         dict(flags=["-Q", "--quality"], default=defaults['quality'], nargs='?', action='store',
-             help="Run mtfit with quality checks enabled [default=False]. Checks if an event has a percentage of non-zero samples lower than the flag - values from 0-100.", dest="quality_check"),
+             help="Run MTfit with quality checks enabled [default=False]. Checks if an event has a percentage of non-zero samples lower than the flag - values from 0-100.", dest="quality_check"),
         dict(flags=["-D", "--debug"], default=defaults['debug'],
-             action='store_true', help="Run mtfit with debugging enabled.", dest="debug"),
+             action='store_true', help="Run MTfit with debugging enabled.", dest="debug"),
         dict(flags=["-V", "--verbosity"], default=defaults['verbosity'], type=int,
              help="Set verbosity level for non-fatal errors [default=0].", dest="verbosity"),
         dict(flags=["-g", "--diagnostics"], default=defaults['diagnostics'], action='store_true',
-             help="Run mtfit with diagnostic output. Outputs the full chain and sampling - wil make a large file.", dest="diagnostic_output"),
+             help="Run MTfit with diagnostic output. Outputs the full chain and sampling - wil make a large file.", dest="diagnostic_output"),
         dict(flags=["-j", "--jumpProbability", "--jumpProb", "--jumpprob", "--jumpProb", "--dimensionJumpProb", "--dimensionjumpprob"], default=defaults['jump_probability'],
              type=float, help="Sets the probability of making a dimension jump in the Trans-Dimensional McMC algorithm [default=0.01]", dest="dimension_jump_prob"),
         dict(flags=["-y", "--initialSampling"], default=defaults['initial_sampling'],
@@ -710,7 +710,7 @@ def _mtfit_argparser(input_args=None, test=False):
              help='Loop over independent non-zero samples randomly to construct joint rather than joint samples', dest='relative_loop')
     ]
     if _ARGPARSE:
-        parser = argparse.ArgumentParser(prog='mtfit', description=description+argparse_description, formatter_class=ArgparseIndentedHelpFormatterWithNewLines)
+        parser = argparse.ArgumentParser(prog='MTfit', description=description+argparse_description, formatter_class=ArgparseIndentedHelpFormatterWithNewLines)
         parser.add_argument('data_file', type=check_path, help=data_file_arg_help, nargs="?")
         for arg in arguments:
             kwargs = {key: value for (key, value) in arg.items() if key != 'flags'}
@@ -720,8 +720,8 @@ def _mtfit_argparser(input_args=None, test=False):
             (group, extension_parser_check) = extension(group, _ARGPARSE, defaults)
             extension_parser_checks.append(extension_parser_check)
         if _PYQSUB:
-            group = parser.add_argument_group('Cluster', description="\nCommands for using mtfit on a cluster environment using qsub/PBS")
-            group = pyqsub.parser_group(module_name='mtfit', group=group, default_nodes=defaults['nodes'], default_ppn=defaults['ppn'], default_pmem=defaults['pmem'],
+            group = parser.add_argument_group('Cluster', description="\nCommands for using MTfit on a cluster environment using qsub/PBS")
+            group = pyqsub.parser_group(module_name='MTfit', group=group, default_nodes=defaults['nodes'], default_ppn=defaults['ppn'], default_pmem=defaults['pmem'],
                                         default_walltime=defaults['walltime'], default_queue=defaults['queue'], default_email_options=defaults['email_options'],
                                         default_email=defaults['email'])
         for option in parser._actions:
@@ -747,7 +747,7 @@ def _mtfit_argparser(input_args=None, test=False):
             options['data_file'] = options['DATAFILE']
         options.pop('DATAFILE')
     else:
-        parser = optparse.OptionParser(prog='mtfit', description=description+optparse_description, formatter=OptparseIndentedHelpFormatterWithNewLines(), version="%(prog)s "+__version__, usage="%prog [options]\nUse -h to get more information")
+        parser = optparse.OptionParser(prog='MTfit', description=description+optparse_description, formatter=OptparseIndentedHelpFormatterWithNewLines(), version="%(prog)s "+__version__, usage="%prog [options]\nUse -h to get more information")
         for arg in arguments:
             kwargs = {
                 key: value for (key, value) in arg.items() if key != 'flags'}
@@ -761,8 +761,8 @@ def _mtfit_argparser(input_args=None, test=False):
             extension_parser_checks.append(extension_parser_check)
         if _PYQSUB:
             group = optparse.OptionGroup(
-                parser, 'Cluster', description="\nCommands for using mtfit on a cluster environment using qsub/PBS")
-            group = pyqsub.parser_group(module_name='mtfit', group=group, default_nodes=defaults['nodes'], default_ppn=defaults['ppn'], default_pmem=defaults[
+                parser, 'Cluster', description="\nCommands for using MTfit on a cluster environment using qsub/PBS")
+            group = pyqsub.parser_group(module_name='MTfit', group=group, default_nodes=defaults['nodes'], default_ppn=defaults['ppn'], default_pmem=defaults[
                                         'pmem'], default_walltime=defaults['walltime'], default_queue=defaults['queue'], default_email_options=defaults['email_options'], default_email=defaults['email'])
             parser.add_option_group(group)
         for option in parser.option_list:
@@ -818,7 +818,7 @@ def _mtfit_argparser(input_args=None, test=False):
     return parser, options, options_map, defaults, flags
 
 
-def mtfit_parser(input_args=False, test=False):
+def MTfit_parser(input_args=False, test=False):
     """
     Parses the command line arguments using _argparser and handles and returns the options
 
@@ -832,7 +832,7 @@ def mtfit_parser(input_args=False, test=False):
         Exception: If there is an error parsing the arguments
 
     """
-    parser, options, options_map, defaults, flags = _mtfit_argparser(input_args, test)
+    parser, options, options_map, defaults, flags = _MTfit_argparser(input_args, test)
     if not _PYQSUB:
         options['qsub'] = False
     if options['relative_amplitude'] and not options['multiple_events']:
@@ -879,7 +879,7 @@ def mtfit_parser(input_args=False, test=False):
                 qsub = False
         pbs_files = [pbs_file for pbs_file in p_files if '.py' not in pbs_file]
         if (qsub or _QSUBTEST) and len(pbs_files):
-            # try looking for mtfit.p with highest number - corresponds to cluster environment
+            # try looking for MTfit.p with highest number - corresponds to cluster environment
             # append r and re qsub unless on cluster
             # sort by ascending job no
             pbs_files.sort(key=lambda x: x.split('.p')[1], reverse=True)
@@ -887,15 +887,15 @@ def mtfit_parser(input_args=False, test=False):
                 if '##mtfit qsub script' in open(pbs_file).read().lower():
                     if not options['_mpi_call']:
                         log('Recovering Run: '+pbs_file)
-                    # mtfit Script therefore read, parse and act
+                    # MTfit Script therefore read, parse and act
                     line = [l for l in open(pbs_file).readlines() if 'python -c "import' in l and '#' not in l[:10]][0].rstrip()
                     qsub_args = []
-                    for arg in line.split('mtfit.__run__()"')[1].split(' '):
+                    for arg in line.split('MTfit.__run__()"')[1].split(' '):
                         if '=' in arg or '--' in arg:
                             qsub_args.append(arg)
                         elif len(arg):
                             qsub_args[-1] += ' '+arg
-                    _, qsub_options, _, dd, fl = _mtfit_argparser(qsub_args)
+                    _, qsub_options, _, dd, fl = _MTfit_argparser(qsub_args)
                     for option_name in qsub_options.keys():
                         if 'qsub' not in option_name:
                             options[option_name] = qsub_options[option_name]
@@ -1102,7 +1102,7 @@ def _MTplot_argparser(input_args=[], test=False):
 
     description = """MTPlot - Moment Tensor Plotting Code by David J Pugh
 
-    MTPlot is the moment tensor plotting code linked to the mtfit moment tensor inversion code.
+    MTPlot is the moment tensor plotting code linked to the MTfit moment tensor inversion code.
 
 
     """
@@ -1115,13 +1115,13 @@ def _MTplot_argparser(input_args=[], test=False):
     # Get extension defaults
     cmd_defaults = {}
     cmd_default_types = {}
-    results = evaluate_extensions('mtfit.cmd_defaults', default_cmd_defaults)
+    results = evaluate_extensions('MTfit.cmd_defaults', default_cmd_defaults)
     for result in results:
         cmd_defaults.update(result[0])
         cmd_default_types.update(result[1])
-    # Try loading mtfitdefaults from env var or ~/.mtfitdefaults
+    # Try loading MTfitdefaults from env var or ~/.MTfitdefaults
     defaults = get_MTplot_defaults(test, cmd_defaults, cmd_default_types)
-    mtplot_data_file_help = """MTplot can read the output data from mtfit"""
+    mtplot_data_file_help = """MTplot can read the output data from MTfit"""
     arguments = [
         dict(flags=["-d", "--datafile", "--data_file"],
              help=mtplot_data_file_help, type=str, dest='DATAFILE', default=False),
@@ -1168,7 +1168,7 @@ def _MTplot_argparser(input_args=[], test=False):
         dict(flags=["--save-dpi", "--savedpi", "--save_dpi"], help="Output file dpi",
              type=int, dest='save_dpi', default=defaults['save_dpi']),
         dict(flags=["--version"], action="version",
-             version="%(prog)s from mtfit "+__version__),
+             version="%(prog)s from MTfit "+__version__),
     ]
     if _ARGPARSE:
         parser = argparse.ArgumentParser(
@@ -1195,7 +1195,7 @@ def _MTplot_argparser(input_args=[], test=False):
         options.pop('DATAFILE')
     else:
         parser = optparse.OptionParser(prog='MTplot', description=description+optparse_description, formatter=OptparseIndentedHelpFormatterWithNewLines(
-        ), version="%(prog)s from mtfit "+__version__, usage="%prog [options]\nUse -h to get more information")
+        ), version="%(prog)s from MTfit "+__version__, usage="%prog [options]\nUse -h to get more information")
         for arg in arguments:
             kwargs = {
                 key: value for (key, value) in arg.items() if key != 'flags'}

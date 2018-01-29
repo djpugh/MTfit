@@ -14,13 +14,13 @@ from examples.example_data import synthetic_event, krafla_event
 # Build epub and pdf
 # Link to pdf from html page
 
-mtfit_documentation = """
+MTfit_documentation = """
 *********************************
-mtfit
+MTfit
 *********************************
 
 Bayesian Moment Tensor Inversion Code by David J Pugh
-mtfit is based on the bayesian approach presented in Pugh, D J, 2015,
+MTfit is based on the bayesian approach presented in Pugh, D J, 2015,
 Bayesian Source Inversion of Microseismic Events, PhD Thesis, Department of Earth Sciences,
 University of Cambridge.
 
@@ -37,10 +37,10 @@ Applications for commercial use should be made to Schlumberger or the University
 Input Data
 ==================================
 
-There are several different input data types, and it is also possible to add additional parsers using the ``mtfit.parsers`` entry point.
+There are several different input data types, and it is also possible to add additional parsers using the ``MTfit.parsers`` entry point.
 
 
-The required data structure for running mtfit is very simple, the inversion expects a python dictionary of the data in the format::
+The required data structure for running MTfit is very simple, the inversion expects a python dictionary of the data in the format::
 
     >>> data={'PPolarity':{'Measured':numpy.matrix([[-1],[-1]...]),
                          'Error':numpy.matrix([[0.01],[0.02],...]),
@@ -54,9 +54,9 @@ The required data structure for running mtfit is very simple, the inversion expe
               'UID':'Event1'
               }
 
-For more information on the data keywords and how to set them up, see :class:`~mtfit.inversion.Inversion` docstrings.
+For more information on the data keywords and how to set them up, see :class:`~MTfit.inversion.Inversion` docstrings.
 
-The data dictionary can be passed directly to the :class:`~mtfit.inversion.Inversion` object (simple if running within python), or from a binary pickled object, these can be made by simply using pickle (or cPickle)::
+The data dictionary can be passed directly to the :class:`~MTfit.inversion.Inversion` object (simple if running within python), or from a binary pickled object, these can be made by simply using pickle (or cPickle)::
 
     >>> pickle.dump(data,open(filename,'wb'))
 
@@ -98,7 +98,7 @@ There is a hyp format parser which reads hyp files as defined by `NonLinLoc <htt
 Output
 ==================================
 
-The default output is to output a MATLAB file containing 2 structures and a cell array, although there are two other possible formats, and others can be added (see mtfit.extensions).
+The default output is to output a MATLAB file containing 2 structures and a cell array, although there are two other possible formats, and others can be added (see MTfit.extensions).
 The ``Events`` structure has the following fieldnames: ``MTspace`` and ``Probability``.
 
     * ``MTspace`` - The moment tensor samples as a 6 by n vector of the form::
@@ -166,7 +166,7 @@ if Converted is true then each sample also contains::
     dip2 (double)
     rake2 (double)
 
-If there are multiple events saved, then the next event starts immediately after the last with the same format. The output binary file can be re-read into python using mtfit.inversion.read_binary_output.
+If there are multiple events saved, then the next event starts immediately after the last with the same format. The output binary file can be re-read into python using MTfit.inversion.read_binary_output.
 
 
 
@@ -179,7 +179,7 @@ The code is written to run in parallel using multiprocessing, it will initialise
 A single thread mode can be forced using:
 
     * -l, --singlethread, --single, --single_thread flag on the command line
-    * parallel=False keyword in the mtfit.inversion.Inversion object initialisation
+    * parallel=False keyword in the MTfit.inversion.Inversion object initialisation
 
 It is also possible to run this code on a cluster using qsub [requires pyqsub]. This can be called from the commandline using a flag:
 
@@ -200,7 +200,7 @@ Command line flags
 
 To obtain a list of the command line flags use the -h flag::
 
-    $ mtfit -h
+    $ MTfit -h
 
 This will provide a list of the arguments and their usage.
 
@@ -208,17 +208,17 @@ This will provide a list of the arguments and their usage.
 Running from the command line
 ==================================
 
-To run from the command line on  linux/*nix  it is necessary to make sure that the mtfit script installed is on the path,
+To run from the command line on  linux/*nix  it is necessary to make sure that the MTfit script installed is on the path,
 or to set up a manual alias/script, e.g. for bash::
 
-    $ python -c "import mtfit;mtfit.run.mtfit()" $*
+    $ python -c "import MTfit;MTfit.run.MTfit()" $*
 
 
 On windows using powershell add the following commandlet to your profile (for information on customizing your powershell profile see: http://www.howtogeek.com/50236/customizing-your-powershell-profile/)::
 
-    function mtfit{
+    function MTfit{
         $script={
-            python -c "import mtfit;mtfit.run.mtfit()" $args
+            python -c "import MTfit;MTfit.run.MTfit()" $args
         }
         Invoke-Command -ScriptBlock $script -ArgumentList $args
     }
@@ -231,13 +231,13 @@ Running from within python
 
 To run from within python, (assuming the module is on your PYTHONPATH) first::
 
-    >>> import mtfit
+    >>> import MTfit
 
-Then to run the inversion it is necessary to set up an mtfit.inversion.Inversion object::
+Then to run the inversion it is necessary to set up an MTfit.inversion.Inversion object::
 
-    >>> myInversion=mtfit.Inversion(**kwargs)
+    >>> myInversion=MTfit.Inversion(**kwargs)
 
-For more information on the arguments for initialising the inversion object, see the mtfit.inversion.Inversion docstrings
+For more information on the arguments for initialising the inversion object, see the MTfit.inversion.Inversion docstrings
 
 
 Running Module Tests
@@ -245,8 +245,8 @@ Running Module Tests
 
 There is a unittest suite for this module that can be run from the python interpreter::
 
-    >>> import mtfit
-    >>> mtfit.run_tests()
+    >>> import MTfit
+    >>> MTfit.run_tests()
 
 Or during setup:
 
@@ -308,7 +308,7 @@ def build_man_pages(output_path=os.path.abspath('./docs/man/')):
                 pass
 
 
-def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit.pdf')):
+def build_pdf(output_path=os.path.abspath('./docs/pdf/MTfit.pdf')):
     print("------------------------------\n\nLaTeX Build\n\n------------------------------")
     try:
         sphinx.main(['sphinx', '-b', 'latex', '-a', os.path.abspath('./docs/source/'), os.path.abspath('./docs/latex/')])
@@ -316,28 +316,28 @@ def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit.pdf')):
         pass
     os.chdir('./docs/latex/')
     try:
-        os.remove('mtfit.toc')
+        os.remove('MTfit.toc')
     except Exception:
         pass
     try:
-        os.remove('mtfit.aux')
+        os.remove('MTfit.aux')
     except Exception:
         pass
     try:
-        os.remove('mtfit.idx')
+        os.remove('MTfit.idx')
     except Exception:
         pass
     # modify table of contents location
-    tex = open('mtfit.tex').readlines()
+    tex = open('MTfit.tex').readlines()
     if '\\endabstract\n' in tex:
         tex.insert(tex.index('\\endabstract\n'), tex.pop(tex.index('\\sphinxtableofcontents\n')))
-    with open('mtfit.tex', 'w') as f:
+    with open('MTfit.tex', 'w') as f:
         f.write(''.join(tex))
     print("------------------------------\n\nPDF Build\n\n------------------------------")
     # Two compiles to update toc
-    p = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'mtfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    p = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'MTfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     (bout, berr) = p.communicate()
-    p2 = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'mtfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    p2 = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'MTfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     (b2out, b2err) = p2.communicate()
     print(bout)
     os.chdir('../../')
@@ -347,7 +347,7 @@ def build_pdf(output_path=os.path.abspath('./docs/pdf/mtfit.pdf')):
         os.mkdir('./docs/pdf')
     except Exception:
         pass
-    shutil.move('./docs/latex/mtfit.pdf', output_path)
+    shutil.move('./docs/latex/MTfit.pdf', output_path)
 
 
 def build_epub(output_path=os.path.abspath('./docs/epub/')):
@@ -360,7 +360,7 @@ def build_epub(output_path=os.path.abspath('./docs/epub/')):
 
 def setup_gh_pages():
     # Copy docs/html to tempfolder
-    from mtfit import __version__
+    from MTfit import __version__
     print("------------------------------\n\nMaking Temporary Directory\n\n------------------------------")
     temp_dir = tempfile.mkdtemp()
     print(temp_dir)
@@ -439,20 +439,20 @@ def copy_recursively(source_folder, destination_folder):
 def get_run():
     with open('./docs/source/run_base.rst') as f:
         run = f.read()
-    run += '\n.. _input-data-label:\n\nInput Data'+mtfit_documentation.split('Input Data')[1].split('Command line flags')[0].replace('Output', '\n.. _MATLAB-output-label:\n\nOutput')
+    run += '\n.. _input-data-label:\n\nInput Data'+MTfit_documentation.split('Input Data')[1].split('Command line flags')[0].replace('Output', '\n.. _MATLAB-output-label:\n\nOutput')
     run = run.replace('WARNING:', '.. warning::\n')
-    run = run.replace('mtfit.inversion.read_binary_output', ':func:`mtfit.inversion.read_binary_output`')
+    run = run.replace('MTfit.inversion.read_binary_output', ':func:`MTfit.inversion.read_binary_output`')
     run = run.replace('mpi4py', ':mod:`mpi4py`')
     with open('./docs/source/run.rst', 'w') as f:
         f.write(run)
 
 
 def get_cli_and_man():
-    from mtfit.utilities.argparser import mtfit_parser
+    from MTfit.utilities.argparser import MTfit_parser
     old_stdout = sys.stdout
     try:
         sys.stdout = open('./docs/source/cli.rst', 'w')
-        mtfit_parser(['-h'])
+        MTfit_parser(['-h'])
         sys.stdout.close()
         sys.stdout = old_stdout
     except SystemExit:
@@ -464,7 +464,7 @@ def get_cli_and_man():
         traceback.print_exc()
     with open('./docs/source/cli.rst') as f:
         cli = f.read()
-    cli = cli.replace('usage: ', '********************************\nmtfit command line options\n********************************\nCommand line usage::\n')
+    cli = cli.replace('usage: ', '********************************\nMTfit command line options\n********************************\nCommand line usage::\n')
     cli = cli.replace('MTfit - Moment Tensor', '#A~A~A~A')
     cli = cli.replace('positional arguments:', '#B~B~B~BPositional Arguments:\n============================\n')
     cli = cli.replace('optional arguments:', 'Optional Arguments:\n============================\n')
@@ -532,8 +532,8 @@ def get_cli_and_man():
 
 
 def generate_man_page(cli):
-    man = cli.replace('********************************\nmtfit command line options\n********************************\nCommand line usage::\n', '\nCommand Line Options\n==================================\n\nUsage:\n\n\t')
-    man = mtfit_documentation+'\n\n\n'+man
+    man = cli.replace('********************************\nMTfit command line options\n********************************\nCommand line usage::\n', '\nCommand Line Options\n==================================\n\nUsage:\n\n\t')
+    man = MTfit_documentation+'\n\n\n'+man
     with open('./docs/source/man.rst', 'w') as f:
         f.write(man)
 
@@ -587,11 +587,11 @@ def setup_examples():
 def make_plot_docs():
 
     try:
-        from mtfit.utilities.argparser import MTplot_parser
+        from MTfit.utilities.argparser import MTplot_parser
     except Exception:
         # Haven't installed the package so add src to the system path
         sys.path.insert(0, 'src')
-        from mtfit.utilities.argparser import MTplot_parser
+        from MTfit.utilities.argparser import MTplot_parser
     path = './docs/source/'
     try:
         old_stdout = sys.stdout
@@ -622,7 +622,7 @@ def make_plot_docs():
         cli = cli.replace('e.g.:', 'e.g.::')
         # Handle splitting of cli args and descrptions
         cli = cli.split('#A~A~A~A')[0]+cli.split('#B~B~B~B')[1]
-        man = cli.replace('********************************\nmtfit command line options\n********************************\nCommand line usage::\n', '\nCommand Line Options\n==================================\n\nUsage:\n\n\t')
+        man = cli.replace('********************************\nMTfit command line options\n********************************\nCommand line usage::\n', '\nCommand Line Options\n==================================\n\nUsage:\n\n\t')
         with open(path+'manMTplot.rst', 'w') as f:
             f.write(man)
         cli_lines = cli.split('\n')
@@ -682,19 +682,19 @@ def make_plot_docs():
 
 def setup_extensions():
     try:
-        from mtfit.utilities.extensions import get_extensions
-        from mtfit.extensions import rst_table, rst_docs, __doc1__
+        from MTfit.utilities.extensions import get_extensions
+        from MTfit.extensions import rst_table, rst_docs, __doc1__
     except Exception:
         # Haven't installed the package so add src to the system path
         sys.path.insert(0, 'src')
-        from mtfit.utilities.extensions import get_extensions
-        from mtfit.extensions import rst_table, rst_docs, __doc1__
-    ext_doc_names, ext_docs = get_extensions('mtfit.documentation')
+        from MTfit.utilities.extensions import get_extensions
+        from MTfit.extensions import rst_table, rst_docs, __doc1__
+    ext_doc_names, ext_docs = get_extensions('MTfit.documentation')
     if len(ext_doc_names):
         # Have extension documentation so add extensions as toc including entry_points
         entry_points_file = 'entry_points'
         entry_points = """*********************************
-mtfit Entry Points
+MTfit Entry Points
 *********************************
 
 """
@@ -704,17 +704,17 @@ mtfit Entry Points
     else:
         entry_points_file = 'extensions'
         entry_points = """*********************************
-Extending mtfit
+Extending MTfit
 *********************************
 
 """
     try:
-        entry_points += """mtfit has been written with the view that it is desirable to be able to easily extend the code. This is done using `entry points <https://pythonhosted.org/setuptools/pkg_resources.html#entry-points>`_ from the `setuptools <https://pythonhosted.org/setuptools>`_ module.
+        entry_points += """MTfit has been written with the view that it is desirable to be able to easily extend the code. This is done using `entry points <https://pythonhosted.org/setuptools/pkg_resources.html#entry-points>`_ from the `setuptools <https://pythonhosted.org/setuptools>`_ module.
 
 The entry points are:
 
 """
-        entry_points = entry_points.replace('The entry points are:', 'The entry points are:\n\n.. only:: latex\n\n    .. tabularcolumns:: |l|L|\n\n'+rst_table+'\n\n'+__doc1__.replace('extensions/scatangle.py', ':download:`extensions/scatangle.py <../../src/mtfit/extensions/scatangle.py>`').replace('setup.py', '``setup.py``')+'\n\n'+rst_docs)
+        entry_points = entry_points.replace('The entry points are:', 'The entry points are:\n\n.. only:: latex\n\n    .. tabularcolumns:: |l|L|\n\n'+rst_table+'\n\n'+__doc1__.replace('extensions/scatangle.py', ':download:`extensions/scatangle.py <../../src/MTfit/extensions/scatangle.py>`').replace('setup.py', '``setup.py``')+'\n\n'+rst_docs)
         with open('./docs/source/'+entry_points_file+'.rst', 'w') as f:
             f.write(entry_points)
     except Exception:
@@ -724,14 +724,14 @@ The entry points are:
 
 def setup_extensions_source_code():
     try:
-        from mtfit.utilities.extensions import get_extensions
+        from MTfit.utilities.extensions import get_extensions
     except Exception:
         # Haven't installed the package so add src to the system path
         sys.path.insert(0, 'src')
-        from mtfit.utilities.extensions import get_extensions
-    ext_source_code_names, ext_source_code = get_extensions('mtfit.source_code')
+        from MTfit.utilities.extensions import get_extensions
+    ext_source_code_names, ext_source_code = get_extensions('MTfit.source_code')
     extensions_source_code = """
-    mtfit.extensions
+    MTfit.extensions
 ====================
 
 Contents
@@ -739,7 +739,7 @@ Contents
 .. toctree::
    :maxdepth: 1
 
-   mtfit.extensions.scatangle<source-scatangle>"""+'\n    '.join([ext.replace('_', ' ').capitalize()+' <'+ext+'>' for ext in ext_source_code_names])+"""
+   MTfit.extensions.scatangle<source-scatangle>"""+'\n    '.join([ext.replace('_', ' ').capitalize()+' <'+ext+'>' for ext in ext_source_code_names])+"""
 
 For the extensions documentation see :ref:`extensions`"""
     with open('./docs/source/source-extensions.rst', 'w') as f:

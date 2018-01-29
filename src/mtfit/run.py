@@ -1,7 +1,7 @@
 """
 run.py
 ******
-Core module for mtfit - handles all the command line parsing logic and calling the forward model based inversion.
+Core module for MTfit - handles all the command line parsing logic and calling the forward model based inversion.
 """
 
 # **Restricted:  For Non-Commercial Use Only**
@@ -28,7 +28,7 @@ from .utilities.extensions import get_extensions
 from .extensions import default_pre_inversions
 from .extensions import default_post_inversions
 from .extensions import default_extensions
-from .utilities.argparser import mtfit_parser
+from .utilities.argparser import MTfit_parser
 
 
 WARNINGS_MAP = {'a': 'always', 'd': 'default',
@@ -36,21 +36,21 @@ WARNINGS_MAP = {'a': 'always', 'd': 'default',
                 'm': 'module', 'o': 'once'}
 
 
-# Main mtfit function
+# Main MTfit function
 
-def mtfit(data={}, data_file=False, location_pdf_file_path=False, algorithm='Time', parallel=True, n=0, phy_mem=8, dc=False, **kwargs):
+def MTfit(data={}, data_file=False, location_pdf_file_path=False, algorithm='Time', parallel=True, n=0, phy_mem=8, dc=False, **kwargs):
     """
-    Runs mtfit
+    Runs MTfit
 
-    Creates an mtfit.inversion.Inversion object for the given arguments and runs the forward model based inversion.
-    For a simple method of initialising the inversion use the command line approach (see mtfit docs).
+    Creates an MTfit.inversion.Inversion object for the given arguments and runs the forward model based inversion.
+    For a simple method of initialising the inversion use the command line approach (see MTfit docs).
 
     Args
-        Data: Data dictionary (see mtfit.inversion.Inversion for structure).
+        Data: Data dictionary (see MTfit.inversion.Inversion for structure).
         data_file: File or list of files which are pickled Data dictionaries.
         location_pdf_file_path: Path to angle scatter files or List of Angle Scatter Files (for Monte carlo marginalisation over location and model uncertainty)
             Can be generated from NonLinLoc *.scat files.
-        algorithm:['Time'] Default search algorithm, for more information on the different algorithms see the mtfit.inversion.Inversion docstrings.
+        algorithm:['Time'] Default search algorithm, for more information on the different algorithms see the MTfit.inversion.Inversion docstrings.
         parallel:['True'] Selects whether to run the inversion in parallel or on a single thread.
         n:[0] Number of threads to use, 0 defaults to all available threads reported by the system (from multiprocessing.cpu_count()).
         phy_mem:[8Gb] Estimated physical memory to use (used for determining array sizes, it is likely that more memory will be used, and if so no errors are forced).
@@ -58,7 +58,7 @@ def mtfit(data={}, data_file=False, location_pdf_file_path=False, algorithm='Tim
 
     Keyword Arguments
         Test:[False] If true, runs unittests rather than the inversion.
-        Other arguments to pass to the mtfit.inversion.Inversion object or for the algorithm (for more information see the mtfit.inversion.Inversion docstrings).
+        Other arguments to pass to the MTfit.inversion.Inversion object or for the algorithm (for more information see the MTfit.inversion.Inversion docstrings).
 
     Returns
         0
@@ -73,9 +73,9 @@ def mtfit(data={}, data_file=False, location_pdf_file_path=False, algorithm='Tim
     kwargs['phy_mem'] = phy_mem
     kwargs['dc'] = dc
     # GET PLUGINS
-    pre_inversion_names, pre_inversions = get_extensions('mtfit.pre_inversion', default_pre_inversions)
-    post_inversion_names, post_inversions = get_extensions('mtfit.post_inversion', default_post_inversions)
-    extension_names, extensions = get_extensions('mtfit.extension', default_extensions)
+    pre_inversion_names, pre_inversions = get_extensions('MTfit.pre_inversion', default_pre_inversions)
+    post_inversion_names, post_inversions = get_extensions('MTfit.post_inversion', default_post_inversions)
+    extension_names, extensions = get_extensions('MTfit.extension', default_extensions)
     # Default extensions
     for ext in extensions.values():
         result = ext(**kwargs)
@@ -91,7 +91,7 @@ def mtfit(data={}, data_file=False, location_pdf_file_path=False, algorithm='Tim
         for plugin in pre_inversions.values():
             kwargs = plugin(**kwargs)
         if not kwargs.get('_mpi_call', False):
-            print('Running mtfit.')
+            print('Running MTfit.')
         # Effectively
         # inversion = Inversion(data, data_file, location_pdf_file_path, algorithm, parallel, n, phy_mem, dc, **kwargs)
         # but allowing the pre inversion plugin to change the kwargs
@@ -121,7 +121,7 @@ def run(args=None):
         0
 
     """
-    options, options_map = mtfit_parser(args)
+    options, options_map = MTfit_parser(args)
     if options['qsub'] and _PYQSUB:
         options_map['data_file'] = options_map['DATAFILE']
         options['singlethread'] = not options.pop('parallel')
@@ -142,9 +142,9 @@ def run(args=None):
                 raise ImportError('MPI module mpi4py not found, unable to run in mpi')
             # restart python as mpirun
             options['_mpi_call'] = True
-            print('Running mtfit using mpirun')
+            print('Running MTfit using mpirun')
             optstring = pyqsub.make_optstr(options, options_map)
-            mpiargs = ["mpirun", "-n", str(options['n']), "mtfit"]
+            mpiargs = ["mpirun", "-n", str(options['n']), "MTfit"]
             mpiargs.extend(optstring.split())
             return subprocess.call(mpiargs)
-        return mtfit(**options)
+        return MTfit(**options)
