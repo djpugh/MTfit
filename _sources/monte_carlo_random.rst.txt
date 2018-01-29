@@ -3,16 +3,16 @@
 Random Sampling Search Algorithm
 =================================
 
-.. automodule:: mtfit.algorithms.monte_carlo
+.. automodule:: MTfit.algorithms.monte_carlo
 
 -------------------
 
-.. autoclass:: mtfit.algorithms.monte_carlo.IterationSample
+.. autoclass:: MTfit.algorithms.monte_carlo.IterationSample
    :members:   
    :inherited-members:
 
 -------------------
-.. autoclass:: mtfit.algorithms.monte_carlo.TimeSample
+.. autoclass:: MTfit.algorithms.monte_carlo.TimeSample
 
    :members:
    :inherited-members:
@@ -21,12 +21,12 @@ Random Sampling Search Algorithm
 
 The random sampling algorithms inherit from the :class:`BaseAlgorithm` class:
 
-.. autoclass:: mtfit.algorithms.base.BaseAlgorithm
+.. autoclass:: MTfit.algorithms.base.BaseAlgorithm
    :members:
 
 -------------------
 
 They also inherit from the :class:`BaseMonteCarloRandomSample` class:
 
-.. autoclass:: mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample
+.. autoclass:: MTfit.algorithms.monte_carlo.BaseMonteCarloRandomSample
    :members:

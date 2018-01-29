@@ -1,19 +1,19 @@
 ***************************
-Tutorial: Using mtfit
+Tutorial: Using MTfit
 ***************************
 
-:mod:`mtfit` is a bayesian approach to moment tensor inversion, allowing rigorous inclusion of uncertainties. This section shows a simple series of examples for running :mod:`mtfit`.
+:mod:`MTfit` is a bayesian approach to moment tensor inversion, allowing rigorous inclusion of uncertainties. This section shows a simple series of examples for running :mod:`MTfit`.
 
 The example data is included in :download:`examples/example_data.py <../../examples/example_data.py>` and are purely data that are used as an example, rather than a necessarily good solution.
 
 
 .. only:: not latex
 
-    These examples show some of the common usage of :mod:`mtfit`. However, the reasons behind the choice of approach have not always been well explained. The next page (:doc:`Real Data Examples <real-tutorial>`) includes real and synthetic data used in the :ref:`Pugh et al. 2016a <Pugh-2016a>` paper as an example of the results that can be obtained using :mod:`mtfit`, along with some explanation of the parameter choices made.
+    These examples show some of the common usage of :mod:`MTfit`. However, the reasons behind the choice of approach have not always been well explained. The next page (:doc:`Real Data Examples <real-tutorial>`) includes real and synthetic data used in the :ref:`Pugh et al. 2016a <Pugh-2016a>` paper as an example of the results that can be obtained using :mod:`MTfit`, along with some explanation of the parameter choices made.
 
 .. only:: latex
 
-    These examples show some of the common usage of :mod:`mtfit`. However, the reasons behind the choice of approach have not always been well explained. The next chapter (Chapter :latex:`\ref{real-tutorial::doc}`) includes real and synthetic data used in the :ref:`Pugh et al. 2016a <Pugh-2016a>` paper as an example of the results that can be obtained using :mod:`mtfit`, along with some explanation of the parameter choices made.
+    These examples show some of the common usage of :mod:`MTfit`. However, the reasons behind the choice of approach have not always been well explained. The next chapter (Chapter :latex:`\ref{real-tutorial::doc}`) includes real and synthetic data used in the :ref:`Pugh et al. 2016a <Pugh-2016a>` paper as an example of the results that can be obtained using :mod:`MTfit`, along with some explanation of the parameter choices made.
 
 .. only:: latex
 
@@ -146,10 +146,10 @@ This has added P/SH Amplitude Ratio observations for 4 more stations to the data
 
 The amplitude ratio ``Measured`` and ``Error`` numpy matrices have the observations of the ratio numerator and denominator at each station, i.e. in this case, ``Station5`` has P Amplitude is ``1242`` and SH Amplitude is ``1113``, along with P error ``102`` and SH error ``743``. The split into numerator and denominator is required because the appropriate :term:`PDF` is the ratio PDF (see :ref:`Amplitude Ratio PDF <ratio-pdf-label>`).
 
-This dictionary can either be provided as a construction argument for the :class:`~mtfit.inversion.Inversion` object::
+This dictionary can either be provided as a construction argument for the :class:`~MTfit.inversion.Inversion` object::
     
-    >>> import mtfit
-    >>> inversion_object = mtfit.Inversion(data)
+    >>> import MTfit
+    >>> inversion_object = MTfit.Inversion(data)
     >>> inversion_object.forward()
 
 Or read in from the command line::
@@ -159,7 +159,7 @@ Or read in from the command line::
 
 This has created a pickled dictionary called ``Event1.inv`` in the current directory. To perform the inversion, open a shell in the same directory::
 
-    $ mtfit -d Event1.inv
+    $ MTfit -d Event1.inv
 
 This will create an output file ``Event1MT.mat`` which contains the MATLAB output data (see :ref:`MATLAB-output-label`).
 
@@ -186,7 +186,7 @@ The parameters used are:
     * dc = False - runs the full moment tensor inversion.
     * max_samples = 1000000 - runs the inversion for 1,000,000 samples.
 
-The :class:`~mtfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
+The :class:`~MTfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
 
     .. literalinclude:: ../../examples/p_polarity.py
         :language: python
@@ -265,7 +265,7 @@ The parameters used are:
     * dc = False - runs the full moment tensor inversion.
     * max_samples = 1000000 - runs the inversion for 1,000,000 samples.
 
-The :class:`~mtfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
+The :class:`~MTfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
 
     .. literalinclude:: ../../examples/p_sh_amplitude_ratio.py
         :language: python
@@ -280,7 +280,7 @@ It is also possible to run the inversion for as many samples as possible in a gi
     * algorithm = 'time' - uses an iterative random sampling approach (see :ref:`Random Monte Carlo sampling <MCsampling>`) until a specified time has elapsed.
     * max_time = 300 - runs the inversion for 300 seconds.
 
-The :class:`~mtfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
+The :class:`~MTfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
 
     .. literalinclude:: ../../examples/p_sh_amplitude_ratio.py
         :language: python
@@ -296,7 +296,7 @@ Double-Couple Inversion
 
 Sometimes it may be better to constrain the solution to only the double-couple space, this is easy to do from the command line using the ``-c`` flag (see :doc:`cli`)::
     
-    $ mtfit -c ...
+    $ MTfit -c ...
 
 An example script for running a mixed inversion constrained to double-couple space is :download:`examples/double_couple.py <../../examples/double_couple.py>`.
 To run the script::
@@ -318,7 +318,7 @@ The inversion parameters used are:
 
 Since the double-couple space has fewer dimensions than the moment tensor space, fewer samples are required for good coverage of the space, so only 100,000 samples are used.  
 
-The :class:`~mtfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
+The :class:`~MTfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
 
     .. literalinclude:: ../../examples/double_couple.py
         :language: python
@@ -338,7 +338,7 @@ To run the script::
 
 The time option for the inversion algorithm sets a maximum time (in seconds) to run the inversion for rather than a maximum number of samples. To select the algorithm from the command line use::
     
-    $mtfit --algorithm=time ...
+    $MTfit --algorithm=time ...
 
 For the other options see :doc:`Command Line Options <cli>`. The inversion parameters used in :download:`examples/time_inversion.py <../../examples/time_inversion.py>` are:
 
@@ -349,13 +349,13 @@ For the other options see :doc:`Command Line Options <cli>`. The inversion param
     * max_time = 120 - runs the inversion for 120 seconds.
     * inversion_options = 'PPolarity,P/SHAmplitudeRatio' - Just uses PPolarity and P/SH Amplitude Ratios rather than all the data in the dictionary
 
-In this case the ``inversion_options`` keyword argument is used to set the data types used in the inversion. If this is not set the inversion will use all of the available data types in the dictionary that match possible data types (see :class:`~mtfit.inversion.Inversion` documentation), this is because the example data has other data types that are not desired or not independent::
+In this case the ``inversion_options`` keyword argument is used to set the data types used in the inversion. If this is not set the inversion will use all of the available data types in the dictionary that match possible data types (see :class:`~MTfit.inversion.Inversion` documentation), this is because the example data has other data types that are not desired or not independent::
 
     >>> data.keys()=['PPolarity','P/SHRMSAmplitudeRatio','P/SVRMSAmplitudeRatio','P/SHAmplitudeRatio','UID]
 
 The ``P/SHRMSAmplitudeRatio`` and the ``P/SHAmplitudeRatio`` are not independent, and so cannot both be used in this inversion.
 
-The :class:`~mtfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
+The :class:`~MTfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
 
     .. literalinclude:: ../../examples/time_inversion.py
         :language: python
@@ -380,7 +380,7 @@ Parallel MPI Inversion
 
 Running the inversion using :term:`MPI` on a multi-node environment (such as a cluster) is done from the command line using::
 
-    $ mtfit -M ...
+    $ MTfit -M ...
 
 .. warning::
     Do not use the ``--mpi-call`` flag as this is a flag set automatically by the code
@@ -406,7 +406,7 @@ And then :mod:`subprocess` is used to call the inversion:
 
 This is equivalent to (see :doc:`command line options <cli>` for more information on the command line options)::
 
-    $ mtfit -M --data_file=MPI_Example.inv --algorithm=iterate --max_samples=100000
+    $ MTfit -M --data_file=MPI_Example.inv --algorithm=iterate --max_samples=100000
 
 The output file is ``MPI_Inversion_Example_OutputMT.mat``. 
 
@@ -417,28 +417,28 @@ The main advantage of running using MPI is to allow for more samples to be tried
 Submitting to a Cluster
 =================================
 
-Submitting an :mod:`mtfit` job to a cluster using ``qsub`` uses a simple module called ``pyqsub`` (from `https://www.github.com/djpugh/pyqsub <https://www.github.com/djpugh/pyqsub>`_) which provides command line options for running ``qsub``.
+Submitting an :mod:`MTfit` job to a cluster using ``qsub`` uses a simple module called ``pyqsub`` (from `https://www.github.com/djpugh/pyqsub <https://www.github.com/djpugh/pyqsub>`_) which provides command line options for running ``qsub``.
 
 To submit to the cluster from command line, on a computer with qsub available use::
 
-    $ mtfit -q ...
+    $ MTfit -q ...
 
 There are other available options when submitting to the cluster::
 
-    $ mtfit -q  --walltime=48:00:00 --nodes=4 --ppn=4 --pmem=2 --emailoptions=ae 
-        --email=example@example.com --name=mtfitClusterTest --queue=auto ...
+    $ MTfit -q  --walltime=48:00:00 --nodes=4 --ppn=4 --pmem=2 --emailoptions=ae 
+        --email=example@example.com --name=MTfitClusterTest --queue=auto ...
 
-This submits an mtfit job to the cluster using ``qsub`` (``-q``) with a :term:`walltime` of 48 hours (``--walltime``) using 4 nodes (``--nodes``) and 4 processors per node (``--ppn``) with a maximum amount of physical memory per process of 2Gb (``--pmem``). The job will send emails on abort and end (``--emailoptions``) to email ``example@example.com`` (``--email``). It has a job name of ``mtfitClusterTest`` (``--name``) and is submitted to the auto queue (``--queue``).
+This submits an MTfit job to the cluster using ``qsub`` (``-q``) with a :term:`walltime` of 48 hours (``--walltime``) using 4 nodes (``--nodes``) and 4 processors per node (``--ppn``) with a maximum amount of physical memory per process of 2Gb (``--pmem``). The job will send emails on abort and end (``--emailoptions``) to email ``example@example.com`` (``--email``). It has a job name of ``MTfitClusterTest`` (``--name``) and is submitted to the auto queue (``--queue``).
 
 These options, combined with the other :doc:`command line options <cli>`, will be saved to a job script named ``JobName.pJobID``. For the above case, if the JobID was ``207642`` a ``PBS`` script is saved called  
-``mtfitClusterTest.p207642``
+``MTfitClusterTest.p207642``
 
 .. _csv-example-label:
 
 Inversion from a CSV File
 =================================
 
-:mod:`mtfit` can use a :term:`CSV` file as input. An example CSV file can be made by running :download:`examples/make_csv_file.py <../../examples/make_csv_file.py>` in the examples folder::
+:mod:`MTfit` can use a :term:`CSV` file as input. An example CSV file can be made by running :download:`examples/make_csv_file.py <../../examples/make_csv_file.py>` in the examples folder::
 
     $ python make_csv_file.py
 
@@ -504,22 +504,22 @@ This is a CSV file with 2 events, one event ID of Event 1 with PPolarity and P/S
 
 Running an inversion using a :term:`CSV` file is the same as running a normal inversion. Calling from the command line is simply called by::
 
-    $ mtfit --datafile=thecsvfile.csv ...
+    $ MTfit --datafile=thecsvfile.csv ...
 
 The ``--invext`` flag sets the file ending that the inversion searches for when no datafile is specified, so to search for CSV files in the current directory::
 
-    $ mtfit --invext=csv
+    $ MTfit --invext=csv
 
 This will try to invert the data from all the CSV files in the current directory.
 
-`mtfit` can be extended for other inversion file formats using :doc:`setuptools entry-points <extensions>`
+`MTfit` can be extended for other inversion file formats using :doc:`setuptools entry-points <extensions>`
 
 .. _location-uncertainty-tutorial-label:
 
 Location Uncertainty
 =================================
 
-:mod:`mtfit` can include location uncertainty in the resultant :term:`PDF`. This requires samples from the location :term:`PDF`. The location uncertainty is included in the inversion using a :term:`Monte Carlo method` (see :doc:`bayes`).
+:mod:`MTfit` can include location uncertainty in the resultant :term:`PDF`. This requires samples from the location :term:`PDF`. The location uncertainty is included in the inversion using a :term:`Monte Carlo method` (see :doc:`bayes`).
 
 This file can be made from the `NonLinLoc <http://alomax.free.fr/nlloc>`_ ``*.scat`` file using :mod:`Scat2Angle` in the `pyNLLoc <https://github.com/djpugh/pyNLLoc>`_ module.
 
@@ -573,12 +573,12 @@ e.g.::
             .
             .
 
-`mtfit` can be extended to use other location :term:`PDF` file formats using :doc:`setuptools entry-points <extensions>`
+`MTfit` can be extended to use other location :term:`PDF` file formats using :doc:`setuptools entry-points <extensions>`
 
-Running with the location uncertainty included will slow the inversion as this requires more memory to store each of the location samples in the inversion. The number of samples used can be changed by setting the ``number_location_samples`` parameter in the :class:`~mtfit.inversion.Inversion` object::
+Running with the location uncertainty included will slow the inversion as this requires more memory to store each of the location samples in the inversion. The number of samples used can be changed by setting the ``number_location_samples`` parameter in the :class:`~MTfit.inversion.Inversion` object::
 
-    >>> import mtfit
-    >>> mtfit.Inversion(...,number_location_samples=10000,...)
+    >>> import MTfit
+    >>> MTfit.Inversion(...,number_location_samples=10000,...)
 
 This limits the number of station samples to 10,000, reducing the memory requirements and improving the speed.
 
@@ -589,11 +589,11 @@ To run the script::
 
 The angle scatter file path option can be set from the command line using::
     
-    $ mtfit --anglescatterfilepath=./ --angleext=.scatangle ...
+    $ MTfit --anglescatterfilepath=./ --angleext=.scatangle ...
 
-This will search in the current directory for `scatangle` files (default is to search for `scatangle` files if ``--angleext`` is not specified). The files are matched to the input data files if mtfit is called from the command line. A specific file or list of files can be set using::
+This will search in the current directory for `scatangle` files (default is to search for `scatangle` files if ``--angleext`` is not specified). The files are matched to the input data files if MTfit is called from the command line. A specific file or list of files can be set using::
 
-    $ mtfit --anglescatterfilepath=./thisanglefile.scatangle ...
+    $ MTfit --anglescatterfilepath=./thisanglefile.scatangle ...
 
 Which uses the `thisanglefile.scatangle` file in the current directory.
 
@@ -607,7 +607,7 @@ The inversion parameters used in :download:`examples/location_uncertainty.py <..
     * inversion_options = 'PPolarity' - Just uses PPolarity rather than all the data in the dictionary
     * location_pdf_file_path = 'Location_Uncertainty.scatangle'
 
-The :class:`~mtfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
+The :class:`~MTfit.inversion.Inversion` object is created and then the forward model run with the results automatically outputted:
 
     .. literalinclude:: ../../examples/location_uncertainty.py
         :language: python
@@ -634,9 +634,9 @@ The method of including location uncertainty can also be used to include **veloc
 Running from the Command Line 
 =================================
 
-``mtfit`` is easy to run from the command line. The installation should install a script onto the path so that::
+``MTfit`` is easy to run from the command line. The installation should install a script onto the path so that::
 
-    $ mtfit -h 
+    $ MTfit -h 
 
 Gives the command line options. If this does not work see :doc:`run` to install the script.
 
@@ -647,14 +647,14 @@ There are many command line options available (see :doc:`cli`) but the default s
     .. literalinclude:: ../../examples/command_line.sh
         :language: bash
 
-This uses the data from the CSV example file (see :ref:`csv-example-label`), prints the version of mtfit being used and then calls mtfit from the command line. The parameters used are:
+This uses the data from the CSV example file (see :ref:`csv-example-label`), prints the version of MTfit being used and then calls MTfit from the command line. The parameters used are:
 
     * --data_file=csv_*.inv - use the data files matching csv_*.inv 
     * --algorithm=iterate - use the iterative algorithm
     * --max_samples=100000 - run for 100,000 samples
     * -b - carry out the inversion for both the double couple constrained and full moment tensor spaces
     * --inversionoptions=PPolarity - carry out the inversion using PPolarity data only
-    * --convert - convert the solution using :mod:`mtfit.MTconvert`.
+    * --convert - convert the solution using :mod:`MTfit.MTconvert`.
 
 
 .. _scatangle-tutorial-label:
@@ -662,7 +662,7 @@ This uses the data from the CSV example file (see :ref:`csv-example-label`), pri
 Scatangle file binning
 =================================
 
-Often the scatangle files are large with many samples at similar station angles. The size of these files can be reduced by binning these samples into similar bins. This can be done either before running mtfit or as a pre-inversion step using the command line parameters:
+Often the scatangle files are large with many samples at similar station angles. The size of these files can be reduced by binning these samples into similar bins. This can be done either before running MTfit or as a pre-inversion step using the command line parameters:
 
     * --bin-scatangle=True - run the scatangle binning before the inversion
     * --bin-size=1.0 - set a bin size of 1.0 degrees.

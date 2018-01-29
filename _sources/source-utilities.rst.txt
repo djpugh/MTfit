@@ -1,4 +1,4 @@
-mtfit.utilities
+MTfit.utilities
 ===============
 
 Contents
@@ -6,7 +6,7 @@ Contents
 .. toctree::
    :maxdepth: 1
 
-   mtfit.utilities.argparser<source-argparser>
-   mtfit.utilities.extensions<source-utilities_extensions>
-   mtfit.utilities.file_io<source-file_io>
-   mtfit.utilities.multiprocessing_helper<source-multiprocessing_helper>
+   MTfit.utilities.argparser<source-argparser>
+   MTfit.utilities.extensions<source-utilities_extensions>
+   MTfit.utilities.file_io<source-file_io>
+   MTfit.utilities.multiprocessing_helper<source-multiprocessing_helper>

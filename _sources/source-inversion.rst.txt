@@ -1,5 +1,5 @@
-mtfit.inversion
+MTfit.inversion
 ===============
 
 
-.. literalinclude:: ../../src/mtfit/inversion.py
+.. literalinclude:: ../../src/MTfit/inversion.py

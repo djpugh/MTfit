@@ -1,12 +1,12 @@
-mtfit.probability
+MTfit.probability
 ====================
 
 
-.. literalinclude:: ../../src/mtfit/probability/probability.py
+.. literalinclude:: ../../src/MTfit/probability/probability.py
 
 There are also Cython functions:
 
 
-.. literalinclude:: ../../src/mtfit/probability/cprobability.pyx
+.. literalinclude:: ../../src/MTfit/probability/cprobability.pyx
     :end-before: # Test functions
     :language: cython

@@ -7,7 +7,7 @@ Commented example script for inversion of a synthetic event, with more in depth 
 
 def run(case='PPolarity', parallel=True, test=False):
     # Import inversion
-    from mtfit.inversion import Inversion
+    from MTfit.inversion import Inversion
     # Get Data
     from example_data import synthetic_event
     data = synthetic_event()
@@ -89,9 +89,9 @@ def run(case='PPolarity', parallel=True, test=False):
         #  >>> import cPickle
         #  >>> cPickle.dump(data,open('synthetic_event_data.inv','wb'))
         # And then calling from the command line
-        #  mtfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \
+        #  MTfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \
         #    --inversion-options=PPolarity --convert synthetic_event_data.inv
-        #  mtfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
+        #  MTfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
         #    --inversion-options=PPolarity --convert synthetic_event_data.inv
         # End
     elif case.lower() == 'ar':
@@ -140,10 +140,10 @@ def run(case='PPolarity', parallel=True, test=False):
         #  >>> import cPickle
         #  >>> cPickle.dump(data,open('synthetic_event_data.inv','wb'))
         # And then calling from the command line
-        #  mtfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \
+        #  MTfit --algorithm=iterate --pmem=1 --double-couple --max-samples=100000 \
         #    --inversion-options=PPolarity,P/SHRMSAmplitudeRatio,P/SVRMSAmplitudeRatio \
         #    --convert synthetic_event_data.inv
-        #  mtfit --algorithm=iterate --pmem=1 --max-samples=50000000  \
+        #  MTfit --algorithm=iterate --pmem=1 --max-samples=50000000  \
         #    --inversion-options=PPolarity,P/SHRMSAmplitudeRatio,P/SVRMSAmplitudeRatio \
         #    --convert synthetic_event_data.inv
         # End

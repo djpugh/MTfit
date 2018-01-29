@@ -1,5 +1,5 @@
-mtfit.utilities.multiprocessing_helper
+MTfit.utilities.multiprocessing_helper
 ======================================
 
 
-.. literalinclude:: ../../src/mtfit/utilities/multiprocessing_helper.py
+.. literalinclude:: ../../src/MTfit/utilities/multiprocessing_helper.py

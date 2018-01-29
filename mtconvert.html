@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8. convert &mdash; mtfit documentation</title>
+  <title>9. convert &mdash; MTfit documentation</title>
   
 
   
@@ -37,9 +37,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mtfit documentation" href="index.html"/>
-        <link rel="next" title="9. mtfit command line options" href="cli.html"/>
-        <link rel="prev" title="7. mtfit.algorithms: Search Algorithms" href="algorithms.html"/> 
+    <link rel="top" title="MTfit documentation" href="index.html"/>
+        <link rel="next" title="10. MTfit command line options" href="cli.html"/>
+        <link rel="prev" title="8. MTfit.algorithms: Search Algorithms" href="algorithms.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -58,12 +58,12 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> mtfit
+            <a href="index.html" class="icon icon-home"> MTfit
           
 
           
             
-            <img src="_static/mtfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" />
           
           </a>
 
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.0.0
+                1.0.1
               </div>
             
           
@@ -96,26 +96,26 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running mtfit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Moment Tensor Conversion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#moment-tensor-conversion-py">8.1. moment_tensor_conversion.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">2. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">3. Running MTfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">4. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">5. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">6. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">7. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">8. Search Algorithms</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Moment Tensor Conversion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#moment-tensor-conversion-py">9.1. moment_tensor_conversion.py</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">10. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">11. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">1. Plot Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">2. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">3. Source Code</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
@@ -131,7 +131,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">mtfit</a>
+          <a href="index.html">MTfit</a>
         
       </nav>
 
@@ -161,7 +161,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>8. convert</li>
+      <li>9. convert</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -181,16 +181,16 @@
            <div itemprop="articleBody">
             
   <div class="section" id="convert">
-<h1>8. convert<a class="headerlink" href="#convert" title="Permalink to this headline">¶</a></h1>
-<p><code class="xref py py-mod docutils literal"><span class="pre">mtfit</span></code> contains a submodule <code class="xref py py-mod docutils literal"><span class="pre">mtfit.convert</span></code> that can handle moment tensor conversions. Mostly it is used with the <code class="docutils literal"><span class="pre">--convert</span></code> flag for converting the moment tensor results to the different source  parameterisations. However it can be used separately, and the functions are described here.</p>
-<span class="target" id="module-mtfit.convert.moment_tensor_conversion"></span><div class="section" id="moment-tensor-conversion-py">
-<h2>8.1. moment_tensor_conversion.py<a class="headerlink" href="#moment-tensor-conversion-py" title="Permalink to this headline">¶</a></h2>
+<h1>9. convert<a class="headerlink" href="#convert" title="Permalink to this headline">¶</a></h1>
+<p><code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> contains a submodule <code class="xref py py-mod docutils literal"><span class="pre">MTfit.convert</span></code> that can handle moment tensor conversions. Mostly it is used with the <code class="docutils literal"><span class="pre">--convert</span></code> flag for converting the moment tensor results to the different source  parameterisations. However it can be used separately, and the functions are described here.</p>
+<span class="target" id="module-MTfit.convert.moment_tensor_conversion"></span><div class="section" id="moment-tensor-conversion-py">
+<h2>9.1. moment_tensor_conversion.py<a class="headerlink" href="#moment-tensor-conversion-py" title="Permalink to this headline">¶</a></h2>
 <p>Module containing moment tensor conversion functions. Acts on the parameters of the moment tensor 3x3 form or the modified 6-vector form, dependent on the name</p>
 <p>The function naming is OriginalVariables_NewVariables</p>
 <p>The coordinate system is North (X), East (Y), Down (Z)</p>
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.E_GD">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">E_GD</code><span class="sig-paren">(</span><em>E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#E_GD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.E_GD" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.E_GD">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">E_GD</code><span class="sig-paren">(</span><em>E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#E_GD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.E_GD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the eigenvalues to the Tape parameterisation gamma and delta.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -201,8 +201,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.E_tk">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">E_tk</code><span class="sig-paren">(</span><em>E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#E_tk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.E_tk" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.E_tk">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">E_tk</code><span class="sig-paren">(</span><em>E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#E_tk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.E_tk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the moment tensor eigenvalues to the Hudson tau, k parameters</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -213,8 +213,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.E_uv">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">E_uv</code><span class="sig-paren">(</span><em>E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#E_uv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.E_uv" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.E_uv">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">E_uv</code><span class="sig-paren">(</span><em>E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#E_uv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.E_uv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the eigenvalues to the Hudson i, v parameters</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -225,8 +225,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.FP_SDR">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">FP_SDR</code><span class="sig-paren">(</span><em>normal</em>, <em>slip</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#FP_SDR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.FP_SDR" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.FP_SDR">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">FP_SDR</code><span class="sig-paren">(</span><em>normal</em>, <em>slip</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#FP_SDR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.FP_SDR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert fault normal and slip to strike, dip and rake</p>
 <p>Coordinate system is North East Down.</p>
 <dl class="docutils">
@@ -239,8 +239,8 @@ slip: numpy matrix - Slip vector</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.FP_SDSD">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">FP_SDSD</code><span class="sig-paren">(</span><em>N1</em>, <em>N2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#FP_SDSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.FP_SDSD" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.FP_SDSD">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">FP_SDSD</code><span class="sig-paren">(</span><em>N1</em>, <em>N2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#FP_SDSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.FP_SDSD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the the fault normal and slip vectors to the strike and dip pairs
 (all angles in radians).</p>
 <dl class="docutils">
@@ -257,8 +257,8 @@ Slip: numpy matrix - Slip vector</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.FP_TNP">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">FP_TNP</code><span class="sig-paren">(</span><em>normal</em>, <em>slip</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#FP_TNP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.FP_TNP" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.FP_TNP">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">FP_TNP</code><span class="sig-paren">(</span><em>normal</em>, <em>slip</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#FP_TNP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.FP_TNP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert fault normal and slip to TNP axes</p>
 <p>Coordinate system is North East Down.</p>
 <dl class="docutils">
@@ -271,8 +271,8 @@ slip: numpy matrix - slip vector</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.GD_E">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">GD_E</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#GD_E"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.GD_E" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.GD_E">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">GD_E</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#GD_E"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.GD_E" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the Tape parameterisation gamma and delta to the eigenvalues.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -284,8 +284,8 @@ delta: numpy array of delta values</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.GD_basic_cdc">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">GD_basic_cdc</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#GD_basic_cdc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.GD_basic_cdc" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.GD_basic_cdc">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">GD_basic_cdc</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#GD_basic_cdc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.GD_basic_cdc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert gamma, delta to basic crack+double-couple parameters</p>
 <p>Gamma and delta are the source type parameters from the Tape parameterisation.</p>
 <dl class="docutils">
@@ -306,8 +306,8 @@ delta: numpy array of delta values</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.MT33_GD">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">MT33_GD</code><span class="sig-paren">(</span><em>MT33</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#MT33_GD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.MT33_GD" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.MT33_GD">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT33_GD</code><span class="sig-paren">(</span><em>MT33</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT33_GD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT33_GD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the 3x3 Moment Tensor to theTape parameterisation gamma and delta.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -318,8 +318,8 @@ delta: numpy array of delta values</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.MT33_MT6">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">MT33_MT6</code><span class="sig-paren">(</span><em>MT33</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#MT33_MT6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.MT33_MT6" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.MT33_MT6">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT33_MT6</code><span class="sig-paren">(</span><em>MT33</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT33_MT6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT33_MT6" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a 3x3 matrix to six vector maintaining normalisation. 6-vector has the form:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
 <span class="n">Myy</span>
@@ -338,8 +338,8 @@ delta: numpy array of delta values</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.MT33_SDR">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">MT33_SDR</code><span class="sig-paren">(</span><em>MT33</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#MT33_SDR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.MT33_SDR" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.MT33_SDR">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT33_SDR</code><span class="sig-paren">(</span><em>MT33</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT33_SDR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT33_SDR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the 3x3 Moment Tensor to the strike, dip and rake.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -350,8 +350,8 @@ delta: numpy array of delta values</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.MT33_TNPE">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">MT33_TNPE</code><span class="sig-paren">(</span><em>MT33</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#MT33_TNPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.MT33_TNPE" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.MT33_TNPE">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT33_TNPE</code><span class="sig-paren">(</span><em>MT33</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT33_TNPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT33_TNPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the 3x3 Moment Tensor to the T,N,P vectors and the eigenvalues.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -366,8 +366,8 @@ delta: numpy array of delta values</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.MT6_MT33">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_MT33</code><span class="sig-paren">(</span><em>MT6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#MT6_MT33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.MT6_MT33" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.MT6_MT33">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_MT33</code><span class="sig-paren">(</span><em>MT6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT6_MT33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT6_MT33" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a six vector to a 3x3 MT maintaining normalisation. 6-vector has the form:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
 <span class="n">Myy</span>
@@ -386,8 +386,8 @@ delta: numpy array of delta values</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.MT6_TNPE">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_TNPE</code><span class="sig-paren">(</span><em>MT6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#MT6_TNPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.MT6_TNPE" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.MT6_TNPE">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_TNPE</code><span class="sig-paren">(</span><em>MT6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT6_TNPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT6_TNPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the 6xn Moment Tensor to the T,N,P vectors and the eigenvalues.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -402,8 +402,8 @@ delta: numpy array of delta values</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.MT6_Tape">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_Tape</code><span class="sig-paren">(</span><em>MT6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#MT6_Tape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.MT6_Tape" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.MT6_Tape">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_Tape</code><span class="sig-paren">(</span><em>MT6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT6_Tape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT6_Tape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the moment tensor 6-vector to the Tape parameters.</p>
 <p>6-vector has the form:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
@@ -427,8 +427,8 @@ delta: numpy array of delta values</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.MT6_biaxes">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_biaxes</code><span class="sig-paren">(</span><em>MT6, c=[3.0, 1.0, 1.0, 0, 0, 0, 3.0, 1.0, 0, 0, 0, 3.0, 0, 0, 0, 1.0, 0, 0, 1.0, 0, 1.0]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#MT6_biaxes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.MT6_biaxes" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.MT6_biaxes">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_biaxes</code><span class="sig-paren">(</span><em>MT6, c=[3.0, 1.0, 1.0, 0, 0, 0, 3.0, 1.0, 0, 0, 0, 3.0, 0, 0, 0, 1.0, 0, 0, 1.0, 0, 1.0]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT6_biaxes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT6_biaxes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert six vector to bi-axes</p>
 <p>Convert the moment tensor 6-vector to the bi-axes decomposition from Chapman, C and
 Leaney,S, 2011. A new moment-tensor decomposition for seismic events in anisotropic
@@ -470,8 +470,8 @@ c: list or numpy array of the 21 element input stiffness tensor</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.MT6c_D6">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">MT6c_D6</code><span class="sig-paren">(</span><em>MT6, c=[3.0, 1.0, 1.0, 0, 0, 0, 3.0, 1.0, 0, 0, 0, 3.0, 0, 0, 0, 1.0, 0, 0, 1.0, 0, 1.0]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#MT6c_D6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.MT6c_D6" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.MT6c_D6">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT6c_D6</code><span class="sig-paren">(</span><em>MT6, c=[3.0, 1.0, 1.0, 0, 0, 0, 3.0, 1.0, 0, 0, 0, 3.0, 0, 0, 0, 1.0, 0, 0, 1.0, 0, 1.0]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT6c_D6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT6c_D6" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the moment tensor 6-vector to the potency tensor.
 The 6-vector has the form:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
@@ -510,8 +510,8 @@ c: list or numpy array of the 21 element input stiffness tensor</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.SDR_FP">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">SDR_FP</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>rake</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#SDR_FP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.SDR_FP" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.SDR_FP">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">SDR_FP</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>rake</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#SDR_FP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.SDR_FP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the strike, dip  and rake in radians to the fault normal and slip.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -524,8 +524,8 @@ rake: float rake angle of fault plane  in radians</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.SDR_SDR">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">SDR_SDR</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>rake</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#SDR_SDR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.SDR_SDR" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.SDR_SDR">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">SDR_SDR</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>rake</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#SDR_SDR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.SDR_SDR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert strike, dip  rake to strike, dip  rake for other fault plane</p>
 <p>Coordinate system is North East Down.</p>
 <dl class="docutils">
@@ -543,8 +543,8 @@ rake: float radians</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.SDR_SDSD">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">SDR_SDSD</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>rake</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#SDR_SDSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.SDR_SDSD" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.SDR_SDSD">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">SDR_SDSD</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>rake</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#SDR_SDSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.SDR_SDSD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the strike, dip  and rake to the strike and dip pairs (all angles in radians).</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -557,8 +557,8 @@ rake: float rake angle of fault plane  in radians</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.SDR_TNP">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">SDR_TNP</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>rake</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#SDR_TNP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.SDR_TNP" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.SDR_TNP">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">SDR_TNP</code><span class="sig-paren">(</span><em>strike</em>, <em>dip</em>, <em>rake</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#SDR_TNP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.SDR_TNP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert strike, dip  rake to TNP vectors</p>
 <p>Coordinate system is North East Down.</p>
 <dl class="docutils">
@@ -572,8 +572,8 @@ rake: float radians</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.SDSD_FP">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">SDSD_FP</code><span class="sig-paren">(</span><em>strike1</em>, <em>dip1</em>, <em>strike2</em>, <em>dip2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#SDSD_FP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.SDSD_FP" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.SDSD_FP">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">SDSD_FP</code><span class="sig-paren">(</span><em>strike1</em>, <em>dip1</em>, <em>strike2</em>, <em>dip2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#SDSD_FP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.SDSD_FP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert strike and dip pairs to fault normal and slip</p>
 <p>Converts the strike and dip pairs in radians to the fault normal and slip.</p>
 <dl class="docutils">
@@ -588,8 +588,8 @@ dip2: float dip  of fault plane 2 in radians</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.TNP_SDR">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">TNP_SDR</code><span class="sig-paren">(</span><em>T</em>, <em>N</em>, <em>P</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#TNP_SDR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.TNP_SDR" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.TNP_SDR">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">TNP_SDR</code><span class="sig-paren">(</span><em>T</em>, <em>N</em>, <em>P</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#TNP_SDR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.TNP_SDR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the T,N,P vectors to the strike, dip and rake in radians</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -602,8 +602,8 @@ P: numpy matrix of P vectors.</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.TP_FP">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">TP_FP</code><span class="sig-paren">(</span><em>T</em>, <em>P</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#TP_FP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.TP_FP" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.TP_FP">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">TP_FP</code><span class="sig-paren">(</span><em>T</em>, <em>P</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#TP_FP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.TP_FP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the 3x3 Moment Tensor to the fault normal and slip vectors.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -615,8 +615,8 @@ P: numpy matrix of P vectors.</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.Tape_MT33">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">Tape_MT33</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em>, <em>kappa</em>, <em>h</em>, <em>sigma</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#Tape_MT33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.Tape_MT33" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.Tape_MT33">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">Tape_MT33</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em>, <em>kappa</em>, <em>h</em>, <em>sigma</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#Tape_MT33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.Tape_MT33" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Tape parameters to a 3x3 moment tensor</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -636,8 +636,8 @@ sigma: float, slip angle (takes values between -pi/2 and pi/2)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.Tape_MT6">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">Tape_MT6</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em>, <em>kappa</em>, <em>h</em>, <em>sigma</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#Tape_MT6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.Tape_MT6" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.Tape_MT6">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">Tape_MT6</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em>, <em>kappa</em>, <em>h</em>, <em>sigma</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#Tape_MT6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.Tape_MT6" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the Tape parameterisation to the moment tensor six-vectors.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -657,8 +657,8 @@ sigma: Slip angle (takes values between -pi/2 and pi/2)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.Tape_TNPE">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">Tape_TNPE</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em>, <em>kappa</em>, <em>h</em>, <em>sigma</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#Tape_TNPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.Tape_TNPE" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.Tape_TNPE">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">Tape_TNPE</code><span class="sig-paren">(</span><em>gamma</em>, <em>delta</em>, <em>kappa</em>, <em>h</em>, <em>sigma</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#Tape_TNPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.Tape_TNPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the Tape parameterisation to the T,N,P vectors and the eigenvalues.</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -682,8 +682,8 @@ sigma: Slip angle (takes values between -pi/2 and pi/2)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.basic_cdc_GD">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">basic_cdc_GD</code><span class="sig-paren">(</span><em>alpha</em>, <em>poisson=0.25</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#basic_cdc_GD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.basic_cdc_GD" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.basic_cdc_GD">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">basic_cdc_GD</code><span class="sig-paren">(</span><em>alpha</em>, <em>poisson=0.25</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#basic_cdc_GD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.basic_cdc_GD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert alpha and poisson ratio to gamma and delta</p>
 <p>alpha is opening angle, poisson : ratio lambda/(2(lambda+mu)) Defaults to 0.25.
 Uses basic crack+double-couple model of Minson et al (Seismically and geodetically
@@ -708,8 +708,8 @@ poisson:[0.25] Poisson ratio on the fault surface.</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.c21_cvoigt">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">c21_cvoigt</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#c21_cvoigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.c21_cvoigt" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.c21_cvoigt">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">c21_cvoigt</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#c21_cvoigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.c21_cvoigt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an input stiffness tensor to voigt form</p>
 <p>The stiffness tensor needs to be provided as a list of the 21 elements of the
 upper triangular part of the Voigt stiffness matrix:</p>
@@ -732,8 +732,8 @@ upper triangular part of the Voigt stiffness matrix:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.c_norm">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">c_norm</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#c_norm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.c_norm" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.c_norm">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">c_norm</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#c_norm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.c_norm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate norm of the stiffness tensor.</p>
 <p>The stiffness tensor needs to be provided as a list of the 21 elements of the
 upper triangular part of the Voigt stiffness matrix:</p>
@@ -756,8 +756,8 @@ upper triangular part of the Voigt stiffness matrix:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.is_isotropic_c">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">is_isotropic_c</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#is_isotropic_c"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.is_isotropic_c" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.is_isotropic_c">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">is_isotropic_c</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#is_isotropic_c"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.is_isotropic_c" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate if an input stiffness tensor is isotropic</p>
 <p>The stiffness tensor needs to be provided as a list of the 21 elements of the
 upper triangular part of the Voigt stiffness matrix:</p>
@@ -780,8 +780,8 @@ upper triangular part of the Voigt stiffness matrix:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.isotropic_c">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">isotropic_c</code><span class="sig-paren">(</span><em>lambda_=1</em>, <em>mu=1</em>, <em>c=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#isotropic_c"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.isotropic_c" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.isotropic_c">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">isotropic_c</code><span class="sig-paren">(</span><em>lambda_=1</em>, <em>mu=1</em>, <em>c=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#isotropic_c"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.isotropic_c" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the isotropic stiffness tensor</p>
 <p>Calculate isotropic stiffness parameters. The input parameters are either
 the two lame parameters lambda and mu, or is a full 21 element stiffness tensor:</p>
@@ -813,8 +813,8 @@ c: list or numpy array of the 21 element input stiffness tensor (overrides</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.normal_SD">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">normal_SD</code><span class="sig-paren">(</span><em>normal</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#normal_SD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.normal_SD" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.normal_SD">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">normal_SD</code><span class="sig-paren">(</span><em>normal</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#normal_SD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.normal_SD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a plane normal to strike and dip</p>
 <p>Coordinate system is North East Down.</p>
 <dl class="docutils">
@@ -826,8 +826,8 @@ c: list or numpy array of the 21 element input stiffness tensor (overrides</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.output_convert">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">output_convert</code><span class="sig-paren">(</span><em>mts</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#output_convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.output_convert" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.output_convert">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">output_convert</code><span class="sig-paren">(</span><em>mts</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#output_convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.output_convert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the moment tensors into several different parameterisations</p>
 <p>The moment tensor six-vectors are converted into the Tape gamma,delta,kappa,h,sigma
 parameterisation; the Hudson u,v parameterisation; and the strike, dip and rakes
@@ -841,8 +841,8 @@ of the two fault planes are calculated.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.tk_uv">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">tk_uv</code><span class="sig-paren">(</span><em>tau</em>, <em>k</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#tk_uv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.tk_uv" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.tk_uv">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">tk_uv</code><span class="sig-paren">(</span><em>tau</em>, <em>k</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#tk_uv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.tk_uv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the Hudson tau, k parameters to the Hudson u, v parameters</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -854,8 +854,8 @@ k: float, Hudson k parameter</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="mtfit.convert.moment_tensor_conversion.toa_vec">
-<code class="descclassname">mtfit.convert.moment_tensor_conversion.</code><code class="descname">toa_vec</code><span class="sig-paren">(</span><em>azimuth</em>, <em>plunge</em>, <em>radians=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mtfit/convert/moment_tensor_conversion.html#toa_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mtfit.convert.moment_tensor_conversion.toa_vec" title="Permalink to this definition">¶</a></dt>
+<dt id="MTfit.convert.moment_tensor_conversion.toa_vec">
+<code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">toa_vec</code><span class="sig-paren">(</span><em>azimuth</em>, <em>plunge</em>, <em>radians=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#toa_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.toa_vec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the azimuth and plunge of a vector to a cartesian description of the vector</p>
 <dl class="docutils">
 <dt>Args</dt>
@@ -881,10 +881,10 @@ plunge: float, vector plunge</dd>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cli.html" class="btn btn-neutral float-right" title="9. mtfit command line options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="cli.html" class="btn btn-neutral float-right" title="10. MTfit command line options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="algorithms.html" class="btn btn-neutral" title="7. mtfit.algorithms: Search Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="algorithms.html" class="btn btn-neutral" title="8. MTfit.algorithms: Search Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -894,7 +894,7 @@ plunge: float, vector plunge</dd>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Nov 19, 2017 (version 1.0.0).
+      Last updated on Jan 29, 2018 (version 1.0.1).
 
     </p>
   </div>
@@ -916,7 +916,7 @@ plunge: float, vector plunge</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.0',
+            VERSION:'1.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

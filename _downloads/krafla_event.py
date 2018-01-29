@@ -7,7 +7,7 @@ Commented example script for inversion of a krafla event, with more in depth exp
 
 def run(case='PPolarity', parallel=True, test=False):
     # Import inversion
-    from mtfit import mtfit
+    from MTfit import MTfit
 
     if test:
 
@@ -30,10 +30,10 @@ def run(case='PPolarity', parallel=True, test=False):
             location_pdf_file_path = 'krafla_event.scatangle'
             number_location_samples = 50
             bin_scatangle = True
-            mtfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm, parallel=parallel,
+            MTfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm, parallel=parallel,
                   inversion_options=inversion_options, phy_mem=phy_mem, dc=dc, max_samples=max_samples,
                   convert=convert, bin_scatangle=bin_scatangle, number_location_samples=number_location_samples)
-            mtfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm, parallel=parallel,
+            MTfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm, parallel=parallel,
                   inversion_options=inversion_options, phy_mem=phy_mem, dc=not dc, max_samples=max_samples,
                   convert=convert, bin_scatangle=bin_scatangle, number_location_samples=number_location_samples)
         elif case.lower() == 'ppolarityprob':
@@ -48,12 +48,12 @@ def run(case='PPolarity', parallel=True, test=False):
             location_pdf_file_path = 'krafla_event.scatangle'
             number_location_samples = 50
             bin_scatangle = True
-            mtfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm, burn_length=100,
+            MTfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm, burn_length=100,
                   parallel=parallel, inversion_options=inversion_options, phy_mem=phy_mem, chain_length=chain_length,
                   convert=convert, bin_scatangle=bin_scatangle, dc_mt=dc_mt, number_location_samples=number_location_samples)
             data['UID'] += '_transd'
             algorithm = 'transdmcmc'
-            mtfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm, burn_length=100,
+            MTfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm, burn_length=100,
                   parallel=parallel, inversion_options=inversion_options, phy_mem=phy_mem, chain_length=chain_length,
                   convert=convert, bin_scatangle=bin_scatangle, number_location_samples=number_location_samples)
         return
@@ -94,15 +94,15 @@ def run(case='PPolarity', parallel=True, test=False):
         number_location_samples = 5000
         # Bin Scatangle File
         bin_scatangle = True
-        # Use mtfit.__core__.mtfit function
-        mtfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm,
+        # Use MTfit.__core__.MTfit function
+        MTfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm,
               parallel=parallel, inversion_options=inversion_options, phy_mem=phy_mem, dc=dc,
               max_samples=max_samples, convert=convert, bin_scatangle=bin_scatangle,
               number_location_samples=number_location_samples)
         # Change max_samples for MT inversion
         max_samples = 1000000
         # Create the inversion object with the set parameters.
-        mtfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm,
+        MTfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm,
               parallel=parallel, inversion_options=inversion_options, phy_mem=phy_mem,
               dc=not dc, max_samples=max_samples, convert=convert,
               bin_scatangle=bin_scatangle, number_location_samples=number_location_samples)
@@ -113,10 +113,10 @@ def run(case='PPolarity', parallel=True, test=False):
         #  >>> import cPickle
         #  >>> cPickle.dump(data,open('krafla_event.inv','wb'))
         # And then calling from the command line
-        #  mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
+        #  MTfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
         #    --pmem=1 --double-couple --max-samples=100000 \
         #    --inversion-options=PPolarity --convert --bin-scatangle krafla_event.inv
-        #  mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
+        #  MTfit --location_pdf_file_path=krafla_event.scatangle --algorithm=iterate \
         #    --pmem=1 --max-samples=10000000  --inversion-options=PPolarity --convert \
         #    --bin-scatangle krafla_event.inv
         # End
@@ -151,8 +151,8 @@ def run(case='PPolarity', parallel=True, test=False):
         number_location_samples = 5000
         # Bin Scatangle File
         bin_scatangle = True
-        # Use mtfit.__core__.mtfit function
-        mtfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm,
+        # Use MTfit.__core__.MTfit function
+        MTfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm,
               parallel=parallel, inversion_options=inversion_options, phy_mem=phy_mem,
               chain_length=chain_length, convert=convert, bin_scatangle=bin_scatangle,
               dc_mt=dc_mt, number_location_samples=number_location_samples)
@@ -160,8 +160,8 @@ def run(case='PPolarity', parallel=True, test=False):
         data['UID'] += '_transd'
         # Use a transdmcmc sampling algorithm
         algorithm = 'transdmcmc'
-        # Use mtfit.__core__.mtfit function
-        mtfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm,
+        # Use MTfit.__core__.MTfit function
+        MTfit(data, location_pdf_file_path=location_pdf_file_path, algorithm=algorithm,
               parallel=parallel, inversion_options=inversion_options, phy_mem=phy_mem,
               chain_length=chain_length, convert=convert, bin_scatangle=bin_scatangle,
               number_location_samples=number_location_samples)
@@ -172,11 +172,11 @@ def run(case='PPolarity', parallel=True, test=False):
         #  >>> import cPickle
         #  >>> cPickle.dump(data,open('krafla_event_data.inv','wb'))
         # And then calling from the command line
-        # mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=mcmc -b \
+        # MTfit --location_pdf_file_path=krafla_event.scatangle --algorithm=mcmc -b \
         #    --pmem=1 --double-couple --max-samples=100000 \
         #    --inversion-options=PPolarityProb --convert --bin-scatangle \
         #    krafla_event.inv
-        # mtfit --location_pdf_file_path=krafla_event.scatangle --algorithm=transdmcmc \
+        # MTfit --location_pdf_file_path=krafla_event.scatangle --algorithm=transdmcmc \
         #    --pmem=1 --max-samples=100000  --inversion-options=PPolarityProb \
         #    --convert --bin-scatangle krafla_event.inv
         # End

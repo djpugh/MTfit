@@ -1,11 +1,11 @@
-mtfit.extensions.scatangle
+MTfit.extensions.scatangle
 ==========================
 
 
-.. literalinclude:: ../../src/mtfit/extensions/scatangle.py
+.. literalinclude:: ../../src/MTfit/extensions/scatangle.py
 
 
 There are also Cython functions:
 
-.. literalinclude:: ../../src/mtfit/extensions/cscatangle.pyx
+.. literalinclude:: ../../src/MTfit/extensions/cscatangle.pyx
     :language: cython

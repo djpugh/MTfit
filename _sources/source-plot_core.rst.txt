@@ -1,5 +1,5 @@
-mtfit.plot.core
+MTfit.plot.core
 ===============
 
 
-.. literalinclude:: ../../src/mtfit/plot/core.py
+.. literalinclude:: ../../src/MTfit/plot/core.py

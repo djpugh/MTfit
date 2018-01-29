@@ -1,5 +1,5 @@
-mtfit.utilities.argparser
+MTfit.utilities.argparser
 =========================
 
 
-.. literalinclude:: ../../src/mtfit/utilities/argparser.py
+.. literalinclude:: ../../src/MTfit/utilities/argparser.py

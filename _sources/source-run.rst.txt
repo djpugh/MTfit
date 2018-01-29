@@ -1,4 +1,4 @@
-mtfit.run
+MTfit.run
 =========
 
-.. literalinclude:: ../../src/mtfit/run.py
+.. literalinclude:: ../../src/MTfit/run.py

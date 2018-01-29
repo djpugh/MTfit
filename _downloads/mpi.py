@@ -29,12 +29,12 @@ def run():
     with open('MPI_Example.inv', 'wb') as f:
         pickle.dump(f, data)
     # Inversion
-    # Use subprocess to call mtfit
+    # Use subprocess to call MTfit
     import subprocess
-    subprocess.call(['mtfit', '-M', '--data_file=MPI_Example.inv',
+    subprocess.call(['MTfit', '-M', '--data_file=MPI_Example.inv',
                      '--algorithm=iterate', '--max_samples=100000'])
     # Equivalent to:
-    #  $ mtfit -M --data_file=MPI_Example.inv --algorithm=iterate --max_samples=100000
+    #  $ MTfit -M --data_file=MPI_Example.inv --algorithm=iterate --max_samples=100000
     # End
 
 

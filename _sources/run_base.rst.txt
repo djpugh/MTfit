@@ -1,15 +1,15 @@
 *******************************
-Running mtfit
+Running MTfit
 *******************************
 
-There are several ways to run :mod:`mtfit`, and these are described here.
+There are several ways to run :mod:`MTfit`, and these are described here.
 
 Command Line
 ===============================
 
-:mod:`mtfit` can be run from the command line. A script should have been installed onto the path during installation and should be callable as::
+:mod:`MTfit` can be run from the command line. A script should have been installed onto the path during installation and should be callable as::
 
-    $ mtfit
+    $ MTfit
 
 
 However it may be necessary to install the script manually. This is platform dependent.
@@ -23,8 +23,8 @@ Linux
 Add this python script to a directory in the $PATH environmental variable::
 
     #!/usr/bin/env python
-    import mtfit
-    mtfit.__run__()
+    import MTfit
+    MTfit.__run__()
 
 And make sure it is executable.
 
@@ -33,9 +33,9 @@ Windows
 
 Add the linux script (above) to the path or if using powershell edit the powershell profile (usually found in *Documents/WindowsPowerShell/* - if not present use ``$PROFILE|Format-List -Force`` to locate it, it may be necessary to create the profile) and add::
 
-    function mtfit{
+    function MTfit{
         $script={
-            python -c "import mtfit;mtfit.__run__()" $args
+            python -c "import MTfit;MTfit.__run__()" $args
             }
         Invoke-Command -ScriptBlock $script -ArgumentList $args
         }
@@ -45,9 +45,9 @@ Windows Powershell does seem to have some errors with commandline arguments, if 
 Command Line Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When running :mod:`mtfit` from the command line, there are many options available, and these can be listed using::
+When running :mod:`MTfit` from the command line, there are many options available, and these can be listed using::
 
-    $ mtfit -h
+    $ MTfit -h
 
 
 .. only:: latex
@@ -61,8 +61,8 @@ When running :mod:`mtfit` from the command line, there are many options availabl
 The command line defaults can be set using a defaults file. This is recursively checked in 3 locations:
 
     1. ``MTFITDEFAULTSPATH`` environmental variable (could be a system level setting)
-    2. ``.mtfitdefaults`` file in the users home directory
-    3. ``.mtfitdefaults`` file in the current working directory
+    2. ``.MTfitdefaults`` file in the users home directory
+    3. ``.MTfitdefaults`` file in the current working directory
 
 The higher number file over-writes defaults in the lower files if they conflict.
 
@@ -79,11 +79,11 @@ e.g.::
 Python Interpreter
 =================================
 
-Running mtfit from the python interpreter is done as::
+Running MTfit from the python interpreter is done as::
 
-    >>> import mtfit
+    >>> import MTfit
     >>> args=['-o','-d']
-    >>> mtfit.__run__(args)
+    >>> MTfit.__run__(args)
 
 .. only:: latex
 
@@ -93,20 +93,20 @@ Running mtfit from the python interpreter is done as::
 
     Where args correspond to the command line arguments (see :doc:`cli`).
 
-It is also possible to create the :class:`~mtfit.inversion.Inversion` object::
+It is also possible to create the :class:`~MTfit.inversion.Inversion` object::
 
-    >>> import mtfit
-    >>> inversion=mtfit.Inversion(*args,**kwargs)
+    >>> import MTfit
+    >>> inversion=MTfit.Inversion(*args,**kwargs)
     >>> inversion.forward()
 
 
 .. only:: latex
 
-    The descriptions of the :class:`~mtfit.inversion.Inversion` initialisation arguments can be found in the :class:`~mtfit.inversion.Inversion.__init__` docstrings, and :latex:`\ref{inversion::doc}`.
+    The descriptions of the :class:`~MTfit.inversion.Inversion` initialisation arguments can be found in the :class:`~MTfit.inversion.Inversion.__init__` docstrings, and :latex:`\ref{inversion::doc}`.
 
 .. only:: not latex
 
-    The descriptions of the :class:`~mtfit.inversion.Inversion` initialisation arguments can be found in the :class:`~mtfit.inversion.Inversion.__init__` docstrings, and :doc:`inversion`.
+    The descriptions of the :class:`~MTfit.inversion.Inversion` initialisation arguments can be found in the :class:`~MTfit.inversion.Inversion.__init__` docstrings, and :doc:`inversion`.
 
 
 

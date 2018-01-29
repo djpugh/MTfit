@@ -31,7 +31,7 @@ def run(test=False):
         max_samples = 1000
 
     # Set-up inversion object:
-    from mtfit.inversion import Inversion
+    from MTfit.inversion import Inversion
     # Inversion
     # Create the inversion object with the set parameters..
     inversion_object = Inversion(data, algorithm=algorithm, parallel=parallel,

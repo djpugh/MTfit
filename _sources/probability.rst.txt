@@ -2,7 +2,7 @@
 Probability
 *************************
 
-:mod:`mtfit` has :term:`PDF` s for two data types, with two different approaches to measuring the polarity.
+:mod:`MTfit` has :term:`PDF` s for two data types, with two different approaches to measuring the polarity.
 
 However, it is possible to add :term:`PDF` s for other data-types (see :doc:`extensions`)
 
@@ -19,7 +19,7 @@ However, it is possible to add :term:`PDF` s for other data-types (see :doc:`ext
     Polarity PDF
     ============================
 
-:ref:`Pugh et al, 2016a <Pugh-2016a>` has a derivation of the polarity :term:`PDF` used in :mod:`mtfit`. It is given by:
+:ref:`Pugh et al, 2016a <Pugh-2016a>` has a derivation of the polarity :term:`PDF` used in :mod:`MTfit`. It is given by:
 
 .. math::
 
@@ -58,7 +58,7 @@ The difficulty in estimating :math:`\sigma_{y}` is increased further when polari
     ============================
 
 :ref:`Pugh et al, 2016b <Pugh-2016b>` introduces an alternate method for estimating the polarity, using an automated Bayesian probability estimate. This approach results in estimates of the postive and negative polarity probabilities.
-:mod:`autopol` provides a Python module for calculating these values (:ref:`Pugh, 2016a <Pugh-2016a>`), and may be available on request. These observations can be included in  :mod:`mtfit`, although the data independence must be preserved. The :term:`PDF` is:
+:mod:`autopol` provides a Python module for calculating these values (:ref:`Pugh, 2016a <Pugh-2016a>`), and may be available on request. These observations can be included in  :mod:`MTfit`, although the data independence must be preserved. The :term:`PDF` is:
 
 .. math::
 
@@ -97,7 +97,7 @@ and :math:`\mathrm{H}\left(x\right)` is the Heaviside step function, given by :m
     Amplitude Ratio PDF
     ============================
 
-The amplitude ratio :term:`PDF` used in :mod:`mtfit` is based on the ratio :term:`PDF` for two gaussian distributed variables (:ref:`Hinkley, 1969 <Hinkley-1969>`):
+The amplitude ratio :term:`PDF` used in :mod:`MTfit` is based on the ratio :term:`PDF` for two gaussian distributed variables (:ref:`Hinkley, 1969 <Hinkley-1969>`):
 
 .. math::
 
