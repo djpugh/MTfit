@@ -15,7 +15,7 @@ Command line usage::
     [-j DIMENSION_JUMP_PROB] [-y {grid}] [-u MIN_ACCEPTANCE_RATE]
     [-v MAX_ACCEPTANCE_RATE] [-w ACCEPTANCE_RATE_WINDOW]
     [-W WARNINGS] [-z LEARNING_LENGTH] [--version] [--mpi_call]
-    [--output-format {hyp,matlab,pickle}]
+    [--output-format {pickle,hyp,matlab}]
     [--results-format {hyp,full_pdf}] [--no-dist]
     [--dc-prior DC_PRIOR] [--sampling SAMPLING]
     [--sample-models SAMPLE_DISTRIBUTION]
@@ -639,8 +639,8 @@ show program's version number and exit
 
 ::
 
-  --output-format {hyp,matlab,pickle}, --output_format {hyp,matlab,pickle},
-  --outputformat {hyp,matlab,pickle}, --format {hyp,matlab,pickle}
+  --output-format {pickle,hyp,matlab}, --output_format {pickle,hyp,matlab},
+  --outputformat {pickle,hyp,matlab}, --format {pickle,hyp,matlab}
 
 
 Output file format [default=matlab]

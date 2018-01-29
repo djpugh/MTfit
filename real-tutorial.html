@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.0.1
+                1.0.2
               </div>
             
           
@@ -219,22 +219,25 @@
 <div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">example_data</span> <span class="kn">import</span> <span class="n">synthetic_event</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span><span class="n">synthetic_event</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">]</span>
-<span class="go">{&#39;Stations&#39;: {&#39;Azimuth&#39;: matrix([[  55.9],</span>
-<span class="go">        [  76.9],</span>
-<span class="go">        [ 277.9],</span>
-<span class="go">        [   5.4],</span>
-<span class="go">        [ 224.7],</span>
-<span class="go">        [  31.9],</span>
-<span class="go">        [  47.9],</span>
-<span class="go">        [  45.2],</span>
-<span class="go">        [ 224.6],</span>
-<span class="go">        [ 122.6],</span>
-<span class="go">        [ 328.4],</span>
-<span class="go">        [  45.2],</span>
-<span class="go">        [ 309.3],</span>
-<span class="go">        [ 187.7],</span>
-<span class="go">        [  16.1],</span>
-<span class="go">        [ 193.4]]), &#39;TakeOffAngle&#39;: matrix([[ 122.8],</span>
+<span class="go">{&#39;Error&#39;: matrix([[ 0.05],</span>
+<span class="go">        [ 0.05],</span>
+<span class="go">        [ 0.05],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 1.  ],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 1.  ],</span>
+<span class="go">        [ 1.  ],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.05],</span>
+<span class="go">                    [ 0.05]]), &#39;Stations&#39;: {&#39;Name&#39;: [&#39;S0517&#39;, &#39;S0415&#39;, &#39;S0347&#39;, </span>
+<span class="go">            &#39;S0534&#39;, &#39;S0244&#39;, &#39;S0618&#39;, &#39;S0650&#39;, &#39;S0595&#39;, &#39;S0271&#39;, &#39;S0155&#39;, </span>
+<span class="go">            &#39;S0529&#39;, &#39;S0649&#39;, &#39;S0450&#39;, &#39;S0195&#39;, &#39;S0588&#39;, &#39;S0142&#39;], </span>
+<span class="go">            &#39;TakeOffAngle&#39;: matrix([[ 122.8],</span>
 <span class="go">        [ 120.8],</span>
 <span class="go">        [ 152.4],</span>
 <span class="go">        [ 138.7],</span>
@@ -249,10 +252,22 @@
 <span class="go">        [ 139.9],</span>
 <span class="go">        [ 147.2],</span>
 <span class="go">        [ 128.7],</span>
-<span class="go">                    [ 137.6]]), &#39;Name&#39;: [&#39;S0517&#39;, &#39;S0415&#39;, &#39;S0347&#39;, &#39;S0534&#39;, </span>
-<span class="go">            &#39;S0244&#39;, &#39;S0618&#39;, &#39;S0650&#39;, &#39;S0595&#39;, &#39;S0271&#39;, &#39;S0155&#39;, &#39;S0529&#39;, </span>
-<span class="go">            &#39;S0649&#39;, &#39;S0450&#39;, &#39;S0195&#39;, &#39;S0588&#39;, &#39;S0142&#39;]}, &#39;Measured&#39;: </span>
-<span class="go">            matrix([[-1],</span>
+<span class="go">        [ 137.6]]), &#39;Azimuth&#39;: matrix([[  55.9],</span>
+<span class="go">        [  76.9],</span>
+<span class="go">        [ 277.9],</span>
+<span class="go">        [   5.4],</span>
+<span class="go">        [ 224.7],</span>
+<span class="go">        [  31.9],</span>
+<span class="go">        [  47.9],</span>
+<span class="go">        [  45.2],</span>
+<span class="go">        [ 224.6],</span>
+<span class="go">        [ 122.6],</span>
+<span class="go">        [ 328.4],</span>
+<span class="go">        [  45.2],</span>
+<span class="go">        [ 309.3],</span>
+<span class="go">        [ 187.7],</span>
+<span class="go">        [  16.1],</span>
+<span class="go">        [ 193.4]])}, &#39;Measured&#39;: matrix([[-1],</span>
 <span class="go">        [-1],</span>
 <span class="go">        [ 1],</span>
 <span class="go">        [-1],</span>
@@ -267,22 +282,7 @@
 <span class="go">        [-1],</span>
 <span class="go">        [ 1],</span>
 <span class="go">        [-1],</span>
-<span class="go">        [ 1]]), &#39;Error&#39;: matrix([[ 0.05],</span>
-<span class="go">        [ 0.05],</span>
-<span class="go">        [ 0.05],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 1.  ],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 1.  ],</span>
-<span class="go">        [ 1.  ],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.05],</span>
-<span class="go">        [ 0.05]])}</span>
+<span class="go">        [ 1]])}</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -482,27 +482,31 @@ $ MTfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
 <div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">example_data</span> <span class="kn">import</span> <span class="n">krafla_event</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span><span class="n">krafla_event</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">]</span>
-<span class="go">{&#39;Stations&#39;: {&#39;Azimuth&#39;: matrix([[ 254.9],</span>
-<span class="go">        [ 102.5],</span>
-<span class="go">        [ 347.4],</span>
-<span class="go">        [ 178.3],</span>
-<span class="go">        [ 215. ],</span>
-<span class="go">        [ 234. ],</span>
-<span class="go">        [ 120.3],</span>
-<span class="go">        [ 350.4],</span>
-<span class="go">        [ 298.6],</span>
-<span class="go">        [ 141.8],</span>
-<span class="go">        [ 288.4],</span>
-<span class="go">        [ 186.2],</span>
-<span class="go">        [ 131.4],</span>
-<span class="go">        [  48.4],</span>
-<span class="go">        [ 239.6],</span>
-<span class="go">        [ 151. ],</span>
-<span class="go">        [ 284. ],</span>
-<span class="go">        [  19.6],</span>
-<span class="go">        [ 100.9],</span>
-<span class="go">        [ 319.8],</span>
-<span class="go">        [ 219.4]]), &#39;TakeOffAngle&#39;: matrix([[  77. ],</span>
+<span class="go">{&#39;Error&#39;: matrix([[ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01],</span>
+<span class="go">        [ 0.01]]), &#39;Stations&#39;: {&#39;Name&#39;: [&#39;KVO0&#39;, &#39;K080&#39;, &#39;K040&#39;, </span>
+<span class="go">&#39;K200&#39;, &#39;REN0&#39;, &#39;K120&#39;, &#39;K100&#39;, &#39;K008&#39;, &#39;K020&#39;, &#39;K140&#39;, &#39;K060&#39;, </span>
+<span class="go">&#39;K250&#39;, &#39;K170&#39;, &#39;K050&#39;, &#39;K090&#39;, &#39;K210&#39;, &#39;K010&#39;, &#39;GHA0&#39;, &#39;K110&#39;, </span>
+<span class="go">&#39;K070&#39;, &#39;K220&#39;], &#39;TakeOffAngle&#39;: matrix([[  77. </span>
+<span class="go">],</span>
 <span class="go">        [ 108.8],</span>
 <span class="go">        [ 104.3],</span>
 <span class="go">        [  87.4],</span>
@@ -522,11 +526,27 @@ $ MTfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
 <span class="go">        [  68.1],</span>
 <span class="go">        [  86.3],</span>
 <span class="go">        [ 137.5],</span>
-<span class="go">        [  72.6]]), &#39;Name&#39;: [&#39;KVO0&#39;, &#39;K080&#39;, &#39;K040&#39;, &#39;K200&#39;, &#39;REN0&#39;, </span>
-<span class="go">&#39;K120&#39;, &#39;K100&#39;, &#39;K008&#39;, &#39;K020&#39;, &#39;K140&#39;, &#39;K060&#39;, &#39;K250&#39;, &#39;K170&#39;, </span>
-<span class="go">&#39;K050&#39;, &#39;K090&#39;, &#39;K210&#39;, &#39;K010&#39;, &#39;GHA0&#39;, &#39;K110&#39;, &#39;K070&#39;, &#39;K220&#39;]}, </span>
-<span class="go">&#39;Measured&#39;: </span>
-<span class="go">matrix([[-1],</span>
+<span class="go">        [  72.6]]), &#39;Azimuth&#39;: matrix([[ 254.9],</span>
+<span class="go">        [ 102.5],</span>
+<span class="go">        [ 347.4],</span>
+<span class="go">        [ 178.3],</span>
+<span class="go">        [ 215. ],</span>
+<span class="go">        [ 234. ],</span>
+<span class="go">        [ 120.3],</span>
+<span class="go">        [ 350.4],</span>
+<span class="go">        [ 298.6],</span>
+<span class="go">        [ 141.8],</span>
+<span class="go">        [ 288.4],</span>
+<span class="go">        [ 186.2],</span>
+<span class="go">        [ 131.4],</span>
+<span class="go">        [  48.4],</span>
+<span class="go">        [ 239.6],</span>
+<span class="go">        [ 151. ],</span>
+<span class="go">        [ 284. ],</span>
+<span class="go">        [  19.6],</span>
+<span class="go">        [ 100.9],</span>
+<span class="go">        [ 319.8],</span>
+<span class="go">        [ 219.4]])}, &#39;Measured&#39;: matrix([[-1],</span>
 <span class="go">        [-1],</span>
 <span class="go">        [-1],</span>
 <span class="go">        [-1],</span>
@@ -546,27 +566,7 @@ $ MTfit --algorithm=iterate --pmem=1 --max-samples=10000000  \
 <span class="go">        [-1],</span>
 <span class="go">        [-1],</span>
 <span class="go">        [-1],</span>
-<span class="go">        [-1]]), &#39;Error&#39;: matrix([[ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01],</span>
-<span class="go">        [ 0.01]])}</span>
+<span class="go">        [-1]])}</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -959,7 +959,7 @@ $ MTfit --algorithm=mcmc --pmem=1 --chain-length=100000  \
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.1).
+      Last updated on Jan 29, 2018 (version 1.0.2).
 
     </p>
   </div>
@@ -981,7 +981,7 @@ $ MTfit --algorithm=mcmc --pmem=1 --chain-length=100000  \
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.1',
+            VERSION:'1.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MTfit.algorithms.markov_chain_monte_carlo &mdash; MTfit documentation</title>
+  <title>mtfit.algorithms.markov_chain_monte_carlo &mdash; MTfit documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                1.0.1
+                1.0.2
               </div>
             
           
@@ -159,7 +159,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>MTfit.algorithms.markov_chain_monte_carlo</li>
+      <li>mtfit.algorithms.markov_chain_monte_carlo</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,7 +176,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for MTfit.algorithms.markov_chain_monte_carlo</h1><div class="highlight"><pre>
+  <h1>Source code for mtfit.algorithms.markov_chain_monte_carlo</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;markov_chain_monte_carlo</span>
 <span class="sd">****************************</span>
 <span class="sd">Module containing algorithm classes for Markov chain Monte Carlo sampling.</span>
@@ -305,7 +305,7 @@
     <span class="k">pass</span>
 
 
-<div class="viewcode-block" id="McMCAlgorithmCreator"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#MTfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator">[docs]</a><span class="k">class</span> <span class="nc">McMCAlgorithmCreator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="McMCAlgorithmCreator"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#mtfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator">[docs]</a><span class="k">class</span> <span class="nc">McMCAlgorithmCreator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates the Markov chain Monte Carlo algorithm from parameters</span>
@@ -314,7 +314,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="McMCAlgorithmCreator.__new__"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#MTfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator.__new__">[docs]</a>    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;metropolis_hastings&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trans_dimensional</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="McMCAlgorithmCreator.__new__"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#mtfit.algorithms.markov_chain_monte_carlo.McMCAlgorithmCreator.__new__">[docs]</a>    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;metropolis_hastings&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trans_dimensional</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="n">learning_length</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">parameterisation</span><span class="o">=</span><span class="s1">&#39;tape&#39;</span><span class="p">,</span> <span class="n">transition</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span>
                 <span class="n">chain_length</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="n">min_acceptance_rate</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">max_acceptance_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
                 <span class="n">acceptance_rate_window</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">initial_sample</span><span class="o">=</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -766,7 +766,7 @@
 <span class="sd">        Iterate from result</span>
 
 <span class="sd">        Args</span>
-<span class="sd">            result: Result dictionary from forward task (e.g. MTfit.inversion.ForwardTask)</span>
+<span class="sd">            result: Result dictionary from forward task (e.g. mtfit.inversion.ForwardTask)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">            new_sample,End where End is a boolean flag to end the chain.</span>
@@ -1399,7 +1399,7 @@
 <span class="sd">        Iterate from result</span>
 
 <span class="sd">        Args</span>
-<span class="sd">            result: Result dictionary from forward task (e.g. MTfit.inversion.ForwardTask)</span>
+<span class="sd">            result: Result dictionary from forward task (e.g. mtfit.inversion.ForwardTask)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">            new_sample,End where End is a boolean flag to end the chain if the length of accepted samples is longer than the chain length.</span>
@@ -1626,7 +1626,7 @@
         <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">output_string</span>
 
 
-<div class="viewcode-block" id="IterativeMultipleTryMetropolisHastingsGaussianTape"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#MTfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape">[docs]</a><span class="k">class</span> <span class="nc">IterativeMultipleTryMetropolisHastingsGaussianTape</span><span class="p">(</span><span class="n">IterativeMetropolisHastingsGaussianTape</span><span class="p">):</span>
+<div class="viewcode-block" id="IterativeMultipleTryMetropolisHastingsGaussianTape"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape">[docs]</a><span class="k">class</span> <span class="nc">IterativeMultipleTryMetropolisHastingsGaussianTape</span><span class="p">(</span><span class="n">IterativeMetropolisHastingsGaussianTape</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Metropolis-Hastings Markov chain Monte Carlo Algorithm using Gaussian Transition PDF and Tape parameterisation, chain length ends maximum length</span>
@@ -1654,7 +1654,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_number_samples</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;number_samples&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_number_samples</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">min_acceptance_rate</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_number_samples</span><span class="p">)</span>
 
-<div class="viewcode-block" id="IterativeMultipleTryMetropolisHastingsGaussianTape.new_sample"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#MTfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.new_sample">[docs]</a>    <span class="k">def</span> <span class="nf">new_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jump</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">gaussian_jump</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="IterativeMultipleTryMetropolisHastingsGaussianTape.new_sample"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryMetropolisHastingsGaussianTape.new_sample">[docs]</a>    <span class="k">def</span> <span class="nf">new_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jump</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">gaussian_jump</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get new samples including multiple samples to try&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Try c code</span>
@@ -1796,7 +1796,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_number_samples</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">min_acceptance_rate</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_number_samples</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="IterativeMultipleTryTransDMetropolisHastingsGaussianTape"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#MTfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape">[docs]</a><span class="k">class</span> <span class="nc">IterativeMultipleTryTransDMetropolisHastingsGaussianTape</span><span class="p">(</span><span class="n">IterativeTransDMetropolisHastingsGaussianTape</span><span class="p">,</span> <span class="n">IterativeMultipleTryMetropolisHastingsGaussianTape</span><span class="p">):</span>
+<div class="viewcode-block" id="IterativeMultipleTryTransDMetropolisHastingsGaussianTape"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape">[docs]</a><span class="k">class</span> <span class="nc">IterativeMultipleTryTransDMetropolisHastingsGaussianTape</span><span class="p">(</span><span class="n">IterativeTransDMetropolisHastingsGaussianTape</span><span class="p">,</span> <span class="n">IterativeMultipleTryMetropolisHastingsGaussianTape</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Trans-Dimensional Metropolis-Hastings Markov chain Monte Carlo Algorithm using Gaussian Transition PDF and Tape parameterisation, chain length ends maximum length</span>
@@ -1819,7 +1819,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">IterativeMultipleTryTransDMetropolisHastingsGaussianTape</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="IterativeMultipleTryTransDMetropolisHastingsGaussianTape.new_sample"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#MTfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.new_sample">[docs]</a>    <span class="k">def</span> <span class="nf">new_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IterativeMultipleTryTransDMetropolisHastingsGaussianTape.new_sample"><a class="viewcode-back" href="../../../markov_chain_monte_carlo.html#mtfit.algorithms.markov_chain_monte_carlo.IterativeMultipleTryTransDMetropolisHastingsGaussianTape.new_sample">[docs]</a>    <span class="k">def</span> <span class="nf">new_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates new sample</span>
 
@@ -1845,7 +1845,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.1).
+      Last updated on Jan 29, 2018 (version 1.0.2).
 
     </p>
   </div>
@@ -1867,7 +1867,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.0.1',
+            VERSION:'1.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

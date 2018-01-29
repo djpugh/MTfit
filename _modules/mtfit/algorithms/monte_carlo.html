@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MTfit.algorithms.monte_carlo &mdash; MTfit documentation</title>
+  <title>mtfit.algorithms.monte_carlo &mdash; MTfit documentation</title>
   
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                1.0.1
+                1.0.2
               </div>
             
           
@@ -159,7 +159,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>MTfit.algorithms.monte_carlo</li>
+      <li>mtfit.algorithms.monte_carlo</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,7 +176,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for MTfit.algorithms.monte_carlo</h1><div class="highlight"><pre>
+  <h1>Source code for mtfit.algorithms.monte_carlo</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;monte_carlo_random</span>
 <span class="sd">******************</span>
 <span class="sd">Module containing algorithm classes for Monte Carlo random sampling.</span>
@@ -204,7 +204,7 @@
            <span class="s1">&#39;TimeSample&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="BaseMonteCarloRandomSample"><a class="viewcode-back" href="../../../monte_carlo_random.html#MTfit.algorithms.monte_carlo.BaseMonteCarloRandomSample">[docs]</a><span class="k">class</span> <span class="nc">BaseMonteCarloRandomSample</span><span class="p">(</span><span class="n">BaseAlgorithm</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseMonteCarloRandomSample"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample">[docs]</a><span class="k">class</span> <span class="nc">BaseMonteCarloRandomSample</span><span class="p">(</span><span class="n">BaseAlgorithm</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for Monte Carlo Random Sampling</span>
@@ -229,7 +229,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_min_number_check_samples</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;min_number_check_samples&#39;</span><span class="p">,</span> <span class="mi">30000</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">=</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="BaseMonteCarloRandomSample.random_sample"><a class="viewcode-back" href="../../../monte_carlo_random.html#MTfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.random_sample">[docs]</a>    <span class="k">def</span> <span class="nf">random_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseMonteCarloRandomSample.random_sample"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.random_sample">[docs]</a>    <span class="k">def</span> <span class="nf">random_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return random sample</span>
 
@@ -257,7 +257,7 @@
     <span class="k">def</span> <span class="nf">check_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">end</span>
 
-<div class="viewcode-block" id="BaseMonteCarloRandomSample.iterate"><a class="viewcode-back" href="../../../monte_carlo_random.html#MTfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.iterate">[docs]</a>    <span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseMonteCarloRandomSample.iterate"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.iterate">[docs]</a>    <span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Iteration function for BaseMonteCarloRandomSample object</span>
 
@@ -297,7 +297,7 @@
         <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">task</span><span class="p">,</span> <span class="n">end</span></div>
 
-<div class="viewcode-block" id="BaseMonteCarloRandomSample.initialise"><a class="viewcode-back" href="../../../monte_carlo_random.html#MTfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.initialise">[docs]</a>    <span class="k">def</span> <span class="nf">initialise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseMonteCarloRandomSample.initialise"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.BaseMonteCarloRandomSample.initialise">[docs]</a>    <span class="k">def</span> <span class="nf">initialise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial task for ForwardTask</span>
 
@@ -347,7 +347,7 @@
         <span class="k">return</span> <span class="n">end</span>
 
 
-<div class="viewcode-block" id="IterationSample"><a class="viewcode-back" href="../../../monte_carlo_random.html#MTfit.algorithms.monte_carlo.IterationSample">[docs]</a><span class="k">class</span> <span class="nc">IterationSample</span><span class="p">(</span><span class="n">BaseMonteCarloRandomSample</span><span class="p">):</span>
+<div class="viewcode-block" id="IterationSample"><a class="viewcode-back" href="../../../monte_carlo_random.html#mtfit.algorithms.monte_carlo.IterationSample">[docs]</a><span class="k">class</span> <span class="nc">IterationSample</span><span class="p">(</span><span class="n">BaseMonteCarloRandomSample</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Iteration based sampling algorithm</span>
@@ -394,7 +394,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.1).
+      Last updated on Jan 29, 2018 (version 1.0.2).
 
     </p>
   </div>
@@ -416,7 +416,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.0.1',
+            VERSION:'1.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                1.0.1
+                1.0.2
               </div>
             
           
@@ -198,7 +198,7 @@
 <span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="n">DIMENSION_JUMP_PROB</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">y</span> <span class="p">{</span><span class="n">grid</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">u</span> <span class="n">MIN_ACCEPTANCE_RATE</span><span class="p">]</span>
 <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="n">MAX_ACCEPTANCE_RATE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">w</span> <span class="n">ACCEPTANCE_RATE_WINDOW</span><span class="p">]</span>
 <span class="p">[</span><span class="o">-</span><span class="n">W</span> <span class="n">WARNINGS</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">z</span> <span class="n">LEARNING_LENGTH</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">version</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">mpi_call</span><span class="p">]</span>
-<span class="p">[</span><span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">,</span><span class="n">pickle</span><span class="p">}]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">format</span> <span class="p">{</span><span class="n">pickle</span><span class="p">,</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">}]</span>
 <span class="p">[</span><span class="o">--</span><span class="n">results</span><span class="o">-</span><span class="nb">format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">full_pdf</span><span class="p">}]</span> <span class="p">[</span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">dist</span><span class="p">]</span>
 <span class="p">[</span><span class="o">--</span><span class="n">dc</span><span class="o">-</span><span class="n">prior</span> <span class="n">DC_PRIOR</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">sampling</span> <span class="n">SAMPLING</span><span class="p">]</span>
 <span class="p">[</span><span class="o">--</span><span class="n">sample</span><span class="o">-</span><span class="n">models</span> <span class="n">SAMPLE_DISTRIBUTION</span><span class="p">]</span>
@@ -629,8 +629,8 @@ period [default=5000]</p>
 <p class="last">Do not use - automatically set when spawning mpi subprocess</p>
 </div>
 <hr class="docutils" />
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">,</span><span class="n">pickle</span><span class="p">},</span> <span class="o">--</span><span class="n">output_format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">,</span><span class="n">pickle</span><span class="p">},</span>
-<span class="o">--</span><span class="n">outputformat</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">,</span><span class="n">pickle</span><span class="p">},</span> <span class="o">--</span><span class="nb">format</span> <span class="p">{</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">,</span><span class="n">pickle</span><span class="p">}</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">format</span> <span class="p">{</span><span class="n">pickle</span><span class="p">,</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">},</span> <span class="o">--</span><span class="n">output_format</span> <span class="p">{</span><span class="n">pickle</span><span class="p">,</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">},</span>
+<span class="o">--</span><span class="n">outputformat</span> <span class="p">{</span><span class="n">pickle</span><span class="p">,</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">},</span> <span class="o">--</span><span class="nb">format</span> <span class="p">{</span><span class="n">pickle</span><span class="p">,</span><span class="n">hyp</span><span class="p">,</span><span class="n">matlab</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Output file format [default=matlab]</p>
@@ -826,7 +826,7 @@ HH:MM:SS. [default=24:00:00]</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.1).
+      Last updated on Jan 29, 2018 (version 1.0.2).
 
     </p>
   </div>
@@ -848,7 +848,7 @@ HH:MM:SS. [default=24:00:00]</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.1',
+            VERSION:'1.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
