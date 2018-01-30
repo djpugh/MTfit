@@ -32,7 +32,7 @@ from libc.math cimport sin
 from libc.math cimport M_PI as pi
 from libc.math cimport M_SQRT2 as sqrt2
 
-from mtfit.convert.cmoment_tensor_conversion cimport cTape_MT6
+from MTfit.convert.cmoment_tensor_conversion cimport cTape_MT6
 
 ctypedef double DTYPE_t
 cdef DTYPE_t PI2=2*pi  

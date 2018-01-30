@@ -3,23 +3,23 @@ import unittest
 import numpy as np
 from scipy.stats import norm as gaussian
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.utilities.unittest_utils import TestCase
-from mtfit.probability.probability import polarity_ln_pdf
-from mtfit.probability.probability import polarity_probability_ln_pdf
-from mtfit.probability.probability import gaussian_pdf
-from mtfit.probability.probability import ratio_pdf
-from mtfit.probability.probability import amplitude_ratio_ln_pdf
-from mtfit.probability.probability import relative_amplitude_ratio_ln_pdf
-from mtfit.probability.probability import scale_estimator
-from mtfit.probability.probability import ln_marginalise
-from mtfit.probability.probability import ln_normalise
-from mtfit.probability.probability import heaviside
-from mtfit.probability.probability import model_probabilities
-from mtfit.probability.probability import dkl
-from mtfit.probability.probability import dkl_estimate
-from mtfit.probability.probability import LnPDF
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.unittest_utils import TestCase
+from MTfit.probability.probability import polarity_ln_pdf
+from MTfit.probability.probability import polarity_probability_ln_pdf
+from MTfit.probability.probability import gaussian_pdf
+from MTfit.probability.probability import ratio_pdf
+from MTfit.probability.probability import amplitude_ratio_ln_pdf
+from MTfit.probability.probability import relative_amplitude_ratio_ln_pdf
+from MTfit.probability.probability import scale_estimator
+from MTfit.probability.probability import ln_marginalise
+from MTfit.probability.probability import ln_normalise
+from MTfit.probability.probability import heaviside
+from MTfit.probability.probability import model_probabilities
+from MTfit.probability.probability import dkl
+from MTfit.probability.probability import dkl_estimate
+from MTfit.probability.probability import LnPDF
 
 
 class ProbabilityTestCase(TestCase):
@@ -31,14 +31,14 @@ class ProbabilityTestCase(TestCase):
         self.enable_c_lib()
 
     def disable_c_lib(self):
-        from mtfit.probability import probability
+        from MTfit.probability import probability
         probability._C_LIB_TESTS = False
         probability._C_LIB = False
 
     def enable_c_lib(self):
-        from mtfit.probability import probability
+        from MTfit.probability import probability
         try:
-            from mtfit.probability import cprobability
+            from MTfit.probability import cprobability
             probability._C_LIB_TESTS = True
             probability._C_LIB = True
             return True
@@ -1078,7 +1078,7 @@ def test_suite(verbosity=2):
         unittest.TestLoader().loadTestsFromTestCase(LnPDFTestCase),
     ]
     try:
-        from mtfit.probability.cprobability import cProbabilityTestCase
+        from MTfit.probability.cprobability import cProbabilityTestCase
         suite.append(unittest.TestLoader().loadTestsFromTestCase(cProbabilityTestCase))
     except ImportError:
         print('C tests import failed')

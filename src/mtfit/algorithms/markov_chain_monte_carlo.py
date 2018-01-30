@@ -587,7 +587,7 @@ class MarginalisedMarkovChainMonteCarlo(BaseAlgorithm):
         Iterate from result
 
         Args
-            result: Result dictionary from forward task (e.g. mtfit.inversion.ForwardTask)
+            result: Result dictionary from forward task (e.g. MTfit.inversion.ForwardTask)
 
         Returns
             new_sample,End where End is a boolean flag to end the chain.
@@ -1220,7 +1220,7 @@ class IterativeMetropolisHastingsGaussianTape(MarginalisedMetropolisHastingsGaus
         Iterate from result
 
         Args
-            result: Result dictionary from forward task (e.g. mtfit.inversion.ForwardTask)
+            result: Result dictionary from forward task (e.g. MTfit.inversion.ForwardTask)
 
         Returns
             new_sample,End where End is a boolean flag to end the chain if the length of accepted samples is longer than the chain length.

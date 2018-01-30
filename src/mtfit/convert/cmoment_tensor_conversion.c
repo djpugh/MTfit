@@ -234,8 +234,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__mtfit__convert__cmoment_tensor_conversion
-#define __PYX_HAVE_API__mtfit__convert__cmoment_tensor_conversion
+#define __PYX_HAVE__MTfit__convert__cmoment_tensor_conversion
+#define __PYX_HAVE_API__MTfit__convert__cmoment_tensor_conversion
 #include "math.h"
 #include "string.h"
 #include "stdlib.h"
@@ -473,7 +473,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "src\\mtfit\\convert\\cmoment_tensor_conversion.pyx",
+  "src\\MTfit\\convert\\cmoment_tensor_conversion.pyx",
   "__init__.pxd",
   "stringsource",
   "type.pxd",
@@ -762,13 +762,13 @@ typedef npy_double __pyx_t_5numpy_double_t;
  */
 typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
 
-/* "mtfit\convert\cmoment_tensor_conversion.pxd":2
+/* "MTfit\convert\cmoment_tensor_conversion.pxd":2
  * 
  * ctypedef double DTYPE_t             # <<<<<<<<<<<<<<
  * 
  * cdef void cTape_MT6(DTYPE_t*M, DTYPE_t gamma,DTYPE_t delta,DTYPE_t kappa,DTYPE_t h,DTYPE_t sigma) nogil
  */
-typedef double __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t;
+typedef double __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t;
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
     typedef ::std::complex< float > __pyx_t_float_complex;
@@ -791,7 +791,7 @@ typedef double __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t;
 
 
 /*--- Type declarations ---*/
-struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes;
+struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes;
 struct __pyx_array_obj;
 struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
@@ -832,43 +832,43 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  * cdef inline object PyArray_MultiIterNew1(a):
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
-struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c;
-struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6;
+struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c;
+struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6;
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":431
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":431
  * 
  * #Bi-axes
  * cpdef list isotropic_c(DTYPE_t l=1.,DTYPE_t mu=1.,list c=[]):             # <<<<<<<<<<<<<<
  *     if len(c)==21: #Calculate isotropic approacximation
  *             #Eqns 81a and 81b from chapman and leaney 2011
  */
-struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c {
+struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c {
   int __pyx_n;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t l;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t mu;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t l;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t mu;
   PyObject *c;
 };
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":469
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":469
  *     return phi,explosion,area_displacement
  * 
  * cpdef MT6c_D6(mt6,list c=isotropic_c(l=1,mu=1)):             # <<<<<<<<<<<<<<
  *     mtvoigt=mt6[np.array([0,1,2,5,4,3])]
  *     mtvoigt=np.matrix(mtvoigt)
  */
-struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6 {
+struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6 {
   int __pyx_n;
   PyObject *c;
 };
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":439
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":439
  *     return [n,l,l,0,0,0,n,l,0,0,0,n,0,0,0,mu,0,0,mu,0,mu]
  * 
  * def MT6_biaxes(DTYPE_t[:]MT6,list c):             # <<<<<<<<<<<<<<
  *     lambda2mu=(3*(c[0]+c[6]+c[11])+4*(c[15]+c[18]+c[20])+2*(c[1]+c[2]+c[7]))/15
  *     mu=((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15
  */
-struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes {
+struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes {
   PyObject_HEAD
   __Pyx_memviewslice __pyx_v_MT6;
   PyObject *__pyx_v_c;
@@ -1433,14 +1433,14 @@ static int __Pyx_ValidateAndInit_memviewslice(
                 __Pyx_memviewslice *memviewslice,
                 PyObject *original_obj);
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *);
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *);
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *);
 
-static PyObject *__pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(const char *itemp);
-static int __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(const char *itemp, PyObject *obj);
+static PyObject *__pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(const char *itemp);
+static int __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(const char *itemp, PyObject *obj);
 
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
@@ -1567,7 +1567,7 @@ static CYTHON_INLINE size_t __Pyx_PyInt_As_size_t(PyObject *);
 
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *);
 
 static int __Pyx_check_binary_version(void);
 
@@ -1698,42 +1698,42 @@ static PyTypeObject *__pyx_ptype_5numpy_ndarray = 0;
 static PyTypeObject *__pyx_ptype_5numpy_ufunc = 0;
 static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *, char *, char *, int *); /*proto*/
 
-/* Module declarations from 'mtfit.convert.cmoment_tensor_conversion' */
-static PyTypeObject *__pyx_ptype_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes = 0;
+/* Module declarations from 'MTfit.convert.cmoment_tensor_conversion' */
+static PyTypeObject *__pyx_ptype_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes = 0;
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
 static PyTypeObject *__pyx_memoryviewslice_type = 0;
-static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_PI2;
-static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_sqrt3;
-static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_rad_cor;
-static int __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_check_finite;
+static __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_PI2;
+static __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_sqrt3;
+static __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_rad_cor;
+static int __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_check_finite;
 static PyObject *generic = 0;
 static PyObject *strided = 0;
 static PyObject *indirect = 0;
 static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
-static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t); /*proto*/
-static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_tk(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
-static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_ctk_uv(__Pyx_memviewslice); /*proto*/
-static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_gd(__Pyx_memviewslice, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *); /*proto*/
-static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *); /*proto*/
-static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTP_SDR(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
-static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTPE_convert(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
-static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMultipleTape_MT6(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, Py_ssize_t); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT_convert(__Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__Pyx_memviewslice); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_E_GD(__Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
-static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c(int __pyx_skip_dispatch, struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c *__pyx_optional_args); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6 *__pyx_optional_args); /*proto*/
-static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isotropic_c(PyObject *, int __pyx_skip_dispatch); /*proto*/
-static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c21_cvoigt(PyObject *, int __pyx_skip_dispatch); /*proto*/
-static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c_norm(PyObject *, int __pyx_skip_dispatch); /*proto*/
+static void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t); /*proto*/
+static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_tk(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_ctk_uv(__Pyx_memviewslice); /*proto*/
+static CYTHON_INLINE void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_gd(__Pyx_memviewslice, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *); /*proto*/
+static CYTHON_INLINE void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *); /*proto*/
+static __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTP_SDR(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+static __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTPE_convert(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+static void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMultipleTape_MT6(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, Py_ssize_t); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT_convert(__Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__Pyx_memviewslice); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_E_GD(__Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
+static void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c(int __pyx_skip_dispatch, struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c *__pyx_optional_args); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6 *__pyx_optional_args); /*proto*/
+static PyBoolObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_is_isotropic_c(PyObject *, int __pyx_skip_dispatch); /*proto*/
+static __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_c21_cvoigt(PyObject *, int __pyx_skip_dispatch); /*proto*/
+static __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_c_norm(PyObject *, int __pyx_skip_dispatch); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -1768,11 +1768,11 @@ static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static CYTHON_INLINE PyObject *__Pyx_carray_to_py_Py__ssize__t(Py_ssize_t *, Py_ssize_t); /*proto*/
 static CYTHON_INLINE PyObject *__Pyx_carray_to_tuple_Py__ssize__t(Py_ssize_t *, Py_ssize_t); /*proto*/
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t = { "DTYPE_t", NULL, sizeof(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t), { 0 }, 0, 'R', 0, 0 };
-#define __Pyx_MODULE_NAME "mtfit.convert.cmoment_tensor_conversion"
-int __pyx_module_is_main_mtfit__convert__cmoment_tensor_conversion = 0;
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t = { "DTYPE_t", NULL, sizeof(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t), { 0 }, 0, 'R', 0, 0 };
+#define __Pyx_MODULE_NAME "MTfit.convert.cmoment_tensor_conversion"
+int __pyx_module_is_main_MTfit__convert__cmoment_tensor_conversion = 0;
 
-/* Implementation of 'mtfit.convert.cmoment_tensor_conversion' */
+/* Implementation of 'MTfit.convert.cmoment_tensor_conversion' */
 static PyObject *__pyx_builtin_ValueError;
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_RuntimeError;
@@ -1961,18 +1961,18 @@ static char __pyx_k_All_dimensions_preceding_dimensi[] = "All dimensions precedi
 static char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
 static char __pyx_k_Can_only_create_a_buffer_that_is[] = "Can only create a buffer that is contiguous in memory.";
 static char __pyx_k_Cannot_transpose_memoryview_with[] = "Cannot transpose memoryview with indirect dimensions";
-static char __pyx_k_D_Code_MTfit_src_mtfit_convert_c[] = "D:\\Code\\MTfit\\src\\mtfit\\convert\\cmoment_tensor_conversion.pyx";
+static char __pyx_k_D_Code_MTfit_src_MTfit_convert_c[] = "D:\\Code\\MTfit\\src\\MTfit\\convert\\cmoment_tensor_conversion.pyx";
 static char __pyx_k_Empty_shape_tuple_for_cython_arr[] = "Empty shape tuple for cython.array";
 static char __pyx_k_Format_string_allocated_too_shor[] = "Format string allocated too short, see comment in numpy.pxd";
 static char __pyx_k_Indirect_dimensions_not_supporte[] = "Indirect dimensions not supported";
 static char __pyx_k_Invalid_mode_expected_c_or_fortr[] = "Invalid mode, expected 'c' or 'fortran', got %s";
 static char __pyx_k_MT6_biaxes_locals_isotropic_solv[] = "MT6_biaxes.<locals>.isotropic_solve";
+static char __pyx_k_MTfit_convert_cmoment_tensor_con[] = "MTfit.convert.cmoment_tensor_conversion";
 static char __pyx_k_Non_native_byte_order_not_suppor[] = "Non-native byte order not supported";
 static char __pyx_k_Out_of_bounds_on_buffer_access_a[] = "Out of bounds on buffer access (axis %d)";
 static char __pyx_k_Unable_to_convert_item_to_object[] = "Unable to convert item to object";
 static char __pyx_k_cMomentTensorConvertTestCase_tes[] = "cMomentTensorConvertTestCase.test_cTape_MT6";
 static char __pyx_k_got_differing_extents_in_dimensi[] = "got differing extents in dimension %d (got %d and %d)";
-static char __pyx_k_mtfit_convert_cmoment_tensor_con[] = "mtfit.convert.cmoment_tensor_conversion";
 static char __pyx_k_ndarray_is_not_Fortran_contiguou[] = "ndarray is not Fortran contiguous";
 static char __pyx_k_unable_to_allocate_shape_and_str[] = "unable to allocate shape and strides.";
 static char __pyx_k_Format_string_allocated_too_shor_2[] = "Format string allocated too short.";
@@ -1992,7 +1992,7 @@ static PyObject *__pyx_kp_s_Can_only_create_a_buffer_that_is;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
 static PyObject *__pyx_n_s_D1;
 static PyObject *__pyx_n_s_D2;
-static PyObject *__pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c;
+static PyObject *__pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c;
 static PyObject *__pyx_n_s_E;
 static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
@@ -2007,6 +2007,7 @@ static PyObject *__pyx_n_s_MT6;
 static PyObject *__pyx_n_s_MT6_biaxes;
 static PyObject *__pyx_n_s_MT6_biaxes_locals_isotropic_solv;
 static PyObject *__pyx_n_s_MT_output_convert;
+static PyObject *__pyx_n_s_MTfit_convert_cmoment_tensor_con;
 static PyObject *__pyx_n_s_MTs;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_kp_s_MemoryView_of_r_at_0x_x;
@@ -2103,7 +2104,6 @@ static PyObject *__pyx_n_s_metaclass;
 static PyObject *__pyx_n_s_mode;
 static PyObject *__pyx_n_s_module;
 static PyObject *__pyx_n_s_mt6;
-static PyObject *__pyx_n_s_mtfit_convert_cmoment_tensor_con;
 static PyObject *__pyx_n_s_mu;
 static PyObject *__pyx_n_s_n;
 static PyObject *__pyx_n_s_name;
@@ -2173,31 +2173,31 @@ static PyObject *__pyx_n_s_v;
 static PyObject *__pyx_n_s_verbosity;
 static PyObject *__pyx_n_s_version;
 static PyObject *__pyx_n_s_zeros;
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_gamma, __Pyx_memviewslice __pyx_v_delta, __Pyx_memviewslice __pyx_v_kappa, __Pyx_memviewslice __pyx_v_h, __Pyx_memviewslice __pyx_v_sigma); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_2MT_convert(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MT, __Pyx_memviewslice __pyx_v_results); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output_convert(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MTs); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MTs); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_8E_GD(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_E); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10TP_SDR(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_s, __Pyx_memviewslice __pyx_v_d, __Pyx_memviewslice __pyx_v_r); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_14isotropic_c(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_l, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_mu, PyObject *__pyx_v_c); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_isotropic_solve(PyObject *__pyx_self, PyObject *__pyx_v_iso); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biaxes(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MT6, PyObject *__pyx_v_c); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_mt6, PyObject *__pyx_v_c); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_20is_isotropic_c(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_22c21_cvoigt(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_24c_norm(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_test_cTape_MT6(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_2test_c_cE_tk(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_4test_c_ctk_uv(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_6test_c_cE_gd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_8test_c_cN_sdr(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_10test_c_cTP_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_12test_c_MT6_TNPE(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_14test_c_E_GD(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_16test_c_TP_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_18test_c_SDR_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_26test_suite(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_verbosity); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_Tape_MT6(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_gamma, __Pyx_memviewslice __pyx_v_delta, __Pyx_memviewslice __pyx_v_kappa, __Pyx_memviewslice __pyx_v_h, __Pyx_memviewslice __pyx_v_sigma); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_2MT_convert(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MT, __Pyx_memviewslice __pyx_v_results); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_4MT_output_convert(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MTs); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MTs); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_8E_GD(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_E); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_10TP_SDR(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_s, __Pyx_memviewslice __pyx_v_d, __Pyx_memviewslice __pyx_v_r); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_14isotropic_c(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_l, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_mu, PyObject *__pyx_v_c); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_isotropic_solve(PyObject *__pyx_self, PyObject *__pyx_v_iso); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_16MT6_biaxes(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MT6, PyObject *__pyx_v_c); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_mt6, PyObject *__pyx_v_c); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_20is_isotropic_c(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_22c21_cvoigt(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_24c_norm(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_test_cTape_MT6(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_2test_c_cE_tk(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_4test_c_ctk_uv(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_6test_c_cE_gd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_8test_c_cN_sdr(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_10test_c_cTP_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_12test_c_MT6_TNPE(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_14test_c_E_GD(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_16test_c_TP_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_18test_c_SDR_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_26test_suite(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_verbosity); /* proto */
 static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
@@ -2232,7 +2232,7 @@ static PyObject *__pyx_memoryview___pyx_pf_15View_dot_MemoryView_10memoryview_20
 static PyObject *__pyx_memoryview___pyx_pf_15View_dot_MemoryView_10memoryview_22copy_fortran(struct __pyx_memoryview_obj *__pyx_v_self); /* proto */
 static void __pyx_memoryviewslice___pyx_pf_15View_dot_MemoryView_16_memoryviewslice___dealloc__(struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView_16_memoryviewslice_4base___get__(struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
-static PyObject *__pyx_tp_new_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -2406,7 +2406,7 @@ static PyObject *__pyx_codeobj__109;
 static PyObject *__pyx_codeobj__111;
 static PyObject *__pyx_codeobj__113;
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":44
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":44
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef inline DTYPE_t[::1] cE_tk(DTYPE_t[::1] E,DTYPE_t[::1] results) nogil:             # <<<<<<<<<<<<<<
@@ -2414,11 +2414,11 @@ static PyObject *__pyx_codeobj__113;
  *     cdef DTYPE_t dev0=E[0]-iso
  */
 
-static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_tk(__Pyx_memviewslice __pyx_v_E, __Pyx_memviewslice __pyx_v_results) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_iso;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dev0;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dev1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dev2;
+static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_tk(__Pyx_memviewslice __pyx_v_E, __Pyx_memviewslice __pyx_v_results) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_iso;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dev0;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dev1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dev2;
   __Pyx_memviewslice __pyx_r = { 0, 0, { 0 }, { 0 }, { 0 } };
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
@@ -2437,7 +2437,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   Py_ssize_t __pyx_t_15;
   Py_ssize_t __pyx_t_16;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":45
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":45
  * @cython.cdivision(True)
  * cdef inline DTYPE_t[::1] cE_tk(DTYPE_t[::1] E,DTYPE_t[::1] results) nogil:
  *     cdef DTYPE_t iso=(E[0]+E[1]+E[2])/3             # <<<<<<<<<<<<<<
@@ -2447,9 +2447,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   __pyx_t_1 = 0;
   __pyx_t_2 = 1;
   __pyx_t_3 = 2;
-  __pyx_v_iso = ((((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_1)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_2)) )))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_3)) )))) / 3.0);
+  __pyx_v_iso = ((((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_1)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_2)) )))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_3)) )))) / 3.0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":46
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":46
  * cdef inline DTYPE_t[::1] cE_tk(DTYPE_t[::1] E,DTYPE_t[::1] results) nogil:
  *     cdef DTYPE_t iso=(E[0]+E[1]+E[2])/3
  *     cdef DTYPE_t dev0=E[0]-iso             # <<<<<<<<<<<<<<
@@ -2457,9 +2457,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *     cdef DTYPE_t dev2=E[1]-iso
  */
   __pyx_t_4 = 0;
-  __pyx_v_dev0 = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_4)) ))) - __pyx_v_iso);
+  __pyx_v_dev0 = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_4)) ))) - __pyx_v_iso);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":47
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":47
  *     cdef DTYPE_t iso=(E[0]+E[1]+E[2])/3
  *     cdef DTYPE_t dev0=E[0]-iso
  *     cdef DTYPE_t dev1=E[2]-iso#Odd sorting from hudson paper E[0]>=E[2]>=E[1]             # <<<<<<<<<<<<<<
@@ -2467,9 +2467,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *     if dev2>0:
  */
   __pyx_t_5 = 2;
-  __pyx_v_dev1 = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_5)) ))) - __pyx_v_iso);
+  __pyx_v_dev1 = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_5)) ))) - __pyx_v_iso);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":48
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":48
  *     cdef DTYPE_t dev0=E[0]-iso
  *     cdef DTYPE_t dev1=E[2]-iso#Odd sorting from hudson paper E[0]>=E[2]>=E[1]
  *     cdef DTYPE_t dev2=E[1]-iso             # <<<<<<<<<<<<<<
@@ -2477,9 +2477,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *         results[5]=iso/(fabs(iso)-dev1)
  */
   __pyx_t_6 = 1;
-  __pyx_v_dev2 = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_6)) ))) - __pyx_v_iso);
+  __pyx_v_dev2 = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_6)) ))) - __pyx_v_iso);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":49
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":49
  *     cdef DTYPE_t dev1=E[2]-iso#Odd sorting from hudson paper E[0]>=E[2]>=E[1]
  *     cdef DTYPE_t dev2=E[1]-iso
  *     if dev2>0:             # <<<<<<<<<<<<<<
@@ -2489,7 +2489,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   __pyx_t_7 = ((__pyx_v_dev2 > 0.0) != 0);
   if (__pyx_t_7) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":50
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":50
  *     cdef DTYPE_t dev2=E[1]-iso
  *     if dev2>0:
  *         results[5]=iso/(fabs(iso)-dev1)             # <<<<<<<<<<<<<<
@@ -2497,9 +2497,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *     elif dev2<0:
  */
     __pyx_t_8 = 5;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_8)) )) = (__pyx_v_iso / (fabs(__pyx_v_iso) - __pyx_v_dev1));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_8)) )) = (__pyx_v_iso / (fabs(__pyx_v_iso) - __pyx_v_dev1));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":51
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":51
  *     if dev2>0:
  *         results[5]=iso/(fabs(iso)-dev1)
  *         results[6]=-2*(dev2)/(dev1)             # <<<<<<<<<<<<<<
@@ -2507,9 +2507,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *         results[5]=iso/(fabs(iso)+dev0)
  */
     __pyx_t_9 = 6;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_9)) )) = ((-2.0 * __pyx_v_dev2) / __pyx_v_dev1);
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_9)) )) = ((-2.0 * __pyx_v_dev2) / __pyx_v_dev1);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":49
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":49
  *     cdef DTYPE_t dev1=E[2]-iso#Odd sorting from hudson paper E[0]>=E[2]>=E[1]
  *     cdef DTYPE_t dev2=E[1]-iso
  *     if dev2>0:             # <<<<<<<<<<<<<<
@@ -2519,7 +2519,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
     goto __pyx_L3;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":52
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":52
  *         results[5]=iso/(fabs(iso)-dev1)
  *         results[6]=-2*(dev2)/(dev1)
  *     elif dev2<0:             # <<<<<<<<<<<<<<
@@ -2529,7 +2529,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   __pyx_t_7 = ((__pyx_v_dev2 < 0.0) != 0);
   if (__pyx_t_7) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":53
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":53
  *         results[6]=-2*(dev2)/(dev1)
  *     elif dev2<0:
  *         results[5]=iso/(fabs(iso)+dev0)             # <<<<<<<<<<<<<<
@@ -2537,9 +2537,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *     else:
  */
     __pyx_t_10 = 5;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_10)) )) = (__pyx_v_iso / (fabs(__pyx_v_iso) + __pyx_v_dev0));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_10)) )) = (__pyx_v_iso / (fabs(__pyx_v_iso) + __pyx_v_dev0));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":54
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":54
  *     elif dev2<0:
  *         results[5]=iso/(fabs(iso)+dev0)
  *         results[6]=2*dev2/dev0             # <<<<<<<<<<<<<<
@@ -2547,9 +2547,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *         results[5]=iso/(fabs(iso)+dev0)
  */
     __pyx_t_11 = 6;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_11)) )) = ((2.0 * __pyx_v_dev2) / __pyx_v_dev0);
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_11)) )) = ((2.0 * __pyx_v_dev2) / __pyx_v_dev0);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":52
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":52
  *         results[5]=iso/(fabs(iso)-dev1)
  *         results[6]=-2*(dev2)/(dev1)
  *     elif dev2<0:             # <<<<<<<<<<<<<<
@@ -2559,7 +2559,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
     goto __pyx_L3;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":56
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":56
  *         results[6]=2*dev2/dev0
  *     else:
  *         results[5]=iso/(fabs(iso)+dev0)             # <<<<<<<<<<<<<<
@@ -2568,9 +2568,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  */
   /*else*/ {
     __pyx_t_12 = 5;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_12)) )) = (__pyx_v_iso / (fabs(__pyx_v_iso) + __pyx_v_dev0));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_12)) )) = (__pyx_v_iso / (fabs(__pyx_v_iso) + __pyx_v_dev0));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":57
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":57
  *     else:
  *         results[5]=iso/(fabs(iso)+dev0)
  *         results[6]=0             # <<<<<<<<<<<<<<
@@ -2578,11 +2578,11 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *     return results
  */
     __pyx_t_13 = 6;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_13)) )) = 0.0;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_13)) )) = 0.0;
   }
   __pyx_L3:;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":58
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":58
  *         results[5]=iso/(fabs(iso)+dev0)
  *         results[6]=0
  *     results[6]=results[6]*(1-fabs(results[5]));             # <<<<<<<<<<<<<<
@@ -2592,9 +2592,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   __pyx_t_14 = 6;
   __pyx_t_15 = 5;
   __pyx_t_16 = 6;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_16)) )) = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_14)) ))) * (1.0 - fabs((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_15)) ))))));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_16)) )) = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_14)) ))) * (1.0 - fabs((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_15)) ))))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":59
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":59
  *         results[6]=0
  *     results[6]=results[6]*(1-fabs(results[5]));
  *     return results             # <<<<<<<<<<<<<<
@@ -2605,7 +2605,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   __pyx_r = __pyx_v_results;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":44
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":44
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef inline DTYPE_t[::1] cE_tk(DTYPE_t[::1] E,DTYPE_t[::1] results) nogil:             # <<<<<<<<<<<<<<
@@ -2621,7 +2621,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":64
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":64
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef inline DTYPE_t[::1] ctk_uv(DTYPE_t[::1] results) nogil:             # <<<<<<<<<<<<<<
@@ -2629,9 +2629,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *     cdef DTYPE_t tau=results[6]
  */
 
-static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_ctk_uv(__Pyx_memviewslice __pyx_v_results) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_k;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_tau;
+static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_ctk_uv(__Pyx_memviewslice __pyx_v_results) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_k;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_tau;
   __Pyx_memviewslice __pyx_r = { 0, 0, { 0 }, { 0 }, { 0 } };
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
@@ -2648,7 +2648,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   Py_ssize_t __pyx_t_13;
   Py_ssize_t __pyx_t_14;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":65
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":65
  * @cython.cdivision(True)
  * cdef inline DTYPE_t[::1] ctk_uv(DTYPE_t[::1] results) nogil:
  *     cdef DTYPE_t k=results[5]             # <<<<<<<<<<<<<<
@@ -2656,9 +2656,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *     if tau>0 and k>0:
  */
   __pyx_t_1 = 5;
-  __pyx_v_k = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_1)) )));
+  __pyx_v_k = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_1)) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":66
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":66
  * cdef inline DTYPE_t[::1] ctk_uv(DTYPE_t[::1] results) nogil:
  *     cdef DTYPE_t k=results[5]
  *     cdef DTYPE_t tau=results[6]             # <<<<<<<<<<<<<<
@@ -2666,9 +2666,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *         if tau<4*k:
  */
   __pyx_t_2 = 6;
-  __pyx_v_tau = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_2)) )));
+  __pyx_v_tau = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_2)) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":67
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":67
  *     cdef DTYPE_t k=results[5]
  *     cdef DTYPE_t tau=results[6]
  *     if tau>0 and k>0:             # <<<<<<<<<<<<<<
@@ -2686,7 +2686,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":68
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":68
  *     cdef DTYPE_t tau=results[6]
  *     if tau>0 and k>0:
  *         if tau<4*k:             # <<<<<<<<<<<<<<
@@ -2696,7 +2696,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
     __pyx_t_3 = ((__pyx_v_tau < (4.0 * __pyx_v_k)) != 0);
     if (__pyx_t_3) {
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":69
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":69
  *     if tau>0 and k>0:
  *         if tau<4*k:
  *             results[5]=tau/(1-(tau/2))             # <<<<<<<<<<<<<<
@@ -2704,9 +2704,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *         else:
  */
       __pyx_t_5 = 5;
-      *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_5)) )) = (__pyx_v_tau / (1.0 - (__pyx_v_tau / 2.0)));
+      *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_5)) )) = (__pyx_v_tau / (1.0 - (__pyx_v_tau / 2.0)));
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":70
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":70
  *         if tau<4*k:
  *             results[5]=tau/(1-(tau/2))
  *             results[6]=k/(1-(tau/2))             # <<<<<<<<<<<<<<
@@ -2714,9 +2714,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *             results[5]=tau/(1-2*k)
  */
       __pyx_t_6 = 6;
-      *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_6)) )) = (__pyx_v_k / (1.0 - (__pyx_v_tau / 2.0)));
+      *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_6)) )) = (__pyx_v_k / (1.0 - (__pyx_v_tau / 2.0)));
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":68
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":68
  *     cdef DTYPE_t tau=results[6]
  *     if tau>0 and k>0:
  *         if tau<4*k:             # <<<<<<<<<<<<<<
@@ -2726,7 +2726,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
       goto __pyx_L6;
     }
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":72
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":72
  *             results[6]=k/(1-(tau/2))
  *         else:
  *             results[5]=tau/(1-2*k)             # <<<<<<<<<<<<<<
@@ -2735,9 +2735,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  */
     /*else*/ {
       __pyx_t_7 = 5;
-      *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_7)) )) = (__pyx_v_tau / (1.0 - (2.0 * __pyx_v_k)));
+      *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_7)) )) = (__pyx_v_tau / (1.0 - (2.0 * __pyx_v_k)));
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":73
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":73
  *         else:
  *             results[5]=tau/(1-2*k)
  *             results[6]=k/(1-2*k)             # <<<<<<<<<<<<<<
@@ -2745,11 +2745,11 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *         if tau>4*k:
  */
       __pyx_t_8 = 6;
-      *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_8)) )) = (__pyx_v_k / (1.0 - (2.0 * __pyx_v_k)));
+      *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_8)) )) = (__pyx_v_k / (1.0 - (2.0 * __pyx_v_k)));
     }
     __pyx_L6:;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":67
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":67
  *     cdef DTYPE_t k=results[5]
  *     cdef DTYPE_t tau=results[6]
  *     if tau>0 and k>0:             # <<<<<<<<<<<<<<
@@ -2759,7 +2759,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
     goto __pyx_L3;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":74
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":74
  *             results[5]=tau/(1-2*k)
  *             results[6]=k/(1-2*k)
  *     elif tau<0 and k<0:             # <<<<<<<<<<<<<<
@@ -2777,7 +2777,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":75
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":75
  *             results[6]=k/(1-2*k)
  *     elif tau<0 and k<0:
  *         if tau>4*k:             # <<<<<<<<<<<<<<
@@ -2787,7 +2787,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
     __pyx_t_3 = ((__pyx_v_tau > (4.0 * __pyx_v_k)) != 0);
     if (__pyx_t_3) {
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":76
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":76
  *     elif tau<0 and k<0:
  *         if tau>4*k:
  *             results[5]=tau/(1+(tau/2))             # <<<<<<<<<<<<<<
@@ -2795,9 +2795,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *         else:
  */
       __pyx_t_9 = 5;
-      *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_9)) )) = (__pyx_v_tau / (1.0 + (__pyx_v_tau / 2.0)));
+      *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_9)) )) = (__pyx_v_tau / (1.0 + (__pyx_v_tau / 2.0)));
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":77
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":77
  *         if tau>4*k:
  *             results[5]=tau/(1+(tau/2))
  *             results[6]=k/(1+(tau/2))             # <<<<<<<<<<<<<<
@@ -2805,9 +2805,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *             results[5]=tau/(1+2*k)
  */
       __pyx_t_10 = 6;
-      *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_10)) )) = (__pyx_v_k / (1.0 + (__pyx_v_tau / 2.0)));
+      *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_10)) )) = (__pyx_v_k / (1.0 + (__pyx_v_tau / 2.0)));
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":75
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":75
  *             results[6]=k/(1-2*k)
  *     elif tau<0 and k<0:
  *         if tau>4*k:             # <<<<<<<<<<<<<<
@@ -2817,7 +2817,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
       goto __pyx_L9;
     }
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":79
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":79
  *             results[6]=k/(1+(tau/2))
  *         else:
  *             results[5]=tau/(1+2*k)             # <<<<<<<<<<<<<<
@@ -2826,9 +2826,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  */
     /*else*/ {
       __pyx_t_11 = 5;
-      *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_11)) )) = (__pyx_v_tau / (1.0 + (2.0 * __pyx_v_k)));
+      *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_11)) )) = (__pyx_v_tau / (1.0 + (2.0 * __pyx_v_k)));
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":80
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":80
  *         else:
  *             results[5]=tau/(1+2*k)
  *             results[6]=k/(1+2*k)             # <<<<<<<<<<<<<<
@@ -2836,11 +2836,11 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *         results[5]=tau
  */
       __pyx_t_12 = 6;
-      *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_12)) )) = (__pyx_v_k / (1.0 + (2.0 * __pyx_v_k)));
+      *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_12)) )) = (__pyx_v_k / (1.0 + (2.0 * __pyx_v_k)));
     }
     __pyx_L9:;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":74
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":74
  *             results[5]=tau/(1-2*k)
  *             results[6]=k/(1-2*k)
  *     elif tau<0 and k<0:             # <<<<<<<<<<<<<<
@@ -2850,7 +2850,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
     goto __pyx_L3;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":82
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":82
  *             results[6]=k/(1+2*k)
  *     else:
  *         results[5]=tau             # <<<<<<<<<<<<<<
@@ -2859,9 +2859,9 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  */
   /*else*/ {
     __pyx_t_13 = 5;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_13)) )) = __pyx_v_tau;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_13)) )) = __pyx_v_tau;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":83
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":83
  *     else:
  *         results[5]=tau
  *         results[6]=k             # <<<<<<<<<<<<<<
@@ -2869,11 +2869,11 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  * @cython.boundscheck(False)
  */
     __pyx_t_14 = 6;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_14)) )) = __pyx_v_k;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_14)) )) = __pyx_v_k;
   }
   __pyx_L3:;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":84
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":84
  *         results[5]=tau
  *         results[6]=k
  *     return results             # <<<<<<<<<<<<<<
@@ -2884,7 +2884,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   __pyx_r = __pyx_v_results;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":64
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":64
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef inline DTYPE_t[::1] ctk_uv(DTYPE_t[::1] results) nogil:             # <<<<<<<<<<<<<<
@@ -2900,7 +2900,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":89
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":89
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef inline void cE_gd(DTYPE_t[:] E,DTYPE_t*g,DTYPE_t*d) nogil:             # <<<<<<<<<<<<<<
@@ -2908,7 +2908,7 @@ static CYTHON_INLINE __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor
  *         if E[0]>0:
  */
 
-static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_gd(__Pyx_memviewslice __pyx_v_E, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_g, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_d) {
+static CYTHON_INLINE void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_gd(__Pyx_memviewslice __pyx_v_E, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_g, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_d) {
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
   int __pyx_t_3;
@@ -2929,7 +2929,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
   Py_ssize_t __pyx_t_18;
   Py_ssize_t __pyx_t_19;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":90
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":90
  * @cython.cdivision(True)
  * cdef inline void cE_gd(DTYPE_t[:] E,DTYPE_t*g,DTYPE_t*d) nogil:
  *     if E[0]==E[2]:             # <<<<<<<<<<<<<<
@@ -2938,10 +2938,10 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
  */
   __pyx_t_1 = 0;
   __pyx_t_2 = 2;
-  __pyx_t_3 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_1 * __pyx_v_E.strides[0]) ))) == (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_2 * __pyx_v_E.strides[0]) )))) != 0);
+  __pyx_t_3 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_1 * __pyx_v_E.strides[0]) ))) == (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_2 * __pyx_v_E.strides[0]) )))) != 0);
   if (__pyx_t_3) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":91
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":91
  * cdef inline void cE_gd(DTYPE_t[:] E,DTYPE_t*g,DTYPE_t*d) nogil:
  *     if E[0]==E[2]:
  *         if E[0]>0:             # <<<<<<<<<<<<<<
@@ -2949,10 +2949,10 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
  *             d[0]=pi/2
  */
     __pyx_t_4 = 0;
-    __pyx_t_3 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_4 * __pyx_v_E.strides[0]) ))) > 0.0) != 0);
+    __pyx_t_3 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_4 * __pyx_v_E.strides[0]) ))) > 0.0) != 0);
     if (__pyx_t_3) {
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":92
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":92
  *     if E[0]==E[2]:
  *         if E[0]>0:
  *             g[0]=0             # <<<<<<<<<<<<<<
@@ -2961,7 +2961,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
  */
       (__pyx_v_g[0]) = 0.0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":93
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":93
  *         if E[0]>0:
  *             g[0]=0
  *             d[0]=pi/2             # <<<<<<<<<<<<<<
@@ -2970,7 +2970,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
  */
       (__pyx_v_d[0]) = (M_PI / 2.0);
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":91
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":91
  * cdef inline void cE_gd(DTYPE_t[:] E,DTYPE_t*g,DTYPE_t*d) nogil:
  *     if E[0]==E[2]:
  *         if E[0]>0:             # <<<<<<<<<<<<<<
@@ -2980,7 +2980,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
       goto __pyx_L4;
     }
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":94
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":94
  *             g[0]=0
  *             d[0]=pi/2
  *         elif E[0]<0:             # <<<<<<<<<<<<<<
@@ -2988,10 +2988,10 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
  *             d[0]=-pi/2
  */
     __pyx_t_5 = 0;
-    __pyx_t_3 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_5 * __pyx_v_E.strides[0]) ))) < 0.0) != 0);
+    __pyx_t_3 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_5 * __pyx_v_E.strides[0]) ))) < 0.0) != 0);
     if (__pyx_t_3) {
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":95
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":95
  *             d[0]=pi/2
  *         elif E[0]<0:
  *             g[0]=0             # <<<<<<<<<<<<<<
@@ -3000,7 +3000,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
  */
       (__pyx_v_g[0]) = 0.0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":96
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":96
  *         elif E[0]<0:
  *             g[0]=0
  *             d[0]=-pi/2             # <<<<<<<<<<<<<<
@@ -3009,7 +3009,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
  */
       (__pyx_v_d[0]) = ((-M_PI) / 2.0);
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":94
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":94
  *             g[0]=0
  *             d[0]=pi/2
  *         elif E[0]<0:             # <<<<<<<<<<<<<<
@@ -3019,7 +3019,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
     }
     __pyx_L4:;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":90
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":90
  * @cython.cdivision(True)
  * cdef inline void cE_gd(DTYPE_t[:] E,DTYPE_t*g,DTYPE_t*d) nogil:
  *     if E[0]==E[2]:             # <<<<<<<<<<<<<<
@@ -3029,7 +3029,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
     goto __pyx_L3;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":98
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":98
  *             d[0]=-pi/2
  *     else:
  *         g[0]=atan2(-E[0]+2*E[1]-E[2],sqrt3*(E[0]-E[2]))             # <<<<<<<<<<<<<<
@@ -3042,9 +3042,9 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
     __pyx_t_8 = 2;
     __pyx_t_9 = 0;
     __pyx_t_10 = 2;
-    (__pyx_v_g[0]) = atan2((((-(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_6 * __pyx_v_E.strides[0]) )))) + (2.0 * (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_7 * __pyx_v_E.strides[0]) ))))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_8 * __pyx_v_E.strides[0]) )))), (__pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_sqrt3 * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_9 * __pyx_v_E.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_10 * __pyx_v_E.strides[0]) ))))));
+    (__pyx_v_g[0]) = atan2((((-(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_6 * __pyx_v_E.strides[0]) )))) + (2.0 * (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_7 * __pyx_v_E.strides[0]) ))))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_8 * __pyx_v_E.strides[0]) )))), (__pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_sqrt3 * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_9 * __pyx_v_E.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_10 * __pyx_v_E.strides[0]) ))))));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":99
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":99
  *     else:
  *         g[0]=atan2(-E[0]+2*E[1]-E[2],sqrt3*(E[0]-E[2]))
  *         d[0]=pi/2-acos((E[0]+E[1]+E[2])/(sqrt3*sqrt((E[0]*E[0]+E[1]*E[1]+E[2]*E[2]))))             # <<<<<<<<<<<<<<
@@ -3060,11 +3060,11 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
     __pyx_t_17 = 1;
     __pyx_t_18 = 2;
     __pyx_t_19 = 2;
-    (__pyx_v_d[0]) = ((M_PI / 2.0) - acos(((((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_11 * __pyx_v_E.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_12 * __pyx_v_E.strides[0]) )))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_13 * __pyx_v_E.strides[0]) )))) / (__pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_sqrt3 * sqrt(((((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_14 * __pyx_v_E.strides[0]) ))) * (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_15 * __pyx_v_E.strides[0]) )))) + ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_16 * __pyx_v_E.strides[0]) ))) * (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_17 * __pyx_v_E.strides[0]) ))))) + ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_18 * __pyx_v_E.strides[0]) ))) * (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_19 * __pyx_v_E.strides[0]) ))))))))));
+    (__pyx_v_d[0]) = ((M_PI / 2.0) - acos(((((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_11 * __pyx_v_E.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_12 * __pyx_v_E.strides[0]) )))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_13 * __pyx_v_E.strides[0]) )))) / (__pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_sqrt3 * sqrt(((((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_14 * __pyx_v_E.strides[0]) ))) * (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_15 * __pyx_v_E.strides[0]) )))) + ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_16 * __pyx_v_E.strides[0]) ))) * (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_17 * __pyx_v_E.strides[0]) ))))) + ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_18 * __pyx_v_E.strides[0]) ))) * (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_19 * __pyx_v_E.strides[0]) ))))))))));
   }
   __pyx_L3:;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":89
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":89
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef inline void cE_gd(DTYPE_t[:] E,DTYPE_t*g,DTYPE_t*d) nogil:             # <<<<<<<<<<<<<<
@@ -3075,7 +3075,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
   /* function exit code */
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":104
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":104
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef inline void cN_SDR(DTYPE_t N0,DTYPE_t N1,DTYPE_t N2,DTYPE_t S0,DTYPE_t S1,DTYPE_t S2,DTYPE_t* strike,DTYPE_t*dip,DTYPE_t*rake) nogil:             # <<<<<<<<<<<<<<
@@ -3083,11 +3083,11 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE
  *         N0=-N0
  */
 
-static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N0, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S0, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S1, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S2, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_strike, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_dip, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_rake) {
+static CYTHON_INLINE void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N0, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S0, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S1, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S2, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_strike, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_dip, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_rake) {
   int __pyx_t_1;
   long __pyx_t_2;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":105
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":105
  * @cython.cdivision(True)
  * cdef inline void cN_SDR(DTYPE_t N0,DTYPE_t N1,DTYPE_t N2,DTYPE_t S0,DTYPE_t S1,DTYPE_t S2,DTYPE_t* strike,DTYPE_t*dip,DTYPE_t*rake) nogil:
  *     if N2>0:             # <<<<<<<<<<<<<<
@@ -3097,7 +3097,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
   __pyx_t_1 = ((__pyx_v_N2 > 0.0) != 0);
   if (__pyx_t_1) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":106
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":106
  * cdef inline void cN_SDR(DTYPE_t N0,DTYPE_t N1,DTYPE_t N2,DTYPE_t S0,DTYPE_t S1,DTYPE_t S2,DTYPE_t* strike,DTYPE_t*dip,DTYPE_t*rake) nogil:
  *     if N2>0:
  *         N0=-N0             # <<<<<<<<<<<<<<
@@ -3106,7 +3106,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
     __pyx_v_N0 = (-__pyx_v_N0);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":107
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":107
  *     if N2>0:
  *         N0=-N0
  *         N1=-N1             # <<<<<<<<<<<<<<
@@ -3115,7 +3115,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
     __pyx_v_N1 = (-__pyx_v_N1);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":108
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":108
  *         N0=-N0
  *         N1=-N1
  *         N2=-N2             # <<<<<<<<<<<<<<
@@ -3124,7 +3124,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
     __pyx_v_N2 = (-__pyx_v_N2);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":109
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":109
  *         N1=-N1
  *         N2=-N2
  *         S0=-S0             # <<<<<<<<<<<<<<
@@ -3133,7 +3133,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
     __pyx_v_S0 = (-__pyx_v_S0);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":110
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":110
  *         N2=-N2
  *         S0=-S0
  *         S1=-S1             # <<<<<<<<<<<<<<
@@ -3142,7 +3142,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
     __pyx_v_S1 = (-__pyx_v_S1);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":111
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":111
  *         S0=-S0
  *         S1=-S1
  *         S2=-S2             # <<<<<<<<<<<<<<
@@ -3151,7 +3151,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
     __pyx_v_S2 = (-__pyx_v_S2);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":105
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":105
  * @cython.cdivision(True)
  * cdef inline void cN_SDR(DTYPE_t N0,DTYPE_t N1,DTYPE_t N2,DTYPE_t S0,DTYPE_t S1,DTYPE_t S2,DTYPE_t* strike,DTYPE_t*dip,DTYPE_t*rake) nogil:
  *     if N2>0:             # <<<<<<<<<<<<<<
@@ -3160,7 +3160,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":112
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":112
  *         S1=-S1
  *         S2=-S2
  *     strike[0]=atan2(-N0,N1)             # <<<<<<<<<<<<<<
@@ -3169,7 +3169,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
   (__pyx_v_strike[0]) = atan2((-__pyx_v_N0), __pyx_v_N1);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":113
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":113
  *         S2=-S2
  *     strike[0]=atan2(-N0,N1)
  *     dip[0]=atan2((N1**2+N0**2),sqrt((N0*N2)**2+(N1*N2)**2))             # <<<<<<<<<<<<<<
@@ -3178,7 +3178,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
   (__pyx_v_dip[0]) = atan2((pow(__pyx_v_N1, 2.0) + pow(__pyx_v_N0, 2.0)), sqrt((pow((__pyx_v_N0 * __pyx_v_N2), 2.0) + pow((__pyx_v_N1 * __pyx_v_N2), 2.0))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":114
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":114
  *     strike[0]=atan2(-N0,N1)
  *     dip[0]=atan2((N1**2+N0**2),sqrt((N0*N2)**2+(N1*N2)**2))
  *     rake[0]=atan2(-S2,S0*N1-S1*N0)             # <<<<<<<<<<<<<<
@@ -3187,7 +3187,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
   (__pyx_v_rake[0]) = atan2((-__pyx_v_S2), ((__pyx_v_S0 * __pyx_v_N1) - (__pyx_v_S1 * __pyx_v_N0)));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":115
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":115
  *     dip[0]=atan2((N1**2+N0**2),sqrt((N0*N2)**2+(N1*N2)**2))
  *     rake[0]=atan2(-S2,S0*N1-S1*N0)
  *     if dip[0]>pi/2:             # <<<<<<<<<<<<<<
@@ -3197,7 +3197,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
   __pyx_t_1 = (((__pyx_v_dip[0]) > (M_PI / 2.0)) != 0);
   if (__pyx_t_1) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":116
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":116
  *     rake[0]=atan2(-S2,S0*N1-S1*N0)
  *     if dip[0]>pi/2:
  *         dip[0]=pi-dip[0]             # <<<<<<<<<<<<<<
@@ -3206,7 +3206,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
     (__pyx_v_dip[0]) = (M_PI - (__pyx_v_dip[0]));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":117
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":117
  *     if dip[0]>pi/2:
  *         dip[0]=pi-dip[0]
  *         strike[0]=strike[0]+pi             # <<<<<<<<<<<<<<
@@ -3215,16 +3215,16 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
     (__pyx_v_strike[0]) = ((__pyx_v_strike[0]) + M_PI);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":118
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":118
  *         dip[0]=pi-dip[0]
  *         strike[0]=strike[0]+pi
  *         rake[0]=PI2-rake[0]             # <<<<<<<<<<<<<<
  *     if fabs(strike[0])>PI2:
  *         strike[0]=fmod(strike[0],PI2)
  */
-    (__pyx_v_rake[0]) = (__pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_PI2 - (__pyx_v_rake[0]));
+    (__pyx_v_rake[0]) = (__pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_PI2 - (__pyx_v_rake[0]));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":115
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":115
  *     dip[0]=atan2((N1**2+N0**2),sqrt((N0*N2)**2+(N1*N2)**2))
  *     rake[0]=atan2(-S2,S0*N1-S1*N0)
  *     if dip[0]>pi/2:             # <<<<<<<<<<<<<<
@@ -3233,26 +3233,26 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":119
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":119
  *         strike[0]=strike[0]+pi
  *         rake[0]=PI2-rake[0]
  *     if fabs(strike[0])>PI2:             # <<<<<<<<<<<<<<
  *         strike[0]=fmod(strike[0],PI2)
  *     if strike[0]<0.0:
  */
-  __pyx_t_1 = ((fabs((__pyx_v_strike[0])) > __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_PI2) != 0);
+  __pyx_t_1 = ((fabs((__pyx_v_strike[0])) > __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_PI2) != 0);
   if (__pyx_t_1) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":120
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":120
  *         rake[0]=PI2-rake[0]
  *     if fabs(strike[0])>PI2:
  *         strike[0]=fmod(strike[0],PI2)             # <<<<<<<<<<<<<<
  *     if strike[0]<0.0:
  *         strike[0]+=PI2
  */
-    (__pyx_v_strike[0]) = fmod((__pyx_v_strike[0]), __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_PI2);
+    (__pyx_v_strike[0]) = fmod((__pyx_v_strike[0]), __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_PI2);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":119
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":119
  *         strike[0]=strike[0]+pi
  *         rake[0]=PI2-rake[0]
  *     if fabs(strike[0])>PI2:             # <<<<<<<<<<<<<<
@@ -3261,7 +3261,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":121
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":121
  *     if fabs(strike[0])>PI2:
  *         strike[0]=fmod(strike[0],PI2)
  *     if strike[0]<0.0:             # <<<<<<<<<<<<<<
@@ -3271,7 +3271,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
   __pyx_t_1 = (((__pyx_v_strike[0]) < 0.0) != 0);
   if (__pyx_t_1) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":122
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":122
  *         strike[0]=fmod(strike[0],PI2)
  *     if strike[0]<0.0:
  *         strike[0]+=PI2             # <<<<<<<<<<<<<<
@@ -3279,9 +3279,9 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  *         rake[0]-=PI2
  */
     __pyx_t_2 = 0;
-    (__pyx_v_strike[__pyx_t_2]) = ((__pyx_v_strike[__pyx_t_2]) + __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_PI2);
+    (__pyx_v_strike[__pyx_t_2]) = ((__pyx_v_strike[__pyx_t_2]) + __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_PI2);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":121
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":121
  *     if fabs(strike[0])>PI2:
  *         strike[0]=fmod(strike[0],PI2)
  *     if strike[0]<0.0:             # <<<<<<<<<<<<<<
@@ -3290,7 +3290,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":123
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":123
  *     if strike[0]<0.0:
  *         strike[0]+=PI2
  *     if rake[0]>pi:             # <<<<<<<<<<<<<<
@@ -3300,7 +3300,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
   __pyx_t_1 = (((__pyx_v_rake[0]) > M_PI) != 0);
   if (__pyx_t_1) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":124
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":124
  *         strike[0]+=PI2
  *     if rake[0]>pi:
  *         rake[0]-=PI2             # <<<<<<<<<<<<<<
@@ -3308,9 +3308,9 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  *         rake[0]+=PI2
  */
     __pyx_t_2 = 0;
-    (__pyx_v_rake[__pyx_t_2]) = ((__pyx_v_rake[__pyx_t_2]) - __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_PI2);
+    (__pyx_v_rake[__pyx_t_2]) = ((__pyx_v_rake[__pyx_t_2]) - __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_PI2);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":123
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":123
  *     if strike[0]<0.0:
  *         strike[0]+=PI2
  *     if rake[0]>pi:             # <<<<<<<<<<<<<<
@@ -3320,7 +3320,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
     goto __pyx_L7;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":125
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":125
  *     if rake[0]>pi:
  *         rake[0]-=PI2
  *     elif rake[0]<-pi:             # <<<<<<<<<<<<<<
@@ -3330,7 +3330,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
   __pyx_t_1 = (((__pyx_v_rake[0]) < (-M_PI)) != 0);
   if (__pyx_t_1) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":126
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":126
  *         rake[0]-=PI2
  *     elif rake[0]<-pi:
  *         rake[0]+=PI2             # <<<<<<<<<<<<<<
@@ -3338,9 +3338,9 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  * @cython.wraparound(False)
  */
     __pyx_t_2 = 0;
-    (__pyx_v_rake[__pyx_t_2]) = ((__pyx_v_rake[__pyx_t_2]) + __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_PI2);
+    (__pyx_v_rake[__pyx_t_2]) = ((__pyx_v_rake[__pyx_t_2]) + __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_PI2);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":125
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":125
  *     if rake[0]>pi:
  *         rake[0]-=PI2
  *     elif rake[0]<-pi:             # <<<<<<<<<<<<<<
@@ -3350,7 +3350,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
   }
   __pyx_L7:;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":104
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":104
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef inline void cN_SDR(DTYPE_t N0,DTYPE_t N1,DTYPE_t N2,DTYPE_t S0,DTYPE_t S1,DTYPE_t S2,DTYPE_t* strike,DTYPE_t*dip,DTYPE_t*rake) nogil:             # <<<<<<<<<<<<<<
@@ -3361,7 +3361,7 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
   /* function exit code */
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":131
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":131
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef DTYPE_t[::1] cTP_SDR(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1] results) nogil:             # <<<<<<<<<<<<<<
@@ -3369,21 +3369,21 @@ static CYTHON_INLINE void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN
  *     cdef DTYPE_t St=sqrt((T[0]-P[0])*(T[0]-P[0])+(T[1]-P[1])*(T[1]-P[1])+(T[2]-P[2])*(T[2]-P[2]))
  */
 
-static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTP_SDR(__Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P, __Pyx_memviewslice __pyx_v_results) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_Nt;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_St;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N0;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S0;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_strike1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dip1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_rake1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_strike2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dip2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_rake2;
+static __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTP_SDR(__Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P, __Pyx_memviewslice __pyx_v_results) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_Nt;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_St;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N0;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S0;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_strike1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dip1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_rake1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_strike2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dip2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_rake2;
   __Pyx_memviewslice __pyx_r = { 0, 0, { 0 }, { 0 }, { 0 } };
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
@@ -3435,7 +3435,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
   Py_ssize_t __pyx_t_48;
   Py_ssize_t __pyx_t_49;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":132
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":132
  * @cython.cdivision(True)
  * cdef DTYPE_t[::1] cTP_SDR(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1] results) nogil:
  *     cdef DTYPE_t Nt=sqrt((T[0]+P[0])*(T[0]+P[0])+(T[1]+P[1])*(T[1]+P[1])+(T[2]+P[2])*(T[2]+P[2]))             # <<<<<<<<<<<<<<
@@ -3454,9 +3454,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
   __pyx_t_10 = 2;
   __pyx_t_11 = 2;
   __pyx_t_12 = 2;
-  __pyx_v_Nt = sqrt((((((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_1)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_2)) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_3)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_4)) ))))) + (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_5)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_6)) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_7)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_8)) )))))) + (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_9)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_10)) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_11)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_12)) )))))));
+  __pyx_v_Nt = sqrt((((((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_1)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_2)) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_3)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_4)) ))))) + (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_5)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_6)) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_7)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_8)) )))))) + (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_9)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_10)) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_11)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_12)) )))))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":133
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":133
  * cdef DTYPE_t[::1] cTP_SDR(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1] results) nogil:
  *     cdef DTYPE_t Nt=sqrt((T[0]+P[0])*(T[0]+P[0])+(T[1]+P[1])*(T[1]+P[1])+(T[2]+P[2])*(T[2]+P[2]))
  *     cdef DTYPE_t St=sqrt((T[0]-P[0])*(T[0]-P[0])+(T[1]-P[1])*(T[1]-P[1])+(T[2]-P[2])*(T[2]-P[2]))             # <<<<<<<<<<<<<<
@@ -3475,9 +3475,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
   __pyx_t_22 = 2;
   __pyx_t_23 = 2;
   __pyx_t_24 = 2;
-  __pyx_v_St = sqrt((((((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_13)) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_14)) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_15)) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_16)) ))))) + (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_17)) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_18)) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_19)) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_20)) )))))) + (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_21)) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_22)) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_23)) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_24)) )))))));
+  __pyx_v_St = sqrt((((((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_13)) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_14)) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_15)) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_16)) ))))) + (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_17)) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_18)) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_19)) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_20)) )))))) + (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_21)) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_22)) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_23)) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_24)) )))))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":134
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":134
  *     cdef DTYPE_t Nt=sqrt((T[0]+P[0])*(T[0]+P[0])+(T[1]+P[1])*(T[1]+P[1])+(T[2]+P[2])*(T[2]+P[2]))
  *     cdef DTYPE_t St=sqrt((T[0]-P[0])*(T[0]-P[0])+(T[1]-P[1])*(T[1]-P[1])+(T[2]-P[2])*(T[2]-P[2]))
  *     cdef DTYPE_t N2=(T[2]+P[2])/Nt             # <<<<<<<<<<<<<<
@@ -3486,9 +3486,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_t_25 = 2;
   __pyx_t_26 = 2;
-  __pyx_v_N2 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_25)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_26)) )))) / __pyx_v_Nt);
+  __pyx_v_N2 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_25)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_26)) )))) / __pyx_v_Nt);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":135
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":135
  *     cdef DTYPE_t St=sqrt((T[0]-P[0])*(T[0]-P[0])+(T[1]-P[1])*(T[1]-P[1])+(T[2]-P[2])*(T[2]-P[2]))
  *     cdef DTYPE_t N2=(T[2]+P[2])/Nt
  *     cdef DTYPE_t N0=(T[0]+P[0])/Nt             # <<<<<<<<<<<<<<
@@ -3497,9 +3497,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_t_27 = 0;
   __pyx_t_28 = 0;
-  __pyx_v_N0 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_27)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_28)) )))) / __pyx_v_Nt);
+  __pyx_v_N0 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_27)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_28)) )))) / __pyx_v_Nt);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":136
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":136
  *     cdef DTYPE_t N2=(T[2]+P[2])/Nt
  *     cdef DTYPE_t N0=(T[0]+P[0])/Nt
  *     cdef DTYPE_t N1=(T[1]+P[1])/Nt             # <<<<<<<<<<<<<<
@@ -3508,9 +3508,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_t_29 = 1;
   __pyx_t_30 = 1;
-  __pyx_v_N1 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_29)) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_30)) )))) / __pyx_v_Nt);
+  __pyx_v_N1 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_29)) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_30)) )))) / __pyx_v_Nt);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":137
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":137
  *     cdef DTYPE_t N0=(T[0]+P[0])/Nt
  *     cdef DTYPE_t N1=(T[1]+P[1])/Nt
  *     cdef DTYPE_t S2=(T[2]-P[2])/St             # <<<<<<<<<<<<<<
@@ -3519,9 +3519,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_t_31 = 2;
   __pyx_t_32 = 2;
-  __pyx_v_S2 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_31)) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_32)) )))) / __pyx_v_St);
+  __pyx_v_S2 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_31)) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_32)) )))) / __pyx_v_St);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":138
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":138
  *     cdef DTYPE_t N1=(T[1]+P[1])/Nt
  *     cdef DTYPE_t S2=(T[2]-P[2])/St
  *     cdef DTYPE_t S0=(T[0]-P[0])/St             # <<<<<<<<<<<<<<
@@ -3530,9 +3530,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_t_33 = 0;
   __pyx_t_34 = 0;
-  __pyx_v_S0 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_33)) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_34)) )))) / __pyx_v_St);
+  __pyx_v_S0 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_33)) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_34)) )))) / __pyx_v_St);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":139
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":139
  *     cdef DTYPE_t S2=(T[2]-P[2])/St
  *     cdef DTYPE_t S0=(T[0]-P[0])/St
  *     cdef DTYPE_t S1=(T[1]-P[1])/St             # <<<<<<<<<<<<<<
@@ -3541,9 +3541,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_t_35 = 1;
   __pyx_t_36 = 1;
-  __pyx_v_S1 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_35)) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_36)) )))) / __pyx_v_St);
+  __pyx_v_S1 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_35)) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_36)) )))) / __pyx_v_St);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":140
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":140
  *     cdef DTYPE_t S0=(T[0]-P[0])/St
  *     cdef DTYPE_t S1=(T[1]-P[1])/St
  *     cdef DTYPE_t strike1=0.             # <<<<<<<<<<<<<<
@@ -3552,7 +3552,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_v_strike1 = 0.;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":141
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":141
  *     cdef DTYPE_t S1=(T[1]-P[1])/St
  *     cdef DTYPE_t strike1=0.
  *     cdef DTYPE_t dip1=0.             # <<<<<<<<<<<<<<
@@ -3561,7 +3561,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_v_dip1 = 0.;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":142
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":142
  *     cdef DTYPE_t strike1=0.
  *     cdef DTYPE_t dip1=0.
  *     cdef DTYPE_t rake1=0.             # <<<<<<<<<<<<<<
@@ -3570,7 +3570,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_v_rake1 = 0.;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":143
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":143
  *     cdef DTYPE_t dip1=0.
  *     cdef DTYPE_t rake1=0.
  *     cdef DTYPE_t strike2=0.             # <<<<<<<<<<<<<<
@@ -3579,7 +3579,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_v_strike2 = 0.;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":144
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":144
  *     cdef DTYPE_t rake1=0.
  *     cdef DTYPE_t strike2=0.
  *     cdef DTYPE_t dip2=0.             # <<<<<<<<<<<<<<
@@ -3588,7 +3588,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_v_dip2 = 0.;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":145
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":145
  *     cdef DTYPE_t strike2=0.
  *     cdef DTYPE_t dip2=0.
  *     cdef DTYPE_t rake2=0.             # <<<<<<<<<<<<<<
@@ -3597,25 +3597,25 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_v_rake2 = 0.;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":146
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":146
  *     cdef DTYPE_t dip2=0.
  *     cdef DTYPE_t rake2=0.
  *     cN_SDR(N0,N1,N2,S0,S1,S2,&strike1,&dip1,&rake1)             # <<<<<<<<<<<<<<
  *     cN_SDR(S0,S1,S2,N0,N1,N2,&strike2,&dip2,&rake2)
  *     #Switch for sdr2
  */
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_v_N0, __pyx_v_N1, __pyx_v_N2, __pyx_v_S0, __pyx_v_S1, __pyx_v_S2, (&__pyx_v_strike1), (&__pyx_v_dip1), (&__pyx_v_rake1));
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_v_N0, __pyx_v_N1, __pyx_v_N2, __pyx_v_S0, __pyx_v_S1, __pyx_v_S2, (&__pyx_v_strike1), (&__pyx_v_dip1), (&__pyx_v_rake1));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":147
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":147
  *     cdef DTYPE_t rake2=0.
  *     cN_SDR(N0,N1,N2,S0,S1,S2,&strike1,&dip1,&rake1)
  *     cN_SDR(S0,S1,S2,N0,N1,N2,&strike2,&dip2,&rake2)             # <<<<<<<<<<<<<<
  *     #Switch for sdr2
  *     if fabs(rake1)>pi/2:
  */
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_v_S0, __pyx_v_S1, __pyx_v_S2, __pyx_v_N0, __pyx_v_N1, __pyx_v_N2, (&__pyx_v_strike2), (&__pyx_v_dip2), (&__pyx_v_rake2));
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_v_S0, __pyx_v_S1, __pyx_v_S2, __pyx_v_N0, __pyx_v_N1, __pyx_v_N2, (&__pyx_v_strike2), (&__pyx_v_dip2), (&__pyx_v_rake2));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":149
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":149
  *     cN_SDR(S0,S1,S2,N0,N1,N2,&strike2,&dip2,&rake2)
  *     #Switch for sdr2
  *     if fabs(rake1)>pi/2:             # <<<<<<<<<<<<<<
@@ -3625,7 +3625,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
   __pyx_t_37 = ((fabs(__pyx_v_rake1) > (M_PI / 2.0)) != 0);
   if (__pyx_t_37) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":150
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":150
  *     #Switch for sdr2
  *     if fabs(rake1)>pi/2:
  *         results[2]=strike2             # <<<<<<<<<<<<<<
@@ -3633,9 +3633,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *         results[4]=rake2
  */
     __pyx_t_38 = 2;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_38)) )) = __pyx_v_strike2;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_38)) )) = __pyx_v_strike2;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":151
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":151
  *     if fabs(rake1)>pi/2:
  *         results[2]=strike2
  *         results[3]=cos(dip2)             # <<<<<<<<<<<<<<
@@ -3643,9 +3643,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     else:
  */
     __pyx_t_39 = 3;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_39)) )) = cos(__pyx_v_dip2);
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_39)) )) = cos(__pyx_v_dip2);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":152
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":152
  *         results[2]=strike2
  *         results[3]=cos(dip2)
  *         results[4]=rake2             # <<<<<<<<<<<<<<
@@ -3653,9 +3653,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *         results[2]=strike1
  */
     __pyx_t_40 = 4;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_40)) )) = __pyx_v_rake2;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_40)) )) = __pyx_v_rake2;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":149
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":149
  *     cN_SDR(S0,S1,S2,N0,N1,N2,&strike2,&dip2,&rake2)
  *     #Switch for sdr2
  *     if fabs(rake1)>pi/2:             # <<<<<<<<<<<<<<
@@ -3665,7 +3665,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
     goto __pyx_L3;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":154
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":154
  *         results[4]=rake2
  *     else:
  *         results[2]=strike1             # <<<<<<<<<<<<<<
@@ -3674,9 +3674,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   /*else*/ {
     __pyx_t_41 = 2;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_41)) )) = __pyx_v_strike1;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_41)) )) = __pyx_v_strike1;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":155
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":155
  *     else:
  *         results[2]=strike1
  *         results[3]=cos(dip1)             # <<<<<<<<<<<<<<
@@ -3684,9 +3684,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     results[7]=strike1*rad_cor
  */
     __pyx_t_42 = 3;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_42)) )) = cos(__pyx_v_dip1);
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_42)) )) = cos(__pyx_v_dip1);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":156
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":156
  *         results[2]=strike1
  *         results[3]=cos(dip1)
  *         results[4]=rake1             # <<<<<<<<<<<<<<
@@ -3694,11 +3694,11 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     results[8]=dip1*rad_cor
  */
     __pyx_t_43 = 4;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_43)) )) = __pyx_v_rake1;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_43)) )) = __pyx_v_rake1;
   }
   __pyx_L3:;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":157
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":157
  *         results[3]=cos(dip1)
  *         results[4]=rake1
  *     results[7]=strike1*rad_cor             # <<<<<<<<<<<<<<
@@ -3706,9 +3706,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     results[9]=rake1*rad_cor
  */
   __pyx_t_44 = 7;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_44)) )) = (__pyx_v_strike1 * __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_rad_cor);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_44)) )) = (__pyx_v_strike1 * __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_rad_cor);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":158
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":158
  *         results[4]=rake1
  *     results[7]=strike1*rad_cor
  *     results[8]=dip1*rad_cor             # <<<<<<<<<<<<<<
@@ -3716,9 +3716,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     results[10]=strike2*rad_cor
  */
   __pyx_t_45 = 8;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_45)) )) = (__pyx_v_dip1 * __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_rad_cor);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_45)) )) = (__pyx_v_dip1 * __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_rad_cor);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":159
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":159
  *     results[7]=strike1*rad_cor
  *     results[8]=dip1*rad_cor
  *     results[9]=rake1*rad_cor             # <<<<<<<<<<<<<<
@@ -3726,9 +3726,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     results[11]=dip2*rad_cor
  */
   __pyx_t_46 = 9;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_46)) )) = (__pyx_v_rake1 * __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_rad_cor);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_46)) )) = (__pyx_v_rake1 * __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_rad_cor);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":160
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":160
  *     results[8]=dip1*rad_cor
  *     results[9]=rake1*rad_cor
  *     results[10]=strike2*rad_cor             # <<<<<<<<<<<<<<
@@ -3736,9 +3736,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     results[12]=rake2*rad_cor
  */
   __pyx_t_47 = 10;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_47)) )) = (__pyx_v_strike2 * __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_rad_cor);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_47)) )) = (__pyx_v_strike2 * __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_rad_cor);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":161
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":161
  *     results[9]=rake1*rad_cor
  *     results[10]=strike2*rad_cor
  *     results[11]=dip2*rad_cor             # <<<<<<<<<<<<<<
@@ -3746,9 +3746,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     return results
  */
   __pyx_t_48 = 11;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_48)) )) = (__pyx_v_dip2 * __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_rad_cor);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_48)) )) = (__pyx_v_dip2 * __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_rad_cor);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":162
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":162
  *     results[10]=strike2*rad_cor
  *     results[11]=dip2*rad_cor
  *     results[12]=rake2*rad_cor             # <<<<<<<<<<<<<<
@@ -3756,9 +3756,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  * @cython.boundscheck(False)
  */
   __pyx_t_49 = 12;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_49)) )) = (__pyx_v_rake2 * __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_rad_cor);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_49)) )) = (__pyx_v_rake2 * __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_rad_cor);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":163
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":163
  *     results[11]=dip2*rad_cor
  *     results[12]=rake2*rad_cor
  *     return results             # <<<<<<<<<<<<<<
@@ -3769,7 +3769,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
   __pyx_r = __pyx_v_results;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":131
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":131
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef DTYPE_t[::1] cTP_SDR(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1] results) nogil:             # <<<<<<<<<<<<<<
@@ -3785,7 +3785,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":168
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":168
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef DTYPE_t[::1] cTPE_convert(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1]E,DTYPE_t[::1]results) nogil:             # <<<<<<<<<<<<<<
@@ -3793,7 +3793,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     results=cE_tk(E,results)
  */
 
-static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTPE_convert(__Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P, __Pyx_memviewslice __pyx_v_E, __Pyx_memviewslice __pyx_v_results) {
+static __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTPE_convert(__Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P, __Pyx_memviewslice __pyx_v_E, __Pyx_memviewslice __pyx_v_results) {
   __Pyx_memviewslice __pyx_r = { 0, 0, { 0 }, { 0 }, { 0 } };
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
@@ -3803,7 +3803,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
   int __pyx_clineno = 0;
   __PYX_INC_MEMVIEW(&__pyx_v_results, 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":169
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":169
  * @cython.cdivision(True)
  * cdef DTYPE_t[::1] cTPE_convert(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1]E,DTYPE_t[::1]results) nogil:
  *     cE_gd(E,&results[0],&results[1])             # <<<<<<<<<<<<<<
@@ -3812,48 +3812,48 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  */
   __pyx_t_1 = 0;
   __pyx_t_2 = 1;
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_v_E, (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_1)) )))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_2)) )))));
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_v_E, (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_1)) )))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_2)) )))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":170
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":170
  * cdef DTYPE_t[::1] cTPE_convert(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1]E,DTYPE_t[::1]results) nogil:
  *     cE_gd(E,&results[0],&results[1])
  *     results=cE_tk(E,results)             # <<<<<<<<<<<<<<
  *     results=ctk_uv(results)
  *     results=cTP_SDR(T,P,results)
  */
-  __pyx_t_3 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_v_E, __pyx_v_results); if (unlikely(!__pyx_t_3.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_v_E, __pyx_v_results); if (unlikely(!__pyx_t_3.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_v_results, 0);
   __pyx_v_results = __pyx_t_3;
   __pyx_t_3.memview = NULL;
   __pyx_t_3.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":171
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":171
  *     cE_gd(E,&results[0],&results[1])
  *     results=cE_tk(E,results)
  *     results=ctk_uv(results)             # <<<<<<<<<<<<<<
  *     results=cTP_SDR(T,P,results)
  *     return results
  */
-  __pyx_t_3 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_ctk_uv(__pyx_v_results); if (unlikely(!__pyx_t_3.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_ctk_uv(__pyx_v_results); if (unlikely(!__pyx_t_3.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_v_results, 0);
   __pyx_v_results = __pyx_t_3;
   __pyx_t_3.memview = NULL;
   __pyx_t_3.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":172
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":172
  *     results=cE_tk(E,results)
  *     results=ctk_uv(results)
  *     results=cTP_SDR(T,P,results)             # <<<<<<<<<<<<<<
  *     return results
  * #Tape to Moment tensor conversion
  */
-  __pyx_t_3 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTP_SDR(__pyx_v_T, __pyx_v_P, __pyx_v_results); if (unlikely(!__pyx_t_3.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTP_SDR(__pyx_v_T, __pyx_v_P, __pyx_v_results); if (unlikely(!__pyx_t_3.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_v_results, 0);
   __pyx_v_results = __pyx_t_3;
   __pyx_t_3.memview = NULL;
   __pyx_t_3.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":173
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":173
  *     results=ctk_uv(results)
  *     results=cTP_SDR(T,P,results)
  *     return results             # <<<<<<<<<<<<<<
@@ -3864,7 +3864,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
   __pyx_r = __pyx_v_results;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":168
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":168
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef DTYPE_t[::1] cTPE_convert(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1]E,DTYPE_t[::1]results) nogil:             # <<<<<<<<<<<<<<
@@ -3881,7 +3881,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
     #ifdef WITH_THREAD
     PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
     #endif
-    __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cTPE_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
+    __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cTPE_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
@@ -3897,7 +3897,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":179
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":179
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef void cTape_MT6(DTYPE_t*M, DTYPE_t gamma,DTYPE_t delta,DTYPE_t kappa,DTYPE_t h,DTYPE_t sigma) nogil:             # <<<<<<<<<<<<<<
@@ -3905,32 +3905,32 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cT
  *     cdef DTYPE_t ck=cos(kappa)
  */
 
-static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_M, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_gamma, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_delta, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_kappa, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_h, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sigma) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_ck;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_cs;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sk;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_ss;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_cg;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sg;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_cd;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sh;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_NT;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_NP;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T3;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P3;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N3;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sd;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_L1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_L2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_L3;
+static void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_M, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_gamma, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_delta, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_kappa, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_h, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sigma) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_ck;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_cs;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sk;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_ss;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_cg;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sg;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_cd;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sh;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_NT;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_NP;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T3;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P3;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N3;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sd;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_L1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_L2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_L3;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":181
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":181
  * cdef void cTape_MT6(DTYPE_t*M, DTYPE_t gamma,DTYPE_t delta,DTYPE_t kappa,DTYPE_t h,DTYPE_t sigma) nogil:
  *     #Get T N P axes
  *     cdef DTYPE_t ck=cos(kappa)             # <<<<<<<<<<<<<<
@@ -3939,7 +3939,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_ck = cos(__pyx_v_kappa);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":182
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":182
  *     #Get T N P axes
  *     cdef DTYPE_t ck=cos(kappa)
  *     cdef DTYPE_t cs=cos(sigma)             # <<<<<<<<<<<<<<
@@ -3948,7 +3948,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_cs = cos(__pyx_v_sigma);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":183
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":183
  *     cdef DTYPE_t ck=cos(kappa)
  *     cdef DTYPE_t cs=cos(sigma)
  *     cdef DTYPE_t sk=sin(kappa)             # <<<<<<<<<<<<<<
@@ -3957,7 +3957,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_sk = sin(__pyx_v_kappa);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":184
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":184
  *     cdef DTYPE_t cs=cos(sigma)
  *     cdef DTYPE_t sk=sin(kappa)
  *     cdef DTYPE_t ss=sin(sigma)             # <<<<<<<<<<<<<<
@@ -3966,7 +3966,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_ss = sin(__pyx_v_sigma);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":185
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":185
  *     cdef DTYPE_t sk=sin(kappa)
  *     cdef DTYPE_t ss=sin(sigma)
  *     cdef DTYPE_t cg=cos(gamma)             # <<<<<<<<<<<<<<
@@ -3975,7 +3975,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_cg = cos(__pyx_v_gamma);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":186
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":186
  *     cdef DTYPE_t ss=sin(sigma)
  *     cdef DTYPE_t cg=cos(gamma)
  *     cdef DTYPE_t sg=sin(gamma)             # <<<<<<<<<<<<<<
@@ -3984,7 +3984,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_sg = sin(__pyx_v_gamma);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":187
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":187
  *     cdef DTYPE_t cg=cos(gamma)
  *     cdef DTYPE_t sg=sin(gamma)
  *     cdef DTYPE_t cd=cos(delta)             # <<<<<<<<<<<<<<
@@ -3993,7 +3993,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_cd = cos(__pyx_v_delta);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":188
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":188
  *     cdef DTYPE_t sg=sin(gamma)
  *     cdef DTYPE_t cd=cos(delta)
  *     cdef DTYPE_t sh=sqrt(1-h*h)             # <<<<<<<<<<<<<<
@@ -4002,7 +4002,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_sh = sqrt((1.0 - (__pyx_v_h * __pyx_v_h)));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":189
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":189
  *     cdef DTYPE_t cd=cos(delta)
  *     cdef DTYPE_t sh=sqrt(1-h*h)
  *     cdef DTYPE_t NT=sqrt((ck*cs+sk*h*ss-sk*sh)*(ck*cs+sk*h*ss-sk*sh)+(sk*cs-ck*h*ss+ck*sh)*(sk*cs-ck*h*ss+ck*sh)+(-sh*ss-h)*(-sh*ss-h))             # <<<<<<<<<<<<<<
@@ -4011,7 +4011,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_NT = sqrt(((((((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_sk * __pyx_v_sh)) * (((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_sk * __pyx_v_sh))) + ((((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_ck * __pyx_v_sh)) * (((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_ck * __pyx_v_sh)))) + ((((-__pyx_v_sh) * __pyx_v_ss) - __pyx_v_h) * (((-__pyx_v_sh) * __pyx_v_ss) - __pyx_v_h))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":190
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":190
  *     cdef DTYPE_t sh=sqrt(1-h*h)
  *     cdef DTYPE_t NT=sqrt((ck*cs+sk*h*ss-sk*sh)*(ck*cs+sk*h*ss-sk*sh)+(sk*cs-ck*h*ss+ck*sh)*(sk*cs-ck*h*ss+ck*sh)+(-sh*ss-h)*(-sh*ss-h))
  *     cdef DTYPE_t NP=sqrt((ck*cs+sk*h*ss+sk*sh)*(ck*cs+sk*h*ss+sk*sh)+(sk*cs-ck*h*ss-ck*sh)*(sk*cs-ck*h*ss-ck*sh)+(-sh*ss+h)*(-sh*ss+h))             # <<<<<<<<<<<<<<
@@ -4020,7 +4020,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_NP = sqrt(((((((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_sk * __pyx_v_sh)) * (((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_sk * __pyx_v_sh))) + ((((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_ck * __pyx_v_sh)) * (((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_ck * __pyx_v_sh)))) + ((((-__pyx_v_sh) * __pyx_v_ss) + __pyx_v_h) * (((-__pyx_v_sh) * __pyx_v_ss) + __pyx_v_h))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":191
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":191
  *     cdef DTYPE_t NT=sqrt((ck*cs+sk*h*ss-sk*sh)*(ck*cs+sk*h*ss-sk*sh)+(sk*cs-ck*h*ss+ck*sh)*(sk*cs-ck*h*ss+ck*sh)+(-sh*ss-h)*(-sh*ss-h))
  *     cdef DTYPE_t NP=sqrt((ck*cs+sk*h*ss+sk*sh)*(ck*cs+sk*h*ss+sk*sh)+(sk*cs-ck*h*ss-ck*sh)*(sk*cs-ck*h*ss-ck*sh)+(-sh*ss+h)*(-sh*ss+h))
  *     cdef DTYPE_t T1=(ck*cs+sk*h*ss-sk*sh)/NT             # <<<<<<<<<<<<<<
@@ -4029,7 +4029,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_T1 = ((((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_sk * __pyx_v_sh)) / __pyx_v_NT);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":192
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":192
  *     cdef DTYPE_t NP=sqrt((ck*cs+sk*h*ss+sk*sh)*(ck*cs+sk*h*ss+sk*sh)+(sk*cs-ck*h*ss-ck*sh)*(sk*cs-ck*h*ss-ck*sh)+(-sh*ss+h)*(-sh*ss+h))
  *     cdef DTYPE_t T1=(ck*cs+sk*h*ss-sk*sh)/NT
  *     cdef DTYPE_t T2=(sk*cs-ck*h*ss+ck*sh)/NT             # <<<<<<<<<<<<<<
@@ -4038,7 +4038,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_T2 = ((((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_ck * __pyx_v_sh)) / __pyx_v_NT);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":193
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":193
  *     cdef DTYPE_t T1=(ck*cs+sk*h*ss-sk*sh)/NT
  *     cdef DTYPE_t T2=(sk*cs-ck*h*ss+ck*sh)/NT
  *     cdef DTYPE_t T3=(-sh*ss-h)/NT             # <<<<<<<<<<<<<<
@@ -4047,7 +4047,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_T3 = ((((-__pyx_v_sh) * __pyx_v_ss) - __pyx_v_h) / __pyx_v_NT);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":194
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":194
  *     cdef DTYPE_t T2=(sk*cs-ck*h*ss+ck*sh)/NT
  *     cdef DTYPE_t T3=(-sh*ss-h)/NT
  *     cdef DTYPE_t P1=(ck*cs+sk*h*ss+sk*sh)/NP             # <<<<<<<<<<<<<<
@@ -4056,7 +4056,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_P1 = ((((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_sk * __pyx_v_sh)) / __pyx_v_NP);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":195
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":195
  *     cdef DTYPE_t T3=(-sh*ss-h)/NT
  *     cdef DTYPE_t P1=(ck*cs+sk*h*ss+sk*sh)/NP
  *     cdef DTYPE_t P2=(sk*cs-ck*h*ss-ck*sh)/NP             # <<<<<<<<<<<<<<
@@ -4065,7 +4065,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_P2 = ((((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_ck * __pyx_v_sh)) / __pyx_v_NP);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":196
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":196
  *     cdef DTYPE_t P1=(ck*cs+sk*h*ss+sk*sh)/NP
  *     cdef DTYPE_t P2=(sk*cs-ck*h*ss-ck*sh)/NP
  *     cdef DTYPE_t P3=(-sh*ss+h)/NP             # <<<<<<<<<<<<<<
@@ -4074,7 +4074,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_P3 = ((((-__pyx_v_sh) * __pyx_v_ss) + __pyx_v_h) / __pyx_v_NP);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":197
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":197
  *     cdef DTYPE_t P2=(sk*cs-ck*h*ss-ck*sh)/NP
  *     cdef DTYPE_t P3=(-sh*ss+h)/NP
  *     cdef DTYPE_t N1=T2*P3-P2*T3             # <<<<<<<<<<<<<<
@@ -4083,7 +4083,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_N1 = ((__pyx_v_T2 * __pyx_v_P3) - (__pyx_v_P2 * __pyx_v_T3));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":198
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":198
  *     cdef DTYPE_t P3=(-sh*ss+h)/NP
  *     cdef DTYPE_t N1=T2*P3-P2*T3
  *     cdef DTYPE_t N2=-T1*P3+P1*T3             # <<<<<<<<<<<<<<
@@ -4092,7 +4092,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_N2 = (((-__pyx_v_T1) * __pyx_v_P3) + (__pyx_v_P1 * __pyx_v_T3));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":199
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":199
  *     cdef DTYPE_t N1=T2*P3-P2*T3
  *     cdef DTYPE_t N2=-T1*P3+P1*T3
  *     cdef DTYPE_t N3=T1*P2-T2*P1             # <<<<<<<<<<<<<<
@@ -4101,7 +4101,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_N3 = ((__pyx_v_T1 * __pyx_v_P2) - (__pyx_v_T2 * __pyx_v_P1));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":201
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":201
  *     cdef DTYPE_t N3=T1*P2-T2*P1
  *     #Normalised TNP Values
  *     cdef DTYPE_t sd=sin(delta)             # <<<<<<<<<<<<<<
@@ -4110,7 +4110,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_sd = sin(__pyx_v_delta);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":202
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":202
  *     #Normalised TNP Values
  *     cdef DTYPE_t sd=sin(delta)
  *     cdef DTYPE_t L1=(sqrt(3)*cg*cd-sg*cd+sqrt(2)*sd)/sqrt(6)             # <<<<<<<<<<<<<<
@@ -4119,7 +4119,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_L1 = (((((sqrt(3.0) * __pyx_v_cg) * __pyx_v_cd) - (__pyx_v_sg * __pyx_v_cd)) + (sqrt(2.0) * __pyx_v_sd)) / sqrt(6.0));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":203
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":203
  *     cdef DTYPE_t sd=sin(delta)
  *     cdef DTYPE_t L1=(sqrt(3)*cg*cd-sg*cd+sqrt(2)*sd)/sqrt(6)
  *     cdef DTYPE_t L2=(2*sg*cd+sqrt(2)*sd)/sqrt(6)             # <<<<<<<<<<<<<<
@@ -4128,7 +4128,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_L2 = ((((2.0 * __pyx_v_sg) * __pyx_v_cd) + (sqrt(2.0) * __pyx_v_sd)) / sqrt(6.0));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":204
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":204
  *     cdef DTYPE_t L1=(sqrt(3)*cg*cd-sg*cd+sqrt(2)*sd)/sqrt(6)
  *     cdef DTYPE_t L2=(2*sg*cd+sqrt(2)*sd)/sqrt(6)
  *     cdef DTYPE_t L3=(-sqrt(3)*cg*cd-sg*cd+sqrt(2)*sd)/sqrt(6)             # <<<<<<<<<<<<<<
@@ -4137,7 +4137,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   __pyx_v_L3 = ((((((-sqrt(3.0)) * __pyx_v_cg) * __pyx_v_cd) - (__pyx_v_sg * __pyx_v_cd)) + (sqrt(2.0) * __pyx_v_sd)) / sqrt(6.0));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":205
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":205
  *     cdef DTYPE_t L2=(2*sg*cd+sqrt(2)*sd)/sqrt(6)
  *     cdef DTYPE_t L3=(-sqrt(3)*cg*cd-sg*cd+sqrt(2)*sd)/sqrt(6)
  *     M[0]=L1*T1*T1+L2*N1*N1+L3*P1*P1             # <<<<<<<<<<<<<<
@@ -4146,7 +4146,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   (__pyx_v_M[0]) = ((((__pyx_v_L1 * __pyx_v_T1) * __pyx_v_T1) + ((__pyx_v_L2 * __pyx_v_N1) * __pyx_v_N1)) + ((__pyx_v_L3 * __pyx_v_P1) * __pyx_v_P1));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":206
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":206
  *     cdef DTYPE_t L3=(-sqrt(3)*cg*cd-sg*cd+sqrt(2)*sd)/sqrt(6)
  *     M[0]=L1*T1*T1+L2*N1*N1+L3*P1*P1
  *     M[1]=L1*T2*T2+L2*N2*N2+L3*P2*P2             # <<<<<<<<<<<<<<
@@ -4155,7 +4155,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   (__pyx_v_M[1]) = ((((__pyx_v_L1 * __pyx_v_T2) * __pyx_v_T2) + ((__pyx_v_L2 * __pyx_v_N2) * __pyx_v_N2)) + ((__pyx_v_L3 * __pyx_v_P2) * __pyx_v_P2));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":207
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":207
  *     M[0]=L1*T1*T1+L2*N1*N1+L3*P1*P1
  *     M[1]=L1*T2*T2+L2*N2*N2+L3*P2*P2
  *     M[2]=L1*T3*T3+L2*N3*N3+L3*P3*P3             # <<<<<<<<<<<<<<
@@ -4164,7 +4164,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   (__pyx_v_M[2]) = ((((__pyx_v_L1 * __pyx_v_T3) * __pyx_v_T3) + ((__pyx_v_L2 * __pyx_v_N3) * __pyx_v_N3)) + ((__pyx_v_L3 * __pyx_v_P3) * __pyx_v_P3));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":208
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":208
  *     M[1]=L1*T2*T2+L2*N2*N2+L3*P2*P2
  *     M[2]=L1*T3*T3+L2*N3*N3+L3*P3*P3
  *     M[3]=sqrt2*(L1*T1*T2+L2*N1*N2+L3*P1*P2)             # <<<<<<<<<<<<<<
@@ -4173,7 +4173,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   (__pyx_v_M[3]) = (M_SQRT2 * ((((__pyx_v_L1 * __pyx_v_T1) * __pyx_v_T2) + ((__pyx_v_L2 * __pyx_v_N1) * __pyx_v_N2)) + ((__pyx_v_L3 * __pyx_v_P1) * __pyx_v_P2)));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":209
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":209
  *     M[2]=L1*T3*T3+L2*N3*N3+L3*P3*P3
  *     M[3]=sqrt2*(L1*T1*T2+L2*N1*N2+L3*P1*P2)
  *     M[4]=sqrt2*(L1*T1*T3+L2*N1*N3+L3*P1*P3)             # <<<<<<<<<<<<<<
@@ -4182,7 +4182,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   (__pyx_v_M[4]) = (M_SQRT2 * ((((__pyx_v_L1 * __pyx_v_T1) * __pyx_v_T3) + ((__pyx_v_L2 * __pyx_v_N1) * __pyx_v_N3)) + ((__pyx_v_L3 * __pyx_v_P1) * __pyx_v_P3)));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":210
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":210
  *     M[3]=sqrt2*(L1*T1*T2+L2*N1*N2+L3*P1*P2)
  *     M[4]=sqrt2*(L1*T1*T3+L2*N1*N3+L3*P1*P3)
  *     M[5]=sqrt2*(L1*T2*T3+L2*N2*N3+L3*P2*P3)             # <<<<<<<<<<<<<<
@@ -4191,7 +4191,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  */
   (__pyx_v_M[5]) = (M_SQRT2 * ((((__pyx_v_L1 * __pyx_v_T2) * __pyx_v_T3) + ((__pyx_v_L2 * __pyx_v_N2) * __pyx_v_N3)) + ((__pyx_v_L3 * __pyx_v_P2) * __pyx_v_P3)));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":179
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":179
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef void cTape_MT6(DTYPE_t*M, DTYPE_t gamma,DTYPE_t delta,DTYPE_t kappa,DTYPE_t h,DTYPE_t sigma) nogil:             # <<<<<<<<<<<<<<
@@ -4202,7 +4202,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
   /* function exit code */
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":215
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":215
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef void cMultipleTape_MT6(DTYPE_t*M,DTYPE_t* gamma,DTYPE_t* delta,DTYPE_t* kappa,DTYPE_t* h,DTYPE_t* sigma,Py_ssize_t n) nogil:             # <<<<<<<<<<<<<<
@@ -4210,11 +4210,11 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6(__pyx_
  *         cTape_MT6(&M[i*6],gamma[i],delta[i],kappa[i],h[i],sigma[i])
  */
 
-static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMultipleTape_MT6(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_M, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_gamma, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_delta, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_kappa, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_h, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_sigma, Py_ssize_t __pyx_v_n) {
+static void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMultipleTape_MT6(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_M, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_gamma, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_delta, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_kappa, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_h, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_sigma, Py_ssize_t __pyx_v_n) {
   long __pyx_v_i;
   Py_ssize_t __pyx_t_1;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":216
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":216
  * @cython.cdivision(True)
  * cdef void cMultipleTape_MT6(DTYPE_t*M,DTYPE_t* gamma,DTYPE_t* delta,DTYPE_t* kappa,DTYPE_t* h,DTYPE_t* sigma,Py_ssize_t n) nogil:
  *     for i from 0<=i<n:             # <<<<<<<<<<<<<<
@@ -4224,17 +4224,17 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMultipleTape_MT
   __pyx_t_1 = __pyx_v_n;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":217
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":217
  * cdef void cMultipleTape_MT6(DTYPE_t*M,DTYPE_t* gamma,DTYPE_t* delta,DTYPE_t* kappa,DTYPE_t* h,DTYPE_t* sigma,Py_ssize_t n) nogil:
  *     for i from 0<=i<n:
  *         cTape_MT6(&M[i*6],gamma[i],delta[i],kappa[i],h[i],sigma[i])             # <<<<<<<<<<<<<<
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  */
-    __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6((&(__pyx_v_M[(__pyx_v_i * 6)])), (__pyx_v_gamma[__pyx_v_i]), (__pyx_v_delta[__pyx_v_i]), (__pyx_v_kappa[__pyx_v_i]), (__pyx_v_h[__pyx_v_i]), (__pyx_v_sigma[__pyx_v_i]));
+    __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTape_MT6((&(__pyx_v_M[(__pyx_v_i * 6)])), (__pyx_v_gamma[__pyx_v_i]), (__pyx_v_delta[__pyx_v_i]), (__pyx_v_kappa[__pyx_v_i]), (__pyx_v_h[__pyx_v_i]), (__pyx_v_sigma[__pyx_v_i]));
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":215
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":215
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef void cMultipleTape_MT6(DTYPE_t*M,DTYPE_t* gamma,DTYPE_t* delta,DTYPE_t* kappa,DTYPE_t* h,DTYPE_t* sigma,Py_ssize_t n) nogil:             # <<<<<<<<<<<<<<
@@ -4245,7 +4245,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMultipleTape_MT
   /* function exit code */
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":222
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":222
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * def Tape_MT6(DTYPE_t[::1] gamma,DTYPE_t[::1] delta,DTYPE_t[::1] kappa,DTYPE_t[::1] h,DTYPE_t[::1] sigma):             # <<<<<<<<<<<<<<
@@ -4254,9 +4254,9 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMultipleTape_MT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_1Tape_MT6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_1Tape_MT6 = {"Tape_MT6", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_1Tape_MT6, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_1Tape_MT6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_1Tape_MT6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_1Tape_MT6 = {"Tape_MT6", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_1Tape_MT6, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_1Tape_MT6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_gamma = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_delta = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_kappa = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -4321,28 +4321,28 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_1Tape_MT6(
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
       values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
     }
-    __pyx_v_gamma = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_gamma.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_delta = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[1]); if (unlikely(!__pyx_v_delta.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_kappa = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[2]); if (unlikely(!__pyx_v_kappa.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_h = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[3]); if (unlikely(!__pyx_v_h.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_sigma = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[4]); if (unlikely(!__pyx_v_sigma.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_gamma = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_gamma.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_delta = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[1]); if (unlikely(!__pyx_v_delta.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_kappa = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[2]); if (unlikely(!__pyx_v_kappa.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_h = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[3]); if (unlikely(!__pyx_v_h.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_sigma = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[4]); if (unlikely(!__pyx_v_sigma.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("Tape_MT6", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.Tape_MT6", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.Tape_MT6", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(__pyx_self, __pyx_v_gamma, __pyx_v_delta, __pyx_v_kappa, __pyx_v_h, __pyx_v_sigma);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_Tape_MT6(__pyx_self, __pyx_v_gamma, __pyx_v_delta, __pyx_v_kappa, __pyx_v_h, __pyx_v_sigma);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_gamma, __Pyx_memviewslice __pyx_v_delta, __Pyx_memviewslice __pyx_v_kappa, __Pyx_memviewslice __pyx_v_h, __Pyx_memviewslice __pyx_v_sigma) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_Tape_MT6(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_gamma, __Pyx_memviewslice __pyx_v_delta, __Pyx_memviewslice __pyx_v_kappa, __Pyx_memviewslice __pyx_v_h, __Pyx_memviewslice __pyx_v_sigma) {
   Py_ssize_t __pyx_v_n;
   __Pyx_memviewslice __pyx_v_MTs = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_r = NULL;
@@ -4369,7 +4369,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("Tape_MT6", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":223
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":223
  * @cython.cdivision(True)
  * def Tape_MT6(DTYPE_t[::1] gamma,DTYPE_t[::1] delta,DTYPE_t[::1] kappa,DTYPE_t[::1] h,DTYPE_t[::1] sigma):
  *     cdef Py_ssize_t n=gamma.shape[0]             # <<<<<<<<<<<<<<
@@ -4378,7 +4378,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
  */
   __pyx_v_n = (__pyx_v_gamma.shape[0]);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":224
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":224
  * def Tape_MT6(DTYPE_t[::1] gamma,DTYPE_t[::1] delta,DTYPE_t[::1] kappa,DTYPE_t[::1] h,DTYPE_t[::1] sigma):
  *     cdef Py_ssize_t n=gamma.shape[0]
  *     if not (gamma.shape[0]==delta.shape[0] and gamma.shape[0]==kappa.shape[0] and gamma.shape[0]==h.shape[0] and gamma.shape[0]==sigma.shape[0]):             # <<<<<<<<<<<<<<
@@ -4409,7 +4409,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
   __pyx_t_2 = ((!__pyx_t_1) != 0);
   if (__pyx_t_2) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":225
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":225
  *     cdef Py_ssize_t n=gamma.shape[0]
  *     if not (gamma.shape[0]==delta.shape[0] and gamma.shape[0]==kappa.shape[0] and gamma.shape[0]==h.shape[0] and gamma.shape[0]==sigma.shape[0]):
  *         raise ValueError('Arguments different size')             # <<<<<<<<<<<<<<
@@ -4422,7 +4422,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":224
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":224
  * def Tape_MT6(DTYPE_t[::1] gamma,DTYPE_t[::1] delta,DTYPE_t[::1] kappa,DTYPE_t[::1] h,DTYPE_t[::1] sigma):
  *     cdef Py_ssize_t n=gamma.shape[0]
  *     if not (gamma.shape[0]==delta.shape[0] and gamma.shape[0]==kappa.shape[0] and gamma.shape[0]==h.shape[0] and gamma.shape[0]==sigma.shape[0]):             # <<<<<<<<<<<<<<
@@ -4431,7 +4431,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":226
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":226
  *     if not (gamma.shape[0]==delta.shape[0] and gamma.shape[0]==kappa.shape[0] and gamma.shape[0]==h.shape[0] and gamma.shape[0]==sigma.shape[0]):
  *         raise ValueError('Arguments different size')
  *     cdef DTYPE_t[:,::1] MTs=np.empty((n,6))             # <<<<<<<<<<<<<<
@@ -4479,14 +4479,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_3);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_3);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_MTs = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":227
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":227
  *         raise ValueError('Arguments different size')
  *     cdef DTYPE_t[:,::1] MTs=np.empty((n,6))
  *     cMultipleTape_MT6(&MTs[0,0],&gamma[0],&delta[0],&kappa[0],&h[0],&sigma[0],n)             # <<<<<<<<<<<<<<
@@ -4500,9 +4500,9 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
   __pyx_t_13 = 0;
   __pyx_t_14 = 0;
   __pyx_t_15 = 0;
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMultipleTape_MT6((&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MTs.data + __pyx_t_9 * __pyx_v_MTs.strides[0]) )) + __pyx_t_10)) )))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_gamma.data) + __pyx_t_11)) )))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_delta.data) + __pyx_t_12)) )))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_kappa.data) + __pyx_t_13)) )))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_h.data) + __pyx_t_14)) )))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_sigma.data) + __pyx_t_15)) )))), __pyx_v_n);
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMultipleTape_MT6((&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MTs.data + __pyx_t_9 * __pyx_v_MTs.strides[0]) )) + __pyx_t_10)) )))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_gamma.data) + __pyx_t_11)) )))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_delta.data) + __pyx_t_12)) )))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_kappa.data) + __pyx_t_13)) )))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_h.data) + __pyx_t_14)) )))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_sigma.data) + __pyx_t_15)) )))), __pyx_v_n);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":228
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":228
  *     cdef DTYPE_t[:,::1] MTs=np.empty((n,6))
  *     cMultipleTape_MT6(&MTs[0,0],&gamma[0],&delta[0],&kappa[0],&h[0],&sigma[0],n)
  *     return np.ascontiguousarray(np.asarray(MTs).T)             # <<<<<<<<<<<<<<
@@ -4520,7 +4520,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_asarray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_MTs, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_MTs, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_16 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -4581,7 +4581,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":222
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":222
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * def Tape_MT6(DTYPE_t[::1] gamma,DTYPE_t[::1] delta,DTYPE_t[::1] kappa,DTYPE_t[::1] h,DTYPE_t[::1] sigma):             # <<<<<<<<<<<<<<
@@ -4599,7 +4599,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_XDECREF(__pyx_t_16);
   __Pyx_XDECREF(__pyx_t_17);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.Tape_MT6", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.Tape_MT6", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_MTs, 1);
@@ -4613,7 +4613,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":233
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":233
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef MT_convert(DTYPE_t[:] MT,DTYPE_t [::1] results):             # <<<<<<<<<<<<<<
@@ -4621,8 +4621,8 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_Tape_MT6(C
  *     return cTPE_convert(T,P,E,results)
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_3MT_convert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT_convert(__Pyx_memviewslice __pyx_v_MT, __Pyx_memviewslice __pyx_v_results, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_3MT_convert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT_convert(__Pyx_memviewslice __pyx_v_MT, __Pyx_memviewslice __pyx_v_results, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_T = NULL;
   CYTHON_UNUSED PyObject *__pyx_v_N = NULL;
   PyObject *__pyx_v_P = NULL;
@@ -4645,14 +4645,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT_convert(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("MT_convert", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":234
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":234
  * @cython.cdivision(True)
  * cpdef MT_convert(DTYPE_t[:] MT,DTYPE_t [::1] results):
  *     T,N,P,E=cMT6_TNPE(MT)             # <<<<<<<<<<<<<<
  *     return cTPE_convert(T,P,E,results)
  * @cython.boundscheck(False)
  */
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_v_MT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_v_MT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
     PyObject* sequence = __pyx_t_1;
@@ -4726,7 +4726,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT_convert(
   __pyx_v_E = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":235
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":235
  * cpdef MT_convert(DTYPE_t[:] MT,DTYPE_t [::1] results):
  *     T,N,P,E=cMT6_TNPE(MT)
  *     return cTPE_convert(T,P,E,results)             # <<<<<<<<<<<<<<
@@ -4734,24 +4734,24 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT_convert(
  * @cython.wraparound(False)
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_T);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_T);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_P);
+  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_P);
   if (unlikely(!__pyx_t_9.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_10.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_11 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTPE_convert(__pyx_t_8, __pyx_t_9, __pyx_t_10, __pyx_v_results); if (unlikely(!__pyx_t_11.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_11 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTPE_convert(__pyx_t_8, __pyx_t_9, __pyx_t_10, __pyx_v_results); if (unlikely(!__pyx_t_11.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_10, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_11, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_11, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_11, 1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":233
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":233
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef MT_convert(DTYPE_t[:] MT,DTYPE_t [::1] results):             # <<<<<<<<<<<<<<
@@ -4771,7 +4771,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT_convert(
   __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_10, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_11, 1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_T);
@@ -4784,8 +4784,8 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT_convert(
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_3MT_convert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_3MT_convert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_3MT_convert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_3MT_convert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_MT = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_results = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_lineno = 0;
@@ -4826,25 +4826,25 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_3MT_conver
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_MT = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_MT.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_results = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[1]); if (unlikely(!__pyx_v_results.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_MT = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_MT.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_results = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[1]); if (unlikely(!__pyx_v_results.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("MT_convert", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_2MT_convert(__pyx_self, __pyx_v_MT, __pyx_v_results);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_2MT_convert(__pyx_self, __pyx_v_MT, __pyx_v_results);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_2MT_convert(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MT, __Pyx_memviewslice __pyx_v_results) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_2MT_convert(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MT, __Pyx_memviewslice __pyx_v_results) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4855,7 +4855,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_2MT_conver
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_v_MT.memview)) { __Pyx_RaiseUnboundLocalError("MT"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   if (unlikely(!__pyx_v_results.memview)) { __Pyx_RaiseUnboundLocalError("results"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT_convert(__pyx_v_MT, __pyx_v_results, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT_convert(__pyx_v_MT, __pyx_v_results, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4864,7 +4864,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_2MT_conver
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_MT, 1);
@@ -4874,7 +4874,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_2MT_conver
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":240
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":240
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * def MT_output_convert(DTYPE_t[:,:] MTs):             # <<<<<<<<<<<<<<
@@ -4883,9 +4883,9 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_2MT_conver
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_5MT_output_convert(PyObject *__pyx_self, PyObject *__pyx_arg_MTs); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_5MT_output_convert = {"MT_output_convert", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_5MT_output_convert, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_5MT_output_convert(PyObject *__pyx_self, PyObject *__pyx_arg_MTs) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_5MT_output_convert(PyObject *__pyx_self, PyObject *__pyx_arg_MTs); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_5MT_output_convert = {"MT_output_convert", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_5MT_output_convert, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_5MT_output_convert(PyObject *__pyx_self, PyObject *__pyx_arg_MTs) {
   __Pyx_memviewslice __pyx_v_MTs = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -4894,22 +4894,22 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_5MT_output
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("MT_output_convert (wrapper)", 0);
   assert(__pyx_arg_MTs); {
-    __pyx_v_MTs = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_arg_MTs); if (unlikely(!__pyx_v_MTs.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_MTs = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_arg_MTs); if (unlikely(!__pyx_v_MTs.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT_output_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT_output_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output_convert(__pyx_self, __pyx_v_MTs);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_4MT_output_convert(__pyx_self, __pyx_v_MTs);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output_convert(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MTs) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_4MT_output_convert(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MTs) {
   Py_ssize_t __pyx_v_imax;
   Py_ssize_t __pyx_v_i;
   __Pyx_memviewslice __pyx_v_g = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -4969,7 +4969,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("MT_output_convert", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":241
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":241
  * @cython.cdivision(True)
  * def MT_output_convert(DTYPE_t[:,:] MTs):
  *     cdef Py_ssize_t imax=MTs.shape[1]             # <<<<<<<<<<<<<<
@@ -4978,7 +4978,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
  */
   __pyx_v_imax = (__pyx_v_MTs.shape[1]);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":243
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":243
  *     cdef Py_ssize_t imax=MTs.shape[1]
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [::1] g=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5023,14 +5023,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_g = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":244
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":244
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [::1] g=np.empty((imax,))
  *     cdef DTYPE_t [::1] d=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5075,14 +5075,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_d = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":245
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":245
  *     cdef DTYPE_t [::1] g=np.empty((imax,))
  *     cdef DTYPE_t [::1] d=np.empty((imax,))
  *     cdef DTYPE_t [::1] k=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5127,14 +5127,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_k = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":246
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":246
  *     cdef DTYPE_t [::1] d=np.empty((imax,))
  *     cdef DTYPE_t [::1] k=np.empty((imax,))
  *     cdef DTYPE_t [::1] h=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5179,14 +5179,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_h = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":247
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":247
  *     cdef DTYPE_t [::1] k=np.empty((imax,))
  *     cdef DTYPE_t [::1] h=np.empty((imax,))
  *     cdef DTYPE_t [::1] s=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5231,14 +5231,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_s = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":248
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":248
  *     cdef DTYPE_t [::1] h=np.empty((imax,))
  *     cdef DTYPE_t [::1] s=np.empty((imax,))
  *     cdef DTYPE_t [::1] u=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5283,14 +5283,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_u = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":249
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":249
  *     cdef DTYPE_t [::1] s=np.empty((imax,))
  *     cdef DTYPE_t [::1] u=np.empty((imax,))
  *     cdef DTYPE_t [::1] v=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5335,14 +5335,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_v = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":250
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":250
  *     cdef DTYPE_t [::1] u=np.empty((imax,))
  *     cdef DTYPE_t [::1] v=np.empty((imax,))
  *     cdef DTYPE_t [::1] s1=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5387,14 +5387,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_s1 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":251
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":251
  *     cdef DTYPE_t [::1] v=np.empty((imax,))
  *     cdef DTYPE_t [::1] s1=np.empty((imax,))
  *     cdef DTYPE_t [::1] d1=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5439,14 +5439,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_d1 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":252
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":252
  *     cdef DTYPE_t [::1] s1=np.empty((imax,))
  *     cdef DTYPE_t [::1] d1=np.empty((imax,))
  *     cdef DTYPE_t [::1] r1=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5491,14 +5491,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r1 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":253
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":253
  *     cdef DTYPE_t [::1] d1=np.empty((imax,))
  *     cdef DTYPE_t [::1] r1=np.empty((imax,))
  *     cdef DTYPE_t [::1] s2=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5543,14 +5543,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_s2 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":254
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":254
  *     cdef DTYPE_t [::1] r1=np.empty((imax,))
  *     cdef DTYPE_t [::1] s2=np.empty((imax,))
  *     cdef DTYPE_t [::1] d2=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5595,14 +5595,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_d2 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":255
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":255
  *     cdef DTYPE_t [::1] s2=np.empty((imax,))
  *     cdef DTYPE_t [::1] d2=np.empty((imax,))
  *     cdef DTYPE_t [::1] r2=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -5647,14 +5647,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r2 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":256
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":256
  *     cdef DTYPE_t [::1] d2=np.empty((imax,))
  *     cdef DTYPE_t [::1] r2=np.empty((imax,))
  *     cdef DTYPE_t [::1] results=np.empty((13,))             # <<<<<<<<<<<<<<
@@ -5669,14 +5669,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_results = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":257
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":257
  *     cdef DTYPE_t [::1] r2=np.empty((imax,))
  *     cdef DTYPE_t [::1] results=np.empty((13,))
  *     for i in range(imax):             # <<<<<<<<<<<<<<
@@ -5687,7 +5687,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_4MT_output
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":258
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":258
  *     cdef DTYPE_t [::1] results=np.empty((13,))
  *     for i in range(imax):
  *         results=MT_convert(MTs[:,i],np.empty((13,)))             # <<<<<<<<<<<<<<
@@ -5722,14 +5722,14 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
     __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+    __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
     if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT_convert(__pyx_t_9, __pyx_t_6, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT_convert(__pyx_t_9, __pyx_t_6, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-    __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+    __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
     if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __PYX_XDEC_MEMVIEW(&__pyx_v_results, 1);
@@ -5737,7 +5737,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
     __pyx_t_6.memview = NULL;
     __pyx_t_6.data = NULL;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":259
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":259
  *     for i in range(imax):
  *         results=MT_convert(MTs[:,i],np.empty((13,)))
  *         g[i]=results[0]             # <<<<<<<<<<<<<<
@@ -5746,9 +5746,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_10 = 0;
     __pyx_t_11 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_g.data) + __pyx_t_11)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_10)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_g.data) + __pyx_t_11)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_10)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":260
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":260
  *         results=MT_convert(MTs[:,i],np.empty((13,)))
  *         g[i]=results[0]
  *         d[i]=results[1]             # <<<<<<<<<<<<<<
@@ -5757,9 +5757,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_12 = 1;
     __pyx_t_13 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d.data) + __pyx_t_13)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_12)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d.data) + __pyx_t_13)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_12)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":261
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":261
  *         g[i]=results[0]
  *         d[i]=results[1]
  *         k[i]=results[2]             # <<<<<<<<<<<<<<
@@ -5768,9 +5768,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_14 = 2;
     __pyx_t_15 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_k.data) + __pyx_t_15)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_14)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_k.data) + __pyx_t_15)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_14)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":262
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":262
  *         d[i]=results[1]
  *         k[i]=results[2]
  *         h[i]=results[3]             # <<<<<<<<<<<<<<
@@ -5779,9 +5779,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_16 = 3;
     __pyx_t_17 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_h.data) + __pyx_t_17)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_16)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_h.data) + __pyx_t_17)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_16)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":263
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":263
  *         k[i]=results[2]
  *         h[i]=results[3]
  *         s[i]=results[4]             # <<<<<<<<<<<<<<
@@ -5790,9 +5790,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_18 = 4;
     __pyx_t_19 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s.data) + __pyx_t_19)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_18)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s.data) + __pyx_t_19)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_18)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":264
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":264
  *         h[i]=results[3]
  *         s[i]=results[4]
  *         u[i]=results[5]             # <<<<<<<<<<<<<<
@@ -5801,9 +5801,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_20 = 5;
     __pyx_t_21 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_u.data) + __pyx_t_21)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_20)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_u.data) + __pyx_t_21)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_20)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":265
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":265
  *         s[i]=results[4]
  *         u[i]=results[5]
  *         v[i]=results[6]             # <<<<<<<<<<<<<<
@@ -5812,9 +5812,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_22 = 6;
     __pyx_t_23 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_v.data) + __pyx_t_23)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_22)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_v.data) + __pyx_t_23)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_22)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":266
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":266
  *         u[i]=results[5]
  *         v[i]=results[6]
  *         s1[i]=results[7]             # <<<<<<<<<<<<<<
@@ -5823,9 +5823,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_24 = 7;
     __pyx_t_25 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s1.data) + __pyx_t_25)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_24)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s1.data) + __pyx_t_25)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_24)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":267
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":267
  *         v[i]=results[6]
  *         s1[i]=results[7]
  *         d1[i]=results[8]             # <<<<<<<<<<<<<<
@@ -5834,9 +5834,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_26 = 8;
     __pyx_t_27 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d1.data) + __pyx_t_27)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_26)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d1.data) + __pyx_t_27)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_26)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":268
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":268
  *         s1[i]=results[7]
  *         d1[i]=results[8]
  *         r1[i]=results[9]             # <<<<<<<<<<<<<<
@@ -5845,9 +5845,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_28 = 9;
     __pyx_t_29 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r1.data) + __pyx_t_29)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_28)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r1.data) + __pyx_t_29)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_28)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":269
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":269
  *         d1[i]=results[8]
  *         r1[i]=results[9]
  *         s2[i]=results[10]             # <<<<<<<<<<<<<<
@@ -5856,9 +5856,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_30 = 10;
     __pyx_t_31 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s2.data) + __pyx_t_31)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_30)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s2.data) + __pyx_t_31)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_30)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":270
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":270
  *         r1[i]=results[9]
  *         s2[i]=results[10]
  *         d2[i]=results[11]             # <<<<<<<<<<<<<<
@@ -5867,9 +5867,9 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_32 = 11;
     __pyx_t_33 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d2.data) + __pyx_t_33)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_32)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d2.data) + __pyx_t_33)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_32)) )));
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":271
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":271
  *         s2[i]=results[10]
  *         d2[i]=results[11]
  *         r2[i]=results[12]             # <<<<<<<<<<<<<<
@@ -5878,10 +5878,10 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  */
     __pyx_t_34 = 12;
     __pyx_t_35 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r2.data) + __pyx_t_35)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_34)) )));
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r2.data) + __pyx_t_35)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_results.data) + __pyx_t_34)) )));
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":272
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":272
  *         d2[i]=results[11]
  *         r2[i]=results[12]
  *     return {'g':np.asarray(g),'d':np.asarray(d),'k':np.asarray(k),'h':np.asarray(h),'s':np.asarray(s),'u':np.asarray(u),'v':np.asarray(v),'S1':np.asarray(s1),'D1':np.asarray(d1),'R1':np.asarray(r1),'S2':np.asarray(s2),'D2':np.asarray(d2),'R2':np.asarray(r2)}             # <<<<<<<<<<<<<<
@@ -5896,7 +5896,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_asarray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_g, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_g, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -5931,7 +5931,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_36 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_asarray); if (unlikely(!__pyx_t_36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_36);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_d, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_d, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_36))) {
@@ -5966,7 +5966,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_36, __pyx_n_s_asarray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_36); __pyx_t_36 = 0;
-  __pyx_t_36 = __pyx_memoryview_fromslice(__pyx_v_k, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_36 = __pyx_memoryview_fromslice(__pyx_v_k, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_36);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -6001,7 +6001,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_asarray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_h, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_h, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_36 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -6036,7 +6036,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_asarray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_s, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_s, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -6071,7 +6071,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_36 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_asarray); if (unlikely(!__pyx_t_36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_36);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_u, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_u, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_36))) {
@@ -6106,7 +6106,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_36, __pyx_n_s_asarray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_36); __pyx_t_36 = 0;
-  __pyx_t_36 = __pyx_memoryview_fromslice(__pyx_v_v, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_36 = __pyx_memoryview_fromslice(__pyx_v_v, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_36);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -6141,7 +6141,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_asarray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_s1, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_s1, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_36 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -6176,7 +6176,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_asarray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_d1, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_d1, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -6211,7 +6211,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_36 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_asarray); if (unlikely(!__pyx_t_36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_36);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_r1, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_r1, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_36))) {
@@ -6246,7 +6246,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_36, __pyx_n_s_asarray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_36); __pyx_t_36 = 0;
-  __pyx_t_36 = __pyx_memoryview_fromslice(__pyx_v_s2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_36 = __pyx_memoryview_fromslice(__pyx_v_s2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_36);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -6281,7 +6281,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_asarray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_d2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_d2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_36 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -6316,7 +6316,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_asarray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_r2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_r2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -6350,7 +6350,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":240
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":240
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * def MT_output_convert(DTYPE_t[:,:] MTs):             # <<<<<<<<<<<<<<
@@ -6368,7 +6368,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
   __Pyx_XDECREF(__pyx_t_36);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT_output_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT_output_convert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_MTs, 1);
@@ -6391,7 +6391,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":277
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":277
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef cMT6_TNPE(DTYPE_t[:] MT):             # <<<<<<<<<<<<<<
@@ -6399,7 +6399,7 @@ __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {
  *     cdef DTYPE_t [::1] E=np.empty((3,))
  */
 
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__Pyx_memviewslice __pyx_v_MT) {
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__Pyx_memviewslice __pyx_v_MT) {
   __Pyx_memviewslice __pyx_v_MT33 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_E = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_e = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -6493,7 +6493,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cMT6_TNPE", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":278
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":278
  * @cython.cdivision(True)
  * cdef cMT6_TNPE(DTYPE_t[:] MT):
  *     cdef DTYPE_t [:,::1] MT33=np.empty((3,3))             # <<<<<<<<<<<<<<
@@ -6508,14 +6508,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_3.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_MT33 = __pyx_t_3;
   __pyx_t_3.memview = NULL;
   __pyx_t_3.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":279
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":279
  * cdef cMT6_TNPE(DTYPE_t[:] MT):
  *     cdef DTYPE_t [:,::1] MT33=np.empty((3,3))
  *     cdef DTYPE_t [::1] E=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -6530,14 +6530,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_4.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_E = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":280
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":280
  *     cdef DTYPE_t [:,::1] MT33=np.empty((3,3))
  *     cdef DTYPE_t [::1] E=np.empty((3,))
  *     cdef DTYPE_t [::1] e=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -6552,14 +6552,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_4.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_e = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":281
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":281
  *     cdef DTYPE_t [::1] E=np.empty((3,))
  *     cdef DTYPE_t [::1] e=np.empty((3,))
  *     cdef DTYPE_t [::1] T=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -6574,14 +6574,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_4.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_T = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":282
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":282
  *     cdef DTYPE_t [::1] e=np.empty((3,))
  *     cdef DTYPE_t [::1] T=np.empty((3,))
  *     cdef DTYPE_t [::1] P=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -6596,14 +6596,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_4.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_P = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":283
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":283
  *     cdef DTYPE_t [::1] T=np.empty((3,))
  *     cdef DTYPE_t [::1] P=np.empty((3,))
  *     cdef DTYPE_t [::1] N=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -6618,14 +6618,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_4.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_N = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":284
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":284
  *     cdef DTYPE_t [::1] P=np.empty((3,))
  *     cdef DTYPE_t [::1] N=np.empty((3,))
  *     cdef DTYPE_t [:,:] L=np.empty((3,3))             # <<<<<<<<<<<<<<
@@ -6640,14 +6640,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_L = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":285
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":285
  *     cdef DTYPE_t [::1] N=np.empty((3,))
  *     cdef DTYPE_t [:,:] L=np.empty((3,3))
  *     MT33[0,0]=MT[0]             # <<<<<<<<<<<<<<
@@ -6657,9 +6657,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_6 = 0;
   __pyx_t_7 = 0;
   __pyx_t_8 = 0;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_7 * __pyx_v_MT33.strides[0]) )) + __pyx_t_8)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_6 * __pyx_v_MT.strides[0]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_7 * __pyx_v_MT33.strides[0]) )) + __pyx_t_8)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_6 * __pyx_v_MT.strides[0]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":286
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":286
  *     cdef DTYPE_t [:,:] L=np.empty((3,3))
  *     MT33[0,0]=MT[0]
  *     MT33[1,1]=MT[1]             # <<<<<<<<<<<<<<
@@ -6669,9 +6669,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_9 = 1;
   __pyx_t_10 = 1;
   __pyx_t_11 = 1;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_10 * __pyx_v_MT33.strides[0]) )) + __pyx_t_11)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_9 * __pyx_v_MT.strides[0]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_10 * __pyx_v_MT33.strides[0]) )) + __pyx_t_11)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_9 * __pyx_v_MT.strides[0]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":287
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":287
  *     MT33[0,0]=MT[0]
  *     MT33[1,1]=MT[1]
  *     MT33[2,2]=MT[2]             # <<<<<<<<<<<<<<
@@ -6681,9 +6681,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_12 = 2;
   __pyx_t_13 = 2;
   __pyx_t_14 = 2;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_13 * __pyx_v_MT33.strides[0]) )) + __pyx_t_14)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_12 * __pyx_v_MT.strides[0]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_13 * __pyx_v_MT33.strides[0]) )) + __pyx_t_14)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_12 * __pyx_v_MT.strides[0]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":288
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":288
  *     MT33[1,1]=MT[1]
  *     MT33[2,2]=MT[2]
  *     MT33[0,1]=MT[3]/sqrt2             # <<<<<<<<<<<<<<
@@ -6693,9 +6693,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_15 = 3;
   __pyx_t_16 = 0;
   __pyx_t_17 = 1;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_16 * __pyx_v_MT33.strides[0]) )) + __pyx_t_17)) )) = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_15 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_16 * __pyx_v_MT33.strides[0]) )) + __pyx_t_17)) )) = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_15 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":289
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":289
  *     MT33[2,2]=MT[2]
  *     MT33[0,1]=MT[3]/sqrt2
  *     MT33[0,2]=MT[4]/sqrt2             # <<<<<<<<<<<<<<
@@ -6705,9 +6705,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_18 = 4;
   __pyx_t_19 = 0;
   __pyx_t_20 = 2;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_19 * __pyx_v_MT33.strides[0]) )) + __pyx_t_20)) )) = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_18 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_19 * __pyx_v_MT33.strides[0]) )) + __pyx_t_20)) )) = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_18 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":290
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":290
  *     MT33[0,1]=MT[3]/sqrt2
  *     MT33[0,2]=MT[4]/sqrt2
  *     MT33[1,2]=MT[5]/sqrt2             # <<<<<<<<<<<<<<
@@ -6717,9 +6717,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_21 = 5;
   __pyx_t_22 = 1;
   __pyx_t_23 = 2;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_22 * __pyx_v_MT33.strides[0]) )) + __pyx_t_23)) )) = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_21 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_22 * __pyx_v_MT33.strides[0]) )) + __pyx_t_23)) )) = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_21 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":291
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":291
  *     MT33[0,2]=MT[4]/sqrt2
  *     MT33[1,2]=MT[5]/sqrt2
  *     MT33[1,0]=MT[3]/sqrt2             # <<<<<<<<<<<<<<
@@ -6729,9 +6729,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_24 = 3;
   __pyx_t_25 = 1;
   __pyx_t_26 = 0;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_25 * __pyx_v_MT33.strides[0]) )) + __pyx_t_26)) )) = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_24 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_25 * __pyx_v_MT33.strides[0]) )) + __pyx_t_26)) )) = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_24 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":292
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":292
  *     MT33[1,2]=MT[5]/sqrt2
  *     MT33[1,0]=MT[3]/sqrt2
  *     MT33[2,0]=MT[4]/sqrt2             # <<<<<<<<<<<<<<
@@ -6741,9 +6741,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_27 = 4;
   __pyx_t_28 = 2;
   __pyx_t_29 = 0;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_28 * __pyx_v_MT33.strides[0]) )) + __pyx_t_29)) )) = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_27 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_28 * __pyx_v_MT33.strides[0]) )) + __pyx_t_29)) )) = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_27 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":293
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":293
  *     MT33[1,0]=MT[3]/sqrt2
  *     MT33[2,0]=MT[4]/sqrt2
  *     MT33[2,1]=MT[5]/sqrt2             # <<<<<<<<<<<<<<
@@ -6753,19 +6753,19 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_30 = 5;
   __pyx_t_31 = 2;
   __pyx_t_32 = 1;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_31 * __pyx_v_MT33.strides[0]) )) + __pyx_t_32)) )) = ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_30 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT33.data + __pyx_t_31 * __pyx_v_MT33.strides[0]) )) + __pyx_t_32)) )) = ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_MT.data + __pyx_t_30 * __pyx_v_MT.strides[0]) ))) / M_SQRT2);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":294
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":294
  *     MT33[2,0]=MT[4]/sqrt2
  *     MT33[2,1]=MT[5]/sqrt2
  *     if check_finite>0:             # <<<<<<<<<<<<<<
  *         e,L=eigh(MT33,overwrite_a=True,check_finite=False)
  *     else:
  */
-  __pyx_t_33 = ((__pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_check_finite > 0) != 0);
+  __pyx_t_33 = ((__pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_check_finite > 0) != 0);
   if (__pyx_t_33) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":295
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":295
  *     MT33[2,1]=MT[5]/sqrt2
  *     if check_finite>0:
  *         e,L=eigh(MT33,overwrite_a=True,check_finite=False)             # <<<<<<<<<<<<<<
@@ -6774,7 +6774,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_eigh); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_MT33, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_MT33, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_34 = PyTuple_New(1); if (unlikely(!__pyx_t_34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_34);
@@ -6840,10 +6840,10 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_2);
+    __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_2);
     if (unlikely(!__pyx_t_4.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_34);
+    __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_34);
     if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __PYX_XDEC_MEMVIEW(&__pyx_v_e, 1);
@@ -6855,7 +6855,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
     __pyx_t_5.memview = NULL;
     __pyx_t_5.data = NULL;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":294
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":294
  *     MT33[2,0]=MT[4]/sqrt2
  *     MT33[2,1]=MT[5]/sqrt2
  *     if check_finite>0:             # <<<<<<<<<<<<<<
@@ -6865,7 +6865,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
     goto __pyx_L3;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":297
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":297
  *         e,L=eigh(MT33,overwrite_a=True,check_finite=False)
  *     else:
  *         e,L=eigh(MT33,overwrite_a=True)             # <<<<<<<<<<<<<<
@@ -6875,7 +6875,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   /*else*/ {
     __pyx_t_35 = __Pyx_GetModuleGlobalName(__pyx_n_s_eigh); if (unlikely(!__pyx_t_35)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_35);
-    __pyx_t_34 = __pyx_memoryview_fromslice(__pyx_v_MT33, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_34 = __pyx_memoryview_fromslice(__pyx_v_MT33, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_34);
     __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
@@ -6940,10 +6940,10 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_L7_unpacking_done:;
     }
-    __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_34);
+    __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_34);
     if (unlikely(!__pyx_t_4.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
-    __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_2);
+    __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_2);
     if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __PYX_XDEC_MEMVIEW(&__pyx_v_e, 1);
@@ -6957,7 +6957,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   }
   __pyx_L3:;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":298
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":298
  *     else:
  *         e,L=eigh(MT33,overwrite_a=True)
  *     maxi=0             # <<<<<<<<<<<<<<
@@ -6966,7 +6966,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
   __pyx_v_maxi = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":299
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":299
  *         e,L=eigh(MT33,overwrite_a=True)
  *     maxi=0
  *     mini=0             # <<<<<<<<<<<<<<
@@ -6975,7 +6975,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
   __pyx_v_mini = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":301
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":301
  *     mini=0
  *     cdef Py_ssize_t i
  *     for i in [0,1,2]:             # <<<<<<<<<<<<<<
@@ -6995,7 +6995,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_i = __pyx_t_38;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":302
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":302
  *     cdef Py_ssize_t i
  *     for i in [0,1,2]:
  *         if e[i]>e[maxi]:             # <<<<<<<<<<<<<<
@@ -7004,10 +7004,10 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
     __pyx_t_39 = __pyx_v_i;
     __pyx_t_40 = __pyx_v_maxi;
-    __pyx_t_33 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_39)) ))) > (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_40)) )))) != 0);
+    __pyx_t_33 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_39)) ))) > (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_40)) )))) != 0);
     if (__pyx_t_33) {
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":303
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":303
  *     for i in [0,1,2]:
  *         if e[i]>e[maxi]:
  *             maxi=i             # <<<<<<<<<<<<<<
@@ -7016,7 +7016,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
       __pyx_v_maxi = __pyx_v_i;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":302
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":302
  *     cdef Py_ssize_t i
  *     for i in [0,1,2]:
  *         if e[i]>e[maxi]:             # <<<<<<<<<<<<<<
@@ -7025,7 +7025,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
     }
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":304
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":304
  *         if e[i]>e[maxi]:
  *             maxi=i
  *         if e[i]<e[mini]:             # <<<<<<<<<<<<<<
@@ -7034,10 +7034,10 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
     __pyx_t_41 = __pyx_v_i;
     __pyx_t_42 = __pyx_v_mini;
-    __pyx_t_33 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_41)) ))) < (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_42)) )))) != 0);
+    __pyx_t_33 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_41)) ))) < (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_42)) )))) != 0);
     if (__pyx_t_33) {
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":305
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":305
  *             maxi=i
  *         if e[i]<e[mini]:
  *             mini=i             # <<<<<<<<<<<<<<
@@ -7046,7 +7046,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
       __pyx_v_mini = __pyx_v_i;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":304
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":304
  *         if e[i]>e[maxi]:
  *             maxi=i
  *         if e[i]<e[mini]:             # <<<<<<<<<<<<<<
@@ -7055,7 +7055,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
     }
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":301
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":301
  *     mini=0
  *     cdef Py_ssize_t i
  *     for i in [0,1,2]:             # <<<<<<<<<<<<<<
@@ -7065,7 +7065,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":306
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":306
  *         if e[i]<e[mini]:
  *             mini=i
  *     E[0]=e[maxi]             # <<<<<<<<<<<<<<
@@ -7074,9 +7074,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
   __pyx_t_43 = __pyx_v_maxi;
   __pyx_t_44 = 0;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_44)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_43)) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_44)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_43)) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":307
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":307
  *             mini=i
  *     E[0]=e[maxi]
  *     E[1]=e[3-maxi-mini]             # <<<<<<<<<<<<<<
@@ -7085,9 +7085,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
   __pyx_t_45 = ((3 - __pyx_v_maxi) - __pyx_v_mini);
   __pyx_t_46 = 1;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_46)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_45)) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_46)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_45)) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":308
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":308
  *     E[0]=e[maxi]
  *     E[1]=e[3-maxi-mini]
  *     E[2]=e[mini]             # <<<<<<<<<<<<<<
@@ -7096,9 +7096,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  */
   __pyx_t_47 = __pyx_v_mini;
   __pyx_t_48 = 2;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_48)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_47)) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_E.data) + __pyx_t_48)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_e.data) + __pyx_t_47)) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":309
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":309
  *     E[1]=e[3-maxi-mini]
  *     E[2]=e[mini]
  *     T[0]=L[0,maxi]             # <<<<<<<<<<<<<<
@@ -7108,9 +7108,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_49 = 0;
   __pyx_t_50 = __pyx_v_maxi;
   __pyx_t_51 = 0;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_51)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_49 * __pyx_v_L.strides[0]) ) + __pyx_t_50 * __pyx_v_L.strides[1]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_51)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_49 * __pyx_v_L.strides[0]) ) + __pyx_t_50 * __pyx_v_L.strides[1]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":310
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":310
  *     E[2]=e[mini]
  *     T[0]=L[0,maxi]
  *     T[1]=L[1,maxi]             # <<<<<<<<<<<<<<
@@ -7120,9 +7120,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_52 = 1;
   __pyx_t_53 = __pyx_v_maxi;
   __pyx_t_54 = 1;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_54)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_52 * __pyx_v_L.strides[0]) ) + __pyx_t_53 * __pyx_v_L.strides[1]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_54)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_52 * __pyx_v_L.strides[0]) ) + __pyx_t_53 * __pyx_v_L.strides[1]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":311
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":311
  *     T[0]=L[0,maxi]
  *     T[1]=L[1,maxi]
  *     T[2]=L[2,maxi]             # <<<<<<<<<<<<<<
@@ -7132,9 +7132,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_55 = 2;
   __pyx_t_56 = __pyx_v_maxi;
   __pyx_t_57 = 2;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_57)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_55 * __pyx_v_L.strides[0]) ) + __pyx_t_56 * __pyx_v_L.strides[1]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_T.data) + __pyx_t_57)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_55 * __pyx_v_L.strides[0]) ) + __pyx_t_56 * __pyx_v_L.strides[1]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":312
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":312
  *     T[1]=L[1,maxi]
  *     T[2]=L[2,maxi]
  *     N[0]=L[0,3-maxi-mini]             # <<<<<<<<<<<<<<
@@ -7144,9 +7144,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_58 = 0;
   __pyx_t_59 = ((3 - __pyx_v_maxi) - __pyx_v_mini);
   __pyx_t_60 = 0;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_N.data) + __pyx_t_60)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_58 * __pyx_v_L.strides[0]) ) + __pyx_t_59 * __pyx_v_L.strides[1]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_N.data) + __pyx_t_60)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_58 * __pyx_v_L.strides[0]) ) + __pyx_t_59 * __pyx_v_L.strides[1]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":313
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":313
  *     T[2]=L[2,maxi]
  *     N[0]=L[0,3-maxi-mini]
  *     N[1]=L[1,3-maxi-mini]             # <<<<<<<<<<<<<<
@@ -7156,9 +7156,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_61 = 1;
   __pyx_t_62 = ((3 - __pyx_v_maxi) - __pyx_v_mini);
   __pyx_t_63 = 1;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_N.data) + __pyx_t_63)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_61 * __pyx_v_L.strides[0]) ) + __pyx_t_62 * __pyx_v_L.strides[1]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_N.data) + __pyx_t_63)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_61 * __pyx_v_L.strides[0]) ) + __pyx_t_62 * __pyx_v_L.strides[1]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":314
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":314
  *     N[0]=L[0,3-maxi-mini]
  *     N[1]=L[1,3-maxi-mini]
  *     N[2]=L[2,3-maxi-mini]             # <<<<<<<<<<<<<<
@@ -7168,9 +7168,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_64 = 2;
   __pyx_t_65 = ((3 - __pyx_v_maxi) - __pyx_v_mini);
   __pyx_t_66 = 2;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_N.data) + __pyx_t_66)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_64 * __pyx_v_L.strides[0]) ) + __pyx_t_65 * __pyx_v_L.strides[1]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_N.data) + __pyx_t_66)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_64 * __pyx_v_L.strides[0]) ) + __pyx_t_65 * __pyx_v_L.strides[1]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":315
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":315
  *     N[1]=L[1,3-maxi-mini]
  *     N[2]=L[2,3-maxi-mini]
  *     P[0]=L[0,mini]             # <<<<<<<<<<<<<<
@@ -7180,9 +7180,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_67 = 0;
   __pyx_t_68 = __pyx_v_mini;
   __pyx_t_69 = 0;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_69)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_67 * __pyx_v_L.strides[0]) ) + __pyx_t_68 * __pyx_v_L.strides[1]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_69)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_67 * __pyx_v_L.strides[0]) ) + __pyx_t_68 * __pyx_v_L.strides[1]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":316
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":316
  *     N[2]=L[2,3-maxi-mini]
  *     P[0]=L[0,mini]
  *     P[1]=L[1,mini]             # <<<<<<<<<<<<<<
@@ -7192,9 +7192,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_70 = 1;
   __pyx_t_71 = __pyx_v_mini;
   __pyx_t_72 = 1;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_72)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_70 * __pyx_v_L.strides[0]) ) + __pyx_t_71 * __pyx_v_L.strides[1]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_72)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_70 * __pyx_v_L.strides[0]) ) + __pyx_t_71 * __pyx_v_L.strides[1]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":317
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":317
  *     P[0]=L[0,mini]
  *     P[1]=L[1,mini]
  *     P[2]=L[2,mini]             # <<<<<<<<<<<<<<
@@ -7204,9 +7204,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_73 = 2;
   __pyx_t_74 = __pyx_v_mini;
   __pyx_t_75 = 2;
-  *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_75)) )) = (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_73 * __pyx_v_L.strides[0]) ) + __pyx_t_74 * __pyx_v_L.strides[1]) )));
+  *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_P.data) + __pyx_t_75)) )) = (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_L.data + __pyx_t_73 * __pyx_v_L.strides[0]) ) + __pyx_t_74 * __pyx_v_L.strides[1]) )));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":318
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":318
  *     P[1]=L[1,mini]
  *     P[2]=L[2,mini]
  *     return T,N,P,E             # <<<<<<<<<<<<<<
@@ -7214,13 +7214,13 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  * @cython.wraparound(False)
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_T, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_T, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_N, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_N, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_34 = __pyx_memoryview_fromslice(__pyx_v_P, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_34 = __pyx_memoryview_fromslice(__pyx_v_P, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_34);
-  __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_v_E, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_35)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_v_E, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_35)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_35);
   __pyx_t_76 = PyTuple_New(4); if (unlikely(!__pyx_t_76)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_76);
@@ -7240,7 +7240,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __pyx_t_76 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":277
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":277
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef cMT6_TNPE(DTYPE_t[:] MT):             # <<<<<<<<<<<<<<
@@ -7258,7 +7258,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   __Pyx_XDECREF(__pyx_t_34);
   __Pyx_XDECREF(__pyx_t_35);
   __Pyx_XDECREF(__pyx_t_76);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_MT33, 1);
@@ -7273,7 +7273,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":323
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":323
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef MT6_TNPE(DTYPE_t[:,:] MTs):             # <<<<<<<<<<<<<<
@@ -7281,8 +7281,8 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(_
  *     cdef Py_ssize_t i
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_7MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_arg_MTs); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__Pyx_memviewslice __pyx_v_MTs, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_7MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_arg_MTs); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__Pyx_memviewslice __pyx_v_MTs, CYTHON_UNUSED int __pyx_skip_dispatch) {
   Py_ssize_t __pyx_v_imax;
   Py_ssize_t __pyx_v_i;
   __Pyx_memviewslice __pyx_v_T = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -7306,7 +7306,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__
   __Pyx_memviewslice __pyx_t_9 = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_t_10 = NULL;
   PyObject *(*__pyx_t_11)(PyObject *);
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_12;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_12;
   Py_ssize_t __pyx_t_13;
   Py_ssize_t __pyx_t_14;
   Py_ssize_t __pyx_t_15;
@@ -7338,7 +7338,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("MT6_TNPE", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":324
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":324
  * @cython.cdivision(True)
  * cpdef MT6_TNPE(DTYPE_t[:,:] MTs):
  *     cdef Py_ssize_t imax=MTs.shape[1]             # <<<<<<<<<<<<<<
@@ -7347,7 +7347,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__
  */
   __pyx_v_imax = (__pyx_v_MTs.shape[1]);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":326
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":326
  *     cdef Py_ssize_t imax=MTs.shape[1]
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [:,::1] T=np.empty((3,imax))             # <<<<<<<<<<<<<<
@@ -7395,14 +7395,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 326; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_T = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":327
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":327
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [:,::1] T=np.empty((3,imax))
  *     cdef DTYPE_t [:,::1] N=np.empty((3,imax))             # <<<<<<<<<<<<<<
@@ -7450,14 +7450,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_N = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":328
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":328
  *     cdef DTYPE_t [:,::1] T=np.empty((3,imax))
  *     cdef DTYPE_t [:,::1] N=np.empty((3,imax))
  *     cdef DTYPE_t [:,::1] P=np.empty((3,imax))             # <<<<<<<<<<<<<<
@@ -7505,14 +7505,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_P = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":329
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":329
  *     cdef DTYPE_t [:,::1] N=np.empty((3,imax))
  *     cdef DTYPE_t [:,::1] P=np.empty((3,imax))
  *     cdef DTYPE_t [:,::1] E=np.empty((3,imax))             # <<<<<<<<<<<<<<
@@ -7560,14 +7560,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_E = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":330
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":330
  *     cdef DTYPE_t [:,::1] P=np.empty((3,imax))
  *     cdef DTYPE_t [:,::1] E=np.empty((3,imax))
  *     for i in range(imax):             # <<<<<<<<<<<<<<
@@ -7578,7 +7578,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":331
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":331
  *     cdef DTYPE_t [:,::1] E=np.empty((3,imax))
  *     for i in range(imax):
  *         t,n,p,e=cMT6_TNPE(MTs[:,i])             # <<<<<<<<<<<<<<
@@ -7605,7 +7605,7 @@ __pyx_t_9.strides[0] = __pyx_v_MTs.strides[0];
         __pyx_t_9.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
 
-__pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_t_9); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+__pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_t_9); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
     if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
@@ -7680,7 +7680,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_XDECREF_SET(__pyx_v_e, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":332
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":332
  *     for i in range(imax):
  *         t,n,p,e=cMT6_TNPE(MTs[:,i])
  *         T[0,i]=t[0]             # <<<<<<<<<<<<<<
@@ -7693,9 +7693,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_13 = 0;
     __pyx_t_14 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_13 * __pyx_v_T.strides[0]) )) + __pyx_t_14)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_13 * __pyx_v_T.strides[0]) )) + __pyx_t_14)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":333
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":333
  *         t,n,p,e=cMT6_TNPE(MTs[:,i])
  *         T[0,i]=t[0]
  *         N[0,i]=n[0]             # <<<<<<<<<<<<<<
@@ -7708,9 +7708,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_15 = 0;
     __pyx_t_16 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_N.data + __pyx_t_15 * __pyx_v_N.strides[0]) )) + __pyx_t_16)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_N.data + __pyx_t_15 * __pyx_v_N.strides[0]) )) + __pyx_t_16)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":334
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":334
  *         T[0,i]=t[0]
  *         N[0,i]=n[0]
  *         P[0,i]=p[0]             # <<<<<<<<<<<<<<
@@ -7723,9 +7723,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_17 = 0;
     __pyx_t_18 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_17 * __pyx_v_P.strides[0]) )) + __pyx_t_18)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_17 * __pyx_v_P.strides[0]) )) + __pyx_t_18)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":335
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":335
  *         N[0,i]=n[0]
  *         P[0,i]=p[0]
  *         E[0,i]=e[0]             # <<<<<<<<<<<<<<
@@ -7738,9 +7738,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_19 = 0;
     __pyx_t_20 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_19 * __pyx_v_E.strides[0]) )) + __pyx_t_20)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_19 * __pyx_v_E.strides[0]) )) + __pyx_t_20)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":336
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":336
  *         P[0,i]=p[0]
  *         E[0,i]=e[0]
  *         T[1,i]=t[1]             # <<<<<<<<<<<<<<
@@ -7753,9 +7753,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_21 = 1;
     __pyx_t_22 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_21 * __pyx_v_T.strides[0]) )) + __pyx_t_22)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_21 * __pyx_v_T.strides[0]) )) + __pyx_t_22)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":337
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":337
  *         E[0,i]=e[0]
  *         T[1,i]=t[1]
  *         N[1,i]=n[1]             # <<<<<<<<<<<<<<
@@ -7768,9 +7768,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_23 = 1;
     __pyx_t_24 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_N.data + __pyx_t_23 * __pyx_v_N.strides[0]) )) + __pyx_t_24)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_N.data + __pyx_t_23 * __pyx_v_N.strides[0]) )) + __pyx_t_24)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":338
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":338
  *         T[1,i]=t[1]
  *         N[1,i]=n[1]
  *         P[1,i]=p[1]             # <<<<<<<<<<<<<<
@@ -7783,9 +7783,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_25 = 1;
     __pyx_t_26 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_25 * __pyx_v_P.strides[0]) )) + __pyx_t_26)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_25 * __pyx_v_P.strides[0]) )) + __pyx_t_26)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":339
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":339
  *         N[1,i]=n[1]
  *         P[1,i]=p[1]
  *         E[1,i]=e[1]             # <<<<<<<<<<<<<<
@@ -7798,9 +7798,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_27 = 1;
     __pyx_t_28 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_27 * __pyx_v_E.strides[0]) )) + __pyx_t_28)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_27 * __pyx_v_E.strides[0]) )) + __pyx_t_28)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":340
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":340
  *         P[1,i]=p[1]
  *         E[1,i]=e[1]
  *         T[2,i]=t[2]             # <<<<<<<<<<<<<<
@@ -7813,9 +7813,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_29 = 2;
     __pyx_t_30 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_29 * __pyx_v_T.strides[0]) )) + __pyx_t_30)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_29 * __pyx_v_T.strides[0]) )) + __pyx_t_30)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":341
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":341
  *         E[1,i]=e[1]
  *         T[2,i]=t[2]
  *         N[2,i]=n[2]             # <<<<<<<<<<<<<<
@@ -7828,9 +7828,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_31 = 2;
     __pyx_t_32 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_N.data + __pyx_t_31 * __pyx_v_N.strides[0]) )) + __pyx_t_32)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_N.data + __pyx_t_31 * __pyx_v_N.strides[0]) )) + __pyx_t_32)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":342
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":342
  *         T[2,i]=t[2]
  *         N[2,i]=n[2]
  *         P[2,i]=p[2]             # <<<<<<<<<<<<<<
@@ -7843,9 +7843,9 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_33 = 2;
     __pyx_t_34 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_33 * __pyx_v_P.strides[0]) )) + __pyx_t_34)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_33 * __pyx_v_P.strides[0]) )) + __pyx_t_34)) )) = __pyx_t_12;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":343
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":343
  *         N[2,i]=n[2]
  *         P[2,i]=p[2]
  *         E[2,i]=e[2]             # <<<<<<<<<<<<<<
@@ -7858,10 +7858,10 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_35 = 2;
     __pyx_t_36 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_35 * __pyx_v_E.strides[0]) )) + __pyx_t_36)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=1 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_E.data + __pyx_t_35 * __pyx_v_E.strides[0]) )) + __pyx_t_36)) )) = __pyx_t_12;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":344
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":344
  *         P[2,i]=p[2]
  *         E[2,i]=e[2]
  *     return np.asarray(T),np.asarray(N),np.asarray(P),np.asarray(E)             # <<<<<<<<<<<<<<
@@ -7874,7 +7874,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_asarray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_T, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_T, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -7907,7 +7907,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_asarray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_N, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_N, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -7940,7 +7940,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_asarray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_P, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_P, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -7973,7 +7973,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
   __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_37, __pyx_n_s_asarray); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
-  __pyx_t_37 = __pyx_memoryview_fromslice(__pyx_v_E, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_37)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_37 = __pyx_memoryview_fromslice(__pyx_v_E, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_37)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_37);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_10))) {
@@ -8019,7 +8019,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":323
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":323
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef MT6_TNPE(DTYPE_t[:,:] MTs):             # <<<<<<<<<<<<<<
@@ -8039,7 +8039,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
   __Pyx_XDECREF(__pyx_t_10);
   __Pyx_XDECREF(__pyx_t_37);
   __Pyx_XDECREF(__pyx_t_38);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_T, 1);
@@ -8056,8 +8056,8 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_7MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_arg_MTs); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_7MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_arg_MTs) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_7MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_arg_MTs); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_7MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_arg_MTs) {
   __Pyx_memviewslice __pyx_v_MTs = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -8066,22 +8066,22 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_7MT6_TNPE(
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("MT6_TNPE (wrapper)", 0);
   assert(__pyx_arg_MTs); {
-    __pyx_v_MTs = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_arg_MTs); if (unlikely(!__pyx_v_MTs.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_MTs = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_arg_MTs); if (unlikely(!__pyx_v_MTs.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(__pyx_self, __pyx_v_MTs);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(__pyx_self, __pyx_v_MTs);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MTs) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MTs) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -8091,7 +8091,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(
   __Pyx_RefNannySetupContext("MT6_TNPE", 0);
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_v_MTs.memview)) { __Pyx_RaiseUnboundLocalError("MTs"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__pyx_v_MTs, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__pyx_v_MTs, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -8100,7 +8100,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_MTs, 1);
@@ -8109,7 +8109,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":349
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":349
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef E_GD(DTYPE_t[:,:]E):             # <<<<<<<<<<<<<<
@@ -8117,8 +8117,8 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_6MT6_TNPE(
  *     cdef Py_ssize_t i
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_9E_GD(PyObject *__pyx_self, PyObject *__pyx_arg_E); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_E_GD(__Pyx_memviewslice __pyx_v_E, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_9E_GD(PyObject *__pyx_self, PyObject *__pyx_arg_E); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_E_GD(__Pyx_memviewslice __pyx_v_E, CYTHON_UNUSED int __pyx_skip_dispatch) {
   Py_ssize_t __pyx_v_imax;
   Py_ssize_t __pyx_v_i;
   __Pyx_memviewslice __pyx_v_g = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -8142,7 +8142,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_E_GD(__Pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("E_GD", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":350
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":350
  * @cython.cdivision(True)
  * cpdef E_GD(DTYPE_t[:,:]E):
  *     cdef Py_ssize_t imax=E.shape[1]             # <<<<<<<<<<<<<<
@@ -8151,7 +8151,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_E_GD(__Pyx_
  */
   __pyx_v_imax = (__pyx_v_E.shape[1]);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":352
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":352
  *     cdef Py_ssize_t imax=E.shape[1]
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [::1] g=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -8196,14 +8196,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_E_GD(__Pyx_
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_g = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":353
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":353
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [::1] g=np.empty((imax,))
  *     cdef DTYPE_t [::1] d=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -8248,14 +8248,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_E_GD(__Pyx_
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_d = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":354
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":354
  *     cdef DTYPE_t [::1] g=np.empty((imax,))
  *     cdef DTYPE_t [::1] d=np.empty((imax,))
  *     for i in range(imax):             # <<<<<<<<<<<<<<
@@ -8266,7 +8266,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_E_GD(__Pyx_
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":355
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":355
  *     cdef DTYPE_t [::1] d=np.empty((imax,))
  *     for i in range(imax):
  *         cE_gd(E[:,i],&g[i],&d[i])             # <<<<<<<<<<<<<<
@@ -8295,11 +8295,11 @@ __pyx_t_9.strides[0] = __pyx_v_E.strides[0];
 
 __pyx_t_10 = __pyx_v_i;
     __pyx_t_11 = __pyx_v_i;
-    __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_t_9, (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_g.data) + __pyx_t_10)) )))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d.data) + __pyx_t_11)) )))));
+    __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_t_9, (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_g.data) + __pyx_t_10)) )))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d.data) + __pyx_t_11)) )))));
     __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":356
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":356
  *     for i in range(imax):
  *         cE_gd(E[:,i],&g[i],&d[i])
  *     return np.asarray(g),np.asarray(d)             # <<<<<<<<<<<<<<
@@ -8312,7 +8312,7 @@ __pyx_t_10 = __pyx_v_i;
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_asarray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_g, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_g, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -8345,7 +8345,7 @@ __pyx_t_10 = __pyx_v_i;
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_asarray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_d, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_d, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -8385,7 +8385,7 @@ __pyx_t_10 = __pyx_v_i;
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":349
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":349
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef E_GD(DTYPE_t[:,:]E):             # <<<<<<<<<<<<<<
@@ -8403,7 +8403,7 @@ __pyx_t_10 = __pyx_v_i;
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
   __Pyx_XDECREF(__pyx_t_12);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.E_GD", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.E_GD", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_g, 1);
@@ -8414,8 +8414,8 @@ __pyx_t_10 = __pyx_v_i;
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_9E_GD(PyObject *__pyx_self, PyObject *__pyx_arg_E); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_9E_GD(PyObject *__pyx_self, PyObject *__pyx_arg_E) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_9E_GD(PyObject *__pyx_self, PyObject *__pyx_arg_E); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_9E_GD(PyObject *__pyx_self, PyObject *__pyx_arg_E) {
   __Pyx_memviewslice __pyx_v_E = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -8424,22 +8424,22 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_9E_GD(PyOb
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("E_GD (wrapper)", 0);
   assert(__pyx_arg_E); {
-    __pyx_v_E = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_arg_E); if (unlikely(!__pyx_v_E.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_E = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_arg_E); if (unlikely(!__pyx_v_E.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.E_GD", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.E_GD", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_8E_GD(__pyx_self, __pyx_v_E);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_8E_GD(__pyx_self, __pyx_v_E);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_8E_GD(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_E) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_8E_GD(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_E) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -8449,7 +8449,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_8E_GD(CYTH
   __Pyx_RefNannySetupContext("E_GD", 0);
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_v_E.memview)) { __Pyx_RaiseUnboundLocalError("E"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_E_GD(__pyx_v_E, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_E_GD(__pyx_v_E, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -8458,7 +8458,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_8E_GD(CYTH
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.E_GD", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.E_GD", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_E, 1);
@@ -8467,7 +8467,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_8E_GD(CYTH
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":361
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":361
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef cSingleTP_SDR(DTYPE_t [:] T,DTYPE_t[:]P):             # <<<<<<<<<<<<<<
@@ -8475,18 +8475,18 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_8E_GD(CYTH
  *     cdef DTYPE_t St=sqrt((T[0]-P[0])*(T[0]-P[0])+(T[1]-P[1])*(T[1]-P[1])+(T[2]-P[2])*(T[2]-P[2]))
  */
 
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_Nt;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_St;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N0;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S0;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_strike1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dip1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_rake1;
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_Nt;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_St;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N0;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S0;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_strike1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_dip1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_rake1;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -8534,7 +8534,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cSingleTP_SDR", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":362
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":362
  * @cython.cdivision(True)
  * cdef cSingleTP_SDR(DTYPE_t [:] T,DTYPE_t[:]P):
  *     cdef DTYPE_t Nt=sqrt((T[0]+P[0])*(T[0]+P[0])+(T[1]+P[1])*(T[1]+P[1])+(T[2]+P[2])*(T[2]+P[2]))             # <<<<<<<<<<<<<<
@@ -8553,9 +8553,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
   __pyx_t_10 = 2;
   __pyx_t_11 = 2;
   __pyx_t_12 = 2;
-  __pyx_v_Nt = sqrt((((((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_1 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_2 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_3 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_4 * __pyx_v_P.strides[0]) ))))) + (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_5 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_6 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_7 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_8 * __pyx_v_P.strides[0]) )))))) + (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_9 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_10 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_11 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_12 * __pyx_v_P.strides[0]) )))))));
+  __pyx_v_Nt = sqrt((((((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_1 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_2 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_3 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_4 * __pyx_v_P.strides[0]) ))))) + (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_5 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_6 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_7 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_8 * __pyx_v_P.strides[0]) )))))) + (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_9 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_10 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_11 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_12 * __pyx_v_P.strides[0]) )))))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":363
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":363
  * cdef cSingleTP_SDR(DTYPE_t [:] T,DTYPE_t[:]P):
  *     cdef DTYPE_t Nt=sqrt((T[0]+P[0])*(T[0]+P[0])+(T[1]+P[1])*(T[1]+P[1])+(T[2]+P[2])*(T[2]+P[2]))
  *     cdef DTYPE_t St=sqrt((T[0]-P[0])*(T[0]-P[0])+(T[1]-P[1])*(T[1]-P[1])+(T[2]-P[2])*(T[2]-P[2]))             # <<<<<<<<<<<<<<
@@ -8574,9 +8574,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
   __pyx_t_22 = 2;
   __pyx_t_23 = 2;
   __pyx_t_24 = 2;
-  __pyx_v_St = sqrt((((((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_13 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_14 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_15 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_16 * __pyx_v_P.strides[0]) ))))) + (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_17 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_18 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_19 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_20 * __pyx_v_P.strides[0]) )))))) + (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_21 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_22 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_23 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_24 * __pyx_v_P.strides[0]) )))))));
+  __pyx_v_St = sqrt((((((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_13 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_14 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_15 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_16 * __pyx_v_P.strides[0]) ))))) + (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_17 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_18 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_19 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_20 * __pyx_v_P.strides[0]) )))))) + (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_21 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_22 * __pyx_v_P.strides[0]) )))) * ((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_23 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_24 * __pyx_v_P.strides[0]) )))))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":364
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":364
  *     cdef DTYPE_t Nt=sqrt((T[0]+P[0])*(T[0]+P[0])+(T[1]+P[1])*(T[1]+P[1])+(T[2]+P[2])*(T[2]+P[2]))
  *     cdef DTYPE_t St=sqrt((T[0]-P[0])*(T[0]-P[0])+(T[1]-P[1])*(T[1]-P[1])+(T[2]-P[2])*(T[2]-P[2]))
  *     cdef DTYPE_t N0=(T[0]+P[0])/Nt             # <<<<<<<<<<<<<<
@@ -8585,9 +8585,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
  */
   __pyx_t_25 = 0;
   __pyx_t_26 = 0;
-  __pyx_v_N0 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_25 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_26 * __pyx_v_P.strides[0]) )))) / __pyx_v_Nt);
+  __pyx_v_N0 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_25 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_26 * __pyx_v_P.strides[0]) )))) / __pyx_v_Nt);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":365
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":365
  *     cdef DTYPE_t St=sqrt((T[0]-P[0])*(T[0]-P[0])+(T[1]-P[1])*(T[1]-P[1])+(T[2]-P[2])*(T[2]-P[2]))
  *     cdef DTYPE_t N0=(T[0]+P[0])/Nt
  *     cdef DTYPE_t N1=(T[1]+P[1])/Nt             # <<<<<<<<<<<<<<
@@ -8596,9 +8596,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
  */
   __pyx_t_27 = 1;
   __pyx_t_28 = 1;
-  __pyx_v_N1 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_27 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_28 * __pyx_v_P.strides[0]) )))) / __pyx_v_Nt);
+  __pyx_v_N1 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_27 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_28 * __pyx_v_P.strides[0]) )))) / __pyx_v_Nt);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":366
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":366
  *     cdef DTYPE_t N0=(T[0]+P[0])/Nt
  *     cdef DTYPE_t N1=(T[1]+P[1])/Nt
  *     cdef DTYPE_t N2=(T[2]+P[2])/Nt             # <<<<<<<<<<<<<<
@@ -8607,9 +8607,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
  */
   __pyx_t_29 = 2;
   __pyx_t_30 = 2;
-  __pyx_v_N2 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_29 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_30 * __pyx_v_P.strides[0]) )))) / __pyx_v_Nt);
+  __pyx_v_N2 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_29 * __pyx_v_T.strides[0]) ))) + (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_30 * __pyx_v_P.strides[0]) )))) / __pyx_v_Nt);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":367
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":367
  *     cdef DTYPE_t N1=(T[1]+P[1])/Nt
  *     cdef DTYPE_t N2=(T[2]+P[2])/Nt
  *     cdef DTYPE_t S0=(T[0]-P[0])/St             # <<<<<<<<<<<<<<
@@ -8618,9 +8618,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
  */
   __pyx_t_31 = 0;
   __pyx_t_32 = 0;
-  __pyx_v_S0 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_31 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_32 * __pyx_v_P.strides[0]) )))) / __pyx_v_St);
+  __pyx_v_S0 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_31 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_32 * __pyx_v_P.strides[0]) )))) / __pyx_v_St);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":368
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":368
  *     cdef DTYPE_t N2=(T[2]+P[2])/Nt
  *     cdef DTYPE_t S0=(T[0]-P[0])/St
  *     cdef DTYPE_t S1=(T[1]-P[1])/St             # <<<<<<<<<<<<<<
@@ -8629,9 +8629,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
  */
   __pyx_t_33 = 1;
   __pyx_t_34 = 1;
-  __pyx_v_S1 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_33 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_34 * __pyx_v_P.strides[0]) )))) / __pyx_v_St);
+  __pyx_v_S1 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_33 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_34 * __pyx_v_P.strides[0]) )))) / __pyx_v_St);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":369
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":369
  *     cdef DTYPE_t S0=(T[0]-P[0])/St
  *     cdef DTYPE_t S1=(T[1]-P[1])/St
  *     cdef DTYPE_t S2=(T[2]-P[2])/St             # <<<<<<<<<<<<<<
@@ -8640,18 +8640,18 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
  */
   __pyx_t_35 = 2;
   __pyx_t_36 = 2;
-  __pyx_v_S2 = (((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_35 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_36 * __pyx_v_P.strides[0]) )))) / __pyx_v_St);
+  __pyx_v_S2 = (((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_T.data + __pyx_t_35 * __pyx_v_T.strides[0]) ))) - (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ (__pyx_v_P.data + __pyx_t_36 * __pyx_v_P.strides[0]) )))) / __pyx_v_St);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":373
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":373
  *     cdef DTYPE_t dip1
  *     cdef DTYPE_t rake1
  *     cN_SDR(N0,N1,N2,S0,S1,S2,&strike1,&dip1,&rake1)             # <<<<<<<<<<<<<<
  *     return strike1,dip1,rake1
  * @cython.boundscheck(False)
  */
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_v_N0, __pyx_v_N1, __pyx_v_N2, __pyx_v_S0, __pyx_v_S1, __pyx_v_S2, (&__pyx_v_strike1), (&__pyx_v_dip1), (&__pyx_v_rake1));
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_v_N0, __pyx_v_N1, __pyx_v_N2, __pyx_v_S0, __pyx_v_S1, __pyx_v_S2, (&__pyx_v_strike1), (&__pyx_v_dip1), (&__pyx_v_rake1));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":374
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":374
  *     cdef DTYPE_t rake1
  *     cN_SDR(N0,N1,N2,S0,S1,S2,&strike1,&dip1,&rake1)
  *     return strike1,dip1,rake1             # <<<<<<<<<<<<<<
@@ -8680,7 +8680,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
   __pyx_t_40 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":361
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":361
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef cSingleTP_SDR(DTYPE_t [:] T,DTYPE_t[:]P):             # <<<<<<<<<<<<<<
@@ -8694,7 +8694,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
   __Pyx_XDECREF(__pyx_t_38);
   __Pyx_XDECREF(__pyx_t_39);
   __Pyx_XDECREF(__pyx_t_40);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cSingleTP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cSingleTP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -8702,7 +8702,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":379
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":379
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef TP_SDR(DTYPE_t[:,:]T,DTYPE_t[:,:]P):             # <<<<<<<<<<<<<<
@@ -8710,8 +8710,8 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_S
  *     cdef Py_ssize_t i
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_11TP_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_11TP_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P, CYTHON_UNUSED int __pyx_skip_dispatch) {
   Py_ssize_t __pyx_v_imax;
   Py_ssize_t __pyx_v_i;
   __Pyx_memviewslice __pyx_v_s = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -8730,9 +8730,9 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Py
   __Pyx_memviewslice __pyx_t_9 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_t_10 = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *(*__pyx_t_11)(PyObject *);
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_12;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_13;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_14;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_12;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_13;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_14;
   Py_ssize_t __pyx_t_15;
   Py_ssize_t __pyx_t_16;
   Py_ssize_t __pyx_t_17;
@@ -8743,7 +8743,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("TP_SDR", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":380
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":380
  * @cython.cdivision(True)
  * cpdef TP_SDR(DTYPE_t[:,:]T,DTYPE_t[:,:]P):
  *     cdef Py_ssize_t imax=T.shape[1]             # <<<<<<<<<<<<<<
@@ -8752,7 +8752,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Py
  */
   __pyx_v_imax = (__pyx_v_T.shape[1]);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":382
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":382
  *     cdef Py_ssize_t imax=T.shape[1]
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [::1] s=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -8797,14 +8797,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Py
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_s = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":383
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":383
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [::1] s=np.empty((imax,))
  *     cdef DTYPE_t [::1] d=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -8849,14 +8849,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Py
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_d = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":384
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":384
  *     cdef DTYPE_t [::1] s=np.empty((imax,))
  *     cdef DTYPE_t [::1] d=np.empty((imax,))
  *     cdef DTYPE_t [::1] r=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -8901,14 +8901,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Py
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 384; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":385
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":385
  *     cdef DTYPE_t [::1] d=np.empty((imax,))
  *     cdef DTYPE_t [::1] r=np.empty((imax,))
  *     for i in range(imax):             # <<<<<<<<<<<<<<
@@ -8919,7 +8919,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__Py
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":386
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":386
  *     cdef DTYPE_t [::1] r=np.empty((imax,))
  *     for i in range(imax):
  *         s[i],d[i],r[i]=cSingleTP_SDR(T[:,i],P[:,i])             # <<<<<<<<<<<<<<
@@ -8966,7 +8966,7 @@ __pyx_t_10.strides[0] = __pyx_v_P.strides[0];
         __pyx_t_10.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
 
-__pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+__pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_10, 1);
@@ -9034,14 +9034,14 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__
     __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_15 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s.data) + __pyx_t_15)) )) = __pyx_t_12;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s.data) + __pyx_t_15)) )) = __pyx_t_12;
     __pyx_t_16 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d.data) + __pyx_t_16)) )) = __pyx_t_13;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d.data) + __pyx_t_16)) )) = __pyx_t_13;
     __pyx_t_17 = __pyx_v_i;
-    *((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r.data) + __pyx_t_17)) )) = __pyx_t_14;
+    *((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r.data) + __pyx_t_17)) )) = __pyx_t_14;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":387
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":387
  *     for i in range(imax):
  *         s[i],d[i],r[i]=cSingleTP_SDR(T[:,i],P[:,i])
  *     return np.asarray(s),np.asarray(d),np.asarray(r)             # <<<<<<<<<<<<<<
@@ -9054,7 +9054,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_asarray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_s, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_s, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -9087,7 +9087,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_asarray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_d, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_d, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -9120,7 +9120,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_asarray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = __pyx_memoryview_fromslice(__pyx_v_r, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_18 = __pyx_memoryview_fromslice(__pyx_v_r, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_18);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -9163,7 +9163,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":379
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":379
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef TP_SDR(DTYPE_t[:,:]T,DTYPE_t[:,:]P):             # <<<<<<<<<<<<<<
@@ -9183,7 +9183,7 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__
   __PYX_XDEC_MEMVIEW(&__pyx_t_10, 1);
   __Pyx_XDECREF(__pyx_t_18);
   __Pyx_XDECREF(__pyx_t_19);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.TP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.TP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_s, 1);
@@ -9195,8 +9195,8 @@ __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cSingleTP_SDR(__
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_11TP_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_11TP_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_11TP_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_11TP_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_T = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_P = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_lineno = 0;
@@ -9237,25 +9237,25 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_11TP_SDR(P
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_T = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_T.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_P = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[1]); if (unlikely(!__pyx_v_P.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_T = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_T.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_P = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[1]); if (unlikely(!__pyx_v_P.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("TP_SDR", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.TP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.TP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10TP_SDR(__pyx_self, __pyx_v_T, __pyx_v_P);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_10TP_SDR(__pyx_self, __pyx_v_T, __pyx_v_P);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10TP_SDR(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_10TP_SDR(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_T, __Pyx_memviewslice __pyx_v_P) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -9266,7 +9266,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10TP_SDR(C
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_v_T.memview)) { __Pyx_RaiseUnboundLocalError("T"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   if (unlikely(!__pyx_v_P.memview)) { __Pyx_RaiseUnboundLocalError("P"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__pyx_v_T, __pyx_v_P, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_TP_SDR(__pyx_v_T, __pyx_v_P, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -9275,7 +9275,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10TP_SDR(C
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.TP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.TP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_T, 1);
@@ -9285,7 +9285,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10TP_SDR(C
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":392
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":392
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef void csingleSDR_SDR(DTYPE_t s,DTYPE_t d,DTYPE_t r,DTYPE_t*s2,DTYPE_t*d2,DTYPE_t*r2):             # <<<<<<<<<<<<<<
@@ -9293,33 +9293,33 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10TP_SDR(C
  *     cdef DTYPE_t cs=cos(r)
  */
 
-static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_s, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_d, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_r, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_s2, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_d2, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_r2) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_ck;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_cs;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sk;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_ss;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_h;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sh;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_NT;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_NP;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T3;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P3;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N0;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S0;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S1;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S2;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_St;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_Nt;
+static void __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_s, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_d, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_r, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_s2, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_d2, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *__pyx_v_r2) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_ck;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_cs;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sk;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_ss;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_h;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_sh;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_NT;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_NP;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_T3;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_P3;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N0;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_N2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S0;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S1;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_S2;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_St;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_Nt;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("csingleSDR_SDR", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":393
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":393
  * @cython.cdivision(True)
  * cdef void csingleSDR_SDR(DTYPE_t s,DTYPE_t d,DTYPE_t r,DTYPE_t*s2,DTYPE_t*d2,DTYPE_t*r2):
  *     cdef DTYPE_t ck=cos(s)             # <<<<<<<<<<<<<<
@@ -9328,7 +9328,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_ck = cos(__pyx_v_s);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":394
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":394
  * cdef void csingleSDR_SDR(DTYPE_t s,DTYPE_t d,DTYPE_t r,DTYPE_t*s2,DTYPE_t*d2,DTYPE_t*r2):
  *     cdef DTYPE_t ck=cos(s)
  *     cdef DTYPE_t cs=cos(r)             # <<<<<<<<<<<<<<
@@ -9337,7 +9337,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_cs = cos(__pyx_v_r);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":395
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":395
  *     cdef DTYPE_t ck=cos(s)
  *     cdef DTYPE_t cs=cos(r)
  *     cdef DTYPE_t sk=sin(s)             # <<<<<<<<<<<<<<
@@ -9346,7 +9346,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_sk = sin(__pyx_v_s);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":396
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":396
  *     cdef DTYPE_t cs=cos(r)
  *     cdef DTYPE_t sk=sin(s)
  *     cdef DTYPE_t ss=sin(r)             # <<<<<<<<<<<<<<
@@ -9355,7 +9355,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_ss = sin(__pyx_v_r);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":397
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":397
  *     cdef DTYPE_t sk=sin(s)
  *     cdef DTYPE_t ss=sin(r)
  *     cdef DTYPE_t h=cos(d)             # <<<<<<<<<<<<<<
@@ -9364,7 +9364,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_h = cos(__pyx_v_d);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":398
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":398
  *     cdef DTYPE_t ss=sin(r)
  *     cdef DTYPE_t h=cos(d)
  *     cdef DTYPE_t sh=sqrt(1-h*h)             # <<<<<<<<<<<<<<
@@ -9373,7 +9373,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_sh = sqrt((1.0 - (__pyx_v_h * __pyx_v_h)));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":399
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":399
  *     cdef DTYPE_t h=cos(d)
  *     cdef DTYPE_t sh=sqrt(1-h*h)
  *     cdef DTYPE_t NT=sqrt((ck*cs+sk*h*ss-sk*sh)*(ck*cs+sk*h*ss-sk*sh)+(sk*cs-ck*h*ss+ck*sh)*(sk*cs-ck*h*ss+ck*sh)+(-sh*ss-h)*(-sh*ss-h))             # <<<<<<<<<<<<<<
@@ -9382,7 +9382,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_NT = sqrt(((((((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_sk * __pyx_v_sh)) * (((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_sk * __pyx_v_sh))) + ((((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_ck * __pyx_v_sh)) * (((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_ck * __pyx_v_sh)))) + ((((-__pyx_v_sh) * __pyx_v_ss) - __pyx_v_h) * (((-__pyx_v_sh) * __pyx_v_ss) - __pyx_v_h))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":400
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":400
  *     cdef DTYPE_t sh=sqrt(1-h*h)
  *     cdef DTYPE_t NT=sqrt((ck*cs+sk*h*ss-sk*sh)*(ck*cs+sk*h*ss-sk*sh)+(sk*cs-ck*h*ss+ck*sh)*(sk*cs-ck*h*ss+ck*sh)+(-sh*ss-h)*(-sh*ss-h))
  *     cdef DTYPE_t NP=sqrt((ck*cs+sk*h*ss+sk*sh)*(ck*cs+sk*h*ss+sk*sh)+(sk*cs-ck*h*ss-ck*sh)*(sk*cs-ck*h*ss-ck*sh)+(-sh*ss+h)*(-sh*ss+h))             # <<<<<<<<<<<<<<
@@ -9391,7 +9391,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_NP = sqrt(((((((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_sk * __pyx_v_sh)) * (((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_sk * __pyx_v_sh))) + ((((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_ck * __pyx_v_sh)) * (((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_ck * __pyx_v_sh)))) + ((((-__pyx_v_sh) * __pyx_v_ss) + __pyx_v_h) * (((-__pyx_v_sh) * __pyx_v_ss) + __pyx_v_h))));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":401
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":401
  *     cdef DTYPE_t NT=sqrt((ck*cs+sk*h*ss-sk*sh)*(ck*cs+sk*h*ss-sk*sh)+(sk*cs-ck*h*ss+ck*sh)*(sk*cs-ck*h*ss+ck*sh)+(-sh*ss-h)*(-sh*ss-h))
  *     cdef DTYPE_t NP=sqrt((ck*cs+sk*h*ss+sk*sh)*(ck*cs+sk*h*ss+sk*sh)+(sk*cs-ck*h*ss-ck*sh)*(sk*cs-ck*h*ss-ck*sh)+(-sh*ss+h)*(-sh*ss+h))
  *     cdef DTYPE_t T1=(ck*cs+sk*h*ss-sk*sh)/NT             # <<<<<<<<<<<<<<
@@ -9400,7 +9400,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_T1 = ((((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_sk * __pyx_v_sh)) / __pyx_v_NT);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":402
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":402
  *     cdef DTYPE_t NP=sqrt((ck*cs+sk*h*ss+sk*sh)*(ck*cs+sk*h*ss+sk*sh)+(sk*cs-ck*h*ss-ck*sh)*(sk*cs-ck*h*ss-ck*sh)+(-sh*ss+h)*(-sh*ss+h))
  *     cdef DTYPE_t T1=(ck*cs+sk*h*ss-sk*sh)/NT
  *     cdef DTYPE_t T2=(sk*cs-ck*h*ss+ck*sh)/NT             # <<<<<<<<<<<<<<
@@ -9409,7 +9409,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_T2 = ((((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_ck * __pyx_v_sh)) / __pyx_v_NT);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":403
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":403
  *     cdef DTYPE_t T1=(ck*cs+sk*h*ss-sk*sh)/NT
  *     cdef DTYPE_t T2=(sk*cs-ck*h*ss+ck*sh)/NT
  *     cdef DTYPE_t T3=(-sh*ss-h)/NT             # <<<<<<<<<<<<<<
@@ -9418,7 +9418,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_T3 = ((((-__pyx_v_sh) * __pyx_v_ss) - __pyx_v_h) / __pyx_v_NT);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":404
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":404
  *     cdef DTYPE_t T2=(sk*cs-ck*h*ss+ck*sh)/NT
  *     cdef DTYPE_t T3=(-sh*ss-h)/NT
  *     cdef DTYPE_t P1=(ck*cs+sk*h*ss+sk*sh)/NP             # <<<<<<<<<<<<<<
@@ -9427,7 +9427,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_P1 = ((((__pyx_v_ck * __pyx_v_cs) + ((__pyx_v_sk * __pyx_v_h) * __pyx_v_ss)) + (__pyx_v_sk * __pyx_v_sh)) / __pyx_v_NP);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":405
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":405
  *     cdef DTYPE_t T3=(-sh*ss-h)/NT
  *     cdef DTYPE_t P1=(ck*cs+sk*h*ss+sk*sh)/NP
  *     cdef DTYPE_t P2=(sk*cs-ck*h*ss-ck*sh)/NP             # <<<<<<<<<<<<<<
@@ -9436,7 +9436,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_P2 = ((((__pyx_v_sk * __pyx_v_cs) - ((__pyx_v_ck * __pyx_v_h) * __pyx_v_ss)) - (__pyx_v_ck * __pyx_v_sh)) / __pyx_v_NP);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":406
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":406
  *     cdef DTYPE_t P1=(ck*cs+sk*h*ss+sk*sh)/NP
  *     cdef DTYPE_t P2=(sk*cs-ck*h*ss-ck*sh)/NP
  *     cdef DTYPE_t P3=(-sh*ss+h)/NP             # <<<<<<<<<<<<<<
@@ -9445,7 +9445,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_P3 = ((((-__pyx_v_sh) * __pyx_v_ss) + __pyx_v_h) / __pyx_v_NP);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":407
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":407
  *     cdef DTYPE_t P2=(sk*cs-ck*h*ss-ck*sh)/NP
  *     cdef DTYPE_t P3=(-sh*ss+h)/NP
  *     cdef DTYPE_t N0=(T1-P1)             # <<<<<<<<<<<<<<
@@ -9454,7 +9454,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_N0 = (__pyx_v_T1 - __pyx_v_P1);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":408
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":408
  *     cdef DTYPE_t P3=(-sh*ss+h)/NP
  *     cdef DTYPE_t N0=(T1-P1)
  *     cdef DTYPE_t N1=(T2-P2)             # <<<<<<<<<<<<<<
@@ -9463,7 +9463,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_N1 = (__pyx_v_T2 - __pyx_v_P2);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":409
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":409
  *     cdef DTYPE_t N0=(T1-P1)
  *     cdef DTYPE_t N1=(T2-P2)
  *     cdef DTYPE_t N2=(T3-P3)             # <<<<<<<<<<<<<<
@@ -9472,7 +9472,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_N2 = (__pyx_v_T3 - __pyx_v_P3);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":410
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":410
  *     cdef DTYPE_t N1=(T2-P2)
  *     cdef DTYPE_t N2=(T3-P3)
  *     cdef DTYPE_t S0=(T1+P1)             # <<<<<<<<<<<<<<
@@ -9481,7 +9481,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_S0 = (__pyx_v_T1 + __pyx_v_P1);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":411
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":411
  *     cdef DTYPE_t N2=(T3-P3)
  *     cdef DTYPE_t S0=(T1+P1)
  *     cdef DTYPE_t S1=(T2+P2)             # <<<<<<<<<<<<<<
@@ -9490,7 +9490,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_S1 = (__pyx_v_T2 + __pyx_v_P2);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":412
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":412
  *     cdef DTYPE_t S0=(T1+P1)
  *     cdef DTYPE_t S1=(T2+P2)
  *     cdef DTYPE_t S2=(T3+P3)             # <<<<<<<<<<<<<<
@@ -9499,7 +9499,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_S2 = (__pyx_v_T3 + __pyx_v_P3);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":413
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":413
  *     cdef DTYPE_t S1=(T2+P2)
  *     cdef DTYPE_t S2=(T3+P3)
  *     cdef DTYPE_t St=sqrt(S0*S0+S1*S1+S2*S2)             # <<<<<<<<<<<<<<
@@ -9508,7 +9508,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_St = sqrt((((__pyx_v_S0 * __pyx_v_S0) + (__pyx_v_S1 * __pyx_v_S1)) + (__pyx_v_S2 * __pyx_v_S2)));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":414
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":414
  *     cdef DTYPE_t S2=(T3+P3)
  *     cdef DTYPE_t St=sqrt(S0*S0+S1*S1+S2*S2)
  *     cdef DTYPE_t Nt=sqrt(N0*N0+N1*N1+N2*N2)             # <<<<<<<<<<<<<<
@@ -9517,16 +9517,16 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  */
   __pyx_v_Nt = sqrt((((__pyx_v_N0 * __pyx_v_N0) + (__pyx_v_N1 * __pyx_v_N1)) + (__pyx_v_N2 * __pyx_v_N2)));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":415
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":415
  *     cdef DTYPE_t St=sqrt(S0*S0+S1*S1+S2*S2)
  *     cdef DTYPE_t Nt=sqrt(N0*N0+N1*N1+N2*N2)
  *     cN_SDR(S0/St,S1/St,S2/St,N0/Nt,N1/Nt,N2/Nt,s2,d2,r2)             # <<<<<<<<<<<<<<
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  */
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN_SDR((__pyx_v_S0 / __pyx_v_St), (__pyx_v_S1 / __pyx_v_St), (__pyx_v_S2 / __pyx_v_St), (__pyx_v_N0 / __pyx_v_Nt), (__pyx_v_N1 / __pyx_v_Nt), (__pyx_v_N2 / __pyx_v_Nt), __pyx_v_s2, __pyx_v_d2, __pyx_v_r2);
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cN_SDR((__pyx_v_S0 / __pyx_v_St), (__pyx_v_S1 / __pyx_v_St), (__pyx_v_S2 / __pyx_v_St), (__pyx_v_N0 / __pyx_v_Nt), (__pyx_v_N1 / __pyx_v_Nt), (__pyx_v_N2 / __pyx_v_Nt), __pyx_v_s2, __pyx_v_d2, __pyx_v_r2);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":392
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":392
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef void csingleSDR_SDR(DTYPE_t s,DTYPE_t d,DTYPE_t r,DTYPE_t*s2,DTYPE_t*d2,DTYPE_t*r2):             # <<<<<<<<<<<<<<
@@ -9538,7 +9538,7 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
   __Pyx_RefNannyFinishContext();
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":420
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":420
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef SDR_SDR(DTYPE_t[::1] s,DTYPE_t[::1] d,DTYPE_t[::1] r):             # <<<<<<<<<<<<<<
@@ -9546,8 +9546,8 @@ static void __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR(_
  *     cdef Py_ssize_t i
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_13SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__Pyx_memviewslice __pyx_v_s, __Pyx_memviewslice __pyx_v_d, __Pyx_memviewslice __pyx_v_r, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_13SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__Pyx_memviewslice __pyx_v_s, __Pyx_memviewslice __pyx_v_d, __Pyx_memviewslice __pyx_v_r, CYTHON_UNUSED int __pyx_skip_dispatch) {
   Py_ssize_t __pyx_v_imax;
   Py_ssize_t __pyx_v_i;
   __Pyx_memviewslice __pyx_v_s2 = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -9576,7 +9576,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("SDR_SDR", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":421
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":421
  * @cython.cdivision(True)
  * cpdef SDR_SDR(DTYPE_t[::1] s,DTYPE_t[::1] d,DTYPE_t[::1] r):
  *     cdef Py_ssize_t imax=s.shape[0]             # <<<<<<<<<<<<<<
@@ -9585,7 +9585,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
  */
   __pyx_v_imax = (__pyx_v_s.shape[0]);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":423
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":423
  *     cdef Py_ssize_t imax=s.shape[0]
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [::1] s2=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -9630,14 +9630,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_s2 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":424
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":424
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t [::1] s2=np.empty((imax,))
  *     cdef DTYPE_t [::1] d2=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -9682,14 +9682,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_d2 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":425
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":425
  *     cdef DTYPE_t [::1] s2=np.empty((imax,))
  *     cdef DTYPE_t [::1] d2=np.empty((imax,))
  *     cdef DTYPE_t [::1] r2=np.empty((imax,))             # <<<<<<<<<<<<<<
@@ -9734,14 +9734,14 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 425; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r2 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":426
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":426
  *     cdef DTYPE_t [::1] d2=np.empty((imax,))
  *     cdef DTYPE_t [::1] r2=np.empty((imax,))
  *     for i in range(imax):             # <<<<<<<<<<<<<<
@@ -9752,7 +9752,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":427
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":427
  *     cdef DTYPE_t [::1] r2=np.empty((imax,))
  *     for i in range(imax):
  *         csingleSDR_SDR(s[i],d[i],r[i],&s2[i],&d2[i],&r2[i])             # <<<<<<<<<<<<<<
@@ -9765,10 +9765,10 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
     __pyx_t_12 = __pyx_v_i;
     __pyx_t_13 = __pyx_v_i;
     __pyx_t_14 = __pyx_v_i;
-    __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s.data) + __pyx_t_9)) ))), (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d.data) + __pyx_t_10)) ))), (*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r.data) + __pyx_t_11)) ))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s2.data) + __pyx_t_12)) )))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d2.data) + __pyx_t_13)) )))), (&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r2.data) + __pyx_t_14)) )))));
+    __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_csingleSDR_SDR((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s.data) + __pyx_t_9)) ))), (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d.data) + __pyx_t_10)) ))), (*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r.data) + __pyx_t_11)) ))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_s2.data) + __pyx_t_12)) )))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_d2.data) + __pyx_t_13)) )))), (&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_r2.data) + __pyx_t_14)) )))));
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":428
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":428
  *     for i in range(imax):
  *         csingleSDR_SDR(s[i],d[i],r[i],&s2[i],&d2[i],&r2[i])
  *     return np.asarray(s2),np.asarray(d2),np.asarray(r2)             # <<<<<<<<<<<<<<
@@ -9781,7 +9781,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_asarray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_s2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_s2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -9814,7 +9814,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_asarray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_d2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_d2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -9847,7 +9847,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_asarray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-  __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_r2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_r2, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_15);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -9890,7 +9890,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":420
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":420
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef SDR_SDR(DTYPE_t[::1] s,DTYPE_t[::1] d,DTYPE_t[::1] r):             # <<<<<<<<<<<<<<
@@ -9908,7 +9908,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __Pyx_XDECREF(__pyx_t_15);
   __Pyx_XDECREF(__pyx_t_16);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.SDR_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.SDR_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_s2, 1);
@@ -9920,8 +9920,8 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__P
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_13SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_13SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_13SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_13SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_s = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_d = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_r = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -9970,26 +9970,26 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_13SDR_SDR(
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_s = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_s.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_d = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[1]); if (unlikely(!__pyx_v_d.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_r = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[2]); if (unlikely(!__pyx_v_r.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_s = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_s.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_d = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[1]); if (unlikely(!__pyx_v_d.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_r = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[2]); if (unlikely(!__pyx_v_r.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("SDR_SDR", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.SDR_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.SDR_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(__pyx_self, __pyx_v_s, __pyx_v_d, __pyx_v_r);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(__pyx_self, __pyx_v_s, __pyx_v_d, __pyx_v_r);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_s, __Pyx_memviewslice __pyx_v_d, __Pyx_memviewslice __pyx_v_r) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_s, __Pyx_memviewslice __pyx_v_d, __Pyx_memviewslice __pyx_v_r) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -10001,7 +10001,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(
   if (unlikely(!__pyx_v_s.memview)) { __Pyx_RaiseUnboundLocalError("s"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   if (unlikely(!__pyx_v_d.memview)) { __Pyx_RaiseUnboundLocalError("d"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   if (unlikely(!__pyx_v_r.memview)) { __Pyx_RaiseUnboundLocalError("r"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__pyx_v_s, __pyx_v_d, __pyx_v_r, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__pyx_v_s, __pyx_v_d, __pyx_v_r, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -10010,7 +10010,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.SDR_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.SDR_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_s, 1);
@@ -10021,7 +10021,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":431
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":431
  * 
  * #Bi-axes
  * cpdef list isotropic_c(DTYPE_t l=1.,DTYPE_t mu=1.,list c=[]):             # <<<<<<<<<<<<<<
@@ -10029,12 +10029,12 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_12SDR_SDR(
  *             #Eqns 81a and 81b from chapman and leaney 2011
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_15isotropic_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c(CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c *__pyx_optional_args) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_l = ((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t)1.);
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_mu = ((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t)1.);
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_15isotropic_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c(CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c *__pyx_optional_args) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_l = ((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t)1.);
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_mu = ((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t)1.);
   PyObject *__pyx_v_c = __pyx_k__21;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_n;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_n;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -10043,7 +10043,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_7;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_7;
   PyObject *__pyx_t_8 = NULL;
   PyObject *__pyx_t_9 = NULL;
   PyObject *__pyx_t_10 = NULL;
@@ -10066,7 +10066,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
     }
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":432
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":432
  * #Bi-axes
  * cpdef list isotropic_c(DTYPE_t l=1.,DTYPE_t mu=1.,list c=[]):
  *     if len(c)==21: #Calculate isotropic approacximation             # <<<<<<<<<<<<<<
@@ -10081,7 +10081,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
   __pyx_t_2 = ((__pyx_t_1 == 21) != 0);
   if (__pyx_t_2) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":434
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":434
  *     if len(c)==21: #Calculate isotropic approacximation
  *             #Eqns 81a and 81b from chapman and leaney 2011
  *             mu=((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15             # <<<<<<<<<<<<<<
@@ -10184,7 +10184,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_mu = __pyx_t_7;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":435
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":435
  *             #Eqns 81a and 81b from chapman and leaney 2011
  *             mu=((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15
  *             l=((c[0]+c[6]+c[11])-2*(c[15]+c[18]+c[20])+4*(c[1]+c[2]+c[7]))/15             # <<<<<<<<<<<<<<
@@ -10290,7 +10290,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_l = __pyx_t_7;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":432
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":432
  * #Bi-axes
  * cpdef list isotropic_c(DTYPE_t l=1.,DTYPE_t mu=1.,list c=[]):
  *     if len(c)==21: #Calculate isotropic approacximation             # <<<<<<<<<<<<<<
@@ -10299,7 +10299,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":436
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":436
  *             mu=((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15
  *             l=((c[0]+c[6]+c[11])-2*(c[15]+c[18]+c[20])+4*(c[1]+c[2]+c[7]))/15
  *     n=l+2*mu             # <<<<<<<<<<<<<<
@@ -10308,7 +10308,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
  */
   __pyx_v_n = (__pyx_v_l + (2.0 * __pyx_v_mu));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":437
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":437
  *             l=((c[0]+c[6]+c[11])-2*(c[15]+c[18]+c[20])+4*(c[1]+c[2]+c[7]))/15
  *     n=l+2*mu
  *     return [n,l,l,0,0,0,n,l,0,0,0,n,0,0,0,mu,0,0,mu,0,mu]             # <<<<<<<<<<<<<<
@@ -10403,7 +10403,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
   __pyx_t_13 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":431
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":431
  * 
  * #Bi-axes
  * cpdef list isotropic_c(DTYPE_t l=1.,DTYPE_t mu=1.,list c=[]):             # <<<<<<<<<<<<<<
@@ -10423,7 +10423,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
   __Pyx_XDECREF(__pyx_t_11);
   __Pyx_XDECREF(__pyx_t_12);
   __Pyx_XDECREF(__pyx_t_13);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -10432,10 +10432,10 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_15isotropic_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_15isotropic_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_l;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_mu;
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_15isotropic_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_15isotropic_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_l;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_mu;
   PyObject *__pyx_v_c = 0;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -10490,12 +10490,12 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_15isotropi
     if (values[0]) {
       __pyx_v_l = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_l == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 431; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
-      __pyx_v_l = ((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t)1.);
+      __pyx_v_l = ((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t)1.);
     }
     if (values[1]) {
       __pyx_v_mu = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_mu == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 431; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
-      __pyx_v_mu = ((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t)1.);
+      __pyx_v_mu = ((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t)1.);
     }
     __pyx_v_c = ((PyObject*)values[2]);
   }
@@ -10503,12 +10503,12 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_15isotropi
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("isotropic_c", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 431; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c), (&PyList_Type), 1, "c", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 431; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_14isotropic_c(__pyx_self, __pyx_v_l, __pyx_v_mu, __pyx_v_c);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_14isotropic_c(__pyx_self, __pyx_v_l, __pyx_v_mu, __pyx_v_c);
 
   /* function exit code */
   goto __pyx_L0;
@@ -10519,11 +10519,11 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_15isotropi
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_14isotropic_c(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_l, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_mu, PyObject *__pyx_v_c) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_14isotropic_c(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_l, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_mu, PyObject *__pyx_v_c) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c __pyx_t_2;
+  struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c __pyx_t_2;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -10533,7 +10533,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_14isotropi
   __pyx_t_2.l = __pyx_v_l;
   __pyx_t_2.mu = __pyx_v_mu;
   __pyx_t_2.c = __pyx_v_c;
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c(0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 431; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c(0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 431; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -10542,7 +10542,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_14isotropi
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -10550,7 +10550,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_14isotropi
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":439
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":439
  *     return [n,l,l,0,0,0,n,l,0,0,0,n,0,0,0,mu,0,0,mu,0,mu]
  * 
  * def MT6_biaxes(DTYPE_t[:]MT6,list c):             # <<<<<<<<<<<<<<
@@ -10559,9 +10559,9 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_14isotropi
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes = {"MT6_biaxes", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes = {"MT6_biaxes", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_MT6 = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_v_c = 0;
   int __pyx_lineno = 0;
@@ -10602,19 +10602,19 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_17MT6_biax
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_MT6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_MT6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_MT6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(values[0]); if (unlikely(!__pyx_v_MT6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     __pyx_v_c = ((PyObject*)values[1]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("MT6_biaxes", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT6_biaxes", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT6_biaxes", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c), (&PyList_Type), 1, "c", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biaxes(__pyx_self, __pyx_v_MT6, __pyx_v_c);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_16MT6_biaxes(__pyx_self, __pyx_v_MT6, __pyx_v_c);
 
   /* function exit code */
   goto __pyx_L0;
@@ -10625,7 +10625,7 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_17MT6_biax
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":448
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":448
  *         explosion=isotropic
  *     else:
  *         def isotropic_solve(iso):             # <<<<<<<<<<<<<<
@@ -10634,22 +10634,22 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_17MT6_biax
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve(PyObject *__pyx_self, PyObject *__pyx_v_iso); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve = {"isotropic_solve", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve(PyObject *__pyx_self, PyObject *__pyx_v_iso) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve(PyObject *__pyx_self, PyObject *__pyx_v_iso); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve = {"isotropic_solve", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve(PyObject *__pyx_self, PyObject *__pyx_v_iso) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("isotropic_solve (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_isotropic_solve(__pyx_self, ((PyObject *)__pyx_v_iso));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_isotropic_solve(__pyx_self, ((PyObject *)__pyx_v_iso));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_isotropic_solve(PyObject *__pyx_self, PyObject *__pyx_v_iso) {
-  struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *__pyx_cur_scope;
-  struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *__pyx_outer_scope;
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_isotropic_solve(PyObject *__pyx_self, PyObject *__pyx_v_iso) {
+  struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *__pyx_cur_scope;
+  struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *__pyx_outer_scope;
   PyObject *__pyx_v_iso6 = NULL;
   CYTHON_UNUSED PyObject *__pyx_v_T = NULL;
   CYTHON_UNUSED PyObject *__pyx_v_N = NULL;
@@ -10668,17 +10668,17 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   PyObject *__pyx_t_9 = NULL;
   PyObject *__pyx_t_10 = NULL;
   int __pyx_t_11;
-  struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6 __pyx_t_12;
+  struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6 __pyx_t_12;
   __Pyx_memviewslice __pyx_t_13 = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *(*__pyx_t_14)(PyObject *);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("isotropic_solve", 0);
-  __pyx_outer_scope = (struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *) __Pyx_CyFunction_GetClosure(__pyx_self);
+  __pyx_outer_scope = (struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":449
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":449
  *     else:
  *         def isotropic_solve(iso):
  *             iso6=np.squeeze(iso)*np.array([[1],[1],[1],[0],[0],[0]])             # <<<<<<<<<<<<<<
@@ -10803,7 +10803,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   __pyx_v_iso6 = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":450
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":450
  *         def isotropic_solve(iso):
  *             iso6=np.squeeze(iso)*np.array([[1],[1],[1],[0],[0],[0]])
  *             if iso6.shape!=MT6.shape:             # <<<<<<<<<<<<<<
@@ -10822,7 +10822,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_11) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":451
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":451
  *             iso6=np.squeeze(iso)*np.array([[1],[1],[1],[0],[0],[0]])
  *             if iso6.shape!=MT6.shape:
  *                 iso6=iso6.T             # <<<<<<<<<<<<<<
@@ -10834,7 +10834,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
     __Pyx_DECREF_SET(__pyx_v_iso6, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":450
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":450
  *         def isotropic_solve(iso):
  *             iso6=np.squeeze(iso)*np.array([[1],[1],[1],[0],[0],[0]])
  *             if iso6.shape!=MT6.shape:             # <<<<<<<<<<<<<<
@@ -10843,7 +10843,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":452
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":452
  *             if iso6.shape!=MT6.shape:
  *                 iso6=iso6.T
  *             T,N,P,E=cMT6_TNPE(MT6c_D6(np.squeeze(MT6-iso6),c).flatten())             # <<<<<<<<<<<<<<
@@ -10856,7 +10856,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(!__pyx_cur_scope->__pyx_v_MT6.memview)) { __Pyx_RaiseClosureNameError("MT6"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_cur_scope->__pyx_v_MT6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_cur_scope->__pyx_v_MT6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_10 = PyNumber_Subtract(__pyx_t_2, __pyx_v_iso6); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
@@ -10892,7 +10892,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   __Pyx_INCREF(__pyx_t_8);
   __pyx_t_12.__pyx_n = 1;
   __pyx_t_12.c = ((PyObject*)__pyx_t_8);
-  __pyx_t_9 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(__pyx_t_3, 0, &__pyx_t_12); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6(__pyx_t_3, 0, &__pyx_t_12); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -10917,10 +10917,10 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_13.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_t_13); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_t_13); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_13, 1);
   if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
@@ -10995,7 +10995,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   __pyx_v_E = __pyx_t_10;
   __pyx_t_10 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":453
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":453
  *                 iso6=iso6.T
  *             T,N,P,E=cMT6_TNPE(MT6c_D6(np.squeeze(MT6-iso6),c).flatten())
  *             return E[1]             # <<<<<<<<<<<<<<
@@ -11009,7 +11009,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":448
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":448
  *         explosion=isotropic
  *     else:
  *         def isotropic_solve(iso):             # <<<<<<<<<<<<<<
@@ -11030,7 +11030,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_10);
   __PYX_XDEC_MEMVIEW(&__pyx_t_13, 1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT6_biaxes.isotropic_solve", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT6_biaxes.isotropic_solve", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_iso6);
@@ -11043,7 +11043,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":439
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":439
  *     return [n,l,l,0,0,0,n,l,0,0,0,n,0,0,0,mu,0,0,mu,0,mu]
  * 
  * def MT6_biaxes(DTYPE_t[:]MT6,list c):             # <<<<<<<<<<<<<<
@@ -11051,8 +11051,8 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biax
  *     mu=((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15
  */
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biaxes(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MT6, PyObject *__pyx_v_c) {
-  struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *__pyx_cur_scope;
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_16MT6_biaxes(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_MT6, PyObject *__pyx_v_c) {
+  struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *__pyx_cur_scope;
   PyObject *__pyx_v_lambda2mu = NULL;
   PyObject *__pyx_v_mu = NULL;
   PyObject *__pyx_v_l = NULL;
@@ -11083,13 +11083,13 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   PyObject *__pyx_t_11 = NULL;
   PyObject *__pyx_t_12 = NULL;
   PyObject *__pyx_t_13 = NULL;
-  struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6 __pyx_t_14;
+  struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6 __pyx_t_14;
   __Pyx_memviewslice __pyx_t_15 = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("MT6_biaxes", 0);
-  __pyx_cur_scope = (struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)__pyx_tp_new_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(__pyx_ptype_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)__pyx_tp_new_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(__pyx_ptype_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
     __Pyx_RefNannyFinishContext();
     return NULL;
@@ -11100,7 +11100,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_c);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_c);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":440
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":440
  * 
  * def MT6_biaxes(DTYPE_t[:]MT6,list c):
  *     lambda2mu=(3*(c[0]+c[6]+c[11])+4*(c[15]+c[18]+c[20])+2*(c[1]+c[2]+c[7]))/15             # <<<<<<<<<<<<<<
@@ -11208,7 +11208,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_v_lambda2mu = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":441
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":441
  * def MT6_biaxes(DTYPE_t[:]MT6,list c):
  *     lambda2mu=(3*(c[0]+c[6]+c[11])+4*(c[15]+c[18]+c[20])+2*(c[1]+c[2]+c[7]))/15
  *     mu=((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15             # <<<<<<<<<<<<<<
@@ -11310,7 +11310,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_v_mu = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":442
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":442
  *     lambda2mu=(3*(c[0]+c[6]+c[11])+4*(c[15]+c[18]+c[20])+2*(c[1]+c[2]+c[7]))/15
  *     mu=((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15
  *     l=lambda2mu-2*mu             # <<<<<<<<<<<<<<
@@ -11325,14 +11325,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_v_l = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":443
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":443
  *     mu=((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15
  *     l=lambda2mu-2*mu
  *     T,N,P,E=cMT6_TNPE(MT6)             # <<<<<<<<<<<<<<
  *     isotropic=(l+mu)*E[1]/mu-l*(E[0]+E[2])/(2*mu)
  *     if is_isotropic_c(c):
  */
-  __pyx_t_2 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_cur_scope->__pyx_v_MT6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 443; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_cur_scope->__pyx_v_MT6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 443; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if ((likely(PyTuple_CheckExact(__pyx_t_2))) || (PyList_CheckExact(__pyx_t_2))) {
     PyObject* sequence = __pyx_t_2;
@@ -11406,7 +11406,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_v_E = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":444
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":444
  *     l=lambda2mu-2*mu
  *     T,N,P,E=cMT6_TNPE(MT6)
  *     isotropic=(l+mu)*E[1]/mu-l*(E[0]+E[2])/(2*mu)             # <<<<<<<<<<<<<<
@@ -11448,7 +11448,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_v_isotropic = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":445
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":445
  *     T,N,P,E=cMT6_TNPE(MT6)
  *     isotropic=(l+mu)*E[1]/mu-l*(E[0]+E[2])/(2*mu)
  *     if is_isotropic_c(c):             # <<<<<<<<<<<<<<
@@ -11457,14 +11457,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
  */
   __pyx_t_3 = __pyx_cur_scope->__pyx_v_c;
   __Pyx_INCREF(__pyx_t_3);
-  __pyx_t_4 = ((PyObject *)__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isotropic_c(((PyObject*)__pyx_t_3), 0)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 445; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = ((PyObject *)__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_is_isotropic_c(((PyObject*)__pyx_t_3), 0)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 445; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 445; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (__pyx_t_8) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":446
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":446
  *     isotropic=(l+mu)*E[1]/mu-l*(E[0]+E[2])/(2*mu)
  *     if is_isotropic_c(c):
  *         explosion=isotropic             # <<<<<<<<<<<<<<
@@ -11474,7 +11474,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
     __Pyx_INCREF(__pyx_v_isotropic);
     __pyx_v_explosion = __pyx_v_isotropic;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":445
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":445
  *     T,N,P,E=cMT6_TNPE(MT6)
  *     isotropic=(l+mu)*E[1]/mu-l*(E[0]+E[2])/(2*mu)
  *     if is_isotropic_c(c):             # <<<<<<<<<<<<<<
@@ -11484,7 +11484,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
     goto __pyx_L5;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":448
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":448
  *         explosion=isotropic
  *     else:
  *         def isotropic_solve(iso):             # <<<<<<<<<<<<<<
@@ -11492,12 +11492,12 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
  *             if iso6.shape!=MT6.shape:
  */
   /*else*/ {
-    __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve, 0, __pyx_n_s_MT6_biaxes_locals_isotropic_solv, ((PyObject*)__pyx_cur_scope), __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_10MT6_biaxes_1isotropic_solve, 0, __pyx_n_s_MT6_biaxes_locals_isotropic_solv, ((PyObject*)__pyx_cur_scope), __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_v_isotropic_solve = __pyx_t_4;
     __pyx_t_4 = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":454
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":454
  *             T,N,P,E=cMT6_TNPE(MT6c_D6(np.squeeze(MT6-iso6),c).flatten())
  *             return E[1]
  *         explosion=fsolve(isotropic_solve,isotropic)             # <<<<<<<<<<<<<<
@@ -11538,7 +11538,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   }
   __pyx_L5:;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":456
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":456
  *         explosion=fsolve(isotropic_solve,isotropic)
  * 
  *     explosion6=np.squeeze(explosion)*np.array([[1],[1],[1],[0],[0],[0]])             # <<<<<<<<<<<<<<
@@ -11663,7 +11663,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_v_explosion6 = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":457
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":457
  * 
  *     explosion6=np.squeeze(explosion)*np.array([[1],[1],[1],[0],[0],[0]])
  *     if explosion6.shape!=MT6.shape:             # <<<<<<<<<<<<<<
@@ -11681,7 +11681,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (__pyx_t_8) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":458
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":458
  *     explosion6=np.squeeze(explosion)*np.array([[1],[1],[1],[0],[0],[0]])
  *     if explosion6.shape!=MT6.shape:
  *         explosion6=explosion6.T             # <<<<<<<<<<<<<<
@@ -11693,7 +11693,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
     __Pyx_DECREF_SET(__pyx_v_explosion6, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":457
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":457
  * 
  *     explosion6=np.squeeze(explosion)*np.array([[1],[1],[1],[0],[0],[0]])
  *     if explosion6.shape!=MT6.shape:             # <<<<<<<<<<<<<<
@@ -11702,7 +11702,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":459
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":459
  *     if explosion6.shape!=MT6.shape:
  *         explosion6=explosion6.T
  *     T,N,P,E=cMT6_TNPE(MT6c_D6(np.squeeze(MT6-explosion6),c).flatten())             # <<<<<<<<<<<<<<
@@ -11714,7 +11714,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_squeeze); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_cur_scope->__pyx_v_MT6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_cur_scope->__pyx_v_MT6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_13 = PyNumber_Subtract(__pyx_t_3, __pyx_v_explosion6); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_13);
@@ -11749,7 +11749,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __Pyx_INCREF(__pyx_t_11);
   __pyx_t_14.__pyx_n = 1;
   __pyx_t_14.c = ((PyObject*)__pyx_t_11);
-  __pyx_t_12 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(__pyx_t_2, 0, &__pyx_t_14); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6(__pyx_t_2, 0, &__pyx_t_14); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -11774,10 +11774,10 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   }
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_15 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_4);
+  __pyx_t_15 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_4);
   if (unlikely(!__pyx_t_15.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_t_15); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cMT6_TNPE(__pyx_t_15); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __PYX_XDEC_MEMVIEW(&__pyx_t_15, 1);
   if ((likely(PyTuple_CheckExact(__pyx_t_4))) || (PyList_CheckExact(__pyx_t_4))) {
@@ -11852,7 +11852,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __Pyx_DECREF_SET(__pyx_v_E, __pyx_t_13);
   __pyx_t_13 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":460
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":460
  *         explosion6=explosion6.T
  *     T,N,P,E=cMT6_TNPE(MT6c_D6(np.squeeze(MT6-explosion6),c).flatten())
  *     area_displacement = E[0]-E[2]             # <<<<<<<<<<<<<<
@@ -11870,7 +11870,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_v_area_displacement = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":461
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":461
  *     T,N,P,E=cMT6_TNPE(MT6c_D6(np.squeeze(MT6-explosion6),c).flatten())
  *     area_displacement = E[0]-E[2]
  *     phi=np.zeros((3,2))             # <<<<<<<<<<<<<<
@@ -11888,7 +11888,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_v_phi = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":462
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":462
  *     area_displacement = E[0]-E[2]
  *     phi=np.zeros((3,2))
  *     if area_displacement!=0:      # to avoid undefined             # <<<<<<<<<<<<<<
@@ -11900,7 +11900,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_8) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":463
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":463
  *     phi=np.zeros((3,2))
  *     if area_displacement!=0:      # to avoid undefined
  *         cphi=np.squeeze(np.sqrt(E[0]/area_displacement))             # <<<<<<<<<<<<<<
@@ -11977,7 +11977,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
     __pyx_v_cphi = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":464
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":464
  *     if area_displacement!=0:      # to avoid undefined
  *         cphi=np.squeeze(np.sqrt(E[0]/area_displacement))
  *         sphi=np.squeeze(np.sqrt(-E[2]/area_displacement))             # <<<<<<<<<<<<<<
@@ -12057,7 +12057,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
     __pyx_v_sphi = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":465
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":465
  *         cphi=np.squeeze(np.sqrt(E[0]/area_displacement))
  *         sphi=np.squeeze(np.sqrt(-E[2]/area_displacement))
  *         phi[:,0]=np.array(cphi*T+sphi*P).flatten()             # <<<<<<<<<<<<<<
@@ -12127,7 +12127,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
     if (unlikely(PyObject_SetItem(__pyx_v_phi, __pyx_tuple__27, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":466
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":466
  *         sphi=np.squeeze(np.sqrt(-E[2]/area_displacement))
  *         phi[:,0]=np.array(cphi*T+sphi*P).flatten()
  *         phi[:,1]=np.array(cphi*T-sphi*P).flatten()             # <<<<<<<<<<<<<<
@@ -12197,7 +12197,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
     if (unlikely(PyObject_SetItem(__pyx_v_phi, __pyx_tuple__29, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":462
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":462
  *     area_displacement = E[0]-E[2]
  *     phi=np.zeros((3,2))
  *     if area_displacement!=0:      # to avoid undefined             # <<<<<<<<<<<<<<
@@ -12206,7 +12206,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":467
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":467
  *         phi[:,0]=np.array(cphi*T+sphi*P).flatten()
  *         phi[:,1]=np.array(cphi*T-sphi*P).flatten()
  *     return phi,explosion,area_displacement             # <<<<<<<<<<<<<<
@@ -12229,7 +12229,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":439
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":439
  *     return [n,l,l,0,0,0,n,l,0,0,0,n,0,0,0,mu,0,0,mu,0,mu]
  * 
  * def MT6_biaxes(DTYPE_t[:]MT6,list c):             # <<<<<<<<<<<<<<
@@ -12250,7 +12250,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   __Pyx_XDECREF(__pyx_t_12);
   __Pyx_XDECREF(__pyx_t_13);
   __PYX_XDEC_MEMVIEW(&__pyx_t_15, 1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT6_biaxes", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT6_biaxes", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_lambda2mu);
@@ -12275,7 +12275,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":469
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":469
  *     return phi,explosion,area_displacement
  * 
  * cpdef MT6c_D6(mt6,list c=isotropic_c(l=1,mu=1)):             # <<<<<<<<<<<<<<
@@ -12283,8 +12283,8 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_16MT6_biax
  *     mtvoigt=np.matrix(mtvoigt)
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_19MT6c_D6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyObject *__pyx_v_mt6, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6 *__pyx_optional_args) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_19MT6c_D6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyObject *__pyx_v_mt6, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6 *__pyx_optional_args) {
   PyObject *__pyx_v_c = __pyx_k__30;
   PyObject *__pyx_v_mtvoigt = NULL;
   PyObject *__pyx_v_dvoigt = NULL;
@@ -12310,7 +12310,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
     }
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":470
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":470
  * 
  * cpdef MT6c_D6(mt6,list c=isotropic_c(l=1,mu=1)):
  *     mtvoigt=mt6[np.array([0,1,2,5,4,3])]             # <<<<<<<<<<<<<<
@@ -12374,7 +12374,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
   __pyx_v_mtvoigt = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":471
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":471
  * cpdef MT6c_D6(mt6,list c=isotropic_c(l=1,mu=1)):
  *     mtvoigt=mt6[np.array([0,1,2,5,4,3])]
  *     mtvoigt=np.matrix(mtvoigt)             # <<<<<<<<<<<<<<
@@ -12414,7 +12414,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
   __Pyx_DECREF_SET(__pyx_v_mtvoigt, __pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":472
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":472
  *     mtvoigt=mt6[np.array([0,1,2,5,4,3])]
  *     mtvoigt=np.matrix(mtvoigt)
  *     if mtvoigt.shape[1]==6:             # <<<<<<<<<<<<<<
@@ -12433,7 +12433,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_6) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":473
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":473
  *     mtvoigt=np.matrix(mtvoigt)
  *     if mtvoigt.shape[1]==6:
  *         mtvoigt=mtvoigt.T             # <<<<<<<<<<<<<<
@@ -12445,7 +12445,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
     __Pyx_DECREF_SET(__pyx_v_mtvoigt, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":472
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":472
  *     mtvoigt=mt6[np.array([0,1,2,5,4,3])]
  *     mtvoigt=np.matrix(mtvoigt)
  *     if mtvoigt.shape[1]==6:             # <<<<<<<<<<<<<<
@@ -12454,7 +12454,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":475
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":475
  *         mtvoigt=mtvoigt.T
  *     #Convert to voigt
  *     dvoigt=np.linalg.solve(np.matrix(c21_cvoigt(c)),mtvoigt)             # <<<<<<<<<<<<<<
@@ -12474,8 +12474,8 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_matrix); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 475; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_7 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c21_cvoigt(__pyx_v_c, 0); if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 475; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 475; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_c21_cvoigt(__pyx_v_c, 0); if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 475; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 475; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_8 = NULL;
@@ -12534,7 +12534,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
   __pyx_v_dvoigt = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":476
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":476
  *     #Convert to voigt
  *     dvoigt=np.linalg.solve(np.matrix(c21_cvoigt(c)),mtvoigt)
  *     return np.asarray(dvoigt[np.array([0,1,2,5,4,3])])             # <<<<<<<<<<<<<<
@@ -12631,7 +12631,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":469
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":469
  *     return phi,explosion,area_displacement
  * 
  * cpdef MT6c_D6(mt6,list c=isotropic_c(l=1,mu=1)):             # <<<<<<<<<<<<<<
@@ -12649,7 +12649,7 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT6c_D6", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT6c_D6", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_mtvoigt);
@@ -12660,8 +12660,8 @@ static PyObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(PyO
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_19MT6c_D6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_19MT6c_D6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_19MT6c_D6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_19MT6c_D6(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_mt6 = 0;
   PyObject *__pyx_v_c = 0;
   int __pyx_lineno = 0;
@@ -12712,12 +12712,12 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_19MT6c_D6(
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("MT6c_D6", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT6c_D6", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT6c_D6", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c), (&PyList_Type), 1, "c", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(__pyx_self, __pyx_v_mt6, __pyx_v_c);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(__pyx_self, __pyx_v_mt6, __pyx_v_c);
 
   /* function exit code */
   goto __pyx_L0;
@@ -12728,11 +12728,11 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_19MT6c_D6(
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_mt6, PyObject *__pyx_v_c) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_mt6, PyObject *__pyx_v_c) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6 __pyx_t_2;
+  struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6 __pyx_t_2;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -12740,7 +12740,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.c = __pyx_v_c;
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6c_D6(__pyx_v_mt6, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT6c_D6(__pyx_v_mt6, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -12749,7 +12749,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.MT6c_D6", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.MT6c_D6", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -12757,7 +12757,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":478
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":478
  *     return np.asarray(dvoigt[np.array([0,1,2,5,4,3])])
  * 
  * cpdef bool is_isotropic_c(list c):             # <<<<<<<<<<<<<<
@@ -12765,9 +12765,9 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_18MT6c_D6(
  *     return ((fabs(c[ 3])<tol)and(fabs(c[ 4])<tol)and(fabs(c[ 5])<tol)and \
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_21is_isotropic_c(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
-static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isotropic_c(PyObject *__pyx_v_c, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_tol;
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_21is_isotropic_c(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
+static PyBoolObject *__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_is_isotropic_c(PyObject *__pyx_v_c, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_tol;
   PyBoolObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -12781,16 +12781,16 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_isotropic_c", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":479
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":479
  * 
  * cpdef bool is_isotropic_c(list c):
  *     cdef DTYPE_t tol = 1.e-6*c_norm(c);             # <<<<<<<<<<<<<<
  *     return ((fabs(c[ 3])<tol)and(fabs(c[ 4])<tol)and(fabs(c[ 5])<tol)and \
  *             (fabs(c[ 8])<tol)and(fabs(c[ 9])<tol)and(fabs(c[10])<tol)and \
  */
-  __pyx_v_tol = (1.e-6 * __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c_norm(__pyx_v_c, 0));
+  __pyx_v_tol = (1.e-6 * __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_c_norm(__pyx_v_c, 0));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":480
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":480
  * cpdef bool is_isotropic_c(list c):
  *     cdef DTYPE_t tol = 1.e-6*c_norm(c);
  *     return ((fabs(c[ 3])<tol)and(fabs(c[ 4])<tol)and(fabs(c[ 5])<tol)and \             # <<<<<<<<<<<<<<
@@ -12853,7 +12853,7 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
     goto __pyx_L3_bool_binop_done;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":481
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":481
  *     cdef DTYPE_t tol = 1.e-6*c_norm(c);
  *     return ((fabs(c[ 3])<tol)and(fabs(c[ 4])<tol)and(fabs(c[ 5])<tol)and \
  *             (fabs(c[ 8])<tol)and(fabs(c[ 9])<tol)and(fabs(c[10])<tol)and \             # <<<<<<<<<<<<<<
@@ -12915,7 +12915,7 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
     goto __pyx_L3_bool_binop_done;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":482
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":482
  *     return ((fabs(c[ 3])<tol)and(fabs(c[ 4])<tol)and(fabs(c[ 5])<tol)and \
  *             (fabs(c[ 8])<tol)and(fabs(c[ 9])<tol)and(fabs(c[10])<tol)and \
  *             (fabs(c[12])<tol)and(fabs(c[13])<tol)and(fabs(c[14])<tol)and \             # <<<<<<<<<<<<<<
@@ -12977,7 +12977,7 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
     goto __pyx_L3_bool_binop_done;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":483
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":483
  *             (fabs(c[ 8])<tol)and(fabs(c[ 9])<tol)and(fabs(c[10])<tol)and \
  *             (fabs(c[12])<tol)and(fabs(c[13])<tol)and(fabs(c[14])<tol)and \
  *             (fabs(c[16])<tol)and(fabs(c[17])<tol)and(fabs(c[19])<tol)and \             # <<<<<<<<<<<<<<
@@ -13039,7 +13039,7 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
     goto __pyx_L3_bool_binop_done;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":484
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":484
  *             (fabs(c[12])<tol)and(fabs(c[13])<tol)and(fabs(c[14])<tol)and \
  *             (fabs(c[16])<tol)and(fabs(c[17])<tol)and(fabs(c[19])<tol)and \
  *             (fabs(c[ 0]-c[ 6])<tol)and(fabs(c[ 6]-c[11])<tol)and \             # <<<<<<<<<<<<<<
@@ -13103,7 +13103,7 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
     goto __pyx_L3_bool_binop_done;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":485
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":485
  *             (fabs(c[16])<tol)and(fabs(c[17])<tol)and(fabs(c[19])<tol)and \
  *             (fabs(c[ 0]-c[ 6])<tol)and(fabs(c[ 6]-c[11])<tol)and \
  *             (fabs(c[15]-c[18])<tol)and(fabs(c[18]-c[20])<tol)and \             # <<<<<<<<<<<<<<
@@ -13167,7 +13167,7 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
     goto __pyx_L3_bool_binop_done;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":486
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":486
  *             (fabs(c[ 0]-c[ 6])<tol)and(fabs(c[ 6]-c[11])<tol)and \
  *             (fabs(c[15]-c[18])<tol)and(fabs(c[18]-c[20])<tol)and \
  *             (fabs(c[ 1]-c[ 2])<tol)and(fabs(c[ 2]-c[ 7])<tol)and \             # <<<<<<<<<<<<<<
@@ -13231,7 +13231,7 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
     goto __pyx_L3_bool_binop_done;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":487
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":487
  *             (fabs(c[15]-c[18])<tol)and(fabs(c[18]-c[20])<tol)and \
  *             (fabs(c[ 1]-c[ 2])<tol)and(fabs(c[ 2]-c[ 7])<tol)and \
  *             (fabs(c[0]-c[1]-2*c[15])<tol))             # <<<<<<<<<<<<<<
@@ -13280,7 +13280,7 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":478
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":478
  *     return np.asarray(dvoigt[np.array([0,1,2,5,4,3])])
  * 
  * cpdef bool is_isotropic_c(list c):             # <<<<<<<<<<<<<<
@@ -13294,7 +13294,7 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.is_isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.is_isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF((PyObject *)__pyx_r);
@@ -13303,8 +13303,8 @@ static PyBoolObject *__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isot
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_21is_isotropic_c(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_21is_isotropic_c(PyObject *__pyx_self, PyObject *__pyx_v_c) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_21is_isotropic_c(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_21is_isotropic_c(PyObject *__pyx_self, PyObject *__pyx_v_c) {
   CYTHON_UNUSED int __pyx_lineno = 0;
   CYTHON_UNUSED const char *__pyx_filename = NULL;
   CYTHON_UNUSED int __pyx_clineno = 0;
@@ -13312,7 +13312,7 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_21is_isotr
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("is_isotropic_c (wrapper)", 0);
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c), (&PyList_Type), 1, "c", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_20is_isotropic_c(__pyx_self, ((PyObject*)__pyx_v_c));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_20is_isotropic_c(__pyx_self, ((PyObject*)__pyx_v_c));
 
   /* function exit code */
   goto __pyx_L0;
@@ -13323,7 +13323,7 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_21is_isotr
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_20is_isotropic_c(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_20is_isotropic_c(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -13332,7 +13332,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_20is_isotr
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_isotropic_c", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_is_isotropic_c(__pyx_v_c, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((PyObject *)__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_is_isotropic_c(__pyx_v_c, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -13341,7 +13341,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_20is_isotr
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.is_isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.is_isotropic_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -13349,7 +13349,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_20is_isotr
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":489
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":489
  *             (fabs(c[0]-c[1]-2*c[15])<tol))
  * 
  * cpdef DTYPE_t [:,::1] c21_cvoigt(list c):             # <<<<<<<<<<<<<<
@@ -13357,8 +13357,8 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_20is_isotr
  *                      [c[1],c[6],c[7],sqrt2*c[8],sqrt2*c[9],sqrt2*c[10]],
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_23c21_cvoigt(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
-static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c21_cvoigt(PyObject *__pyx_v_c, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_23c21_cvoigt(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
+static __Pyx_memviewslice __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_c21_cvoigt(PyObject *__pyx_v_c, CYTHON_UNUSED int __pyx_skip_dispatch) {
   __Pyx_memviewslice __pyx_r = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -13381,7 +13381,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("c21_cvoigt", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":490
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":490
  * 
  * cpdef DTYPE_t [:,::1] c21_cvoigt(list c):
  *     return np.array([[c[0],c[1],c[2],sqrt2*c[3],sqrt2*c[4],sqrt2*c[5]],             # <<<<<<<<<<<<<<
@@ -13468,7 +13468,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
   __pyx_t_9 = 0;
   __pyx_t_10 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":491
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":491
  * cpdef DTYPE_t [:,::1] c21_cvoigt(list c):
  *     return np.array([[c[0],c[1],c[2],sqrt2*c[3],sqrt2*c[4],sqrt2*c[5]],
  *                      [c[1],c[6],c[7],sqrt2*c[8],sqrt2*c[9],sqrt2*c[10]],             # <<<<<<<<<<<<<<
@@ -13550,7 +13550,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
   __pyx_t_6 = 0;
   __pyx_t_11 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":492
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":492
  *     return np.array([[c[0],c[1],c[2],sqrt2*c[3],sqrt2*c[4],sqrt2*c[5]],
  *                      [c[1],c[6],c[7],sqrt2*c[8],sqrt2*c[9],sqrt2*c[10]],
  *                      [c[2],c[7],c[11],sqrt2*c[12],sqrt2*c[13],sqrt2*c[14]],             # <<<<<<<<<<<<<<
@@ -13632,7 +13632,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
   __pyx_t_5 = 0;
   __pyx_t_12 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":493
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":493
  *                      [c[1],c[6],c[7],sqrt2*c[8],sqrt2*c[9],sqrt2*c[10]],
  *                      [c[2],c[7],c[11],sqrt2*c[12],sqrt2*c[13],sqrt2*c[14]],
  *                      [sqrt2*c[3],sqrt2*c[8],sqrt2*c[12],2*c[15],2*c[16],2*c[17]],             # <<<<<<<<<<<<<<
@@ -13723,7 +13723,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
   __pyx_t_11 = 0;
   __pyx_t_8 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":494
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":494
  *                      [c[2],c[7],c[11],sqrt2*c[12],sqrt2*c[13],sqrt2*c[14]],
  *                      [sqrt2*c[3],sqrt2*c[8],sqrt2*c[12],2*c[15],2*c[16],2*c[17]],
  *                      [sqrt2*c[4],sqrt2*c[9],sqrt2*c[13],2*c[16],2*c[18],2*c[19]],             # <<<<<<<<<<<<<<
@@ -13814,7 +13814,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
   __pyx_t_10 = 0;
   __pyx_t_13 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":495
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":495
  *                      [sqrt2*c[3],sqrt2*c[8],sqrt2*c[12],2*c[15],2*c[16],2*c[17]],
  *                      [sqrt2*c[4],sqrt2*c[9],sqrt2*c[13],2*c[16],2*c[18],2*c[19]],
  *                      [sqrt2*c[5],sqrt2*c[10],sqrt2*c[14],2*c[17],2*c[19],2*c[20]]])             # <<<<<<<<<<<<<<
@@ -13905,7 +13905,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
   __pyx_t_12 = 0;
   __pyx_t_14 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":490
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":490
  * 
  * cpdef DTYPE_t [:,::1] c21_cvoigt(list c):
  *     return np.array([[c[0],c[1],c[2],sqrt2*c[3],sqrt2*c[4],sqrt2*c[5]],             # <<<<<<<<<<<<<<
@@ -13958,7 +13958,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_15 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_15 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_15.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 490; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_15;
@@ -13966,7 +13966,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
   __pyx_t_15.data = NULL;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":489
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":489
  *             (fabs(c[0]-c[1]-2*c[15])<tol))
  * 
  * cpdef DTYPE_t [:,::1] c21_cvoigt(list c):             # <<<<<<<<<<<<<<
@@ -13993,7 +13993,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
   __PYX_XDEC_MEMVIEW(&__pyx_t_15, 1);
   __pyx_r.data = NULL;
   __pyx_r.memview = NULL;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.c21_cvoigt", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.c21_cvoigt", __pyx_clineno, __pyx_lineno, __pyx_filename);
 
   goto __pyx_L2;
   __pyx_L0:;
@@ -14006,8 +14006,8 @@ static __Pyx_memviewslice __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c2
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_23c21_cvoigt(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_23c21_cvoigt(PyObject *__pyx_self, PyObject *__pyx_v_c) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_23c21_cvoigt(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_23c21_cvoigt(PyObject *__pyx_self, PyObject *__pyx_v_c) {
   CYTHON_UNUSED int __pyx_lineno = 0;
   CYTHON_UNUSED const char *__pyx_filename = NULL;
   CYTHON_UNUSED int __pyx_clineno = 0;
@@ -14015,7 +14015,7 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_23c21_cvoi
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("c21_cvoigt (wrapper)", 0);
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c), (&PyList_Type), 1, "c", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 489; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_22c21_cvoigt(__pyx_self, ((PyObject*)__pyx_v_c));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_22c21_cvoigt(__pyx_self, ((PyObject*)__pyx_v_c));
 
   /* function exit code */
   goto __pyx_L0;
@@ -14026,7 +14026,7 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_23c21_cvoi
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_22c21_cvoigt(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_22c21_cvoigt(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_memviewslice __pyx_t_1 = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -14036,8 +14036,8 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_22c21_cvoi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("c21_cvoigt", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c21_cvoigt(__pyx_v_c, 0); if (unlikely(!__pyx_t_1.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 489; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_1, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 489; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_c21_cvoigt(__pyx_v_c, 0); if (unlikely(!__pyx_t_1.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 489; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_1, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 489; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
   __pyx_r = __pyx_t_2;
@@ -14048,7 +14048,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_22c21_cvoi
   __pyx_L1_error:;
   __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.c21_cvoigt", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.c21_cvoigt", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -14056,7 +14056,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_22c21_cvoi
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":497
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":497
  *                      [sqrt2*c[5],sqrt2*c[10],sqrt2*c[14],2*c[17],2*c[19],2*c[20]]])
  * 
  * cpdef DTYPE_t c_norm(list c):             # <<<<<<<<<<<<<<
@@ -14064,9 +14064,9 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_22c21_cvoi
  *                  4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2+
  */
 
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_25c_norm(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
-static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c_norm(PyObject *__pyx_v_c, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_r;
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_25c_norm(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
+static __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_c_norm(PyObject *__pyx_v_c, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
@@ -14078,7 +14078,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("c_norm", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":498
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":498
  * 
  * cpdef DTYPE_t c_norm(list c):
  *     return sqrt(c[0]**2+c[6]**2+c[11]**2+2*(c[1]**2+c[2]**2+c[7]**2)+             # <<<<<<<<<<<<<<
@@ -14163,7 +14163,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":499
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":499
  * cpdef DTYPE_t c_norm(list c):
  *     return sqrt(c[0]**2+c[6]**2+c[11]**2+2*(c[1]**2+c[2]**2+c[7]**2)+
  *                  4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2+             # <<<<<<<<<<<<<<
@@ -14245,7 +14245,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":500
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":500
  *     return sqrt(c[0]**2+c[6]**2+c[11]**2+2*(c[1]**2+c[2]**2+c[7]**2)+
  *                  4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2+
  *                     c[12]**2+c[13]**2+c[14]**2+c[15]**2+c[18]**2+c[20]**2)+             # <<<<<<<<<<<<<<
@@ -14262,7 +14262,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":499
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":499
  * cpdef DTYPE_t c_norm(list c):
  *     return sqrt(c[0]**2+c[6]**2+c[11]**2+2*(c[1]**2+c[2]**2+c[7]**2)+
  *                  4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2+             # <<<<<<<<<<<<<<
@@ -14274,7 +14274,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":500
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":500
  *     return sqrt(c[0]**2+c[6]**2+c[11]**2+2*(c[1]**2+c[2]**2+c[7]**2)+
  *                  4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2+
  *                     c[12]**2+c[13]**2+c[14]**2+c[15]**2+c[18]**2+c[20]**2)+             # <<<<<<<<<<<<<<
@@ -14347,7 +14347,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":499
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":499
  * cpdef DTYPE_t c_norm(list c):
  *     return sqrt(c[0]**2+c[6]**2+c[11]**2+2*(c[1]**2+c[2]**2+c[7]**2)+
  *                  4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2+             # <<<<<<<<<<<<<<
@@ -14358,7 +14358,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":498
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":498
  * 
  * cpdef DTYPE_t c_norm(list c):
  *     return sqrt(c[0]**2+c[6]**2+c[11]**2+2*(c[1]**2+c[2]**2+c[7]**2)+             # <<<<<<<<<<<<<<
@@ -14370,7 +14370,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":501
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":501
  *                  4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2+
  *                     c[12]**2+c[13]**2+c[14]**2+c[15]**2+c[18]**2+c[20]**2)+
  *                  8*(c[16]**2+c[17]**2+c[19]**2));             # <<<<<<<<<<<<<<
@@ -14416,7 +14416,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":500
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":500
  *     return sqrt(c[0]**2+c[6]**2+c[11]**2+2*(c[1]**2+c[2]**2+c[7]**2)+
  *                  4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2+
  *                     c[12]**2+c[13]**2+c[14]**2+c[15]**2+c[18]**2+c[20]**2)+             # <<<<<<<<<<<<<<
@@ -14430,7 +14430,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":498
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":498
  * 
  * cpdef DTYPE_t c_norm(list c):
  *     return sqrt(c[0]**2+c[6]**2+c[11]**2+2*(c[1]**2+c[2]**2+c[7]**2)+             # <<<<<<<<<<<<<<
@@ -14440,7 +14440,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __pyx_r = sqrt(__pyx_t_5);
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":497
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":497
  *                      [sqrt2*c[5],sqrt2*c[10],sqrt2*c[14],2*c[17],2*c[19],2*c[20]]])
  * 
  * cpdef DTYPE_t c_norm(list c):             # <<<<<<<<<<<<<<
@@ -14454,7 +14454,7 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_WriteUnraisable("mtfit.convert.cmoment_tensor_conversion.c_norm", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  __Pyx_WriteUnraisable("MTfit.convert.cmoment_tensor_conversion.c_norm", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -14462,8 +14462,8 @@ static __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_f_5mtfi
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_25c_norm(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_25c_norm(PyObject *__pyx_self, PyObject *__pyx_v_c) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_25c_norm(PyObject *__pyx_self, PyObject *__pyx_v_c); /*proto*/
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_25c_norm(PyObject *__pyx_self, PyObject *__pyx_v_c) {
   CYTHON_UNUSED int __pyx_lineno = 0;
   CYTHON_UNUSED const char *__pyx_filename = NULL;
   CYTHON_UNUSED int __pyx_clineno = 0;
@@ -14471,7 +14471,7 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_25c_norm(P
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("c_norm (wrapper)", 0);
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c), (&PyList_Type), 1, "c", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_24c_norm(__pyx_self, ((PyObject*)__pyx_v_c));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_24c_norm(__pyx_self, ((PyObject*)__pyx_v_c));
 
   /* function exit code */
   goto __pyx_L0;
@@ -14482,7 +14482,7 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_25c_norm(P
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_24c_norm(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_24c_norm(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_c) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -14491,7 +14491,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_24c_norm(C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("c_norm", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_c_norm(__pyx_v_c, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_c_norm(__pyx_v_c, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -14500,7 +14500,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_24c_norm(C
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.c_norm", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.c_norm", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -14508,7 +14508,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_24c_norm(C
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":506
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":506
  * 
  * class cMomentTensorConvertTestCase(TestCase):
  *     def test_cTape_MT6(self):             # <<<<<<<<<<<<<<
@@ -14517,20 +14517,20 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_24c_norm(C
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6 = {"test_cTape_MT6", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6 = {"test_cTape_MT6", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cTape_MT6 (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_test_cTape_MT6(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_test_cTape_MT6(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_test_cTape_MT6(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_test_cTape_MT6(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   __Pyx_memviewslice __pyx_v_m = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -14554,7 +14554,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_cTape_MT6", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":507
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":507
  * class cMomentTensorConvertTestCase(TestCase):
  *     def test_cTape_MT6(self):
  *         cdef DTYPE_t[::1] m=np.empty((6))             # <<<<<<<<<<<<<<
@@ -14569,14 +14569,14 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__31, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_3.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_m = __pyx_t_3;
   __pyx_t_3.memview = NULL;
   __pyx_t_3.data = NULL;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":508
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":508
  *     def test_cTape_MT6(self):
  *         cdef DTYPE_t[::1] m=np.empty((6))
  *         cTape_MT6(&m[0],0.12,0.43,0.76,0.63,0.75)             # <<<<<<<<<<<<<<
@@ -14593,9 +14593,9 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 508; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6((&(*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_4)) )))), 0.12, 0.43, 0.76, 0.63, 0.75);
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTape_MT6((&(*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_4)) )))), 0.12, 0.43, 0.76, 0.63, 0.75);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":509
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":509
  *         cdef DTYPE_t[::1] m=np.empty((6))
  *         cTape_MT6(&m[0],0.12,0.43,0.76,0.63,0.75)
  *         self.assertAlmostEqual(m[0],-0.3637,4)             # <<<<<<<<<<<<<<
@@ -14614,7 +14614,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_7 = PyFloat_FromDouble((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_6)) )))); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyFloat_FromDouble((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_6)) )))); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -14648,7 +14648,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":510
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":510
  *         cTape_MT6(&m[0],0.12,0.43,0.76,0.63,0.75)
  *         self.assertAlmostEqual(m[0],-0.3637,4)
  *         self.assertAlmostEqual(m[1],0.4209,4)             # <<<<<<<<<<<<<<
@@ -14667,7 +14667,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 510; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_10 = PyFloat_FromDouble((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 510; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyFloat_FromDouble((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 510; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_t_7 = NULL;
   __pyx_t_9 = 0;
@@ -14701,7 +14701,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":511
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":511
  *         self.assertAlmostEqual(m[0],-0.3637,4)
  *         self.assertAlmostEqual(m[1],0.4209,4)
  *         self.assertAlmostEqual(m[2],0.6649,4)             # <<<<<<<<<<<<<<
@@ -14720,7 +14720,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_8 = PyFloat_FromDouble((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_12)) )))); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = PyFloat_FromDouble((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_12)) )))); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_10 = NULL;
   __pyx_t_9 = 0;
@@ -14754,7 +14754,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":512
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":512
  *         self.assertAlmostEqual(m[1],0.4209,4)
  *         self.assertAlmostEqual(m[2],0.6649,4)
  *         self.assertAlmostEqual(m[3],0.3533,4)             # <<<<<<<<<<<<<<
@@ -14773,7 +14773,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 512; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_7 = PyFloat_FromDouble((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_13)) )))); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 512; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyFloat_FromDouble((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_13)) )))); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 512; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = NULL;
   __pyx_t_9 = 0;
@@ -14807,7 +14807,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":513
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":513
  *         self.assertAlmostEqual(m[2],0.6649,4)
  *         self.assertAlmostEqual(m[3],0.3533,4)
  *         self.assertAlmostEqual(m[4],-0.1952,4)             # <<<<<<<<<<<<<<
@@ -14826,7 +14826,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 513; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_10 = PyFloat_FromDouble((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_14)) )))); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 513; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyFloat_FromDouble((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_14)) )))); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 513; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_t_7 = NULL;
   __pyx_t_9 = 0;
@@ -14860,7 +14860,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":514
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":514
  *         self.assertAlmostEqual(m[3],0.3533,4)
  *         self.assertAlmostEqual(m[4],-0.1952,4)
  *         self.assertAlmostEqual(m[5],-0.2924,4)             # <<<<<<<<<<<<<<
@@ -14879,7 +14879,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 514; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_8 = PyFloat_FromDouble((*((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_15)) )))); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 514; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = PyFloat_FromDouble((*((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) __pyx_v_m.data) + __pyx_t_15)) )))); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 514; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_10 = NULL;
   __pyx_t_9 = 0;
@@ -14913,7 +14913,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":506
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":506
  * 
  * class cMomentTensorConvertTestCase(TestCase):
  *     def test_cTape_MT6(self):             # <<<<<<<<<<<<<<
@@ -14931,7 +14931,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_cTape_MT6", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_cTape_MT6", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_m, 1);
@@ -14940,7 +14940,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":515
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":515
  *         self.assertAlmostEqual(m[4],-0.1952,4)
  *         self.assertAlmostEqual(m[5],-0.2924,4)
  *     def test_c_cE_tk(self):             # <<<<<<<<<<<<<<
@@ -14949,20 +14949,20 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk = {"test_c_cE_tk", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk = {"test_c_cE_tk", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_c_cE_tk (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_2test_c_cE_tk(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_2test_c_cE_tk(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_2test_c_cE_tk(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_2test_c_cE_tk(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_results = NULL;
   PyObject *__pyx_v_E = NULL;
   PyObject *__pyx_r = NULL;
@@ -14981,7 +14981,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_c_cE_tk", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":516
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":516
  *         self.assertAlmostEqual(m[5],-0.2924,4)
  *     def test_c_cE_tk(self):
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.])             # <<<<<<<<<<<<<<
@@ -15045,7 +15045,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_results = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":517
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":517
  *     def test_c_cE_tk(self):
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.])
  *         E=np.array([1.,0.,-1.])             # <<<<<<<<<<<<<<
@@ -15097,27 +15097,27 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_E = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":518
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":518
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.])
  *         E=np.array([1.,0.,-1.])
  *         results=cE_tk(E,results)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(results[5],0)
  *         self.assertAlmostEqual(results[6],0)
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_8 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":519
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":519
  *         E=np.array([1.,0.,-1.])
  *         results=cE_tk(E,results)
  *         self.assertAlmostEqual(results[5],0)             # <<<<<<<<<<<<<<
@@ -15157,7 +15157,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":520
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":520
  *         results=cE_tk(E,results)
  *         self.assertAlmostEqual(results[5],0)
  *         self.assertAlmostEqual(results[6],0)             # <<<<<<<<<<<<<<
@@ -15197,7 +15197,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":521
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":521
  *         self.assertAlmostEqual(results[5],0)
  *         self.assertAlmostEqual(results[6],0)
  *         E=np.array([1.,1.,1.])             # <<<<<<<<<<<<<<
@@ -15249,27 +15249,27 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF_SET(__pyx_v_E, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":522
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":522
  *         self.assertAlmostEqual(results[6],0)
  *         E=np.array([1.,1.,1.])
  *         results=cE_tk(E,results)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(results[5],1.)
  *         self.assertAlmostEqual(results[6],0.)
  */
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_6 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_8, __pyx_t_7); if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_8, __pyx_t_7); if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":523
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":523
  *         E=np.array([1.,1.,1.])
  *         results=cE_tk(E,results)
  *         self.assertAlmostEqual(results[5],1.)             # <<<<<<<<<<<<<<
@@ -15309,7 +15309,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":524
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":524
  *         results=cE_tk(E,results)
  *         self.assertAlmostEqual(results[5],1.)
  *         self.assertAlmostEqual(results[6],0.)             # <<<<<<<<<<<<<<
@@ -15349,7 +15349,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":525
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":525
  *         self.assertAlmostEqual(results[5],1.)
  *         self.assertAlmostEqual(results[6],0.)
  *         E=np.array([1.,-1.,-1.])             # <<<<<<<<<<<<<<
@@ -15401,27 +15401,27 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF_SET(__pyx_v_E, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":526
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":526
  *         self.assertAlmostEqual(results[6],0.)
  *         E=np.array([1.,-1.,-1.])
  *         results=cE_tk(E,results)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(results[5],-0.2)#y
  *         self.assertAlmostEqual(results[6],-0.8)#x
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 526; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 526; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_8 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 526; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 526; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 526; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 526; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":527
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":527
  *         E=np.array([1.,-1.,-1.])
  *         results=cE_tk(E,results)
  *         self.assertAlmostEqual(results[5],-0.2)#y             # <<<<<<<<<<<<<<
@@ -15461,7 +15461,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":528
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":528
  *         results=cE_tk(E,results)
  *         self.assertAlmostEqual(results[5],-0.2)#y
  *         self.assertAlmostEqual(results[6],-0.8)#x             # <<<<<<<<<<<<<<
@@ -15501,7 +15501,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":515
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":515
  *         self.assertAlmostEqual(m[4],-0.1952,4)
  *         self.assertAlmostEqual(m[5],-0.2924,4)
  *     def test_c_cE_tk(self):             # <<<<<<<<<<<<<<
@@ -15521,7 +15521,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cE_tk", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cE_tk", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_results);
@@ -15531,7 +15531,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":529
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":529
  *         self.assertAlmostEqual(results[5],-0.2)#y
  *         self.assertAlmostEqual(results[6],-0.8)#x
  *     def test_c_ctk_uv(self):             # <<<<<<<<<<<<<<
@@ -15540,20 +15540,20 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv = {"test_c_ctk_uv", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv = {"test_c_ctk_uv", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_c_ctk_uv (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_4test_c_ctk_uv(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_4test_c_ctk_uv(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_4test_c_ctk_uv(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_4test_c_ctk_uv(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_results = NULL;
   PyObject *__pyx_v_E = NULL;
   PyObject *__pyx_r = NULL;
@@ -15573,7 +15573,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_c_ctk_uv", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":530
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":530
  *         self.assertAlmostEqual(results[6],-0.8)#x
  *     def test_c_ctk_uv(self):
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.])             # <<<<<<<<<<<<<<
@@ -15637,7 +15637,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_results = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":531
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":531
  *     def test_c_ctk_uv(self):
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.])
  *         E=np.array([1.,0.,-1.])             # <<<<<<<<<<<<<<
@@ -15689,44 +15689,44 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_E = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":532
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":532
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.])
  *         E=np.array([1.,0.,-1.])
  *         results=cE_tk(E,results)             # <<<<<<<<<<<<<<
  *         results=ctk_uv(results)
  *         self.assertAlmostEqual(results[5],0)
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_8 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":533
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":533
  *         E=np.array([1.,0.,-1.])
  *         results=cE_tk(E,results)
  *         results=ctk_uv(results)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(results[5],0)
  *         self.assertAlmostEqual(results[6],0)
  */
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_7 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_ctk_uv(__pyx_t_8); if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_ctk_uv(__pyx_t_8); if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":534
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":534
  *         results=cE_tk(E,results)
  *         results=ctk_uv(results)
  *         self.assertAlmostEqual(results[5],0)             # <<<<<<<<<<<<<<
@@ -15766,7 +15766,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":535
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":535
  *         results=ctk_uv(results)
  *         self.assertAlmostEqual(results[5],0)
  *         self.assertAlmostEqual(results[6],0)             # <<<<<<<<<<<<<<
@@ -15806,7 +15806,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":536
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":536
  *         self.assertAlmostEqual(results[5],0)
  *         self.assertAlmostEqual(results[6],0)
  *         E=np.array([1.,1.,1.])             # <<<<<<<<<<<<<<
@@ -15858,44 +15858,44 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF_SET(__pyx_v_E, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":537
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":537
  *         self.assertAlmostEqual(results[6],0)
  *         E=np.array([1.,1.,1.])
  *         results=cE_tk(E,results)             # <<<<<<<<<<<<<<
  *         results=ctk_uv(results)
  *         self.assertAlmostEqual(results[5],0)
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_6 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":538
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":538
  *         E=np.array([1.,1.,1.])
  *         results=cE_tk(E,results)
  *         results=ctk_uv(results)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(results[5],0)
  *         self.assertAlmostEqual(results[6],1)
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_8 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_ctk_uv(__pyx_t_6); if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_ctk_uv(__pyx_t_6); if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":539
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":539
  *         results=cE_tk(E,results)
  *         results=ctk_uv(results)
  *         self.assertAlmostEqual(results[5],0)             # <<<<<<<<<<<<<<
@@ -15935,7 +15935,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":540
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":540
  *         results=ctk_uv(results)
  *         self.assertAlmostEqual(results[5],0)
  *         self.assertAlmostEqual(results[6],1)             # <<<<<<<<<<<<<<
@@ -15975,7 +15975,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":541
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":541
  *         self.assertAlmostEqual(results[5],0)
  *         self.assertAlmostEqual(results[6],1)
  *         E=np.array([1.,-1.,-1.])             # <<<<<<<<<<<<<<
@@ -16027,44 +16027,44 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF_SET(__pyx_v_E, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":542
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":542
  *         self.assertAlmostEqual(results[6],1)
  *         E=np.array([1.,-1.,-1.])
  *         results=cE_tk(E,results)             # <<<<<<<<<<<<<<
  *         results=ctk_uv(results)
  *         self.assertAlmostEqual(results[5],-4./3)
  */
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 542; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 542; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_7 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_8, __pyx_t_6); if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 542; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_tk(__pyx_t_8, __pyx_t_6); if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 542; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 542; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 542; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":543
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":543
  *         E=np.array([1.,-1.,-1.])
  *         results=cE_tk(E,results)
  *         results=ctk_uv(results)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(results[5],-4./3)
  *         self.assertAlmostEqual(results[6],-1./3)
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_6 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_ctk_uv(__pyx_t_7); if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_ctk_uv(__pyx_t_7); if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_6, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":544
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":544
  *         results=cE_tk(E,results)
  *         results=ctk_uv(results)
  *         self.assertAlmostEqual(results[5],-4./3)             # <<<<<<<<<<<<<<
@@ -16106,7 +16106,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":545
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":545
  *         results=ctk_uv(results)
  *         self.assertAlmostEqual(results[5],-4./3)
  *         self.assertAlmostEqual(results[6],-1./3)             # <<<<<<<<<<<<<<
@@ -16148,7 +16148,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":529
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":529
  *         self.assertAlmostEqual(results[5],-0.2)#y
  *         self.assertAlmostEqual(results[6],-0.8)#x
  *     def test_c_ctk_uv(self):             # <<<<<<<<<<<<<<
@@ -16169,7 +16169,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_ctk_uv", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_ctk_uv", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_results);
@@ -16179,7 +16179,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":546
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":546
  *         self.assertAlmostEqual(results[5],-4./3)
  *         self.assertAlmostEqual(results[6],-1./3)
  *     def test_c_cE_gd(self):             # <<<<<<<<<<<<<<
@@ -16188,23 +16188,23 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd = {"test_c_cE_gd", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd = {"test_c_cE_gd", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_c_cE_gd (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_6test_c_cE_gd(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_6test_c_cE_gd(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_6test_c_cE_gd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_6test_c_cE_gd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_E = NULL;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_g;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_d;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_g;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_d;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -16220,7 +16220,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_c_cE_gd", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":547
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":547
  *         self.assertAlmostEqual(results[6],-1./3)
  *     def test_c_cE_gd(self):
  *         E=np.array([1.,0.,-1.])             # <<<<<<<<<<<<<<
@@ -16272,19 +16272,19 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_E = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":550
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":550
  *         cdef DTYPE_t g
  *         cdef DTYPE_t d
  *         cE_gd(E,&g,&d)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(g,0)
  *         self.assertAlmostEqual(d,0)
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 550; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_t_6, (&__pyx_v_g), (&__pyx_v_d));
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_t_6, (&__pyx_v_g), (&__pyx_v_d));
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":551
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":551
  *         cdef DTYPE_t d
  *         cE_gd(E,&g,&d)
  *         self.assertAlmostEqual(g,0)             # <<<<<<<<<<<<<<
@@ -16324,7 +16324,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":552
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":552
  *         cE_gd(E,&g,&d)
  *         self.assertAlmostEqual(g,0)
  *         self.assertAlmostEqual(d,0)             # <<<<<<<<<<<<<<
@@ -16364,7 +16364,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":553
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":553
  *         self.assertAlmostEqual(g,0)
  *         self.assertAlmostEqual(d,0)
  *         E=np.array([1.,1.,1.])             # <<<<<<<<<<<<<<
@@ -16416,19 +16416,19 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF_SET(__pyx_v_E, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":554
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":554
  *         self.assertAlmostEqual(d,0)
  *         E=np.array([1.,1.,1.])
  *         cE_gd(E,&g,&d)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(g,0)
  *         self.assertAlmostEqual(d,pi/2)
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 554; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_t_6, (&__pyx_v_g), (&__pyx_v_d));
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_t_6, (&__pyx_v_g), (&__pyx_v_d));
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":555
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":555
  *         E=np.array([1.,1.,1.])
  *         cE_gd(E,&g,&d)
  *         self.assertAlmostEqual(g,0)             # <<<<<<<<<<<<<<
@@ -16468,7 +16468,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":556
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":556
  *         cE_gd(E,&g,&d)
  *         self.assertAlmostEqual(g,0)
  *         self.assertAlmostEqual(d,pi/2)             # <<<<<<<<<<<<<<
@@ -16510,7 +16510,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":557
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":557
  *         self.assertAlmostEqual(g,0)
  *         self.assertAlmostEqual(d,pi/2)
  *         E=np.array([1.,-1.,-1.])             # <<<<<<<<<<<<<<
@@ -16562,19 +16562,19 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF_SET(__pyx_v_E, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":558
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":558
  *         self.assertAlmostEqual(d,pi/2)
  *         E=np.array([1.,-1.,-1.])
  *         cE_gd(E,&g,&d)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(g,-0.523598775598299)
  *         self.assertAlmostEqual(d,-0.339836909454122)
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 558; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_t_6, (&__pyx_v_g), (&__pyx_v_d));
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cE_gd(__pyx_t_6, (&__pyx_v_g), (&__pyx_v_d));
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":559
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":559
  *         E=np.array([1.,-1.,-1.])
  *         cE_gd(E,&g,&d)
  *         self.assertAlmostEqual(g,-0.523598775598299)             # <<<<<<<<<<<<<<
@@ -16614,7 +16614,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":560
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":560
  *         cE_gd(E,&g,&d)
  *         self.assertAlmostEqual(g,-0.523598775598299)
  *         self.assertAlmostEqual(d,-0.339836909454122)             # <<<<<<<<<<<<<<
@@ -16654,7 +16654,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":546
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":546
  *         self.assertAlmostEqual(results[5],-4./3)
  *         self.assertAlmostEqual(results[6],-1./3)
  *     def test_c_cE_gd(self):             # <<<<<<<<<<<<<<
@@ -16673,7 +16673,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_XDECREF(__pyx_t_5);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cE_gd", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cE_gd", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_E);
@@ -16682,7 +16682,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":561
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":561
  *         self.assertAlmostEqual(g,-0.523598775598299)
  *         self.assertAlmostEqual(d,-0.339836909454122)
  *     def test_c_cN_sdr(self):             # <<<<<<<<<<<<<<
@@ -16691,24 +16691,24 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr = {"test_c_cN_sdr", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr = {"test_c_cN_sdr", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_c_cN_sdr (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_8test_c_cN_sdr(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_8test_c_cN_sdr(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_8test_c_cN_sdr(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_8test_c_cN_sdr(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   CYTHON_UNUSED PyObject *__pyx_v_E = NULL;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_s;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_d;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_r;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_s;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_d;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_v_r;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -16716,10 +16716,10 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_6;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_7;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_8;
-  __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_9;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_6;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_7;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_8;
+  __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t __pyx_t_9;
   Py_ssize_t __pyx_t_10;
   PyObject *__pyx_t_11 = NULL;
   int __pyx_lineno = 0;
@@ -16727,7 +16727,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_c_cN_sdr", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":562
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":562
  *         self.assertAlmostEqual(d,-0.339836909454122)
  *     def test_c_cN_sdr(self):
  *         E=np.array([1.,0.,-1.])             # <<<<<<<<<<<<<<
@@ -16779,7 +16779,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_E = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":566
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":566
  *         cdef DTYPE_t d
  *         cdef DTYPE_t r
  *         cN_SDR(0.,0.5/np.sqrt(1.25),1.0/np.sqrt(1.25),0.5/np.sqrt(1.25),0,1.0/np.sqrt(1.25),&s,&d,&r)             # <<<<<<<<<<<<<<
@@ -16838,9 +16838,9 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN_SDR(0., __pyx_t_6, __pyx_t_7, __pyx_t_8, 0.0, __pyx_t_9, (&__pyx_v_s), (&__pyx_v_d), (&__pyx_v_r));
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cN_SDR(0., __pyx_t_6, __pyx_t_7, __pyx_t_8, 0.0, __pyx_t_9, (&__pyx_v_s), (&__pyx_v_d), (&__pyx_v_r));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":567
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":567
  *         cdef DTYPE_t r
  *         cN_SDR(0.,0.5/np.sqrt(1.25),1.0/np.sqrt(1.25),0.5/np.sqrt(1.25),0,1.0/np.sqrt(1.25),&s,&d,&r)
  *         self.assertAlmostEqual(s,pi)             # <<<<<<<<<<<<<<
@@ -16882,7 +16882,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":568
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":568
  *         cN_SDR(0.,0.5/np.sqrt(1.25),1.0/np.sqrt(1.25),0.5/np.sqrt(1.25),0,1.0/np.sqrt(1.25),&s,&d,&r)
  *         self.assertAlmostEqual(s,pi)
  *         self.assertAlmostEqual(d,0.463647609000806)             # <<<<<<<<<<<<<<
@@ -16922,7 +16922,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":569
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":569
  *         self.assertAlmostEqual(s,pi)
  *         self.assertAlmostEqual(d,0.463647609000806)
  *         self.assertAlmostEqual(r,1.35080834939944)             # <<<<<<<<<<<<<<
@@ -16962,7 +16962,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":570
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":570
  *         self.assertAlmostEqual(d,0.463647609000806)
  *         self.assertAlmostEqual(r,1.35080834939944)
  *         cN_SDR(0.5/np.sqrt(1.25),0,1.0/np.sqrt(1.25),0.,0.5/np.sqrt(1.25),1.0/np.sqrt(1.25),&s,&d,&r)             # <<<<<<<<<<<<<<
@@ -17021,9 +17021,9 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 570; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_t_9, 0.0, __pyx_t_8, 0., __pyx_t_7, __pyx_t_6, (&__pyx_v_s), (&__pyx_v_d), (&__pyx_v_r));
+  __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cN_SDR(__pyx_t_9, 0.0, __pyx_t_8, 0., __pyx_t_7, __pyx_t_6, (&__pyx_v_s), (&__pyx_v_d), (&__pyx_v_r));
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":571
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":571
  *         self.assertAlmostEqual(r,1.35080834939944)
  *         cN_SDR(0.5/np.sqrt(1.25),0,1.0/np.sqrt(1.25),0.,0.5/np.sqrt(1.25),1.0/np.sqrt(1.25),&s,&d,&r)
  *         self.assertAlmostEqual(s,pi/2)             # <<<<<<<<<<<<<<
@@ -17065,7 +17065,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":572
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":572
  *         cN_SDR(0.5/np.sqrt(1.25),0,1.0/np.sqrt(1.25),0.,0.5/np.sqrt(1.25),1.0/np.sqrt(1.25),&s,&d,&r)
  *         self.assertAlmostEqual(s,pi/2)
  *         self.assertAlmostEqual(d,0.463647609000806)             # <<<<<<<<<<<<<<
@@ -17105,7 +17105,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":573
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":573
  *         self.assertAlmostEqual(s,pi/2)
  *         self.assertAlmostEqual(d,0.463647609000806)
  *         self.assertAlmostEqual(r,1.79078430419036)             # <<<<<<<<<<<<<<
@@ -17145,7 +17145,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":561
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":561
  *         self.assertAlmostEqual(g,-0.523598775598299)
  *         self.assertAlmostEqual(d,-0.339836909454122)
  *     def test_c_cN_sdr(self):             # <<<<<<<<<<<<<<
@@ -17163,7 +17163,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_11);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cN_sdr", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cN_sdr", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_E);
@@ -17172,7 +17172,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":574
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":574
  *         self.assertAlmostEqual(d,0.463647609000806)
  *         self.assertAlmostEqual(r,1.79078430419036)
  *     def test_c_cTP_SDR(self):             # <<<<<<<<<<<<<<
@@ -17181,20 +17181,20 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR = {"test_c_cTP_SDR", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR = {"test_c_cTP_SDR", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_c_cTP_SDR (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_10test_c_cTP_SDR(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_10test_c_cTP_SDR(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_10test_c_cTP_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_10test_c_cTP_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_T = NULL;
   PyObject *__pyx_v_P = NULL;
   PyObject *__pyx_v_results = NULL;
@@ -17221,7 +17221,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_c_cTP_SDR", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":575
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":575
  *         self.assertAlmostEqual(r,1.79078430419036)
  *     def test_c_cTP_SDR(self):
  *         T=np.array([0.235702260395516,             # <<<<<<<<<<<<<<
@@ -17273,7 +17273,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_T = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":578
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":578
  *          0.235702260395516,
  *          0.942809041582063])
  *         P=np.array([0.707106781186547,             # <<<<<<<<<<<<<<
@@ -17325,7 +17325,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_P = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":581
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":581
  *         -0.707106781186547,
  *                          0])
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.])             # <<<<<<<<<<<<<<
@@ -17416,30 +17416,30 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_results = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":582
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":582
  *                          0])
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.])
  *         results=cTP_SDR(T,P,results)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(results[2],3.6052402625906)
  *         self.assertAlmostEqual(results[3],0.666666666666667)
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_T);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_T);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 582; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_P);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_P);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 582; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_results);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 582; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_9 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTP_SDR(__pyx_t_6, __pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_9.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 582; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTP_SDR(__pyx_t_6, __pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_9.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 582; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_9, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 582; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_9, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 582; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
   __Pyx_DECREF_SET(__pyx_v_results, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":583
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":583
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.])
  *         results=cTP_SDR(T,P,results)
  *         self.assertAlmostEqual(results[2],3.6052402625906)             # <<<<<<<<<<<<<<
@@ -17479,7 +17479,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":584
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":584
  *         results=cTP_SDR(T,P,results)
  *         self.assertAlmostEqual(results[2],3.6052402625906)
  *         self.assertAlmostEqual(results[3],0.666666666666667)             # <<<<<<<<<<<<<<
@@ -17519,7 +17519,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":585
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":585
  *         self.assertAlmostEqual(results[2],3.6052402625906)
  *         self.assertAlmostEqual(results[3],0.666666666666667)
  *         self.assertAlmostEqual(results[4],1.10714871779409)             # <<<<<<<<<<<<<<
@@ -17559,7 +17559,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":586
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":586
  *         self.assertAlmostEqual(results[3],0.666666666666667)
  *         self.assertAlmostEqual(results[4],1.10714871779409)
  *         try:             # <<<<<<<<<<<<<<
@@ -17573,7 +17573,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_XGOTREF(__pyx_t_13);
     /*try:*/ {
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":587
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":587
  *         self.assertAlmostEqual(results[4],1.10714871779409)
  *         try:
  *             self.assertAlmostEqual(results[7],206.565051177078)             # <<<<<<<<<<<<<<
@@ -17613,7 +17613,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":588
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":588
  *         try:
  *             self.assertAlmostEqual(results[7],206.565051177078)
  *             self.assertAlmostEqual(results[8],48.1896851042214)             # <<<<<<<<<<<<<<
@@ -17653,7 +17653,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":589
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":589
  *             self.assertAlmostEqual(results[7],206.565051177078)
  *             self.assertAlmostEqual(results[8],48.1896851042214)
  *             self.assertAlmostEqual(results[9],63.434948822922)             # <<<<<<<<<<<<<<
@@ -17693,7 +17693,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":590
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":590
  *             self.assertAlmostEqual(results[8],48.1896851042214)
  *             self.assertAlmostEqual(results[9],63.434948822922)
  *             self.assertAlmostEqual(results[10],63.434948822922)             # <<<<<<<<<<<<<<
@@ -17733,7 +17733,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":591
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":591
  *             self.assertAlmostEqual(results[9],63.434948822922)
  *             self.assertAlmostEqual(results[10],63.434948822922)
  *             self.assertAlmostEqual(results[11],48.1896851042214)             # <<<<<<<<<<<<<<
@@ -17773,7 +17773,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":592
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":592
  *             self.assertAlmostEqual(results[10],63.434948822922)
  *             self.assertAlmostEqual(results[11],48.1896851042214)
  *             self.assertAlmostEqual(results[12],116.565051177078)             # <<<<<<<<<<<<<<
@@ -17813,7 +17813,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":586
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":586
  *         self.assertAlmostEqual(results[3],0.666666666666667)
  *         self.assertAlmostEqual(results[4],1.10714871779409)
  *         try:             # <<<<<<<<<<<<<<
@@ -17826,17 +17826,17 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
     goto __pyx_L10_try_end;
     __pyx_L3_error:;
-    __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-    __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-    __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
-    __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
+    __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
+    __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
+    __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":593
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":593
  *             self.assertAlmostEqual(results[11],48.1896851042214)
  *             self.assertAlmostEqual(results[12],116.565051177078)
  *         except:             # <<<<<<<<<<<<<<
@@ -17844,13 +17844,13 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  *             self.assertAlmostEqual(results[11],48.1896851042214)
  */
     /*except:*/ {
-      __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cTP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cTP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
       if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_4, &__pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 593; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GOTREF(__pyx_t_2);
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":594
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":594
  *             self.assertAlmostEqual(results[12],116.565051177078)
  *         except:
  *             self.assertAlmostEqual(results[10],206.565051177078)             # <<<<<<<<<<<<<<
@@ -17890,7 +17890,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":595
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":595
  *         except:
  *             self.assertAlmostEqual(results[10],206.565051177078)
  *             self.assertAlmostEqual(results[11],48.1896851042214)             # <<<<<<<<<<<<<<
@@ -17930,7 +17930,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":596
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":596
  *             self.assertAlmostEqual(results[10],206.565051177078)
  *             self.assertAlmostEqual(results[11],48.1896851042214)
  *             self.assertAlmostEqual(results[12],63.434948822922)             # <<<<<<<<<<<<<<
@@ -17970,7 +17970,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":597
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":597
  *             self.assertAlmostEqual(results[11],48.1896851042214)
  *             self.assertAlmostEqual(results[12],63.434948822922)
  *             self.assertAlmostEqual(results[7],63.434948822922)             # <<<<<<<<<<<<<<
@@ -18010,7 +18010,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":598
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":598
  *             self.assertAlmostEqual(results[12],63.434948822922)
  *             self.assertAlmostEqual(results[7],63.434948822922)
  *             self.assertAlmostEqual(results[8],48.1896851042214)             # <<<<<<<<<<<<<<
@@ -18050,7 +18050,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "mtfit\convert\cmoment_tensor_conversion.pyx":599
+      /* "MTfit\convert\cmoment_tensor_conversion.pyx":599
  *             self.assertAlmostEqual(results[7],63.434948822922)
  *             self.assertAlmostEqual(results[8],48.1896851042214)
  *             self.assertAlmostEqual(results[9],116.565051177078)             # <<<<<<<<<<<<<<
@@ -18096,7 +18096,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     }
     __pyx_L5_except_error:;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":586
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":586
  *         self.assertAlmostEqual(results[3],0.666666666666667)
  *         self.assertAlmostEqual(results[4],1.10714871779409)
  *         try:             # <<<<<<<<<<<<<<
@@ -18116,7 +18116,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __pyx_L10_try_end:;
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":574
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":574
  *         self.assertAlmostEqual(d,0.463647609000806)
  *         self.assertAlmostEqual(r,1.79078430419036)
  *     def test_c_cTP_SDR(self):             # <<<<<<<<<<<<<<
@@ -18140,7 +18140,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_XDECREF(__pyx_t_14);
   __Pyx_XDECREF(__pyx_t_15);
   __Pyx_XDECREF(__pyx_t_16);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cTP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_cTP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_T);
@@ -18151,7 +18151,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":600
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":600
  *             self.assertAlmostEqual(results[8],48.1896851042214)
  *             self.assertAlmostEqual(results[9],116.565051177078)
  *     def test_c_MT6_TNPE(self):             # <<<<<<<<<<<<<<
@@ -18160,20 +18160,20 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE = {"test_c_MT6_TNPE", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE = {"test_c_MT6_TNPE", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_c_MT6_TNPE (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_12test_c_MT6_TNPE(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_12test_c_MT6_TNPE(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_12test_c_MT6_TNPE(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_12test_c_MT6_TNPE(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_MT = NULL;
   PyObject *__pyx_v_T = NULL;
   PyObject *__pyx_v_N = NULL;
@@ -18196,7 +18196,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_c_MT6_TNPE", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":601
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":601
  *             self.assertAlmostEqual(results[9],116.565051177078)
  *     def test_c_MT6_TNPE(self):
  *         MT=np.array([[1.,0.,-1.,0.,0.,0.],[0,2.0,-1.0,0.,1.0,0.]]).T             # <<<<<<<<<<<<<<
@@ -18288,16 +18288,16 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_MT = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":602
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":602
  *     def test_c_MT6_TNPE(self):
  *         MT=np.array([[1.,0.,-1.,0.,0.,0.],[0,2.0,-1.0,0.,1.0,0.]]).T
  *         T,N,P,E=MT6_TNPE(MT)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(E[0,0],1)
  *         self.assertAlmostEqual(E[1,0],0)
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_MT);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_MT);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__pyx_t_6, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_MT6_TNPE(__pyx_t_6, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   if ((likely(PyTuple_CheckExact(__pyx_t_3))) || (PyList_CheckExact(__pyx_t_3))) {
@@ -18372,7 +18372,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_E = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":603
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":603
  *         MT=np.array([[1.,0.,-1.,0.,0.,0.],[0,2.0,-1.0,0.,1.0,0.]]).T
  *         T,N,P,E=MT6_TNPE(MT)
  *         self.assertAlmostEqual(E[0,0],1)             # <<<<<<<<<<<<<<
@@ -18412,7 +18412,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":604
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":604
  *         T,N,P,E=MT6_TNPE(MT)
  *         self.assertAlmostEqual(E[0,0],1)
  *         self.assertAlmostEqual(E[1,0],0)             # <<<<<<<<<<<<<<
@@ -18452,7 +18452,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":605
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":605
  *         self.assertAlmostEqual(E[0,0],1)
  *         self.assertAlmostEqual(E[1,0],0)
  *         self.assertAlmostEqual(E[2,0],-1)             # <<<<<<<<<<<<<<
@@ -18492,7 +18492,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":606
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":606
  *         self.assertAlmostEqual(E[1,0],0)
  *         self.assertAlmostEqual(E[2,0],-1)
  *         self.assertAlmostEqual(np.abs(T[0,0]),1)             # <<<<<<<<<<<<<<
@@ -18563,7 +18563,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":607
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":607
  *         self.assertAlmostEqual(E[2,0],-1)
  *         self.assertAlmostEqual(np.abs(T[0,0]),1)
  *         self.assertAlmostEqual(np.abs(T[1,0]),0)             # <<<<<<<<<<<<<<
@@ -18634,7 +18634,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":608
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":608
  *         self.assertAlmostEqual(np.abs(T[0,0]),1)
  *         self.assertAlmostEqual(np.abs(T[1,0]),0)
  *         self.assertAlmostEqual(np.abs(T[2,0]),0)             # <<<<<<<<<<<<<<
@@ -18705,7 +18705,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":609
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":609
  *         self.assertAlmostEqual(np.abs(T[1,0]),0)
  *         self.assertAlmostEqual(np.abs(T[2,0]),0)
  *         self.assertAlmostEqual(np.abs(N[0,0]),0)             # <<<<<<<<<<<<<<
@@ -18776,7 +18776,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":610
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":610
  *         self.assertAlmostEqual(np.abs(T[2,0]),0)
  *         self.assertAlmostEqual(np.abs(N[0,0]),0)
  *         self.assertAlmostEqual(np.abs(N[1,0]),1)             # <<<<<<<<<<<<<<
@@ -18847,7 +18847,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":611
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":611
  *         self.assertAlmostEqual(np.abs(N[0,0]),0)
  *         self.assertAlmostEqual(np.abs(N[1,0]),1)
  *         self.assertAlmostEqual(np.abs(N[2,0]),0)             # <<<<<<<<<<<<<<
@@ -18918,7 +18918,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":612
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":612
  *         self.assertAlmostEqual(np.abs(N[1,0]),1)
  *         self.assertAlmostEqual(np.abs(N[2,0]),0)
  *         self.assertAlmostEqual(np.abs(P[0,0]),0)             # <<<<<<<<<<<<<<
@@ -18989,7 +18989,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":613
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":613
  *         self.assertAlmostEqual(np.abs(N[2,0]),0)
  *         self.assertAlmostEqual(np.abs(P[0,0]),0)
  *         self.assertAlmostEqual(np.abs(P[1,0]),0)             # <<<<<<<<<<<<<<
@@ -19060,7 +19060,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":614
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":614
  *         self.assertAlmostEqual(np.abs(P[0,0]),0)
  *         self.assertAlmostEqual(np.abs(P[1,0]),0)
  *         self.assertAlmostEqual(np.abs(P[2,0]),1)             # <<<<<<<<<<<<<<
@@ -19131,7 +19131,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":616
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":616
  *         self.assertAlmostEqual(np.abs(P[2,0]),1)
  *         #Second Event
  *         self.assertAlmostEqual(E[0,1],2)             # <<<<<<<<<<<<<<
@@ -19171,7 +19171,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":617
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":617
  *         #Second Event
  *         self.assertAlmostEqual(E[0,1],2)
  *         self.assertAlmostEqual(E[1,1],0.366025403784439 )             # <<<<<<<<<<<<<<
@@ -19211,7 +19211,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":618
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":618
  *         self.assertAlmostEqual(E[0,1],2)
  *         self.assertAlmostEqual(E[1,1],0.366025403784439 )
  *         self.assertAlmostEqual(E[2,1],-1.36602540378444)             # <<<<<<<<<<<<<<
@@ -19251,7 +19251,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":619
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":619
  *         self.assertAlmostEqual(E[1,1],0.366025403784439 )
  *         self.assertAlmostEqual(E[2,1],-1.36602540378444)
  *         self.assertAlmostEqual(np.abs(T[0,1]),0)             # <<<<<<<<<<<<<<
@@ -19322,7 +19322,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":620
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":620
  *         self.assertAlmostEqual(E[2,1],-1.36602540378444)
  *         self.assertAlmostEqual(np.abs(T[0,1]),0)
  *         self.assertAlmostEqual(np.abs(T[1,1]),1)             # <<<<<<<<<<<<<<
@@ -19393,7 +19393,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":621
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":621
  *         self.assertAlmostEqual(np.abs(T[0,1]),0)
  *         self.assertAlmostEqual(np.abs(T[1,1]),1)
  *         self.assertAlmostEqual(np.abs(T[2,1]),0)             # <<<<<<<<<<<<<<
@@ -19464,7 +19464,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":622
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":622
  *         self.assertAlmostEqual(np.abs(T[1,1]),1)
  *         self.assertAlmostEqual(np.abs(T[2,1]),0)
  *         self.assertAlmostEqual(np.abs(N[0,1]),0.888073833977115)             # <<<<<<<<<<<<<<
@@ -19535,7 +19535,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":623
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":623
  *         self.assertAlmostEqual(np.abs(T[2,1]),0)
  *         self.assertAlmostEqual(np.abs(N[0,1]),0.888073833977115)
  *         self.assertAlmostEqual(np.abs(N[1,1]),0)             # <<<<<<<<<<<<<<
@@ -19606,7 +19606,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":624
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":624
  *         self.assertAlmostEqual(np.abs(N[0,1]),0.888073833977115)
  *         self.assertAlmostEqual(np.abs(N[1,1]),0)
  *         self.assertAlmostEqual(np.abs(N[2,1]),0.459700843380983)             # <<<<<<<<<<<<<<
@@ -19677,7 +19677,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":625
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":625
  *         self.assertAlmostEqual(np.abs(N[1,1]),0)
  *         self.assertAlmostEqual(np.abs(N[2,1]),0.459700843380983)
  *         self.assertAlmostEqual(np.abs(P[0,1]),0.459700843380983)             # <<<<<<<<<<<<<<
@@ -19748,7 +19748,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":626
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":626
  *         self.assertAlmostEqual(np.abs(N[2,1]),0.459700843380983)
  *         self.assertAlmostEqual(np.abs(P[0,1]),0.459700843380983)
  *         self.assertAlmostEqual(np.abs(P[1,1]),0)             # <<<<<<<<<<<<<<
@@ -19819,7 +19819,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":627
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":627
  *         self.assertAlmostEqual(np.abs(P[0,1]),0.459700843380983)
  *         self.assertAlmostEqual(np.abs(P[1,1]),0)
  *         self.assertAlmostEqual(np.abs(P[2,1]),0.888073833977115)             # <<<<<<<<<<<<<<
@@ -19890,7 +19890,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":600
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":600
  *             self.assertAlmostEqual(results[8],48.1896851042214)
  *             self.assertAlmostEqual(results[9],116.565051177078)
  *     def test_c_MT6_TNPE(self):             # <<<<<<<<<<<<<<
@@ -19910,7 +19910,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_MT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_MT6_TNPE", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_MT);
@@ -19923,7 +19923,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":628
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":628
  *         self.assertAlmostEqual(np.abs(P[1,1]),0)
  *         self.assertAlmostEqual(np.abs(P[2,1]),0.888073833977115)
  *     def test_c_E_GD(self):             # <<<<<<<<<<<<<<
@@ -19932,20 +19932,20 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD = {"test_c_E_GD", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD = {"test_c_E_GD", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_c_E_GD (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_14test_c_E_GD(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_14test_c_E_GD(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_14test_c_E_GD(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_14test_c_E_GD(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_E = NULL;
   PyObject *__pyx_v_g = NULL;
   PyObject *__pyx_v_d = NULL;
@@ -19967,7 +19967,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_c_E_GD", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":629
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":629
  *         self.assertAlmostEqual(np.abs(P[2,1]),0.888073833977115)
  *     def test_c_E_GD(self):
  *         E=np.array([[1.,0.,-1.],[1.,1.,1.],[1.,-1.,-1.],[-1.,-1.,-1.]]).T             # <<<<<<<<<<<<<<
@@ -20069,16 +20069,16 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_E = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":630
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":630
  *     def test_c_E_GD(self):
  *         E=np.array([[1.,0.,-1.],[1.,1.,1.],[1.,-1.,-1.],[-1.,-1.,-1.]]).T
  *         g,d=E_GD(E)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(g[0],np.array([0.]))
  *         self.assertAlmostEqual(d[0],np.array([0.]))
  */
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_E);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_E_GD(__pyx_t_8, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_E_GD(__pyx_t_8, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   if ((likely(PyTuple_CheckExact(__pyx_t_3))) || (PyList_CheckExact(__pyx_t_3))) {
@@ -20136,7 +20136,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_d = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":631
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":631
  *         E=np.array([[1.,0.,-1.],[1.,1.,1.],[1.,-1.,-1.],[-1.,-1.,-1.]]).T
  *         g,d=E_GD(E)
  *         self.assertAlmostEqual(g[0],np.array([0.]))             # <<<<<<<<<<<<<<
@@ -20212,7 +20212,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":632
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":632
  *         g,d=E_GD(E)
  *         self.assertAlmostEqual(g[0],np.array([0.]))
  *         self.assertAlmostEqual(d[0],np.array([0.]))             # <<<<<<<<<<<<<<
@@ -20288,7 +20288,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":633
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":633
  *         self.assertAlmostEqual(g[0],np.array([0.]))
  *         self.assertAlmostEqual(d[0],np.array([0.]))
  *         self.assertAlmostEqual(g[1],np.array([0.]))             # <<<<<<<<<<<<<<
@@ -20364,7 +20364,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":634
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":634
  *         self.assertAlmostEqual(d[0],np.array([0.]))
  *         self.assertAlmostEqual(g[1],np.array([0.]))
  *         self.assertAlmostEqual(d[1],np.array([pi/2]))             # <<<<<<<<<<<<<<
@@ -20442,7 +20442,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":635
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":635
  *         self.assertAlmostEqual(g[1],np.array([0.]))
  *         self.assertAlmostEqual(d[1],np.array([pi/2]))
  *         self.assertAlmostEqual(g[2],np.array([-0.523598775598299]))             # <<<<<<<<<<<<<<
@@ -20518,7 +20518,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":636
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":636
  *         self.assertAlmostEqual(d[1],np.array([pi/2]))
  *         self.assertAlmostEqual(g[2],np.array([-0.523598775598299]))
  *         self.assertAlmostEqual(d[2],np.array([-0.339836909454122]))             # <<<<<<<<<<<<<<
@@ -20594,7 +20594,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":637
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":637
  *         self.assertAlmostEqual(g[2],np.array([-0.523598775598299]))
  *         self.assertAlmostEqual(d[2],np.array([-0.339836909454122]))
  *         self.assertAlmostEqual(g[3],np.array([0.]))             # <<<<<<<<<<<<<<
@@ -20670,7 +20670,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":638
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":638
  *         self.assertAlmostEqual(d[2],np.array([-0.339836909454122]))
  *         self.assertAlmostEqual(g[3],np.array([0.]))
  *         self.assertAlmostEqual(d[3],np.array([-pi/2]))             # <<<<<<<<<<<<<<
@@ -20748,7 +20748,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":628
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":628
  *         self.assertAlmostEqual(np.abs(P[1,1]),0)
  *         self.assertAlmostEqual(np.abs(P[2,1]),0.888073833977115)
  *     def test_c_E_GD(self):             # <<<<<<<<<<<<<<
@@ -20769,7 +20769,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_XDECREF(__pyx_t_7);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_E_GD", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_E_GD", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_E);
@@ -20780,7 +20780,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":639
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":639
  *         self.assertAlmostEqual(g[3],np.array([0.]))
  *         self.assertAlmostEqual(d[3],np.array([-pi/2]))
  *     def test_c_TP_SDR(self):             # <<<<<<<<<<<<<<
@@ -20789,20 +20789,20 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR = {"test_c_TP_SDR", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR = {"test_c_TP_SDR", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_c_TP_SDR (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_16test_c_TP_SDR(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_16test_c_TP_SDR(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_16test_c_TP_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_16test_c_TP_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_T = NULL;
   PyObject *__pyx_v_P = NULL;
   PyObject *__pyx_v_s = NULL;
@@ -20827,7 +20827,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_c_TP_SDR", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":640
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":640
  *         self.assertAlmostEqual(d[3],np.array([-pi/2]))
  *     def test_c_TP_SDR(self):
  *         T=np.array([[0.235702260395516,0.],[0.235702260395516,1.0],[0.942809041582063,0.]])             # <<<<<<<<<<<<<<
@@ -20903,7 +20903,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_T = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":641
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":641
  *     def test_c_TP_SDR(self):
  *         T=np.array([[0.235702260395516,0.],[0.235702260395516,1.0],[0.942809041582063,0.]])
  *         P=np.array([[0.707106781186547,1.],[-0.707106781186547,0],[0.,0.]])             # <<<<<<<<<<<<<<
@@ -20979,18 +20979,18 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_P = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":642
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":642
  *         T=np.array([[0.235702260395516,0.],[0.235702260395516,1.0],[0.942809041582063,0.]])
  *         P=np.array([[0.707106781186547,1.],[-0.707106781186547,0],[0.,0.]])
  *         s,d,r=TP_SDR(T,P)             # <<<<<<<<<<<<<<
  *         self.assertAlmostEqual(s[0],np.array([1.1071487177940911]))
  *         self.assertAlmostEqual(d[0],np.array([0.84106867056793]))
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_T);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_T);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_P);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_v_P);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_TP_SDR(__pyx_t_7, __pyx_t_8, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_TP_SDR(__pyx_t_7, __pyx_t_8, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
@@ -21058,7 +21058,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_r = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":643
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":643
  *         P=np.array([[0.707106781186547,1.],[-0.707106781186547,0],[0.,0.]])
  *         s,d,r=TP_SDR(T,P)
  *         self.assertAlmostEqual(s[0],np.array([1.1071487177940911]))             # <<<<<<<<<<<<<<
@@ -21134,7 +21134,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":644
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":644
  *         s,d,r=TP_SDR(T,P)
  *         self.assertAlmostEqual(s[0],np.array([1.1071487177940911]))
  *         self.assertAlmostEqual(d[0],np.array([0.84106867056793]))             # <<<<<<<<<<<<<<
@@ -21210,7 +21210,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":645
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":645
  *         self.assertAlmostEqual(s[0],np.array([1.1071487177940911]))
  *         self.assertAlmostEqual(d[0],np.array([0.84106867056793]))
  *         self.assertAlmostEqual(r[0],np.array([2.0344439357957032]))             # <<<<<<<<<<<<<<
@@ -21286,7 +21286,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":646
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":646
  *         self.assertAlmostEqual(d[0],np.array([0.84106867056793]))
  *         self.assertAlmostEqual(r[0],np.array([2.0344439357957032]))
  *         self.assertAlmostEqual(s[1],np.array([5.497787143782138]))             # <<<<<<<<<<<<<<
@@ -21362,7 +21362,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":647
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":647
  *         self.assertAlmostEqual(r[0],np.array([2.0344439357957032]))
  *         self.assertAlmostEqual(s[1],np.array([5.497787143782138]))
  *         self.assertAlmostEqual(d[1],np.array([pi/2]))             # <<<<<<<<<<<<<<
@@ -21440,7 +21440,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":648
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":648
  *         self.assertAlmostEqual(s[1],np.array([5.497787143782138]))
  *         self.assertAlmostEqual(d[1],np.array([pi/2]))
  *         self.assertAlmostEqual(r[1],np.array([-pi]))             # <<<<<<<<<<<<<<
@@ -21518,7 +21518,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":639
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":639
  *         self.assertAlmostEqual(g[3],np.array([0.]))
  *         self.assertAlmostEqual(d[3],np.array([-pi/2]))
  *     def test_c_TP_SDR(self):             # <<<<<<<<<<<<<<
@@ -21540,7 +21540,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_XDECREF(__pyx_t_10);
   __Pyx_XDECREF(__pyx_t_11);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_TP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_TP_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_T);
@@ -21553,7 +21553,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":649
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":649
  *         self.assertAlmostEqual(d[1],np.array([pi/2]))
  *         self.assertAlmostEqual(r[1],np.array([-pi]))
  *     def test_c_SDR_SDR(self):             # <<<<<<<<<<<<<<
@@ -21562,20 +21562,20 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR = {"test_c_SDR_SDR", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR, METH_O, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR = {"test_c_SDR_SDR", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR, METH_O, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_c_SDR_SDR (wrapper)", 0);
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_18test_c_SDR_SDR(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_18test_c_SDR_SDR(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_18test_c_SDR_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_18test_c_SDR_SDR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_s2 = NULL;
   PyObject *__pyx_v_d2 = NULL;
   PyObject *__pyx_v_r2 = NULL;
@@ -21596,7 +21596,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_c_SDR_SDR", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":650
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":650
  *         self.assertAlmostEqual(r[1],np.array([-pi]))
  *     def test_c_SDR_SDR(self):
  *         s2,d2,r2=SDR_SDR(np.array([206.565051177078*pi/180]),np.array([48.1896851042214*pi/180]),np.array([63.434948822922*pi/180]))             # <<<<<<<<<<<<<<
@@ -21641,7 +21641,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -21682,7 +21682,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -21723,10 +21723,10 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__pyx_t_6, __pyx_t_7, __pyx_t_8, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__pyx_t_6, __pyx_t_7, __pyx_t_8, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
@@ -21795,7 +21795,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __pyx_v_r2 = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":651
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":651
  *     def test_c_SDR_SDR(self):
  *         s2,d2,r2=SDR_SDR(np.array([206.565051177078*pi/180]),np.array([48.1896851042214*pi/180]),np.array([63.434948822922*pi/180]))
  *         self.assertAlmostEqual(s2,63.434948822922*pi/180)             # <<<<<<<<<<<<<<
@@ -21835,7 +21835,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":652
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":652
  *         s2,d2,r2=SDR_SDR(np.array([206.565051177078*pi/180]),np.array([48.1896851042214*pi/180]),np.array([63.434948822922*pi/180]))
  *         self.assertAlmostEqual(s2,63.434948822922*pi/180)
  *         self.assertAlmostEqual(d2,48.1896851042214*pi/180)             # <<<<<<<<<<<<<<
@@ -21875,7 +21875,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":653
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":653
  *         self.assertAlmostEqual(s2,63.434948822922*pi/180)
  *         self.assertAlmostEqual(d2,48.1896851042214*pi/180)
  *         self.assertAlmostEqual(r2,116.565051177078*pi/180)             # <<<<<<<<<<<<<<
@@ -21915,7 +21915,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":654
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":654
  *         self.assertAlmostEqual(d2,48.1896851042214*pi/180)
  *         self.assertAlmostEqual(r2,116.565051177078*pi/180)
  *         s2,d2,r2=SDR_SDR(np.array([63.434948822922*pi/180]),np.array([48.1896851042214*pi/180]),np.array([116.565051177078*pi/180]))             # <<<<<<<<<<<<<<
@@ -21960,7 +21960,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -22001,7 +22001,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -22042,10 +22042,10 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__pyx_t_8, __pyx_t_7, __pyx_t_6, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_SDR_SDR(__pyx_t_8, __pyx_t_7, __pyx_t_6, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
@@ -22114,7 +22114,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF_SET(__pyx_v_r2, __pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":655
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":655
  *         self.assertAlmostEqual(r2,116.565051177078*pi/180)
  *         s2,d2,r2=SDR_SDR(np.array([63.434948822922*pi/180]),np.array([48.1896851042214*pi/180]),np.array([116.565051177078*pi/180]))
  *         self.assertAlmostEqual(s2,206.565051177078*pi/180)             # <<<<<<<<<<<<<<
@@ -22154,7 +22154,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":656
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":656
  *         s2,d2,r2=SDR_SDR(np.array([63.434948822922*pi/180]),np.array([48.1896851042214*pi/180]),np.array([116.565051177078*pi/180]))
  *         self.assertAlmostEqual(s2,206.565051177078*pi/180)
  *         self.assertAlmostEqual(d2,48.1896851042214*pi/180)             # <<<<<<<<<<<<<<
@@ -22194,7 +22194,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":657
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":657
  *         self.assertAlmostEqual(s2,206.565051177078*pi/180)
  *         self.assertAlmostEqual(d2,48.1896851042214*pi/180)
  *         self.assertAlmostEqual(r2,63.434948822922*pi/180)             # <<<<<<<<<<<<<<
@@ -22234,7 +22234,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":649
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":649
  *         self.assertAlmostEqual(d[1],np.array([pi/2]))
  *         self.assertAlmostEqual(r[1],np.array([-pi]))
  *     def test_c_SDR_SDR(self):             # <<<<<<<<<<<<<<
@@ -22254,7 +22254,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_SDR_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.cMomentTensorConvertTestCase.test_c_SDR_SDR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_s2);
@@ -22265,7 +22265,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
   return __pyx_r;
 }
 
-/* "mtfit\convert\cmoment_tensor_conversion.pyx":659
+/* "MTfit\convert\cmoment_tensor_conversion.pyx":659
  *         self.assertAlmostEqual(r2,63.434948822922*pi/180)
  * 
  * def test_suite(verbosity=2):             # <<<<<<<<<<<<<<
@@ -22274,9 +22274,9 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_27test_suite(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_27test_suite = {"test_suite", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_27test_suite, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_27test_suite(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_27test_suite(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_27test_suite = {"test_suite", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_27test_suite, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_27test_suite(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   CYTHON_UNUSED PyObject *__pyx_v_verbosity = 0;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -22320,18 +22320,18 @@ static PyObject *__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_27test_sui
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("test_suite", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.test_suite", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.test_suite", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_26test_suite(__pyx_self, __pyx_v_verbosity);
+  __pyx_r = __pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_26test_suite(__pyx_self, __pyx_v_verbosity);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_26test_suite(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_verbosity) {
+static PyObject *__pyx_pf_5MTfit_7convert_25cmoment_tensor_conversion_26test_suite(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_verbosity) {
   PyObject *__pyx_v_suite = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -22345,7 +22345,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_26test_sui
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_suite", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":660
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":660
  * 
  * def test_suite(verbosity=2):
  *     suite = [unittest.TestLoader().loadTestsFromTestCase(cMomentTensorConvertTestCase), ]             # <<<<<<<<<<<<<<
@@ -22414,7 +22414,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_26test_sui
   __pyx_v_suite = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":661
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":661
  * def test_suite(verbosity=2):
  *     suite = [unittest.TestLoader().loadTestsFromTestCase(cMomentTensorConvertTestCase), ]
  *     suite = unittest.TestSuite(suite)             # <<<<<<<<<<<<<<
@@ -22453,7 +22453,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_26test_sui
   __Pyx_DECREF_SET(__pyx_v_suite, __pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":662
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":662
  *     suite = [unittest.TestLoader().loadTestsFromTestCase(cMomentTensorConvertTestCase), ]
  *     suite = unittest.TestSuite(suite)
  *     return suite             # <<<<<<<<<<<<<<
@@ -22463,7 +22463,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_26test_sui
   __pyx_r = __pyx_v_suite;
   goto __pyx_L0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":659
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":659
  *         self.assertAlmostEqual(r2,63.434948822922*pi/180)
  * 
  * def test_suite(verbosity=2):             # <<<<<<<<<<<<<<
@@ -22478,7 +22478,7 @@ static PyObject *__pyx_pf_5mtfit_7convert_25cmoment_tensor_conversion_26test_sui
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("mtfit.convert.cmoment_tensor_conversion.test_suite", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.convert.cmoment_tensor_conversion.test_suite", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_suite);
@@ -36366,63 +36366,63 @@ static CYTHON_INLINE PyObject *__Pyx_carray_to_tuple_Py__ssize__t(Py_ssize_t *__
   return __pyx_r;
 }
 
-static struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *__pyx_freelist_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes[8];
-static int __pyx_freecount_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes = 0;
+static struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *__pyx_freelist_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes[8];
+static int __pyx_freecount_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes = 0;
 
-static PyObject *__pyx_tp_new_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
-  struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *p;
+static PyObject *__pyx_tp_new_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *p;
   PyObject *o;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes)))) {
-    o = (PyObject*)__pyx_freelist_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes[--__pyx_freecount_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes];
-    memset(o, 0, sizeof(struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes));
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes)))) {
+    o = (PyObject*)__pyx_freelist_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes[--__pyx_freecount_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes];
+    memset(o, 0, sizeof(struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else {
     o = (*t->tp_alloc)(t, 0);
     if (unlikely(!o)) return 0;
   }
-  p = ((struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o);
+  p = ((struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o);
   p->__pyx_v_MT6.data = NULL;
   p->__pyx_v_MT6.memview = NULL;
   return o;
 }
 
-static void __pyx_tp_dealloc_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyObject *o) {
-  struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *p = (struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o;
+static void __pyx_tp_dealloc_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyObject *o) {
+  struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *p = (struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o;
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_v_c);
   __PYX_XDEC_MEMVIEW(&p->__pyx_v_MT6, 1);
-  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes)))) {
-    __pyx_freelist_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes[__pyx_freecount_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes++] = ((struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes)))) {
+    __pyx_freelist_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes[__pyx_freecount_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes++] = ((struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o);
   } else {
     (*Py_TYPE(o)->tp_free)(o);
   }
 }
 
-static int __pyx_tp_traverse_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *p = (struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o;
+  struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *p = (struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o;
   if (p->__pyx_v_c) {
     e = (*v)(p->__pyx_v_c, a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyObject *o) {
+static int __pyx_tp_clear_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *p = (struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o;
+  struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *p = (struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes *)o;
   tmp = ((PyObject*)p->__pyx_v_c);
   p->__pyx_v_c = ((PyObject*)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 
-static PyTypeObject __pyx_type_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes = {
+static PyTypeObject __pyx_type_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mtfit.convert.cmoment_tensor_conversion.__pyx_scope_struct__MT6_biaxes", /*tp_name*/
-  sizeof(struct __pyx_obj_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes), /*tp_basicsize*/
+  "MTfit.convert.cmoment_tensor_conversion.__pyx_scope_struct__MT6_biaxes", /*tp_name*/
+  sizeof(struct __pyx_obj_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, /*tp_dealloc*/
+  __pyx_tp_dealloc_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -36444,8 +36444,8 @@ static PyTypeObject __pyx_type_5mtfit_7convert_25cmoment_tensor_conversion___pyx
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, /*tp_traverse*/
-  __pyx_tp_clear_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, /*tp_clear*/
+  __pyx_tp_traverse_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, /*tp_traverse*/
+  __pyx_tp_clear_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -36460,7 +36460,7 @@ static PyTypeObject __pyx_type_5mtfit_7convert_25cmoment_tensor_conversion___pyx
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, /*tp_new*/
+  __pyx_tp_new_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -36592,7 +36592,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mtfit.convert.cmoment_tensor_conversion.array", /*tp_name*/
+  "MTfit.convert.cmoment_tensor_conversion.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -36698,7 +36698,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mtfit.convert.cmoment_tensor_conversion.Enum", /*tp_name*/
+  "MTfit.convert.cmoment_tensor_conversion.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -36945,7 +36945,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mtfit.convert.cmoment_tensor_conversion.memoryview", /*tp_name*/
+  "MTfit.convert.cmoment_tensor_conversion.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -37070,7 +37070,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mtfit.convert.cmoment_tensor_conversion._memoryviewslice", /*tp_name*/
+  "MTfit.convert.cmoment_tensor_conversion._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -37135,16 +37135,16 @@ static PyTypeObject __pyx_type___pyx_memoryviewslice = {
 };
 
 static PyMethodDef __pyx_methods[] = {
-  {"MT_convert", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_3MT_convert, METH_VARARGS|METH_KEYWORDS, 0},
-  {"MT6_TNPE", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_7MT6_TNPE, METH_O, 0},
-  {"E_GD", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_9E_GD, METH_O, 0},
-  {"TP_SDR", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_11TP_SDR, METH_VARARGS|METH_KEYWORDS, 0},
-  {"SDR_SDR", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_13SDR_SDR, METH_VARARGS|METH_KEYWORDS, 0},
-  {"isotropic_c", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_15isotropic_c, METH_VARARGS|METH_KEYWORDS, 0},
-  {"MT6c_D6", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_19MT6c_D6, METH_VARARGS|METH_KEYWORDS, 0},
-  {"is_isotropic_c", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_21is_isotropic_c, METH_O, 0},
-  {"c21_cvoigt", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_23c21_cvoigt, METH_O, 0},
-  {"c_norm", (PyCFunction)__pyx_pw_5mtfit_7convert_25cmoment_tensor_conversion_25c_norm, METH_O, 0},
+  {"MT_convert", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_3MT_convert, METH_VARARGS|METH_KEYWORDS, 0},
+  {"MT6_TNPE", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_7MT6_TNPE, METH_O, 0},
+  {"E_GD", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_9E_GD, METH_O, 0},
+  {"TP_SDR", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_11TP_SDR, METH_VARARGS|METH_KEYWORDS, 0},
+  {"SDR_SDR", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_13SDR_SDR, METH_VARARGS|METH_KEYWORDS, 0},
+  {"isotropic_c", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_15isotropic_c, METH_VARARGS|METH_KEYWORDS, 0},
+  {"MT6c_D6", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_19MT6c_D6, METH_VARARGS|METH_KEYWORDS, 0},
+  {"is_isotropic_c", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_21is_isotropic_c, METH_O, 0},
+  {"c21_cvoigt", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_23c21_cvoigt, METH_O, 0},
+  {"c_norm", (PyCFunction)__pyx_pw_5MTfit_7convert_25cmoment_tensor_conversion_25c_norm, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -37174,7 +37174,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
   {&__pyx_n_s_D1, __pyx_k_D1, sizeof(__pyx_k_D1), 0, 0, 1, 1},
   {&__pyx_n_s_D2, __pyx_k_D2, sizeof(__pyx_k_D2), 0, 0, 1, 1},
-  {&__pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_k_D_Code_MTfit_src_mtfit_convert_c, sizeof(__pyx_k_D_Code_MTfit_src_mtfit_convert_c), 0, 0, 1, 0},
+  {&__pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_k_D_Code_MTfit_src_MTfit_convert_c, sizeof(__pyx_k_D_Code_MTfit_src_MTfit_convert_c), 0, 0, 1, 0},
   {&__pyx_n_s_E, __pyx_k_E, sizeof(__pyx_k_E), 0, 0, 1, 1},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
@@ -37189,6 +37189,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_MT6_biaxes, __pyx_k_MT6_biaxes, sizeof(__pyx_k_MT6_biaxes), 0, 0, 1, 1},
   {&__pyx_n_s_MT6_biaxes_locals_isotropic_solv, __pyx_k_MT6_biaxes_locals_isotropic_solv, sizeof(__pyx_k_MT6_biaxes_locals_isotropic_solv), 0, 0, 1, 1},
   {&__pyx_n_s_MT_output_convert, __pyx_k_MT_output_convert, sizeof(__pyx_k_MT_output_convert), 0, 0, 1, 1},
+  {&__pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_k_MTfit_convert_cmoment_tensor_con, sizeof(__pyx_k_MTfit_convert_cmoment_tensor_con), 0, 0, 1, 1},
   {&__pyx_n_s_MTs, __pyx_k_MTs, sizeof(__pyx_k_MTs), 0, 0, 1, 1},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_kp_s_MemoryView_of_r_at_0x_x, __pyx_k_MemoryView_of_r_at_0x_x, sizeof(__pyx_k_MemoryView_of_r_at_0x_x), 0, 0, 1, 0},
@@ -37285,7 +37286,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
   {&__pyx_n_s_module, __pyx_k_module, sizeof(__pyx_k_module), 0, 0, 1, 1},
   {&__pyx_n_s_mt6, __pyx_k_mt6, sizeof(__pyx_k_mt6), 0, 0, 1, 1},
-  {&__pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_k_mtfit_convert_cmoment_tensor_con, sizeof(__pyx_k_mtfit_convert_cmoment_tensor_con), 0, 0, 1, 1},
   {&__pyx_n_s_mu, __pyx_k_mu, sizeof(__pyx_k_mu), 0, 0, 1, 1},
   {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
@@ -37376,7 +37376,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":225
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":225
  *     cdef Py_ssize_t n=gamma.shape[0]
  *     if not (gamma.shape[0]==delta.shape[0] and gamma.shape[0]==kappa.shape[0] and gamma.shape[0]==h.shape[0] and gamma.shape[0]==sigma.shape[0]):
  *         raise ValueError('Arguments different size')             # <<<<<<<<<<<<<<
@@ -37387,7 +37387,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":256
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":256
  *     cdef DTYPE_t [::1] d2=np.empty((imax,))
  *     cdef DTYPE_t [::1] r2=np.empty((imax,))
  *     cdef DTYPE_t [::1] results=np.empty((13,))             # <<<<<<<<<<<<<<
@@ -37401,7 +37401,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":258
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":258
  *     cdef DTYPE_t [::1] results=np.empty((13,))
  *     for i in range(imax):
  *         results=MT_convert(MTs[:,i],np.empty((13,)))             # <<<<<<<<<<<<<<
@@ -37415,7 +37415,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":278
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":278
  * @cython.cdivision(True)
  * cdef cMT6_TNPE(DTYPE_t[:] MT):
  *     cdef DTYPE_t [:,::1] MT33=np.empty((3,3))             # <<<<<<<<<<<<<<
@@ -37429,7 +37429,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":279
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":279
  * cdef cMT6_TNPE(DTYPE_t[:] MT):
  *     cdef DTYPE_t [:,::1] MT33=np.empty((3,3))
  *     cdef DTYPE_t [::1] E=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -37443,7 +37443,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":280
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":280
  *     cdef DTYPE_t [:,::1] MT33=np.empty((3,3))
  *     cdef DTYPE_t [::1] E=np.empty((3,))
  *     cdef DTYPE_t [::1] e=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -37457,7 +37457,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":281
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":281
  *     cdef DTYPE_t [::1] E=np.empty((3,))
  *     cdef DTYPE_t [::1] e=np.empty((3,))
  *     cdef DTYPE_t [::1] T=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -37471,7 +37471,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":282
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":282
  *     cdef DTYPE_t [::1] e=np.empty((3,))
  *     cdef DTYPE_t [::1] T=np.empty((3,))
  *     cdef DTYPE_t [::1] P=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -37485,7 +37485,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":283
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":283
  *     cdef DTYPE_t [::1] T=np.empty((3,))
  *     cdef DTYPE_t [::1] P=np.empty((3,))
  *     cdef DTYPE_t [::1] N=np.empty((3,))             # <<<<<<<<<<<<<<
@@ -37499,7 +37499,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":284
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":284
  *     cdef DTYPE_t [::1] P=np.empty((3,))
  *     cdef DTYPE_t [::1] N=np.empty((3,))
  *     cdef DTYPE_t [:,:] L=np.empty((3,3))             # <<<<<<<<<<<<<<
@@ -37513,7 +37513,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":301
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":301
  *     mini=0
  *     cdef Py_ssize_t i
  *     for i in [0,1,2]:             # <<<<<<<<<<<<<<
@@ -37524,7 +37524,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":448
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":448
  *         explosion=isotropic
  *     else:
  *         def isotropic_solve(iso):             # <<<<<<<<<<<<<<
@@ -37534,9 +37534,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__22 = PyTuple_Pack(6, __pyx_n_s_iso, __pyx_n_s_iso6, __pyx_n_s_T, __pyx_n_s_N, __pyx_n_s_P, __pyx_n_s_E); if (unlikely(!__pyx_tuple__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_isotropic_solve, 448, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_isotropic_solve, 448, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":461
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":461
  *     T,N,P,E=cMT6_TNPE(MT6c_D6(np.squeeze(MT6-explosion6),c).flatten())
  *     area_displacement = E[0]-E[2]
  *     phi=np.zeros((3,2))             # <<<<<<<<<<<<<<
@@ -37550,7 +37550,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":465
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":465
  *         cphi=np.squeeze(np.sqrt(E[0]/area_displacement))
  *         sphi=np.squeeze(np.sqrt(-E[2]/area_displacement))
  *         phi[:,0]=np.array(cphi*T+sphi*P).flatten()             # <<<<<<<<<<<<<<
@@ -37564,7 +37564,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":466
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":466
  *         sphi=np.squeeze(np.sqrt(-E[2]/area_displacement))
  *         phi[:,0]=np.array(cphi*T+sphi*P).flatten()
  *         phi[:,1]=np.array(cphi*T-sphi*P).flatten()             # <<<<<<<<<<<<<<
@@ -37578,7 +37578,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":507
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":507
  * class cMomentTensorConvertTestCase(TestCase):
  *     def test_cTape_MT6(self):
  *         cdef DTYPE_t[::1] m=np.empty((6))             # <<<<<<<<<<<<<<
@@ -37589,7 +37589,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__31);
   __Pyx_GIVEREF(__pyx_tuple__31);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":566
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":566
  *         cdef DTYPE_t d
  *         cdef DTYPE_t r
  *         cN_SDR(0.,0.5/np.sqrt(1.25),1.0/np.sqrt(1.25),0.5/np.sqrt(1.25),0,1.0/np.sqrt(1.25),&s,&d,&r)             # <<<<<<<<<<<<<<
@@ -37609,7 +37609,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":570
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":570
  *         self.assertAlmostEqual(d,0.463647609000806)
  *         self.assertAlmostEqual(r,1.35080834939944)
  *         cN_SDR(0.5/np.sqrt(1.25),0,1.0/np.sqrt(1.25),0.,0.5/np.sqrt(1.25),1.0/np.sqrt(1.25),&s,&d,&r)             # <<<<<<<<<<<<<<
@@ -37629,7 +37629,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":603
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":603
  *         MT=np.array([[1.,0.,-1.,0.,0.,0.],[0,2.0,-1.0,0.,1.0,0.]]).T
  *         T,N,P,E=MT6_TNPE(MT)
  *         self.assertAlmostEqual(E[0,0],1)             # <<<<<<<<<<<<<<
@@ -37640,7 +37640,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":604
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":604
  *         T,N,P,E=MT6_TNPE(MT)
  *         self.assertAlmostEqual(E[0,0],1)
  *         self.assertAlmostEqual(E[1,0],0)             # <<<<<<<<<<<<<<
@@ -37651,7 +37651,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__41);
   __Pyx_GIVEREF(__pyx_tuple__41);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":605
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":605
  *         self.assertAlmostEqual(E[0,0],1)
  *         self.assertAlmostEqual(E[1,0],0)
  *         self.assertAlmostEqual(E[2,0],-1)             # <<<<<<<<<<<<<<
@@ -37662,7 +37662,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__42);
   __Pyx_GIVEREF(__pyx_tuple__42);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":606
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":606
  *         self.assertAlmostEqual(E[1,0],0)
  *         self.assertAlmostEqual(E[2,0],-1)
  *         self.assertAlmostEqual(np.abs(T[0,0]),1)             # <<<<<<<<<<<<<<
@@ -37673,7 +37673,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__43);
   __Pyx_GIVEREF(__pyx_tuple__43);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":607
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":607
  *         self.assertAlmostEqual(E[2,0],-1)
  *         self.assertAlmostEqual(np.abs(T[0,0]),1)
  *         self.assertAlmostEqual(np.abs(T[1,0]),0)             # <<<<<<<<<<<<<<
@@ -37684,7 +37684,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__44);
   __Pyx_GIVEREF(__pyx_tuple__44);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":608
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":608
  *         self.assertAlmostEqual(np.abs(T[0,0]),1)
  *         self.assertAlmostEqual(np.abs(T[1,0]),0)
  *         self.assertAlmostEqual(np.abs(T[2,0]),0)             # <<<<<<<<<<<<<<
@@ -37695,7 +37695,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__45);
   __Pyx_GIVEREF(__pyx_tuple__45);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":609
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":609
  *         self.assertAlmostEqual(np.abs(T[1,0]),0)
  *         self.assertAlmostEqual(np.abs(T[2,0]),0)
  *         self.assertAlmostEqual(np.abs(N[0,0]),0)             # <<<<<<<<<<<<<<
@@ -37706,7 +37706,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__46);
   __Pyx_GIVEREF(__pyx_tuple__46);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":610
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":610
  *         self.assertAlmostEqual(np.abs(T[2,0]),0)
  *         self.assertAlmostEqual(np.abs(N[0,0]),0)
  *         self.assertAlmostEqual(np.abs(N[1,0]),1)             # <<<<<<<<<<<<<<
@@ -37717,7 +37717,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__47);
   __Pyx_GIVEREF(__pyx_tuple__47);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":611
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":611
  *         self.assertAlmostEqual(np.abs(N[0,0]),0)
  *         self.assertAlmostEqual(np.abs(N[1,0]),1)
  *         self.assertAlmostEqual(np.abs(N[2,0]),0)             # <<<<<<<<<<<<<<
@@ -37728,7 +37728,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__48);
   __Pyx_GIVEREF(__pyx_tuple__48);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":612
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":612
  *         self.assertAlmostEqual(np.abs(N[1,0]),1)
  *         self.assertAlmostEqual(np.abs(N[2,0]),0)
  *         self.assertAlmostEqual(np.abs(P[0,0]),0)             # <<<<<<<<<<<<<<
@@ -37739,7 +37739,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__49);
   __Pyx_GIVEREF(__pyx_tuple__49);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":613
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":613
  *         self.assertAlmostEqual(np.abs(N[2,0]),0)
  *         self.assertAlmostEqual(np.abs(P[0,0]),0)
  *         self.assertAlmostEqual(np.abs(P[1,0]),0)             # <<<<<<<<<<<<<<
@@ -37750,7 +37750,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__50);
   __Pyx_GIVEREF(__pyx_tuple__50);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":614
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":614
  *         self.assertAlmostEqual(np.abs(P[0,0]),0)
  *         self.assertAlmostEqual(np.abs(P[1,0]),0)
  *         self.assertAlmostEqual(np.abs(P[2,0]),1)             # <<<<<<<<<<<<<<
@@ -37761,7 +37761,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__51);
   __Pyx_GIVEREF(__pyx_tuple__51);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":616
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":616
  *         self.assertAlmostEqual(np.abs(P[2,0]),1)
  *         #Second Event
  *         self.assertAlmostEqual(E[0,1],2)             # <<<<<<<<<<<<<<
@@ -37772,7 +37772,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__52);
   __Pyx_GIVEREF(__pyx_tuple__52);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":617
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":617
  *         #Second Event
  *         self.assertAlmostEqual(E[0,1],2)
  *         self.assertAlmostEqual(E[1,1],0.366025403784439 )             # <<<<<<<<<<<<<<
@@ -37783,7 +37783,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__53);
   __Pyx_GIVEREF(__pyx_tuple__53);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":618
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":618
  *         self.assertAlmostEqual(E[0,1],2)
  *         self.assertAlmostEqual(E[1,1],0.366025403784439 )
  *         self.assertAlmostEqual(E[2,1],-1.36602540378444)             # <<<<<<<<<<<<<<
@@ -37794,7 +37794,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__54);
   __Pyx_GIVEREF(__pyx_tuple__54);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":619
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":619
  *         self.assertAlmostEqual(E[1,1],0.366025403784439 )
  *         self.assertAlmostEqual(E[2,1],-1.36602540378444)
  *         self.assertAlmostEqual(np.abs(T[0,1]),0)             # <<<<<<<<<<<<<<
@@ -37805,7 +37805,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__55);
   __Pyx_GIVEREF(__pyx_tuple__55);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":620
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":620
  *         self.assertAlmostEqual(E[2,1],-1.36602540378444)
  *         self.assertAlmostEqual(np.abs(T[0,1]),0)
  *         self.assertAlmostEqual(np.abs(T[1,1]),1)             # <<<<<<<<<<<<<<
@@ -37816,7 +37816,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__56);
   __Pyx_GIVEREF(__pyx_tuple__56);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":621
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":621
  *         self.assertAlmostEqual(np.abs(T[0,1]),0)
  *         self.assertAlmostEqual(np.abs(T[1,1]),1)
  *         self.assertAlmostEqual(np.abs(T[2,1]),0)             # <<<<<<<<<<<<<<
@@ -37827,7 +37827,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__57);
   __Pyx_GIVEREF(__pyx_tuple__57);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":622
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":622
  *         self.assertAlmostEqual(np.abs(T[1,1]),1)
  *         self.assertAlmostEqual(np.abs(T[2,1]),0)
  *         self.assertAlmostEqual(np.abs(N[0,1]),0.888073833977115)             # <<<<<<<<<<<<<<
@@ -37838,7 +37838,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__58);
   __Pyx_GIVEREF(__pyx_tuple__58);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":623
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":623
  *         self.assertAlmostEqual(np.abs(T[2,1]),0)
  *         self.assertAlmostEqual(np.abs(N[0,1]),0.888073833977115)
  *         self.assertAlmostEqual(np.abs(N[1,1]),0)             # <<<<<<<<<<<<<<
@@ -37849,7 +37849,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__59);
   __Pyx_GIVEREF(__pyx_tuple__59);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":624
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":624
  *         self.assertAlmostEqual(np.abs(N[0,1]),0.888073833977115)
  *         self.assertAlmostEqual(np.abs(N[1,1]),0)
  *         self.assertAlmostEqual(np.abs(N[2,1]),0.459700843380983)             # <<<<<<<<<<<<<<
@@ -37860,7 +37860,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__60);
   __Pyx_GIVEREF(__pyx_tuple__60);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":625
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":625
  *         self.assertAlmostEqual(np.abs(N[1,1]),0)
  *         self.assertAlmostEqual(np.abs(N[2,1]),0.459700843380983)
  *         self.assertAlmostEqual(np.abs(P[0,1]),0.459700843380983)             # <<<<<<<<<<<<<<
@@ -37871,7 +37871,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__61);
   __Pyx_GIVEREF(__pyx_tuple__61);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":626
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":626
  *         self.assertAlmostEqual(np.abs(N[2,1]),0.459700843380983)
  *         self.assertAlmostEqual(np.abs(P[0,1]),0.459700843380983)
  *         self.assertAlmostEqual(np.abs(P[1,1]),0)             # <<<<<<<<<<<<<<
@@ -37882,7 +37882,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__62);
   __Pyx_GIVEREF(__pyx_tuple__62);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":627
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":627
  *         self.assertAlmostEqual(np.abs(P[0,1]),0.459700843380983)
  *         self.assertAlmostEqual(np.abs(P[1,1]),0)
  *         self.assertAlmostEqual(np.abs(P[2,1]),0.888073833977115)             # <<<<<<<<<<<<<<
@@ -38105,7 +38105,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__82);
   __Pyx_GIVEREF(__pyx_tuple__82);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":38
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":38
  * cdef DTYPE_t rad_cor=180/pi
  * cdef int check_finite=1
  * if int(__scipy_version__.split('.')[0])==0 and int(__scipy_version__.split('.')[1])<13:             # <<<<<<<<<<<<<<
@@ -38119,7 +38119,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__85);
   __Pyx_GIVEREF(__pyx_tuple__85);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":222
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":222
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * def Tape_MT6(DTYPE_t[::1] gamma,DTYPE_t[::1] delta,DTYPE_t[::1] kappa,DTYPE_t[::1] h,DTYPE_t[::1] sigma):             # <<<<<<<<<<<<<<
@@ -38129,9 +38129,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__86 = PyTuple_Pack(7, __pyx_n_s_gamma, __pyx_n_s_delta, __pyx_n_s_kappa, __pyx_n_s_h, __pyx_n_s_sigma, __pyx_n_s_n, __pyx_n_s_MTs); if (unlikely(!__pyx_tuple__86)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__86);
   __Pyx_GIVEREF(__pyx_tuple__86);
-  __pyx_codeobj__87 = (PyObject*)__Pyx_PyCode_New(5, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__86, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_Tape_MT6, 222, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__87)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__87 = (PyObject*)__Pyx_PyCode_New(5, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__86, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_Tape_MT6, 222, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__87)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":240
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":240
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * def MT_output_convert(DTYPE_t[:,:] MTs):             # <<<<<<<<<<<<<<
@@ -38141,9 +38141,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__88 = PyTuple_Pack(18, __pyx_n_s_MTs, __pyx_n_s_MTs, __pyx_n_s_imax, __pyx_n_s_i, __pyx_n_s_g, __pyx_n_s_d, __pyx_n_s_k, __pyx_n_s_h, __pyx_n_s_s, __pyx_n_s_u, __pyx_n_s_v, __pyx_n_s_s1, __pyx_n_s_d1, __pyx_n_s_r1, __pyx_n_s_s2, __pyx_n_s_d2, __pyx_n_s_r2, __pyx_n_s_results); if (unlikely(!__pyx_tuple__88)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__88);
   __Pyx_GIVEREF(__pyx_tuple__88);
-  __pyx_codeobj__89 = (PyObject*)__Pyx_PyCode_New(1, 0, 18, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__88, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_MT_output_convert, 240, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__89)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__89 = (PyObject*)__Pyx_PyCode_New(1, 0, 18, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__88, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_MT_output_convert, 240, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__89)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":439
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":439
  *     return [n,l,l,0,0,0,n,l,0,0,0,n,0,0,0,mu,0,0,mu,0,mu]
  * 
  * def MT6_biaxes(DTYPE_t[:]MT6,list c):             # <<<<<<<<<<<<<<
@@ -38153,9 +38153,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__90 = PyTuple_Pack(18, __pyx_n_s_MT6, __pyx_n_s_c, __pyx_n_s_lambda2mu, __pyx_n_s_mu, __pyx_n_s_l, __pyx_n_s_T, __pyx_n_s_N, __pyx_n_s_P, __pyx_n_s_E, __pyx_n_s_isotropic, __pyx_n_s_explosion, __pyx_n_s_isotropic_solve, __pyx_n_s_isotropic_solve, __pyx_n_s_explosion6, __pyx_n_s_area_displacement, __pyx_n_s_phi, __pyx_n_s_cphi, __pyx_n_s_sphi); if (unlikely(!__pyx_tuple__90)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__90);
   __Pyx_GIVEREF(__pyx_tuple__90);
-  __pyx_codeobj__91 = (PyObject*)__Pyx_PyCode_New(2, 0, 18, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__90, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_MT6_biaxes, 439, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__91)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__91 = (PyObject*)__Pyx_PyCode_New(2, 0, 18, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__90, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_MT6_biaxes, 439, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__91)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":506
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":506
  * 
  * class cMomentTensorConvertTestCase(TestCase):
  *     def test_cTape_MT6(self):             # <<<<<<<<<<<<<<
@@ -38165,9 +38165,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__92 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_m); if (unlikely(!__pyx_tuple__92)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__92);
   __Pyx_GIVEREF(__pyx_tuple__92);
-  __pyx_codeobj__93 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__92, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_cTape_MT6, 506, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__93)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__93 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__92, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_cTape_MT6, 506, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__93)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":515
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":515
  *         self.assertAlmostEqual(m[4],-0.1952,4)
  *         self.assertAlmostEqual(m[5],-0.2924,4)
  *     def test_c_cE_tk(self):             # <<<<<<<<<<<<<<
@@ -38177,9 +38177,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__94 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_results, __pyx_n_s_E); if (unlikely(!__pyx_tuple__94)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__94);
   __Pyx_GIVEREF(__pyx_tuple__94);
-  __pyx_codeobj__95 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__94, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_c_cE_tk, 515, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__95)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__95 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__94, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_c_cE_tk, 515, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__95)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":529
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":529
  *         self.assertAlmostEqual(results[5],-0.2)#y
  *         self.assertAlmostEqual(results[6],-0.8)#x
  *     def test_c_ctk_uv(self):             # <<<<<<<<<<<<<<
@@ -38189,9 +38189,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__96 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_results, __pyx_n_s_E); if (unlikely(!__pyx_tuple__96)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__96);
   __Pyx_GIVEREF(__pyx_tuple__96);
-  __pyx_codeobj__97 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__96, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_c_ctk_uv, 529, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__97)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__97 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__96, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_c_ctk_uv, 529, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__97)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":546
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":546
  *         self.assertAlmostEqual(results[5],-4./3)
  *         self.assertAlmostEqual(results[6],-1./3)
  *     def test_c_cE_gd(self):             # <<<<<<<<<<<<<<
@@ -38201,9 +38201,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__98 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_E, __pyx_n_s_g, __pyx_n_s_d); if (unlikely(!__pyx_tuple__98)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__98);
   __Pyx_GIVEREF(__pyx_tuple__98);
-  __pyx_codeobj__99 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__98, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_c_cE_gd, 546, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__99)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__99 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__98, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_c_cE_gd, 546, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__99)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":561
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":561
  *         self.assertAlmostEqual(g,-0.523598775598299)
  *         self.assertAlmostEqual(d,-0.339836909454122)
  *     def test_c_cN_sdr(self):             # <<<<<<<<<<<<<<
@@ -38213,9 +38213,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__100 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_E, __pyx_n_s_s, __pyx_n_s_d, __pyx_n_s_r); if (unlikely(!__pyx_tuple__100)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 561; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__100);
   __Pyx_GIVEREF(__pyx_tuple__100);
-  __pyx_codeobj__101 = (PyObject*)__Pyx_PyCode_New(1, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__100, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_c_cN_sdr, 561, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__101)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 561; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__101 = (PyObject*)__Pyx_PyCode_New(1, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__100, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_c_cN_sdr, 561, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__101)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 561; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":574
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":574
  *         self.assertAlmostEqual(d,0.463647609000806)
  *         self.assertAlmostEqual(r,1.79078430419036)
  *     def test_c_cTP_SDR(self):             # <<<<<<<<<<<<<<
@@ -38225,9 +38225,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__102 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_T, __pyx_n_s_P, __pyx_n_s_results); if (unlikely(!__pyx_tuple__102)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__102);
   __Pyx_GIVEREF(__pyx_tuple__102);
-  __pyx_codeobj__103 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__102, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_c_cTP_SDR, 574, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__103)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__103 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__102, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_c_cTP_SDR, 574, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__103)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":600
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":600
  *             self.assertAlmostEqual(results[8],48.1896851042214)
  *             self.assertAlmostEqual(results[9],116.565051177078)
  *     def test_c_MT6_TNPE(self):             # <<<<<<<<<<<<<<
@@ -38237,9 +38237,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__104 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_MT, __pyx_n_s_T, __pyx_n_s_N, __pyx_n_s_P, __pyx_n_s_E); if (unlikely(!__pyx_tuple__104)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__104);
   __Pyx_GIVEREF(__pyx_tuple__104);
-  __pyx_codeobj__105 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__104, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_c_MT6_TNPE, 600, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__105)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__105 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__104, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_c_MT6_TNPE, 600, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__105)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":628
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":628
  *         self.assertAlmostEqual(np.abs(P[1,1]),0)
  *         self.assertAlmostEqual(np.abs(P[2,1]),0.888073833977115)
  *     def test_c_E_GD(self):             # <<<<<<<<<<<<<<
@@ -38249,9 +38249,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__106 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_E, __pyx_n_s_g, __pyx_n_s_d); if (unlikely(!__pyx_tuple__106)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__106);
   __Pyx_GIVEREF(__pyx_tuple__106);
-  __pyx_codeobj__107 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__106, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_c_E_GD, 628, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__107)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__107 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__106, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_c_E_GD, 628, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__107)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":639
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":639
  *         self.assertAlmostEqual(g[3],np.array([0.]))
  *         self.assertAlmostEqual(d[3],np.array([-pi/2]))
  *     def test_c_TP_SDR(self):             # <<<<<<<<<<<<<<
@@ -38261,9 +38261,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__108 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_T, __pyx_n_s_P, __pyx_n_s_s, __pyx_n_s_d, __pyx_n_s_r); if (unlikely(!__pyx_tuple__108)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__108);
   __Pyx_GIVEREF(__pyx_tuple__108);
-  __pyx_codeobj__109 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__108, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_c_TP_SDR, 639, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__109)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__109 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__108, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_c_TP_SDR, 639, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__109)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":649
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":649
  *         self.assertAlmostEqual(d[1],np.array([pi/2]))
  *         self.assertAlmostEqual(r[1],np.array([-pi]))
  *     def test_c_SDR_SDR(self):             # <<<<<<<<<<<<<<
@@ -38273,9 +38273,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__110 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_s2, __pyx_n_s_d2, __pyx_n_s_r2); if (unlikely(!__pyx_tuple__110)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 649; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__110);
   __Pyx_GIVEREF(__pyx_tuple__110);
-  __pyx_codeobj__111 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__110, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_c_SDR_SDR, 649, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__111)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 649; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__111 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__110, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_c_SDR_SDR, 649, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__111)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 649; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":659
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":659
  *         self.assertAlmostEqual(r2,63.434948822922*pi/180)
  * 
  * def test_suite(verbosity=2):             # <<<<<<<<<<<<<<
@@ -38285,7 +38285,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__112 = PyTuple_Pack(2, __pyx_n_s_verbosity, __pyx_n_s_suite); if (unlikely(!__pyx_tuple__112)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__112);
   __Pyx_GIVEREF(__pyx_tuple__112);
-  __pyx_codeobj__113 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__112, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_mtfit_convert_c, __pyx_n_s_test_suite, 659, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__113)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__113 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__112, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_D_Code_MTfit_src_MTfit_convert_c, __pyx_n_s_test_suite, 659, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__113)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "View.MemoryView":278
  *         return self.name
@@ -38418,7 +38418,7 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   PyObject *__pyx_t_2 = NULL;
   int __pyx_t_3;
   int __pyx_t_4;
-  struct __pyx_opt_args_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c __pyx_t_5;
+  struct __pyx_opt_args_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   int __pyx_lineno = 0;
@@ -38479,14 +38479,14 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
-  if (__pyx_module_is_main_mtfit__convert__cmoment_tensor_conversion) {
+  if (__pyx_module_is_main_MTfit__convert__cmoment_tensor_conversion) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (!PyDict_GetItemString(modules, "mtfit.convert.cmoment_tensor_conversion")) {
-      if (unlikely(PyDict_SetItemString(modules, "mtfit.convert.cmoment_tensor_conversion", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!PyDict_GetItemString(modules, "MTfit.convert.cmoment_tensor_conversion")) {
+      if (unlikely(PyDict_SetItemString(modules, "MTfit.convert.cmoment_tensor_conversion", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
@@ -38502,11 +38502,11 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   indirect_contiguous = Py_None; Py_INCREF(Py_None);
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("cTape_MT6", (void (*)(void))__pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_cTape_MT6, "void (__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("cTape_MT6", (void (*)(void))__pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_cTape_MT6, "void (__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_type_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes.tp_print = 0;
-  __pyx_ptype_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes = &__pyx_type_5mtfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes;
+  if (PyType_Ready(&__pyx_type_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_type_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes.tp_print = 0;
+  __pyx_ptype_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes = &__pyx_type_5MTfit_7convert_25cmoment_tensor_conversion___pyx_scope_struct__MT6_biaxes;
   if (PyType_Ready(&__pyx_type___pyx_array) < 0) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type___pyx_array.tp_print = 0;
   __pyx_array_type = &__pyx_type___pyx_array;
@@ -38556,7 +38556,7 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   if (__Pyx_patch_abc() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":21
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":21
  * from libc.stdlib cimport free
  * 
  * import unittest             # <<<<<<<<<<<<<<
@@ -38568,7 +38568,7 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_unittest, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":25
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":25
  * cimport cython
  * cimport numpy as np
  * from scipy.linalg import eigh             # <<<<<<<<<<<<<<
@@ -38589,7 +38589,7 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":26
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":26
  * cimport numpy as np
  * from scipy.linalg import eigh
  * from scipy.optimize import fsolve             # <<<<<<<<<<<<<<
@@ -38610,7 +38610,7 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":27
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":27
  * from scipy.linalg import eigh
  * from scipy.optimize import fsolve
  * from scipy import __version__ as __scipy_version__             # <<<<<<<<<<<<<<
@@ -38631,7 +38631,7 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":28
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":28
  * from scipy.optimize import fsolve
  * from scipy import __version__ as __scipy_version__
  * import numpy as np             # <<<<<<<<<<<<<<
@@ -38643,7 +38643,7 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":31
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":31
  * from cpython cimport bool
  * 
  * from ..utilities.unittest_utils import TestCase             # <<<<<<<<<<<<<<
@@ -38664,25 +38664,25 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":34
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":34
  * 
  * 
  * cdef DTYPE_t PI2=2*pi             # <<<<<<<<<<<<<<
  * cdef DTYPE_t sqrt3=sqrt(3)
  * cdef DTYPE_t rad_cor=180/pi
  */
-  __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_PI2 = (2.0 * M_PI);
+  __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_PI2 = (2.0 * M_PI);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":35
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":35
  * 
  * cdef DTYPE_t PI2=2*pi
  * cdef DTYPE_t sqrt3=sqrt(3)             # <<<<<<<<<<<<<<
  * cdef DTYPE_t rad_cor=180/pi
  * cdef int check_finite=1
  */
-  __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_sqrt3 = sqrt(3.0);
+  __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_sqrt3 = sqrt(3.0);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":36
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":36
  * cdef DTYPE_t PI2=2*pi
  * cdef DTYPE_t sqrt3=sqrt(3)
  * cdef DTYPE_t rad_cor=180/pi             # <<<<<<<<<<<<<<
@@ -38693,18 +38693,18 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_rad_cor = (180.0 / M_PI);
+  __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_rad_cor = (180.0 / M_PI);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":37
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":37
  * cdef DTYPE_t sqrt3=sqrt(3)
  * cdef DTYPE_t rad_cor=180/pi
  * cdef int check_finite=1             # <<<<<<<<<<<<<<
  * if int(__scipy_version__.split('.')[0])==0 and int(__scipy_version__.split('.')[1])<13:
  *     check_finite=0
  */
-  __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_check_finite = 1;
+  __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_check_finite = 1;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":38
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":38
  * cdef DTYPE_t rad_cor=180/pi
  * cdef int check_finite=1
  * if int(__scipy_version__.split('.')[0])==0 and int(__scipy_version__.split('.')[1])<13:             # <<<<<<<<<<<<<<
@@ -38757,16 +38757,16 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __pyx_L3_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":39
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":39
  * cdef int check_finite=1
  * if int(__scipy_version__.split('.')[0])==0 and int(__scipy_version__.split('.')[1])<13:
  *     check_finite=0             # <<<<<<<<<<<<<<
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  */
-    __pyx_v_5mtfit_7convert_25cmoment_tensor_conversion_check_finite = 0;
+    __pyx_v_5MTfit_7convert_25cmoment_tensor_conversion_check_finite = 0;
 
-    /* "mtfit\convert\cmoment_tensor_conversion.pyx":38
+    /* "MTfit\convert\cmoment_tensor_conversion.pyx":38
  * cdef DTYPE_t rad_cor=180/pi
  * cdef int check_finite=1
  * if int(__scipy_version__.split('.')[0])==0 and int(__scipy_version__.split('.')[1])<13:             # <<<<<<<<<<<<<<
@@ -38775,31 +38775,31 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
  */
   }
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":222
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":222
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * def Tape_MT6(DTYPE_t[::1] gamma,DTYPE_t[::1] delta,DTYPE_t[::1] kappa,DTYPE_t[::1] h,DTYPE_t[::1] sigma):             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t n=gamma.shape[0]
  *     if not (gamma.shape[0]==delta.shape[0] and gamma.shape[0]==kappa.shape[0] and gamma.shape[0]==h.shape[0] and gamma.shape[0]==sigma.shape[0]):
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_1Tape_MT6, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_1Tape_MT6, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_Tape_MT6, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":240
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":240
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * def MT_output_convert(DTYPE_t[:,:] MTs):             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t imax=MTs.shape[1]
  *     cdef Py_ssize_t i
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_5MT_output_convert, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_5MT_output_convert, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_MT_output_convert, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":431
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":431
  * 
  * #Bi-axes
  * cpdef list isotropic_c(DTYPE_t l=1.,DTYPE_t mu=1.,list c=[]):             # <<<<<<<<<<<<<<
@@ -38817,19 +38817,19 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":439
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":439
  *     return [n,l,l,0,0,0,n,l,0,0,0,n,0,0,0,mu,0,0,mu,0,mu]
  * 
  * def MT6_biaxes(DTYPE_t[:]MT6,list c):             # <<<<<<<<<<<<<<
  *     lambda2mu=(3*(c[0]+c[6]+c[11])+4*(c[15]+c[18]+c[20])+2*(c[1]+c[2]+c[7]))/15
  *     mu=((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_17MT6_biaxes, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_MT6_biaxes, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":469
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":469
  *     return phi,explosion,area_displacement
  * 
  * cpdef MT6c_D6(mt6,list c=isotropic_c(l=1,mu=1)):             # <<<<<<<<<<<<<<
@@ -38839,7 +38839,7 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __pyx_t_5.__pyx_n = 2;
   __pyx_t_5.l = 1.0;
   __pyx_t_5.mu = 1.0;
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c(0, &__pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c(0, &__pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_k__30 = ((PyObject*)__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -38847,13 +38847,13 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __pyx_t_5.__pyx_n = 2;
   __pyx_t_5.l = 1.0;
   __pyx_t_5.mu = 1.0;
-  __pyx_t_1 = __pyx_f_5mtfit_7convert_25cmoment_tensor_conversion_isotropic_c(0, &__pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_7convert_25cmoment_tensor_conversion_isotropic_c(0, &__pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_k__30 = ((PyObject*)__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":505
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":505
  * # Test functions - Not Documented
  * 
  * class cMomentTensorConvertTestCase(TestCase):             # <<<<<<<<<<<<<<
@@ -38869,130 +38869,130 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 505; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_cMomentTensorConvertTestCase, __pyx_n_s_cMomentTensorConvertTestCase, (PyObject *) NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, (PyObject *) NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 505; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_cMomentTensorConvertTestCase, __pyx_n_s_cMomentTensorConvertTestCase, (PyObject *) NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, (PyObject *) NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 505; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":506
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":506
  * 
  * class cMomentTensorConvertTestCase(TestCase):
  *     def test_cTape_MT6(self):             # <<<<<<<<<<<<<<
  *         cdef DTYPE_t[::1] m=np.empty((6))
  *         cTape_MT6(&m[0],0.12,0.43,0.76,0.63,0.75)
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__93)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_1test_cTape_MT6, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__93)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_cTape_MT6, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":515
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":515
  *         self.assertAlmostEqual(m[4],-0.1952,4)
  *         self.assertAlmostEqual(m[5],-0.2924,4)
  *     def test_c_cE_tk(self):             # <<<<<<<<<<<<<<
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.])
  *         E=np.array([1.,0.,-1.])
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_2, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__95)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_3test_c_cE_tk, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_2, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__95)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_c_cE_tk, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":529
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":529
  *         self.assertAlmostEqual(results[5],-0.2)#y
  *         self.assertAlmostEqual(results[6],-0.8)#x
  *     def test_c_ctk_uv(self):             # <<<<<<<<<<<<<<
  *         results=np.array([0.,0.,0.,0.,0.,0.,0.])
  *         E=np.array([1.,0.,-1.])
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_3, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__97)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_5test_c_ctk_uv, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_3, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__97)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_c_ctk_uv, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":546
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":546
  *         self.assertAlmostEqual(results[5],-4./3)
  *         self.assertAlmostEqual(results[6],-1./3)
  *     def test_c_cE_gd(self):             # <<<<<<<<<<<<<<
  *         E=np.array([1.,0.,-1.])
  *         cdef DTYPE_t g
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_4, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__99)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_7test_c_cE_gd, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_4, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__99)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_c_cE_gd, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":561
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":561
  *         self.assertAlmostEqual(g,-0.523598775598299)
  *         self.assertAlmostEqual(d,-0.339836909454122)
  *     def test_c_cN_sdr(self):             # <<<<<<<<<<<<<<
  *         E=np.array([1.,0.,-1.])
  *         cdef DTYPE_t s
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_5, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__101)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 561; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_9test_c_cN_sdr, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_5, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__101)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 561; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_c_cN_sdr, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 561; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":574
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":574
  *         self.assertAlmostEqual(d,0.463647609000806)
  *         self.assertAlmostEqual(r,1.79078430419036)
  *     def test_c_cTP_SDR(self):             # <<<<<<<<<<<<<<
  *         T=np.array([0.235702260395516,
  *          0.235702260395516,
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_6, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__103)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_11test_c_cTP_SDR, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_6, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__103)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_c_cTP_SDR, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":600
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":600
  *             self.assertAlmostEqual(results[8],48.1896851042214)
  *             self.assertAlmostEqual(results[9],116.565051177078)
  *     def test_c_MT6_TNPE(self):             # <<<<<<<<<<<<<<
  *         MT=np.array([[1.,0.,-1.,0.,0.,0.],[0,2.0,-1.0,0.,1.0,0.]]).T
  *         T,N,P,E=MT6_TNPE(MT)
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_7, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__105)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_13test_c_MT6_TNPE, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_7, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__105)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_c_MT6_TNPE, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":628
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":628
  *         self.assertAlmostEqual(np.abs(P[1,1]),0)
  *         self.assertAlmostEqual(np.abs(P[2,1]),0.888073833977115)
  *     def test_c_E_GD(self):             # <<<<<<<<<<<<<<
  *         E=np.array([[1.,0.,-1.],[1.,1.,1.],[1.,-1.,-1.],[-1.,-1.,-1.]]).T
  *         g,d=E_GD(E)
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_8, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__107)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_15test_c_E_GD, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_8, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__107)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_c_E_GD, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":639
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":639
  *         self.assertAlmostEqual(g[3],np.array([0.]))
  *         self.assertAlmostEqual(d[3],np.array([-pi/2]))
  *     def test_c_TP_SDR(self):             # <<<<<<<<<<<<<<
  *         T=np.array([[0.235702260395516,0.],[0.235702260395516,1.0],[0.942809041582063,0.]])
  *         P=np.array([[0.707106781186547,1.],[-0.707106781186547,0],[0.,0.]])
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_9, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__109)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_17test_c_TP_SDR, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_9, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__109)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_c_TP_SDR, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":649
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":649
  *         self.assertAlmostEqual(d[1],np.array([pi/2]))
  *         self.assertAlmostEqual(r[1],np.array([-pi]))
  *     def test_c_SDR_SDR(self):             # <<<<<<<<<<<<<<
  *         s2,d2,r2=SDR_SDR(np.array([206.565051177078*pi/180]),np.array([48.1896851042214*pi/180]),np.array([63.434948822922*pi/180]))
  *         self.assertAlmostEqual(s2,63.434948822922*pi/180)
  */
-  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_10, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__111)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 649; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_28cMomentTensorConvertTestCase_19test_c_SDR_SDR, 0, __pyx_n_s_cMomentTensorConvertTestCase_tes_10, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con, __pyx_d, ((PyObject *)__pyx_codeobj__111)); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 649; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_test_c_SDR_SDR, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 649; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":505
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":505
  * # Test functions - Not Documented
  * 
  * class cMomentTensorConvertTestCase(TestCase):             # <<<<<<<<<<<<<<
@@ -39007,19 +39007,19 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":659
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":659
  *         self.assertAlmostEqual(r2,63.434948822922*pi/180)
  * 
  * def test_suite(verbosity=2):             # <<<<<<<<<<<<<<
  *     suite = [unittest.TestLoader().loadTestsFromTestCase(cMomentTensorConvertTestCase), ]
  *     suite = unittest.TestSuite(suite)
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_5mtfit_7convert_25cmoment_tensor_conversion_27test_suite, NULL, __pyx_n_s_mtfit_convert_cmoment_tensor_con); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_5MTfit_7convert_25cmoment_tensor_conversion_27test_suite, NULL, __pyx_n_s_MTfit_convert_cmoment_tensor_con); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test_suite, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mtfit\convert\cmoment_tensor_conversion.pyx":1
+  /* "MTfit\convert\cmoment_tensor_conversion.pyx":1
  * #!python             # <<<<<<<<<<<<<<
  * # cython: infer_types=True
  * 
@@ -39156,11 +39156,11 @@ PyMODINIT_FUNC PyInit_cmoment_tensor_conversion(void)
   __Pyx_XDECREF(__pyx_t_7);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init mtfit.convert.cmoment_tensor_conversion", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init MTfit.convert.cmoment_tensor_conversion", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init mtfit.convert.cmoment_tensor_conversion");
+    PyErr_SetString(PyExc_ImportError, "init MTfit.convert.cmoment_tensor_conversion");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -42313,7 +42313,7 @@ no_fail:
     return retval;
 }
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *obj) {
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -42324,7 +42324,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn_
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT | PyBUF_WRITABLE), 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -42335,7 +42335,7 @@ __pyx_fail:
     return result;
 }
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *obj) {
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED) };
@@ -42346,7 +42346,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn_
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, 0,
                                                  PyBUF_RECORDS, 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -42357,7 +42357,7 @@ __pyx_fail:
     return result;
 }
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *obj) {
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED) };
@@ -42368,7 +42368,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_n
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, 0,
                                                  PyBUF_RECORDS, 2,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -42379,14 +42379,14 @@ __pyx_fail:
     return result;
 }
 
-static PyObject *__pyx_memview_get_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(const char *itemp) {
-    return (PyObject *) PyFloat_FromDouble(*(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) itemp);
+static PyObject *__pyx_memview_get_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(const char *itemp) {
+    return (PyObject *) PyFloat_FromDouble(*(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) itemp);
 }
-static int __pyx_memview_set_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(const char *itemp, PyObject *obj) {
-    __pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t value = __pyx_PyFloat_AsDouble(obj);
+static int __pyx_memview_set_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(const char *itemp, PyObject *obj) {
+    __pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t value = __pyx_PyFloat_AsDouble(obj);
     if ((value == (double)-1) && PyErr_Occurred())
         return 0;
-    *(__pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) itemp = value;
+    *(__pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t *) itemp = value;
     return 1;
 }
 
@@ -43574,7 +43574,7 @@ raise_neg_overflow:
     return (long) -1;
 }
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *obj) {
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -43585,7 +43585,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_n
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT | PyBUF_WRITABLE), 2,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_5mtfit_7convert_25cmoment_tensor_conversion_DTYPE_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_5MTfit_7convert_25cmoment_tensor_conversion_DTYPE_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;

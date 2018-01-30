@@ -5,7 +5,7 @@ model_sampling_strike_slip
 Example extension module for generating strike slip events
 """
 import numpy as np
-from mtfit.convert import Tape_MT6
+from MTfit.convert import Tape_MT6
 
 
 def random_strike_slip(self, n_samples):

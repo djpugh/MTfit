@@ -13,10 +13,10 @@ except ImportError:
 
 import numpy as np
 
-from mtfit.inversion import Inversion, ForwardTask
-from mtfit.probability.probability import polarity_ln_pdf, amplitude_ratio_ln_pdf
-from mtfit.sampling import convert_keys_to_unicode
-from mtfit.algorithms.markov_chain_monte_carlo import MarkovChainMonteCarloAlgorithmCreator
+from MTfit.inversion import Inversion, ForwardTask
+from MTfit.probability.probability import polarity_ln_pdf, amplitude_ratio_ln_pdf
+from MTfit.sampling import convert_keys_to_unicode
+from MTfit.algorithms.markov_chain_monte_carlo import MarkovChainMonteCarloAlgorithmCreator
 
 DEFAULT_SAMPLE_RANGE = [10000, 50000, 80000, 100000, 200000, 500000, 700000,
                         1000000, 3000000, 5000000, 7000000, 100000000]

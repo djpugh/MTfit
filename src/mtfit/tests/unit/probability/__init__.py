@@ -1,8 +1,8 @@
 import unittest
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.tests.unit.probability.test_probability import test_suite as probability_test_suite
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.tests.unit.probability.test_probability import test_suite as probability_test_suite
 
 __all__ = ['run_tests']
 

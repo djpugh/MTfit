@@ -1,7 +1,7 @@
 """
 inversion
 =========
-Module containing the main inversion class, mtfit.inversion.Inversion class.
+Module containing the main inversion class, MTfit.inversion.Inversion class.
 
 """
 
@@ -123,7 +123,7 @@ class ForwardTask(object):
             generate_samples:[100000] Number of samples to generate when generating samples.
             cutoff:[100000000] Max number of samples to try when generating samples.
             dc:[False] DC or MT when generating samples.
-            extension_data:[{}] A dictionary of processed data for use by an mtfit.data_types extension.
+            extension_data:[{}] A dictionary of processed data for use by an MTfit.data_types extension.
         """
         self.mt = mt
         self.a_polarity = a_polarity
@@ -203,7 +203,7 @@ class ForwardTask(object):
                                                                       marginalised=int(self.marginalise), location_samples_multipliers=ln_location_sample_multipliers)
                         # Handle extensions
                         if len(self.extension_data):
-                            extension_names, extensions = get_extensions('mtfit.data_types')
+                            extension_names, extensions = get_extensions('MTfit.data_types')
                             for key in self.extension_data.keys():
                                 try:
                                     if key in extension_names and 'relative' not in key:
@@ -321,7 +321,7 @@ class ForwardTask(object):
                     # Force garbage collection
                     # Handle extensions
                     if len(self.extension_data):
-                        extension_names, extensions = get_extensions('mtfit.data_types')
+                        extension_names, extensions = get_extensions('MTfit.data_types')
                         for key in self.extension_data.keys():
                             try:
                                 if key in extension_names and 'relative' not in key:
@@ -420,7 +420,7 @@ class McMCForwardTask(object):
             marginalise:[True] Boolean flag as to whether pdf is marginalised over location/model uncertainty.
             normalise:[True] Normalise output (doesn't matter for McMC main output, but will affect probability output)
             convert:[False] Convert output data to tape, hudson and fault plane coordinates.
-            extension_data:[{}] A dictionary of processed data for use by an mtfit.data_types extension.
+            extension_data:[{}] A dictionary of processed data for use by an MTfit.data_types extension.
 
         """
         self.algorithm_kwargs = algorithm_kwargs
@@ -505,7 +505,7 @@ class MultipleEventsForwardTask(object):
             location_samples:[1]  Integer number of station samples, (default is 1)
             marginalise_relative:[False] Boolean flag to marginalise the location uncertainty between absolute and relative data.
             combine:[False] Boolean flag to combine the probabilities between multiple events.
-            extension_data:[] A list of dictionaries of processed data for use by an mtfit.data_types extension.
+            extension_data:[] A list of dictionaries of processed data for use by an MTfit.data_types extension.
         """
         self.mts = mts
         self.a_polarity = a_polarity
@@ -737,7 +737,7 @@ class MultipleEventsForwardTask(object):
                             traceback.print_exc()
             # Handle relative inversion extensions
             if self._relative and len(self.extension_data):
-                extension_names, extensions = get_extensions('mtfit.data_types')
+                extension_names, extensions = get_extensions('MTfit.data_types')
                 extension_scale = {}
                 extension_scale_uncertainty = {}
                 for key in self.extension_data[i].keys():
@@ -893,7 +893,7 @@ class MultipleEventsMcMCForwardTask(McMCForwardTask):
             marginalise_relative:[False] Boolean flag as to whether pdf is marginalised over location/model uncertainty - IGNORED.
             normalise:[True] Normalise output (doesn't matter for McMC main output, but will affect probability output)
             convert:[False] Convert output data to tape, hudson and fault plane coordinates.
-            extension_data:[] A list of dictionaries of processed data for use by an mtfit.data_types extension.
+            extension_data:[] A list of dictionaries of processed data for use by an MTfit.data_types extension.
 
         """
         self.algorithm_kwargs = algorithm_kwargs
@@ -1112,9 +1112,9 @@ class Inversion(object):
         * McMC - Markov chain Monte Carlo sampling.
         * TransDMcMC - Markov chain Monte Carlo sampling.
 
-    These are discussed in more detail in the mtfit.algorithms documentation.
+    These are discussed in more detail in the MTfit.algorithms documentation.
 
-    The inversion is run by calling the forward function (mtfit.inversion.Inversion.forward)
+    The inversion is run by calling the forward function (MTfit.inversion.Inversion.forward)
 
     **Data Format**
 
@@ -1300,7 +1300,7 @@ class Inversion(object):
             number_stations (int):[0] Used for estimating sample sizes in the Monte Carlo random sampling algorithms (Time,Iterate) if set.
             number_location_samples (int):[0] Used for estimating sample sizes in the Monte Carlo random sampling algorithms (Time,Iterate) if set.
             path (str): File path for output. Default is current working dir (interactive) or PBS workdir.
-            fid (str): File name root for output, default is to use mtfitOutput or the event UID if set in the data dictionary.
+            fid (str): File name root for output, default is to use MTfitOutput or the event UID if set in the data dictionary.
             inversion_options (list): List of data types to be used in the iversion, if not set, the inversion uses all the data types in the data dictionary, irrespective of independence.
             diagnostic_output (bool): [False] Boolean flag to output diagnostic information in MATLAB save file.
             marginalise_relative (bool): [False] Boolean flag to marginalise over location/model uncertainty during relative amplitude inversion.
@@ -1328,7 +1328,7 @@ class Inversion(object):
             verbosity (int): [0] Set verbosity level (0-4) high numbers mean more logging output and verbosity==4 means the debugger will be called on errors.
             debug (bool): [False] Sets debug on or off (True means verbosity set to 4).
 
-        Other kwargs are passed to the algorithm - see mtfit.algorithms documentation for help on those.
+        Other kwargs are passed to the algorithm - see MTfit.algorithms documentation for help on those.
         """
         data_file_path = data_file
         self.dc = dc
@@ -1347,7 +1347,7 @@ class Inversion(object):
             try:
                 from mpi4py import MPI
                 self.comm = MPI.COMM_WORLD
-                self._print('Running mtfit using MPI')
+                self._print('Running MTfit using MPI')
             except Exception:
                 self._MPI = False
         # Set DC parameters
@@ -1523,7 +1523,7 @@ class Inversion(object):
             except Exception:
                 data = False
                 # Parser plug-in extensions.
-                parser_names, parsers = get_extensions('mtfit.parsers', {'.csv': parse_csv, '.hyp': parse_hyp})
+                parser_names, parsers = get_extensions('MTfit.parsers', {'.csv': parse_csv, '.hyp': parse_hyp})
                 try:
                     try:
                         ext = os.path.splitext(filename)[1]
@@ -1563,7 +1563,7 @@ class Inversion(object):
 
 
         """
-        parser_names, parsers = get_extensions('mtfit.location_pdf_parsers', {'.scatangle': parse_scatangle})
+        parser_names, parsers = get_extensions('MTfit.location_pdf_parsers', {'.scatangle': parse_scatangle})
         try:
             # Try to call the plugin for the correct extension
             try:
@@ -1605,7 +1605,7 @@ class Inversion(object):
         Keyword Arguments
             keyword arguments for algorithm configuration
 
-        For information on the kwargs, see the mtfit.Algorithm docstrings.
+        For information on the kwargs, see the MTfit.Algorithm docstrings.
 
         """
         self.McMC = False
@@ -1613,7 +1613,7 @@ class Inversion(object):
         if not self._algorithm_name:
             self.algorithm = BaseAlgorithm(number_samples=self.number_samples, dc=self.dc, quality_check=self._quality_check,
                                            number_events=self.number_events, file_sample=self.file_sample,
-                                           fname=self.kwargs.get('fid', 'mtfit_run'), file_safe=not self.kwargs.get('no_file_safe', False),
+                                           fname=self.kwargs.get('fid', 'MTfit_run'), file_safe=not self.kwargs.get('no_file_safe', False),
                                            sampling=self.kwargs.get('sampling', False), sampling_prior=self.kwargs.get('sampling_prior', False),
                                            sample_distribution=self.kwargs.get('sample_distribution', False))
         # Iterate algorithm
@@ -1629,7 +1629,7 @@ class Inversion(object):
                 self._print('Iterate algorithm chosen, maximum samples: '+str(self.max_samples))
             self.algorithm = IterationSample(number_samples=number_samples, dc=self.dc, max_samples=max_samples,
                                              quality_check=self._quality_check, number_events=self.number_events,
-                                             file_sample=self.file_sample, fname=self.kwargs.get('fid', 'mtfit_run'),
+                                             file_sample=self.file_sample, fname=self.kwargs.get('fid', 'MTfit_run'),
                                              file_safe=not self.kwargs.get('no_file_safe', False),
                                              generate=single and self.c_generate, sampling=self.kwargs.get('sampling', False),
                                              sampling_prior=self.kwargs.get('sampling_prior', False),
@@ -1643,7 +1643,7 @@ class Inversion(object):
             self._print('Time algorithm chosen, maximum time: '+str(self.max_time))
             self.algorithm = TimeSample(number_samples=self.number_samples, dc=self.dc, max_time=self.max_time,
                                         quality_check=self._quality_check, number_events=self.number_events,
-                                        file_sample=self.file_sample, fname=self.kwargs.get('fid', 'mtfit_run'),
+                                        file_sample=self.file_sample, fname=self.kwargs.get('fid', 'MTfit_run'),
                                         file_safe=not self.kwargs.get('no_file_safe', False),
                                         generate=single and self.c_generate, sampling=self.kwargs.get('sampling', False),
                                         sampling_prior=self.kwargs.get('sampling_prior', False),
@@ -1652,19 +1652,19 @@ class Inversion(object):
                 # Set generate sample size, cutoff is default or set in initialisation
                 self.generate_samples = self.number_samples/5
         # Algorithm extensions
-        elif self._algorithm_name.lower() in get_extensions('mtfit.parallel_algorithms')[0]:
-            extension_algorithms = get_extensions('mtfit.parallel_algorithms')[0]
+        elif self._algorithm_name.lower() in get_extensions('MTfit.parallel_algorithms')[0]:
+            extension_algorithms = get_extensions('MTfit.parallel_algorithms')[0]
             kwargs['number_samples'] = self.number_samples
             self.kwargs['number_samples'] = self.number_samples
             self.algorithm = extension_algorithms[self._algorithm_name.lower()](**kwargs)
         # McMC algorithm
-        elif 'mcmc' in self._algorithm_name.lower() or self._algorithm_name.lower() in get_extensions('mtfit.directed_algorithms')[0]:
+        elif 'mcmc' in self._algorithm_name.lower() or self._algorithm_name.lower() in get_extensions('MTfit.directed_algorithms')[0]:
             if 'transd' in self._algorithm_name.lower():
                 kwargs['trans_dimensional'] = True
                 self.kwargs['trans_dimensional'] = True
                 kwargs['number_samples'] = self.number_samples
                 self.kwargs['number_samples'] = self.number_samples
-            if self._algorithm_name.lower() in get_extensions('mtfit.directed_algorithms')[0]:
+            if self._algorithm_name.lower() in get_extensions('MTfit.directed_algorithms')[0]:
                 kwargs['mode'] = self._algorithm_name.lower()
             self.McMC = True
             self.algorithm = MarkovChainMonteCarloAlgorithmCreator(**kwargs)
@@ -1813,7 +1813,7 @@ class Inversion(object):
 
         gc.collect()
 
-    def _combine_mpi_output(self, event_data, fids, scale_factor_fids=[], fid='mtfitOutput.mat', output_data=False, location_samples=False,
+    def _combine_mpi_output(self, event_data, fids, scale_factor_fids=[], fid='MTfitOutput.mat', output_data=False, location_samples=False,
                             location_sample_multipliers=False, format='matlab', binary_file_version=2, *args, **kwargs):
         """
         Combine mpi output binary files - Rank 0 only
@@ -1822,7 +1822,7 @@ class Inversion(object):
         event_data: Event data dictionary
         fids: storage fids
         scale_factor_fids:[[]] Scale_factor fids if relative amplitudes are used.
-        fid=[mtfitOutput.mat] Output filename.
+        fid=[MTfitOutput.mat] Output filename.
         output_data:[False] Output data (Stations etc.)
         location_samples:[False] Location PDF samples
         location_sample_multipliers:[False] Location PDF sample probabilities (should be one for Oct-tree samples)
@@ -1953,7 +1953,7 @@ class Inversion(object):
         # Reset output format
         self.results_format = old_results_format
 
-    def output(self, event_data, fid='mtfitOutput.mat', output_data=False, location_samples=False, location_sample_multipliers=False,
+    def output(self, event_data, fid='MTfitOutput.mat', output_data=False, location_samples=False, location_sample_multipliers=False,
                output_format='matlab', *args, **kwargs):
         """
         Outputs event_data results to fid
@@ -1962,7 +1962,7 @@ class Inversion(object):
 
         Args
             event_data: data dictionary for the event_data.
-            fid:['mtfitOutput.mat'] Filename for output.
+            fid:['MTfitOutput.mat'] Filename for output.
             Algorithm:[False] Algorith for output - only needed if multiple event_datas/algorithms used
             location_samples:[False] Station angle scatter samples.
             location_sample_multipliers:[False] Station angle scatter probabilities.
@@ -1990,7 +1990,7 @@ class Inversion(object):
             output_data, output_string = self.algorithm.output(self.normalise, self.convert, self.discard)
             if not self._MPI or (self._MPI and (self.mpi_output or(not isinstance(self.comm, bool) and self.comm.Get_rank()))) == 0:
                 if self._MPI and self.mpi_output:
-                    output_string.replace('-mtfit Forward Model Output-', '-mtfit Forward Model Output Process '+str(self.comm.Get_rank())+'-')
+                    output_string.replace('-MTfit Forward Model Output-', '-MTfit Forward Model Output Process '+str(self.comm.Get_rank())+'-')
                 print(output_string)
         try:
             if (not isinstance(output_data, dict) or not len(output_data['probability'])) and not kwargs.get('station_only', False):
@@ -1998,7 +1998,7 @@ class Inversion(object):
         except TypeError:
             return
         # get results format
-        output_data_names, output_data_formats = get_extensions('mtfit.output_data_formats', {'full_pdf': full_pdf_output_dicts, 'hyp': hyp_output_dicts})
+        output_data_names, output_data_formats = get_extensions('MTfit.output_data_formats', {'full_pdf': full_pdf_output_dicts, 'hyp': hyp_output_dicts})
         try:
             # Try to call the plugin for the correct extension'
             if output_format and output_format.lower() == 'hyp':
@@ -2017,7 +2017,7 @@ class Inversion(object):
             except Exception:
                 out_data[0] = False
         # output data
-        output_data_names, output_data_formats = get_extensions('mtfit.output_formats', {'matlab': MATLAB_output, 'pickle': pickle_output, 'hyp': hyp_output})
+        output_data_names, output_data_formats = get_extensions('MTfit.output_formats', {'matlab': MATLAB_output, 'pickle': pickle_output, 'hyp': hyp_output})
         try:
             try:
                 # Try to call the plugin for the correct extension
@@ -2083,7 +2083,7 @@ class Inversion(object):
         a_polarity_probability, polarity_probability, incorrect_polarity_probability_2 = polarity_probability_matrix(event, location_samples)
         # Extensions:
         extension_data = {}
-        extension_names, extensions = get_extensions('mtfit.process_data_types')
+        extension_names, extensions = get_extensions('MTfit.process_data_types')
         for ext in extension_names:
             extension_data[ext] = extensions[ext](event)
         # Bin station location PDF samples
@@ -2110,12 +2110,12 @@ class Inversion(object):
         # Try to make fid from attribute
         if self.fid:
             fid = self.fid.split('.mat')[0]+str(i)+source+'.mat'
-        # Otherwise try to use UID or fall back to mtfitOutput as default
+        # Otherwise try to use UID or fall back to MTfitOutput as default
         else:
             try:
                 fid = self._path+os.path.sep+str(event['UID'])+source+'.mat'
             except Exception:
-                fid = self._path+os.path.sep+'mtfitOutput'+source+'.mat'
+                fid = self._path+os.path.sep+'MTfitOutput'+source+'.mat'
         # Add rank to MPI file output (so they don't overwrite)
         if self._MPI and single and self.mpi_output:
             fid = os.path.splitext(fid)[0]+'.'+str(self.comm.Get_rank())+os.path.splitext(fid)[1]
@@ -2766,7 +2766,7 @@ class Inversion(object):
         """
         Runs event forward model using the arguments when the Inversion object was initialised.
 
-        Depending on the algorithm selection uses either random sampling or Markov chain Monte Carlo sampling - for more information on the different algorithms see mtfit.algorithms documentation.
+        Depending on the algorithm selection uses either random sampling or Markov chain Monte Carlo sampling - for more information on the different algorithms see MTfit.algorithms documentation.
         """
         source_type = 'MT'
         if self.dc:
@@ -3212,7 +3212,7 @@ def station_angles(stations, phase, radians=False):
     TakeOffAngle 0 down (as this is positive z-axis in NED system.
 
     Args
-        stations: station dictionary (format is the station component of the data dictionary (mtfit.inversion.Inversion docstrings))
+        stations: station dictionary (format is the station component of the data dictionary (MTfit.inversion.Inversion docstrings))
         phase: 'P','SH','SV' - the component for which to calculate the station angles, can be a ratio separated with a \.
         radians:[False] Boolean flag to set radians true or false
 

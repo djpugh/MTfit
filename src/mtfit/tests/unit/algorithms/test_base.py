@@ -4,8 +4,8 @@ import sys
 
 import numpy as np
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 
 VERBOSITY = 2
 
@@ -13,7 +13,7 @@ VERBOSITY = 2
 class BaseAlgorithmTestCase(unittest.TestCase):
 
     def setUp(self, **kwargs):
-        from mtfit.algorithms.base import BaseAlgorithm
+        from MTfit.algorithms.base import BaseAlgorithm
         self.base_algorithm = BaseAlgorithm(**kwargs)
 
     def tearDown(self):

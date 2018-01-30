@@ -4,11 +4,11 @@ import time
 
 import numpy as np
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.algorithms.monte_carlo import BaseMonteCarloRandomSample
-from mtfit.algorithms.monte_carlo import IterationSample
-from mtfit.algorithms.monte_carlo import TimeSample
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.algorithms.monte_carlo import BaseMonteCarloRandomSample
+from MTfit.algorithms.monte_carlo import IterationSample
+from MTfit.algorithms.monte_carlo import TimeSample
 
 VERBOSITY = 2
 

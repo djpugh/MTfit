@@ -9,14 +9,14 @@ import unittest
 import multiprocessing
 import multiprocessing.queues
 
-from mtfit.utilities.unittest_utils import TestCase
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.utilities.multiprocessing_helper import Worker
-from mtfit.utilities.multiprocessing_helper import JobPool
-from mtfit.utilities.multiprocessing_helper import PoisonPill
-from mtfit.tests.unit.utilities.multiprocessing_test_classes import TestTask
-from mtfit.tests.unit.utilities.multiprocessing_test_classes import TestTask2
+from MTfit.utilities.unittest_utils import TestCase
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.multiprocessing_helper import Worker
+from MTfit.utilities.multiprocessing_helper import JobPool
+from MTfit.utilities.multiprocessing_helper import PoisonPill
+from MTfit.tests.unit.utilities.multiprocessing_test_classes import TestTask
+from MTfit.tests.unit.utilities.multiprocessing_test_classes import TestTask2
 
 
 class WorkerTestCase(TestCase):

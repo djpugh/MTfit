@@ -2,7 +2,7 @@
 algorithms/base.py
 ******************
 
-Basic algorithm class for mtfit
+Basic algorithm class for MTfit
 """
 
 

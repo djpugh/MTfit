@@ -2130,7 +2130,7 @@ class cProbabilityTestCase(unittest.TestCase):
         self.assertAlmostEqual(scipy_erf(0.9), erf(0.9), 5)
         self.assertAlmostEqual(scipy_erf(-0.6), erf(-0.6), 5)
     def test_ar_pdf(self):
-        from mtfit.probability.probability import ratio_pdf
+        from MTfit.probability.probability import ratio_pdf
         c_p = ar_pdf(4.1, 0.2, 2.5, 0.1, 0.5)
         py_p = ratio_pdf(4.1, 0.2, 2.5, 4.1*0.1, 2.5*0.5)
         self.assertAlmostEqual(c_p, py_p, 3)

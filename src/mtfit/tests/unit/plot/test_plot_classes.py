@@ -2,10 +2,10 @@ import unittest
 
 import numpy as np
 
-from mtfit.plot.plot_classes import MTData
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.utilities.unittest_utils import TestCase
+from MTfit.plot.plot_classes import MTData
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.unittest_utils import TestCase
 
 
 class MTDataTestCase(TestCase):

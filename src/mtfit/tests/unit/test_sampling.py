@@ -4,11 +4,11 @@ import glob
 
 import numpy as np
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
-from mtfit.sampling import Sample
-from mtfit.sampling import FileSample
-from mtfit.probability.probability import LnPDF
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.sampling import Sample
+from MTfit.sampling import FileSample
+from MTfit.probability.probability import LnPDF
 
 
 class SampleTestCase(unittest.TestCase):

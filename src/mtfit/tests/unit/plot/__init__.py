@@ -6,13 +6,13 @@ Provides unit tests for the plot module
 
 import unittest
 
-from mtfit.tests.unit.plot.test_core import test_suite as core_test_suite
-from mtfit.tests.unit.plot.test_plot_classes import test_suite as plot_classes_test_suite
-from mtfit.tests.unit.plot.test_spherical_projection import test_suite as spherical_projection_test_suite
+from MTfit.tests.unit.plot.test_core import test_suite as core_test_suite
+from MTfit.tests.unit.plot.test_plot_classes import test_suite as plot_classes_test_suite
+from MTfit.tests.unit.plot.test_spherical_projection import test_suite as spherical_projection_test_suite
 
 
-from mtfit.utilities.unittest_utils import run_tests as _run_tests
-from mtfit.utilities.unittest_utils import debug_tests as _debug_tests
+from MTfit.utilities.unittest_utils import run_tests as _run_tests
+from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 
 
 __all__ = ['run_tests']

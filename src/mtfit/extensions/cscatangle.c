@@ -234,8 +234,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__mtfit__extensions__cscatangle
-#define __PYX_HAVE_API__mtfit__extensions__cscatangle
+#define __PYX_HAVE__MTfit__extensions__cscatangle
+#define __PYX_HAVE_API__MTfit__extensions__cscatangle
 #include "string.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -473,7 +473,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "src\\mtfit\\extensions\\cscatangle.pyx",
+  "src\\MTfit\\extensions\\cscatangle.pyx",
   "__init__.pxd",
   "stringsource",
   "type.pxd",
@@ -762,23 +762,23 @@ typedef npy_double __pyx_t_5numpy_double_t;
  */
 typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
 
-/* "mtfit\extensions\cscatangle.pyx":17
+/* "MTfit\extensions\cscatangle.pyx":17
  * # DTYPE=np.float64
  * # ctypedef np.float64_t DTYPE_t
  * ctypedef double DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef long long LONG
  * # ctypedef long long
  */
-typedef double __pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t;
+typedef double __pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t;
 
-/* "mtfit\extensions\cscatangle.pyx":18
+/* "MTfit\extensions\cscatangle.pyx":18
  * # ctypedef np.float64_t DTYPE_t
  * ctypedef double DTYPE_t
  * ctypedef long long LONG             # <<<<<<<<<<<<<<
  * # ctypedef long long
  * from libc.stdlib cimport rand, RAND_MAX
  */
-typedef PY_LONG_LONG __pyx_t_5mtfit_10extensions_10cscatangle_LONG;
+typedef PY_LONG_LONG __pyx_t_5MTfit_10extensions_10cscatangle_LONG;
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
     typedef ::std::complex< float > __pyx_t_float_complex;
@@ -1304,8 +1304,8 @@ static Py_ssize_t __Pyx_minusones[] = {-1, -1, -1, -1, -1, -1, -1, -1};
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
-static PyObject *__pyx_memview_get_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(const char *itemp);
-static int __pyx_memview_set_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(const char *itemp, PyObject *obj);
+static PyObject *__pyx_memview_get_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(const char *itemp);
+static int __pyx_memview_set_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(const char *itemp, PyObject *obj);
 
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
@@ -1442,9 +1442,9 @@ static int __Pyx_ValidateAndInit_memviewslice(
                 __Pyx_memviewslice *memviewslice,
                 PyObject *original_obj);
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(PyObject *);
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(PyObject *);
 
 static int __Pyx_check_binary_version(void);
 
@@ -1573,7 +1573,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *, cha
 
 /* Module declarations from 'libc.math' */
 
-/* Module declarations from 'mtfit.extensions.cscatangle' */
+/* Module declarations from 'MTfit.extensions.cscatangle' */
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
@@ -1583,8 +1583,8 @@ static PyObject *strided = 0;
 static PyObject *indirect = 0;
 static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
-static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multipliers(__Pyx_memviewslice, __pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t, __Pyx_memviewslice); /*proto*/
-static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static __Pyx_memviewslice __pyx_f_5MTfit_10extensions_10cscatangle_get_multipliers(__Pyx_memviewslice, __pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t, __Pyx_memviewslice); /*proto*/
+static PyObject *__pyx_f_5MTfit_10extensions_10cscatangle_bin_scatangle(PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -1617,11 +1617,11 @@ static void __pyx_memoryview_refcount_objects_in_slice_with_gil(char *, Py_ssize
 static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_ssize_t *, int, int); /*proto*/
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t = { "DTYPE_t", NULL, sizeof(__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t), { 0 }, 0, 'R', 0, 0 };
-#define __Pyx_MODULE_NAME "mtfit.extensions.cscatangle"
-int __pyx_module_is_main_mtfit__extensions__cscatangle = 0;
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t = { "DTYPE_t", NULL, sizeof(__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t), { 0 }, 0, 'R', 0, 0 };
+#define __Pyx_MODULE_NAME "MTfit.extensions.cscatangle"
+int __pyx_module_is_main_MTfit__extensions__cscatangle = 0;
 
-/* Implementation of 'mtfit.extensions.cscatangle' */
+/* Implementation of 'MTfit.extensions.cscatangle' */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_enumerate;
 static PyObject *__pyx_builtin_ValueError;
@@ -1811,7 +1811,7 @@ static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_unpack;
-static PyObject *__pyx_pf_5mtfit_10extensions_10cscatangle_bin_scatangle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sample_records, PyObject *__pyx_v_multipliers, PyObject *__pyx_v_bin_size); /* proto */
+static PyObject *__pyx_pf_5MTfit_10extensions_10cscatangle_bin_scatangle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sample_records, PyObject *__pyx_v_multipliers, PyObject *__pyx_v_bin_size); /* proto */
 static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
@@ -1879,7 +1879,7 @@ static PyObject *__pyx_tuple__22;
 static PyObject *__pyx_tuple__23;
 static PyObject *__pyx_tuple__24;
 
-/* "mtfit\extensions\cscatangle.pyx":42
+/* "MTfit\extensions\cscatangle.pyx":42
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef DTYPE_t[::1] get_multipliers(DTYPE_t[:,:,::1] angles,DTYPE_t bin_size,DTYPE_t [::1] multipliers) nogil:             # <<<<<<<<<<<<<<
@@ -1887,7 +1887,7 @@ static PyObject *__pyx_tuple__24;
  *     cdef Py_ssize_t nsta=angles.shape[2]
  */
 
-static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multipliers(__Pyx_memviewslice __pyx_v_angles, __pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t __pyx_v_bin_size, __Pyx_memviewslice __pyx_v_multipliers) {
+static __Pyx_memviewslice __pyx_f_5MTfit_10extensions_10cscatangle_get_multipliers(__Pyx_memviewslice __pyx_v_angles, __pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t __pyx_v_bin_size, __Pyx_memviewslice __pyx_v_multipliers) {
   Py_ssize_t __pyx_v_umax;
   Py_ssize_t __pyx_v_nsta;
   Py_ssize_t __pyx_v_u;
@@ -1921,7 +1921,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
   Py_ssize_t __pyx_t_24;
   Py_ssize_t __pyx_t_25;
 
-  /* "mtfit\extensions\cscatangle.pyx":43
+  /* "MTfit\extensions\cscatangle.pyx":43
  * @cython.cdivision(True)
  * cdef DTYPE_t[::1] get_multipliers(DTYPE_t[:,:,::1] angles,DTYPE_t bin_size,DTYPE_t [::1] multipliers) nogil:
  *     cdef Py_ssize_t umax=angles.shape[0]             # <<<<<<<<<<<<<<
@@ -1930,7 +1930,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
   __pyx_v_umax = (__pyx_v_angles.shape[0]);
 
-  /* "mtfit\extensions\cscatangle.pyx":44
+  /* "MTfit\extensions\cscatangle.pyx":44
  * cdef DTYPE_t[::1] get_multipliers(DTYPE_t[:,:,::1] angles,DTYPE_t bin_size,DTYPE_t [::1] multipliers) nogil:
  *     cdef Py_ssize_t umax=angles.shape[0]
  *     cdef Py_ssize_t nsta=angles.shape[2]             # <<<<<<<<<<<<<<
@@ -1939,7 +1939,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
   __pyx_v_nsta = (__pyx_v_angles.shape[2]);
 
-  /* "mtfit\extensions\cscatangle.pyx":47
+  /* "MTfit\extensions\cscatangle.pyx":47
  *     cdef Py_ssize_t u
  *     cdef Py_ssize_t w
  *     cdef int ok=1             # <<<<<<<<<<<<<<
@@ -1948,7 +1948,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
   __pyx_v_ok = 1;
 
-  /* "mtfit\extensions\cscatangle.pyx":48
+  /* "MTfit\extensions\cscatangle.pyx":48
  *     cdef Py_ssize_t w
  *     cdef int ok=1
  *     for u in range(umax):             # <<<<<<<<<<<<<<
@@ -1959,7 +1959,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_u = __pyx_t_2;
 
-    /* "mtfit\extensions\cscatangle.pyx":49
+    /* "MTfit\extensions\cscatangle.pyx":49
  *     cdef int ok=1
  *     for u in range(umax):
  *         if multipliers[u]==-1:             # <<<<<<<<<<<<<<
@@ -1967,10 +1967,10 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  *         for v in range(u+1,umax):
  */
     __pyx_t_3 = __pyx_v_u;
-    __pyx_t_4 = (((*((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_3)) ))) == -1.0) != 0);
+    __pyx_t_4 = (((*((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_3)) ))) == -1.0) != 0);
     if (__pyx_t_4) {
 
-      /* "mtfit\extensions\cscatangle.pyx":50
+      /* "MTfit\extensions\cscatangle.pyx":50
  *     for u in range(umax):
  *         if multipliers[u]==-1:
  *             continue             # <<<<<<<<<<<<<<
@@ -1979,7 +1979,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
       goto __pyx_L3_continue;
 
-      /* "mtfit\extensions\cscatangle.pyx":49
+      /* "MTfit\extensions\cscatangle.pyx":49
  *     cdef int ok=1
  *     for u in range(umax):
  *         if multipliers[u]==-1:             # <<<<<<<<<<<<<<
@@ -1988,7 +1988,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
     }
 
-    /* "mtfit\extensions\cscatangle.pyx":51
+    /* "MTfit\extensions\cscatangle.pyx":51
  *         if multipliers[u]==-1:
  *             continue
  *         for v in range(u+1,umax):             # <<<<<<<<<<<<<<
@@ -1999,7 +1999,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
     for (__pyx_t_6 = (__pyx_v_u + 1); __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_v = __pyx_t_6;
 
-      /* "mtfit\extensions\cscatangle.pyx":52
+      /* "MTfit\extensions\cscatangle.pyx":52
  *             continue
  *         for v in range(u+1,umax):
  *             if multipliers[v]>-1:             # <<<<<<<<<<<<<<
@@ -2007,10 +2007,10 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  *                 for w in range(nsta):
  */
       __pyx_t_7 = __pyx_v_v;
-      __pyx_t_4 = (((*((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_7)) ))) > -1.0) != 0);
+      __pyx_t_4 = (((*((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_7)) ))) > -1.0) != 0);
       if (__pyx_t_4) {
 
-        /* "mtfit\extensions\cscatangle.pyx":53
+        /* "MTfit\extensions\cscatangle.pyx":53
  *         for v in range(u+1,umax):
  *             if multipliers[v]>-1:
  *                 ok=1             # <<<<<<<<<<<<<<
@@ -2019,7 +2019,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
         __pyx_v_ok = 1;
 
-        /* "mtfit\extensions\cscatangle.pyx":54
+        /* "MTfit\extensions\cscatangle.pyx":54
  *             if multipliers[v]>-1:
  *                 ok=1
  *                 for w in range(nsta):             # <<<<<<<<<<<<<<
@@ -2030,7 +2030,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
         for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
           __pyx_v_w = __pyx_t_9;
 
-          /* "mtfit\extensions\cscatangle.pyx":55
+          /* "MTfit\extensions\cscatangle.pyx":55
  *                 ok=1
  *                 for w in range(nsta):
  *                     ok=ok*(fabs(angles[u,0,w]-angles[v,0,w])<bin_size/2.)*(fabs(angles[u,1,w]-angles[v,1,w])<bin_size/2.)             # <<<<<<<<<<<<<<
@@ -2049,9 +2049,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
           __pyx_t_19 = __pyx_v_v;
           __pyx_t_20 = 1;
           __pyx_t_21 = __pyx_v_w;
-          __pyx_v_ok = ((__pyx_v_ok * (fabs(((*((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_10 * __pyx_v_angles.strides[0]) ) + __pyx_t_11 * __pyx_v_angles.strides[1]) )) + __pyx_t_12)) ))) - (*((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_13 * __pyx_v_angles.strides[0]) ) + __pyx_t_14 * __pyx_v_angles.strides[1]) )) + __pyx_t_15)) ))))) < (__pyx_v_bin_size / 2.))) * (fabs(((*((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_16 * __pyx_v_angles.strides[0]) ) + __pyx_t_17 * __pyx_v_angles.strides[1]) )) + __pyx_t_18)) ))) - (*((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_19 * __pyx_v_angles.strides[0]) ) + __pyx_t_20 * __pyx_v_angles.strides[1]) )) + __pyx_t_21)) ))))) < (__pyx_v_bin_size / 2.)));
+          __pyx_v_ok = ((__pyx_v_ok * (fabs(((*((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_10 * __pyx_v_angles.strides[0]) ) + __pyx_t_11 * __pyx_v_angles.strides[1]) )) + __pyx_t_12)) ))) - (*((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_13 * __pyx_v_angles.strides[0]) ) + __pyx_t_14 * __pyx_v_angles.strides[1]) )) + __pyx_t_15)) ))))) < (__pyx_v_bin_size / 2.))) * (fabs(((*((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_16 * __pyx_v_angles.strides[0]) ) + __pyx_t_17 * __pyx_v_angles.strides[1]) )) + __pyx_t_18)) ))) - (*((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_19 * __pyx_v_angles.strides[0]) ) + __pyx_t_20 * __pyx_v_angles.strides[1]) )) + __pyx_t_21)) ))))) < (__pyx_v_bin_size / 2.)));
 
-          /* "mtfit\extensions\cscatangle.pyx":56
+          /* "MTfit\extensions\cscatangle.pyx":56
  *                 for w in range(nsta):
  *                     ok=ok*(fabs(angles[u,0,w]-angles[v,0,w])<bin_size/2.)*(fabs(angles[u,1,w]-angles[v,1,w])<bin_size/2.)
  *                     if ok==0:             # <<<<<<<<<<<<<<
@@ -2061,7 +2061,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
           __pyx_t_4 = ((__pyx_v_ok == 0) != 0);
           if (__pyx_t_4) {
 
-            /* "mtfit\extensions\cscatangle.pyx":57
+            /* "MTfit\extensions\cscatangle.pyx":57
  *                     ok=ok*(fabs(angles[u,0,w]-angles[v,0,w])<bin_size/2.)*(fabs(angles[u,1,w]-angles[v,1,w])<bin_size/2.)
  *                     if ok==0:
  *                         break             # <<<<<<<<<<<<<<
@@ -2070,7 +2070,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
             goto __pyx_L10_break;
 
-            /* "mtfit\extensions\cscatangle.pyx":56
+            /* "MTfit\extensions\cscatangle.pyx":56
  *                 for w in range(nsta):
  *                     ok=ok*(fabs(angles[u,0,w]-angles[v,0,w])<bin_size/2.)*(fabs(angles[u,1,w]-angles[v,1,w])<bin_size/2.)
  *                     if ok==0:             # <<<<<<<<<<<<<<
@@ -2081,7 +2081,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
         }
         __pyx_L10_break:;
 
-        /* "mtfit\extensions\cscatangle.pyx":58
+        /* "MTfit\extensions\cscatangle.pyx":58
  *                     if ok==0:
  *                         break
  *                 if w==nsta-1 and ok>0:             # <<<<<<<<<<<<<<
@@ -2099,7 +2099,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
         __pyx_L13_bool_binop_done:;
         if (__pyx_t_4) {
 
-          /* "mtfit\extensions\cscatangle.pyx":59
+          /* "MTfit\extensions\cscatangle.pyx":59
  *                         break
  *                 if w==nsta-1 and ok>0:
  *                     multipliers[u]+=multipliers[v]             # <<<<<<<<<<<<<<
@@ -2108,9 +2108,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
           __pyx_t_23 = __pyx_v_v;
           __pyx_t_24 = __pyx_v_u;
-          *((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_24)) )) += (*((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_23)) )));
+          *((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_24)) )) += (*((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_23)) )));
 
-          /* "mtfit\extensions\cscatangle.pyx":60
+          /* "MTfit\extensions\cscatangle.pyx":60
  *                 if w==nsta-1 and ok>0:
  *                     multipliers[u]+=multipliers[v]
  *                     if v>u:             # <<<<<<<<<<<<<<
@@ -2120,7 +2120,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
           __pyx_t_4 = ((__pyx_v_v > __pyx_v_u) != 0);
           if (__pyx_t_4) {
 
-            /* "mtfit\extensions\cscatangle.pyx":61
+            /* "MTfit\extensions\cscatangle.pyx":61
  *                     multipliers[u]+=multipliers[v]
  *                     if v>u:
  *                         multipliers[v]=-1             # <<<<<<<<<<<<<<
@@ -2128,9 +2128,9 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  * 
  */
             __pyx_t_25 = __pyx_v_v;
-            *((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_25)) )) = -1.0;
+            *((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) __pyx_v_multipliers.data) + __pyx_t_25)) )) = -1.0;
 
-            /* "mtfit\extensions\cscatangle.pyx":60
+            /* "MTfit\extensions\cscatangle.pyx":60
  *                 if w==nsta-1 and ok>0:
  *                     multipliers[u]+=multipliers[v]
  *                     if v>u:             # <<<<<<<<<<<<<<
@@ -2139,7 +2139,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
           }
 
-          /* "mtfit\extensions\cscatangle.pyx":58
+          /* "MTfit\extensions\cscatangle.pyx":58
  *                     if ok==0:
  *                         break
  *                 if w==nsta-1 and ok>0:             # <<<<<<<<<<<<<<
@@ -2148,7 +2148,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  */
         }
 
-        /* "mtfit\extensions\cscatangle.pyx":52
+        /* "MTfit\extensions\cscatangle.pyx":52
  *             continue
  *         for v in range(u+1,umax):
  *             if multipliers[v]>-1:             # <<<<<<<<<<<<<<
@@ -2160,7 +2160,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
     __pyx_L3_continue:;
   }
 
-  /* "mtfit\extensions\cscatangle.pyx":62
+  /* "MTfit\extensions\cscatangle.pyx":62
  *                     if v>u:
  *                         multipliers[v]=-1
  *     return multipliers             # <<<<<<<<<<<<<<
@@ -2171,7 +2171,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
   __pyx_r = __pyx_v_multipliers;
   goto __pyx_L0;
 
-  /* "mtfit\extensions\cscatangle.pyx":42
+  /* "MTfit\extensions\cscatangle.pyx":42
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cdef DTYPE_t[::1] get_multipliers(DTYPE_t[:,:,::1] angles,DTYPE_t bin_size,DTYPE_t [::1] multipliers) nogil:             # <<<<<<<<<<<<<<
@@ -2187,7 +2187,7 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
   return __pyx_r;
 }
 
-/* "mtfit\extensions\cscatangle.pyx":65
+/* "MTfit\extensions\cscatangle.pyx":65
  * 
  * 
  * cpdef bin_scatangle(sample_records,multipliers,bin_size):             # <<<<<<<<<<<<<<
@@ -2195,8 +2195,8 @@ static __Pyx_memviewslice __pyx_f_5mtfit_10extensions_10cscatangle_get_multiplie
  *     cdef Py_ssize_t i
  */
 
-static PyObject *__pyx_pw_5mtfit_10extensions_10cscatangle_1bin_scatangle(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject *__pyx_v_sample_records, PyObject *__pyx_v_multipliers, PyObject *__pyx_v_bin_size, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_5MTfit_10extensions_10cscatangle_1bin_scatangle(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_5MTfit_10extensions_10cscatangle_bin_scatangle(PyObject *__pyx_v_sample_records, PyObject *__pyx_v_multipliers, PyObject *__pyx_v_bin_size, CYTHON_UNUSED int __pyx_skip_dispatch) {
   __Pyx_memviewslice __pyx_v_angles = { 0, 0, { 0 }, { 0 }, { 0 } };
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_j;
@@ -2216,7 +2216,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   PyObject *(*__pyx_t_9)(PyObject *);
   Py_ssize_t __pyx_t_10;
   Py_ssize_t __pyx_t_11;
-  __pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t __pyx_t_12;
+  __pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t __pyx_t_12;
   Py_ssize_t __pyx_t_13;
   Py_ssize_t __pyx_t_14;
   Py_ssize_t __pyx_t_15;
@@ -2235,7 +2235,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   __Pyx_RefNannySetupContext("bin_scatangle", 0);
   __Pyx_INCREF(__pyx_v_multipliers);
 
-  /* "mtfit\extensions\cscatangle.pyx":66
+  /* "MTfit\extensions\cscatangle.pyx":66
  * 
  * cpdef bin_scatangle(sample_records,multipliers,bin_size):
  *     cdef DTYPE_t[:,:,::1] angles=np.empty((len(sample_records),2,len(sample_records[0]['Name'])))             # <<<<<<<<<<<<<<
@@ -2296,14 +2296,14 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(__pyx_t_1);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(__pyx_t_1);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_angles = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "mtfit\extensions\cscatangle.pyx":69
+  /* "MTfit\extensions\cscatangle.pyx":69
  *     cdef Py_ssize_t i
  *     cdef Py_ssize_t j
  *     new_records=[]             # <<<<<<<<<<<<<<
@@ -2315,7 +2315,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   __pyx_v_new_records = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\extensions\cscatangle.pyx":70
+  /* "MTfit\extensions\cscatangle.pyx":70
  *     cdef Py_ssize_t j
  *     new_records=[]
  *     new_multipliers=[]             # <<<<<<<<<<<<<<
@@ -2327,7 +2327,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   __pyx_v_new_multipliers = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\extensions\cscatangle.pyx":71
+  /* "MTfit\extensions\cscatangle.pyx":71
  *     new_records=[]
  *     new_multipliers=[]
  *     for i,record in enumerate(sample_records):             # <<<<<<<<<<<<<<
@@ -2379,7 +2379,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
     __pyx_v_i = __pyx_t_4;
     __pyx_t_4 = (__pyx_t_4 + 1);
 
-    /* "mtfit\extensions\cscatangle.pyx":73
+    /* "MTfit\extensions\cscatangle.pyx":73
  *     for i,record in enumerate(sample_records):
  *         # print i,record
  *         for j in range(len(record['Name'])):             # <<<<<<<<<<<<<<
@@ -2393,7 +2393,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
       __pyx_v_j = __pyx_t_11;
 
-      /* "mtfit\extensions\cscatangle.pyx":74
+      /* "MTfit\extensions\cscatangle.pyx":74
  *         # print i,record
  *         for j in range(len(record['Name'])):
  *             angles[i,0,j]=record['TakeOffAngle'][j,0]             # <<<<<<<<<<<<<<
@@ -2438,9 +2438,9 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
         __Pyx_RaiseBufferIndexError(__pyx_t_16);
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      *((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_13 * __pyx_v_angles.strides[0]) ) + __pyx_t_14 * __pyx_v_angles.strides[1]) )) + __pyx_t_15)) )) = __pyx_t_12;
+      *((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_13 * __pyx_v_angles.strides[0]) ) + __pyx_t_14 * __pyx_v_angles.strides[1]) )) + __pyx_t_15)) )) = __pyx_t_12;
 
-      /* "mtfit\extensions\cscatangle.pyx":75
+      /* "MTfit\extensions\cscatangle.pyx":75
  *         for j in range(len(record['Name'])):
  *             angles[i,0,j]=record['TakeOffAngle'][j,0]
  *             angles[i,1,j]=record['Azimuth'][j,0]             # <<<<<<<<<<<<<<
@@ -2485,10 +2485,10 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
         __Pyx_RaiseBufferIndexError(__pyx_t_16);
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      *((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_17 * __pyx_v_angles.strides[0]) ) + __pyx_t_18 * __pyx_v_angles.strides[1]) )) + __pyx_t_19)) )) = __pyx_t_12;
+      *((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=2 */ ((char *) (((__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_angles.data + __pyx_t_17 * __pyx_v_angles.strides[0]) ) + __pyx_t_18 * __pyx_v_angles.strides[1]) )) + __pyx_t_19)) )) = __pyx_t_12;
     }
 
-    /* "mtfit\extensions\cscatangle.pyx":71
+    /* "MTfit\extensions\cscatangle.pyx":71
  *     new_records=[]
  *     new_multipliers=[]
  *     for i,record in enumerate(sample_records):             # <<<<<<<<<<<<<<
@@ -2498,7 +2498,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\extensions\cscatangle.pyx":77
+  /* "MTfit\extensions\cscatangle.pyx":77
  *             angles[i,1,j]=record['Azimuth'][j,0]
  *     # print multipliers,bin_size,angles
  *     multipliers=np.asarray(get_multipliers(angles,bin_size,multipliers)).flatten()             # <<<<<<<<<<<<<<
@@ -2511,11 +2511,11 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_v_bin_size); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_20 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(__pyx_v_multipliers);
+  __pyx_t_20 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(__pyx_v_multipliers);
   if (unlikely(!__pyx_t_20.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_21 = __pyx_f_5mtfit_10extensions_10cscatangle_get_multipliers(__pyx_v_angles, __pyx_t_12, __pyx_t_20); if (unlikely(!__pyx_t_21.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_21 = __pyx_f_5MTfit_10extensions_10cscatangle_get_multipliers(__pyx_v_angles, __pyx_t_12, __pyx_t_20); if (unlikely(!__pyx_t_21.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_20, 1);
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t, 0);; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t, 0);; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_21, 1);
   __pyx_t_6 = NULL;
@@ -2568,7 +2568,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   __Pyx_DECREF_SET(__pyx_v_multipliers, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mtfit\extensions\cscatangle.pyx":78
+  /* "MTfit\extensions\cscatangle.pyx":78
  *     # print multipliers,bin_size,angles
  *     multipliers=np.asarray(get_multipliers(angles,bin_size,multipliers)).flatten()
  *     for i,record in enumerate(sample_records):             # <<<<<<<<<<<<<<
@@ -2620,7 +2620,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
     __pyx_v_i = __pyx_t_4;
     __pyx_t_4 = (__pyx_t_4 + 1);
 
-    /* "mtfit\extensions\cscatangle.pyx":79
+    /* "MTfit\extensions\cscatangle.pyx":79
  *     multipliers=np.asarray(get_multipliers(angles,bin_size,multipliers)).flatten()
  *     for i,record in enumerate(sample_records):
  *         if multipliers[i]>0:             # <<<<<<<<<<<<<<
@@ -2635,7 +2635,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_23) {
 
-      /* "mtfit\extensions\cscatangle.pyx":80
+      /* "MTfit\extensions\cscatangle.pyx":80
  *     for i,record in enumerate(sample_records):
  *         if multipliers[i]>0:
  *             new_records.append(record)             # <<<<<<<<<<<<<<
@@ -2644,7 +2644,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
  */
       __pyx_t_24 = __Pyx_PyList_Append(__pyx_v_new_records, __pyx_v_record); if (unlikely(__pyx_t_24 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "mtfit\extensions\cscatangle.pyx":81
+      /* "MTfit\extensions\cscatangle.pyx":81
  *         if multipliers[i]>0:
  *             new_records.append(record)
  *             new_multipliers.append(multipliers[i])             # <<<<<<<<<<<<<<
@@ -2655,7 +2655,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
       __pyx_t_24 = __Pyx_PyList_Append(__pyx_v_new_multipliers, __pyx_t_5); if (unlikely(__pyx_t_24 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "mtfit\extensions\cscatangle.pyx":79
+      /* "MTfit\extensions\cscatangle.pyx":79
  *     multipliers=np.asarray(get_multipliers(angles,bin_size,multipliers)).flatten()
  *     for i,record in enumerate(sample_records):
  *         if multipliers[i]>0:             # <<<<<<<<<<<<<<
@@ -2664,7 +2664,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
  */
     }
 
-    /* "mtfit\extensions\cscatangle.pyx":78
+    /* "MTfit\extensions\cscatangle.pyx":78
  *     # print multipliers,bin_size,angles
  *     multipliers=np.asarray(get_multipliers(angles,bin_size,multipliers)).flatten()
  *     for i,record in enumerate(sample_records):             # <<<<<<<<<<<<<<
@@ -2674,7 +2674,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\extensions\cscatangle.pyx":82
+  /* "MTfit\extensions\cscatangle.pyx":82
  *             new_records.append(record)
  *             new_multipliers.append(multipliers[i])
  *     return new_records,new_multipliers             # <<<<<<<<<<<<<<
@@ -2692,7 +2692,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mtfit\extensions\cscatangle.pyx":65
+  /* "MTfit\extensions\cscatangle.pyx":65
  * 
  * 
  * cpdef bin_scatangle(sample_records,multipliers,bin_size):             # <<<<<<<<<<<<<<
@@ -2711,7 +2711,7 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
   __PYX_XDEC_MEMVIEW(&__pyx_t_20, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_21, 1);
   __Pyx_XDECREF(__pyx_t_22);
-  __Pyx_AddTraceback("mtfit.extensions.cscatangle.bin_scatangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.extensions.cscatangle.bin_scatangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_angles, 1);
@@ -2725,8 +2725,8 @@ static PyObject *__pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(PyObject
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5mtfit_10extensions_10cscatangle_1bin_scatangle(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_5mtfit_10extensions_10cscatangle_1bin_scatangle(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5MTfit_10extensions_10cscatangle_1bin_scatangle(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5MTfit_10extensions_10cscatangle_1bin_scatangle(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_sample_records = 0;
   PyObject *__pyx_v_multipliers = 0;
   PyObject *__pyx_v_bin_size = 0;
@@ -2783,18 +2783,18 @@ static PyObject *__pyx_pw_5mtfit_10extensions_10cscatangle_1bin_scatangle(PyObje
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("bin_scatangle", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mtfit.extensions.cscatangle.bin_scatangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.extensions.cscatangle.bin_scatangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5mtfit_10extensions_10cscatangle_bin_scatangle(__pyx_self, __pyx_v_sample_records, __pyx_v_multipliers, __pyx_v_bin_size);
+  __pyx_r = __pyx_pf_5MTfit_10extensions_10cscatangle_bin_scatangle(__pyx_self, __pyx_v_sample_records, __pyx_v_multipliers, __pyx_v_bin_size);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5mtfit_10extensions_10cscatangle_bin_scatangle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sample_records, PyObject *__pyx_v_multipliers, PyObject *__pyx_v_bin_size) {
+static PyObject *__pyx_pf_5MTfit_10extensions_10cscatangle_bin_scatangle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sample_records, PyObject *__pyx_v_multipliers, PyObject *__pyx_v_bin_size) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2803,7 +2803,7 @@ static PyObject *__pyx_pf_5mtfit_10extensions_10cscatangle_bin_scatangle(CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("bin_scatangle", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5mtfit_10extensions_10cscatangle_bin_scatangle(__pyx_v_sample_records, __pyx_v_multipliers, __pyx_v_bin_size, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5MTfit_10extensions_10cscatangle_bin_scatangle(__pyx_v_sample_records, __pyx_v_multipliers, __pyx_v_bin_size, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2812,7 +2812,7 @@ static PyObject *__pyx_pf_5mtfit_10extensions_10cscatangle_bin_scatangle(CYTHON_
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mtfit.extensions.cscatangle.bin_scatangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("MTfit.extensions.cscatangle.bin_scatangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -16601,7 +16601,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mtfit.extensions.cscatangle.array", /*tp_name*/
+  "MTfit.extensions.cscatangle.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -16707,7 +16707,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mtfit.extensions.cscatangle.Enum", /*tp_name*/
+  "MTfit.extensions.cscatangle.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -16954,7 +16954,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mtfit.extensions.cscatangle.memoryview", /*tp_name*/
+  "MTfit.extensions.cscatangle.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -17079,7 +17079,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mtfit.extensions.cscatangle._memoryviewslice", /*tp_name*/
+  "MTfit.extensions.cscatangle._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -17144,7 +17144,7 @@ static PyTypeObject __pyx_type___pyx_memoryviewslice = {
 };
 
 static PyMethodDef __pyx_methods[] = {
-  {"bin_scatangle", (PyCFunction)__pyx_pw_5mtfit_10extensions_10cscatangle_1bin_scatangle, METH_VARARGS|METH_KEYWORDS, 0},
+  {"bin_scatangle", (PyCFunction)__pyx_pw_5MTfit_10extensions_10cscatangle_1bin_scatangle, METH_VARARGS|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
@@ -17619,14 +17619,14 @@ PyMODINIT_FUNC PyInit_cscatangle(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
-  if (__pyx_module_is_main_mtfit__extensions__cscatangle) {
+  if (__pyx_module_is_main_MTfit__extensions__cscatangle) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (!PyDict_GetItemString(modules, "mtfit.extensions.cscatangle")) {
-      if (unlikely(PyDict_SetItemString(modules, "mtfit.extensions.cscatangle", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!PyDict_GetItemString(modules, "MTfit.extensions.cscatangle")) {
+      if (unlikely(PyDict_SetItemString(modules, "MTfit.extensions.cscatangle", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
@@ -17692,7 +17692,7 @@ PyMODINIT_FUNC PyInit_cscatangle(void)
   if (__Pyx_patch_abc() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
 
-  /* "mtfit\extensions\cscatangle.pyx":11
+  /* "MTfit\extensions\cscatangle.pyx":11
  * 
  * cimport cython
  * import numpy as np             # <<<<<<<<<<<<<<
@@ -17704,7 +17704,7 @@ PyMODINIT_FUNC PyInit_cscatangle(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mtfit\extensions\cscatangle.pyx":1
+  /* "MTfit\extensions\cscatangle.pyx":1
  * # cython: infer_types=True             # <<<<<<<<<<<<<<
  * #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
  * 
@@ -17838,11 +17838,11 @@ PyMODINIT_FUNC PyInit_cscatangle(void)
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init mtfit.extensions.cscatangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init MTfit.extensions.cscatangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init mtfit.extensions.cscatangle");
+    PyErr_SetString(PyExc_ImportError, "init MTfit.extensions.cscatangle");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -19853,14 +19853,14 @@ static void __Pyx_ReleaseBuffer(Py_buffer *view) {
     }
 }
 
-static PyObject *__pyx_memview_get_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(const char *itemp) {
-    return (PyObject *) PyFloat_FromDouble(*(__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) itemp);
+static PyObject *__pyx_memview_get_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(const char *itemp) {
+    return (PyObject *) PyFloat_FromDouble(*(__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) itemp);
 }
-static int __pyx_memview_set_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(const char *itemp, PyObject *obj) {
-    __pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t value = __pyx_PyFloat_AsDouble(obj);
+static int __pyx_memview_set_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(const char *itemp, PyObject *obj) {
+    __pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t value = __pyx_PyFloat_AsDouble(obj);
     if ((value == (double)-1) && PyErr_Occurred())
         return 0;
-    *(__pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t *) itemp = value;
+    *(__pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t *) itemp = value;
     return 1;
 }
 
@@ -21085,7 +21085,7 @@ no_fail:
     return retval;
 }
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(PyObject *obj) {
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -21096,7 +21096,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT | PyBUF_WRITABLE), 3,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -21107,7 +21107,7 @@ __pyx_fail:
     return result;
 }
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t(PyObject *obj) {
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -21118,7 +21118,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn_
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT | PyBUF_WRITABLE), 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_5mtfit_10extensions_10cscatangle_DTYPE_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_5MTfit_10extensions_10cscatangle_DTYPE_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;

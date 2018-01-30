@@ -1,2 +1,2 @@
 #!/usr/bin/env python
-python -c "import mtfit.run;mtfit.run.run()" $args
+python -c "import MTfit.run;MTfit.run.run()" $args
