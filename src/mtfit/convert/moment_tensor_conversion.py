@@ -408,8 +408,10 @@ def TP_FP(T, P):
         T = T.T
     if P.shape[0] != 3:
         P = P.T
-    N1 = (T+P)/np.sqrt(np.diag(np.matrix(T+P).T*np.matrix(T+P)))
-    N2 = (T-P)/np.sqrt(np.diag(np.matrix(T-P).T*np.matrix(T-P)))
+    TP1 = T+P
+    TP2 = T-P
+    N1 = (TP1)/np.sqrt(np.einsum('ij,ij->j', TP1, TP1))
+    N2 = (TP2)/np.sqrt(np.einsum('ij,ij->j', TP2, TP2))
     return (N1, N2)
 
 
@@ -431,11 +433,12 @@ def FP_SDR(normal, slip):
     if not isinstance(slip, np.matrixlib.defmatrix.matrix):
         slip = slip/np.sqrt(np.sum(slip*slip))
     else:
-        slip = slip/np.sqrt(np.diag(slip.T*slip))
+        # Do we need to replace this with einsum
+        slip = slip/np.sqrt(np.einsum('ij,ij->j', slip, slip))
     if not isinstance(normal, np.matrixlib.defmatrix.matrix):
         normal = normal/np.sqrt(np.sum(normal*normal))
     else:
-        normal = normal/np.sqrt(np.diag(normal.T*normal))
+        normal = normal/np.sqrt(np.einsum('ij,ij->j', normal, normal))
     slip[:, np.array(normal[2, :] > 0).flatten()] *= -1
     normal[:, np.array(normal[2, :] > 0).flatten()] *= -1
     normal = np.array(normal)
@@ -588,9 +591,9 @@ def FP_TNP(normal, slip):
         (numpy.matrix, numpy.matrix, numpy.matrix): tuple of T, N, P vectors
     """
     T = (normal+slip)
-    T = T/np.sqrt(np.diag(T.T*T))
+    T = T/np.sqrt(np.einsum('ij,ij->j', T, T))
     P = (normal-slip)
-    P = P/np.sqrt(np.diag(P.T*P))
+    P = P/np.sqrt(np.einsum('ij,ij->j', P, P))
     N = np.matrix(-np.cross(T.T, P.T)).T
     return (T, N, P)
 

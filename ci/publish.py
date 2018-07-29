@@ -28,7 +28,7 @@ def publish(branch, pypi_url=PYPI_URL):
         print('No wheels found')
         return
     else:
-        print(f'Identified wheel: {wheel_file}')
+        print('Identified wheel: {}'.format(wheel_file))
         version = parse_version(os.path.split(wheel_file)[-1].split('-')[1])
         if version.local is None:
             # Only pushing tagged version to pypi
@@ -56,4 +56,4 @@ if __name__ == "__main__":
     if current_branch == publish_branch:
         publish(publish_branch, pypi_url)
     else:
-        print(f"Skipping as publish branch = {publish_branch} doesn't match the current branch = {current_branch}")
+        print("Skipping as publish branch = {} doesn't match the current branch = {}".format(publish_branch, current_branch))

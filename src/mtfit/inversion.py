@@ -349,7 +349,7 @@ class ForwardTask(object):
                             ln_p_total += np.log(np.matrix(self.location_sample_multipliers).T)  # Conversion to matrix and transpose to correct for list order to ln_p_total dimensions (0 is sample dimension)
                     # If there are location samples and the marginalise flag is set, then marginalise, trying to use Cython
                     if location_samples and self.marginalise:
-                        ln_p_total = ln_marginalise(ln_p_total, _cython=cprobability is not False)
+                        ln_p_total = ln_marginalise(ln_p_total)
                 # Delete arrays to free memory if not reusing
                 if not self._reuse:
                     del self.a_polarity
