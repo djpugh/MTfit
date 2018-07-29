@@ -1257,7 +1257,12 @@ class _BasePlot(object):
         """2d surface plot (see _surf_plot documentation)"""
         kwargs.pop('colormap', None)
         kwargs.pop('bins', None)
-        return self.ax.pcolormesh(x, y, c, cmap=self.colormap, shading='flat', zorder=zorder, **kwargs)
+        # Need to handle nans in x and y here
+        valid = ~np.isnan(x)
+        assert (valid == ~np.isnan(y)).all(), 'Expect both x and y to have the same NaN values'
+        valid_rows = np.bitwise_and.reduce(valid, axis=1)
+        assert (valid_rows == np.bitwise_or.reduce(valid, axis=1)).all(), 'Expect to set each row to either nan or non nan'
+        return self.ax.pcolormesh(x[valid_rows, :], y[valid_rows, :], c[valid_rows, :], cmap=self.colormap, shading='flat', zorder=zorder, **kwargs)
 
     def _2d_scatter_plot(self, x, y, c, marker='.', markersize=10, zorder=0, **kwargs):
         """2d scatter plot (see _scatter_plot documentation)"""
