@@ -1218,9 +1218,9 @@ def _MTplot_argparser(input_args=[], test=False):
             options['data_file'] = options['DATAFILE']
         options.pop('DATAFILE')
     if options.pop('hide'):
-        options['plot'] = False
+        options['show'] = False
     else:
-        options['plot'] = True
+        options['show'] = True
     return parser, options
 
 

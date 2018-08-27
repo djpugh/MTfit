@@ -60,8 +60,8 @@ class CoreTestCase(unittest.TestCase):
 
     def test_run(self):
         self.generate_test_file()
-        save_file, plot = self.make_savefile('Run Beachball')
-        if plot:
+        save_file, show = self.make_savefile('Run Beachball')
+        if show:
             opt = []
         else:
             opt = ['-q', '--save_file='+save_file]
@@ -85,8 +85,8 @@ class CoreTestCase(unittest.TestCase):
     def test_single_beachball(self):
         plot_name = "Single Beachball"
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
-        MTplot(self.singleMT, nodal_line=True, save_file=save_file, plot=plot)
+        save_file, show = self.make_savefile(plot_name)
+        MTplot(self.singleMT, nodal_line=True, save_file=save_file, show=show)
 
     def test_multiple_mts_beachball_fail(self):
         with self.assertRaises(ValueError):
@@ -95,26 +95,26 @@ class CoreTestCase(unittest.TestCase):
     def test_nodal_line_plot(self):
         plot_name = 'Nodal line plot'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
-        MTplot(self.multiMTs, 'faultplane', nodal_line=True, save_file=save_file, plot=plot)
+        save_file, show = self.make_savefile(plot_name)
+        MTplot(self.multiMTs, 'faultplane', nodal_line=True, save_file=save_file, show=show)
 
     def test_lune_plot(self):
         plot_name = 'Lune Plot'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
-        MTplot(self.multiMTs, 'lune', color='purple', save_file=save_file, plot=plot)
+        save_file, show = self.make_savefile(plot_name)
+        MTplot(self.multiMTs, 'lune', color='purple', save_file=save_file, show=show)
 
     def test_hudson_plot(self):
         plot_name = 'Hudson Plot'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
-        MTplot(self.multiMTs, 'hudson', color='red', save_file=save_file, plot=plot)
+        save_file, show = self.make_savefile(plot_name)
+        MTplot(self.multiMTs, 'hudson', color='red', save_file=save_file, show=show)
 
     def test_riedesel_jordan_plot(self):
         plot_name = 'Riedesel Jordan Plot'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
-        MTplot(self.singleMT, 'riedeseljordan', color='purple', save_file=save_file, plot=plot)
+        save_file, show = self.make_savefile(plot_name)
+        MTplot(self.singleMT, 'riedeseljordan', color='purple', save_file=save_file, show=show)
 
     def test_riedesel_jordan_plot_multiple_mts_fail(self):
         with self.assertRaises(ValueError):
@@ -123,9 +123,9 @@ class CoreTestCase(unittest.TestCase):
     def test_fault_plane_with_stations(self):
         plot_name = "Fault plane with stations"
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations=self.stations,
-               fault_plane=True, color='purple', save_file=save_file, plot=plot)
+               fault_plane=True, color='purple', save_file=save_file, show=show)
 
     def test_fault_plane_with_polarity_probability(self):
         plot_name = "Fault plane"
@@ -134,68 +134,68 @@ class CoreTestCase(unittest.TestCase):
                                      -0.99, 0.99, 0.66, -0.58]
 
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations=self.stations,
-               fault_plane=True, color='purple', save_file=save_file, plot=plot)
+               fault_plane=True, color='purple', save_file=save_file, show=show)
 
     def test_fault_plane_with_stations_station_dist(self):
         plot_name = 'Fault Plane and Stations with Station Dist'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations=self.stations,
-               station_distribution=self.station_distribution, fault_plane=True, color='purple', save_file=save_file, plot=plot)
+               station_distribution=self.station_distribution, fault_plane=True, color='purple', save_file=save_file, show=show)
 
     def test_stations_station_dist(self):
         plot_name = 'Stations and Station Dist Only'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations=self.stations,
-               station_distribution=self.station_distribution, fault_plane=False, color='purple', save_file=save_file, plot=plot)
+               station_distribution=self.station_distribution, fault_plane=False, color='purple', save_file=save_file, show=show)
 
     def test_fault_plane_with_station_dist(self):
         plot_name = 'Fault Plane no Stations with Station Dist'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations=self.stations, show_stations=False,
-               station_distribution=self.station_distribution, fault_plane=True, color='purple', save_file=save_file, plot=plot)
+               station_distribution=self.station_distribution, fault_plane=True, color='purple', save_file=save_file, show=show)
 
     def test_station_dist(self):
         plot_name = 'Station Dist Only'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations=self.stations, show_stations=False,
-               station_distribution=self.station_distribution, fault_plane=False, color='purple', save_file=save_file, plot=plot)
+               station_distribution=self.station_distribution, fault_plane=False, color='purple', save_file=save_file, show=show)
 
     def test_fault_plane_with_station_dist_2(self):
         plot_name = 'Fault Plane with Station Dist Only'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations={}, station_distribution=self.station_distribution, fault_plane=True,
-               color='purple', save_file=save_file, plot=plot)
+               color='purple', save_file=save_file, show=show)
 
     def test_station_dist_2(self):
         plot_name = 'Station Dist Only 2'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations={}, station_distribution=self.station_distribution, fault_plane=False,
-               color='purple', save_file=save_file, plot=plot)
+               color='purple', save_file=save_file, show=show)
 
     def test_fault_plane_with_prob_station_dist(self):
         self.station_distribution['probability'] = [305, 505]
 
         plot_name = 'Fault Plane with Prob Station Dist Only'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations=self.stations, show_stations=False,
-               station_distribution=self.station_distribution, fault_plane=True, color='purple', save_file=save_file, plot=plot)
+               station_distribution=self.station_distribution, fault_plane=True, color='purple', save_file=save_file, show=show)
 
     def test_prob_station_dist(self):
         self.station_distribution['probability'] = [305, 505]
         plot_name = 'Prob Station Dist Only'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.singleMT, 'faultplane', stations=self.stations, show_stations=False,
-               station_distribution=self.station_distribution, fault_plane=False, color='purple', save_file=save_file, plot=plot)
+               station_distribution=self.station_distribution, fault_plane=False, color='purple', save_file=save_file, show=show)
         print('With probabilities')
         print("Fault plane")
 
@@ -203,68 +203,68 @@ class CoreTestCase(unittest.TestCase):
         self.station_distribution['probability'] = [305, 505]
         plot_name = 'Fault Plane Prob with Prob Station Dist'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.multiDCs, 'faultplane', probability=np.array([0.2, 0.6, 0.8, 0.1]), fault_plane=True, show_max_likelihood=True,
-               show_mean=True, color='purple', save_file=save_file, plot=plot)
+               show_mean=True, color='purple', save_file=save_file, show=show)
 
     def test_limited_fault_plane_prob_with_prob_station_dist(self):
         self.station_distribution['probability'] = [305, 505]
         plot_name = '2 Fault Planes with Prob Station Dist '
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.multiDCs, 'faultplane', probability=np.array([0.2, 0.6, 0.8, 0.1]), fault_plane=True, max_number_planes=2,
-               show_max_likelihood=True, show_mean=True, color='purple', save_file=save_file, plot=plot)
+               show_max_likelihood=True, show_mean=True, color='purple', save_file=save_file, show=show)
 
     def test_lune_hist(self):
         plot_name = 'Lune Hist'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.multiMTs, 'lune', probability=np.array(
-               [0.2, 0.6, 0.8, 0.1, 0.3, 0.7, 0.1, 0.8]), color='purple', save_file=save_file, plot=plot)
+               [0.2, 0.6, 0.8, 0.1, 0.3, 0.7, 0.1, 0.8]), color='purple', save_file=save_file, show=show)
 
     def test_lune(self):
         plot_name = 'Lune'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
-        MTplot(self.singleMT, 'lune', color='purple', save_file=save_file, plot=plot)
+        save_file, show = self.make_savefile(plot_name)
+        MTplot(self.singleMT, 'lune', color='purple', save_file=save_file, show=show)
 
     def test_hudson_hist(self):
         plot_name = 'Hudson'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot(self.multiMTs, 'hudson', probability=np.array(
-            [0.2, 0.6, 0.8, 0.1, 0.3, 0.7, 0.1, 0.8]), color='red', save_file=save_file, plot=plot)
+            [0.2, 0.6, 0.8, 0.1, 0.3, 0.7, 0.1, 0.8]), color='red', save_file=save_file, show=show)
 
     def test_hudson(self):
         plot_name = 'Hudson'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
-        MTplot(self.singleMT, 'hudson', color='blue', save_file=save_file, plot=plot)
+        save_file, show = self.make_savefile(plot_name)
+        MTplot(self.singleMT, 'hudson', color='blue', save_file=save_file, show=show)
 
     def test_hudson_fault_plane_multi(self):
         plot_name = 'Hudson and Fault Plane'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
+        save_file, show = self.make_savefile(plot_name)
         MTplot([self.multiMTs, self.multiDCs], ['hudson', 'fault_plane'], probability=[np.array([0.2, 0.6, 0.8, 0.1, 0.3, 0.7, 0.1, 0.8]),
                                                                                        np.array([0.2, 0.6, 0.8, 0.1])],
-               show_max_likelihood=True, show_mean=True, color='red', save_file=save_file, plot=plot)
+               show_max_likelihood=True, show_mean=True, color='red', save_file=save_file, show=show)
 
     def test_tape_hist(self):
         plot_name = 'Tape histogram'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
-        MTplot(self.multiMTs, 'tape', hex_bin=0, save_file=save_file, plot=plot)
+        save_file, show = self.make_savefile(plot_name)
+        MTplot(self.multiMTs, 'tape', hex_bin=0, save_file=save_file, show=show)
 
     def test_parameter_hist(self):
         plot_name = 'Parameter'
         print(plot_name)
-        save_file, plot = self.make_savefile(plot_name)
-        MTplot(self.multiMTs, 'parameter', hex_bin=0, parameter='gamma', save_file=save_file, plot=plot)
+        save_file, show = self.make_savefile(plot_name)
+        MTplot(self.multiMTs, 'parameter', hex_bin=0, parameter='gamma', save_file=save_file, show=show)
 
     def test_output_file(self):
         MTplot(self.multiMTs, 'parameter', save_file='MTfit_plot_save_test.png',
-               hex_bin=0, parameter='gamma')
-        self.assertTrue(os.path.exists('MTfit_plot_save_test.png'))
+               hex_bin=0, parameter='gamma', show=False)
+        self.assertTrue(os.path.exists('MTfit_plot_save_test.png'), os.listdir('.'))
         try:
             os.remove('MTfit_plot_save_test.png')
         except Exception:

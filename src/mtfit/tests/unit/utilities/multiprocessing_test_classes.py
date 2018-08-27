@@ -1,7 +1,7 @@
 import time
 
 
-class TestTask(object):
+class TaskTest(object):
 
     def __init__(self, a, b):
         self.a = a
@@ -12,7 +12,7 @@ class TestTask(object):
         return self.a*self.b
 
 
-class TestTask2(object):
+class TaskTest2(object):
 
     def __init__(self, a, b):
         self.a = a

@@ -960,6 +960,8 @@ class MTplot(object):
         self.ax_labels(self.show)
         if len(self.save_file):
             self.fig.savefig(self.save_file, dpi=self.save_dpi)
+            from matplotlib import pyplot as plt
+            plt.close(self.fig)
 
     def ax_labels(self, show=True):
         """Set or update axis label to axis corners."""

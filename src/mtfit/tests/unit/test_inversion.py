@@ -11,8 +11,6 @@ except ImportError:
 
 import numpy as np
 
-from MTfit.utilities.unittest_utils import run_tests as _run_tests
-from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 from MTfit.utilities.unittest_utils import TestCase
 from MTfit.inversion import McMCForwardTask
 from MTfit.inversion import ForwardTask
@@ -1866,32 +1864,3 @@ class MiscTestCase(TestCase):
             (a1_relative_amplitude_ratio == a_relative_amplitudetest[1, :]).all())
         self.assertTrue(
             (a2_relative_amplitude_ratio == a_relative_amplitudetest[0, :]).all())
-
-
-def test_suite(verbosity=2):
-    global VERBOSITY
-    VERBOSITY = verbosity
-    suite = [unittest.TestLoader().loadTestsFromTestCase(McMCForwardTaskTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(MultipleEventsMcMCForwardTaskTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(MultipleEventsForwardTaskTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(ForwardTaskTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(InversionTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(MiscTestCase),
-             ]
-    suite = unittest.TestSuite(suite)
-    return suite
-
-
-def run_tests(verbosity=2):
-    """Run tests"""
-    _run_tests(test_suite(verbosity), verbosity)
-
-
-def debug_tests(verbosity=2):
-    """Runs tests with debugging on errors"""
-    _debug_tests(test_suite(verbosity))
-
-
-if __name__ == "__main__":
-    # Run tests
-    run_tests(verbosity=2)

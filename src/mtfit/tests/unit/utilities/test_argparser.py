@@ -4,8 +4,6 @@ test_argparser.py
 
 Tests for src/utils/argparser.py
 """
-
-import unittest
 import os
 import glob
 
@@ -16,8 +14,6 @@ from MTfit.utilities.extensions import get_extensions
 from MTfit.utilities.argparser import _ARGPARSE
 from MTfit.utilities.argparser_defaults import DEFAULT_AMP_COLORMAP
 from MTfit.utilities.unittest_utils import TestCase
-from MTfit.utilities.unittest_utils import run_tests as _run_tests
-from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 from MTfit.utilities.argparser import MTfit_parser
 from MTfit.utilities.argparser import get_MTfit_defaults
 from MTfit.utilities.argparser import evaluate_extensions
@@ -26,7 +22,25 @@ from MTfit.utilities import argparser
 
 class ParserTestCase(TestCase):
 
+    def setUp(self):
+        out_files = glob.glob('*.out')
+        log_files = glob.glob('*.log')
+        mat_files = glob.glob('*.mat')
+        inv_files = glob.glob('*.inv')
+        mt_files = glob.glob('*.mt')
+        hyp_files = glob.glob('*.hyp')
+        self.old_files = {'out': out_files, 'log': log_files, 'mat': mat_files,
+                          'inv': inv_files, 'mt': mt_files, 'hyp': hyp_files}
+        self.keep = ['MTfit_build.log']
+
     def tearDown(self):
+        for file_type in self.old_files.keys():
+            for fname in glob.glob('*.'+file_type):
+                if fname not in self.old_files[file_type] and fname not in self.keep:
+                    try:
+                        os.remove(fname)
+                    except Exception:
+                        pass
         try:
             os.remove('Test.inv')
         except Exception:
@@ -1220,13 +1234,13 @@ class ParserTestCase(TestCase):
                 MTplot_parser(['test', '--save_dpi=150'], test=True)['save_dpi'], 150)
             print('hide')
             self.assertEqual(
-                MTplot_parser(['test'], test=True)['plot'], True)
+                MTplot_parser(['test'], test=True)['show'], True)
             self.assertEqual(
-                MTplot_parser(['test', '-q'], test=True)['plot'], False)
+                MTplot_parser(['test', '-q'], test=True)['show'], False)
             self.assertEqual(
-                MTplot_parser(['test', '--quiet'], test=True)['plot'], False)
+                MTplot_parser(['test', '--quiet'], test=True)['show'], False)
             self.assertEqual(
-                MTplot_parser(['test', '--hide'], test=True)['plot'], False)
+                MTplot_parser(['test', '--hide'], test=True)['show'], False)
             _ARGPARSE = False
         if not _ARGPARSE:
             print('data_file -d check')
@@ -1383,49 +1397,12 @@ class ParserTestCase(TestCase):
                 MTplot_parser(['test', '--save_dpi=150'], test=True)['save_dpi'], 150)
             print('hide')
             self.assertEqual(
-                MTplot_parser(['test'], test=True)['plot'], True)
+                MTplot_parser(['test'], test=True)['show'], True)
             self.assertEqual(
-                MTplot_parser(['test', '-q'], test=True)['plot'], False)
+                MTplot_parser(['test', '-q'], test=True)['show'], False)
             self.assertEqual(
-                MTplot_parser(['test', '--quiet'], test=True)['plot'], False)
+                MTplot_parser(['test', '--quiet'], test=True)['show'], False)
             self.assertEqual(
-                MTplot_parser(['test', '--hide'], test=True)['plot'], False)
+                MTplot_parser(['test', '--hide'], test=True)['show'], False)
             _ARGPARSE = _argparse
 
-
-def test_suite(verbosity=2):
-    global VERBOSITY
-    VERBOSITY = verbosity
-    suite = [unittest.TestLoader().loadTestsFromTestCase(ParserTestCase), ]
-    suite = unittest.TestSuite(suite)
-    return suite
-
-
-def run_tests(verbosity=2):
-    """Run tests"""
-    out_files = glob.glob('*.out')
-    log_files = glob.glob('*.log')
-    mat_files = glob.glob('*.mat')
-    inv_files = glob.glob('*.inv')
-    mt_files = glob.glob('*.mt')
-    hyp_files = glob.glob('*.hyp')
-    old_files = {'out': out_files, 'log': log_files, 'mat':
-                 mat_files, 'inv': inv_files, 'mt': mt_files, 'hyp': hyp_files}
-    keep = ['MTfit_build.log']
-    _run_tests(test_suite(verbosity), verbosity)
-    for file_type in old_files.keys():
-        for fname in glob.glob('*.'+file_type):
-            if fname not in old_files[file_type] and fname not in keep:
-                try:
-                    os.remove(fname)
-                except Exception:
-                    pass
-
-
-def debug_tests(verbosity=2):
-    """Runs tests with debugging on errors"""
-    _debug_tests(test_suite(verbosity))
-
-if __name__ == "__main__":
-    # Run tests
-    run_tests(verbosity=2)
