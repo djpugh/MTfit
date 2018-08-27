@@ -15,19 +15,18 @@ The coordinate system is North (X), East (Y), Down (Z)
 # and non-commercially funded academic research purposes.
 #
 # Applications for commercial use should be made to Schlumberger or the University of Cambridge.
-
+import logging
 
 import numpy as np
 from scipy.optimize import fsolve
 
-_CYTHON = True
-if _CYTHON:
-    try:
-        from . import cmoment_tensor_conversion
-    except Exception:
-        cmoment_tensor_conversion = False
-else:
+from ..utilities import C_EXTENSION_FALLBACK_LOG_MSG
+try:
+    from . import cmoment_tensor_conversion
+except Exception:
     cmoment_tensor_conversion = False
+
+logger = logging.getLogger('MTfit.convert')
 
 
 def MT33_MT6(MT33):
@@ -94,17 +93,19 @@ def MT6_TNPE(MT6):
         (numpy.matrix, numpy.matrix, numpy.matrix, numpy.array): tuple of T, N, P
                         vectors and Eigenvalue array
     """
-    try:
-        if cmoment_tensor_conversion:
-            if not isinstance(MT6, np.ndarray):
-                MT6 = np.array(MT6)
-            if MT6.ndim < 2:
-                MT6 = np.array([MT6])
-            if MT6.shape[1] == 6 and MT6.shape[0] != 6:
-                MT6 = MT6.T
-            return cmoment_tensor_conversion.MT6_TNPE(MT6.astype(np.float64))
-    except Exception:
-        pass
+    if cmoment_tensor_conversion:
+        try:
+                if not isinstance(MT6, np.ndarray):
+                    MT6 = np.array(MT6)
+                if MT6.ndim < 2:
+                    MT6 = np.array([MT6])
+                if MT6.shape[1] == 6 and MT6.shape[0] != 6:
+                    MT6 = MT6.T
+                return cmoment_tensor_conversion.MT6_TNPE(MT6.astype(np.float64))
+        except Exception:
+            pass
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     try:
         n = MT6.shape[1]
     except Exception:
@@ -305,7 +306,7 @@ def E_uv(E):
     Returns
         (float, float): u, v  tuple
     """
-    return tk_uv(E_uv(E))
+    return tk_uv(*E_tk(E))
 
 
 def E_GD(E):
@@ -319,16 +320,18 @@ def E_GD(E):
         (numpy.array, numpy.array): tuple of gamma, delta
 
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             # Expect E to be an array of arrays
             if E.ndim < 2:
                 E = np.array([E])
             if E.shape[1] == 3 and E.shape != (3, 3):
                 E = E.T
             return cmoment_tensor_conversion.E_GD(E.astype(np.float64))
-    except Exception:
-        pass
+        except Exception:
+            pass
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     if isinstance(E, np.ndarray):
         E = np.squeeze(np.array(E))
     if len(E.shape) > 1 and E.shape[1] > 1:
@@ -380,11 +383,13 @@ def TNP_SDR(T, N, P):
         (float, float, float): tuple of strike, dip and rake angles of fault plane in radians
 
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             return cmoment_tensor_conversion.TP_SDR(T.astype(np.float64), P.astype(np.float64))
-    except Exception:
-        pass
+        except Exception:
+            pass
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     N1, N2 = TP_FP(T, P)
     return FP_SDR(N1, N2)
 
@@ -534,8 +539,7 @@ def SDR_TNP(strike, dip, rake):
                     (np.sin(strike)*np.cos(rake)) -
                     np.cos(strike)*np.cos(dip)*np.sin(rake),
                     -np.sin(dip)*np.sin(rake)])
-    N2 = np.matrix(
-        [-np.sin(strike)*np.sin(dip), np.cos(strike)*np.sin(dip), -np.cos(dip)])
+    N2 = np.matrix([-np.sin(strike)*np.sin(dip), np.cos(strike)*np.sin(dip), -np.cos(dip)])
     return FP_TNP(N1, N2)
 
 
@@ -555,11 +559,13 @@ def SDR_SDR(strike, dip, rake):
                         plane in radians
 
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             return cmoment_tensor_conversion.SDR_SDR(strike.astype(np.float64), dip.astype(np.float64), rake.astype(np.float64))
-    except Exception:
-        pass
+        except Exception:
+            pass
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     # Handle multiple inputs
     N1, N2 = SDR_FP(strike, dip, rake)
     s1, d1, r1 = FP_SDR(N1, N2)
@@ -719,15 +725,17 @@ def Tape_MT6(gamma, delta, kappa, h, sigma):
         np.array: Array of MT 6-vectors
 
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             return cmoment_tensor_conversion.Tape_MT6(gamma.astype(np.float64),
                                                       delta.astype(np.float64),
                                                       kappa.astype(np.float64),
                                                       h.astype(np.float64),
                                                       sigma.astype(np.float64))
-    except Exception:
-        pass
+        except Exception:
+            pass
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     if isinstance(gamma, (list, np.ndarray)):
         MT6 = np.empty((6, len(gamma)))
         for i in range(len(gamma)):
@@ -777,7 +785,7 @@ def normal_SD(normal):
         (float, float): tuple of strike and dip angles in radians
     """
     if not isinstance(normal, np.matrixlib.defmatrix.matrix):
-        normal = normal/np.sqrt(np.sum(normal*normal))
+        normal = np.array(normal)/np.sqrt(np.sum(normal*normal))
     else:
         normal = normal/np.sqrt(np.diag(normal.T*normal))
     normal[:, np.array(normal[2, :] > 0).flatten()] *= -1
@@ -832,11 +840,13 @@ def output_convert(mts):
     Returns
         dict: dictionary of numpy arrays for each parameter
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             return cmoment_tensor_conversion.MT_output_convert(mts.astype(np.float64))
-    except Exception:
-        pass
+        except Exception:
+            pass
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     g = np.empty((mts.shape[1],))
     d = np.empty((mts.shape[1],))
     k = np.empty((mts.shape[1],))
@@ -919,13 +929,15 @@ def isotropic_c(lambda_=1, mu=1, c=False):
     Returns
         list: list of 21 elements of the stiffness tensor
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             if isinstance(c, bool):
                 c = []
             return cmoment_tensor_conversion.isotropic_c(lambda_, mu, c)
-    except Exception:
-        pass
+        except Exception:
+            pass
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     # Calculate isotropic approximation
     if not isinstance(c, bool) and len(c) == 21:
         # Eqns 81a and 81b from chapman and leaney 2011
@@ -988,11 +1000,13 @@ def MT6_biaxes(MT6, c=isotropic_c(lambda_=1, mu=1)):
                 phi[i, :, :], explosion[i], area_displacement[i] = MT6_biaxes(MT6[:, i], c)
     else:
         MT6 = np.asarray([MT6]).T
-        try:
-            if cmoment_tensor_conversion:
+        if cmoment_tensor_conversion:
+            try:
                 return cmoment_tensor_conversion.MT6_biaxes(MT6.flatten().astype(np.float64), c)
-        except Exception:
-            pass
+            except Exception:
+                pass
+        else:
+            logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
         lambda2mu = (
             3*(c[0]+c[6]+c[11])+4*(c[15]+c[18]+c[20])+2*(c[1]+c[2]+c[7]))/15
         mu = ((c[0]+c[6]+c[11])+3*(c[15]+c[18]+c[20])-(c[1]+c[2]+c[7]))/15
@@ -1061,11 +1075,13 @@ def MT6c_D6(MT6, c=isotropic_c(lambda_=1, mu=1)):
                 moment tensor six vector)
 
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             return np.asarray(cmoment_tensor_conversion.MT6c_D6(MT6.astype(np.float64), c))
-    except Exception:
-        pass
+        except Exception:
+            pass
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     mtvoigt = MT6[np.array([0, 1, 2, 5, 4, 3])]
     mtvoigt = np.matrix(mtvoigt)
     if mtvoigt.shape[1] == 6:
@@ -1097,21 +1113,22 @@ def is_isotropic_c(c):
     Returns
         bool: result of is_isotropic check
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             return cmoment_tensor_conversion.is_isotropic_c(c)
-    except Exception:
-        pass
+        except Exception:
+            pass
     else:
-        tol = 1.e-6*c_norm(c)
-        return ((abs(c[3]) < tol) and (abs(c[4]) < tol) and (abs(c[5]) < tol) and
-                (abs(c[8]) < tol) and (abs(c[9]) < tol) and (abs(c[10]) < tol) and
-                (abs(c[12]) < tol) and (abs(c[13]) < tol) and (abs(c[14]) < tol) and
-                (abs(c[16]) < tol) and (abs(c[17]) < tol) and (abs(c[19]) < tol) and
-                (abs(c[0]-c[6]) < tol) and (abs(c[6]-c[11]) < tol) and
-                (abs(c[15]-c[18]) < tol) and (abs(c[18]-c[20]) < tol) and
-                (abs(c[1]-c[2]) < tol) and (abs(c[2]-c[7]) < tol) and
-                (abs(c[0]-c[1]-2*c[15]) < tol))
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    tol = 1.e-6*c_norm(c)
+    return ((abs(c[3]) < tol) and (abs(c[4]) < tol) and (abs(c[5]) < tol) and
+            (abs(c[8]) < tol) and (abs(c[9]) < tol) and (abs(c[10]) < tol) and
+            (abs(c[12]) < tol) and (abs(c[13]) < tol) and (abs(c[14]) < tol) and
+            (abs(c[16]) < tol) and (abs(c[17]) < tol) and (abs(c[19]) < tol) and
+            (abs(c[0]-c[6]) < tol) and (abs(c[6]-c[11]) < tol) and
+            (abs(c[15]-c[18]) < tol) and (abs(c[18]-c[20]) < tol) and
+            (abs(c[1]-c[2]) < tol) and (abs(c[2]-c[7]) < tol) and
+            (abs(c[0]-c[1]-2*c[15]) < tol))
 
 
 def c21_cvoigt(c):
@@ -1136,23 +1153,24 @@ def c21_cvoigt(c):
     Returns
         numpy.array: voigt form of the stiffness tensor
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             return np.asarray(cmoment_tensor_conversion.c21_cvoigt(c))
-    except Exception:
-        pass
+        except Exception:
+            pass
     else:
-        return np.array([[c[0], c[1], c[2], np.sqrt(2)*c[3], np.sqrt(2)*c[4], np.sqrt(2)*c[5]],
-                         [c[1], c[6], c[7], np.sqrt(
-                             2)*c[8], np.sqrt(2)*c[9], np.sqrt(2)*c[10]],
-                         [c[2], c[7], c[11], np.sqrt(
-                             2)*c[12], np.sqrt(2)*c[13], np.sqrt(2)*c[14]],
-                         [np.sqrt(2)*c[3], np.sqrt(2)*c[8], np.sqrt(2)*c[12],
-                          2*c[15], 2*c[16], 2*c[17]],
-                         [np.sqrt(2)*c[4], np.sqrt(2)*c[9], np.sqrt(2)*c[13],
-                          2*c[16], 2*c[18], 2*c[19]],
-                         [np.sqrt(2)*c[5], np.sqrt(2)*c[10], np.sqrt(2)*c[14],
-                          2*c[17], 2*c[19], 2*c[20]]])
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    return np.array([[c[0], c[1], c[2], np.sqrt(2)*c[3], np.sqrt(2)*c[4], np.sqrt(2)*c[5]],
+                     [c[1], c[6], c[7], np.sqrt(
+                         2)*c[8], np.sqrt(2)*c[9], np.sqrt(2)*c[10]],
+                     [c[2], c[7], c[11], np.sqrt(
+                         2)*c[12], np.sqrt(2)*c[13], np.sqrt(2)*c[14]],
+                     [np.sqrt(2)*c[3], np.sqrt(2)*c[8], np.sqrt(2)*c[12],
+                      2*c[15], 2*c[16], 2*c[17]],
+                     [np.sqrt(2)*c[4], np.sqrt(2)*c[9], np.sqrt(2)*c[13],
+                      2*c[16], 2*c[18], 2*c[19]],
+                     [np.sqrt(2)*c[5], np.sqrt(2)*c[10], np.sqrt(2)*c[14],
+                      2*c[17], 2*c[19], 2*c[20]]])
 
 
 def c_norm(c):
@@ -1178,13 +1196,14 @@ def c_norm(c):
        float: Euclidean norm of the tensor
 
     """
-    try:
-        if cmoment_tensor_conversion:
+    if cmoment_tensor_conversion:
+        try:
             return cmoment_tensor_conversion.c_norm(c)
-    except Exception:
-        pass
+        except Exception:
+            pass
     else:
-        return np.sqrt(c[0]**2 + c[6]**2 + c[11]**2 + 2*(c[1]**2+c[2]**2+c[7]**2) +
-                       4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2 +
-                          c[12]**2+c[13]**2+c[14]**2+c[15]**2+c[18]**2+c[20]**2) +
-                       8*(c[16]**2+c[17]**2+c[19]**2))
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    return np.sqrt(c[0]**2 + c[6]**2 + c[11]**2 + 2*(c[1]**2+c[2]**2+c[7]**2) +
+                   4*(c[3]**2+c[4]**2+c[5]**2+c[8]**2+c[9]**2+c[10]**2 +
+                      c[12]**2+c[13]**2+c[14]**2+c[15]**2+c[18]**2+c[20]**2) +
+                   8*(c[16]**2+c[17]**2+c[19]**2))

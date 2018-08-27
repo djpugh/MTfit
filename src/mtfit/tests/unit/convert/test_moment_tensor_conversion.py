@@ -6,25 +6,26 @@ Tests for src/convert/moment_tensor_conversion.py
 """
 
 import unittest
+from unittest import mock
 
 import numpy as np
 
-from MTfit.utilities.unittest_utils import run_tests as _run_tests
-from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
-from MTfit.utilities.unittest_utils import TestCase
 from MTfit.convert import moment_tensor_conversion as mtc
 from MTfit.convert import MT33_MT6
 from MTfit.convert import MT6_MT33
 from MTfit.convert import MT6_TNPE
-from MTfit.convert import MT33_TNPE
 from MTfit.convert import MT6_Tape
+from MTfit.convert import MT33_TNPE
+from MTfit.convert import MT33_SDR
+from MTfit.convert import MT33_GD
+from MTfit.convert import E_tk
+from MTfit.convert import tk_uv
+from MTfit.convert import E_uv
+from MTfit.convert import E_GD
+from MTfit.convert import GD_basic_cdc
 from MTfit.convert import TNP_SDR
 from MTfit.convert import TP_FP
 from MTfit.convert import FP_SDR
-from MTfit.convert import E_tk
-from MTfit.convert import tk_uv
-from MTfit.convert import E_GD
-from MTfit.convert import GD_basic_cdc
 from MTfit.convert import basic_cdc_GD
 from MTfit.convert import GD_E
 from MTfit.convert import SDR_TNP
@@ -40,18 +41,28 @@ from MTfit.convert import Tape_TNPE
 from MTfit.convert import normal_SD
 from MTfit.convert import toa_vec
 from MTfit.convert import output_convert
+from MTfit.convert import isotropic_c
 from MTfit.convert import MT6_biaxes
 from MTfit.convert import MT6c_D6
-from MTfit.convert import isotropic_c
-from MTfit.convert import c_norm
 from MTfit.convert import is_isotropic_c
 from MTfit.convert import c21_cvoigt
+from MTfit.convert import c_norm
+from MTfit.convert import moment_tensor_conversion
+from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+from MTfit.utilities.unittest_utils import TestCase
 
-try:
-    from MTfit.convert import cmoment_tensor_conversion
-    _CYTHON = True
-except Exception:
-    _CYTHON = False
+
+C_EXTENSIONS = (not moment_tensor_conversion.cmoment_tensor_conversion, 'No C extension available')
+
+
+class PythonOnly(object):
+
+    def __enter__(self, *args, **kwargs):
+        self.cmoment_tensor_conversion = moment_tensor_conversion.cmoment_tensor_conversion
+        moment_tensor_conversion.cmoment_tensor_conversion = False
+
+    def __exit__(self, *args, **kwargs):
+        moment_tensor_conversion.cmoment_tensor_conversion = self.cmoment_tensor_conversion
 
 
 class MomentTensorConvertTestCase(TestCase):
@@ -176,21 +187,47 @@ class MomentTensorConvertTestCase(TestCase):
                 raise e1
 
     def test_MT33_MT6(self):
-        mtc._CYTHON = False
         DC6 = MT33_MT6(self.DC33)
         MT6 = MT33_MT6(self.MT33)
         self.assertAlmostEqual(DC6, self.DC6)
         self.assertAlmostEqual(MT6, self.MT6/self.MT6norm)
 
     def test_MT6_MT33(self):
-        mtc._CYTHON = False
         DC33 = MT6_MT33(self.DC6)
         MT33 = MT6_MT33(self.MT6)
         self.assertAlmostEqual(DC33, self.DC33)
         self.assertAlmostEqual(MT33, self.MT33)
 
-    def test_MT6_TNPE(self):
-        mtc._CYTHON = False
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_MT6_TNPE(self, logger):
+        with PythonOnly():
+            [Tdc, Ndc, Pdc, Edc] = MT6_TNPE(self.DC6)
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            [Tmt, Nmt, Pmt, Emt] = MT6_TNPE(self.MT6)
+            self.assertVectorEquals(Tdc, self.Tdc)
+            self.assertVectorEquals(Ndc, self.Ndc)
+            self.assertVectorEquals(Pdc, self.Pdc)
+            self.assertAlmostEquals(Edc, self.Edc)
+            self.assertVectorEquals(Tmt, self.Tmt)
+            self.assertVectorEquals(Nmt, self.Nmt)
+            self.assertVectorEquals(Pmt, self.Pmt)
+            self.assertAlmostEquals(Emt, self.Emt)
+            [T, N, P, E] = MT6_TNPE(np.append(self.MT6, self.DC6, 1))
+            self.assertVectorEquals(T[:, 1], self.Tdc)
+            self.assertVectorEquals(N[:, 1], self.Ndc)
+            self.assertVectorEquals(P[:, 1], self.Pdc)
+            self.assertAlmostEquals(E[:, 1], self.Edc)
+            self.assertVectorEquals(T[:, 0], self.Tmt)
+            self.assertVectorEquals(N[:, 0], self.Nmt)
+            self.assertVectorEquals(P[:, 0], self.Pmt)
+            self.assertAlmostEquals(E[:, 0], self.Emt)
+            self.assertEqual(logger.info.call_args_list, [mock.call(C_EXTENSION_FALLBACK_LOG_MSG),
+                                                          mock.call(C_EXTENSION_FALLBACK_LOG_MSG),
+                                                          mock.call(C_EXTENSION_FALLBACK_LOG_MSG)])
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_MT6_TNPE_cython(self, logger):
         [Tdc, Ndc, Pdc, Edc] = MT6_TNPE(self.DC6)
         [Tmt, Nmt, Pmt, Emt] = MT6_TNPE(self.MT6)
         self.assertVectorEquals(Tdc, self.Tdc)
@@ -210,43 +247,7 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertVectorEquals(N[:, 0], self.Nmt)
         self.assertVectorEquals(P[:, 0], self.Pmt)
         self.assertAlmostEquals(E[:, 0], self.Emt)
-
-    def test_MT6_TNPE_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
-        [Tdc, Ndc, Pdc, Edc] = MT6_TNPE(self.DC6)
-        [Tmt, Nmt, Pmt, Emt] = MT6_TNPE(self.MT6)
-        self.assertVectorEquals(Tdc, self.Tdc)
-        self.assertVectorEquals(Ndc, self.Ndc)
-        self.assertVectorEquals(Pdc, self.Pdc)
-        self.assertAlmostEquals(Edc, self.Edc)
-        self.assertVectorEquals(Tmt, self.Tmt)
-        self.assertVectorEquals(Nmt, self.Nmt)
-        self.assertVectorEquals(Pmt, self.Pmt)
-        self.assertAlmostEquals(Emt, self.Emt)
-        [T, N, P, E] = MT6_TNPE(np.append(self.MT6, self.DC6, 1))
-        self.assertVectorEquals(T[:, 1], self.Tdc)
-        self.assertVectorEquals(N[:, 1], self.Ndc)
-        self.assertVectorEquals(P[:, 1], self.Pdc)
-        self.assertAlmostEquals(E[:, 1], self.Edc)
-        self.assertVectorEquals(T[:, 0], self.Tmt)
-        self.assertVectorEquals(N[:, 0], self.Nmt)
-        self.assertVectorEquals(P[:, 0], self.Pmt)
-        self.assertAlmostEquals(E[:, 0], self.Emt)
-
-    def test_MT33_TNPE(self):
-        mtc._CYTHON = False
-        [Tdc, Ndc, Pdc, Edc] = MT33_TNPE(self.DC33)
-        [Tmt, Nmt, Pmt, Emt] = MT33_TNPE(self.MT33)
-        self.assertVectorEquals(Tdc, self.Tdc)
-        self.assertVectorEquals(Ndc, self.Ndc)
-        self.assertVectorEquals(Pdc, self.Pdc)
-        self.assertAlmostEquals(Edc, self.Edc)
-        self.assertVectorEquals(Tmt, self.Tmt)
-        self.assertVectorEquals(Nmt, self.Nmt)
-        self.assertVectorEquals(Pmt, self.Pmt)
-        self.assertAlmostEquals(Emt, self.Emt)
+        logger.info.assert_not_called()
 
     def test_MT6_Tape(self):
         mtc._CYTHON = False
@@ -265,6 +266,8 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(Kdc-np.pi, self.Kdc)
         self.assertAlmostEquals(Hdc, self.Hdc)
         self.assertAlmostEquals(Odc, self.Odc)
+
+    def test_MT6_Tape_multiple(self):
         [G, D, K, H, O] = MT6_Tape(np.append(self.MT6, self.DC6, 1))
         self.assertAlmostEquals(G[0], self.Gmt)
         self.assertAlmostEquals(D[0], self.Dmt)
@@ -280,51 +283,21 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertAlmostEquals(H[1], self.Hdc)
         self.assertAlmostEquals(O[1], self.Odc)
 
-    def test_TNP_SDR(self):
-        mtc._CYTHON = False
-        [Sdc, Ddc, Rdc] = TNP_SDR(self.Tdc, self.Ndc, self.Pdc)
-        [Smt, Dmt, Rmt] = TNP_SDR(self.Tmt, self.Nmt, self.Pmt)
-        try:
-            self.assertAlmostEquals(Sdc, self.S1dc)
-            self.assertAlmostEquals(Ddc, self.D1dc)
-            self.assertAlmostEquals(Rdc, self.R1dc)
-        except Exception:
-            self.assertAlmostEquals(Sdc, self.S2dc)
-            self.assertAlmostEquals(Ddc, self.D2dc)
-            self.assertAlmostEquals(Rdc, self.R2dc)
-        try:
-            self.assertAlmostEquals(Smt, self.S1mt)
-            self.assertAlmostEquals(Dmt, self.D1mt)
-            self.assertAlmostEquals(Rmt, self.R1mt)
-        except Exception:
-            self.assertAlmostEquals(Smt, self.S2mt)
-            self.assertAlmostEquals(Dmt, self.D2mt)
-            self.assertAlmostEquals(Rmt, self.R2mt)
-        [s, d, r] = TNP_SDR(np.append(self.Tmt, self.Tdc, 1), np.append(
-            self.Nmt, self.Ndc, 1), np.append(self.Pmt, self.Pdc, 1))
-        try:
-            self.assertAlmostEquals(s[0], self.S1mt)
-            self.assertAlmostEquals(d[0], self.D1mt)
-            self.assertAlmostEquals(r[0], self.R1mt)
-        except Exception:
-            self.assertAlmostEquals(s[0], self.S2mt)
-            self.assertAlmostEquals(d[0], self.D2mt)
-            self.assertAlmostEquals(r[0], self.R2mt)
-        try:
-            self.assertAlmostEquals(s[1], self.S1dc)
-            self.assertAlmostEquals(d[1], self.D1dc)
-            self.assertAlmostEquals(r[1], self.R1dc)
-        except Exception:
-            self.assertAlmostEquals(s[1], self.S2dc)
-            self.assertAlmostEquals(d[1], self.D2dc)
-            self.assertAlmostEquals(r[1], self.R2dc)
+    def test_MT33_TNPE(self):
+        [Tdc, Ndc, Pdc, Edc] = MT33_TNPE(self.DC33)
+        [Tmt, Nmt, Pmt, Emt] = MT33_TNPE(self.MT33)
+        self.assertVectorEquals(Tdc, self.Tdc)
+        self.assertVectorEquals(Ndc, self.Ndc)
+        self.assertVectorEquals(Pdc, self.Pdc)
+        self.assertAlmostEquals(Edc, self.Edc)
+        self.assertVectorEquals(Tmt, self.Tmt)
+        self.assertVectorEquals(Nmt, self.Nmt)
+        self.assertVectorEquals(Pmt, self.Pmt)
+        self.assertAlmostEquals(Emt, self.Emt)
 
-    def test_TNP_SDR_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
-        [Sdc, Ddc, Rdc] = TNP_SDR(self.Tdc, self.Ndc, self.Pdc)
-        [Smt, Dmt, Rmt] = TNP_SDR(self.Tmt, self.Nmt, self.Pmt)
+    def test_MT33_SDR(self):
+        [Sdc, Ddc, Rdc] = MT33_SDR(self.DC33)
+        [Smt, Dmt, Rmt] = MT33_SDR(self.MT33)
         try:
             self.assertAlmostEquals(Sdc, self.S1dc)
             self.assertAlmostEquals(Ddc, self.D1dc)
@@ -341,8 +314,183 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(Smt, self.S2mt)
             self.assertAlmostEquals(Dmt, self.D2mt)
             self.assertAlmostEquals(Rmt, self.R2mt)
-        [s, d, r] = TNP_SDR(np.append(self.Tmt, self.Tdc, 1), np.append(
-            self.Nmt, self.Ndc, 1), np.append(self.Pmt, self.Pdc, 1))
+
+    def test_MT33_GD(self):
+        [Gmt, Dmt] = MT33_GD(self.MT33)
+        self.assertAlmostEquals(Gmt, self.Gmt)
+        self.assertAlmostEquals(Dmt, self.Dmt)
+
+    def test_E_tk(self):
+        tdc, kdc = E_tk(self.Edc)
+        tmt, kmt = E_tk(self.Emt)
+        self.assertAlmostEquals(tdc, self.tdc)
+        self.assertAlmostEquals(kdc, self.kdc)
+        self.assertAlmostEquals(tmt, self.tmt)
+        self.assertAlmostEquals(kmt, self.kmt)
+
+    def test_E_tk_multiple(self):
+        t, k = E_tk(np.append(self.Emt, self.Edc, 1))
+        self.assertAlmostEquals(t[1], self.tdc)
+        self.assertAlmostEquals(k[1], self.kdc)
+        self.assertAlmostEquals(t[0], self.tmt)
+        self.assertAlmostEquals(k[0], self.kmt)
+
+    def test_tk_uv(self):
+        Udc, Vdc = tk_uv(self.tdc, self.kdc)
+        Umt, Vmt = tk_uv(self.tmt, self.kmt)
+        self.assertAlmostEquals(Udc, self.Udc)
+        self.assertAlmostEquals(Vdc, self.Vdc)
+        self.assertAlmostEquals(Umt, self.Umt)
+        self.assertAlmostEquals(Vmt, self.Vmt)
+
+    def test_tk_uv_multiple(self):
+        u, v = tk_uv(np.array([self.tmt, self.tdc]), np.array([self.kmt, self.kdc]))
+        self.assertAlmostEquals(u[1], self.Udc)
+        self.assertAlmostEquals(v[1], self.Vdc)
+        self.assertAlmostEquals(u[0], self.Umt)
+        self.assertAlmostEquals(v[0], self.Vmt)
+
+    def test_E_uv(self):
+        Udc, Vdc = E_uv(self.Edc)
+        Umt, Vmt = E_uv(self.Emt)
+        self.assertAlmostEquals(Udc, self.Udc)
+        self.assertAlmostEquals(Vdc, self.Vdc)
+        self.assertAlmostEquals(Umt, self.Umt)
+        self.assertAlmostEquals(Vmt, self.Vmt)
+
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_E_GD_python(self, logger):
+        with PythonOnly():
+            Gdc, Ddc = E_GD(self.Edc)
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            Gmt, Dmt = E_GD(self.Emt)
+            self.assertAlmostEquals(Gdc, self.Gdc)
+            self.assertAlmostEquals(Ddc, self.Ddc)
+            self.assertAlmostEquals(Gmt, self.Gmt)
+            self.assertAlmostEquals(Dmt, self.Dmt)
+
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_E_GD_multiple_python(self, logger):
+        with PythonOnly():
+            t, k = E_GD(np.append(self.Emt, self.Edc, 1))
+            self.assertAlmostEquals(t[1], self.Gdc)
+            self.assertAlmostEquals(k[1], self.Ddc)
+            self.assertAlmostEquals(t[0], self.Gmt)
+            self.assertAlmostEquals(k[0], self.Dmt)
+            logger.info.assert_called_with(C_EXTENSION_FALLBACK_LOG_MSG)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_E_GD_cython(self, logger):
+        Gdc, Ddc = E_GD(self.Edc)
+        Gmt, Dmt = E_GD(self.Emt)
+        self.assertAlmostEquals(Gdc, self.Gdc)
+        self.assertAlmostEquals(Ddc, self.Ddc)
+        self.assertAlmostEquals(Gmt, self.Gmt)
+        self.assertAlmostEquals(Dmt, self.Dmt)
+        logger.info.assert_not_called()
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_E_GD_multiple_cython(self, logger):
+        t, k = E_GD(np.append(self.Emt, self.Edc, 1))
+        self.assertAlmostEquals(t[1], self.Gdc)
+        self.assertAlmostEquals(k[1], self.Ddc)
+        self.assertAlmostEquals(t[0], self.Gmt)
+        self.assertAlmostEquals(k[0], self.Dmt)
+        logger.info.assert_not_called()
+
+    def test_GD_basic_cdc(self):
+        adc, vdc = GD_basic_cdc(self.Gdc, self.Ddc)
+        amt, vmt = GD_basic_cdc(self.Gmt, self.Dmt)
+        self.assertAlmostEquals(adc, self.adc)
+        self.assertAlmostEquals(vdc, self.vdc)
+        self.assertAlmostEquals(amt, self.amt)
+        self.assertAlmostEquals(vmt, self.vmt)
+        a, v = GD_basic_cdc(
+            np.array([self.Gmt, self.Gdc]), np.array([self.Dmt, self.Ddc]))
+        self.assertAlmostEquals(a[1], self.adc)
+        self.assertAlmostEquals(v[1], self.vdc)
+        self.assertAlmostEquals(a[0], self.amt)
+        self.assertAlmostEquals(v[0], self.vmt)
+
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_TNP_SDR_python(self, logger):
+        with PythonOnly():
+            [Sdc, Ddc, Rdc] = TNP_SDR(self.Tdc, self.Ndc, self.Pdc)
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            [Smt, Dmt, Rmt] = TNP_SDR(self.Tmt, self.Nmt, self.Pmt)
+            try:
+                self.assertAlmostEquals(Sdc, self.S1dc)
+                self.assertAlmostEquals(Ddc, self.D1dc)
+                self.assertAlmostEquals(Rdc, self.R1dc)
+            except Exception:
+                self.assertAlmostEquals(Sdc, self.S2dc)
+                self.assertAlmostEquals(Ddc, self.D2dc)
+                self.assertAlmostEquals(Rdc, self.R2dc)
+            try:
+                self.assertAlmostEquals(Smt, self.S1mt)
+                self.assertAlmostEquals(Dmt, self.D1mt)
+                self.assertAlmostEquals(Rmt, self.R1mt)
+            except Exception:
+                self.assertAlmostEquals(Smt, self.S2mt)
+                self.assertAlmostEquals(Dmt, self.D2mt)
+                self.assertAlmostEquals(Rmt, self.R2mt)
+
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_TNP_SDR_multiple_python(self, logger):
+        with PythonOnly():
+            [s, d, r] = TNP_SDR(np.append(self.Tmt, self.Tdc, 1),
+                                np.append(self.Nmt, self.Ndc, 1),
+                                np.append(self.Pmt, self.Pdc, 1))
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            try:
+                self.assertAlmostEquals(s[0], self.S1mt)
+                self.assertAlmostEquals(d[0], self.D1mt)
+                self.assertAlmostEquals(r[0], self.R1mt)
+            except Exception:
+                self.assertAlmostEquals(s[0], self.S2mt)
+                self.assertAlmostEquals(d[0], self.D2mt)
+                self.assertAlmostEquals(r[0], self.R2mt)
+            try:
+                self.assertAlmostEquals(s[1], self.S1dc)
+                self.assertAlmostEquals(d[1], self.D1dc)
+                self.assertAlmostEquals(r[1], self.R1dc)
+            except Exception:
+                self.assertAlmostEquals(s[1], self.S2dc)
+                self.assertAlmostEquals(d[1], self.D2dc)
+                self.assertAlmostEquals(r[1], self.R2dc)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_TNP_SDR_cython(self, logger):
+        [Sdc, Ddc, Rdc] = TNP_SDR(self.Tdc, self.Ndc, self.Pdc)
+        [Smt, Dmt, Rmt] = TNP_SDR(self.Tmt, self.Nmt, self.Pmt)
+        logger.info.assert_not_called()
+        try:
+            self.assertAlmostEquals(Sdc, self.S1dc)
+            self.assertAlmostEquals(Ddc, self.D1dc)
+            self.assertAlmostEquals(Rdc, self.R1dc)
+        except Exception:
+            self.assertAlmostEquals(Sdc, self.S2dc)
+            self.assertAlmostEquals(Ddc, self.D2dc)
+            self.assertAlmostEquals(Rdc, self.R2dc)
+        try:
+            self.assertAlmostEquals(Smt, self.S1mt)
+            self.assertAlmostEquals(Dmt, self.D1mt)
+            self.assertAlmostEquals(Rmt, self.R1mt)
+        except Exception:
+            self.assertAlmostEquals(Smt, self.S2mt)
+            self.assertAlmostEquals(Dmt, self.D2mt)
+            self.assertAlmostEquals(Rmt, self.R2mt)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_TNP_SDR_multiple_cython(self, logger):
+        [s, d, r] = TNP_SDR(np.append(self.Tmt, self.Tdc, 1),
+                            np.append(self.Nmt, self.Ndc, 1),
+                            np.append(self.Pmt, self.Pdc, 1))
+        logger.info.assert_not_called()
         try:
             self.assertAlmostEquals(s[0], self.S1mt)
             self.assertAlmostEquals(d[0], self.D1mt)
@@ -361,7 +509,6 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(r[1], self.R2dc)
 
     def test_TP_FP(self):
-        mtc._CYTHON = False
         [N1dc, N2dc] = TP_FP(self.Tdc, self.Pdc)
         [N1mt, N2mt] = TP_FP(self.Tmt, self.Pmt)
         self.assertVectorEquals(N1dc, self.N1dc)
@@ -376,7 +523,6 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertVectorEquals(N2[:, 1], self.N2dc)
 
     def test_FP_SDR(self):
-        mtc._CYTHON = False
         [Sdc, Ddc, Rdc] = FP_SDR(self.N1dc, self.N2dc)
         [Smt, Dmt, Rmt] = FP_SDR(self.N1mt, self.N2mt)
         self.assertAlmostEquals(Sdc, self.S1dc)
@@ -385,8 +531,10 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertAlmostEquals(Smt, self.S1mt)
         self.assertAlmostEquals(Dmt, self.D1mt)
         self.assertAlmostEquals(Rmt, self.R1mt)
-        [s, d, r] = FP_SDR(
-            np.append(self.N1mt, self.N1dc, 1), np.append(self.N2mt, self.N2dc, 1))
+
+    def test_FP_SDR_multiple(self):
+        [s, d, r] = FP_SDR(np.append(self.N1mt, self.N1dc, 1),
+                           np.append(self.N2mt, self.N2dc, 1))
         self.assertAlmostEquals(s[0], self.S1mt)
         self.assertAlmostEquals(d[0], self.D1mt)
         self.assertAlmostEquals(r[0], self.R1mt)
@@ -401,8 +549,8 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertAlmostEquals(Smt, self.S2mt)
         self.assertAlmostEquals(Dmt, self.D2mt)
         self.assertAlmostEquals(Rmt, self.R2mt)
-        [s, d, r] = FP_SDR(
-            np.append(self.N2mt, self.N2dc, 1), np.append(self.N1mt, self.N1dc, 1))
+        [s, d, r] = FP_SDR(np.append(self.N2mt, self.N2dc, 1),
+                           np.append(self.N1mt, self.N1dc, 1))
         self.assertAlmostEquals(s[0], self.S2mt)
         self.assertAlmostEquals(d[0], self.D2mt)
         self.assertAlmostEquals(r[0], self.R2mt)
@@ -410,110 +558,50 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertAlmostEquals(d[1], self.D2dc)
         self.assertAlmostEquals(r[1], self.R2dc)
 
-    def test_E_tk(self):
-        mtc._CYTHON = False
-        tdc, kdc = E_tk(self.Edc)
-        tmt, kmt = E_tk(self.Emt)
-        self.assertAlmostEquals(tdc, self.tdc)
-        self.assertAlmostEquals(kdc, self.kdc)
-        self.assertAlmostEquals(tmt, self.tmt)
-        self.assertAlmostEquals(kmt, self.kmt)
-        t, k = E_tk(np.append(self.Emt, self.Edc, 1))
-        self.assertAlmostEquals(t[1], self.tdc)
-        self.assertAlmostEquals(k[1], self.kdc)
-        self.assertAlmostEquals(t[0], self.tmt)
-        self.assertAlmostEquals(k[0], self.kmt)
-
-    def test_tk_uv(self):
-        mtc._CYTHON = False
-        Udc, Vdc = tk_uv(self.tdc, self.kdc)
-        Umt, Vmt = tk_uv(self.tmt, self.kmt)
-        self.assertAlmostEquals(Udc, self.Udc)
-        self.assertAlmostEquals(Vdc, self.Vdc)
-        self.assertAlmostEquals(Umt, self.Umt)
-        self.assertAlmostEquals(Vmt, self.Vmt)
-        u, v = tk_uv(
-            np.array([self.tmt, self.tdc]), np.array([self.kmt, self.kdc]))
-        self.assertAlmostEquals(u[1], self.Udc)
-        self.assertAlmostEquals(v[1], self.Vdc)
-        self.assertAlmostEquals(u[0], self.Umt)
-        self.assertAlmostEquals(v[0], self.Vmt)
-
-    def test_E_GD(self):
-        mtc._CYTHON = False
-        Gdc, Ddc = E_GD(self.Edc)
-        Gmt, Dmt = E_GD(self.Emt)
-        self.assertAlmostEquals(Gdc, self.Gdc)
-        self.assertAlmostEquals(Ddc, self.Ddc)
-        self.assertAlmostEquals(Gmt, self.Gmt)
-        self.assertAlmostEquals(Dmt, self.Dmt)
-        t, k = E_GD(np.append(self.Emt, self.Edc, 1))
-        self.assertAlmostEquals(t[1], self.Gdc)
-        self.assertAlmostEquals(k[1], self.Ddc)
-        self.assertAlmostEquals(t[0], self.Gmt)
-        self.assertAlmostEquals(k[0], self.Dmt)
-
-    def test_E_GD_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
-        Gdc, Ddc = E_GD(self.Edc)
-        Gmt, Dmt = E_GD(self.Emt)
-        self.assertAlmostEquals(Gdc, self.Gdc)
-        self.assertAlmostEquals(Ddc, self.Ddc)
-        self.assertAlmostEquals(Gmt, self.Gmt)
-        self.assertAlmostEquals(Dmt, self.Dmt)
-        t, k = E_GD(np.append(self.Emt, self.Edc, 1))
-        self.assertAlmostEquals(t[1], self.Gdc)
-        self.assertAlmostEquals(k[1], self.Ddc)
-        self.assertAlmostEquals(t[0], self.Gmt)
-        self.assertAlmostEquals(k[0], self.Dmt)
-
-    def test_GD_basic_cdc(self):
-        mtc._CYTHON = False
-        adc, vdc = GD_basic_cdc(self.Gdc, self.Ddc)
-        amt, vmt = GD_basic_cdc(self.Gmt, self.Dmt)
-        self.assertAlmostEquals(adc, self.adc)
-        self.assertAlmostEquals(vdc, self.vdc)
-        self.assertAlmostEquals(amt, self.amt)
-        self.assertAlmostEquals(vmt, self.vmt)
-        a, v = GD_basic_cdc(
-            np.array([self.Gmt, self.Gdc]), np.array([self.Dmt, self.Ddc]))
-        self.assertAlmostEquals(a[1], self.adc)
-        self.assertAlmostEquals(v[1], self.vdc)
-        self.assertAlmostEquals(a[0], self.amt)
-        self.assertAlmostEquals(v[0], self.vmt)
+    def test_FP_SDR_array(self):
+        [Sdc, Ddc, Rdc] = FP_SDR(np.array(2*self.N1dc), np.array(2*self.N2dc))
+        [Smt, Dmt, Rmt] = FP_SDR(np.array(2*self.N1mt), np.array(2*self.N2mt))
+        self.assertAlmostEquals(Sdc, self.S1dc)
+        self.assertAlmostEquals(Ddc, self.D1dc)
+        self.assertAlmostEquals(Rdc, self.R1dc)
+        self.assertAlmostEquals(Smt, self.S1mt)
+        self.assertAlmostEquals(Dmt, self.D1mt)
+        self.assertAlmostEquals(Rmt, self.R1mt)
 
     def test_basic_cdc_GD(self):
-        mtc._CYTHON = False
         Gdc, Ddc = basic_cdc_GD(self.adc, self.vdc)
         Gmt, Dmt = basic_cdc_GD(self.amt, self.vmt)
         self.assertAlmostEquals(Gdc, self.Gdc)
         self.assertAlmostEquals(Ddc, self.Ddc)
         self.assertAlmostEquals(Gmt, self.Gmt)
         self.assertAlmostEquals(Dmt, self.Dmt)
-        G, D = basic_cdc_GD(
-            np.array([self.amt, self.adc]), np.array([self.vmt, self.vdc]))
+        G, D = basic_cdc_GD(np.array([self.amt, self.adc]),
+                            np.array([self.vmt, self.vdc]))
         self.assertAlmostEquals(G[1], self.Gdc)
         self.assertAlmostEquals(D[1], self.Ddc)
         self.assertAlmostEquals(G[0], self.Gmt)
         self.assertAlmostEquals(D[0], self.Dmt)
+
+    def test_basic_cdc_GD_pi_2(self):
+        G2, D2 = basic_cdc_GD(np.pi/2, self.vmt)
+        self.assertEqual(D2, 0)
+        G, D = basic_cdc_GD(np.array([np.pi/2, np.pi/2]),
+                            np.array([self.vmt, self.vdc]))
+        self.assertAlmostEquals(D[1], 0)
+        self.assertAlmostEquals(D[0], 0)
 
     def test_GD_E(self):
         mtc._CYTHON = False
         Edc = GD_E(self.Gdc, self.Ddc)
         Emt = GD_E(self.Gmt, self.Dmt)
         self.assertAlmostEquals(Edc, self.Edc)
-        self.assertAlmostEquals(
-            Emt, self.Emt/np.sqrt(np.diag(self.Emt.T*self.Emt)))
-        E = GD_E(
-            np.array([self.Gmt, self.Gdc]), np.array([self.Dmt, self.Ddc]))
+        self.assertAlmostEquals(Emt, self.Emt/np.sqrt(np.diag(self.Emt.T*self.Emt)))
+        E = GD_E(np.array([self.Gmt, self.Gdc]),
+                 np.array([self.Dmt, self.Ddc]))
         self.assertAlmostEquals(E[:, 1], self.Edc)
-        self.assertAlmostEquals(
-            E[:, 0], self.Emt/np.sqrt(np.diag(self.Emt.T*self.Emt)))
+        self.assertAlmostEquals(E[:, 0], self.Emt/np.sqrt(np.diag(self.Emt.T*self.Emt)))
 
     def test_SDR_TNP(self):
-        mtc._CYTHON = False
         [Tdc, Ndc, Pdc] = SDR_TNP(self.S1dc, self.D1dc, self.R1dc)
         [Tmt, Nmt, Pmt] = SDR_TNP(self.S1mt, self.D1mt, self.R1mt)
         self.assertVectorEquals(Tdc, self.Tdc)
@@ -547,57 +635,58 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertVectorEquals(N[:, 1], self.Ndc)
         self.assertVectorEquals(P[:, 1], self.Pdc)
 
-    def test_SDR_SDR(self):
-        mtc._CYTHON = False
-        [S2dc, D2dc, R2dc] = SDR_SDR(self.S1dc, self.D1dc, self.R1dc)
-        [S2mt, D2mt, R2mt] = SDR_SDR(self.S1mt, self.D1mt, self.R1mt)
-        self.assertAlmostEquals(S2dc, self.S2dc)
-        self.assertAlmostEquals(D2dc, self.D2dc)
-        self.assertSigmaEquals(R2dc, self.R2dc)
-        self.assertAlmostEquals(S2mt, self.S2mt)
-        self.assertAlmostEquals(D2mt, self.D2mt)
-        self.assertSigmaEquals(R2mt, self.R2mt)
-        [S, D, R] = SDR_SDR(np.array([self.S1mt, self.S1dc]), np.array(
-            [self.D1mt, self.D1dc]), np.array([self.R1mt, self.R1dc]))
-        self.assertAlmostEquals(S[0], self.S2mt)
-        self.assertAlmostEquals(D[0], self.D2mt)
-        self.assertSigmaEquals(R[0], self.R2mt)
-        self.assertAlmostEquals(S[1], self.S2dc)
-        self.assertAlmostEquals(D[1], self.D2dc)
-        self.assertSigmaEquals(R[1], self.R2dc)
-        [S1dc, D1dc, R1dc] = SDR_SDR(self.S2dc, self.D2dc, self.R2dc)
-        [S1mt, D1mt, R1mt] = SDR_SDR(self.S2mt, self.D2mt, self.R2mt)
-        try:
-            self.assertAlmostEquals(S1dc, self.S1dc)
-        except AssertionError as e:
-            if self.S1dc in [0, np.pi]:
-                self.assertAlmostEquals(S1dc, np.mod(self.S1dc+np.pi, 2*np.pi))
-            else:
-                raise e
-        self.assertAlmostEquals(D1dc, self.D1dc)
-        self.assertSigmaEquals(R1dc, self.R1dc)
-        self.assertAlmostEquals(S1mt, self.S1mt)
-        self.assertAlmostEquals(D1mt, self.D1mt)
-        self.assertSigmaEquals(R1mt, self.R1mt)
-        [S, D, R] = SDR_SDR(np.array([self.S2mt, self.S2dc]), np.array(
-            [self.D2mt, self.D2dc]), np.array([self.R2mt, self.R2dc]))
-        self.assertAlmostEquals(S[0], self.S1mt)
-        self.assertAlmostEquals(D[0], self.D1mt)
-        self.assertSigmaEquals(R[0], self.R1mt)
-        try:
-            self.assertAlmostEquals(S[1], self.S1dc)
-        except AssertionError as e:
-            if self.S1dc in [0, np.pi]:
-                self.assertAlmostEquals(S[1], np.mod(self.S1dc+np.pi, 2*np.pi))
-            else:
-                raise e
-        self.assertAlmostEquals(D[1], self.D1dc)
-        self.assertSigmaEquals(R[1], self.R1dc)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_SDR_SDR_python(self, logger):
+        with PythonOnly():
+            [S2dc, D2dc, R2dc] = SDR_SDR(self.S1dc, self.D1dc, self.R1dc)
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            [S2mt, D2mt, R2mt] = SDR_SDR(self.S1mt, self.D1mt, self.R1mt)
+            self.assertAlmostEquals(S2dc, self.S2dc)
+            self.assertAlmostEquals(D2dc, self.D2dc)
+            self.assertSigmaEquals(R2dc, self.R2dc)
+            self.assertAlmostEquals(S2mt, self.S2mt)
+            self.assertAlmostEquals(D2mt, self.D2mt)
+            self.assertSigmaEquals(R2mt, self.R2mt)
+            [S, D, R] = SDR_SDR(np.array([self.S1mt, self.S1dc]), np.array(
+                [self.D1mt, self.D1dc]), np.array([self.R1mt, self.R1dc]))
+            self.assertAlmostEquals(S[0], self.S2mt)
+            self.assertAlmostEquals(D[0], self.D2mt)
+            self.assertSigmaEquals(R[0], self.R2mt)
+            self.assertAlmostEquals(S[1], self.S2dc)
+            self.assertAlmostEquals(D[1], self.D2dc)
+            self.assertSigmaEquals(R[1], self.R2dc)
+            [S1dc, D1dc, R1dc] = SDR_SDR(self.S2dc, self.D2dc, self.R2dc)
+            [S1mt, D1mt, R1mt] = SDR_SDR(self.S2mt, self.D2mt, self.R2mt)
+            try:
+                self.assertAlmostEquals(S1dc, self.S1dc)
+            except AssertionError as e:
+                if self.S1dc in [0, np.pi]:
+                    self.assertAlmostEquals(S1dc, np.mod(self.S1dc+np.pi, 2*np.pi))
+                else:
+                    raise e
+            self.assertAlmostEquals(D1dc, self.D1dc)
+            self.assertSigmaEquals(R1dc, self.R1dc)
+            self.assertAlmostEquals(S1mt, self.S1mt)
+            self.assertAlmostEquals(D1mt, self.D1mt)
+            self.assertSigmaEquals(R1mt, self.R1mt)
+            [S, D, R] = SDR_SDR(np.array([self.S2mt, self.S2dc]), np.array(
+                [self.D2mt, self.D2dc]), np.array([self.R2mt, self.R2dc]))
+            self.assertAlmostEquals(S[0], self.S1mt)
+            self.assertAlmostEquals(D[0], self.D1mt)
+            self.assertSigmaEquals(R[0], self.R1mt)
+            try:
+                self.assertAlmostEquals(S[1], self.S1dc)
+            except AssertionError as e:
+                if self.S1dc in [0, np.pi]:
+                    self.assertAlmostEquals(S[1], np.mod(self.S1dc+np.pi, 2*np.pi))
+                else:
+                    raise e
+            self.assertAlmostEquals(D[1], self.D1dc)
+            self.assertSigmaEquals(R[1], self.R1dc)
 
-    def test_SDR_SDR_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_SDR_SDR_cython(self, logger):
         [S2dc, D2dc, R2dc] = SDR_SDR(self.S1dc, self.D1dc, self.R1dc)
         [S2mt, D2mt, R2mt] = SDR_SDR(self.S1mt, self.D1mt, self.R1mt)
         self.assertAlmostEquals(S2dc, self.S2dc)
@@ -642,9 +731,9 @@ class MomentTensorConvertTestCase(TestCase):
                 raise e
         self.assertAlmostEquals(D[1], self.D1dc)
         self.assertSigmaEquals(R[1], self.R1dc)
+        logger.info.assert_not_called()
 
     def test_FP_TNP(self):
-        mtc._CYTHON = False
         [Tdc, Ndc, Pdc] = FP_TNP(self.N1dc, self.N2dc)
         [Tmt, Nmt, Pmt] = FP_TNP(self.N1mt, self.N2mt)
         self.assertVectorEquals(Tdc, self.Tdc)
@@ -653,8 +742,8 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertVectorEquals(Tmt, self.Tmt)
         self.assertVectorEquals(Nmt, self.Nmt)
         self.assertVectorEquals(Pmt, self.Pmt)
-        [T, N, P] = FP_TNP(
-            np.append(self.N1mt, self.N1dc, 1), np.append(self.N2mt, self.N2dc, 1))
+        [T, N, P] = FP_TNP(np.append(self.N1mt, self.N1dc, 1),
+                           np.append(self.N2mt, self.N2dc, 1))
         self.assertVectorEquals(T[:, 0], self.Tmt)
         self.assertVectorEquals(N[:, 0], self.Nmt)
         self.assertVectorEquals(P[:, 0], self.Pmt)
@@ -684,8 +773,12 @@ class MomentTensorConvertTestCase(TestCase):
                 self.assertVectorEquals(N1mt, self.N2mt)
             except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
-        [N1, N2] = SDSD_FP(np.array([self.S1mt, self.S1dc]), np.array(
-            [self.D1mt, self.D1dc]), np.array([self.S2mt, self.S2dc]), np.array([self.D2mt, self.D2dc]))
+
+    def test_SDSD_FP_multiple(self):
+        [N1, N2] = SDSD_FP(np.array([self.S1mt, self.S1dc]),
+                           np.array([self.D1mt, self.D1dc]),
+                           np.array([self.S2mt, self.S2dc]),
+                           np.array([self.D2mt, self.D2dc]))
         try:
             self.assertVectorEquals(N1[:, 1], self.N1dc)
             self.assertVectorEquals(N2[:, 1], self.N2dc)
@@ -706,7 +799,6 @@ class MomentTensorConvertTestCase(TestCase):
                 raise AssertionError(e1.message+' or '+e2.message)
 
     def test_SDR_FP(self):
-        mtc._CYTHON = False
         [N1dc, N2dc] = SDR_FP(self.S1dc, self.D1dc, self.R1dc)
         [N1mt, N2mt] = SDR_FP(self.S1mt, self.D1mt, self.R1mt)
         try:
@@ -727,8 +819,11 @@ class MomentTensorConvertTestCase(TestCase):
                 self.assertVectorEquals(N1mt, self.N2mt)
             except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
-        [N1, N2] = SDR_FP(np.array([self.S1mt, self.S1dc]), np.array(
-            [self.D1mt, self.D1dc]), np.array([self.R1mt, self.R1dc]))
+
+    def test_SDR_FP_multiple(self):
+        [N1, N2] = SDR_FP(np.array([self.S1mt, self.S1dc]),
+                          np.array([self.D1mt, self.D1dc]),
+                          np.array([self.R1mt, self.R1dc]))
         try:
             self.assertVectorEquals(N1[:, 1], self.N1dc)
             self.assertVectorEquals(N2[:, 1], self.N2dc)
@@ -789,7 +884,6 @@ class MomentTensorConvertTestCase(TestCase):
                 raise AssertionError(e1.message+' or '+e2.message)
 
     def test_SDR_SDSD(self):
-        mtc._CYTHON = False
         [S1dc, D1dc, S2dc, D2dc] = SDR_SDSD(self.S1dc, self.D1dc, self.R1dc)
         [S1mt, D1mt, S2mt, D2mt] = SDR_SDSD(self.S1mt, self.D1mt, self.R1mt)
         try:
@@ -818,8 +912,11 @@ class MomentTensorConvertTestCase(TestCase):
                 self.assertAlmostEquals(D1mt, self.D2mt)
             except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
-        [S1, D1, S2, D2] = SDR_SDSD(np.array([self.S1mt, self.S1dc]), np.array(
-            [self.D1mt, self.D1dc]), np.array([self.R1mt, self.R1dc]))
+
+    def test_SDR_SDSD_multiple(self):
+        [S1, D1, S2, D2] = SDR_SDSD(np.array([self.S1mt, self.S1dc]),
+                                    np.array([self.D1mt, self.D1dc]),
+                                    np.array([self.R1mt, self.R1dc]))
         try:
             self.assertAlmostEquals(S1[1], self.S1dc)
             self.assertAlmostEquals(S2[1], self.S2dc)
@@ -902,8 +999,9 @@ class MomentTensorConvertTestCase(TestCase):
                 self.assertAlmostEquals(D1mt, self.D2mt)
             except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
-        [S1, D1, S2, D2] = SDR_SDSD(np.array([self.S2mt, self.S2dc]), np.array(
-            [self.D2mt, self.D2dc]), np.array([self.R2mt, self.R2dc]))
+        [S1, D1, S2, D2] = SDR_SDSD(np.array([self.S2mt, self.S2dc]),
+                                    np.array([self.D2mt, self.D2dc]),
+                                    np.array([self.R2mt, self.R2dc]))
         try:
             try:
                 self.assertAlmostEquals(S1[1], self.S1dc)
@@ -960,7 +1058,6 @@ class MomentTensorConvertTestCase(TestCase):
                 raise AssertionError(e1.message+' or '+e2.message)
 
     def test_FP_SDSD(self):
-        mtc._CYTHON = False
         [S1dc, D1dc, S2dc, D2dc] = FP_SDSD(self.N1dc, self.N2dc)
         [S1mt, D1mt, S2mt, D2mt] = FP_SDSD(self.N1mt, self.N2mt)
         try:
@@ -989,8 +1086,10 @@ class MomentTensorConvertTestCase(TestCase):
                 self.assertAlmostEquals(D1mt, self.D2mt)
             except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
-        [S1, D1, S2, D2] = FP_SDSD(
-            np.append(self.N1mt, self.N1dc, 1), np.append(self.N2mt, self.N2dc, 1))
+
+    def test_FP_SDSD_multiple(self):
+        [S1, D1, S2, D2] = FP_SDSD(np.append(self.N1mt, self.N1dc, 1),
+                                   np.append(self.N2mt, self.N2dc, 1))
         try:
             self.assertAlmostEquals(S1[1], self.S1dc)
             self.assertAlmostEquals(S2[1], self.S2dc)
@@ -1045,8 +1144,8 @@ class MomentTensorConvertTestCase(TestCase):
                 self.assertAlmostEquals(D1mt, self.D2mt)
             except AssertionError as e2:
                 raise AssertionError(e1.message+' or '+e2.message)
-        [S1, D1, S2, D2] = FP_SDSD(
-            np.append(self.N2mt, self.N2dc, 1), np.append(self.N1mt, self.N1dc, 1))
+        [S1, D1, S2, D2] = FP_SDSD(np.append(self.N2mt, self.N2dc, 1),
+                                   np.append(self.N1mt, self.N1dc, 1))
         try:
             self.assertAlmostEquals(S1[1], self.S1dc)
             self.assertAlmostEquals(S2[1], self.S2dc)
@@ -1075,53 +1174,69 @@ class MomentTensorConvertTestCase(TestCase):
                 raise AssertionError(e1.message+' or '+e2.message)
 
     def test_Tape_MT33(self):
-        mtc._CYTHON = False
         MT33 = Tape_MT33(self.Gmt, self.Dmt, self.Kmt, self.Hmt, self.Omt)
         self.assertAlmostEquals(MT33, self.MT33/self.MT33norm)
         DC33 = Tape_MT33(self.Gdc, self.Ddc, self.Kdc, self.Hdc, self.Odc)
         self.assertAlmostEquals(DC33, self.DC33)
 
-    def test_Tape_MT6(self):
-        mtc._CYTHON = False
-        MT6 = Tape_MT6(self.Gmt, self.Dmt, self.Kmt, self.Hmt, self.Omt)
-        self.assertAlmostEquals(MT6, self.MT6/self.MT6norm)
-        DC6 = Tape_MT6(self.Gdc, self.Ddc, self.Kdc, self.Hdc, self.Odc)
-        self.assertAlmostEquals(DC6, self.DC6)
-        MTs = Tape_MT6(np.array([self.Gmt, self.Gdc]), np.array([self.Dmt, self.Ddc]), np.array(
-            [self.Kmt, self.Kdc]), np.array([self.Hmt, self.Hdc]), np.array([self.Omt, self.Odc]))
-        self.assertAlmostEquals(MTs[:, 0], self.MT6/self.MT6norm)
-        self.assertAlmostEquals(MTs[:, 1], self.DC6)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_Tape_MT6_python(self, logger):
+        with PythonOnly():
+            MT6 = Tape_MT6(self.Gmt, self.Dmt, self.Kmt, self.Hmt, self.Omt)
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            self.assertAlmostEquals(MT6, self.MT6/self.MT6norm)
+            DC6 = Tape_MT6(self.Gdc, self.Ddc, self.Kdc, self.Hdc, self.Odc)
+            self.assertAlmostEquals(DC6, self.DC6)
 
-    def test_Tape_MT6_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_Tape_MT6_multiple_python(self, logger):
+        with PythonOnly():
+            MTs = Tape_MT6(np.array([self.Gmt, self.Gdc]),
+                           np.array([self.Dmt, self.Ddc]),
+                           np.array([self.Kmt, self.Kdc]),
+                           np.array([self.Hmt, self.Hdc]),
+                           np.array([self.Omt, self.Odc]))
+            self.assertAlmostEquals(MTs[:, 0], self.MT6/self.MT6norm)
+            self.assertAlmostEquals(MTs[:, 1], self.DC6)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_Tape_MT6_cython(self, logger):
         MT6 = Tape_MT6(self.Gmt, self.Dmt, self.Kmt, self.Hmt, self.Omt)
         self.assertAlmostEquals(MT6, self.MT6/self.MT6norm)
         DC6 = Tape_MT6(self.Gdc, self.Ddc, self.Kdc, self.Hdc, self.Odc)
         self.assertAlmostEquals(DC6, self.DC6)
-        MTs = Tape_MT6(np.array([self.Gmt, self.Gdc]), np.array([self.Dmt, self.Ddc]), np.array(
-            [self.Kmt, self.Kdc]), np.array([self.Hmt, self.Hdc]), np.array([self.Omt, self.Odc]))
+        logger.info.assert_not_called()
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_Tape_MT6_multiple_cython(self, logger):
+        MTs = Tape_MT6(np.array([self.Gmt, self.Gdc]),
+                       np.array([self.Dmt, self.Ddc]),
+                       np.array([self.Kmt, self.Kdc]),
+                       np.array([self.Hmt, self.Hdc]),
+                       np.array([self.Omt, self.Odc]))
         self.assertAlmostEquals(MTs[:, 0], self.MT6/self.MT6norm)
         self.assertAlmostEquals(MTs[:, 1], self.DC6)
+        logger.info.assert_not_called()
 
     def test_Tape_TNPE(self):
-        mtc._CYTHON = False
-        [Tmt, Nmt, Pmt, Emt] = Tape_TNPE(
-            self.Gmt, self.Dmt, self.Kmt, self.Hmt, self.Omt)
+        [Tmt, Nmt, Pmt, Emt] = Tape_TNPE(self.Gmt, self.Dmt, self.Kmt, self.Hmt, self.Omt)
         self.assertVectorEquals(Tmt, self.Tmt, 4)
         self.assertVectorEquals(Nmt, self.Nmt, 4)
         self.assertVectorEquals(Pmt, self.Pmt, 4)
         Emtnorm = np.sqrt(self.Emt.T*self.Emt)
         self.assertAlmostEquals(Emt, self.Emt/Emtnorm, 4)
-        [Tdc, Ndc, Pdc, Edc] = Tape_TNPE(
-            self.Gdc, self.Ddc, self.Kdc, self.Hdc, self.Odc)
+        [Tdc, Ndc, Pdc, Edc] = Tape_TNPE(self.Gdc, self.Ddc, self.Kdc, self.Hdc, self.Odc)
         self.assertVectorEquals(Tdc, self.Tdc, 4)
         self.assertVectorEquals(Ndc, self.Ndc, 4)
         self.assertVectorEquals(Pdc, self.Pdc, 4)
         self.assertAlmostEquals(Edc, self.Edc, 4)
-        [T, N, P, E] = Tape_TNPE(np.array([self.Gmt, self.Gdc]), np.array([self.Dmt, self.Ddc]), np.array(
-            [self.Kmt, self.Kdc]), np.array([self.Hmt, self.Hdc]), np.array([self.Omt, self.Odc]))
+        [T, N, P, E] = Tape_TNPE(np.array([self.Gmt, self.Gdc]),
+                                 np.array([self.Dmt, self.Ddc]),
+                                 np.array([self.Kmt, self.Kdc]),
+                                 np.array([self.Hmt, self.Hdc]),
+                                 np.array([self.Omt, self.Odc]))
         self.assertVectorEquals(T[:, 0], self.Tmt, 4)
         self.assertVectorEquals(N[:, 0], self.Nmt, 4)
         self.assertVectorEquals(P[:, 0], self.Pmt, 4)
@@ -1132,7 +1247,6 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertAlmostEquals(E[:, 1], self.Edc, 4)
 
     def test_normal_SD(self):
-        mtc._CYTHON = False
         s, d = normal_SD(self.N1dc)
         self.assertAlmostEquals(s, self.S1dc)
         self.assertAlmostEquals(d, self.D1dc)
@@ -1146,71 +1260,318 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertAlmostEquals(s, self.S2mt)
         self.assertAlmostEquals(d, self.D2mt)
 
-    def test_toa_vec(self):
-        mtc._CYTHON = False
+    def test_normal_SD_array(self):
+        s, d = normal_SD(np.array(self.N1dc))
+        self.assertAlmostEquals(s, self.S1dc)
+        self.assertAlmostEquals(d, self.D1dc)
+
+    def test_toa_vec_radians(self):
         vec = toa_vec(np.pi/4, np.pi/4, True)
         self.assertVectorEquals(vec, np.matrix([[0.5], [0.5], [1/np.sqrt(2)]]))
+
+    def test_toa_vec_degrees(self):
         vec = toa_vec(45., 45., False)
         self.assertVectorEquals(vec, np.matrix([[0.5], [0.5], [1/np.sqrt(2)]]))
 
-    def test_output_convert(self):
-        mtc._CYTHON = False
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_output_convert_mt(self, logger):
+        with PythonOnly():
+            result_mt = output_convert(self.MT6)
+            self.assertEqual(logger.info.call_args_list[0], mock.call(C_EXTENSION_FALLBACK_LOG_MSG))
+            for key in result_mt.keys():
+                new_key = key
+                if key == 's':
+                    new_key = 'O'
+                if key in ['S1', 'D1', 'S2', 'D2']:
+                    try:
+                        self.assertAlmostEquals(result_mt[key],
+                                                getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
+                    except AssertionError as e:
+                        if key in ['S1', 'D1']:
+                            new_key = key.replace('1', '2')
+                        else:
+                            new_key = key.replace('2', '1')
+                        try:
+                            self.assertAlmostEquals(result_mt[key],
+                                                    getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
+                        except AssertionError as e2:
+                            try:
+                                self.assertAlmostEquals(result_mt[key]-180,
+                                                        getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
+                            except AssertionError as e3:
+                                raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
+
+                elif key in ['R1', 'R2']:
+                    try:
+                        self.assertSigmaEquals(result_mt[key],
+                                               getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
+                    except AssertionError as e:
+                        if key in ['R1']:
+                            new_key = key.replace('1', '2')
+                        else:
+                            new_key = key.replace('2', '1')
+                        try:
+                            self.assertSigmaEquals(result_mt[key],
+                                                   getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
+                        except AssertionError as e2:
+                            raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+
+                elif key in ['k']:
+                    try:
+                        self.assertSigmaEquals(result_mt[key],
+                                               getattr(self, new_key.upper()+'mt'), 5)
+                    except AssertionError as e:
+                        try:
+                            self.assertSigmaEquals(result_mt[key]-np.pi,
+                                                   getattr(self, new_key.upper()+'mt'), 5)
+                        except AssertionError as e2:
+                            raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+                else:
+                    try:
+                        self.assertAlmostEquals(result_mt[key],
+                                                getattr(self, new_key.upper()+'mt'), 5)
+                    except AssertionError as e:
+                        raise AssertionError('Key:'+str(key)+'\n'+e.message)
+
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_output_convert_dc(self, logger):
+        with PythonOnly():
+            result_dc = output_convert(self.DC6)
+            self.assertEqual(logger.info.call_args_list[0], mock.call(C_EXTENSION_FALLBACK_LOG_MSG))
+            for key in result_dc.keys():
+                new_key = key
+                if key == 's':
+                    new_key = 'O'
+                if key in ['S1', 'D1', 'S2', 'D2']:
+                    try:
+                        self.assertAlmostEquals(result_dc[key],
+                                                getattr(self, new_key.upper()+'dc')*180/np.pi, 5)
+                    except AssertionError as e:
+                        if key in ['S1', 'D1']:
+                            new_key = key.replace('1', '2')
+                        else:
+                            new_key = key.replace('2', '1')
+                        try:
+                            self.assertAlmostEquals(result_dc[key],
+                                                    getattr(self, new_key.upper()+'dc')*180/np.pi, 5)
+                        except AssertionError as e2:
+                            try:
+                                self.assertAlmostEquals(result_dc[key]-180, getattr(self, new_key.upper()+'dc')*180/np.pi, 5)
+                            except AssertionError as e3:
+                                raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
+
+                elif key in ['R1', 'R2']:
+                    try:
+                        self.assertSigmaEquals(result_dc[key]*np.pi/180., getattr(self, new_key.upper()+'dc'), 5)
+                    except AssertionError as e:
+                        if key in ['R1']:
+                            new_key = key.replace('1', '2')
+                        else:
+                            new_key = key.replace('2', '1')
+                        try:
+                            self.assertSigmaEquals(result_dc[key]*np.pi/180., getattr(self, new_key.upper()+'dc'), 5)
+                        except AssertionError as e2:
+                            raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+
+                elif key in ['k']:
+                    try:
+                        self.assertSigmaEquals(result_dc[key],
+                                               getattr(self, new_key.upper()+'dc'), 5)
+                    except AssertionError as e:
+                        try:
+                            self.assertSigmaEquals(result_dc[key]-np.pi,
+                                                   getattr(self, new_key.upper()+'dc'), 5)
+                        except AssertionError as e2:
+                            raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+                else:
+                    try:
+                        self.assertAlmostEquals(result_dc[key],
+                                                getattr(self, new_key.upper()+'dc'), 5)
+                    except AssertionError as e:
+                        raise AssertionError('Key:'+str(key)+'\n'+e.message)
+
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_output_convert_multiple(self, logger):
+        with PythonOnly():
+            result = output_convert(np.append(self.MT6, self.DC6, 1))
+            self.assertEqual(logger.info.call_args_list[0], mock.call(C_EXTENSION_FALLBACK_LOG_MSG))
+            for key in result.keys():
+                new_key = key
+                if key == 's':
+                    new_key = 'O'
+                try:
+                    self.assertAlmostEquals(result[key][:, 0],
+                                            getattr(self, new_key.upper()+'mt'), 5)
+                except IndexError:
+                    if key in ['S1', 'D1', 'S2', 'D2']:
+                        try:
+                            self.assertAlmostEquals(result[key][0]*np.pi/180,
+                                                    getattr(self, new_key.upper()+'mt'), 5)
+                        except AssertionError as e:
+                            if key in ['S1', 'D1']:
+                                new_key = key.replace('1', '2')
+                            else:
+                                new_key = key.replace('2', '1')
+                            try:
+                                self.assertAlmostEquals(result[key][0]*np.pi/180,
+                                                        getattr(self, new_key.upper()+'mt'), 5)
+                            except AssertionError as e2:
+                                try:
+                                    self.assertAlmostEquals(result[key][0]-180,
+                                                            getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
+                                except AssertionError as e3:
+                                    raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
+
+                    elif key in ['R1', 'R2']:
+                        try:
+                            self.assertSigmaEquals(result[key][0]*np.pi/180,
+                                                   getattr(self, new_key.upper()+'mt'), 5)
+                        except AssertionError as e:
+                            if key in ['R1']:
+                                new_key = key.replace('1', '2')
+                            else:
+                                new_key = key.replace('2', '1')
+                            try:
+                                self.assertSigmaEquals(result[key][0]*np.pi/180,
+                                                       getattr(self, new_key.upper()+'mt'), 5)
+                            except AssertionError as e2:
+                                raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+
+                    elif key in ['k']:
+                        try:
+                            self.assertSigmaEquals(result[key][0],
+                                                   getattr(self, new_key.upper()+'mt'), 5)
+                        except AssertionError as e:
+                            try:
+                                self.assertSigmaEquals(result[key][0]-np.pi,
+                                                       getattr(self, new_key.upper()+'mt'), 5)
+                            except AssertionError as e2:
+                                raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+                    else:
+                        try:
+                            self.assertAlmostEquals(result[key][0],
+                                                    getattr(self, new_key.upper()+'mt'), 5)
+                        except AssertionError as e:
+                            raise AssertionError('Key:'+str(key)+'\n'+e.message)
+                except AssertionError as e:
+                    raise AssertionError('Key:'+str(key)+'\n'+e.message)
+                try:
+                    self.assertAlmostEquals(result[key][:, 1],
+                                            getattr(self, new_key.upper()+'dc'), 5)
+                except IndexError:
+                    if key in ['S1', 'D1', 'S2', 'D2']:
+                        try:
+                            self.assertAlmostEquals(result[key][1]*np.pi/180,
+                                                    getattr(self, new_key.upper()+'dc'), 5)
+                        except AssertionError as e:
+                            if key in ['S1', 'D1']:
+                                new_key = key.replace('1', '2')
+                            else:
+                                new_key = key.replace('2', '1')
+                            try:
+                                self.assertAlmostEquals(result[key][1]*np.pi/180,
+                                                        getattr(self, new_key.upper()+'dc'), 5)
+                            except AssertionError as e2:
+                                try:
+                                    self.assertAlmostEquals(result[key][1]-180,
+                                                            getattr(self, new_key.upper()+'dc')*180/np.pi, 5)
+                                except AssertionError as e3:
+                                    raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
+
+                    elif key in ['R1', 'R2']:
+                        try:
+                            self.assertSigmaEquals(result[key][1]*np.pi/180,
+                                                   getattr(self, new_key.upper()+'dc'), 5)
+                        except AssertionError as e:
+                            if key in ['R1']:
+                                new_key = key.replace('1', '2')
+                            else:
+                                new_key = key.replace('2', '1')
+                            try:
+                                self.assertSigmaEquals(result[key][1]*np.pi/180,
+                                                       getattr(self, new_key.upper()+'dc'), 5)
+                            except AssertionError as e2:
+                                raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+
+                    elif key in ['k']:
+                        try:
+                            self.assertSigmaEquals(result[key][1],
+                                                   getattr(self, new_key.upper()+'dc'), 5)
+                        except AssertionError as e:
+                            try:
+                                self.assertSigmaEquals(result[key][1]-np.pi,
+                                                       getattr(self, new_key.upper()+'dc'), 5)
+                            except AssertionError as e2:
+                                raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+                    else:
+                        try:
+                            self.assertAlmostEquals(result[key][1],
+                                                    getattr(self, new_key.upper()+'dc'), 5)
+                        except AssertionError as e:
+                            raise AssertionError('Key:'+str(key)+'\n'+e.message)
+                except AssertionError as e:
+                    raise AssertionError('Key:'+str(key)+'\n'+e.message)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_output_convert_cython(self, logger):
         result_mt = output_convert(self.MT6)
+        logger.info.assert_not_called()
         for key in result_mt.keys():
             new_key = key
             if key == 's':
                 new_key = 'O'
             if key in ['S1', 'D1', 'S2', 'D2']:
                 try:
-                    self.assertAlmostEquals(
-                        result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
+                    self.assertAlmostEquals(result_mt[key],
+                                            getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
                 except AssertionError as e:
                     if key in ['S1', 'D1']:
                         new_key = key.replace('1', '2')
                     else:
                         new_key = key.replace('2', '1')
                     try:
-                        self.assertAlmostEquals(
-                            result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
+                        self.assertAlmostEquals(result_mt[key],
+                                                getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
                     except AssertionError as e2:
                         try:
-                            self.assertAlmostEquals(
-                                result_mt[key]-180, self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
+                            self.assertAlmostEquals(result_mt[key]-180,
+                                                    getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
                         except AssertionError as e3:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
             elif key in ['R1', 'R2']:
                 try:
-                    self.assertSigmaEquals(
-                        result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
+                    self.assertSigmaEquals(result_mt[key],
+                                           getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
                 except AssertionError as e:
                     if key in ['R1']:
                         new_key = key.replace('1', '2')
                     else:
                         new_key = key.replace('2', '1')
                     try:
-                        self.assertSigmaEquals(
-                            result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
+                        self.assertSigmaEquals(result_mt[key],
+                                               getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
                     except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
             elif key in ['k']:
                 try:
-                    self.assertSigmaEquals(
-                        result_mt[key], self.__getattribute__(new_key.upper()+'mt'), 5)
+                    self.assertSigmaEquals(result_mt[key],
+                                           getattr(self, new_key.upper()+'mt'), 5)
                 except AssertionError as e:
                     try:
-                        self.assertSigmaEquals(
-                            result_mt[key]-np.pi, self.__getattribute__(new_key.upper()+'mt'), 5)
+                        self.assertSigmaEquals(result_mt[key]-np.pi,
+                                               getattr(self, new_key.upper()+'mt'), 5)
                     except AssertionError as e2:
                         raise AssertionError(
                             'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
             else:
                 try:
-                    self.assertAlmostEquals(
-                        result_mt[key], self.__getattribute__(new_key.upper()+'mt'), 5)
+                    self.assertAlmostEquals(result_mt[key],
+                                            getattr(self, new_key.upper()+'mt'), 5)
                 except AssertionError as e:
                     raise AssertionError('Key:'+str(key)+'\n'+e.message)
         result_dc = output_convert(self.DC6)
@@ -1220,55 +1581,53 @@ class MomentTensorConvertTestCase(TestCase):
                 new_key = 'O'
             if key in ['S1', 'D1', 'S2', 'D2']:
                 try:
-                    self.assertAlmostEquals(
-                        result_dc[key], self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
+                    self.assertAlmostEquals(result_dc[key],
+                                            getattr(self, new_key.upper()+'dc')*180/np.pi, 5)
                 except AssertionError as e:
                     if key in ['S1', 'D1']:
                         new_key = key.replace('1', '2')
                     else:
                         new_key = key.replace('2', '1')
                     try:
-                        self.assertAlmostEquals(
-                            result_dc[key], self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
+                        self.assertAlmostEquals(result_dc[key],
+                                                getattr(self, new_key.upper()+'dc')*180/np.pi, 5)
                     except AssertionError as e2:
                         try:
-                            self.assertAlmostEquals(
-                                result_dc[key]-180, self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
+                            self.assertAlmostEquals(result_dc[key]-180,
+                                                    getattr(self, new_key.upper()+'dc')*180/np.pi, 5)
                         except AssertionError as e3:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
             elif key in ['R1', 'R2']:
                 try:
-                    self.assertSigmaEquals(
-                        result_dc[key]*np.pi/180., self.__getattribute__(new_key.upper()+'dc'), 5)
+                    self.assertSigmaEquals(result_dc[key]*np.pi/180.,
+                                           getattr(self, new_key.upper()+'dc'), 5)
                 except AssertionError as e:
                     if key in ['R1']:
                         new_key = key.replace('1', '2')
                     else:
                         new_key = key.replace('2', '1')
                     try:
-                        self.assertSigmaEquals(
-                            result_dc[key]*np.pi/180., self.__getattribute__(new_key.upper()+'dc'), 5)
+                        self.assertSigmaEquals(result_dc[key]*np.pi/180.,
+                                               getattr(self, new_key.upper()+'dc'), 5)
                     except AssertionError as e2:
-                        raise AssertionError(
-                            'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+                        raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
             elif key in ['k']:
                 try:
-                    self.assertSigmaEquals(
-                        result_dc[key], self.__getattribute__(new_key.upper()+'dc'), 5)
+                    self.assertSigmaEquals(result_dc[key],
+                                           getattr(self, new_key.upper()+'dc'), 5)
                 except AssertionError as e:
                     try:
-                        self.assertSigmaEquals(
-                            result_dc[key]-np.pi, self.__getattribute__(new_key.upper()+'dc'), 5)
+                        self.assertSigmaEquals(result_dc[key]-np.pi,
+                                               getattr(self, new_key.upper()+'dc'), 5)
                     except AssertionError as e2:
-                        raise AssertionError(
-                            'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+                        raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
             else:
                 try:
-                    self.assertAlmostEquals(
-                        result_dc[key], self.__getattribute__(new_key.upper()+'dc'), 5)
+                    self.assertAlmostEquals(result_dc[key],
+                                            getattr(self, new_key.upper()+'dc'), 5)
                 except AssertionError as e:
                     raise AssertionError('Key:'+str(key)+'\n'+e.message)
         result = output_convert(np.append(self.MT6, self.DC6, 1))
@@ -1277,402 +1636,160 @@ class MomentTensorConvertTestCase(TestCase):
             if key == 's':
                 new_key = 'O'
             try:
-                self.assertAlmostEquals(
-                    result[key][:, 0], self.__getattribute__(new_key.upper()+'mt'), 5)
+                self.assertAlmostEquals(result[key][:, 0],
+                                        getattr(self, new_key.upper()+'mt'), 5)
             except IndexError:
                 if key in ['S1', 'D1', 'S2', 'D2']:
                     try:
-                        self.assertAlmostEquals(
-                            result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
+                        self.assertAlmostEquals(result[key][0]*np.pi/180,
+                                                getattr(self, new_key.upper()+'mt'), 5)
                     except AssertionError as e:
                         if key in ['S1', 'D1']:
                             new_key = key.replace('1', '2')
                         else:
                             new_key = key.replace('2', '1')
                         try:
-                            self.assertAlmostEquals(
-                                result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
+                            self.assertAlmostEquals(result[key][0]*np.pi/180,
+                                                    getattr(self, new_key.upper()+'mt'), 5)
                         except AssertionError as e2:
                             try:
-                                self.assertAlmostEquals(
-                                    result[key][0]-180, self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
+                                self.assertAlmostEquals(result[key][0]-180,
+                                                        getattr(self, new_key.upper()+'mt')*180/np.pi, 5)
                             except AssertionError as e3:
                                 raise AssertionError(
                                     'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
                 elif key in ['R1', 'R2']:
                     try:
-                        self.assertSigmaEquals(
-                            result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
+                        self.assertSigmaEquals(result[key][0]*np.pi/180,
+                                               getattr(self, new_key.upper()+'mt'), 5)
                     except AssertionError as e:
                         if key in ['R1']:
                             new_key = key.replace('1', '2')
                         else:
                             new_key = key.replace('2', '1')
                         try:
-                            self.assertSigmaEquals(
-                                result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
+                            self.assertSigmaEquals(result[key][0]*np.pi/180,
+                                                   getattr(self, new_key.upper()+'mt'), 5)
                         except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
                 elif key in ['k']:
                     try:
-                        self.assertSigmaEquals(
-                            result[key][0], self.__getattribute__(new_key.upper()+'mt'), 5)
+                        self.assertSigmaEquals(result[key][0],
+                                               getattr(self, new_key.upper()+'mt'), 5)
                     except AssertionError as e:
                         try:
-                            self.assertSigmaEquals(
-                                result[key][0]-np.pi, self.__getattribute__(new_key.upper()+'mt'), 5)
+                            self.assertSigmaEquals(result[key][0]-np.pi,
+                                                   getattr(self, new_key.upper()+'mt'), 5)
                         except AssertionError as e2:
-                            raise AssertionError(
-                                'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
+                            raise AssertionError('Key:'+str(key)+'\n'+e.message+' or '+e2.message)
                 else:
                     try:
-                        self.assertAlmostEquals(
-                            result[key][0], self.__getattribute__(new_key.upper()+'mt'), 5)
+                        self.assertAlmostEquals(result[key][0],
+                                                getattr(self, new_key.upper()+'mt'), 5)
                     except AssertionError as e:
                         raise AssertionError('Key:'+str(key)+'\n'+e.message)
             except AssertionError as e:
                 raise AssertionError('Key:'+str(key)+'\n'+e.message)
             try:
-                self.assertAlmostEquals(
-                    result[key][:, 1], self.__getattribute__(new_key.upper()+'dc'), 5)
+                self.assertAlmostEquals(result[key][:, 1],
+                                        getattr(self, new_key.upper()+'dc'), 5)
             except IndexError:
                 if key in ['S1', 'D1', 'S2', 'D2']:
                     try:
-                        self.assertAlmostEquals(
-                            result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
+                        self.assertAlmostEquals(result[key][1]*np.pi/180,
+                                                getattr(self, new_key.upper()+'dc'), 5)
                     except AssertionError as e:
                         if key in ['S1', 'D1']:
                             new_key = key.replace('1', '2')
                         else:
                             new_key = key.replace('2', '1')
                         try:
-                            self.assertAlmostEquals(
-                                result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
+                            self.assertAlmostEquals(result[key][1]*np.pi/180,
+                                                    getattr(self, new_key.upper()+'dc'), 5)
                         except AssertionError as e2:
                             try:
-                                self.assertAlmostEquals(
-                                    result[key][1]-180, self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
+                                self.assertAlmostEquals(result[key][1]-180,
+                                                        getattr(self, new_key.upper()+'dc')*180/np.pi, 5)
                             except AssertionError as e3:
                                 raise AssertionError(
                                     'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
 
                 elif key in ['R1', 'R2']:
                     try:
-                        self.assertSigmaEquals(
-                            result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
+                        self.assertSigmaEquals(result[key][1]*np.pi/180,
+                                               getattr(self, new_key.upper()+'dc'), 5)
                     except AssertionError as e:
                         if key in ['R1']:
                             new_key = key.replace('1', '2')
                         else:
                             new_key = key.replace('2', '1')
                         try:
-                            self.assertSigmaEquals(
-                                result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
+                            self.assertSigmaEquals(result[key][1]*np.pi/180,
+                                                   getattr(self, new_key.upper()+'dc'), 5)
                         except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
 
                 elif key in ['k']:
                     try:
-                        self.assertSigmaEquals(
-                            result[key][1], self.__getattribute__(new_key.upper()+'dc'), 5)
+                        self.assertSigmaEquals(result[key][1],
+                                               getattr(self, new_key.upper()+'dc'), 5)
                     except AssertionError as e:
                         try:
-                            self.assertSigmaEquals(
-                                result[key][1]-np.pi, self.__getattribute__(new_key.upper()+'dc'), 5)
+                            self.assertSigmaEquals(result[key][1]-np.pi,
+                                                   getattr(self, new_key.upper()+'dc'), 5)
                         except AssertionError as e2:
                             raise AssertionError(
                                 'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
                 else:
                     try:
-                        self.assertAlmostEquals(
-                            result[key][1], self.__getattribute__(new_key.upper()+'dc'), 5)
+                        self.assertAlmostEquals(result[key][1],
+                                                getattr(self, new_key.upper()+'dc'), 5)
                     except AssertionError as e:
                         raise AssertionError('Key:'+str(key)+'\n'+e.message)
             except AssertionError as e:
                 raise AssertionError('Key:'+str(key)+'\n'+e.message)
 
-    def test_output_convert_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
-        result_mt = output_convert(self.MT6)
-        for key in result_mt.keys():
-            new_key = key
-            if key == 's':
-                new_key = 'O'
-            if key in ['S1', 'D1', 'S2', 'D2']:
-                try:
-                    self.assertAlmostEquals(
-                        result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                except AssertionError as e:
-                    if key in ['S1', 'D1']:
-                        new_key = key.replace('1', '2')
-                    else:
-                        new_key = key.replace('2', '1')
-                    try:
-                        self.assertAlmostEquals(
-                            result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                    except AssertionError as e2:
-                        try:
-                            self.assertAlmostEquals(
-                                result_mt[key]-180, self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                        except AssertionError as e3:
-                            raise AssertionError(
-                                'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
-
-            elif key in ['R1', 'R2']:
-                try:
-                    self.assertSigmaEquals(
-                        result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                except AssertionError as e:
-                    if key in ['R1']:
-                        new_key = key.replace('1', '2')
-                    else:
-                        new_key = key.replace('2', '1')
-                    try:
-                        self.assertSigmaEquals(
-                            result_mt[key], self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                    except AssertionError as e2:
-                        raise AssertionError(
-                            'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
-
-            elif key in ['k']:
-                try:
-                    self.assertSigmaEquals(
-                        result_mt[key], self.__getattribute__(new_key.upper()+'mt'), 5)
-                except AssertionError as e:
-                    try:
-                        self.assertSigmaEquals(
-                            result_mt[key]-np.pi, self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError as e2:
-                        raise AssertionError(
-                            'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
-            else:
-                try:
-                    self.assertAlmostEquals(
-                        result_mt[key], self.__getattribute__(new_key.upper()+'mt'), 5)
-                except AssertionError as e:
-                    raise AssertionError('Key:'+str(key)+'\n'+e.message)
-        result_dc = output_convert(self.DC6)
-        for key in result_dc.keys():
-            new_key = key
-            if key == 's':
-                new_key = 'O'
-            if key in ['S1', 'D1', 'S2', 'D2']:
-                try:
-                    self.assertAlmostEquals(
-                        result_dc[key], self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                except AssertionError as e:
-                    if key in ['S1', 'D1']:
-                        new_key = key.replace('1', '2')
-                    else:
-                        new_key = key.replace('2', '1')
-                    try:
-                        self.assertAlmostEquals(
-                            result_dc[key], self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                    except AssertionError as e2:
-                        try:
-                            self.assertAlmostEquals(
-                                result_dc[key]-180, self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                        except AssertionError as e3:
-                            raise AssertionError(
-                                'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
-
-            elif key in ['R1', 'R2']:
-                try:
-                    self.assertSigmaEquals(
-                        result_dc[key]*np.pi/180., self.__getattribute__(new_key.upper()+'dc'), 5)
-                except AssertionError as e:
-                    if key in ['R1']:
-                        new_key = key.replace('1', '2')
-                    else:
-                        new_key = key.replace('2', '1')
-                    try:
-                        self.assertSigmaEquals(
-                            result_dc[key]*np.pi/180., self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError as e2:
-                        raise AssertionError(
-                            'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
-
-            elif key in ['k']:
-                try:
-                    self.assertSigmaEquals(
-                        result_dc[key], self.__getattribute__(new_key.upper()+'dc'), 5)
-                except AssertionError as e:
-                    try:
-                        self.assertSigmaEquals(
-                            result_dc[key]-np.pi, self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError as e2:
-                        raise AssertionError(
-                            'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
-            else:
-                try:
-                    self.assertAlmostEquals(
-                        result_dc[key], self.__getattribute__(new_key.upper()+'dc'), 5)
-                except AssertionError as e:
-                    raise AssertionError('Key:'+str(key)+'\n'+e.message)
-        result = output_convert(np.append(self.MT6, self.DC6, 1))
-        for key in result.keys():
-            new_key = key
-            if key == 's':
-                new_key = 'O'
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_MT6_biaxes_python(self, logger):
+        with PythonOnly():
+            # Tested against MATLAB code
+            phi, explosion, area_displacement = MT6_biaxes(np.array([2., 1, 0, -1, 0, 0]))
+            logger.info.assert_called_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            self.assertAlmostEquals(phi, np.array([[0.75983569,  0.75983569],
+                                                   [-0.39331989, -0.39331989],
+                                                   [0.51763809, -0.51763809]]))
+            self.assertAlmostEquals(area_displacement, 1.18301270189222)
+            self.assertAlmostEquals(explosion, 0.0849364905389036)
+            phi, explosion, area_displacement = MT6_biaxes(
+                np.array([[2, 3], [1, 0], [0, -3], [-1, 0], [0, 0], [0, 0]]))
+            self.assertAlmostEquals(phi, np.array([[[0.75983569, 0.75983569], [-0.39331989, -0.39331989],
+                                                    [0.51763809, -0.51763809]],
+                                                   [[0.70710678, 0.70710678], [0., 0.],
+                                                    [0.70710678, -0.70710678]]]))
+            self.assertAlmostEquals(area_displacement, np.array([1.1830127, 3.]))
+            self.assertAlmostEquals(explosion, np.array([0.08493649, 0.]))
+            vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
+                    0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
+            phi, explosion, area_displacement = MT6_biaxes(
+                np.array([2, 1, 0, -1, 0, 0]), vtic)
             try:
-                self.assertAlmostEquals(
-                    result[key][:, 0], self.__getattribute__(new_key.upper()+'mt'), 5)
-            except IndexError:
-                if key in ['S1', 'D1', 'S2', 'D2']:
-                    try:
-                        self.assertAlmostEquals(
-                            result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError as e:
-                        if key in ['S1', 'D1']:
-                            new_key = key.replace('1', '2')
-                        else:
-                            new_key = key.replace('2', '1')
-                        try:
-                            self.assertAlmostEquals(
-                                result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                        except AssertionError as e2:
-                            try:
-                                self.assertAlmostEquals(
-                                    result[key][0]-180, self.__getattribute__(new_key.upper()+'mt')*180/np.pi, 5)
-                            except AssertionError as e3:
-                                raise AssertionError(
-                                    'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
+                self.assertVectorEquals(phi[:, 0], np.array([-0.062501878200605, 0.712609970150016, 0.698770738986823]))
+                self.assertVectorEquals(phi[:, 1], np.array(
+                    [-0.062501878200605, 0.712609970150016, -0.698770738986823]))
+            except AssertionError:
+                self.assertVectorEquals(phi[:, 1], np.array([-0.062501878200605, 0.712609970150016, 0.698770738986823]))
+                self.assertVectorEquals(phi[:, 0], np.array([-0.062501878200605, 0.712609970150016, -0.698770738986823]))
+            self.assertAlmostEquals(area_displacement, 1.984495199420505)
+            self.assertAlmostEquals(explosion, 0.461237998551262)
 
-                elif key in ['R1', 'R2']:
-                    try:
-                        self.assertSigmaEquals(
-                            result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError as e:
-                        if key in ['R1']:
-                            new_key = key.replace('1', '2')
-                        else:
-                            new_key = key.replace('2', '1')
-                        try:
-                            self.assertSigmaEquals(
-                                result[key][0]*np.pi/180, self.__getattribute__(new_key.upper()+'mt'), 5)
-                        except AssertionError as e2:
-                            raise AssertionError(
-                                'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
-
-                elif key in ['k']:
-                    try:
-                        self.assertSigmaEquals(
-                            result[key][0], self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError as e:
-                        try:
-                            self.assertSigmaEquals(
-                                result[key][0]-np.pi, self.__getattribute__(new_key.upper()+'mt'), 5)
-                        except AssertionError as e2:
-                            raise AssertionError(
-                                'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
-                else:
-                    try:
-                        self.assertAlmostEquals(
-                            result[key][0], self.__getattribute__(new_key.upper()+'mt'), 5)
-                    except AssertionError as e:
-                        raise AssertionError('Key:'+str(key)+'\n'+e.message)
-            except AssertionError as e:
-                raise AssertionError('Key:'+str(key)+'\n'+e.message)
-            try:
-                self.assertAlmostEquals(
-                    result[key][:, 1], self.__getattribute__(new_key.upper()+'dc'), 5)
-            except IndexError:
-                if key in ['S1', 'D1', 'S2', 'D2']:
-                    try:
-                        self.assertAlmostEquals(
-                            result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError as e:
-                        if key in ['S1', 'D1']:
-                            new_key = key.replace('1', '2')
-                        else:
-                            new_key = key.replace('2', '1')
-                        try:
-                            self.assertAlmostEquals(
-                                result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                        except AssertionError as e2:
-                            try:
-                                self.assertAlmostEquals(
-                                    result[key][1]-180, self.__getattribute__(new_key.upper()+'dc')*180/np.pi, 5)
-                            except AssertionError as e3:
-                                raise AssertionError(
-                                    'Key:'+str(key)+'\n'+e.message+' or '+e2.message+' or '+e3.message)
-
-                elif key in ['R1', 'R2']:
-                    try:
-                        self.assertSigmaEquals(
-                            result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError as e:
-                        if key in ['R1']:
-                            new_key = key.replace('1', '2')
-                        else:
-                            new_key = key.replace('2', '1')
-                        try:
-                            self.assertSigmaEquals(
-                                result[key][1]*np.pi/180, self.__getattribute__(new_key.upper()+'dc'), 5)
-                        except AssertionError as e2:
-                            raise AssertionError(
-                                'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
-
-                elif key in ['k']:
-                    try:
-                        self.assertSigmaEquals(
-                            result[key][1], self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError as e:
-                        try:
-                            self.assertSigmaEquals(
-                                result[key][1]-np.pi, self.__getattribute__(new_key.upper()+'dc'), 5)
-                        except AssertionError as e2:
-                            raise AssertionError(
-                                'Key:'+str(key)+'\n'+e.message+' or '+e2.message)
-                else:
-                    try:
-                        self.assertAlmostEquals(
-                            result[key][1], self.__getattribute__(new_key.upper()+'dc'), 5)
-                    except AssertionError as e:
-                        raise AssertionError('Key:'+str(key)+'\n'+e.message)
-            except AssertionError as e:
-                raise AssertionError('Key:'+str(key)+'\n'+e.message)
-
-    def test_MT6_biaxes(self):
-        mtc._CYTHON = False
-        # Tested against MATLAB code
-        phi, explosion, area_displacement = MT6_biaxes(np.array([2., 1, 0, -1, 0, 0]))
-        self.assertAlmostEquals(phi, np.array([[0.75983569,  0.75983569],
-                                               [-0.39331989, -0.39331989],
-                                               [0.51763809, -0.51763809]]))
-        self.assertAlmostEquals(area_displacement, 1.18301270189222)
-        self.assertAlmostEquals(explosion, 0.0849364905389036)
-        phi, explosion, area_displacement = MT6_biaxes(
-            np.array([[2, 3], [1, 0], [0, -3], [-1, 0], [0, 0], [0, 0]]))
-        self.assertAlmostEquals(phi, np.array([[[0.75983569, 0.75983569], [-0.39331989, -0.39331989],
-                                                [0.51763809, -0.51763809]],
-                                               [[0.70710678, 0.70710678], [0., 0.],
-                                                [0.70710678, -0.70710678]]]))
-        self.assertAlmostEquals(area_displacement, np.array([1.1830127, 3.]))
-        self.assertAlmostEquals(explosion, np.array([0.08493649, 0.]))
-        vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
-                0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
-        phi, explosion, area_displacement = MT6_biaxes(
-            np.array([2, 1, 0, -1, 0, 0]), vtic)
-        try:
-            self.assertVectorEquals(phi[:, 0], np.array([-0.062501878200605, 0.712609970150016, 0.698770738986823]))
-            self.assertVectorEquals(phi[:, 1], np.array(
-                [-0.062501878200605, 0.712609970150016, -0.698770738986823]))
-        except AssertionError:
-            self.assertVectorEquals(phi[:, 1], np.array([-0.062501878200605, 0.712609970150016, 0.698770738986823]))
-            self.assertVectorEquals(phi[:, 0], np.array([-0.062501878200605, 0.712609970150016, -0.698770738986823]))
-        self.assertAlmostEquals(area_displacement, 1.984495199420505)
-        self.assertAlmostEquals(explosion, 0.461237998551262)
-
-    def test_MT6_biaxes_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_MT6_biaxes_cython(self, logger):
         mtc._CYTHON = True
         # Tested against MATLAB code
         phi, explosion, area_displacement = MT6_biaxes(
@@ -1703,10 +1820,34 @@ class MomentTensorConvertTestCase(TestCase):
                 [-0.062501878200605, 0.712609970150016, -0.698770738986823]))
         self.assertAlmostEquals(area_displacement, 1.984495199420505)
         self.assertAlmostEquals(explosion, 0.461237998551262)
+        logger.info.assert_not_called()
 
-    def test_MT6c_D6(self):
-        mtc._CYTHON = False
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_MT6c_D6_python(self, logger):
+        with PythonOnly():
+            D6 = MT6c_D6(self.MT6, isotropic_c())
+            logger.info.assert_called_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            Td, Nd, Pd, Ed = MT6_TNPE(D6)
+            try:
+                self.assertAlmostEquals(Td, self.Tmt)
+            except Exception:
+                self.assertAlmostEquals(Td, -self.Tmt)
+            try:
+                self.assertAlmostEquals(Nd, self.Nmt)
+            except Exception:
+                self.assertAlmostEquals(Nd, -self.Nmt)
+            try:
+                self.assertAlmostEquals(Pd, self.Pmt)
+            except Exception:
+                self.assertAlmostEquals(Pd, -self.Pmt)
+            with self.assertRaises(AssertionError):
+                self.assertAlmostEquals(Ed, self.Emt)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_MT6c_D6_cython(self, logger):
         D6 = MT6c_D6(self.MT6, isotropic_c())
+        logger.info.assert_not_called()
         Td, Nd, Pd, Ed = MT6_TNPE(D6)
         try:
             self.assertAlmostEquals(Td, self.Tmt)
@@ -1723,89 +1864,121 @@ class MomentTensorConvertTestCase(TestCase):
         with self.assertRaises(AssertionError):
             self.assertAlmostEquals(Ed, self.Emt)
 
-    def test_MT6c_D6_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
-        D6 = MT6c_D6(self.MT6, isotropic_c())
-        Td, Nd, Pd, Ed = MT6_TNPE(D6)
-        try:
-            self.assertAlmostEquals(Td, self.Tmt)
-        except Exception:
-            self.assertAlmostEquals(Td, -self.Tmt)
-        try:
-            self.assertAlmostEquals(Nd, self.Nmt)
-        except Exception:
-            self.assertAlmostEquals(Nd, -self.Nmt)
-        try:
-            self.assertAlmostEquals(Pd, self.Pmt)
-        except Exception:
-            self.assertAlmostEquals(Pd, -self.Pmt)
-        with self.assertRaises(AssertionError):
-            self.assertAlmostEquals(Ed, self.Emt)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_c_norm_python(self, logger):
+        with PythonOnly():
+            self.assertEqual(c_norm(isotropic_c()), 6.7082039324993694)
+            self.assertEqual(c_norm(isotropic_c(2)), 9.16515138991168)
+            self.assertEqual(c_norm(isotropic_c(2, 4)), 22.715633383201094)
+            logger.info.assert_called_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            # Matlab values
 
-    def test_c_norm(self):
-        mtc._CYTHON = False
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_c_norm_cython(self, logger):
         self.assertEqual(c_norm(isotropic_c()), 6.7082039324993694)
         self.assertEqual(c_norm(isotropic_c(2)), 9.16515138991168)
         self.assertEqual(c_norm(isotropic_c(2, 4)), 22.715633383201094)
         # Matlab values
+        logger.info.assert_not_called()
 
-    def test_c_norm_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
-        self.assertEqual(c_norm(isotropic_c()), 6.7082039324993694)
-        self.assertEqual(c_norm(isotropic_c(2)), 9.16515138991168)
-        self.assertEqual(c_norm(isotropic_c(2, 4)), 22.715633383201094)
-        # Matlab values
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_isotropic_c_python(self, logger):
+        with PythonOnly():
+            self.assertEqual(isotropic_c(),
+                             [3, 1, 1, 0, 0, 0, 3, 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 1, 0, 1])
+            self.assertEqual(isotropic_c(2),
+                             [4, 2, 2, 0, 0, 0, 4, 2, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 1, 0, 1])
+            vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
+                    0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
+            self.assertAlmostEquals(np.array(isotropic_c(c=vtic)),
+                                    np.array([5.2666666666666675, -1.1333333333333333,
+                                              -1.1333333333333333, 0, 0, 0,
+                                              5.2666666666666675, -1.1333333333333333,
+                                              0, 0, 0, 5.2666666666666675, 0, 0, 0,
+                                              3.2000000000000002, 0, 0, 3.2000000000000002,
+                                              0, 3.2000000000000002]))
+            logger.info.assert_called_with(C_EXTENSION_FALLBACK_LOG_MSG)
 
-    def test_isotropic_c(self):
-        mtc._CYTHON = False
-        self.assertEqual(
-            isotropic_c(), [3, 1, 1, 0, 0, 0, 3, 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 1, 0, 1])
-        self.assertEqual(
-            isotropic_c(2), [4, 2, 2, 0, 0, 0, 4, 2, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 1, 0, 1])
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_isotropic_c_cython(self, logger):
+        self.assertEqual(isotropic_c(),
+                         [3, 1, 1, 0, 0, 0, 3, 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 1, 0, 1])
+        self.assertEqual(isotropic_c(2),
+                         [4, 2, 2, 0, 0, 0, 4, 2, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 1, 0, 1])
         vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
                 0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
-        self.assertAlmostEquals(np.array(isotropic_c(c=vtic)), np.array(
-            [5.2666666666666675, -1.1333333333333333, -1.1333333333333333, 0, 0, 0, 5.2666666666666675, -1.1333333333333333, 0, 0, 0, 5.2666666666666675, 0, 0, 0, 3.2000000000000002, 0, 0, 3.2000000000000002, 0, 3.2000000000000002]))
+        self.assertAlmostEquals(np.array(isotropic_c(c=vtic)),
+                                np.array([5.2666666666666675, -1.1333333333333333,
+                                          -1.1333333333333333, 0, 0, 0, 5.2666666666666675,
+                                          -1.1333333333333333, 0, 0, 0, 5.2666666666666675,
+                                          0, 0, 0, 3.2000000000000002, 0, 0, 3.2000000000000002,
+                                          0, 3.2000000000000002]))
+        logger.info.assert_not_called()
 
-    def test_isotropic_c_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
-        self.assertEqual(
-            isotropic_c(), [3, 1, 1, 0, 0, 0, 3, 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 1, 0, 1])
-        self.assertEqual(
-            isotropic_c(2), [4, 2, 2, 0, 0, 0, 4, 2, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 1, 0, 1])
-        vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
-                0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
-        self.assertAlmostEquals(np.array(isotropic_c(c=vtic)), np.array(
-            [5.2666666666666675, -1.1333333333333333, -1.1333333333333333, 0, 0, 0, 5.2666666666666675, -1.1333333333333333, 0, 0, 0, 5.2666666666666675, 0, 0, 0, 3.2000000000000002, 0, 0, 3.2000000000000002, 0, 3.2000000000000002]))
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_is_isotropic_c_python(self, logger):
+        with PythonOnly():
+            self.assertTrue(is_isotropic_c(isotropic_c()))
+            self.assertTrue(is_isotropic_c(isotropic_c(2)))
+            vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
+                    0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
+            self.assertFalse(is_isotropic_c(vtic))
+            self.assertTrue(is_isotropic_c(isotropic_c(c=vtic)))
+            logger.info.assert_called_with(C_EXTENSION_FALLBACK_LOG_MSG)
 
-    def test_is_isotropic_c(self):
-        mtc._CYTHON = False
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_is_isotropic_c_cython(self, logger):
         self.assertTrue(is_isotropic_c(isotropic_c()))
         self.assertTrue(is_isotropic_c(isotropic_c(2)))
         vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
                 0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
         self.assertFalse(is_isotropic_c(vtic))
         self.assertTrue(is_isotropic_c(isotropic_c(c=vtic)))
+        logger.info.assert_not_called()
 
-    def test_is_isotropic_c_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
-        self.assertTrue(is_isotropic_c(isotropic_c()))
-        self.assertTrue(is_isotropic_c(isotropic_c(2)))
-        vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
-                0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
-        self.assertFalse(is_isotropic_c(vtic))
-        self.assertTrue(is_isotropic_c(isotropic_c(c=vtic)))
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_c21_cvoigt_python(self, logger):
+        with PythonOnly():
+            self.assertAlmostEquals(c21_cvoigt(isotropic_c()), np.array([[3, 1, 1, 0, 0, 0],
+                                                                         [1, 3, 1,
+                                                                             0, 0, 0],
+                                                                         [1, 1, 3,
+                                                                             0, 0, 0],
+                                                                         [0, 0, 0,
+                                                                             2, 0, 0],
+                                                                         [0, 0, 0,
+                                                                             0, 2, 0],
+                                                                         [0, 0, 0, 0, 0, 2]]))
+            self.assertAlmostEquals(c21_cvoigt(isotropic_c(2)), np.array([[4, 2, 2, 0, 0, 0],
+                                                                          [2, 4, 2,
+                                                                              0, 0, 0],
+                                                                          [2, 2, 4,
+                                                                              0, 0, 0],
+                                                                          [0, 0, 0,
+                                                                              2, 0, 0],
+                                                                          [0, 0, 0,
+                                                                              0, 2, 0],
+                                                                          [0, 0, 0, 0, 0, 2]]))
+            vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
+                    0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
+            self.assertAlmostEquals(c21_cvoigt(vtic), np.array([[1, 2, 0.5, 0, 0, 0],
+                                                                [2, 1, 0.5,
+                                                                    0, 0, 0],
+                                                                [0.5, 0.5, 1,
+                                                                    0, 0, 0],
+                                                                [0, 0,  0,
+                                                                    12, 0, 0],
+                                                                [0, 0,  0, 0,
+                                                                    12, 0],
+                                                                [0, 0,  0, 0, 0, 8]]))
+            logger.info.assert_called_with(C_EXTENSION_FALLBACK_LOG_MSG)
 
-    def test_c21_cvoigt(self):
-        mtc._CYTHON = False
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
+    def test_c21_cvoigt_cython(self, logger):
         self.assertAlmostEquals(c21_cvoigt(isotropic_c()), np.array([[3, 1, 1, 0, 0, 0],
                                                                      [1, 3, 1,
                                                                          0, 0, 0],
@@ -1838,63 +2011,4 @@ class MomentTensorConvertTestCase(TestCase):
                                                             [0, 0,  0, 0,
                                                                 12, 0],
                                                             [0, 0,  0, 0, 0, 8]]))
-
-    def test_c21_cvoigt_cython(self):
-        if not _CYTHON:
-            raise unittest.SkipTest('No cmoment_tensor_conversion module')
-        mtc._CYTHON = True
-        self.assertAlmostEquals(c21_cvoigt(isotropic_c()), np.array([[3, 1, 1, 0, 0, 0],
-                                                                     [1, 3, 1,
-                                                                         0, 0, 0],
-                                                                     [1, 1, 3,
-                                                                         0, 0, 0],
-                                                                     [0, 0, 0,
-                                                                         2, 0, 0],
-                                                                     [0, 0, 0,
-                                                                         0, 2, 0],
-                                                                     [0, 0, 0, 0, 0, 2]]))
-        self.assertAlmostEquals(c21_cvoigt(isotropic_c(2)), np.array([[4, 2, 2, 0, 0, 0],
-                                                                      [2, 4, 2,
-                                                                          0, 0, 0],
-                                                                      [2, 2, 4,
-                                                                          0, 0, 0],
-                                                                      [0, 0, 0,
-                                                                          2, 0, 0],
-                                                                      [0, 0, 0,
-                                                                          0, 2, 0],
-                                                                      [0, 0, 0, 0, 0, 2]]))
-        vtic = [1.0000, 2.0000, 0.5000, 0, 0, 0, 1.0000, 0.5000,
-                0, 0, 0, 1.0000, 0, 0, 0, 6.0000, 0, 0, 6.0000, 0, 4.]
-        self.assertAlmostEquals(c21_cvoigt(vtic), np.array([[1, 2, 0.5, 0, 0, 0],
-                                                            [2, 1, 0.5,
-                                                                0, 0, 0],
-                                                            [0.5, 0.5, 1,
-                                                                0, 0, 0],
-                                                            [0, 0,  0,
-                                                                12, 0, 0],
-                                                            [0, 0,  0, 0,
-                                                                12, 0],
-                                                            [0, 0,  0, 0, 0, 8]]))
-
-
-def test_suite(verbosity=2):
-    global VERBOSITY
-    VERBOSITY = verbosity
-    suite = [unittest.TestLoader().loadTestsFromTestCase(
-        MomentTensorConvertTestCase), ]
-    suite = unittest.TestSuite(suite)
-    return suite
-
-
-def run_tests(verbosity=2):
-    """Run tests"""
-    _run_tests(test_suite(verbosity), verbosity)
-
-
-def debug_tests(verbosity=2):
-    """Runs tests with debugging on errors"""
-    _debug_tests(test_suite(verbosity))
-
-if __name__ == "__main__":
-    # Run tests
-    run_tests(verbosity=2)
+        logger.info.assert_not_called()
