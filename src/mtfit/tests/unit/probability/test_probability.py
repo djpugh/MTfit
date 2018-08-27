@@ -20,33 +20,30 @@ from MTfit.probability.probability import model_probabilities
 from MTfit.probability.probability import dkl
 from MTfit.probability.probability import dkl_estimate
 from MTfit.probability.probability import LnPDF
+from MTfit.probability import probability
+from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+try:
+    from MTfit.probability.cprobability import cProbabilityTestCase
+except ImportError:
+    pass
+
+C_EXTENSIONS = (not probability.cprobability, 'No C extension available')
+
+
+class PythonOnly(object):
+
+    def __enter__(self, *args, **kwargs):
+        self.cprobability = probability.cprobability
+        probability.cprobability = False
+
+    def __exit__(self, *args, **kwargs):
+        probability.cprobability = self.cprobability
 
 
 class ProbabilityTestCase(TestCase):
 
-    def setUp(self):
-        self.disable_c_lib()
-
-    def tearDown(self):
-        self.enable_c_lib()
-
-    def disable_c_lib(self):
-        from MTfit.probability import probability
-        probability._C_LIB_TESTS = False
-        probability._C_LIB = False
-
-    def enable_c_lib(self):
-        from MTfit.probability import probability
-        try:
-            from MTfit.probability import cprobability
-            probability._C_LIB_TESTS = True
-            probability._C_LIB = True
-            return True
-        except Exception:
-            return False
-
-    def test_polarity_ln_pdf(self):
-        Ap = np.array([[[-0.0801, -0.5611, -0.3588, -0.2998, 0.2398, 0.6345]],
+    def set_polarity_ln_pdf_vars(self):
+        self.Ap = np.array([[[-0.0801, -0.5611, -0.3588, -0.2998, 0.2398, 0.6345]],
                        [[-0.0877, -0.4819, -0.4304, -0.2907,
                            0.2747, 0.6441]],
                        [[-0.1176, -0.1983, -0.6841, -0.2160,
@@ -440,7 +437,7 @@ class ProbabilityTestCase(TestCase):
                        [[0.4852, 0.3933, 0.1215, -0.6178,
                            0.3434, -0.3092]],
                        [[0.6536, 0.0191, 0.3274, 0.1580, 0.6541, 0.1118]]])
-        ErrorPolarity = np.array([[0.0010],
+        self.ErrorPolarity = np.array([[0.0010],
                                   [0.0010],
                                   [0.0010],
                                   [0.0010],
@@ -638,100 +635,127 @@ class ProbabilityTestCase(TestCase):
                                   [0.0010],
                                   [0.0010],
                                   [0.0010]])
-        ErrorPolarity = ErrorPolarity.flatten()
-        A = np.array([[[1., 1, 1, 1, 1, 1]], [[1, 1, 1, 1, 2, 1]]])
-        M = np.matrix([[1.], [0], [2], [1], [2], [1]])
-        sigma = np.array([0., 1.])
-        P = np.array([1, -1])
-        M2 = np.matrix([[1.], [0.], [0.], [0.], [0.], [1.]])
-        A2 = np.array(
+        self.ErrorPolarity = self.ErrorPolarity.flatten()
+        self.A = np.array([[[1., 1, 1, 1, 1, 1]], [[1, 1, 1, 1, 2, 1]]])
+        self.M = np.matrix([[1.], [0], [2], [1], [2], [1]])
+        self.sigma = np.array([0., 1.])
+        self.P = np.array([1, -1])
+        self.M2 = np.matrix([[1.], [0.], [0.], [0.], [0.], [1.]])
+        self.A2 = np.array(
             [[[1, 1, 1, 1, 1, 1]], [[1, 1, 1, 1, 2, 1]], [[2, 1, 1, 1, 2, 1]]])
-        MT = np.matrix([[0.0509, -0.3742],
+        self.MT = np.matrix([[0.0509, -0.3742],
                         [0.4391, 0.1393],
                         [-0.4900, 0.2349],
                         [-0.5897, -0.7131],
                         [-0.3515, -0.0840],
                         [-0.3053, 0.5194]])
-        self.assertTrue((polarity_ln_pdf(np.expand_dims(
-            np.expand_dims(P, 1), 1)*A, M, sigma)[0, 0] == np.log(0)+np.log(1)))
-        self.assertAlmostEqual(polarity_ln_pdf(
-            np.expand_dims(np.expand_dims(P, 1), 1)*A, M2, sigma)[0, 0], -3.78318433, 6)
-        self.assertAlmostEqual(len(polarity_ln_pdf(
-            np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3])).shape), 2)
-        self.assertAlmostEqual(polarity_ln_pdf(np.array(
-            np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]))[0, 0], -45.35532285, 6)
-        self.assertAlmostEqual(polarity_ln_pdf(np.array(
-            np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), 0.1)[0, 1], -5.28884939, 6)
-        self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array(
-            [0.2, 0.5, 0.3]), np.array([0.1, 0.2, 0.3]))[0, 0], -5.11390762, 6)
-        ln_p = polarity_ln_pdf(Ap, MT, ErrorPolarity)
-        self.assertEqual(ln_p[0, 0], -np.inf)
-        self.assertAlmostEqual(polarity_ln_pdf(
-            np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, 0.1)[0, 0], -2.40794561)
-        # test for two station p missing
-        self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, np.array([0.2, 0.1]))[0, 0], -2.52572864)
 
-        if self.enable_c_lib():
-            P = np.array([1, -1])
-            self.assertTrue((polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, _use_c=True)[0, 0] == np.log(0)+np.log(1)))
-            self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M2, sigma, _use_c=True)[0, 0], -3.78318433, 5)
-            self.assertAlmostEqual(len(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), _use_c=True).shape), 2)
-            self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), _use_c=True)[0, 0], -45.35532285, 1)
-            self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), 0.1, _use_c=True)[0, 1], -5.28884939, 5)
-            self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(A2, A2, 1)), MT, np.array([0.2, 0.5, 0.3]), np.array([0.1, 0.2, 0.3]), _use_c=True)[0, 0], -5.11390762, 5)
-            ln_p = polarity_ln_pdf(Ap, MT, ErrorPolarity, _use_c=True)
+    def set_polarity_probability_ln_pdf_vars(self):
+        self.A = np.array([[[1, 0, 0, 0, 0, 0]], [[0, 0, 0, 0, 0, 1]]])
+        self.M = 0.25*np.matrix([[0], [0], [2], [2], [2], [2]])
+        self.posProb = np.array([0.1, 0.8])
+        self.negProb = np.array([0.9, 0.2])
+        self.M2 = (1/np.sqrt(2))*np.matrix([[1], [0], [0], [0], [0], [1]])
+        self.A2 = np.array([[[1, 0, 0, 0, 0, 0]], [[0, 0, 0, 0, 0, 1]], [
+                      [0.5, 0.5, 0, 0, 0, 0]], [[0, 0, 0.6, 0.4, 0, 0]]])
+        self.posProb2 = np.array([0.1, 0.8, 0.4, 0.7])
+        self.negProb2 = np.array([0.9, 0.2, 0.6, 0.3])
+
+    def set_amplitude_ratio_ln_pdf_vars(self):
+        self.A1 = np.matrix([[1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]])
+        self.A2 = np.matrix([[1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]])
+        self.M1 = 0.25*np.matrix([[2], [0], [2], [2], [0], [2]])
+        self.M2 = 0.25*np.matrix([[2], [0], [2], [2], [0], [2]])
+        self.sigmax = np.array([0.1, 0.5])
+        self.sigmay = np.array([0.1, 0.9])
+        self.ax = np.array([[[1.000001, 0, 0, 0, 0, 0]], [[1.1, 0, 0, 0, 0, 0]]])
+        self.ay = np.array([[[1.000001, 0, 0, 0, 0, 0]], [[1.1, 0, 0, 0, 0, 0]]])
+        self.mt = np.matrix([[1.0], [1.0], [0.], [0.], [0.], [0.]])
+
+    def set_relative_amplitude_ratio_ln_pdf_vars(self):
+        self.A1 = np.array([[[1., 0, 0, 0, 0, 0]], [[0., 0, 0, 0, 0, 1]]])
+        self.A2 = np.array([[[1., 0, 0, 0, 0, 0]], [[0., 0, 0, 0, 0, 1]]])
+        self.M1 = 0.25*np.matrix([[2], [0], [2], [2.], [0], [2]])
+        self.M2 = 0.25*np.matrix([[2], [0], [2], [2.], [0], [2]])
+        self.sigmax = np.array([0.1, 0.5])
+        self.sigmay = np.array([0.1, 0.9])
+
+    def test_polarity_ln_pdf(self):
+        self.set_polarity_ln_pdf_vars()
+        with PythonOnly():
+            self.assertTrue((polarity_ln_pdf(np.expand_dims(
+                np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma)[0, 0] == np.log(0)+np.log(1)))
+            self.assertAlmostEqual(polarity_ln_pdf(
+                np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M2, self.sigma)[0, 0], -3.78318433, 6)
+            self.assertAlmostEqual(len(polarity_ln_pdf(
+                np.array(np.append(self.A2, self.A2, 1)), self.MT, np.array([0.2, 0.5, 0.3])).shape), 2)
+            self.assertAlmostEqual(polarity_ln_pdf(np.array(
+                np.append(self.A2, self.A2, 1)), self.MT, np.array([0.2, 0.5, 0.3]))[0, 0], -45.35532285, 6)
+            self.assertAlmostEqual(polarity_ln_pdf(np.array(
+                np.append(self.A2, self.A2, 1)), self.MT, np.array([0.2, 0.5, 0.3]), 0.1)[0, 1], -5.28884939, 6)
+            self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(self.A2, self.A2, 1)), self.MT, np.array(
+                [0.2, 0.5, 0.3]), np.array([0.1, 0.2, 0.3]))[0, 0], -5.11390762, 6)
+            ln_p = polarity_ln_pdf(self.Ap, self.MT, self.ErrorPolarity)
             self.assertEqual(ln_p[0, 0], -np.inf)
-            self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, 0.1, _use_c=True)[0, 0], -2.40794561)
+            self.assertAlmostEqual(polarity_ln_pdf(
+                np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma, 0.1)[0, 0], -2.40794561)
             # test for two station p missing
-            self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(P, 1), 1)*A, M, sigma, np.array([0.2, 0.1]), _use_c=True)[0, 0], -2.52572864)
-        else:
-            print('C Library tests not run')
+            self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma, np.array([0.2, 0.1]))[0, 0], -2.52572864)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    def test_polarity_ln_pdf_cython(self):
+        self.set_polarity_ln_pdf_vars()
+        self.assertTrue((polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma, _use_c=True)[0, 0] == np.log(0)+np.log(1)))
+        self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M2, self.sigma, _use_c=True)[0, 0], -3.78318433, 5)
+        self.assertAlmostEqual(len(polarity_ln_pdf(np.array(np.append(self.A2, self.A2, 1)), self.MT, np.array([0.2, 0.5, 0.3]), _use_c=True).shape), 2)
+        self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(self.A2, self.A2, 1)), self.MT, np.array([0.2, 0.5, 0.3]), _use_c=True)[0, 0], -45.35532285, 1)
+        self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(self.A2, self.A2, 1)), self.MT, np.array([0.2, 0.5, 0.3]), 0.1, _use_c=True)[0, 1], -5.28884939, 5)
+        self.assertAlmostEqual(polarity_ln_pdf(np.array(np.append(self.A2, self.A2, 1)), self.MT, np.array([0.2, 0.5, 0.3]), np.array([0.1, 0.2, 0.3]), _use_c=True)[0, 0], -5.11390762, 5)
+        ln_p = polarity_ln_pdf(self.Ap, self.MT, self.ErrorPolarity, _use_c=True)
+        self.assertEqual(ln_p[0, 0], -np.inf)
+        self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma, 0.1, _use_c=True)[0, 0], -2.40794561)
+        # test for two station p missing
+        self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma, np.array([0.2, 0.1]), _use_c=True)[0, 0], -2.52572864)
 
     def test_polarity_probability_ln_pdf(self):
-        A = np.array([[[1, 0, 0, 0, 0, 0]], [[0, 0, 0, 0, 0, 1]]])
-        M = 0.25*np.matrix([[0], [0], [2], [2], [2], [2]])
-        posProb = np.array([0.1, 0.8])
-        negProb = np.array([0.9, 0.2])
-        M2 = (1/np.sqrt(2))*np.matrix([[1], [0], [0], [0], [0], [1]])
-        A2 = np.array([[[1, 0, 0, 0, 0, 0]], [[0, 0, 0, 0, 0, 1]], [
-                      [0.5, 0.5, 0, 0, 0, 0]], [[0, 0, 0.6, 0.4, 0, 0]]])
-        posProb2 = np.array([0.1, 0.8, 0.4, 0.7])
-        negProb2 = np.array([0.9, 0.2, 0.6, 0.3])
-        self.assertAlmostEqual(polarity_probability_ln_pdf(
-            A, M, posProb, negProb)[0, 0], np.log(0.5)+np.log(0.800))
-        self.assertAlmostEqual(polarity_probability_ln_pdf(
-            A, M2, posProb, negProb)[0, 0], np.log(0.1)+np.log(0.800))
-        self.assertAlmostEqual(polarity_probability_ln_pdf(
-            A, M2, posProb, negProb, 0.1)[0, 0], np.log(0.18)+np.log(0.74))
-        self.assertAlmostEqual(polarity_probability_ln_pdf(
-            A, M2, posProb, negProb, np.array([0.2, 0.1]))[0, 0], -1.64817874, 4)
-        self.assertAlmostEqual(
-            len(polarity_probability_ln_pdf(A2, M2, posProb2, negProb2).shape), 2)
-        self.assertAlmostEqual(
-            polarity_probability_ln_pdf(A2, M2, posProb2, negProb2)[0, 0], -4.135166556742)
-        self.assertAlmostEqual(polarity_probability_ln_pdf(
-            A2, M2, posProb2, negProb2, 0.1)[0, 0], -3.57655127)
-        self.assertAlmostEqual(polarity_probability_ln_pdf(
-            A2, M2, posProb2, negProb2, np.array([[0.1], [0.2], [0.3], [0.4]]))[0, 0], -3.57013688)
-        if self.enable_c_lib():
+        with PythonOnly():
+            self.set_polarity_probability_ln_pdf_vars()
             self.assertAlmostEqual(polarity_probability_ln_pdf(
-                A, M, posProb, negProb)[0, 0], np.log(0.5)+np.log(0.800))
+                self.A, self.M, self.posProb, self.negProb)[0, 0], np.log(0.5)+np.log(0.800))
             self.assertAlmostEqual(polarity_probability_ln_pdf(
-                A, M2, posProb, negProb)[0, 0], np.log(0.1)+np.log(0.800))
+                self.A, self.M2, self.posProb, self.negProb)[0, 0], np.log(0.1)+np.log(0.800))
             self.assertAlmostEqual(polarity_probability_ln_pdf(
-                A, M2, posProb, negProb, 0.1)[0, 0], np.log(0.18)+np.log(0.74))
+                self.A, self.M2, self.posProb, self.negProb, 0.1)[0, 0], np.log(0.18)+np.log(0.74))
             self.assertAlmostEqual(polarity_probability_ln_pdf(
-                A, M2, posProb, negProb, np.array([0.2, 0.1]))[0, 0], -1.64817874, 4)
+                self.A, self.M2, self.posProb, self.negProb, np.array([0.2, 0.1]))[0, 0], -1.64817874, 4)
             self.assertAlmostEqual(
-                len(polarity_probability_ln_pdf(A2, M2, posProb2, negProb2).shape), 2)
+                len(polarity_probability_ln_pdf(self.A2, self.M2, self.posProb2, self.negProb2).shape), 2)
             self.assertAlmostEqual(
-                polarity_probability_ln_pdf(A2, M2, posProb2, negProb2)[0, 0], -4.135166556742)
+                polarity_probability_ln_pdf(self.A2, self.M2, self.posProb2, self.negProb2)[0, 0], -4.135166556742)
             self.assertAlmostEqual(polarity_probability_ln_pdf(
-                A2, M2, posProb2, negProb2, 0.1)[0, 0], -3.57655127)
+                self.A2, self.M2, self.posProb2, self.negProb2, 0.1)[0, 0], -3.57655127)
             self.assertAlmostEqual(polarity_probability_ln_pdf(
-                A2, M2, posProb2, negProb2, np.array([[0.1], [0.2], [0.3], [0.4]]))[0, 0], -3.57013688)
-        else:
-            print('C Library tests not run')
+                self.A2, self.M2, self.posProb2, self.negProb2, np.array([[0.1], [0.2], [0.3], [0.4]]))[0, 0], -3.57013688)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    def test_polarity_probability_ln_pdf_cython(self):
+        self.set_polarity_probability_ln_pdf_vars()
+        self.assertAlmostEqual(polarity_probability_ln_pdf(
+            self.A, self.M, self.posProb, self.negProb)[0, 0], np.log(0.5)+np.log(0.800))
+        self.assertAlmostEqual(polarity_probability_ln_pdf(
+            self.A, self.M2, self.posProb, self.negProb)[0, 0], np.log(0.1)+np.log(0.800))
+        self.assertAlmostEqual(polarity_probability_ln_pdf(
+            self.A, self.M2, self.posProb, self.negProb, 0.1)[0, 0], np.log(0.18)+np.log(0.74))
+        self.assertAlmostEqual(polarity_probability_ln_pdf(
+            self.A, self.M2, self.posProb, self.negProb, np.array([0.2, 0.1]))[0, 0], -1.64817874, 4)
+        self.assertAlmostEqual(
+            len(polarity_probability_ln_pdf(self.A2, self.M2, self.posProb2, self.negProb2).shape), 2)
+        self.assertAlmostEqual(
+            polarity_probability_ln_pdf(self.A2, self.M2, self.posProb2, self.negProb2)[0, 0], -4.135166556742)
+        self.assertAlmostEqual(polarity_probability_ln_pdf(
+            self.A2, self.M2, self.posProb2, self.negProb2, 0.1)[0, 0], -3.57655127)
+        self.assertAlmostEqual(polarity_probability_ln_pdf(
+            self.A2, self.M2, self.posProb2, self.negProb2, np.array([[0.1], [0.2], [0.3], [0.4]]))[0, 0], -3.57013688)
 
     def test_gaussian_pdf(self):
         A1 = np.matrix([[1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]])
@@ -768,48 +792,39 @@ class ProbabilityTestCase(TestCase):
         self.assertEqual(len(rP.shape), 3)
 
     def test_amplitude_ratio_ln_pdf(self):
-        A1 = np.matrix([[1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]])
-        A2 = np.matrix([[1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]])
-        M1 = 0.25*np.matrix([[2], [0], [2], [2], [0], [2]])
-        M2 = 0.25*np.matrix([[2], [0], [2], [2], [0], [2]])
-        sigmax = np.array([0.1, 0.5])
-        sigmay = np.array([0.1, 0.9])
-        ax = np.array([[[1.000001, 0, 0, 0, 0, 0]], [[1.1, 0, 0, 0, 0, 0]]])
-        ay = np.array([[[1.000001, 0, 0, 0, 0, 0]], [[1.1, 0, 0, 0, 0, 0]]])
-        mt = np.matrix([[1.0], [1.0], [0.], [0.], [0.], [0.]])
-        self.assertAlmostEqual(amplitude_ratio_ln_pdf(np.array(np.divide(A1*M1, A2*M2)).flatten(), mt, ax, ay, sigmax, sigmay)[
-                               0, 0], np.log(2.8209507386866988)+np.log(0.42262614), 4)  # Values checked against working MATLAB code
-        if self.enable_c_lib():
-            self.assertAlmostEqual(amplitude_ratio_ln_pdf(np.array(np.divide(A1*M1, A2*M2)).flatten(), mt, ax, ay, sigmax, sigmay)[
-                                   0, 0], np.log(2.8209507386866988)+np.log(0.42262614), 4)  # Values checked against working MATLAB code
-        else:
-            print('C Library tests not run')
+        with PythonOnly():
+            self.set_amplitude_ratio_ln_pdf_vars()
+            self.assertAlmostEqual(amplitude_ratio_ln_pdf(np.array(np.divide(self.A1*self.M1, self.A2*self.M2)).flatten(), self.mt, self.ax, self.ay, self.sigmax, self.sigmay)[0, 0],
+                                   np.log(2.8209507386866988)+np.log(0.42262614), 4)  # Values checked against working MATLAB code
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    def test_amplitude_ratio_ln_pdf_cython(self):
+        self.set_amplitude_ratio_ln_pdf_vars()
+        self.assertAlmostEqual(amplitude_ratio_ln_pdf(np.array(np.divide(self.A1*self.M1, self.A2*self.M2)).flatten(), self.mt, self.ax, self.ay, self.sigmax, self.sigmay)[0, 0],
+                               np.log(2.8209507386866988)+np.log(0.42262614), 4)  # Values checked against working MATLAB code
 
     def test_relative_amplitude_ratio_ln_pdf(self):
-        A1 = np.array([[[1., 0, 0, 0, 0, 0]], [[0., 0, 0, 0, 0, 1]]])
-        A2 = np.array([[[1., 0, 0, 0, 0, 0]], [[0., 0, 0, 0, 0, 1]]])
-        M1 = 0.25*np.matrix([[2], [0], [2], [2.], [0], [2]])
-        M2 = 0.25*np.matrix([[2], [0], [2], [2.], [0], [2]])
-        sigmax = np.array([0.1, 0.5])
-        sigmay = np.array([0.1, 0.9])
-        p, s, su = relative_amplitude_ratio_ln_pdf(np.array(A1*M1).flatten(),
-                                                   np.array(A2*M2).flatten(),
-                                                   M1, M2, A1, A2, sigmax, sigmay)
-        self.assertAlmostEqual(p[0, 0], 0.1647361350698705, 4)
-        self.assertAlmostEqual(s[0, 0], 1.03006741, 4)
-        self.assertAlmostEqual(su[0, 0], 0.13889421816774333, 4)
-        self.assertEqual(len(p.shape), 2)
-        if self.enable_c_lib():
-            cp, cs, csu = relative_amplitude_ratio_ln_pdf(np.array(A1*M1).flatten(),
-                                                          np.array(A2*M2).flatten(),
-                                                          M1, M2, A1, A2, sigmax, sigmay)
-            # Values checked against working MATLAB code
-            self.assertAlmostEqual(cs[0, 0], 1.03006741, 4)
-            self.assertAlmostEqual(csu[0, 0], 0.13889421816774333, 4)
-            self.assertEqual(cp.ndim, 2)
-            self.assertAlmostEqual(cp[0, 0], 0.1647361350698705, 4)
-        else:
-            print('C Library tests not run')
+        with PythonOnly():
+            self.set_relative_amplitude_ratio_ln_pdf_vars()
+            p, s, su = relative_amplitude_ratio_ln_pdf(np.array(self.A1*self.M1).flatten(),
+                                                       np.array(self.A2*self.M2).flatten(),
+                                                       self.M1, self.M2, self.A1, self.A2, self.sigmax, self.sigmay)
+            self.assertAlmostEqual(p[0, 0], 0.1647361350698705, 4)
+            self.assertAlmostEqual(s[0, 0], 1.03006741, 4)
+            self.assertAlmostEqual(su[0, 0], 0.13889421816774333, 4)
+            self.assertEqual(len(p.shape), 2)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    def test_relative_amplitude_ratio_ln_pdf_cython(self):
+        self.set_relative_amplitude_ratio_ln_pdf_vars()
+        cp, cs, csu = relative_amplitude_ratio_ln_pdf(np.array(self.A1*self.M1).flatten(),
+                                                      np.array(self.A2*self.M2).flatten(),
+                                                      self.M1, self.M2, self.A1, self.A2, self.sigmax, self.sigmay)
+        # Values checked against working MATLAB code
+        self.assertAlmostEqual(cs[0, 0], 1.03006741, 4)
+        self.assertAlmostEqual(csu[0, 0], 0.13889421816774333, 4)
+        self.assertEqual(cp.ndim, 2)
+        self.assertAlmostEqual(cp[0, 0], 0.1647361350698705, 4)
 
     def test__scale_estimator(self):
         observed = np.array([[10.], [5.], [2], [2.]])
@@ -835,7 +850,7 @@ class ProbabilityTestCase(TestCase):
     def test_ln_marginalise(self):
         ln_pdf = np.log(np.matrix([[1/6., 2/6.],
                                    [2/6., 1/6.]]))
-        self.assertAlmostEqual(ln_marginalise(ln_pdf)[0, 1], np.log(0.5))
+        self.assertAlmostEqual(ln_marginalise(ln_pdf)[0], np.log(0.5))
         self.assertAlmostEqual(ln_marginalise(ln_pdf, axis=1)[1, 0], np.log(0.5))
 
     def test_ln_normalise(self):
@@ -848,19 +863,18 @@ class ProbabilityTestCase(TestCase):
         self.assertAlmostEqual(
             ln_normalise(ln_normalise(ln_pdf))[1, 0], np.log(2/6.))
 
-        if self.enable_c_lib():
-            ln_pdf = np.log(np.matrix([[1., 2.],
-                                       [2., 1.]]))
-            self.assertAlmostEqual(
-                ln_normalise(ln_marginalise(ln_pdf))[0], np.log(0.5))
-            self.assertAlmostEqual(
-                ln_normalise(ln_marginalise(ln_pdf))[1], np.log(0.5))
-            self.assertAlmostEqual(
-                ln_normalise(ln_normalise(ln_marginalise(ln_pdf)))[0], np.log(0.5))
-            self.assertAlmostEqual(
-                ln_normalise(ln_normalise(ln_marginalise(ln_pdf)))[1], np.log(0.5))
-        else:
-            print('C Library tests not run')
+    @unittest.skipIf(*C_EXTENSIONS)
+    def test_ln_normalise_cython(self):
+        ln_pdf = np.log(np.matrix([[1., 2.],
+                                   [2., 1.]]))
+        self.assertAlmostEqual(
+            ln_normalise(ln_marginalise(ln_pdf))[0], np.log(0.5))
+        self.assertAlmostEqual(
+            ln_normalise(ln_marginalise(ln_pdf))[1], np.log(0.5))
+        self.assertAlmostEqual(
+            ln_normalise(ln_normalise(ln_marginalise(ln_pdf)))[0], np.log(0.5))
+        self.assertAlmostEqual(
+            ln_normalise(ln_normalise(ln_marginalise(ln_pdf)))[1], np.log(0.5))
 
     def test_heaviside(self):
         self.assertEqual(heaviside(-1), 0)
@@ -1068,34 +1082,3 @@ class LnPDFTestCase(unittest.TestCase):
         self.assertEqual(self.ln_pdf[0, 1], 4.)
         self.assertTrue((self.ln_pdf == ln_pdf).any())
         self.assertFalse((self.ln_pdf == ln_pdf).all())
-
-
-def test_suite(verbosity=2):
-    global VERBOSITY
-    VERBOSITY = verbosity
-    suite = [
-        unittest.TestLoader().loadTestsFromTestCase(ProbabilityTestCase),
-        unittest.TestLoader().loadTestsFromTestCase(LnPDFTestCase),
-    ]
-    try:
-        from MTfit.probability.cprobability import cProbabilityTestCase
-        suite.append(unittest.TestLoader().loadTestsFromTestCase(cProbabilityTestCase))
-    except ImportError:
-        print('C tests import failed')
-    suite = unittest.TestSuite(suite)
-    return suite
-
-
-def run_tests(verbosity=2):
-    """Run tests"""
-    _run_tests(test_suite(verbosity), verbosity)
-
-
-def debug_tests(verbosity=2):
-    """Runs tests with debugging on errors"""
-    _debug_tests(test_suite(verbosity))
-
-
-if __name__ == "__main__":
-    # Run tests
-    run_tests(verbosity=2)
