@@ -1,13 +1,32 @@
 import unittest
+from unittest import mock
 import glob
 import os
+import tempfile
 
 from MTfit.extensions.scatangle import parse_scatangle
+from MTfit.extensions import scatangle
+from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+
+
+C_EXTENSIONS = (not scatangle.cscatangle, 'No C extension available')
+
+
+class PythonOnly(object):
+
+    def __enter__(self, *args, **kwargs):
+        self.cscatangle = scatangle.cscatangle
+        scatangle.cscatangle = False
+
+    def __exit__(self, *args, **kwargs):
+        scatangle.cscatangle = self.cscatangle
 
 
 class ScatangleTestCase(unittest.TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        self.tempdir = tempfile.TemporaryDirectory()
         self.existing_scatangle_files = glob.glob('*.scatangle')
 
     def tearDown(self):
@@ -22,6 +41,8 @@ class ScatangleTestCase(unittest.TestCase):
             os.remove('test.scatangle')
         except Exception:
             pass
+        os.chdir(self.cwd)
+        self.tempdir.cleanup()
         gc.collect()
 
     def station_angles(self):
@@ -83,36 +104,30 @@ class ScatangleTestCase(unittest.TestCase):
         out += "\n"
         return out
 
-    def test_parser_scatangle(self, parser=parse_scatangle, *args):
-        open('test.scatangle', 'w').write(self.station_angles())
-        A, B = parser('test.scatangle')
-        self.assertEqual(B, [504.7, 504.7])
-        self.assertEqual(len(A), 2)
-        self.assertEqual(sorted(A[0].keys()), ['Azimuth', 'Name', 'TakeOffAngle'])
-        A, B = parser('test.scatangle', bin_size=1)
-        self.assertEqual(B, [1009.4])
-        self.assertEqual(len(A), 1)
-        self.assertEqual(sorted(A[0].keys()), ['Azimuth', 'Name', 'TakeOffAngle'])
+    @mock.patch('MTfit.extensions.scatangle.logger')
+    def test_parser_scatangle(self, logger, parser=parse_scatangle, *args):
+        with PythonOnly():
+            open('test.scatangle', 'w').write(self.station_angles())
+            A, B = parser('test.scatangle')
+            self.assertEqual(B, [504.7, 504.7])
+            self.assertEqual(len(A), 2)
+            self.assertEqual(sorted(A[0].keys()), ['Azimuth', 'Name', 'TakeOffAngle'])
+            A, B = parser('test.scatangle', bin_size=1)
+            self.assertEqual(B, [1009.4])
+            self.assertEqual(len(A), 1)
+            self.assertEqual(sorted(A[0].keys()), ['Azimuth', 'Name', 'TakeOffAngle'])
+            self.assertIn(mock.call('Python code used'), logger.info.call_args_list)
+            self.assertNotIn(mock.call('C code used'), logger.info.call_args_list)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.extensions.scatangle.logger')
+    def test_parser_scatangle_cython(self, logger, parser=parse_scatangle, *args):
         open('test.scatangle', 'w').write('\n'.join([self.station_angles() for i in range(40)]))
         AC, BC = parser('test.scatangle', bin_size=1)
+        self.assertNotIn(mock.call('Python code used'), logger.info.call_args_list)
+        self.assertIn(mock.call('C code used'), logger.info.call_args_list)
         APy, BPy = parser('test.scatangle', bin_size=1, _use_c=False)
         self.assertEqual(len(APy), 1)
         self.assertEqual(len(AC), 1)
         self.assertEqual(BPy, BC)
         os.remove('test.scatangle')
-
-
-def test_suite(verbosity=2):
-    tests = []
-    tests.append(unittest.TestLoader().loadTestsFromTestCase(ScatangleTestCase))
-    return unittest.TestSuite(tests)
-
-
-def run_tests(verbosity=1):
-    """Run inversion module tests."""
-    suite = test_suite(verbosity)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
-
-
-if __name__ == "__main__":
-    run_tests()
