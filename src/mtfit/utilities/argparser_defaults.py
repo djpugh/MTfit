@@ -195,6 +195,7 @@ MTPLOT_PARSER_DEFAULTS = {
     'projection': 'equalarea',
     'save_file': '',
     'save_dpi': 200,
+    'hide': False
 }
 
 # Default types for the MTplot parser structure, used for checking option types
@@ -220,4 +221,5 @@ MTPLOT_PARSER_DEFAULT_TYPES = {
     'projection': [str],
     'save_file': [str],
     'save_dpi': [int],
+    'hide': [bool],
 }
