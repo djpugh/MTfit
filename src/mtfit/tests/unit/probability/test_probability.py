@@ -1,10 +1,9 @@
 import unittest
+from unittest import mock
 
 import numpy as np
 from scipy.stats import norm as gaussian
 
-from MTfit.utilities.unittest_utils import run_tests as _run_tests
-from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 from MTfit.utilities.unittest_utils import TestCase
 from MTfit.probability.probability import polarity_ln_pdf
 from MTfit.probability.probability import polarity_probability_ln_pdf
@@ -41,6 +40,13 @@ class PythonOnly(object):
 
 
 class ProbabilityTestCase(TestCase):
+
+    def setUp(self):
+        self.old_value = probability._C_LIB_TESTS
+        probability._C_LIB_TESTS = True
+
+    def tearDown(self):
+        probability._C_LIB_TESTS = self.old_value
 
     def set_polarity_ln_pdf_vars(self):
         self.Ap = np.array([[[-0.0801, -0.5611, -0.3588, -0.2998, 0.2398, 0.6345]],
@@ -680,11 +686,13 @@ class ProbabilityTestCase(TestCase):
         self.sigmax = np.array([0.1, 0.5])
         self.sigmay = np.array([0.1, 0.9])
 
-    def test_polarity_ln_pdf(self):
+    @mock.patch('MTfit.probability.probability.logger')
+    def test_polarity_ln_pdf(self, logger):
         self.set_polarity_ln_pdf_vars()
         with PythonOnly():
             self.assertTrue((polarity_ln_pdf(np.expand_dims(
                 np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma)[0, 0] == np.log(0)+np.log(1)))
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
             self.assertAlmostEqual(polarity_ln_pdf(
                 np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M2, self.sigma)[0, 0], -3.78318433, 6)
             self.assertAlmostEqual(len(polarity_ln_pdf(
@@ -703,7 +711,8 @@ class ProbabilityTestCase(TestCase):
             self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma, np.array([0.2, 0.1]))[0, 0], -2.52572864)
 
     @unittest.skipIf(*C_EXTENSIONS)
-    def test_polarity_ln_pdf_cython(self):
+    @mock.patch('MTfit.probability.probability.logger')
+    def test_polarity_ln_pdf_cython(self, logger):
         self.set_polarity_ln_pdf_vars()
         self.assertTrue((polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma, _use_c=True)[0, 0] == np.log(0)+np.log(1)))
         self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M2, self.sigma, _use_c=True)[0, 0], -3.78318433, 5)
@@ -716,12 +725,15 @@ class ProbabilityTestCase(TestCase):
         self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma, 0.1, _use_c=True)[0, 0], -2.40794561)
         # test for two station p missing
         self.assertAlmostEqual(polarity_ln_pdf(np.expand_dims(np.expand_dims(self.P, 1), 1)*self.A, self.M, self.sigma, np.array([0.2, 0.1]), _use_c=True)[0, 0], -2.52572864)
+        logger.info.assert_not_called()
 
-    def test_polarity_probability_ln_pdf(self):
+    @mock.patch('MTfit.probability.probability.logger')
+    def test_polarity_probability_ln_pdf(self, logger):
         with PythonOnly():
             self.set_polarity_probability_ln_pdf_vars()
             self.assertAlmostEqual(polarity_probability_ln_pdf(
                 self.A, self.M, self.posProb, self.negProb)[0, 0], np.log(0.5)+np.log(0.800))
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
             self.assertAlmostEqual(polarity_probability_ln_pdf(
                 self.A, self.M2, self.posProb, self.negProb)[0, 0], np.log(0.1)+np.log(0.800))
             self.assertAlmostEqual(polarity_probability_ln_pdf(
@@ -738,7 +750,8 @@ class ProbabilityTestCase(TestCase):
                 self.A2, self.M2, self.posProb2, self.negProb2, np.array([[0.1], [0.2], [0.3], [0.4]]))[0, 0], -3.57013688)
 
     @unittest.skipIf(*C_EXTENSIONS)
-    def test_polarity_probability_ln_pdf_cython(self):
+    @mock.patch('MTfit.probability.probability.logger')
+    def test_polarity_probability_ln_pdf_cython(self, logger):
         self.set_polarity_probability_ln_pdf_vars()
         self.assertAlmostEqual(polarity_probability_ln_pdf(
             self.A, self.M, self.posProb, self.negProb)[0, 0], np.log(0.5)+np.log(0.800))
@@ -756,6 +769,7 @@ class ProbabilityTestCase(TestCase):
             self.A2, self.M2, self.posProb2, self.negProb2, 0.1)[0, 0], -3.57655127)
         self.assertAlmostEqual(polarity_probability_ln_pdf(
             self.A2, self.M2, self.posProb2, self.negProb2, np.array([[0.1], [0.2], [0.3], [0.4]]))[0, 0], -3.57013688)
+        logger.info.assert_not_called()
 
     def test_gaussian_pdf(self):
         A1 = np.matrix([[1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]])
@@ -791,31 +805,38 @@ class ProbabilityTestCase(TestCase):
         rP = ratio_pdf(z, mx, my, sx, sy)
         self.assertEqual(len(rP.shape), 3)
 
-    def test_amplitude_ratio_ln_pdf(self):
+    @mock.patch('MTfit.probability.probability.logger')
+    def test_amplitude_ratio_ln_pdf(self, logger):
         with PythonOnly():
             self.set_amplitude_ratio_ln_pdf_vars()
             self.assertAlmostEqual(amplitude_ratio_ln_pdf(np.array(np.divide(self.A1*self.M1, self.A2*self.M2)).flatten(), self.mt, self.ax, self.ay, self.sigmax, self.sigmay)[0, 0],
                                    np.log(2.8209507386866988)+np.log(0.42262614), 4)  # Values checked against working MATLAB code
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
 
+    @mock.patch('MTfit.probability.probability.logger')
     @unittest.skipIf(*C_EXTENSIONS)
-    def test_amplitude_ratio_ln_pdf_cython(self):
+    def test_amplitude_ratio_ln_pdf_cython(self, logger):
         self.set_amplitude_ratio_ln_pdf_vars()
         self.assertAlmostEqual(amplitude_ratio_ln_pdf(np.array(np.divide(self.A1*self.M1, self.A2*self.M2)).flatten(), self.mt, self.ax, self.ay, self.sigmax, self.sigmay)[0, 0],
                                np.log(2.8209507386866988)+np.log(0.42262614), 4)  # Values checked against working MATLAB code
+        logger.info.assert_not_called()
 
-    def test_relative_amplitude_ratio_ln_pdf(self):
+    @mock.patch('MTfit.probability.probability.logger')
+    def test_relative_amplitude_ratio_ln_pdf(self, logger):
         with PythonOnly():
             self.set_relative_amplitude_ratio_ln_pdf_vars()
             p, s, su = relative_amplitude_ratio_ln_pdf(np.array(self.A1*self.M1).flatten(),
                                                        np.array(self.A2*self.M2).flatten(),
                                                        self.M1, self.M2, self.A1, self.A2, self.sigmax, self.sigmay)
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
             self.assertAlmostEqual(p[0, 0], 0.1647361350698705, 4)
             self.assertAlmostEqual(s[0, 0], 1.03006741, 4)
             self.assertAlmostEqual(su[0, 0], 0.13889421816774333, 4)
             self.assertEqual(len(p.shape), 2)
 
+    @mock.patch('MTfit.probability.probability.logger')
     @unittest.skipIf(*C_EXTENSIONS)
-    def test_relative_amplitude_ratio_ln_pdf_cython(self):
+    def test_relative_amplitude_ratio_ln_pdf_cython(self, logger):
         self.set_relative_amplitude_ratio_ln_pdf_vars()
         cp, cs, csu = relative_amplitude_ratio_ln_pdf(np.array(self.A1*self.M1).flatten(),
                                                       np.array(self.A2*self.M2).flatten(),
@@ -825,6 +846,7 @@ class ProbabilityTestCase(TestCase):
         self.assertAlmostEqual(csu[0, 0], 0.13889421816774333, 4)
         self.assertEqual(cp.ndim, 2)
         self.assertAlmostEqual(cp[0, 0], 0.1647361350698705, 4)
+        logger.info.assert_not_called()
 
     def test__scale_estimator(self):
         observed = np.array([[10.], [5.], [2], [2.]])
@@ -853,18 +875,22 @@ class ProbabilityTestCase(TestCase):
         self.assertAlmostEqual(ln_marginalise(ln_pdf)[0], np.log(0.5))
         self.assertAlmostEqual(ln_marginalise(ln_pdf, axis=1)[1, 0], np.log(0.5))
 
-    def test_ln_normalise(self):
-        ln_pdf = np.log(np.matrix([[1., 2.],
-                                   [2., 1.]]))
-        self.assertAlmostEqual(ln_normalise(ln_pdf)[0, 1], np.log(2/6.))
-        self.assertAlmostEqual(ln_normalise(ln_pdf)[1, 0], np.log(2/6.))
-        self.assertAlmostEqual(
-            ln_normalise(ln_normalise(ln_pdf))[0, 1], np.log(2/6.))
-        self.assertAlmostEqual(
-            ln_normalise(ln_normalise(ln_pdf))[1, 0], np.log(2/6.))
+    @mock.patch('MTfit.probability.probability.logger')
+    def test_ln_normalise(self, logger):
+        with PythonOnly():
+            ln_pdf = np.log(np.matrix([[1., 2.],
+                                       [2., 1.]]))
+            self.assertAlmostEqual(ln_normalise(ln_pdf)[0, 1], np.log(2/6.))
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            self.assertAlmostEqual(ln_normalise(ln_pdf)[1, 0], np.log(2/6.))
+            self.assertAlmostEqual(
+                ln_normalise(ln_normalise(ln_pdf))[0, 1], np.log(2/6.))
+            self.assertAlmostEqual(
+                ln_normalise(ln_normalise(ln_pdf))[1, 0], np.log(2/6.))
 
+    @mock.patch('MTfit.probability.probability.logger')
     @unittest.skipIf(*C_EXTENSIONS)
-    def test_ln_normalise_cython(self):
+    def test_ln_normalise_cython(self, logger):
         ln_pdf = np.log(np.matrix([[1., 2.],
                                    [2., 1.]]))
         self.assertAlmostEqual(
@@ -875,6 +901,7 @@ class ProbabilityTestCase(TestCase):
             ln_normalise(ln_normalise(ln_marginalise(ln_pdf)))[0], np.log(0.5))
         self.assertAlmostEqual(
             ln_normalise(ln_normalise(ln_marginalise(ln_pdf)))[1], np.log(0.5))
+        logger.info.assert_not_called()
 
     def test_heaviside(self):
         self.assertEqual(heaviside(-1), 0)
@@ -939,6 +966,86 @@ class LnPDFTestCase(unittest.TestCase):
 
     def tearDown(self):
         del self.ln_pdf
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___getstate__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___setstate__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___getattr__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___len__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___repr__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__cmp(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__arithmetic(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___truediv__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___rsub__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___radd__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___rmul__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___rdiv__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___rtruediv__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___abs__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___float__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_argmax(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_max(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_output(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_exp(self):
+        raise NotImplementedError()
 
     def test_shape(self):
         self.assertEqual(self.ln_pdf.shape, (1, 0))
