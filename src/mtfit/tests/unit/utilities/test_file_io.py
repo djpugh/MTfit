@@ -8,6 +8,8 @@ Tests for src/utils/file_io.py
 import os
 import glob
 import sys
+import tempfile
+import shutil
 
 try:
     import cPickle as pickle
@@ -38,6 +40,13 @@ from MTfit.utilities.file_io import convert_keys_from_unicode
 class IOTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         self.existing_csv_files = glob.glob('*.csv')
         self.existing_hyp_files = glob.glob('*.hyp')
         self.existing_out_files = glob.glob('*.out')
@@ -75,6 +84,14 @@ class IOTestCase(TestCase):
                     os.remove(fname)
                 except Exception:
                     print('Cannot remove ', fname)
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def station_angles(self):
         out = "504.7\n"

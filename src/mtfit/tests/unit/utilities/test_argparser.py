@@ -6,6 +6,9 @@ Tests for src/utils/argparser.py
 """
 import os
 import glob
+import sys
+import tempfile
+import shutil
 
 from MTfit.extensions import default_cmd_opts
 from MTfit.extensions import default_cmd_defaults
@@ -23,6 +26,13 @@ from MTfit.utilities import argparser
 class ParserTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         out_files = glob.glob('*.out')
         log_files = glob.glob('*.log')
         mat_files = glob.glob('*.mat')
@@ -65,6 +75,14 @@ class ParserTestCase(TestCase):
             os.remove('Test2.i')
         except Exception:
             pass
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def test_MTfit_parser(self):
         cmd_defaults = {}

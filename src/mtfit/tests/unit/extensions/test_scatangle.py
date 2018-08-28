@@ -33,9 +33,10 @@ class ScatangleTestCase(unittest.TestCase):
         self.cwd = os.getcwd()
         if sys.version_info >= (3, 0):
             self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
         else:
             self.tempdir = tempfile.mkdtemp()
-        os.chdir(self.tempdir)
+            os.chdir(self.tempdir)
         self.existing_scatangle_files = glob.glob('*.scatangle')
 
     def tearDown(self):

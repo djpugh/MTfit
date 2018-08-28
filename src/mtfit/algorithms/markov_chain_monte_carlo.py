@@ -709,7 +709,7 @@ class MarginalisedMarkovChainMonteCarlo(BaseAlgorithm):
                 xi_1, ln_pi_1, scale_factor_i, tried = self._acceptance_check(
                     self.xi_1, ln_pi_1, result.get('scale_factor', False))
                 # returns dict not array/list of arrays
-                if (self.number_events == 1 and len(xi_1)) or (self.number_events > 1 and all([len(u) for u in xi_1])):
+                if (self.number_events == 1 and len(xi_1)) or (self.number_events > 1 and all([len(u) for u in xi_1]) and len(xi_1)):
                     # Handling for multiple tries (agnostic)
                     for i in range(tried-1):
                         # Add old samples for tried but not accepted samples
@@ -862,6 +862,8 @@ class MarginalisedMetropolisHastings(MarginalisedMarkovChainMonteCarlo):
         if isinstance(ln_likelihood_x, (np.ndarray, LnPDF)):
             ln_likelihood_x = float(ln_likelihood_x)
         # Handle multiple events
+        if ln_likelihood_x == -np.inf:
+            return 0
         if self.number_events > 1:
             alpha = self.alpha[:]
             acc = 1
@@ -1638,14 +1640,52 @@ class IterativeMultipleTryMetropolisHastingsGaussianTape(IterativeMetropolisHast
                         oscale_factori_1 = False
                     return oxi_1, oln_pi_1, oscale_factori_1, u
             # No Accepted samples
-            return {}, False, False, len(self.xi_1)
+            if self.number_events > 1:
+                if isinstance(self.xi_1[0], dict):
+                    tried = 1
+                else:
+                    tried = len(self.xi_1[0])
+                return [{} for w in range(self.number_events)], False, False, tried
+
+            if isinstance(self.xi_1, dict):
+                tried = 1
+            else:
+                tried = len(self.xi_1)
+            return {}, False, False, tried
         # No accepted samples
         elif isinstance(ln_pi_1, bool):
             if self.number_events > 1:
-                return [{} for w in range(self.number_events)], False, False, len(self.xi_1[0])
-            return {}, False, False, len(self.xi_1)
+                if isinstance(self.xi_1[0], dict):
+                    tried = 1
+                else:
+                    tried = len(self.xi_1[0])
+                return [{} for w in range(self.number_events)], False, False, tried
+
+            if isinstance(self.xi_1, dict):
+                tried = 1
+            else:
+                tried = len(self.xi_1)
+            return {}, False, False, tried
+        elif ln_pi_1 == -np.inf:
+            if self.number_events > 1:
+                if self.number_events > 1:
+                    if isinstance(self.xi_1[0], dict):
+                        tried = 1
+                    else:
+                        tried = len(self.xi_1[0])
+                return [{} for w in range(self.number_events)], False, False, tried
+
+            if isinstance(self.xi_1, dict):
+                tried = 1
+            else:
+                tried = len(self.xi_1)
+            return {}, False, False, tried
         else:
-            return super(IterativeMultipleTryMetropolisHastingsGaussianTape, self)._acceptance_check(xi_1, ln_pi_1, scale_factori_1, dc_prior=getattr(self, 'dc_prior', False))
+            if self.number_events > 1:
+                dc = [False for i in range(self.number_events)]
+            else:
+                dc = False
+            return super(IterativeMultipleTryMetropolisHastingsGaussianTape, self)._acceptance_check(xi_1, ln_pi_1, scale_factori_1, dc_prior=getattr(self, 'dc_prior', dc))
 
     def _modify_acceptance_rate(self, non_zero_percentage=False):
         """Adjusts the acceptance rate parameters based on the targetted acceptance rate."""

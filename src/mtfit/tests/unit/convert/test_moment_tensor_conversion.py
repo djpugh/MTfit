@@ -136,11 +136,11 @@ class MomentTensorConvertTestCase(TestCase):
                             [0., 0., 0., 0.16910198, 0., 0., 0., 0.],
                             [1., 0.99931011, 1., -0.98559856, 1., 1., 1., 1.]])
         self.S21 = np.array([90., 90., 94.02473349, 279.5980303, 99.73561032, 90., 90., 90.])*np.pi/180.
-        self.S22 = np.array([270., 270., 274.02473349, 92.58061772, 279.73561032, 270., 270., 270.])*np.pi/180.
+        self.S22 = np.array([270., 270., 274.02473349, 80.4019697, 279.73561032, 270., 270., 270.])*np.pi/180.
         self.D21 = np.array([45., 42.87159666, 45., 45.81931182, 45., 45., 45., 45.])*np.pi/180.
-        self.D22 = np.array([45., 47.12840334, 45., 44.39602839, 45., 45., 45., 45.])*np.pi/180.
-        self.R21 = np.array([-90., -90., -90., -85.09680372, -90., -90., -90., -90.])*np.pi/180.
-        self.R22 = np.array([-90., -90., -90., -95.02637855, -90., -90., -90., -90.])*np.pi/180.
+        self.D22 = np.array([45., 47.12840334, 45., 45.81931182, 45., 45., 45., 45.])*np.pi/180.
+        self.R21 = np.array([-90., -90., -90., -76.36129238206001, -90., -90., -90., -90.])*np.pi/180.
+        self.R22 = np.array([-90., -90., -90., -103.63870728, -90., -90., -90., -90.])*np.pi/180.
 
     def tearDown(self):
         del self.DC6
@@ -557,7 +557,6 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(s[1], self.S2dc)
             self.assertAlmostEquals(d[1], self.D2dc)
             self.assertAlmostEquals(r[1], self.R2dc)
-        import ipdb; ipdb.set_trace()
         [S2, D2, R2] = TNP_SDR(self.T2, self.N2, self.P2)
         for i, s in enumerate(S2):
             try:

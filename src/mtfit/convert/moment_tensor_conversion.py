@@ -436,12 +436,12 @@ def FP_SDR(normal, slip):
 
     """
     if not isinstance(slip, np.matrixlib.defmatrix.matrix):
-        slip = slip/np.sqrt(np.sum(slip*slip))
+        slip = slip/np.sqrt(np.sum(slip*slip, axis=0))
     else:
         # Do we need to replace this with einsum
         slip = slip/np.sqrt(np.einsum('ij,ij->j', slip, slip))
     if not isinstance(normal, np.matrixlib.defmatrix.matrix):
-        normal = normal/np.sqrt(np.sum(normal*normal))
+        normal = normal/np.sqrt(np.sum(normal*normal, axis=0))
     else:
         normal = normal/np.sqrt(np.einsum('ij,ij->j', normal, normal))
     slip[:, np.array(normal[2, :] > 0).flatten()] *= -1
@@ -450,7 +450,6 @@ def FP_SDR(normal, slip):
     slip = np.array(slip)
     strike, dip = normal_SD(normal)
     rake = np.arctan2(-slip[2], slip[0]*normal[1]-slip[1]*normal[0])
-    print(slip[2], slip[0], normal[1], slip[1], normal[0])
     strike[dip > np.pi/2] += np.pi
     rake[dip > np.pi/2] = 2*np.pi-rake[dip > np.pi/2]
     dip[dip > np.pi/2] = np.pi-dip[dip > np.pi/2]
@@ -786,7 +785,7 @@ def normal_SD(normal):
         (float, float): tuple of strike and dip angles in radians
     """
     if not isinstance(normal, np.matrixlib.defmatrix.matrix):
-        normal = np.array(normal)/np.sqrt(np.sum(normal*normal))
+        normal = np.array(normal)/np.sqrt(np.sum(normal*normal, axis=0))
     else:
         normal = normal/np.sqrt(np.diag(normal.T*normal))
     normal[:, np.array(normal[2, :] > 0).flatten()] *= -1

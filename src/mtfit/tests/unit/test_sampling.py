@@ -1,6 +1,9 @@
 import unittest
 import os
 import glob
+import sys
+import tempfile
+import shutil
 
 import numpy as np
 
@@ -122,7 +125,13 @@ class SampleTestCase(unittest.TestCase):
 
 class FileSampleTestCase(unittest.TestCase):
     def setUp(self):
-        self.tearDown()
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         self.FileSample = FileSample('test')
 
     def tearDown(self):
@@ -137,6 +146,14 @@ class FileSampleTestCase(unittest.TestCase):
             try:
                 os.remove(filename)
             except Exception:
+                pass
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
                 pass
 
     def test___init__(self):

@@ -180,15 +180,14 @@ class MTDataTestCase(TestCase):
 
     def test_get_mean_orientation(self):
         self.test_cluster_normals()
-        import ipdb; ipdb.set_trace()
-        [s, d, r] = self.MTData.get_mean_orientation()
+        [s, d, r] = self.MTData.mean_orientation
         self.assertAlmostEquals(s, 272.91522545)
         self.assertAlmostEquals(d, 45.2947782)
         self.assertAlmostEquals(r, -88.295161590065447)
         self.assertAlmostEquals(self.MTData.var_clustered_rake1, 23.251792031905531)
         self.assertTrue(self.MTData.cov_clustered_N1.max() < 0.005)
         self.MTData._set_probability([0.05, 0.15, 0.1, 0.3, 0.1, 0.1, 0.1, 0.1])
-        [s, d, r] = self.MTData.get_mean_orientation()
+        [s, d, r] = self.MTData.mean_orientation
         self.assertAlmostEquals(s, 274.25373043)
         self.assertAlmostEquals(d, 45.47487435)
         self.assertAlmostEquals(r, -85.908387816157074)

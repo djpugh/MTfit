@@ -1,6 +1,9 @@
 import unittest
 import os
+import sys
+import tempfile
 import glob
+import shutil
 
 import numpy as np
 
@@ -9,6 +12,25 @@ from MTfit.run import MTfit
 
 
 class RunTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
+
+    def tearDown(self):
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def test_MTfit(self):
         logfiles = glob.glob('*.log')

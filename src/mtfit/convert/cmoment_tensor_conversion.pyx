@@ -41,7 +41,7 @@ if int(__scipy_version__.split('.')[0])==0 and int(__scipy_version__.split('.')[
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef inline DTYPE_t[::1] cE_tk(DTYPE_t[::1] E,DTYPE_t[::1] results):  # nogil:
+cdef inline DTYPE_t[::1] cE_tk(DTYPE_t[::1] E,DTYPE_t[::1] results) nogil:
     cdef DTYPE_t iso=(E[0]+E[1]+E[2])/3
     cdef DTYPE_t dev0=E[0]-iso
     cdef DTYPE_t dev1=E[2]-iso#Odd sorting from hudson paper E[0]>=E[2]>=E[1]
@@ -61,7 +61,7 @@ cdef inline DTYPE_t[::1] cE_tk(DTYPE_t[::1] E,DTYPE_t[::1] results):  # nogil:
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef inline DTYPE_t[::1] ctk_uv(DTYPE_t[::1] results):  # nogil:
+cdef inline DTYPE_t[::1] ctk_uv(DTYPE_t[::1] results) nogil:
     cdef DTYPE_t k=results[5]
     cdef DTYPE_t tau=results[6]
     if tau>0 and k>0:
@@ -86,7 +86,7 @@ cdef inline DTYPE_t[::1] ctk_uv(DTYPE_t[::1] results):  # nogil:
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef inline void cE_gd(DTYPE_t[:] E,DTYPE_t*g,DTYPE_t*d):  # nogil:
+cdef inline void cE_gd(DTYPE_t[:] E,DTYPE_t*g,DTYPE_t*d) nogil:
     if E[0]==E[2]:
         if E[0]>0:
             g[0]=0
@@ -101,7 +101,7 @@ cdef inline void cE_gd(DTYPE_t[:] E,DTYPE_t*g,DTYPE_t*d):  # nogil:
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef inline void cN_SDR(DTYPE_t N0,DTYPE_t N1,DTYPE_t N2,DTYPE_t S0,DTYPE_t S1,DTYPE_t S2,DTYPE_t* strike,DTYPE_t*dip,DTYPE_t*rake):  # nogil:
+cdef inline void cN_SDR(DTYPE_t N0,DTYPE_t N1,DTYPE_t N2,DTYPE_t S0,DTYPE_t S1,DTYPE_t S2,DTYPE_t* strike,DTYPE_t*dip,DTYPE_t*rake) nogil:
     if N2 > 0:
         N0 = -N0
         N1 = -N1
@@ -129,7 +129,7 @@ cdef inline void cN_SDR(DTYPE_t N0,DTYPE_t N1,DTYPE_t N2,DTYPE_t S0,DTYPE_t S1,D
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef DTYPE_t[::1] cTP_SDR(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1] results):  # nogil:    
+cdef DTYPE_t[::1] cTP_SDR(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1] results) nogil:    
     cdef DTYPE_t Nt=sqrt((T[0]+P[0])*(T[0]+P[0])+(T[1]+P[1])*(T[1]+P[1])+(T[2]+P[2])*(T[2]+P[2]))
     cdef DTYPE_t St=sqrt((T[0]-P[0])*(T[0]-P[0])+(T[1]-P[1])*(T[1]-P[1])+(T[2]-P[2])*(T[2]-P[2]))
     cdef DTYPE_t N2=(T[2]+P[2])/Nt
@@ -166,7 +166,7 @@ cdef DTYPE_t[::1] cTP_SDR(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1] results):  
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef DTYPE_t[::1] cTPE_convert(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1]E,DTYPE_t[::1]results):  # nogil: 
+cdef DTYPE_t[::1] cTPE_convert(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1]E,DTYPE_t[::1]results) nogil: 
     cE_gd(E,&results[0],&results[1])
     results=cE_tk(E,results)
     results=ctk_uv(results)
@@ -177,7 +177,7 @@ cdef DTYPE_t[::1] cTPE_convert(DTYPE_t[::1] T,DTYPE_t[::1] P,DTYPE_t[::1]E,DTYPE
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef void cTape_MT6(DTYPE_t*M, DTYPE_t gamma,DTYPE_t delta,DTYPE_t kappa,DTYPE_t h,DTYPE_t sigma):  # nogil:
+cdef void cTape_MT6(DTYPE_t*M, DTYPE_t gamma,DTYPE_t delta,DTYPE_t kappa,DTYPE_t h,DTYPE_t sigma) nogil:
     #Get T N P axes
     cdef DTYPE_t ck=cos(kappa)
     cdef DTYPE_t cs=cos(sigma)
@@ -213,7 +213,7 @@ cdef void cTape_MT6(DTYPE_t*M, DTYPE_t gamma,DTYPE_t delta,DTYPE_t kappa,DTYPE_t
 @cython.wraparound(False)
 @cython.nonecheck(False)
 @cython.cdivision(True)
-cdef void cMultipleTape_MT6(DTYPE_t*M,DTYPE_t* gamma,DTYPE_t* delta,DTYPE_t* kappa,DTYPE_t* h,DTYPE_t* sigma,Py_ssize_t n):  # nogil:
+cdef void cMultipleTape_MT6(DTYPE_t*M,DTYPE_t* gamma,DTYPE_t* delta,DTYPE_t* kappa,DTYPE_t* h,DTYPE_t* sigma,Py_ssize_t n) nogil:
     for i from 0<=i<n:
         cTape_MT6(&M[i*6],gamma[i],delta[i],kappa[i],h[i],sigma[i])
 @cython.boundscheck(False)
@@ -599,11 +599,11 @@ class cMomentTensorConvertTestCase(TestCase):
         try:
             self.assertAlmostEqual(s, 279.5980303*pi/180)
             self.assertAlmostEqual(d, 45.81931182*pi/180)
-            self.assertAlmostEqual(r, -85.09680372*pi/180)
+            self.assertAlmostEqual(r, -76.36129238206001*pi/180)
         except Exception:
-            self.assertAlmostEqual(s, 92.58061772*pi/180)
-            self.assertAlmostEqual(d, 44.39602839*pi/180)
-            self.assertAlmostEqual(r, -95.02637855*pi/180)
+            self.assertAlmostEqual(s, 80.4019697*pi/180)
+            self.assertAlmostEqual(d, 45.81931182*pi/180)
+            self.assertAlmostEqual(r,-103.63870728*pi/180)
 
     def test_c_cTP_SDR(self):
         T=np.array([0.235702260395516,
@@ -656,11 +656,11 @@ class cMomentTensorConvertTestCase(TestCase):
         try:
             self.assertAlmostEqual(s, 279.5980303*pi/180)
             self.assertAlmostEqual(d, 45.81931182*pi/180)
-            self.assertAlmostEqual(r, -85.09680372*pi/180)
+            self.assertAlmostEqual(r, -76.36129238206001*pi/180)
         except Exception:
-            self.assertAlmostEqual(s, 92.58061772*pi/180)
-            self.assertAlmostEqual(d, 44.39602839*pi/180)
-            self.assertAlmostEqual(r, -95.02637855*pi/180)
+            self.assertAlmostEqual(s, 80.4019697*pi/180)
+            self.assertAlmostEqual(d, 45.81931182*pi/180)
+            self.assertAlmostEqual(r,-103.63870728*pi/180)
 
     def test_c_MT6_TNPE(self):
         MT=np.array([[1.,0.,-1.,0.,0.,0.],[0,2.0,-1.0,0.,1.0,0.]]).T
