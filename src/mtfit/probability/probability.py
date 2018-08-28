@@ -861,16 +861,16 @@ def ln_marginalise(ln_pdf, axis=0, dV=1.0):
     if cprobability and axis == 0:
         try:
             if isinstance(ln_pdf, LnPDF):
-                return cprobability.ln_marginalise(ln_pdf._ln_pdf)
-            return cprobability.ln_marginalise(ln_pdf)
+                return cprobability.ln_marginalise(ln_pdf._ln_pdf.astype(np.float64))
+            return cprobability.ln_marginalise(ln_pdf.astype(np.float64))
         except Exception:
             logger.exception('Error running cython code')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
-    # scale and then marginalise:b
+    # scale and then marginalise:
     ln_scale = 0
     if ln_pdf.shape[axis] == 1:
-        return ln_pdf.squeeze(axis)
+        return np.array(ln_pdf).squeeze(axis)
     elif axis == 0 and len(ln_pdf.shape) == 1:
         # Probably shouldn't be marginalising over the last parameter
         return ln_pdf
@@ -878,8 +878,12 @@ def ln_marginalise(ln_pdf, axis=0, dV=1.0):
         ln_scale = -ln_pdf.max()
     with warnings.catch_warnings() and np.errstate(divide='ignore'):
         warnings.simplefilter("ignore")
-        result = np.log(
-            np.sum(np.exp(ln_pdf+ln_scale)*dV, axis=axis)) - ln_scale
+        # if axis == 0:
+        #     # Get consistency with c code
+        #     ln_pdf = np.array(ln_pdf)
+        result = np.log(np.sum(np.exp(ln_pdf+ln_scale)*dV, axis=axis)) - ln_scale
+    if axis == 0:
+        result = np.array(result).flatten()
     return result
 
 
@@ -900,15 +904,14 @@ def ln_normalise(ln_pdf, dV=1):
         np.array - normalised distribtion
 
     """
+    if ln_pdf.ndim == 1 and ln_pdf.shape[0] == 1:
+        return np.array([0])
     if cprobability:
         try:
             if ln_pdf.ndim != 1 and ln_pdf.shape[0] != 1:
                 raise Exception('Incorrect shape')
             if ln_pdf.ndim == 2:
-                normalised_ln_pdf = cprobability.ln_normalise(
-                    np.asarray(ln_pdf).flatten())
-            elif ln_pdf.ndim == 1 and ln_pdf.shape[0] == 1:
-                normalised_ln_pdf = ln_pdf
+                normalised_ln_pdf = cprobability.ln_normalise(np.asarray(ln_pdf).flatten())
             else:
                 normalised_ln_pdf = cprobability.ln_normalise(ln_pdf)
             return normalised_ln_pdf
@@ -922,8 +925,11 @@ def ln_normalise(ln_pdf, dV=1):
         ln_scale = -ln_pdf.max()
     with warnings.catch_warnings() and np.errstate(divide='ignore'):
         warnings.simplefilter("ignore")
-        ln_n = np.log(
-            np.sum(np.exp(ln_pdf+ln_scale) * dV, axis=None)) - ln_scale
+        ln_n = np.log(np.sum(np.exp(ln_pdf+ln_scale) * dV, axis=None)) - ln_scale
+    if ln_pdf.ndim == 2 and 1 in list(ln_pdf.shape):
+        ln_pdf = np.squeeze(np.asarray(ln_pdf))
+        if not ln_pdf.shape:
+            ln_pdf = np.array([ln_pdf])
     # ln_probability_scale_factor is automatically included in normalisation
     return ln_pdf - ln_n
 
@@ -1045,10 +1051,12 @@ class LnPDF(object):
         Return the length of ln_pdf
 
         Returns
-            int - length of ln_pdf (axis=-11)
+            int - length of ln_pdf (axis=-1)
 
         """
-        return self.shape[-1]
+        if isinstance(self._ln_pdf, np.ndarray):
+            return self.shape[-1]
+        return 1
 
     def __repr__(self):
         """x.__repr__() <==> repr(x)"""
@@ -1202,7 +1210,7 @@ class LnPDF(object):
             np.array - array of indices to maximum values.
         """
         axis = min(self._ln_pdf.ndim-1, axis)
-        if axis == -1:
+        if self._ln_pdf.ndim > 1 and axis == -1:
             return self.marginalise().argmax(0).flatten()
         return self._ln_pdf.argmax(axis)
 
@@ -1223,7 +1231,7 @@ class LnPDF(object):
         if not np.prod(self._ln_pdf.shape):
             return 0
         axis = min(self._ln_pdf.ndim-1, axis)
-        if axis == -1:
+        if self._ln_pdf.ndim > 1 and axis == -1:
             return np.exp(self.marginalise().max()).flatten()
         return float(np.exp(self._ln_pdf.max(axis)))
 

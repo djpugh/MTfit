@@ -874,11 +874,24 @@ class ProbabilityTestCase(TestCase):
         self.assertAlmostEquals(
             s, np.array([[0.093337369886041369], [0.09391465679198667]]))
 
-    def test_ln_marginalise(self):
+    @mock.patch('MTfit.probability.probability.logger')
+    def test_ln_marginalise(self, logger):
+        with PythonOnly():
+            ln_pdf = np.log(np.matrix([[1/6., 2/6.],
+                                       [2/6., 1/6.]]))
+            self.assertAlmostEqual(ln_marginalise(ln_pdf)[0], np.log(0.5))
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            self.assertAlmostEqual(ln_marginalise(ln_pdf, axis=1)[1, 0], np.log(0.5))
+
+    @mock.patch('MTfit.probability.probability.logger')
+    @unittest.skipIf(*C_EXTENSIONS)
+    def test_ln_marginalise_cython(self, logger):
         ln_pdf = np.log(np.matrix([[1/6., 2/6.],
                                    [2/6., 1/6.]]))
         self.assertAlmostEqual(ln_marginalise(ln_pdf)[0], np.log(0.5))
+        logger.info.assert_not_called()
         self.assertAlmostEqual(ln_marginalise(ln_pdf, axis=1)[1, 0], np.log(0.5))
+        logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
 
     @mock.patch('MTfit.probability.probability.logger')
     def test_ln_normalise(self, logger):
@@ -892,12 +905,26 @@ class ProbabilityTestCase(TestCase):
                 ln_normalise(ln_normalise(ln_pdf))[0, 1], np.log(2/6.))
             self.assertAlmostEqual(
                 ln_normalise(ln_normalise(ln_pdf))[1, 0], np.log(2/6.))
+            self.assertAlmostEqual(
+                ln_normalise(ln_marginalise(ln_pdf))[0], np.log(0.5))
+            self.assertAlmostEqual(
+                ln_normalise(ln_marginalise(ln_pdf))[1], np.log(0.5))
+            self.assertAlmostEqual(
+                ln_normalise(ln_normalise(ln_marginalise(ln_pdf)))[0], np.log(0.5))
+            self.assertAlmostEqual(
+                ln_normalise(ln_normalise(ln_marginalise(ln_pdf)))[1], np.log(0.5))
 
     @mock.patch('MTfit.probability.probability.logger')
     @unittest.skipIf(*C_EXTENSIONS)
     def test_ln_normalise_cython(self, logger):
         ln_pdf = np.log(np.matrix([[1., 2.],
                                    [2., 1.]]))
+        self.assertAlmostEqual(ln_normalise(ln_pdf)[0, 1], np.log(2/6.))
+        self.assertAlmostEqual(ln_normalise(ln_pdf)[1, 0], np.log(2/6.))
+        self.assertAlmostEqual(
+            ln_normalise(ln_normalise(ln_pdf))[0, 1], np.log(2/6.))
+        self.assertAlmostEqual(
+            ln_normalise(ln_normalise(ln_pdf))[1, 0], np.log(2/6.))
         self.assertAlmostEqual(
             ln_normalise(ln_marginalise(ln_pdf))[0], np.log(0.5))
         self.assertAlmostEqual(
@@ -1114,7 +1141,7 @@ class LnPDFTestCase(unittest.TestCase):
         self.ln_pdf._set_ln_pdf(ln_pdf)
         self.ln_pdf = self.ln_pdf.normalise()
         result = self.ln_pdf.marginalise()
-        self.assertAlmostEqual(result[1], np.log(0.5))
+        self.assertAlmostEqual(result[0], np.log(0.5))
         result = self.ln_pdf.marginalise(axis=1)
         self.assertAlmostEqual(result[1, 0], np.log(0.5))
 

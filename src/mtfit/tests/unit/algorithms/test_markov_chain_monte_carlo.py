@@ -1509,9 +1509,9 @@ class IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase(TestCase):
     @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
     def test__acceptance_check_multiple_events(self, logger):
         self.mcmc_algorithm.number_events = 3
-        self.mcmc_algorithm.new_sample()
         self.mcmc_algorithm.xi = [self.mcmc_algorithm.random_mt(), self.mcmc_algorithm.random_mt(), self.mcmc_algorithm.random_mt()]
         self.mcmc_algorithm.alpha = [self.mcmc_algorithm.alpha, self.mcmc_algorithm.alpha, self.mcmc_algorithm.alpha]
+        self.mcmc_algorithm.new_sample()
         self.mcmc_algorithm.ln_likelihood_xi = - np.inf
         if isinstance(self.mcmc_algorithm.xi_1[0], dict):
             n = 1
@@ -1561,7 +1561,8 @@ class IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase(TestCase):
         self.mcmc_algorithm.dc = [False, False, False]
         xi_1, ln_pi1, sf1, index = self.mcmc_algorithm._acceptance_check(self.mcmc_algorithm.xi_1,
                                                                          -np.inf*np.ones((n)))
-        self.assertEqual(index, 0)
+        # C Code returns 1 here
+        self.assertEqual(index, 1)
         self.assertEqual(len(xi_1), 3)
         logger.info.assert_not_called()
 
