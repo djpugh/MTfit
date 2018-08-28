@@ -1,6 +1,9 @@
 import unittest
 import os
 import glob
+import sys
+import tempfile
+import shutil
 
 import numpy as np
 
@@ -75,18 +78,18 @@ class SampleTestCase(unittest.TestCase):
     def test_output(self):
         self.test_append()
         self.assertTrue((self.Sample.output()[0]['moment_tensor_space'] == np.matrix([[2, 2, 3, 2], [1, 1, 5, 1], [2, 2, 1, 2], [1, 1, 1, 1], [2, 2, 2, 2], [1, 1, 1, 1]])).all())
-        output_ln_pdf = np.sum(np.exp(np.matrix([[1, 1, 0, 1], [2, 2, 1, 2]])), 0)
+        output_ln_pdf = np.sum(np.exp(np.matrix([[1., 1., 0., 1.], [2., 2., 1., 2.]])), 0)
         output_ln_pdf /= np.sum(output_ln_pdf)
         self.assertAlmostEqual(self.Sample.output()[0]['probability'][0], output_ln_pdf[0, 0])
         self.assertAlmostEqual(self.Sample.output()[0]['probability'][1], output_ln_pdf[0, 1])
         self.assertAlmostEqual(self.Sample.output()[0]['probability'][2], output_ln_pdf[0, 2])
         self.assertAlmostEqual(self.Sample.output()[0]['probability'][3], output_ln_pdf[0, 3])
         self.assertEqual(self.Sample.output()[0]['dV'], 1)
-        output_ln_pdf = np.sum(np.exp(np.matrix([[1, 1, 0, 1], [2, 2, 1, 2]])), 0)
-        self.assertAlmostEqual(self.Sample.output(False)[0]['probability'][0, 0], output_ln_pdf[0, 0])
-        self.assertAlmostEqual(self.Sample.output(False)[0]['probability'][0, 1], output_ln_pdf[0, 1])
-        self.assertAlmostEqual(self.Sample.output(False)[0]['probability'][0, 2], output_ln_pdf[0, 2])
-        self.assertAlmostEqual(self.Sample.output(False)[0]['probability'][0, 3], output_ln_pdf[0, 3])
+        output_ln_pdf = np.sum(np.exp(np.matrix([[1., 1., 0., 1.], [2., 2., 1., 2.]])), 0)
+        self.assertAlmostEqual(self.Sample.output(False)[0]['probability'][0], output_ln_pdf[0, 0])
+        self.assertAlmostEqual(self.Sample.output(False)[0]['probability'][1], output_ln_pdf[0, 1])
+        self.assertAlmostEqual(self.Sample.output(False)[0]['probability'][2], output_ln_pdf[0, 2])
+        self.assertAlmostEqual(self.Sample.output(False)[0]['probability'][3], output_ln_pdf[0, 3])
         self.assertEqual(self.Sample.output(False)[0]['dV'], 1)
         self.tearDown()
         self.Sample = Sample(initial_sample_size=1, number_events=2)
@@ -96,12 +99,12 @@ class SampleTestCase(unittest.TestCase):
         self.assertTrue((self.Sample.moment_tensors[:, 0] == np.matrix([[2], [1], [2], [1], [2], [1], [3], [1], [2], [1], [2], [1]])).all())
         self.assertTrue((self.Sample.output()[0]['moment_tensor_space_1'] == np.matrix([[2], [1], [2], [1], [2], [1]])).all())
         self.assertTrue((self.Sample.output()[0]['moment_tensor_space_2'] == np.matrix([[3], [1], [2], [1], [2], [1]])).all())
-        self.assertTrue((self.Sample.output()[0]['probability'] == np.matrix([[1]])).all(), str(self.Sample.output()[0]['probability']))
+        self.assertTrue((self.Sample.output()[0]['probability'] == (np.array([1]))).all(), str(self.Sample.output()[0]['probability']))
         self.assertEqual(self.Sample.output()[0]['dV'], 1)
         self.tearDown()
         self.Sample = Sample(initial_sample_size=1, number_events=2)
         moment_tensors = [np.matrix([[2], [1], [2], [1], [2], [1]]), np.matrix([[2], [1], [2], [1], [2], [1]])]
-        ln_pdf = LnPDF(np.matrix([[1]]))
+        ln_pdf = LnPDF(np.matrix([[1.]]))
         scale_factor = np.array([{'mu': np.array([[[2, 3], [3, 2]]]), 'sigma': np.array([[1, 1], [1, 1]])}])
         self.assertFalse(self.Sample.__dict__.__contains__('scale_factor'))
         self.Sample.append(moment_tensors, ln_pdf, 1, scale_factor)
@@ -122,7 +125,13 @@ class SampleTestCase(unittest.TestCase):
 
 class FileSampleTestCase(unittest.TestCase):
     def setUp(self):
-        self.tearDown()
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         self.FileSample = FileSample('test')
 
     def tearDown(self):
@@ -137,6 +146,14 @@ class FileSampleTestCase(unittest.TestCase):
             try:
                 os.remove(filename)
             except Exception:
+                pass
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
                 pass
 
     def test___init__(self):
@@ -204,4 +221,4 @@ class FileSampleTestCase(unittest.TestCase):
         self.assertTrue('ln_pdf' in out.keys())
         self.assertTrue('g' in out.keys())
         self.assertEqual(out['moment_tensor_space'].shape, (6, 2))
-        self.assertEqual(out['probability'].shape, (1, 2))
+        self.assertEqual(out['probability'].shape, (2, ))

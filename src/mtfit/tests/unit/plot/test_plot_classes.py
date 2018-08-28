@@ -140,7 +140,10 @@ class MTDataTestCase(TestCase):
                                                                45), ('rake1', -90), ('strike2', 270), ('dip2', 45),
                      ('rake2', -90), ('strike', 90), ('dip', 45), ('rake', -
                                                                    90), ('N1', np.matrix([[1/np.sqrt(2)], [0], [1/np.sqrt(2)]])),
-                     ('N2', np.matrix([[1/np.sqrt(2)], [0], [-1/np.sqrt(2)]])), ('kappa', np.pi/2), ('h', np.cos(np.pi/4)), ('sigma', -np.pi/2), ('phi1', np.array([[1/np.sqrt(2)], [0.], [1/np.sqrt(2)]])), ('phi2', np.array([[1/np.sqrt(2)], [0.], [-1/np.sqrt(2)]])), ('area_displacement', 1.0), ('explosion', 0.0)]
+                     ('N2', np.matrix([[1/np.sqrt(2)], [0], [-1/np.sqrt(2)]])), ('kappa', np.pi/2), ('h', np.cos(np.pi/4)),
+                     ('sigma', -np.pi/2), ('phi1', np.array([[1/np.sqrt(2)], [0.], [1/np.sqrt(2)]])),
+                     ('phi2', np.array([[1/np.sqrt(2)], [0.], [-1/np.sqrt(2)]])), ('area_displacement', 1.0),
+                     ('explosion', 0.0)]
         for attr, value in test_data:
             if attr in ['T', 'N', 'P', 'E', 'N1', 'N2']:
                 self.assertTrue((self.MTData[:, 0]._convert(attr) == value).all())
@@ -165,16 +168,12 @@ class MTDataTestCase(TestCase):
 
     def test_cluster_normals(self):
         self.tearDown()
-        self.MTData = MTData(np.array([[1, 0.9,   1,   1, 0.8, 1.1, 0.9,   1],
-                                       [0,   0,   0,   0,
-                                           0,  0,  0,   0],
-                                       [-1,  -1, -0.9, -0.8,  -
-                                           1, -1, -1, -0.9],
-                                       [0,   0, 0.1,
-                                           0, 0.2,  0,  0,   0],
-                                       [0, 0.1,   0,   0,
-                                           0,  0,  0,   0],
-                                       [0,   0,   0, 0.2,   0,  0,  0,   0]]))
+        self.MTData = MTData(np.array([[1, 0.9,    1,    1, 0.8, 1.1, 0.9,    1],
+                                       [0,   0,    0,    0,   0,   0,   0,    0],
+                                       [-1, -1, -0.9, -0.8,  -1,  -1,  -1, -0.9],
+                                       [0,   0,  0.1,    0, 0.2,   0,   0,    0],
+                                       [0, 0.1,    0,    0,   0,   0,   0,    0],
+                                       [0,   0,    0,  0.2,   0,   0,   0,    0]]))
         self.MTData.cluster_normals()
         self.assertTrue((self.MTData.clustered_N1[2, :] < 0).all())
         self.assertTrue((self.MTData.clustered_N2[2, :] > 0).all())

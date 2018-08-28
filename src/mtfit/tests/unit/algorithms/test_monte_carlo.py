@@ -1,7 +1,6 @@
 import unittest
 import time
 
-import pytest
 import numpy as np
 
 from MTfit.algorithms.monte_carlo import BaseMonteCarloRandomSample
@@ -97,7 +96,6 @@ class TimeSampleTestCase(unittest.TestCase):
         self.assertEqual(self.time_sample.iteration, 0)
         self.assertTrue(self.time_sample.start_time)
 
-    @pytest.mark.functional
     def test_iterate(self):
         self.time_sample.initialise()
         moment_tensors, end = self.time_sample.iterate({'moment_tensors': self.time_sample.random_mt(),
@@ -143,7 +141,6 @@ class IterationSampleTestCase(unittest.TestCase):
         self.assertEqual(self.iteration_sample.iteration, 0)
         self.assertTrue(self.iteration_sample.start_time)
 
-    @pytest.mark.functional
     def test_iterate(self):
         self.iteration_sample.initialise()
         self.iteration_sample.max_samples = 6*self.iteration_sample.number_samples - 2

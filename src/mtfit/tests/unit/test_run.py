@@ -1,14 +1,42 @@
 import unittest
 import os
+import sys
+import tempfile
 import glob
+import shutil
 
 import numpy as np
 
 from MTfit.utilities.file_io import _convert_mt_space_to_struct
-from MTfit.run import MTfit
+from MTfit.run import MTfit, ERROR_MESSAGE
+from MTfit import get_details_json
+
+if sys.version_info >= (3, 3):
+    from unittest import mock
+else:
+    import mock
 
 
 class RunTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
+
+    def tearDown(self):
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def test_MTfit(self):
         logfiles = glob.glob('*.log')
@@ -22,6 +50,16 @@ class RunTestCase(unittest.TestCase):
         for logfile in newlogfiles:
             if logfile not in logfiles:
                 os.remove(logfile)
+
+    @unittest.skipIf(sys.version_info < (3, 0), 'Requires python 3')
+    def test_MTfit_error(self):
+        with mock.patch('MTfit.run.print') as _print:
+            with mock.patch('MTfit.run.get_extensions') as get_extensions:
+                get_extensions.side_effect = ValueError('abc')
+                with self.assertRaises(ValueError):
+                    MTfit(datafile='./', combine_mpi_output=True, max_time=10,
+                          phy_mem=0.5, parallel=False, convert=True, binary_file_version=2)
+                self.assertIn(ERROR_MESSAGE.format(get_details_json(), '').split('## Traceback')[0], _print.call_args[0][0])
 
     def test_combine_mpi_output(self):
         self.output_mpi()

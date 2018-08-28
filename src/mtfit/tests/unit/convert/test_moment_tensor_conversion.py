@@ -6,7 +6,7 @@ Tests for src/convert/moment_tensor_conversion.py
 """
 
 import unittest
-from unittest import mock
+import sys
 
 import numpy as np
 
@@ -50,6 +50,11 @@ from MTfit.convert import c_norm
 from MTfit.convert import moment_tensor_conversion
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
 from MTfit.utilities.unittest_utils import TestCase
+
+if sys.version_info >= (3, 3):
+    from unittest import mock
+else:
+    import mock
 
 
 C_EXTENSIONS = (not moment_tensor_conversion.cmoment_tensor_conversion, 'No C extension available')
@@ -121,6 +126,21 @@ class MomentTensorConvertTestCase(TestCase):
         self.Kdc = 0.
         self.Hdc = 0.
         self.Odc = 0.
+        self.T2 = np.array([[1., 0.99931011, 0.99753384, 1., 0.98559856, 1., 1., 1.],
+                            [0., 0., 0.0701871, 0., 0.16910198, 0., 0., 0.],
+                            [0., 0.0371391, 0., 0., 0., 0., 0., 0.]])
+        self.N2 = np.array([[0., 0., -0.0701871, 0., -0.16910198, 0., 0., 0.],
+                            [1., 1., 0.99753384, -0.98559856,  0.98559856, 1., 1., 1.],
+                            [0., 0., 0., -0.16910198, 0., 0., 0., 0.]])
+        self.P2 = np.array([[0., -0.0371391, 0., 0., 0., 0., 0., 0.],
+                            [0., 0., 0., 0.16910198, 0., 0., 0., 0.],
+                            [1., 0.99931011, 1., -0.98559856, 1., 1., 1., 1.]])
+        self.S21 = np.array([90., 90., 94.02473349, 279.5980303, 99.73561032, 90., 90., 90.])*np.pi/180.
+        self.S22 = np.array([270., 270., 274.02473349, 80.4019697, 279.73561032, 270., 270., 270.])*np.pi/180.
+        self.D21 = np.array([45., 42.87159666, 45., 45.81931182, 45., 45., 45., 45.])*np.pi/180.
+        self.D22 = np.array([45., 47.12840334, 45., 45.81931182, 45., 45., 45., 45.])*np.pi/180.
+        self.R21 = np.array([-90., -90., -90., -76.36129238206001, -90., -90., -90., -90.])*np.pi/180.
+        self.R22 = np.array([-90., -90., -90., -103.63870728, -90., -90., -90., -90.])*np.pi/180.
 
     def tearDown(self):
         del self.DC6
@@ -175,6 +195,15 @@ class MomentTensorConvertTestCase(TestCase):
         del self.Kdc
         del self.Hdc
         del self.Odc
+        del self.T2
+        del self.P2
+        del self.N2
+        del self.S21
+        del self.D21
+        del self.R21
+        del self.S22
+        del self.D22
+        del self.R22
 
     def assertSigmaEquals(self, first, second, *args):
         try:
@@ -460,6 +489,27 @@ class MomentTensorConvertTestCase(TestCase):
                 self.assertAlmostEquals(s[1], self.S2dc)
                 self.assertAlmostEquals(d[1], self.D2dc)
                 self.assertAlmostEquals(r[1], self.R2dc)
+            [S2, D2, R2] = TNP_SDR(self.T2, self.N2, self.P2)
+            for i, s in enumerate(S2):
+                try:
+                    self.assertAlmostEquals(s, self.S21[i])
+                    self.assertAlmostEquals(D2[i], self.D21[i])
+                    self.assertAlmostEquals(R2[i], self.R21[i])
+                except Exception:
+                    self.assertAlmostEquals(s, self.S22[i])
+                    self.assertAlmostEquals(D2[i], self.D22[i])
+                    self.assertAlmostEquals(R2[i], self.R22[i])
+
+            [S2, D2, R2] = TNP_SDR(-self.T2, -self.N2, -self.P2)
+            for i, s in enumerate(S2):
+                try:
+                    self.assertAlmostEquals(s, self.S21[i])
+                    self.assertAlmostEquals(D2[i], self.D21[i])
+                    self.assertAlmostEquals(R2[i], self.R21[i])
+                except Exception:
+                    self.assertAlmostEquals(s, self.S22[i])
+                    self.assertAlmostEquals(D2[i], self.D22[i])
+                    self.assertAlmostEquals(R2[i], self.R22[i])
 
     @unittest.skipIf(*C_EXTENSIONS)
     @mock.patch('MTfit.convert.moment_tensor_conversion.logger')
@@ -507,6 +557,26 @@ class MomentTensorConvertTestCase(TestCase):
             self.assertAlmostEquals(s[1], self.S2dc)
             self.assertAlmostEquals(d[1], self.D2dc)
             self.assertAlmostEquals(r[1], self.R2dc)
+        [S2, D2, R2] = TNP_SDR(self.T2, self.N2, self.P2)
+        for i, s in enumerate(S2):
+            try:
+                self.assertAlmostEquals(s, self.S21[i])
+                self.assertAlmostEquals(D2[i], self.D21[i])
+                self.assertAlmostEquals(R2[i], self.R21[i])
+            except Exception:
+                self.assertAlmostEquals(s, self.S22[i])
+                self.assertAlmostEquals(D2[i], self.D22[i])
+                self.assertAlmostEquals(R2[i], self.R22[i])
+        [S2, D2, R2] = TNP_SDR(-self.T2, -self.N2, -self.P2)
+        for i, s in enumerate(S2):
+            try:
+                self.assertAlmostEquals(s, self.S21[i])
+                self.assertAlmostEquals(D2[i], self.D21[i])
+                self.assertAlmostEquals(R2[i], self.R21[i])
+            except Exception:
+                self.assertAlmostEquals(s, self.S22[i])
+                self.assertAlmostEquals(D2[i], self.D22[i])
+                self.assertAlmostEquals(R2[i], self.R22[i])
 
     def test_TP_FP(self):
         [N1dc, N2dc] = TP_FP(self.Tdc, self.Pdc)
@@ -523,8 +593,18 @@ class MomentTensorConvertTestCase(TestCase):
         self.assertVectorEquals(N2[:, 1], self.N2dc)
 
     def test_FP_SDR(self):
-        [Sdc, Ddc, Rdc] = FP_SDR(self.N1dc, self.N2dc)
-        [Smt, Dmt, Rmt] = FP_SDR(self.N1mt, self.N2mt)
+        [Sdc, Ddc, Rdc] = FP_SDR(np.array(self.N1dc), np.array(self.N2dc))
+        [Smt, Dmt, Rmt] = FP_SDR(np.array(self.N1mt), np.array(self.N2mt))
+        self.assertAlmostEquals(Sdc, self.S1dc)
+        self.assertAlmostEquals(Ddc, self.D1dc)
+        self.assertAlmostEquals(Rdc, self.R1dc)
+        self.assertAlmostEquals(Smt, self.S1mt)
+        self.assertAlmostEquals(Dmt, self.D1mt)
+        self.assertAlmostEquals(Rmt, self.R1mt)
+
+    def test_FP_SDR_matrix(self):
+        [Sdc, Ddc, Rdc] = FP_SDR(np.matrix(self.N1dc), np.matrix(self.N2dc))
+        [Smt, Dmt, Rmt] = FP_SDR(np.matrix(self.N1mt), np.matrix(self.N2mt))
         self.assertAlmostEquals(Sdc, self.S1dc)
         self.assertAlmostEquals(Ddc, self.D1dc)
         self.assertAlmostEquals(Rdc, self.R1dc)

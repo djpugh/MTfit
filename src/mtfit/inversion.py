@@ -478,7 +478,7 @@ class MultipleEventsForwardTask(object):
     """
     def __init__(self, mts, a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio,
                  a_polarity_prob, polarity_prob, a_relative_amplitude, relative_amplitude, percentage_error_relative_amplitude, relative_amplitude_stations, location_sample_multipliers=False,
-                 incorrect_polarity_prob=0, minimum_number_intersections=2, return_zero=False, reuse=False, relative=True, location_sample_size=1, marginalise_relative=False,
+                 incorrect_polarity_prob=0, minimum_number_intersections=2, return_zero=False, reuse=False, relative=False, location_sample_size=1, marginalise_relative=False,
                  combine=True, extension_data=[]):
         """
         Initialisation of MultipleEventsForwardTask
@@ -502,6 +502,7 @@ class MultipleEventsForwardTask(object):
             relative_amplitude_stations: List of relative amplitude stations allowing for intersections when evaluating the relative amplitudes
             return_zero:[False] Boolean flag to return zero probability samples.
             reuse:[False] Boolean flag as to whether task is reused (mt changed and re-run...)
+            relative:[False] Use relative amplitude on multiple
             location_samples:[1]  Integer number of station samples, (default is 1)
             marginalise_relative:[False] Boolean flag to marginalise the location uncertainty between absolute and relative data.
             combine:[False] Boolean flag to combine the probabilities between multiple events.
@@ -532,8 +533,12 @@ class MultipleEventsForwardTask(object):
         self._marginalise_relative = marginalise_relative
         self._combine = combine
         # Need to implement marginalisation of scale factor for self._marginalise_relative and location_samples
-        if self._marginalise_relative and self.location_sample_size > 1:
-            raise NotImplementedError('Marginalisation of location samples on relative data not implemented yet')
+        if self._relative and self._marginalise_relative and self.location_sample_size > 1:
+            raise NotImplementedError('Marginalisation of location samples on relative data not implemented yet - we may well expect location uncertainty between the co-located events to be zero')
+            # https://github.com/djpugh/MTfit/issues/11
+            # Scale factor is location/amplitude specific
+            # We would expect amplitude ratio location uncertainty to be minimal between co-located events
+            # So probably need to remove any location uncertainty for the relative amplitude terms
         self.extension_data = extension_data
         if self._relative and not self._combine and self._return_zero:
             self._combine = True

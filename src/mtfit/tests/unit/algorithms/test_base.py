@@ -1,5 +1,4 @@
 import unittest
-from unittest import mock
 from types import MethodType
 import sys
 
@@ -8,6 +7,10 @@ import numpy as np
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
 import MTfit.algorithms.base as base
 
+if sys.version_info >= (3, 3):
+    from unittest import mock
+else:
+    import mock
 
 VERBOSITY = 2
 

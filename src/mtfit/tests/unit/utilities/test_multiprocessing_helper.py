@@ -4,9 +4,11 @@ test_multiprocessing_utils.py
 
 Tests for src/utils/multiprocessing_utils.py
 """
-
+import sys
+import unittest
 import multiprocessing
 import multiprocessing.queues
+
 
 from MTfit.utilities.unittest_utils import TestCase
 from MTfit.utilities.multiprocessing_helper import Worker

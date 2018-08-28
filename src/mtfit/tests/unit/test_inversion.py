@@ -3,6 +3,8 @@ import os
 import glob
 import time
 import sys
+import tempfile
+import shutil
 import gc
 try:
     import cPickle as pickle
@@ -24,11 +26,37 @@ from MTfit.inversion import relative_amplitude_ratio_matrix
 from MTfit.inversion import _intersect_stations
 from MTfit.inversion import station_angles
 from MTfit.extensions.scatangle import parse_scatangle
+from MTfit.algorithms import markov_chain_monte_carlo as mcmc
+from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+
+if sys.version_info >= (3, 3):
+    from unittest import mock
+else:
+    import mock
+
+C_EXTENSIONS = (not mcmc.cmarkov_chain_monte_carlo, 'No C extension available')
+
+
+class PythonAlgorithms(object):
+
+    def __enter__(self, *args, **kwargs):
+        self.cmarkov_chain_monte_carlo = mcmc.cmarkov_chain_monte_carlo
+        mcmc.cmarkov_chain_monte_carlo = False
+
+    def __exit__(self, *args, **kwargs):
+        mcmc.cmarkov_chain_monte_carlo = self.cmarkov_chain_monte_carlo
 
 
 class McMCForwardTaskTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         self.existing_log_files = glob.glob('*.log')
         data = {'PPolarity': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.001], [0.001]])},
@@ -54,23 +82,33 @@ class McMCForwardTaskTestCase(TestCase):
                 except Exception:
                     print('Cannot remove {}'.format(fname))
         del self.mcmc_forward_task
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
-    def test___call__(self):
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test___call__cython(self, logger):
         result = self.mcmc_forward_task()
         self.assertTrue('algorithm_output_data' in result)
         self.assertTrue('event_data' in result)
         del self.mcmc_forward_task
-        data = {'PPolarity': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.5], [0.5]])},
-                'PPolarity2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.5], [0.5]])}}
-        data = {'P/SHRMSAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                                          'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.1, 0.3], [0.1, 0.2]])},
-                'P/SVAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                                       'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.1, 0.3], [0.1, 0.2]])}}
         location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
             [31.0, 61.0, 12.1])}, {'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([92.0, 272.0, 122.1]), 'TakeOffAngle':np.array([32.0, 62.0, 13.1])}]
+        data = {'PPolarity': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.9], [0.9]])},
+                'PPolarity2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.9], [0.9]])}}
         a_polarity, error_polarity, incorrect_polarity_prob = polarity_matrix(data, location_samples)
+        data = {'P/SHRMSAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                          'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.9, 0.9], [0.9, 0.9]])},
+                'P/SVAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                       'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.9, 0.9], [0.9, 0.9]])}}
         a_polarity_prob, polarity_prob, incorrect_polarity_prob = polarity_probability_matrix(data, location_samples)
         a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio = amplitude_ratio_matrix(
             data, location_samples)
@@ -78,20 +116,55 @@ class McMCForwardTaskTestCase(TestCase):
                                                  amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio,
                                                  a_polarity_prob, polarity_prob, incorrect_polarity_prob)
         result = self.mcmc_forward_task()
+        self.assertNotIn(mock.call(C_EXTENSION_FALLBACK_LOG_MSG), logger.info.call_args_list)
+
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test___call__python(self, logger):
+        with PythonAlgorithms():
+            result = self.mcmc_forward_task()
+            self.assertTrue('algorithm_output_data' in result)
+            self.assertTrue('event_data' in result)
+            del self.mcmc_forward_task
+            location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
+                [31.0, 61.0, 12.1])}, {'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([92.0, 272.0, 122.1]), 'TakeOffAngle':np.array([32.0, 62.0, 13.1])}]
+            data = {'PPolarity': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                  'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.9], [0.9]])},
+                    'PPolarity2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                   'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.9], [0.9]])}}
+            a_polarity, error_polarity, incorrect_polarity_prob = polarity_matrix(data, location_samples)
+            data = {'P/SHRMSAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                              'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.9, 0.9], [0.9, 0.9]])},
+                    'P/SVAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                           'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.9, 0.9], [0.9, 0.9]])}}
+            a_polarity_prob, polarity_prob, incorrect_polarity_prob = polarity_probability_matrix(data, location_samples)
+            a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio = amplitude_ratio_matrix(
+                data, location_samples)
+            self.mcmc_forward_task = McMCForwardTask(self.algorithm_kwargs, a_polarity, error_polarity, a1_amplitude_ratio, a2_amplitude_ratio,
+                                                     amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio,
+                                                     a_polarity_prob, polarity_prob, incorrect_polarity_prob)
+            result = self.mcmc_forward_task()
+            self.assertIn(mock.call(C_EXTENSION_FALLBACK_LOG_MSG), logger.info.call_args_list)
 
 
 class MultipleEventsMcMCForwardTaskTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         self.existing_log_files = glob.glob('*.log')
         data = {'PPolarity': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.001], [0.001]])}}
+                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.9], [0.9]])}}
         a_polarity, error_polarity, incorrect_polarity_prob = polarity_matrix(data)
         a_polarity_prob, polarity_prob, incorrect_polarity_prob = polarity_probability_matrix(data)
         data = {'P/SHRMSAmplitudeRatio': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                                          'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.001, 0.003], [0.001, 0.002]])},
+                                          'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.9, 0.9], [0.9, 0.9]])},
                 'P/SVAmplitudeRatio': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                                       'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.001, 0.03], [0.001, 0.02]])}}
+                                       'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.9, 0.9], [0.9, 0.9]])}}
         a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio = amplitude_ratio_matrix(
             data)
         self.algorithm_kwargs = {'learning_length': 10, 'chain_length': 4, 'acceptance_rate_window': 20, 'number_events': 2, 'min_number_initialisation_samples': 10}
@@ -122,28 +195,49 @@ class MultipleEventsMcMCForwardTaskTestCase(TestCase):
                 except Exception:
                     print('Cannot remove {}'.format(fname))
         del self.multiple_events_mcmc_forward_task
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
-    def test___call__(self):
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test___call___cython(self, logger):
         result = self.multiple_events_mcmc_forward_task()
         self.assertTrue('algorithm_output_data' in result)
         self.assertTrue('event_data' in result)
+        self.assertNotIn(mock.call(C_EXTENSION_FALLBACK_LOG_MSG), logger.info.call_args_list)
 
-    def test___call__location_samples(self):
-        data = {'PPolarity': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.2], [0.2]])},
-                'PPolarity2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.2], [0.2]])}}
-        data = {'P/SHRMSAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                                          'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.2, 0.003], [0.2, 0.002]])},
-                'P/SVAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                                       'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.2, 0.03], [0.2, 0.02]])},
-                'P/SHRMSAmplitudeRatio2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                                          'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.2, 0.003], [0.2, 0.002]])},
-                'P/SVAmplitudeRatio2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
-                                       'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.2, 0.03], [0.2, 0.02]])}}
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test___call__python(self, logger):
+        with PythonAlgorithms():
+            result = self.multiple_events_mcmc_forward_task()
+            self.assertTrue('algorithm_output_data' in result)
+            self.assertTrue('event_data' in result)
+            self.assertIn(mock.call(C_EXTENSION_FALLBACK_LOG_MSG), logger.info.call_args_list)
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test___call__location_samples_cython(self, logger):
         location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
             [31.0, 61.0, 12.1])}, {'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([92.0, 272.0, 122.1]), 'TakeOffAngle':np.array([32.0, 62.0, 13.1])}]
+        data = {'PPolarity': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                              'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.9], [0.9]])},
+                'PPolarity2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.9], [0.9]])}}
         a_polarity, error_polarity, incorrect_polarity_prob = polarity_matrix(data, location_samples)
+        data = {'P/SHRMSAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                          'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.8, 0.9], [0.8, 0.9]])},
+                'P/SVAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                       'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.8, 0.9], [0.8, 0.9]])},
+                'P/SHRMSAmplitudeRatio2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                           'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.8, 0.9], [0.8, 0.9]])},
+                'P/SVAmplitudeRatio2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                        'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.8, 0.9], [0.8, 0.9]])}}
         a_polarity_prob, polarity_prob, incorrect_polarity_prob = polarity_probability_matrix(data, location_samples)
         a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio = amplitude_ratio_matrix(
             data, location_samples)
@@ -166,11 +260,61 @@ class MultipleEventsMcMCForwardTaskTestCase(TestCase):
         result = self.multiple_events_mcmc_forward_task()
         self.assertTrue('algorithm_output_data' in result)
         self.assertTrue('event_data' in result)
+        self.assertNotIn(mock.call(C_EXTENSION_FALLBACK_LOG_MSG), logger.info.call_args_list)
+
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test___call__location_samples_python(self, logger):
+        with PythonAlgorithms():
+            location_samples = [{'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([91.0, 271.0, 120.1]), 'TakeOffAngle':np.array(
+                [31.0, 61.0, 12.1])}, {'Name': ['S01', 'S02', 'S03'], 'Azimuth':np.array([92.0, 272.0, 122.1]), 'TakeOffAngle':np.array([32.0, 62.0, 13.1])}]
+            data = {'PPolarity': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                  'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.9], [0.9]])},
+                    'PPolarity2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                   'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.9], [0.9]])}}
+            a_polarity, error_polarity, incorrect_polarity_prob = polarity_matrix(data, location_samples)
+            data = {'P/SHRMSAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                              'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.8, 0.9], [0.8, 0.9]])},
+                    'P/SVAmplitudeRatio': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                           'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.8, 0.9], [0.8, 0.9]])},
+                    'P/SHRMSAmplitudeRatio2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                               'Measured': np.matrix([[1.3664, 1], [1.0038, 1]]), 'Error': np.matrix([[0.8, 0.9], [0.8, 0.9]])},
+                    'P/SVAmplitudeRatio2': {'Stations': {'Name': ['S01', 'S02'], 'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
+                                            'Measured': np.matrix([[1.3386, 1], [0.9805, 1]]), 'Error': np.matrix([[0.8, 0.9], [0.8, 0.9]])}}
+            a_polarity_prob, polarity_prob, incorrect_polarity_prob = polarity_probability_matrix(data, location_samples)
+            a1_amplitude_ratio, a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio, percentage_error2_amplitude_ratio = amplitude_ratio_matrix(
+                data, location_samples)
+            a_relative_amplitude, relative_amplitude, percentage_error_relative_amplitude, relative_amplitude_stations = relative_amplitude_ratio_matrix(
+                data)
+            a_polarity = [a_polarity, a_polarity]
+            error_polarity = [error_polarity, error_polarity]
+            a1_amplitude_ratio = [a1_amplitude_ratio, a1_amplitude_ratio]
+            a2_amplitude_ratio = [a2_amplitude_ratio, a2_amplitude_ratio]
+            percentage_error1_amplitude_ratio = [percentage_error1_amplitude_ratio, percentage_error1_amplitude_ratio]
+            percentage_error2_amplitude_ratio = [percentage_error2_amplitude_ratio, percentage_error2_amplitude_ratio]
+            amplitude_ratio = [amplitude_ratio, amplitude_ratio]
+            a_polarity_prob = [a_polarity_prob, a_polarity_prob]
+            polarity_prob = [polarity_prob, polarity_prob]
+            self.multiple_events_mcmc_forward_task = MultipleEventsMcMCForwardTask(self.algorithm_kwargs, a_polarity, error_polarity, a1_amplitude_ratio,
+                                                                                   a2_amplitude_ratio, amplitude_ratio, percentage_error1_amplitude_ratio,
+                                                                                   percentage_error2_amplitude_ratio, a_polarity_prob, polarity_prob,
+                                                                                   a_relative_amplitude, relative_amplitude, percentage_error_relative_amplitude,
+                                                                                   relative_amplitude_stations, incorrect_polarity_prob)
+            result = self.multiple_events_mcmc_forward_task()
+            self.assertTrue('algorithm_output_data' in result)
+            self.assertTrue('event_data' in result)
+            self.assertIn(mock.call(C_EXTENSION_FALLBACK_LOG_MSG), logger.info.call_args_list)
 
 
 class MultipleEventsForwardTaskTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         data = {'PPolarity': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.001], [0.001]])},
                 'PPolarity2': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
@@ -404,6 +548,14 @@ class MultipleEventsForwardTaskTestCase(TestCase):
     def tearDown(self):
         del self.multiple_events_forward_task
         del self.MTs
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def test___call__(self):
         result = self.multiple_events_forward_task()
@@ -503,6 +655,13 @@ class MultipleEventsForwardTaskTestCase(TestCase):
 class ForwardTaskTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         data = {'PPolarity': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.1]])},
                 'PPolarity2': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
@@ -737,6 +896,14 @@ class ForwardTaskTestCase(TestCase):
         _CYTHON_TESTS = False
         global _COMBINED_TESTS
         _COMBINED_TESTS = True
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def test___call__(self):
         global _COMBINED_TESTS
@@ -958,6 +1125,13 @@ class ForwardTaskTestCase(TestCase):
 class InversionTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         global _DEBUG
         _DEBUG = True
         self.parallel = not _DEBUG
@@ -1001,6 +1175,14 @@ class InversionTestCase(TestCase):
         except Exception:
             pass
         gc.collect()
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def _test_csv_file(self):
         csv = """UID=123,,,,
@@ -1378,6 +1560,7 @@ S003,110,10,1,0.05"""
         except Exception:
             pass
 
+    @unittest.expectedFailure  # Marginalise relative with location uncertainty not implemented
     def test__mcmc_multiple_forward_location_uncertainty(self):
         try:
             os.remove('MTfitOutput_joint_inversionMT.mat')
@@ -1387,7 +1570,7 @@ S003,110,10,1,0.05"""
                                               'Measured': np.matrix([[1], [1], [-1]]), 'Error': np.matrix([[0.1], [0.5], [0.02]])}}
         data2 = data.copy()
         data2['UID'] = 'TestB'
-        self.inversion = Inversion([data, data], algorithm='McMC', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, multiple_events=True, convert=False)
+        self.inversion = Inversion([data, data], algorithm='McMC', parallel=False, relative_amplitude=True, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, multiple_events=True, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
@@ -1414,7 +1597,7 @@ S003,110,10,1,0.05"""
                 'PRMSQAmplitude': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
                                    'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])}}
         self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5,
-                                   phy_mem=1, max_time=10, relative_amplitude=True, convert=False)
+                                   phy_mem=1, max_time=10, relative_amplitude=False, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         self.inversion._mcmc_multiple_forward()
         self.assertTrue(os.path.exists('MTfitOutput_joint_inversionMT.mat'))
@@ -1423,6 +1606,7 @@ S003,110,10,1,0.05"""
         except Exception:
             pass
 
+    @unittest.expectedFailure  # Marginalise relative with location uncertainty not implemented
     def test__mcmc_multiple_forward_amplitude_location_uncertainty(self):
         try:
             os.remove('MTfitOutput_joint_inversionMT.mat')
@@ -1622,6 +1806,13 @@ S003,110,10,1,0.05"""
 class MiscTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+            os.chdir(self.tempdir.name)
+        else:
+            self.tempdir = tempfile.mkdtemp()
+            os.chdir(self.tempdir)
         self.existing_csv_files = glob.glob('*.csv')
         self.existing_hyp_files = glob.glob('*.hyp')
 
@@ -1638,6 +1829,14 @@ class MiscTestCase(TestCase):
                     os.remove(fname)
                 except Exception:
                     print('Cannot remove {}'.format(fname))
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def station_angles(self):
         out = "504.7\n"

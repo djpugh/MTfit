@@ -28,15 +28,15 @@ from scipy.stats import norm as gaussian
 from scipy.stats import beta
 from scipy.special import erf
 
+from ..utilities import C_EXTENSION_FALLBACK_LOG_MSG
+try:
+    from . import cprobability
+except ImportError:
+    cprobability = False
 # Set to prevent numpy warnings
 np.seterr(divide='print', invalid='print')
 
 # Set flags for running with/without the c library
-try:
-    from . import cprobability
-    _C_LIB = True
-except ImportError:
-    _C_LIB = False
 
 logger = logging.getLogger('MTfit.probability')
 
@@ -46,7 +46,8 @@ _C_LIB_TESTS = False
 
 # Value of a very small non-zero number for handling zero error values
 _SMALL_NUMBER = 0.000000000000000000000001
-CPROBABILITY_MODULE_EXCEPTION = 'No cprobability module found'
+
+# TODO - tidy and refactor code to avoid duplication
 
 
 def _6sphere_prior(g, d):
@@ -97,41 +98,45 @@ def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0, _use_c=Non
     # For fractional uncertainties that are zero make them really small
     # to avoid zero divison errors
     sigma[sigma == 0] = _SMALL_NUMBER
-    try:
-        if not _C_LIB or (_use_c is not None and not _use_c):
-            raise ImportError(CPROBABILITY_MODULE_EXCEPTION)
-        if sys.platform.startswith('win') and not _use_c:
-            # Raise an exception due to windows C_LIB using VS2008 VC math.h
-            # which has no erf
-            raise Exception('Windows')
-        # Run using C library
-        # Handle incorrect polarity probability
-        if isinstance(incorrect_polarity_probability, (float, int)):
-            incorrect_polarity_probability = np.ones(
-                sigma.shape)*incorrect_polarity_probability
-        if incorrect_polarity_probability.ndim != 1:
-            raise TypeError('Variable: incorrect_polarity_probability is expected to be a one-dimensional numpy array or a float')
-        # Check types and convert to the correct types in place
-        if a.dtype != np.float64:
-            a = a.astype(np.float64, copy=False)
-        if mt.dtype != np.float64:
-            mt = mt.astype(np.float64, copy=False)
-        if sigma.dtype != np.float64:
-            sigma = sigma.astype(np.float64, copy=False)
-        if incorrect_polarity_probability.dtype != np.float64:
-            incorrect_polarity_probability = incorrect_polarity_probability.astype(np.float64,
-                                                                                   copy=False)
-        # Make sure moment tensors are C contiguous
-        if not mt.flags['C_CONTIGUOUS']:
-            mt = np.ascontiguousarray(mt)
-        # Calculate log of pdf
-        ln_p = cprobability.polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability)
-    except Exception as e:
-        # Run using python
-        if _C_LIB_TESTS:
+    completed = False
+    if cprobability and (_use_c is None or _use_c):
+        try:
+            if sys.platform.startswith('win') and not _use_c:
+                # Raise an exception due to windows C_LIB using VS2008 VC math.h
+                # which has no erf
+                raise Exception('Windows')
+            # Run using C library
+            # Handle incorrect polarity probability
+            if isinstance(incorrect_polarity_probability, (float, int)):
+                incorrect_polarity_probability = np.ones(sigma.shape)*incorrect_polarity_probability
+            incorrect_polarity_probability = np.squeeze(incorrect_polarity_probability)
+            if incorrect_polarity_probability.ndim != 1:
+                raise TypeError('Variable: incorrect_polarity_probability is expected to be a one-dimensional numpy array or a float')
+            # Check types and convert to the correct types in place
+            if a.dtype != np.float64:
+                a = a.astype(np.float64, copy=False)
+            if mt.dtype != np.float64:
+                mt = mt.astype(np.float64, copy=False)
+            if sigma.dtype != np.float64:
+                sigma = sigma.astype(np.float64, copy=False)
+            if incorrect_polarity_probability.dtype != np.float64:
+                incorrect_polarity_probability = incorrect_polarity_probability.astype(np.float64,
+                                                                                       copy=False)
+            # Make sure moment tensors are C contiguous
+            if not mt.flags['C_CONTIGUOUS']:
+                mt = np.ascontiguousarray(mt)
+            # Calculate log of pdf
+            ln_p = cprobability.polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability)
+            completed = True
+        except Exception as e:
+            # Run using python
             # Testing C code
-            logging.exception(CPROBABILITY_MODULE_EXCEPTION)
-            raise e
+            logger.exception('Error running cython code')
+            if _C_LIB_TESTS:
+                raise e
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    if not completed:
         # Check moment tensor shape is correct
         if mt.shape[0] != a.shape[-1]:
             mt = mt.transpose()
@@ -142,8 +147,7 @@ def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0, _use_c=Non
         while sigma.ndim < 3:
             sigma = np.expand_dims(sigma, 1)
         if not isinstance(incorrect_polarity_probability, (float, int)):
-            incorrect_polarity_probability = np.array(
-                incorrect_polarity_probability)
+            incorrect_polarity_probability = np.array(incorrect_polarity_probability)
         if isinstance(incorrect_polarity_probability, np.ndarray):
             while incorrect_polarity_probability.ndim < 3:
                 incorrect_polarity_probability = np.expand_dims(
@@ -160,6 +164,8 @@ def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0, _use_c=Non
         try:
             ln_p = cprobability.ln_prod(ln_p)
         except Exception:
+            if cprobability:
+                logger.exception('Error running cython code')
             ln_p = np.sum(ln_p, 0)
     if isinstance(ln_p, np.ndarray):
         ln_p[np.isnan(ln_p)] = -np.inf
@@ -211,35 +217,44 @@ def polarity_probability_ln_pdf(a, mt, positive_probability, negative_probabilit
         raise TypeError('Variable: a is expected to be a three-dimensional numpy array')
     if not isinstance(mt, np.ndarray) or mt.ndim != 2:
         raise TypeError('Variable: mt is expected to be a two-dimensional numpy array of moment tensor six vectors')
-    try:
-        if not _C_LIB or (_use_c is not None and not _use_c):
-            raise ImportError(CPROBABILITY_MODULE_EXCEPTION)
-        # Run using C library
-        # Handle incorrect polarity probability
-        if isinstance(incorrect_polarity_probability, (float, int)):
-            incorrect_polarity_probability = np.ones(
-                positive_probability.shape)*incorrect_polarity_probability
-        if incorrect_polarity_probability.ndim != 1:
-            raise TypeError('Variable: incorrect_polarity_probability is expected to be a one-dimensional numpy array or a float')
-        # Check types and convert to the correct types in place
-        if a.dtype != np.float64:
-            a = a.astype(np.float64, copy=False)
-        if mt.dtype != np.float64:
-            mt = mt.astype(np.float64, copy=False)
-        if incorrect_polarity_probability.dtype != np.float64:
-            incorrect_polarity_probability = incorrect_polarity_probability.astype(np.float64,
-                                                                                   copy=False)
-        if positive_probability.dtype != np.float64:
-            positive_probability = positive_probability.astype(np.float64, copy=False)
-        if negative_probability.dtype != np.float64:
-            negative_probability = negative_probability.astype(np.float64, copy=False)
-        # Make sure moment tensors are C contiguous
-        if not mt.flags['C_CONTIGUOUS']:
-            mt = np.ascontiguousarray(mt)
-        # Calculate log of pdf
-        ln_p = cprobability.polarity_probability_ln_pdf(a, mt, positive_probability, negative_probability,
-                                                        incorrect_polarity_probability)
-    except Exception:
+    completed = False
+    if cprobability and (_use_c is None or _use_c):
+        try:
+            # Run using C library
+            # Handle incorrect polarity probability
+            if isinstance(incorrect_polarity_probability, (float, int)):
+                incorrect_polarity_probability = np.ones(positive_probability.shape)*incorrect_polarity_probability
+            incorrect_polarity_probability = np.squeeze(incorrect_polarity_probability)
+            if incorrect_polarity_probability.ndim != 1:
+                raise TypeError('Variable: incorrect_polarity_probability is expected to be a one-dimensional numpy array or a float')
+            # Check types and convert to the correct types in place
+            if a.dtype != np.float64:
+                a = a.astype(np.float64, copy=False)
+            if mt.dtype != np.float64:
+                mt = mt.astype(np.float64, copy=False)
+            if incorrect_polarity_probability.dtype != np.float64:
+                incorrect_polarity_probability = incorrect_polarity_probability.astype(np.float64,
+                                                                                       copy=False)
+            if positive_probability.dtype != np.float64:
+                positive_probability = positive_probability.astype(np.float64, copy=False)
+            if negative_probability.dtype != np.float64:
+                negative_probability = negative_probability.astype(np.float64, copy=False)
+            # Make sure moment tensors are C contiguous
+            if not mt.flags['C_CONTIGUOUS']:
+                mt = np.ascontiguousarray(mt)
+            # Calculate log of pdf
+            ln_p = cprobability.polarity_probability_ln_pdf(a, mt, positive_probability, negative_probability,
+                                                            incorrect_polarity_probability)
+            completed = True
+        except Exception as e:
+            # Run using python
+            # Testing C code
+            logger.exception('Error running cython code')
+            if _C_LIB_TESTS:
+                raise e
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    if not completed:
         if mt.shape[0] != a.shape[-1]:
             mt = mt.transpose()
         # Calculate theoretical amplitude
@@ -330,12 +345,21 @@ def amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x, percentage_e
     # Make sure the errors are positive
     percentage_error_x = np.abs(percentage_error_x)
     percentage_error_y = np.abs(percentage_error_y)
-    try:
-        if not _C_LIB or (_use_c is not None and not _use_c):
-            raise ImportError(CPROBABILITY_MODULE_EXCEPTION)
-        ln_p = cprobability.amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x,
-                                                   percentage_error_y)
-    except Exception:
+    completed = False
+    if cprobability and (_use_c is None or _use_c):
+        try:
+            ln_p = cprobability.amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x,
+                                                       percentage_error_y)
+            completed = True
+        except Exception as e:
+            # Run using python
+            # Testing C code
+            logger.exception('Error running cython code')
+            if _C_LIB_TESTS:
+                raise e
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    if not completed:
         # Calculate probability using Python code
         # Calculate means for numerator and denominator
         mu_x = np.tensordot(a_x, mt, 1)
@@ -363,6 +387,8 @@ def amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x, percentage_e
         try:
             ln_p = cprobability.ln_prod(ln_p)
         except Exception:
+            if cprobability:
+                logger.exception('Error running cython code')
             ln_p = np.sum(ln_p, 0)
     if isinstance(ln_p, np.ndarray):
         ln_p[np.isnan(ln_p)] = -np.inf
@@ -431,19 +457,28 @@ def relative_amplitude_ratio_ln_pdf(x_1, x_2, mt_1, mt_2, a_1, a_2, percentage_e
     # Make sure the errors are positive
     percentage_error_1 = np.abs(percentage_error_1)
     percentage_error_2 = np.abs(percentage_error_2)
-    try:
-        if not _C_LIB or not _C_LIB_TESTS or (_use_c is not None and not _use_c):
-            raise ImportError(CPROBABILITY_MODULE_EXCEPTION)
-        # raise ValueError('C code returning incorrect result for probabilities')
-        ln_p, scale, scale_uncertainty = cprobability.relative_amplitude_ratio_ln_pdf(np.ascontiguousarray(x_1),
-                                                                                      np.ascontiguousarray(x_2),
-                                                                                      np.ascontiguousarray(mt_1),
-                                                                                      np.ascontiguousarray(mt_2),
-                                                                                      np.ascontiguousarray(a_1),
-                                                                                      np.ascontiguousarray(a_2),
-                                                                                      np.ascontiguousarray(percentage_error_1),
-                                                                                      np.ascontiguousarray(percentage_error_2))
-    except Exception:
+    completed = False
+    if cprobability and (_use_c is None or _use_c):
+        try:
+            # raise ValueError('C code returning incorrect result for probabilities')
+            ln_p, scale, scale_uncertainty = cprobability.relative_amplitude_ratio_ln_pdf(np.ascontiguousarray(x_1),
+                                                                                          np.ascontiguousarray(x_2),
+                                                                                          np.ascontiguousarray(mt_1),
+                                                                                          np.ascontiguousarray(mt_2),
+                                                                                          np.ascontiguousarray(a_1),
+                                                                                          np.ascontiguousarray(a_2),
+                                                                                          np.ascontiguousarray(percentage_error_1),
+                                                                                          np.ascontiguousarray(percentage_error_2))
+            completed = True
+        except Exception as e:
+            # Run using python
+            # Testing C code
+            logger.exception('Error running cython code')
+            if _C_LIB_TESTS:
+                raise e
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    if not completed:
         # Calculate probability using Python code
         # Calculate the ratio
         ratio = np.divide(x_1, x_2)
@@ -601,7 +636,7 @@ def gaussian_pdf(x, mu, sigma):
 
     """
     # Avoid nan overflows for 0 errors, make the error very small to get a large number
-    if not isinstance(sigma, (float, int)):
+    if not isinstance(sigma, (float, int, np.float64)):
         sigma[sigma == 0] = _SMALL_NUMBER
     elif sigma == 0:
         sigma = _SMALL_NUMBER
@@ -632,7 +667,7 @@ def gaussian_cdf(x, mu, sigma):
 
     """
     # Avoid nan overflows for 0 errors, make the error very small to get a large number
-    if type(sigma)not in (float, int):
+    if not isinstance(sigma, (float, int, np.float64)):
         sigma[sigma == 0] = _SMALL_NUMBER
     elif sigma == 0:
         sigma = _SMALL_NUMBER
@@ -781,25 +816,27 @@ def dkl(ln_probability_p, ln_probability_q, dV=1.0):
     if isinstance(ln_probability_q, LnPDF):
         ln_probability_q = np.ascontiguousarray(
             np.array(ln_probability_q._ln_pdf).flatten())
-    try:
-        if not _C_LIB:
-            raise Exception()
-        return cprobability.dkl(ln_probability_p.copy(), ln_probability_q.copy(), dV)
-    except Exception:
-        ind = ln_probability_p > -np.inf
-        ln_probability_p = ln_probability_p.copy() - ln_probability_p.max()
-        ln_probability_q = ln_probability_q.copy() - ln_probability_q.max()
-        probability_p = np.exp(ln_probability_p)
-        # Normalise PDF p
-        n = np.sum(probability_p)*dV
-        ln_probability_p -= np.log(n)
-        probability_p /= n
-        # Normalise PDF q
-        probability_q = np.exp(ln_probability_q)
-        n = np.sum(probability_q)*dV
-        ln_probability_q -= np.log(n)
-        return np.sum(ln_probability_p[ind]*probability_p[ind] -
-                      ln_probability_q[ind]*probability_p[ind]) * dV
+    if cprobability:
+        try:
+            return cprobability.dkl(ln_probability_p.copy(), ln_probability_q.copy(), dV)
+        except Exception:
+            logger.exception('Error running cython code')
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    ind = ln_probability_p > -np.inf
+    ln_probability_p = ln_probability_p.copy() - ln_probability_p.max()
+    ln_probability_q = ln_probability_q.copy() - ln_probability_q.max()
+    probability_p = np.exp(ln_probability_p)
+    # Normalise PDF p
+    n = np.sum(probability_p)*dV
+    ln_probability_p -= np.log(n)
+    probability_p /= n
+    # Normalise PDF q
+    probability_q = np.exp(ln_probability_q)
+    n = np.sum(probability_q)*dV
+    ln_probability_q -= np.log(n)
+    return np.sum(ln_probability_p[ind]*probability_p[ind] -
+                  ln_probability_q[ind]*probability_p[ind]) * dV
 
 
 def ln_marginalise(ln_pdf, axis=0, dV=1.0):
@@ -821,19 +858,19 @@ def ln_marginalise(ln_pdf, axis=0, dV=1.0):
     Returns
         np.array - marginalised distribtion over axis
     """
-    try:
-        if not _C_LIB:
-            raise Exception(CPROBABILITY_MODULE_EXCEPTION)
-        if _C_LIB and axis == 0:
+    if cprobability and axis == 0:
+        try:
             if isinstance(ln_pdf, LnPDF):
-                return cprobability.ln_marginalise(ln_pdf._ln_pdf)
-            return cprobability.ln_marginalise(ln_pdf)
-    except Exception:
-        pass
-    # scale and then marginalise:b
+                return cprobability.ln_marginalise(ln_pdf._ln_pdf.astype(np.float64))
+            return cprobability.ln_marginalise(ln_pdf.astype(np.float64))
+        except Exception:
+            logger.exception('Error running cython code')
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    # scale and then marginalise:
     ln_scale = 0
     if ln_pdf.shape[axis] == 1:
-        return ln_pdf.squeeze(axis)
+        return np.array(ln_pdf).squeeze(axis)
     elif axis == 0 and len(ln_pdf.shape) == 1:
         # Probably shouldn't be marginalising over the last parameter
         return ln_pdf
@@ -841,8 +878,12 @@ def ln_marginalise(ln_pdf, axis=0, dV=1.0):
         ln_scale = -ln_pdf.max()
     with warnings.catch_warnings() and np.errstate(divide='ignore'):
         warnings.simplefilter("ignore")
-        result = np.log(
-            np.sum(np.exp(ln_pdf+ln_scale)*dV, axis=axis)) - ln_scale
+        # if axis == 0:
+        #     # Get consistency with c code
+        #     ln_pdf = np.array(ln_pdf)
+        result = np.log(np.sum(np.exp(ln_pdf+ln_scale)*dV, axis=axis)) - ln_scale
+    if axis == 0:
+        result = np.array(result).flatten()
     return result
 
 
@@ -863,29 +904,32 @@ def ln_normalise(ln_pdf, dV=1):
         np.array - normalised distribtion
 
     """
-    try:
-        if not _C_LIB:
-            raise Exception(CPROBABILITY_MODULE_EXCEPTION)
-        if ln_pdf.ndim != 1 and ln_pdf.shape[0] != 1:
-            raise Exception('Incorrect shape')
-        if ln_pdf.ndim == 2:
-            normalised_ln_pdf = cprobability.ln_normalise(
-                np.asarray(ln_pdf).flatten())
-        elif ln_pdf.ndim == 1 and ln_pdf.shape[0] == 1:
-            normalised_ln_pdf = ln_pdf
-        else:
-            normalised_ln_pdf = cprobability.ln_normalise(ln_pdf)
-        return normalised_ln_pdf
-    except Exception:
-        pass
+    if ln_pdf.ndim == 1 and ln_pdf.shape[0] == 1:
+        return np.array([0])
+    if cprobability:
+        try:
+            if ln_pdf.ndim != 1 and ln_pdf.shape[0] != 1:
+                raise Exception('Incorrect shape')
+            if ln_pdf.ndim == 2:
+                normalised_ln_pdf = cprobability.ln_normalise(np.asarray(ln_pdf).flatten())
+            else:
+                normalised_ln_pdf = cprobability.ln_normalise(ln_pdf)
+            return normalised_ln_pdf
+        except Exception:
+            logger.exception('Error running cython code')
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     # scale and then marginalise:
     ln_scale = 0
     if -ln_pdf.max() > 0 and ln_pdf.max() > -np.inf:
         ln_scale = -ln_pdf.max()
     with warnings.catch_warnings() and np.errstate(divide='ignore'):
         warnings.simplefilter("ignore")
-        ln_n = np.log(
-            np.sum(np.exp(ln_pdf+ln_scale) * dV, axis=None)) - ln_scale
+        ln_n = np.log(np.sum(np.exp(ln_pdf+ln_scale) * dV, axis=None)) - ln_scale
+    if ln_pdf.ndim == 2 and 1 in list(ln_pdf.shape):
+        ln_pdf = np.squeeze(np.asarray(ln_pdf))
+        if not ln_pdf.shape:
+            ln_pdf = np.array([ln_pdf])
     # ln_probability_scale_factor is automatically included in normalisation
     return ln_pdf - ln_n
 
@@ -939,19 +983,21 @@ def dkl_estimate(ln_pdf, V, N):
     # Doesnt use dkl function as can be simplified to reduce calculation
     if isinstance(ln_pdf, LnPDF):
         ln_pdf = np.ascontiguousarray(np.array(ln_pdf._ln_pdf).flatten())
-    try:
-        if not _C_LIB:
-            raise Exception()
-        return cprobability.dkl_uniform(ln_pdf.copy(), V, dV)
-    except Exception:
-        ind = ln_pdf > -np.inf
-        ln_pdf = ln_pdf[ind].copy()-ln_pdf.max()
-        pdf = np.exp(ln_pdf)
-        # Normalise PDF
-        n = np.sum(pdf)*dV
-        ln_pdf -= np.log(n)
-        pdf /= n
-        return np.sum(np.array(ln_pdf)*np.array(pdf) + np.array(pdf)*np.log(V), -1)*dV
+    if cprobability:
+        try:
+            return cprobability.dkl_uniform(ln_pdf.copy(), V, dV)
+        except Exception:
+            logger.exception('Error running cython code')
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+    ind = ln_pdf > -np.inf
+    ln_pdf = ln_pdf[ind].copy()-ln_pdf.max()
+    pdf = np.exp(ln_pdf)
+    # Normalise PDF
+    n = np.sum(pdf)*dV
+    ln_pdf -= np.log(n)
+    pdf /= n
+    return np.sum(np.array(ln_pdf)*np.array(pdf) + np.array(pdf)*np.log(V), -1)*dV
 
 
 class LnPDF(object):
@@ -1005,10 +1051,12 @@ class LnPDF(object):
         Return the length of ln_pdf
 
         Returns
-            int - length of ln_pdf (axis=-11)
+            int - length of ln_pdf (axis=-1)
 
         """
-        return self.shape[-1]
+        if isinstance(self._ln_pdf, np.ndarray):
+            return self.shape[-1]
+        return 1
 
     def __repr__(self):
         """x.__repr__() <==> repr(x)"""
@@ -1162,7 +1210,7 @@ class LnPDF(object):
             np.array - array of indices to maximum values.
         """
         axis = min(self._ln_pdf.ndim-1, axis)
-        if axis == -1:
+        if self._ln_pdf.ndim > 1 and axis == -1:
             return self.marginalise().argmax(0).flatten()
         return self._ln_pdf.argmax(axis)
 
@@ -1183,7 +1231,7 @@ class LnPDF(object):
         if not np.prod(self._ln_pdf.shape):
             return 0
         axis = min(self._ln_pdf.ndim-1, axis)
-        if axis == -1:
+        if self._ln_pdf.ndim > 1 and axis == -1:
             return np.exp(self.marginalise().max()).flatten()
         return float(np.exp(self._ln_pdf.max(axis)))
 
@@ -1210,12 +1258,13 @@ class LnPDF(object):
         return self.marginalise()
 
     def exp(self):
-        try:
-            if not _C_LIB:
-                raise Exception(CPROBABILITY_MODULE_EXCEPTION)
-            return cprobability.ln_exp(self._ln_pdf)
-        except Exception:
-            pass
+        if cprobability:
+            try:
+                return cprobability.ln_exp(self._ln_pdf)
+            except Exception:
+                logger.exception('Error running cython code')
+        else:
+            logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
         return np.exp(self._ln_pdf)
 
     def nonzero(self, discard=100000., n_samples=0):

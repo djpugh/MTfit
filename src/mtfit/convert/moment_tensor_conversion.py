@@ -436,12 +436,12 @@ def FP_SDR(normal, slip):
 
     """
     if not isinstance(slip, np.matrixlib.defmatrix.matrix):
-        slip = slip/np.sqrt(np.sum(slip*slip))
+        slip = slip/np.sqrt(np.sum(slip*slip, axis=0))
     else:
         # Do we need to replace this with einsum
         slip = slip/np.sqrt(np.einsum('ij,ij->j', slip, slip))
     if not isinstance(normal, np.matrixlib.defmatrix.matrix):
-        normal = normal/np.sqrt(np.sum(normal*normal))
+        normal = normal/np.sqrt(np.sum(normal*normal, axis=0))
     else:
         normal = normal/np.sqrt(np.einsum('ij,ij->j', normal, normal))
     slip[:, np.array(normal[2, :] > 0).flatten()] *= -1
@@ -785,7 +785,7 @@ def normal_SD(normal):
         (float, float): tuple of strike and dip angles in radians
     """
     if not isinstance(normal, np.matrixlib.defmatrix.matrix):
-        normal = np.array(normal)/np.sqrt(np.sum(normal*normal))
+        normal = np.array(normal)/np.sqrt(np.sum(normal*normal, axis=0))
     else:
         normal = normal/np.sqrt(np.diag(normal.T*normal))
     normal[:, np.array(normal[2, :] > 0).flatten()] *= -1
@@ -999,7 +999,8 @@ def MT6_biaxes(MT6, c=isotropic_c(lambda_=1, mu=1)):
             except Exception:
                 phi[i, :, :], explosion[i], area_displacement[i] = MT6_biaxes(MT6[:, i], c)
     else:
-        MT6 = np.asarray([MT6]).T
+        if np.prod(MT6.shape) != 6:
+            MT6 = np.asarray([MT6]).T
         if cmoment_tensor_conversion:
             try:
                 return cmoment_tensor_conversion.MT6_biaxes(MT6.flatten().astype(np.float64), c)

@@ -9,7 +9,7 @@ from MTfit.plot.core import MTplot
 
 VERBOSITY = 2
 
-PLOT_DIR = os.environ.get('MTFIT_TEST_PLOT_DIR', 'D:\\src\\repos\\MTfit\\reports\\plots')
+PLOT_DIR = os.environ.get('MTFIT_TEST_PLOT_DIR', None)
 
 
 class CoreTestCase(unittest.TestCase):

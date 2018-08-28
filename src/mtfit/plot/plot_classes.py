@@ -408,9 +408,9 @@ class MTData(object):
                 self.explosion[arg[1]] = explosion
         if 'T' in self.__dict__.keys():
             try:
-                self.T[arg] = np.matrix(T)
-                self.N[arg] = np.matrix(N)
-                self.P[arg] = np.matrix(P)
+                self.T[arg] = np.array(np.matrix(T))
+                self.N[arg] = np.array(np.matrix(N))
+                self.P[arg] = np.array(np.matrix(P))
             except ValueError:
                 self.T[arg] = T.flatten()
                 self.N[arg] = N.flatten()
@@ -573,10 +573,10 @@ class MTData(object):
             self.rake = rake*rad_deg
         if attr in ['T', 'N', 'P', 'E']:
             T, N, P, E = MT6_TNPE(self.MTs)
-            self.T = T
-            self.N = N
-            self.P = P
-            self.E = E
+            self.T = np.array(T)
+            self.N = np.array(N)
+            self.P = np.array(P)
+            self.E = np.array(E)
         if attr in ['N1', 'N2']:
             # N1 is T+P N2 is T-P - strike1, dip1,rake1 correspond to N1 and
             # strike2,dip2,rake2 to N2
@@ -652,8 +652,7 @@ class MTData(object):
             n1_2cos_theta = np.abs(self.N2[:, i].T*n1).max()
             n2_1cos_theta = np.abs(self.N1[:, i].T*n2).max()
             n2_2cos_theta = np.abs(self.N2[:, i].T*n2).max()
-            dist = np.array(
-                [n1_1cos_theta, n1_2cos_theta, n2_1cos_theta, n2_2cos_theta])
+            dist = np.array([n1_1cos_theta, n1_2cos_theta, n2_1cos_theta, n2_2cos_theta])
             ind = np.nonzero(dist == max(dist))[0]
             if (len(ind == 1) and (ind[0] == 0 or ind[0] == 3)) or (ind == [0, 3]).all():
                 if (self.N1[:, i].T*n1).max() < 0:
@@ -703,13 +702,10 @@ class MTData(object):
         Returns
             numpy array, numpy array, numpy array: tuple of the mean strike dip and rake of the fault planes.
         """
-        self.clustered_N1[:, np.array(self.clustered_N1[:, 0].T*self.clustered_N1).flatten(
-        ) < 0] = -self.clustered_N1[:, np.array(self.clustered_N1[:, 0].T*self.clustered_N1).flatten() < 0]
+        self.clustered_N1[:, np.array(self.clustered_N1[:, 0].T*self.clustered_N1).flatten() < 0] = -self.clustered_N1[:, np.array(self.clustered_N1[:, 0].T*self.clustered_N1).flatten() < 0]
         if len(self.probability) > 1:
-            n = np.sum(
-                np.multiply(self.clustered_N1, self.probability), 1)/np.sum(self.probability)
-            r = np.sum(
-                np.multiply(self.clustered_rake1, self.probability))/np.sum(self.probability)
+            n = np.sum(np.multiply(self.clustered_N1, self.probability), 1)/np.sum(self.probability)
+            r = np.sum(np.multiply(self.clustered_rake1, self.probability))/np.sum(self.probability)
             self.var_clustered_rake1 = (np.sum(np.multiply(np.multiply(self.clustered_rake1-r, self.clustered_rake1-r), self.probability)) /
                                         (np.sum(self.probability)-(np.sum(np.multiply(self.probability, self.probability))/np.sum(self.probability))))
             r2 = np.sum(np.multiply(self.clustered_rake1, self.probability))/np.sum(self.probability)
@@ -2887,9 +2883,9 @@ class _RiedeselJordanPlot(_FocalSpherePlot):
         # if self.show_amplitude:
         #     pass
         E = self.MTs.E
-        T = self.MTs.T
-        N = self.MTs.N
-        P = self.MTs.P
+        T = np.array(self.MTs.T)
+        N = np.array(self.MTs.N)
+        P = np.array(self.MTs.P)
         self.mt = E[0][0]*T+E[1][0]*N+E[2][0]*P
         self.mt = self.mt.flatten()
         self.mt /= np.sqrt(self.mt.T*self.mt)
