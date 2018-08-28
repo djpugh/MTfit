@@ -1,13 +1,18 @@
 import unittest
-from unittest import mock
+import sys
 import glob
 import os
 import tempfile
+import shutil
 
 from MTfit.extensions.scatangle import parse_scatangle
 from MTfit.extensions import scatangle
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
 
+if sys.version_info >= (3, 3):
+    from unittest import mock
+else:
+    import mock
 
 C_EXTENSIONS = (not scatangle.cscatangle, 'No C extension available')
 
@@ -26,7 +31,11 @@ class ScatangleTestCase(unittest.TestCase):
 
     def setUp(self):
         self.cwd = os.getcwd()
-        self.tempdir = tempfile.TemporaryDirectory()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+        else:
+            self.tempdir = tempfile.mkdtemp()
+        os.chdir(self.tempdir)
         self.existing_scatangle_files = glob.glob('*.scatangle')
 
     def tearDown(self):
@@ -42,7 +51,13 @@ class ScatangleTestCase(unittest.TestCase):
         except Exception:
             pass
         os.chdir(self.cwd)
-        self.tempdir.cleanup()
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
         gc.collect()
 
     def station_angles(self):

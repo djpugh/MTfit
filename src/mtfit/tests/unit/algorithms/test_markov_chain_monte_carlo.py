@@ -1,6 +1,6 @@
 import unittest
 import copy
-from unittest import mock
+import sys
 
 import numpy as np
 
@@ -17,6 +17,10 @@ from MTfit.algorithms.markov_chain_monte_carlo import McMCAlgorithmCreator
 import MTfit.algorithms.markov_chain_monte_carlo as markov_chain_monte_carlo
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
 
+if sys.version_info >= (3, 3):
+    from unittest import mock
+else:
+    import mock
 
 VERBOSITY = 2
 

@@ -1,5 +1,5 @@
 import unittest
-from unittest import mock
+import sys
 
 import numpy as np
 from scipy.stats import norm as gaussian
@@ -21,6 +21,11 @@ from MTfit.probability.probability import dkl_estimate
 from MTfit.probability.probability import LnPDF
 from MTfit.probability import probability
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+
+if sys.version_info >= (3, 3):
+    from unittest import mock
+else:
+    import mock
 try:
     from MTfit.probability.cprobability import cProbabilityTestCase
 except ImportError:

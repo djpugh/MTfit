@@ -450,6 +450,7 @@ def FP_SDR(normal, slip):
     slip = np.array(slip)
     strike, dip = normal_SD(normal)
     rake = np.arctan2(-slip[2], slip[0]*normal[1]-slip[1]*normal[0])
+    print(slip[2], slip[0], normal[1], slip[1], normal[0])
     strike[dip > np.pi/2] += np.pi
     rake[dip > np.pi/2] = 2*np.pi-rake[dip > np.pi/2]
     dip[dip > np.pi/2] = np.pi-dip[dip > np.pi/2]
@@ -999,7 +1000,8 @@ def MT6_biaxes(MT6, c=isotropic_c(lambda_=1, mu=1)):
             except Exception:
                 phi[i, :, :], explosion[i], area_displacement[i] = MT6_biaxes(MT6[:, i], c)
     else:
-        MT6 = np.asarray([MT6]).T
+        if np.prod(MT6.shape) != 6:
+            MT6 = np.asarray([MT6]).T
         if cmoment_tensor_conversion:
             try:
                 return cmoment_tensor_conversion.MT6_biaxes(MT6.flatten().astype(np.float64), c)

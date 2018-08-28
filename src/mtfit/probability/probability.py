@@ -223,8 +223,7 @@ def polarity_probability_ln_pdf(a, mt, positive_probability, negative_probabilit
             # Run using C library
             # Handle incorrect polarity probability
             if isinstance(incorrect_polarity_probability, (float, int)):
-                incorrect_polarity_probability = np.ones(
-                    positive_probability.shape)*incorrect_polarity_probability
+                incorrect_polarity_probability = np.ones(positive_probability.shape)*incorrect_polarity_probability
             incorrect_polarity_probability = np.squeeze(incorrect_polarity_probability)
             if incorrect_polarity_probability.ndim != 1:
                 raise TypeError('Variable: incorrect_polarity_probability is expected to be a one-dimensional numpy array or a float')
@@ -637,7 +636,7 @@ def gaussian_pdf(x, mu, sigma):
 
     """
     # Avoid nan overflows for 0 errors, make the error very small to get a large number
-    if not isinstance(sigma, (float, int)):
+    if not isinstance(sigma, (float, int, np.float64)):
         sigma[sigma == 0] = _SMALL_NUMBER
     elif sigma == 0:
         sigma = _SMALL_NUMBER
@@ -668,7 +667,7 @@ def gaussian_cdf(x, mu, sigma):
 
     """
     # Avoid nan overflows for 0 errors, make the error very small to get a large number
-    if type(sigma)not in (float, int):
+    if not isinstance(sigma, (float, int, np.float64)):
         sigma[sigma == 0] = _SMALL_NUMBER
     elif sigma == 0:
         sigma = _SMALL_NUMBER

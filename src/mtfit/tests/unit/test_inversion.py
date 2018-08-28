@@ -3,6 +3,8 @@ import os
 import glob
 import time
 import sys
+import tempfile
+import shutil
 import gc
 try:
     import cPickle as pickle
@@ -29,6 +31,12 @@ from MTfit.extensions.scatangle import parse_scatangle
 class McMCForwardTaskTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+        else:
+            self.tempdir = tempfile.mkdtemp()
+        os.chdir(self.tempdir)
         self.existing_log_files = glob.glob('*.log')
         data = {'PPolarity': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.001], [0.001]])},
@@ -54,6 +62,14 @@ class McMCForwardTaskTestCase(TestCase):
                 except Exception:
                     print('Cannot remove {}'.format(fname))
         del self.mcmc_forward_task
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def test___call__(self):
         result = self.mcmc_forward_task()
@@ -83,6 +99,12 @@ class McMCForwardTaskTestCase(TestCase):
 class MultipleEventsMcMCForwardTaskTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+        else:
+            self.tempdir = tempfile.mkdtemp()
+        os.chdir(self.tempdir)
         self.existing_log_files = glob.glob('*.log')
         data = {'PPolarity': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.001], [0.001]])}}
@@ -122,6 +144,14 @@ class MultipleEventsMcMCForwardTaskTestCase(TestCase):
                 except Exception:
                     print('Cannot remove {}'.format(fname))
         del self.multiple_events_mcmc_forward_task
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def test___call__(self):
         result = self.multiple_events_mcmc_forward_task()
@@ -171,6 +201,12 @@ class MultipleEventsMcMCForwardTaskTestCase(TestCase):
 class MultipleEventsForwardTaskTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+        else:
+            self.tempdir = tempfile.mkdtemp()
+        os.chdir(self.tempdir)
         data = {'PPolarity': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.001], [0.001]])},
                 'PPolarity2': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
@@ -404,6 +440,14 @@ class MultipleEventsForwardTaskTestCase(TestCase):
     def tearDown(self):
         del self.multiple_events_forward_task
         del self.MTs
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def test___call__(self):
         result = self.multiple_events_forward_task()
@@ -503,6 +547,12 @@ class MultipleEventsForwardTaskTestCase(TestCase):
 class ForwardTaskTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+        else:
+            self.tempdir = tempfile.mkdtemp()
+        os.chdir(self.tempdir)
         data = {'PPolarity': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
                               'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.1]])},
                 'PPolarity2': {'Stations': {'Azimuth': np.array([90.0, 270.0]), 'TakeOffAngle': np.array([30.0, 60.0])},
@@ -737,6 +787,14 @@ class ForwardTaskTestCase(TestCase):
         _CYTHON_TESTS = False
         global _COMBINED_TESTS
         _COMBINED_TESTS = True
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def test___call__(self):
         global _COMBINED_TESTS
@@ -958,6 +1016,12 @@ class ForwardTaskTestCase(TestCase):
 class InversionTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+        else:
+            self.tempdir = tempfile.mkdtemp()
+        os.chdir(self.tempdir)
         global _DEBUG
         _DEBUG = True
         self.parallel = not _DEBUG
@@ -1001,6 +1065,14 @@ class InversionTestCase(TestCase):
         except Exception:
             pass
         gc.collect()
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def _test_csv_file(self):
         csv = """UID=123,,,,
@@ -1624,6 +1696,12 @@ S003,110,10,1,0.05"""
 class MiscTestCase(TestCase):
 
     def setUp(self):
+        self.cwd = os.getcwd()
+        if sys.version_info >= (3, 0):
+            self.tempdir = tempfile.TemporaryDirectory()
+        else:
+            self.tempdir = tempfile.mkdtemp()
+        os.chdir(self.tempdir)
         self.existing_csv_files = glob.glob('*.csv')
         self.existing_hyp_files = glob.glob('*.hyp')
 
@@ -1640,6 +1718,14 @@ class MiscTestCase(TestCase):
                     os.remove(fname)
                 except Exception:
                     print('Cannot remove {}'.format(fname))
+        os.chdir(self.cwd)
+        if sys.version_info >= (3, 0):
+            self.tempdir.cleanup()
+        else:
+            try:
+                shutil.rmtree(self.tempdir)
+            except:
+                pass
 
     def station_angles(self):
         out = "504.7\n"

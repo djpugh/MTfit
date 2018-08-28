@@ -140,7 +140,10 @@ class MTDataTestCase(TestCase):
                                                                45), ('rake1', -90), ('strike2', 270), ('dip2', 45),
                      ('rake2', -90), ('strike', 90), ('dip', 45), ('rake', -
                                                                    90), ('N1', np.matrix([[1/np.sqrt(2)], [0], [1/np.sqrt(2)]])),
-                     ('N2', np.matrix([[1/np.sqrt(2)], [0], [-1/np.sqrt(2)]])), ('kappa', np.pi/2), ('h', np.cos(np.pi/4)), ('sigma', -np.pi/2), ('phi1', np.array([[1/np.sqrt(2)], [0.], [1/np.sqrt(2)]])), ('phi2', np.array([[1/np.sqrt(2)], [0.], [-1/np.sqrt(2)]])), ('area_displacement', 1.0), ('explosion', 0.0)]
+                     ('N2', np.matrix([[1/np.sqrt(2)], [0], [-1/np.sqrt(2)]])), ('kappa', np.pi/2), ('h', np.cos(np.pi/4)),
+                     ('sigma', -np.pi/2), ('phi1', np.array([[1/np.sqrt(2)], [0.], [1/np.sqrt(2)]])),
+                     ('phi2', np.array([[1/np.sqrt(2)], [0.], [-1/np.sqrt(2)]])), ('area_displacement', 1.0),
+                     ('explosion', 0.0)]
         for attr, value in test_data:
             if attr in ['T', 'N', 'P', 'E', 'N1', 'N2']:
                 self.assertTrue((self.MTData[:, 0]._convert(attr) == value).all())
@@ -165,30 +168,27 @@ class MTDataTestCase(TestCase):
 
     def test_cluster_normals(self):
         self.tearDown()
-        self.MTData = MTData(np.array([[1, 0.9,   1,   1, 0.8, 1.1, 0.9,   1],
-                                       [0,   0,   0,   0,
-                                           0,  0,  0,   0],
-                                       [-1,  -1, -0.9, -0.8,  -
-                                           1, -1, -1, -0.9],
-                                       [0,   0, 0.1,
-                                           0, 0.2,  0,  0,   0],
-                                       [0, 0.1,   0,   0,
-                                           0,  0,  0,   0],
-                                       [0,   0,   0, 0.2,   0,  0,  0,   0]]))
+        self.MTData = MTData(np.array([[1, 0.9,    1,    1, 0.8, 1.1, 0.9,    1],
+                                       [0,   0,    0,    0,   0,   0,   0,    0],
+                                       [-1, -1, -0.9, -0.8,  -1,  -1,  -1, -0.9],
+                                       [0,   0,  0.1,    0, 0.2,   0,   0,    0],
+                                       [0, 0.1,    0,    0,   0,   0,   0,    0],
+                                       [0,   0,    0,  0.2,   0,   0,   0,    0]]))
         self.MTData.cluster_normals()
         self.assertTrue((self.MTData.clustered_N1[2, :] < 0).all())
         self.assertTrue((self.MTData.clustered_N2[2, :] > 0).all())
 
     def test_get_mean_orientation(self):
         self.test_cluster_normals()
-        [s, d, r] = self.MTData.mean_orientation
+        import ipdb; ipdb.set_trace()
+        [s, d, r] = self.MTData.get_mean_orientation()
         self.assertAlmostEquals(s, 272.91522545)
         self.assertAlmostEquals(d, 45.2947782)
         self.assertAlmostEquals(r, -88.295161590065447)
         self.assertAlmostEquals(self.MTData.var_clustered_rake1, 23.251792031905531)
         self.assertTrue(self.MTData.cov_clustered_N1.max() < 0.005)
         self.MTData._set_probability([0.05, 0.15, 0.1, 0.3, 0.1, 0.1, 0.1, 0.1])
-        [s, d, r] = self.MTData.mean_orientation
+        [s, d, r] = self.MTData.get_mean_orientation()
         self.assertAlmostEquals(s, 274.25373043)
         self.assertAlmostEquals(d, 45.47487435)
         self.assertAlmostEquals(r, -85.908387816157074)
