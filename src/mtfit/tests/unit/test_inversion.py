@@ -1378,6 +1378,7 @@ S003,110,10,1,0.05"""
         except Exception:
             pass
 
+    @unittest.expectedFailure  # Marginalise relative with location uncertainty not implemented
     def test__mcmc_multiple_forward_location_uncertainty(self):
         try:
             os.remove('MTfitOutput_joint_inversionMT.mat')
@@ -1387,7 +1388,7 @@ S003,110,10,1,0.05"""
                                               'Measured': np.matrix([[1], [1], [-1]]), 'Error': np.matrix([[0.1], [0.5], [0.02]])}}
         data2 = data.copy()
         data2['UID'] = 'TestB'
-        self.inversion = Inversion([data, data], algorithm='McMC', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, multiple_events=True, convert=False)
+        self.inversion = Inversion([data, data], algorithm='McMC', parallel=False, relative_amplitude=True, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, multiple_events=True, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
@@ -1414,7 +1415,7 @@ S003,110,10,1,0.05"""
                 'PRMSQAmplitude': {'Stations': {'Name': ['S0649', "S0162"], 'Azimuth': np.matrix([[90.0], [270.0]]), 'TakeOffAngle': np.matrix([[30.0], [60.0]])},
                                    'Measured': np.matrix([[1], [-1]]), 'Error': np.matrix([[0.1], [0.5]])}}
         self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5,
-                                   phy_mem=1, max_time=10, relative_amplitude=True, convert=False)
+                                   phy_mem=1, max_time=10, relative_amplitude=False, convert=False)
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
         self.inversion._mcmc_multiple_forward()
         self.assertTrue(os.path.exists('MTfitOutput_joint_inversionMT.mat'))
@@ -1423,6 +1424,7 @@ S003,110,10,1,0.05"""
         except Exception:
             pass
 
+    @unittest.expectedFailure  # Marginalise relative with location uncertainty not implemented
     def test__mcmc_multiple_forward_amplitude_location_uncertainty(self):
         try:
             os.remove('MTfitOutput_joint_inversionMT.mat')
