@@ -55,31 +55,43 @@ def get_details():
         dependency_versions['matplotlib'] = mpl.__version__
     except ImportError:
         pass
+    except AttributeError:
+        dependency_versions['matplotlib'] = 'unknown'
     try:
         import cython
         dependency_versions['cython'] = cython.__version__
     except ImportError:
         pass
+    except AttributeError:
+        dependency_versions['cython'] = 'unknown'
     try:
         import pyqsub
         dependency_versions['pyqsub'] = pyqsub.__version__
     except ImportError:
         pass
+    except AttributeError:
+        dependency_versions['pyqsub'] = 'unknown'
     try:
         import sphinx
         dependency_versions['sphinx'] = sphinx.__version__
     except ImportError:
         pass
+    except AttributeError:
+        dependency_versions['sphinx'] = 'unknown'
     try:
         import h5py
         dependency_versions['h5py'] = h5py.__version__
     except ImportError:
         pass
+    except AttributeError:
+        dependency_versions['h5py'] = 'unknown'
     try:
         import hdf5storage
         dependency_versions['hdf5storage'] = hdf5storage.__version__
     except ImportError:
         pass
+    except AttributeError:
+        dependency_versions['hdf5storage'] = 'unknown'
     details = {'version': __version__,
                'c_extensions present': c_extensions,
                'platform': sys.platform,
@@ -88,7 +100,11 @@ def get_details():
                'python version info': sys.version_info,
                'dependency info': dependency_versions}
     if sys.platform.startswith('win'):
-        details['windows_version'] = sys.getwindowsversion()
+        details['windows version'] = sys.getwindowsversion()
+    if sys.version_info.major < 3:
+        details['python version info'] = str(details['python version info'])
+        if sys.platform.startswith('win'):
+            details['windows version'] = str(details['windows version'])
     return details
 
 

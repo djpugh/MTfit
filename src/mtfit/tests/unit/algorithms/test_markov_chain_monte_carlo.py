@@ -1558,9 +1558,10 @@ class IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase(TestCase):
         else:
             n = len(self.mcmc_algorithm.xi_1[0])
         logger.info.reset_mock()
+        self.mcmc_algorithm.dc = [False, False, False]
         xi_1, ln_pi1, sf1, index = self.mcmc_algorithm._acceptance_check(self.mcmc_algorithm.xi_1,
                                                                          -np.inf*np.ones((n)))
-        self.assertEqual(index, 10)
+        self.assertEqual(index, 0)
         self.assertEqual(len(xi_1), 3)
         logger.info.assert_not_called()
 
@@ -1577,6 +1578,7 @@ class IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase(TestCase):
             else:
                 n = len(self.mcmc_algorithm.xi_1[0])
             logger.info.reset_mock()
+            self.mcmc_algorithm.dc = [False, False, False]
             xi_1, ln_pi1, sf1, index = self.mcmc_algorithm._acceptance_check(self.mcmc_algorithm.xi_1,
                                                                              -np.inf*np.ones((n)))
             self.assertEqual(index, 1)

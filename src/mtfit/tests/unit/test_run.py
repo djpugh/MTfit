@@ -51,16 +51,18 @@ class RunTestCase(unittest.TestCase):
             if logfile not in logfiles:
                 os.remove(logfile)
 
-    @mock.patch.multiple('MTfit.run', print=mock.DEFAULT, get_extensions=mock.DEFAULT)
-    def test_MTfit_error(self, print, get_extensions):
-        get_extensions.side_effect = ValueError('abc')
-        with self.assertRaises(ValueError):
-            MTfit(datafile='./', combine_mpi_output=True, max_time=10,
-                  phy_mem=0.5, parallel=False, convert=True, binary_file_version=2)
-        self.assertIn(ERROR_MESSAGE.format(get_details_json(), '').split('## Traceback')[0], print.call_args[0][0])
+    @unittest.skipIf(sys.version_info < (3, 0), 'Requires python 3')
+    def test_MTfit_error(self):
+        with mock.patch('MTfit.run.print') as _print:
+            with mock.patch('MTfit.run.get_extensions') as get_extensions:
+                get_extensions.side_effect = ValueError('abc')
+                with self.assertRaises(ValueError):
+                    MTfit(datafile='./', combine_mpi_output=True, max_time=10,
+                          phy_mem=0.5, parallel=False, convert=True, binary_file_version=2)
+                self.assertIn(ERROR_MESSAGE.format(get_details_json(), '').split('## Traceback')[0], _print.call_args[0][0])
 
     def test_combine_mpi_output(self):
-        self.output_mpi()   
+        self.output_mpi()
         MTfit(datafile='./', combine_mpi_output=True, max_time=10,
               phy_mem=0.5, parallel=False, convert=True, binary_file_version=2)
         self.assertTrue(os.path.exists('20120620223428431DC.mat'))
