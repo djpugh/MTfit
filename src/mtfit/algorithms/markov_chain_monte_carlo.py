@@ -1520,6 +1520,7 @@ class IterativeMultipleTryMetropolisHastingsGaussianTape(IterativeMetropolisHast
 
     def _acceptance_check(self, xi_1, ln_pi_1, scale_factori_1=False):
         """Check acceptance for multiple tries"""
+        # TODO tidy this code up
         if cmarkov_chain_monte_carlo:
             try:
                 # Try C code

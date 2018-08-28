@@ -54,6 +54,12 @@ logger = logging.getLogger('MTfit')
 # qsub test flag
 _QSUBTEST = False
 
+
+def get_details_json():
+    from .. import get_details_json as _get_details_json
+    return _get_details_json()
+
+
 if _ARGPARSE:
     class ArgparseIndentedHelpFormatterWithNewLines(argparse.RawDescriptionHelpFormatter):
 
@@ -678,6 +684,8 @@ def _MTfit_argparser(input_args=None, test=False):
              help="Sets the number of samples to discard as the learning period [default="+str(defaults['learning_length'])+"]", dest="learning_length"),
         dict(flags=["--version"], action="version",
              version="%(prog)s "+__version__),
+        dict(flags=["--detail"], action="version",
+             version=get_details_json()),
         dict(flags=["--mpi_call"], default=False, action='store_true',
              help='DO NOT USE - only for spawning mpi subprocess', dest='_mpi_call'),
         dict(flags=["--output-format", "--output_format", "--outputformat", "--format"], default=defaults['output_format'],
