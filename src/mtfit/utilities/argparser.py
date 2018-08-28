@@ -1167,6 +1167,8 @@ def _MTplot_argparser(input_args=[], test=False):
              help="Set the filename to save to (if set the plot is saved to the file)", type=str, dest='save_file', default=defaults['save_file']),
         dict(flags=["--save-dpi", "--savedpi", "--save_dpi"], help="Output file dpi",
              type=int, dest='save_dpi', default=defaults['save_dpi']),
+        dict(flags=['-q', '--quiet', '--hide'], help="Don't show the plot on screen", action="store_true",
+             dest='hide', default=defaults['hide']),
         dict(flags=["--version"], action="version",
              version="%(prog)s from MTfit "+__version__),
     ]
@@ -1215,6 +1217,10 @@ def _MTplot_argparser(input_args=[], test=False):
         elif options['DATAFILE']:
             options['data_file'] = options['DATAFILE']
         options.pop('DATAFILE')
+    if options.pop('hide'):
+        options['show'] = False
+    else:
+        options['show'] = True
     return parser, options
 
 

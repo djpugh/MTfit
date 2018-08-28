@@ -1,24 +1,35 @@
 import unittest
-import os
 import time
 
+import pytest
 import numpy as np
 
-from MTfit.utilities.unittest_utils import run_tests as _run_tests
-from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 from MTfit.algorithms.monte_carlo import BaseMonteCarloRandomSample
 from MTfit.algorithms.monte_carlo import IterationSample
 from MTfit.algorithms.monte_carlo import TimeSample
 
 VERBOSITY = 2
 
-class MonteCarloRandomSampleTestCase(unittest.TestCase):
+
+class BaseMonteCarloRandomSampleTestCase(unittest.TestCase):
 
     def setUp(self):
         self.monte_carlo_random_sample = BaseMonteCarloRandomSample()
 
     def tearDown(self):
         del self.monte_carlo_random_sample
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_total_number_samples(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_check_finished(self):
+        raise NotImplementedError()
 
     def test_initialise(self):
         self.assertTrue(self.monte_carlo_random_sample.initialise()[0].shape,
@@ -31,7 +42,7 @@ class MonteCarloRandomSampleTestCase(unittest.TestCase):
         self.assertEqual(moment_tensors.shape, (6, self.monte_carlo_random_sample.number_samples))
         self.assertFalse(end)
 
-    def test_quality_check(self):
+    def test_iterate_quality_check(self):
         self.monte_carlo_random_sample._initialising = True
         self.monte_carlo_random_sample.quality_check = 1
         self.monte_carlo_random_sample._number_check_samples = 30000
@@ -68,17 +79,30 @@ class TimeSampleTestCase(unittest.TestCase):
     def tearDown(self):
         del self.time_sample
 
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_check_finished(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_max_value(self):
+        raise NotImplementedError()
+
     def test_initialise(self):
         task, end = self.time_sample.initialise()
         self.assertTrue(task.shape, (6, self.time_sample.number_samples))
         self.assertEqual(self.time_sample.iteration, 0)
         self.assertTrue(self.time_sample.start_time)
 
+    @pytest.mark.functional
     def test_iterate(self):
         self.time_sample.initialise()
         moment_tensors, end = self.time_sample.iterate({'moment_tensors': self.time_sample.random_mt(),
-                                                       'ln_pdf': np.ones((1, self.time_sample.number_samples)),
-                                                       'n': self.time_sample.number_samples})
+                                                        'ln_pdf': np.ones((1, self.time_sample.number_samples)),
+                                                        'n': self.time_sample.number_samples})
         self.assertEqual(moment_tensors.shape, (6, self.time_sample.number_samples))
         self.assertFalse(end)
         self.time_sample.max_time = 2
@@ -86,8 +110,8 @@ class TimeSampleTestCase(unittest.TestCase):
         while time.time()-runStart < 2.:
             pass
         moment_tensors, end = self.time_sample.iterate({'moment_tensors': self.time_sample.random_mt(),
-                                                       'ln_pdf': np.ones((1, self.time_sample.number_samples)),
-                                                       'n': self.time_sample.number_samples})
+                                                        'ln_pdf': np.ones((1, self.time_sample.number_samples)),
+                                                        'n': self.time_sample.number_samples})
         self.assertEqual(moment_tensors.shape, (6, self.time_sample.number_samples))
         self.assertTrue(end)
         self.assertEqual(self.time_sample.iteration, 2)
@@ -101,12 +125,25 @@ class IterationSampleTestCase(unittest.TestCase):
     def tearDown(self):
         del self.iteration_sample
 
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_check_finished(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_max_value(self):
+        raise NotImplementedError()
+
     def test_initialise(self):
         task, end = self.iteration_sample.initialise()
         self.assertTrue(task.shape, (6, self.iteration_sample.number_samples))
         self.assertEqual(self.iteration_sample.iteration, 0)
         self.assertTrue(self.iteration_sample.start_time)
 
+    @pytest.mark.functional
     def test_iterate(self):
         self.iteration_sample.initialise()
         self.iteration_sample.max_samples = 6*self.iteration_sample.number_samples - 2
@@ -125,28 +162,3 @@ class IterationSampleTestCase(unittest.TestCase):
         self.assertEqual(moment_tensors.shape, (6, self.iteration_sample.number_samples))
         self.assertTrue(end)
         self.assertEqual(self.iteration_sample.iteration, 6)
-
-
-def test_suite(verbosity=2):
-    """Returns test suite"""
-    global VERBOSITY
-    VERBOSITY = verbosity
-    suite = [unittest.TestLoader().loadTestsFromTestCase(MonteCarloRandomSampleTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(TimeSampleTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(IterationSampleTestCase),
-             ]
-    suite = unittest.TestSuite(suite)
-    return suite
-
-def run_tests(verbosity=2):
-    """Run tests"""
-    _run_tests(test_suite(verbosity), verbosity)
-
-
-def debug_tests(verbosity=2):
-    """Runs tests with debugging on errors"""
-    _debug_tests(test_suite(verbosity))
-
-if __name__ == "__main__":
-    # Run tests
-    run_tests(verbosity=2)

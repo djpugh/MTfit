@@ -21,8 +21,9 @@ import numpy as np
 
 from ..sampling import Sample, FileSample, _6sphere_prior
 from ..utilities.extensions import get_extensions
+from ..utilities import C_EXTENSION_FALLBACK_LOG_MSG
 try:
-    from .. import cprobability
+    from ..probability import cprobability
 except ImportError:
     cprobability = False
 
@@ -141,7 +142,7 @@ class BaseAlgorithm(object):
             self.pdf_sample = Sample(number_events=self.number_events, prior=self._prior)
 
     def max_value(self):
-        return ' BaseAlgorithm has no max_value'
+        return 'BaseAlgorithm has no max_value'
 
     def random_sample(self):
         """
@@ -227,6 +228,8 @@ class BaseAlgorithm(object):
         # Check CYTHON code - use C code if possible
         if cprobability:
             return cprobability.random_dc(self.number_samples)
+        else:
+            logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
         # Use random_type for DC eigenvalues
         dc_diag = np.array([[1/np.sqrt(2)], [0], [-1/np.sqrt(2)]])
         return self.random_type(dc_diag)
@@ -353,6 +356,8 @@ def _6sphere_random_mt(self):
         ns = self.number_samples
     if cprobability:
         return cprobability.random_mt(ns)
+    else:
+        logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     # Reseed np.random and generate new random samples.
     np.random.seed()
     M = np.random.randn(6, ns)

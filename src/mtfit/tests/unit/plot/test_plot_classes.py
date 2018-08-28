@@ -3,8 +3,6 @@ import unittest
 import numpy as np
 
 from MTfit.plot.plot_classes import MTData
-from MTfit.utilities.unittest_utils import run_tests as _run_tests
-from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 from MTfit.utilities.unittest_utils import TestCase
 
 
@@ -21,6 +19,34 @@ class MTDataTestCase(TestCase):
 
     def tearDown(self):
         del self.MTData
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__set_ln_pdf(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__clear_dependent_parameters(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___eq__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__del_converted(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__set_converted(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_is_dc(self):
+        raise NotImplementedError()
 
     def test__set_probability(self):
         self.MTData._set_probability([1])
@@ -153,7 +179,7 @@ class MTDataTestCase(TestCase):
         self.assertTrue((self.MTData.clustered_N1[2, :] < 0).all())
         self.assertTrue((self.MTData.clustered_N2[2, :] > 0).all())
 
-    def test_mean_orientation(self):
+    def test_get_mean_orientation(self):
         self.test_cluster_normals()
         [s, d, r] = self.MTData.mean_orientation
         self.assertAlmostEquals(s, 272.91522545)
@@ -169,7 +195,7 @@ class MTDataTestCase(TestCase):
         self.assertAlmostEquals(self.MTData.var_clustered_rake1, 46.782048639043481)
         self.assertTrue(self.MTData.cov_clustered_N1.max() < 0.007)
 
-    def test_mean(self):
+    def test_get_mean(self):
         self.test_cluster_normals()
         mts = self.MTData.mean
         mean = np.array([[0.9625],
@@ -218,7 +244,7 @@ class MTDataTestCase(TestCase):
         cov = self.MTData.covariance
         self.assertAlmostEquals(cov, covariance)
 
-    def test_max_probability(self):
+    def test_get_max_probability(self):
         self.test_cluster_normals()
         self.MTData._set_probability(
             [0.05, 0.15, 0.1, 0.3, 0.1, 0.1, 0.1, 0.1])
@@ -292,26 +318,373 @@ class MTDataTestCase(TestCase):
         self.assertAlmostEquals(self.MTData.yz, np.array([0, 0, 0, 1, 0, 0, 0, 0]))
 
 
-def test_suite(verbosity=2):
-    """Returns test suite"""
-    global VERBOSITY
-    VERBOSITY = verbosity
-    suite = [unittest.TestLoader().loadTestsFromTestCase(MTDataTestCase),
-             ]
-    suite = unittest.TestSuite(suite)
-    return suite
+class MTplotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__prep_data(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_ax_labels(self):
+        raise NotImplementedError()
 
 
-def run_tests(verbosity=2):
-    """Run tests"""
-    _run_tests(test_suite(verbosity), verbosity)
+class _BasePlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test___call__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__convert(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__convert_mts(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__ax_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__background(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__eigenvector_matrix(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__surf_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__scatter_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__line_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__text(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__2d_surf_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__2d_scatter_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__2d_line_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__2d_text(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__3d_surf_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__3d_scatter_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__3d_line_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__3d_text(self):
+        raise NotImplementedError()
 
 
-def debug_tests(verbosity=2):
-    """Runs tests with debugging on errors"""
-    _debug_tests(test_suite(verbosity))
+class _FocalSpherePlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test__init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__convert_mts(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__ax_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_plot_plane(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__get_great_circle(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__get_small_circle(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__rotation_matrix(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__get_nodal_line(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__axis_lines(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__boundary_lines(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__fault_plane(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__plot_TNP(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__nodal_line(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__background(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__stations(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__plot_stations(self):
+        raise NotImplementedError()
 
 
-if __name__ == "__main__":
-    # Run tests
-    run_tests(verbosity=2)
+class _AmplitudePlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test__convert_mts(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__ax_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__background(self):
+        raise NotImplementedError()
+
+
+class _RadiationPlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test__convert_mts(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__boundary_lines(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__stations(self):
+        raise NotImplementedError()
+
+
+class _FaultPlanePlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__convert_mts(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__ax_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__background(self):
+        raise NotImplementedError()
+
+
+class _HistPlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__ax_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__hist(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__max_2d_for_hist(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__2d_hist(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__background(self):
+        raise NotImplementedError()
+
+
+class _LunePlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test__convert_mts(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__ax_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__lune_coords(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__2d_hist(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__get_small_circle(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__boundary_lines(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__stations(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__plot_TNP(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__nodal_line(self):
+        raise NotImplementedError()
+
+
+class _HudsonPlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__convert_mts(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__ax_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__background(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__boundary_lines(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__uv_boundary_lines(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__tk_boundary_lines(self):
+        raise NotImplementedError()
+
+
+class _RiedeselJordanPlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__convert_mts(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__ax_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__background(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__stations(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__boundary_lines(self):
+        raise NotImplementedError()
+
+
+class _ParameterHistPlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__ax_plot(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__convert(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__background(self):
+        raise NotImplementedError()
+
+
+class _TapePlotTestCase(TestCase):
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_plot(self):
+        raise NotImplementedError()

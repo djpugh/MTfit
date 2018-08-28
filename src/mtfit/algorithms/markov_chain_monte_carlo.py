@@ -27,6 +27,12 @@ from ..probability import gaussian_pdf, gaussian_cdf, beta_pdf, LnPDF
 from ..sampling import Sample
 from ..convert import Tape_MT33, basic_cdc_GD, MT33_MT6, MT6_Tape
 from ..utilities.extensions import get_extensions
+from ..utilities import C_EXTENSION_FALLBACK_LOG_MSG
+
+try:
+    from . import cmarkov_chain_monte_carlo
+except Exception:
+    cmarkov_chain_monte_carlo = None
 
 logger = logging.getLogger('MTfit.algorithms')
 
@@ -570,7 +576,8 @@ class MarginalisedMarkovChainMonteCarlo(BaseAlgorithm):
                     self.dc[i] = True
                 else:
                     self.dc[i] = False
-
+        # TODO handle warning about element wise comparison - sometimes output is a single element array
+        # need to tidy output/array passing
         elif 'gamma' in self.xi and self.xi['gamma'] == 0 and self.xi['delta'] == 0:
             if not self.learning_check():
                 self.p_dc += 1
@@ -1114,12 +1121,12 @@ class MarginalisedMetropolisHastingsGaussianTape(MarginalisedMetropolisHastings)
         """
         if isinstance(x, np.ndarray):
             return dict(zip(['gamma', 'delta', 'kappa', 'h', 'sigma'], MT6_Tape(x)))
-        try:
+        if cmarkov_chain_monte_carlo:
             # Try c functions (quicker)
-            from .cmarkov_chain_monte_carlo import convert_sample as c_convert_sample
-            return c_convert_sample(x['gamma'], x['delta'], x['kappa'], x['h'], x['sigma'])
-        except Exception:
-            return MT33_MT6(Tape_MT33(**x))
+            return cmarkov_chain_monte_carlo.convert_sample(x['gamma'], x['delta'], x['kappa'], x['h'], x['sigma'])
+        else:
+            logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+        return MT33_MT6(Tape_MT33(**x))
 
     def _6sphere_random_mt(self):
         """
@@ -1477,139 +1484,168 @@ class IterativeMultipleTryMetropolisHastingsGaussianTape(IterativeMetropolisHast
 
     def new_sample(self, jump=0.0, gaussian_jump=False):
         """Get new samples including multiple samples to try"""
-        try:
-            # Try c code
-            from .cmarkov_chain_monte_carlo import new_samples
-            self.xi_1 = []
-            mt = []
-            # Multiple events
-            if self.number_events > 1:
-                for i in range(self.number_events):
-                    xi_1, mt_i = new_samples(self.xi[i], self.alpha[i], self._number_samples, self.dc[i],
-                                             jump=jump, gaussian_jump=gaussian_jump)
-                    self.xi_1.append(xi_1)
-                    mt.append(mt_i)
-            # Single event
-            else:
-                self.xi_1, mt = new_samples(self.xi, self.alpha, self._number_samples, self.dc, jump=jump,
-                                            gaussian_jump=gaussian_jump)
-            return mt
-        except Exception:
-            # Use python code
-            return super(IterativeMultipleTryMetropolisHastingsGaussianTape, self).new_sample()
+        if cmarkov_chain_monte_carlo:
+            try:
+                # Try c code
+                # Multiple events
+                if self.number_events > 1:
+                    self.xi_1 = []
+                    mt = []
+                    for i in range(self.number_events):
+                        xi_1, mt_i = cmarkov_chain_monte_carlo.new_samples(self.xi[i],
+                                                                           self.alpha[i],
+                                                                           self._number_samples,
+                                                                           self.dc[i],
+                                                                           jump=jump,
+                                                                           gaussian_jump=gaussian_jump)
+                        self.xi_1.append(xi_1)
+                        mt.append(mt_i)
+                # Single event
+                else:
+                    self.xi_1, mt = cmarkov_chain_monte_carlo.new_samples(self.xi,
+                                                                          self.alpha,
+                                                                          self._number_samples,
+                                                                          self.dc,
+                                                                          jump=jump,
+                                                                          gaussian_jump=gaussian_jump)
+                return mt
+            except Exception:
+                logging.exception('Cython error')
+        else:
+            logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+        # Otherwise/Fallback to use python code
+        return super(IterativeMultipleTryMetropolisHastingsGaussianTape, self).new_sample()
 
     def _acceptance_check(self, xi_1, ln_pi_1, scale_factori_1=False):
         """Check acceptance for multiple tries"""
-        try:
-            # Try C code
-            from .cmarkov_chain_monte_carlo import acceptance_check, me_acceptance_check
-            if isinstance(ln_pi_1, LnPDF):
-                ln_pi_1 = ln_pi_1._ln_pdf
-            # No non-zero samples
-            if ln_pi_1.max() == -np.inf:
-                xi_1 = {}
-                index = ln_pi_1.shape[1]
-                if self.number_events > 1:
-                    xi_1 = [{} for i in range(self.number_events)]
-                ln_pi_1 = False
-                # If in learning, increase the number of test samples
-                if self.learning_check():
-                    self._number_samples = min([self._max_number_samples, max(
-                        int(1.1*self._number_samples), self._number_samples+1)])
-                return xi_1, ln_pi_1, False, index
-            else:
-                if sys.version_info.major > 2:
-                    is_uniform = self._prior.__name__ == 'uniform_prior'
-                else:
-                    is_uniform = self._prior.func_name == 'uniform_prior'
-                # Mutliple events
-                if self.number_events > 1:
-                    if hasattr(self, 'dc_prior') and isinstance(self.dc_prior, (float, int)):
-                        self.dc_prior = np.array([self.dc_prior])
-                    if isinstance(ln_pi_1, np.ndarray):
-                        xi_1, ln_pi_1, index = me_acceptance_check(xi_1, self.xi, self.alpha, np.asarray(ln_pi_1).flatten(),
-                                                                   self.ln_likelihood_xi, is_uniform,
-                                                                   gaussian_jump=getattr(self, 'gaussian_jump_params', False),
-                                                                   dc_prior=getattr(self, 'dc_prior', np.array([0.])))  # dc prior ignored if not transd
-                    else:
-                        xi_1, ln_pi_1, index = me_acceptance_check(xi_1, self.xi, self.alpha, np.asarray(ln_pi_1._ln_pdf).flatten(),
-                                                                   self.ln_likelihood_xi, is_uniform,
-                                                                   gaussian_jump=getattr(self, 'gaussian_jump_params', False),
-                                                                   dc_prior=getattr(self, 'dc_prior', np.array([0.])))
-                # Single events
-                else:
-                    if isinstance(ln_pi_1, np.ndarray):
-                        xi_1, ln_pi_1, index = acceptance_check(xi_1, self.xi, self.alpha, np.asarray(ln_pi_1).flatten(),
-                                                                self.ln_likelihood_xi, is_uniform,
-                                                                gaussian_jump=getattr(self, 'gaussian_jump_params', False),
-                                                                dc_prior=getattr(self, 'dc_prior', 0.))
-                    else:
-                        xi_1, ln_pi_1, index = acceptance_check(xi_1, self.xi, self.alpha, np.asarray(ln_pi_1._ln_pdf).flatten(),
-                                                                self.ln_likelihood_xi, is_uniform,
-                                                                gaussian_jump=getattr(self, 'gaussian_jump_params', False),
-                                                                dc_prior=getattr(self, 'dc_prior', 0.))
-            # No accepted samples, so increase the number of test samples if in
-            # learning period
-            if isinstance(ln_pi_1, bool) and self.learning_check:
-                self._number_samples = min([self._max_number_samples, max(int(1.1*self._number_samples), self._number_samples+1)])
-            elif self.learning_check() and min([120*(max(index, 1)), int(self._number_samples)]) != self._number_samples:
-                # Handle too many samples
-                # Probability of having accepted sample within index is
-                #
-                #   P(x<=j)=1-(1-r)^j
-                #
-                # where r is the probability of accepting a sample and j is the accepted sample index
-                # Solving for this given r~1/number_samples for P=0.01 gives j~0.01*number_samples
-                # Consequently, the index of the accepted sample has a probability of 0.01 of being < 0.01*number_samples (given the number_samples -> r estimate)
-                # The factor of 120 is a fudge to account for uncertainties
-                # (this can help prevent calculating too many forward models)
-                # max prevents 0 for _number_samples
-                self._number_samples = min([120*(max(index, 1)), int(self._number_samples)])
-            # Accepted sample with scale_factor (relative inversion)
-            if not isinstance(scale_factori_1, bool) and not isinstance(ln_pi_1, bool):
-                return xi_1, ln_pi_1, scale_factori_1[index], index
-            return xi_1, ln_pi_1, False, index
-        except Exception:
-            # Python code
-            logging.exception('Cython Error')
-            # Non-zero samples
-            if not isinstance(ln_pi_1, bool) and np.prod(ln_pi_1.shape) > 1:
-                if not isinstance(ln_pi_1, np.ndarray):
-                    ln_pi_1 = ln_pi_1._ln_pdf.transpose()
-                # Loop over samples
-                for u in range(ln_pi_1.shape[0]):
+        if cmarkov_chain_monte_carlo:
+            try:
+                # Try C code
+                if isinstance(ln_pi_1, LnPDF):
+                    ln_pi_1 = ln_pi_1._ln_pdf
+                # No non-zero samples
+                if ln_pi_1.max() == -np.inf:
+                    xi_1 = {}
+                    index = ln_pi_1.shape[1]
                     if self.number_events > 1:
-                        _xi_1 = []
-                        if isinstance(xi_1[0], list):
-                            for v in range(self.number_events):
-                                _xi_1.append(xi_1[v][u])
-                        else:
-                            _xi_1 = xi_1
-
+                        xi_1 = [{} for i in range(self.number_events)]
+                    ln_pi_1 = False
+                    # If in learning, increase the number of test samples
+                    if self.learning_check():
+                        self._number_samples = min([self._max_number_samples, max(
+                            int(1.1*self._number_samples), self._number_samples+1)])
+                    return xi_1, ln_pi_1, False, index
+                else:
+                    if sys.version_info.major > 2:
+                        is_uniform = self._prior.__name__ == 'uniform_prior'
                     else:
-                        if isinstance(xi_1, list):
-                            _xi_1 = xi_1[u]
+                        is_uniform = self._prior.func_name == 'uniform_prior'
+                    # Mutliple events
+                    if self.number_events > 1:
+                        if hasattr(self, 'dc_prior') and isinstance(self.dc_prior, (float, int)):
+                            self.dc_prior = np.array([self.dc_prior])
+                        if isinstance(ln_pi_1, np.ndarray):
+                            xi_1, ln_pi_1, index = cmarkov_chain_monte_carlo.me_acceptance_check(xi_1,
+                                                                                                 self.xi,
+                                                                                                 self.alpha,
+                                                                                                 np.asarray(ln_pi_1).flatten(),
+                                                                                                 self.ln_likelihood_xi,
+                                                                                                 is_uniform,
+                                                                                                 gaussian_jump=getattr(self, 'gaussian_jump_params', False),
+                                                                                                 dc_prior=getattr(self, 'dc_prior', np.array([0.])))  # dc prior ignored if not transd
                         else:
-                            _xi_1 = xi_1
-                    # Get acceptance result
-                    oxi_1, oln_pi_1, a, b = super(IterativeMultipleTryMetropolisHastingsGaussianTape, self)._acceptance_check(_xi_1, np.asarray(ln_pi_1).flatten()[u],
-                                                                                                                              False, dc_prior=getattr(self, 'dc_prior', False))
-                    if oln_pi_1:
-                        # If accepted sample, try to get the sacale_factor
-                        if not isinstance(scale_factori_1, bool):
-                            oscale_factori_1 = scale_factori_1[u]
+                            xi_1, ln_pi_1, index = cmarkov_chain_monte_carlo.me_acceptance_check(xi_1,
+                                                                                                 self.xi,
+                                                                                                 self.alpha,
+                                                                                                 np.asarray(ln_pi_1._ln_pdf).flatten(),
+                                                                                                 self.ln_likelihood_xi,
+                                                                                                 is_uniform,
+                                                                                                 gaussian_jump=getattr(self, 'gaussian_jump_params', False),
+                                                                                                 dc_prior=getattr(self, 'dc_prior', np.array([0.])))
+                    # Single events
+                    else:
+                        if isinstance(ln_pi_1, np.ndarray):
+                            xi_1, ln_pi_1, index = cmarkov_chain_monte_carlo.acceptance_check(xi_1,
+                                                                                              self.xi,
+                                                                                              self.alpha,
+                                                                                              np.asarray(ln_pi_1).flatten(),
+                                                                                              self.ln_likelihood_xi,
+                                                                                              is_uniform,
+                                                                                              gaussian_jump=getattr(self, 'gaussian_jump_params', False),
+                                                                                              dc_prior=getattr(self, 'dc_prior', 0.))
                         else:
-                            oscale_factori_1 = False
-                        return oxi_1, oln_pi_1, oscale_factori_1, u
-                # No Accepted samples
-                return {}, False, False, len(self.xi_1)
-            # No accepted samples
-            elif isinstance(ln_pi_1, bool):
+                            xi_1, ln_pi_1, index = cmarkov_chain_monte_carlo.acceptance_check(xi_1,
+                                                                                              self.xi,
+                                                                                              self.alpha,
+                                                                                              np.asarray(ln_pi_1._ln_pdf).flatten(),
+                                                                                              self.ln_likelihood_xi,
+                                                                                              is_uniform,
+                                                                                              gaussian_jump=getattr(self, 'gaussian_jump_params', False),
+                                                                                              dc_prior=getattr(self, 'dc_prior', 0.))
+                # No accepted samples, so increase the number of test samples if in
+                # learning period
+                if isinstance(ln_pi_1, bool) and self.learning_check:
+                    self._number_samples = min([self._max_number_samples, max(int(1.1*self._number_samples), self._number_samples+1)])
+                elif self.learning_check() and min([120*(max(index, 1)), int(self._number_samples)]) != self._number_samples:
+                    # Handle too many samples
+                    # Probability of having accepted sample within index is
+                    #
+                    #   P(x<=j)=1-(1-r)^j
+                    #
+                    # where r is the probability of accepting a sample and j is the accepted sample index
+                    # Solving for this given r~1/number_samples for P=0.01 gives j~0.01*number_samples
+                    # Consequently, the index of the accepted sample has a probability of 0.01 of being < 0.01*number_samples (given the number_samples -> r estimate)
+                    # The factor of 120 is a fudge to account for uncertainties
+                    # (this can help prevent calculating too many forward models)
+                    # max prevents 0 for _number_samples
+                    self._number_samples = min([120*(max(index, 1)), int(self._number_samples)])
+                # Accepted sample with scale_factor (relative inversion)
+                if not isinstance(scale_factori_1, bool) and not isinstance(ln_pi_1, bool):
+                    return xi_1, ln_pi_1, scale_factori_1[index], index
+                return xi_1, ln_pi_1, False, index
+            except Exception:
+                logger.exception('Cython Error')
+        else:
+            logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
+        # Otherwise use/fallback to Python code
+        # Non-zero samples
+        if not isinstance(ln_pi_1, bool) and np.prod(ln_pi_1.shape) > 1:
+            if not isinstance(ln_pi_1, np.ndarray):
+                ln_pi_1 = ln_pi_1._ln_pdf.transpose()
+            # Loop over samples
+            for u in range(ln_pi_1.shape[0]):
                 if self.number_events > 1:
-                    return [{} for w in range(self.number_events)], False, False, len(self.xi_1[0])
-                return {}, False, False, len(self.xi_1)
-            else:
-                return super(IterativeMultipleTryMetropolisHastingsGaussianTape, self)._acceptance_check(xi_1, ln_pi_1, scale_factori_1, dc_prior=getattr(self, 'dc_prior', False))
+                    _xi_1 = []
+                    if isinstance(xi_1[0], list):
+                        for v in range(self.number_events):
+                            _xi_1.append(xi_1[v][u])
+                    else:
+                        _xi_1 = xi_1
+
+                else:
+                    if isinstance(xi_1, list):
+                        _xi_1 = xi_1[u]
+                    else:
+                        _xi_1 = xi_1
+                # Get acceptance result
+                oxi_1, oln_pi_1, a, b = super(IterativeMultipleTryMetropolisHastingsGaussianTape, self)._acceptance_check(_xi_1, np.asarray(ln_pi_1).flatten()[u],
+                                                                                                                          False, dc_prior=getattr(self, 'dc_prior', False))
+                if oln_pi_1:
+                    # If accepted sample, try to get the sacale_factor
+                    if not isinstance(scale_factori_1, bool):
+                        oscale_factori_1 = scale_factori_1[u]
+                    else:
+                        oscale_factori_1 = False
+                    return oxi_1, oln_pi_1, oscale_factori_1, u
+            # No Accepted samples
+            return {}, False, False, len(self.xi_1)
+        # No accepted samples
+        elif isinstance(ln_pi_1, bool):
+            if self.number_events > 1:
+                return [{} for w in range(self.number_events)], False, False, len(self.xi_1[0])
+            return {}, False, False, len(self.xi_1)
+        else:
+            return super(IterativeMultipleTryMetropolisHastingsGaussianTape, self)._acceptance_check(xi_1, ln_pi_1, scale_factori_1, dc_prior=getattr(self, 'dc_prior', False))
 
     def _modify_acceptance_rate(self, non_zero_percentage=False):
         """Adjusts the acceptance rate parameters based on the targetted acceptance rate."""

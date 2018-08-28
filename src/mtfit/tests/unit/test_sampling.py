@@ -4,8 +4,6 @@ import glob
 
 import numpy as np
 
-from MTfit.utilities.unittest_utils import run_tests as _run_tests
-from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 from MTfit.sampling import Sample
 from MTfit.sampling import FileSample
 from MTfit.probability.probability import LnPDF
@@ -207,27 +205,3 @@ class FileSampleTestCase(unittest.TestCase):
         self.assertTrue('g' in out.keys())
         self.assertEqual(out['moment_tensor_space'].shape, (6, 2))
         self.assertEqual(out['probability'].shape, (1, 2))
-
-
-def test_suite(verbosity=2):
-    global VERBOSITY
-    VERBOSITY = verbosity
-    suite = [unittest.TestLoader().loadTestsFromTestCase(SampleTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(FileSampleTestCase), ]
-    suite = unittest.TestSuite(suite)
-    return suite
-
-
-def run_tests(verbosity=2):
-    """Run tests"""
-    _run_tests(test_suite(verbosity),  verbosity)
-
-
-def debug_tests(verbosity=2):
-    """Runs tests with debugging on errors"""
-    _debug_tests(test_suite(verbosity))
-
-
-if __name__ == "__main__":
-    # Run tests
-    run_tests(verbosity=2)

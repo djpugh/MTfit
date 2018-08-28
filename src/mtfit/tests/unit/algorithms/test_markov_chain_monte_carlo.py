@@ -1,10 +1,9 @@
 import unittest
 import copy
+from unittest import mock
 
 import numpy as np
 
-from MTfit.utilities.unittest_utils import run_tests as _run_tests
-from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 from MTfit.utilities.unittest_utils import TestCase
 
 from MTfit.algorithms.markov_chain_monte_carlo import IterativeMetropolisHastingsGaussianTape
@@ -15,46 +14,24 @@ from MTfit.algorithms.markov_chain_monte_carlo import MarginalisedMetropolisHast
 from MTfit.algorithms.markov_chain_monte_carlo import MarginalisedMetropolisHastingsGaussianTape
 from MTfit.algorithms.markov_chain_monte_carlo import IterativeMultipleTryTransDMetropolisHastingsGaussianTape
 from MTfit.algorithms.markov_chain_monte_carlo import McMCAlgorithmCreator
+import MTfit.algorithms.markov_chain_monte_carlo as markov_chain_monte_carlo
+from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
 
-
-try:
-    from MTfit.algorithms import cmarkov_chain_monte_carlo
-except ImportError:
-    cmarkov_chain_monte_carlo = False
 
 VERBOSITY = 2
 
 
-class IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase(TestCase):
+C_EXTENSIONS = (not markov_chain_monte_carlo.cmarkov_chain_monte_carlo, 'No C extension available')
 
-    def setUp(self):
-        self.mcmc_algorithm = IterativeMultipleTryMetropolisHastingsGaussianTape()
-        self.mcmc_algorithm.xi = self.mcmc_algorithm.random_mt()
 
-    def tearDown(self):
-        del self.mcmc_algorithm
+class PythonOnly(object):
 
-    def test_new_sample(self):
-        self.assertEqual(self.mcmc_algorithm._number_samples, int(1./self.mcmc_algorithm.min_acceptance_rate))
-        self.mcmc_algorithm._number_samples = 100
-        x0 = self.mcmc_algorithm.new_sample()
-        if cmarkov_chain_monte_carlo:
-            self.assertEqual(x0.shape[0], 6)
-            self.assertEqual(x0.shape[1], 100)
-        else:
-            self.assertEqual(x0.shape[0], 6)
-            self.assertEqual(x0.shape[1], 1)
+    def __enter__(self, *args, **kwargs):
+        self.cmarkov_chain_monte_carlo = markov_chain_monte_carlo.cmarkov_chain_monte_carlo
+        markov_chain_monte_carlo.cmarkov_chain_monte_carlo = False
 
-    def test__acceptance_check(self):
-        self.mcmc_algorithm.new_sample()
-        self.mcmc_algorithm.ln_likelihood_xi = - np.inf
-        if isinstance(self.mcmc_algorithm.xi_1, dict):
-            n = 1
-        else:
-            n = len(self.mcmc_algorithm.xi_1)
-        xi_1, ln_pi1, sf1, index = self.mcmc_algorithm._acceptance_check(self.mcmc_algorithm.xi_1,
-                                                                         1.0*np.ones((n)))
-        self.assertEqual(index, 0)
+    def __exit__(self, *args, **kwargs):
+        markov_chain_monte_carlo.cmarkov_chain_monte_carlo = self.cmarkov_chain_monte_carlo
 
 
 class MarginalisedMarkovChainMonteCarloTestCase(TestCase):
@@ -64,6 +41,64 @@ class MarginalisedMarkovChainMonteCarloTestCase(TestCase):
 
     def tearDown(self):
         del self.mcmc_algorithm
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_output(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__modify_alpha(self):
+        raise NotImplementedError()
+
+    def test_transition_pdf(self):
+        self.assertEqual(self.mcmc_algorithm.transition_pdf(1, 2), 0)
+        self.assertEqual(self.mcmc_algorithm.transition_pdf(2, 5), 0)
+        self.assertEqual(self.mcmc_algorithm.transition_pdf(2, -1), 0)
+
+    @unittest.expectedFailure
+    def test_prior(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_new_sample(self):
+        raise NotImplementedError()
+
+    def test_acceptance(self):
+        self.assertEqual(self.mcmc_algorithm.acceptance(1, 2), 0)
+        self.assertEqual(self.mcmc_algorithm.acceptance(2, 5), 0)
+        self.assertEqual(self.mcmc_algorithm.acceptance(2, -1), 0)
+
+    @unittest.expectedFailure
+    def test__acceptance_check(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_learning_check(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__add_old(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__add_new(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__add(self):
+        raise NotImplementedError()
+
+    def test__convert_sample_single(self):
+        self.assertEqual(self.mcmc_algorithm._convert_sample_single(10), 10)
+        self.assertEqual(self.mcmc_algorithm._convert_sample_single('a'), 'a')
+
+    @unittest.expectedFailure
+    def test_convert_sample(self):
+        raise NotImplementedError()
 
     def test_initialise(self):
         self.assertTrue(self.mcmc_algorithm.initialise()[0].shape, (6, self.mcmc_algorithm.number_samples))
@@ -201,32 +236,43 @@ class MarginalisedMetropolisHastingsGaussianTapeTestCase(TestCase):
         self.assertAlmostEqual(self.mcmc_algorithm.transition_pdf(x0, x1), 2.1646452165457575)
         x1 = {'gamma': np.pi/5, 'delta': -np.pi/2, 'kappa': 0, 'h': 0.9, 'sigma': np.pi-0.4}
         x0 = {'gamma': np.pi/6, 'delta': -np.pi/2, 'kappa': 0.2, 'h': 0.98, 'sigma': np.pi-0.2}
-        old_alpha = self.mcmc_algorithm.alpha
         self.mcmc_algorithm.alpha = {'gamma': 0.2, 'delta': 0.4, 'kappa': 1, 'h': 0.2, 'sigma': 0.4}
         self.assertAlmostEqual(self.mcmc_algorithm.transition_pdf(x1, x0), 68262.57402456368)
         self.assertAlmostEqual(self.mcmc_algorithm.transition_pdf(x0, x1), 15823.834783183942)
-        if cmarkov_chain_monte_carlo:
-            x1 = self.mcmc_algorithm.convert_sample(self.mcmc_algorithm.new_sample())
-            x0 = self.mcmc_algorithm.convert_sample(self.mcmc_algorithm.new_sample())
-            self.mcmc_algorithm.alpha = old_alpha
-            self.assertIsInstance(cmarkov_chain_monte_carlo._gaussian_transition_ratio_test(x1,
-                                                                                            x0,
-                                                                                            self.mcmc_algorithm.alpha),
-                                  float)
-            x1 = {'gamma': 0, 'delta': 0, 'kappa': np.pi, 'h': 0.5, 'sigma': 0}
-            x0 = {'gamma': 0, 'delta': 0, 'kappa': 0.5+np.pi, 'h': 0.7, 'sigma': 0.2}
-            self.mcmc_algorithm.alpha = {'gamma': 0.2, 'delta': 0.4, 'kappa': 1, 'h': 0.2, 'sigma': 0.4}
-            # DC
-            self.assertAlmostEqual(cmarkov_chain_monte_carlo._gaussian_transition_ratio_test(x1, x0,
-                                                                                             self.mcmc_algorithm.alpha),
-                                   2.1646452165457575/2.291888412753515, 4)
-            x1 = {'gamma': np.pi/5, 'delta': -np.pi/2, 'kappa': 0, 'h': 0.9, 'sigma': np.pi-0.4}
-            x0 = {'gamma': np.pi/6, 'delta': -np.pi/2, 'kappa': 0.2, 'h': 0.98, 'sigma': np.pi-0.2}
-            self.mcmc_algorithm.alpha = {'gamma': 0.2, 'delta': 0.4, 'kappa': 1, 'h': 0.2, 'sigma': 0.4}
-            self.assertAlmostEqual(cmarkov_chain_monte_carlo._gaussian_transition_ratio_test(x1, x0, self.mcmc_algorithm.alpha),
-                                   15823.834783183942/68262.57402456368, 4)
 
-    def test_acceptance(self):
+    @unittest.skipIf(*C_EXTENSIONS)
+    def test_transition_pdf_cython(self):
+        old_alpha = self.mcmc_algorithm.alpha
+        self.mcmc_algorithm.initialise()
+        x1 = self.mcmc_algorithm.convert_sample(self.mcmc_algorithm.new_sample())
+        x0 = self.mcmc_algorithm.convert_sample(self.mcmc_algorithm.new_sample())
+        self.mcmc_algorithm.alpha = old_alpha
+        self.assertIsInstance(markov_chain_monte_carlo.cmarkov_chain_monte_carlo._gaussian_transition_ratio_test(x1,
+                                                                                                                 x0,
+                                                                                                                 self.mcmc_algorithm.alpha),
+                              float)
+        x1 = {'gamma': 0, 'delta': 0, 'kappa': np.pi, 'h': 0.5, 'sigma': 0}
+        x0 = {'gamma': 0, 'delta': 0, 'kappa': 0.5+np.pi, 'h': 0.7, 'sigma': 0.2}
+        self.mcmc_algorithm.alpha = {'gamma': 0.2, 'delta': 0.4, 'kappa': 1, 'h': 0.2, 'sigma': 0.4}
+        # DC
+        self.assertAlmostEqual(markov_chain_monte_carlo.cmarkov_chain_monte_carlo._gaussian_transition_ratio_test(x1,
+                                                                                                                  x0,
+                                                                                                                  self.mcmc_algorithm.alpha),
+                               2.1646452165457575/2.291888412753515, 4)
+        x1 = {'gamma': np.pi/5, 'delta': -np.pi/2, 'kappa': 0, 'h': 0.9, 'sigma': np.pi-0.4}
+        x0 = {'gamma': np.pi/6, 'delta': -np.pi/2, 'kappa': 0.2, 'h': 0.98, 'sigma': np.pi-0.2}
+        self.mcmc_algorithm.alpha = {'gamma': 0.2, 'delta': 0.4, 'kappa': 1, 'h': 0.2, 'sigma': 0.4}
+        self.assertAlmostEqual(markov_chain_monte_carlo.cmarkov_chain_monte_carlo._gaussian_transition_ratio_test(x1,
+                                                                                                                  x0,
+                                                                                                                  self.mcmc_algorithm.alpha),
+                               15823.834783183942/68262.57402456368, 4)
+
+    @unittest.expectedFailure
+    def test_acceptance_no_cython(self):
+        raise NotImplementedError()
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    def test_acceptance_cython(self):
         self.mcmc_algorithm.initialise()
         self.mcmc_algorithm.xi = {'h': 0.7972501404226121, 'sigma': 0.3034672053613414,
                                   'kappa': 5.562484106876691, 'gamma': -0.4613373190200656,
@@ -234,118 +280,137 @@ class MarginalisedMetropolisHastingsGaussianTapeTestCase(TestCase):
         self.mcmc_algorithm.xi_1 = {'h': np.array([0.62021735]), 'sigma': np.array([1.08204009]),
                                     'kappa': np.array([5.51100894]), 'gamma': np.array([-0.45280446]),
                                     'delta': np.array([-0.43080595])}
-        if cmarkov_chain_monte_carlo:
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.array([1.0]),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
-            self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.log(np.array([0.5])),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
-            self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.log(np.array([1.8])),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
-            self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.log(np.array([1.4])),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
-            self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.array([1.0]),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
-            self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.log(np.array([0.5])),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
-            self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.log(np.array([1.8])),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1,
-                                                                  np.log(1.8)),
-                                   acc, 4)
-            self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.log(np.array([1.4])),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1,
-                                                                  np.log(1.4)),
-                                   acc, 4)
-            self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.array([1.0]),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
-            self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.log(np.array([0.5])),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
-            self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.log(np.array([1.8])),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
-            self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
-                                                                self.mcmc_algorithm.xi,
-                                                                self.mcmc_algorithm.alpha,
-                                                                np.log(np.array([1.4])),
-                                                                self.mcmc_algorithm.ln_likelihood_xi,
-                                                                True,
-                                                                True)
-            self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.array([1.0]),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
+        self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.log(np.array([0.5])),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
+        self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.log(np.array([1.8])),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
+        self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.log(np.array([1.4])),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
+        self.mcmc_algorithm.new_sample()
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.array([1.0]),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
+        self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.log(np.array([0.5])),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
+        self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.log(np.array([1.8])),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1,
+                                                              np.log(1.8)),
+                               acc, 4)
+        self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.log(np.array([1.4])),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1,
+                                                              np.log(1.4)),
+                               acc, 4)
+        self.mcmc_algorithm.new_sample()
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.array([1.0]),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
+        self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.log(np.array([0.5])),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
+        self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.log(np.array([1.8])),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
+        self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
+        acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+                                                                                     self.mcmc_algorithm.xi,
+                                                                                     self.mcmc_algorithm.alpha,
+                                                                                     np.log(np.array([1.4])),
+                                                                                     self.mcmc_algorithm.ln_likelihood_xi,
+                                                                                     True,
+                                                                                     True)
+        self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__new_sample_single(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_is_dc(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__convert_sample_single(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__6sphere_random_mt(self):
+        raise NotImplementedError()
 
 
 class IterativeMetropolisHastingsGaussianTapeTestCase(TestCase):
@@ -355,6 +420,10 @@ class IterativeMetropolisHastingsGaussianTapeTestCase(TestCase):
 
     def tearDown(self):
         del self.mcmc_algorithm
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
 
     def test___iterate__(self):
         self.mcmc_algorithm.ln_likelihood_xi = 1
@@ -404,6 +473,22 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
     def tearDown(self):
         del self.mcmc_algorithm
 
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test__new_sample_single(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_iterate(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_output(self):
+        raise NotImplementedError()
+
     def test_new_sample(self):
         self.mcmc_algorithm.dimension_jump_prob = 1
         self.mcmc_algorithm.dc = False
@@ -444,7 +529,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
         self.mcmc_algorithm.gaussian_jump_params = True
         a = self.mcmc_algorithm.acceptance(x1, likelihoodx1)
         self.assertAlmostEqual(a, 1)
-        if not cmarkov_chain_monte_carlo:
+        if not markov_chain_monte_carlo.cmarkov_chain_monte_carlo:
             return
         i = 0
         while i < 10:
@@ -465,7 +550,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                 self.mcmc_algorithm.dc = False
             self.mcmc_algorithm.new_sample()
             self.mcmc_algorithm.ln_likelihood_xi = np.log(0.3)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -474,7 +559,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -484,7 +569,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
 
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -493,7 +578,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -502,7 +587,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -512,7 +597,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
             # import ipdb;ipdb.set_trace()
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -521,7 +606,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -530,7 +615,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -539,7 +624,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -548,7 +633,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -557,7 +642,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -566,14 +651,14 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])), self.mcmc_algorithm.ln_likelihood_xi,
                                                                 True,
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.         acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -582,7 +667,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -591,7 +676,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -600,7 +685,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -609,7 +694,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -618,7 +703,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -627,7 +712,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -636,7 +721,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -645,7 +730,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -654,7 +739,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -663,7 +748,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -672,7 +757,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -683,7 +768,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
             # Flat jump
             self.mcmc_algorithm.gaussian_jump_params = False
             self.mcmc_algorithm.ln_likelihood_xi = np.log(0.3)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -692,7 +777,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -701,7 +786,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -710,7 +795,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -719,7 +804,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -728,7 +813,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -737,7 +822,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -746,7 +831,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -755,7 +840,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -764,7 +849,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -773,7 +858,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -782,7 +867,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -790,7 +875,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 True,
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -801,7 +886,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
             # if self.mcmc_algorithm.dc:
             #     import ipdb;ipdb.set_trace()
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -811,7 +896,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
 
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -820,7 +905,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -829,7 +914,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -838,7 +923,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -847,7 +932,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -856,7 +941,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -865,7 +950,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -874,7 +959,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -883,7 +968,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -892,7 +977,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -915,7 +1000,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
             self.mcmc_algorithm.gaussian_jump_params = True
             self.mcmc_algorithm.new_sample()
             self.mcmc_algorithm.ln_likelihood_xi = np.log(0.3)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -924,7 +1009,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -934,7 +1019,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
 
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -943,7 +1028,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -952,7 +1037,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -961,7 +1046,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -970,7 +1055,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -979,7 +1064,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -988,7 +1073,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -997,7 +1082,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1006,7 +1091,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1015,7 +1100,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1024,7 +1109,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(0.3)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -1033,7 +1118,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1043,7 +1128,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
 
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1052,7 +1137,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1061,7 +1146,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -1070,7 +1155,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1079,7 +1164,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1088,7 +1173,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1097,7 +1182,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -1106,7 +1191,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1115,7 +1200,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1124,7 +1209,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1135,7 +1220,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
             self.mcmc_algorithm.gaussian_jump_params = False
 
             self.mcmc_algorithm.ln_likelihood_xi = np.log(0.3)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -1144,7 +1229,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1154,7 +1239,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
 
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1163,7 +1248,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1172,7 +1257,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -1181,7 +1266,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1190,7 +1275,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1199,7 +1284,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1208,7 +1293,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -1217,7 +1302,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1226,7 +1311,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1235,7 +1320,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1244,7 +1329,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(0.3)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -1253,7 +1338,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1263,7 +1348,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
 
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1272,7 +1357,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1281,7 +1366,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -1290,7 +1375,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1299,7 +1384,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1308,7 +1393,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1317,7 +1402,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
             self.mcmc_algorithm.new_sample()
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.array([1.0]),
@@ -1326,7 +1411,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, 1.0), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(2.2)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([0.5])),
@@ -1335,7 +1420,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(0.5)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.5)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.8])),
@@ -1344,7 +1429,7 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.8)), acc, 4)
             self.mcmc_algorithm.ln_likelihood_xi = np.log(1.7)
-            acc = cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
+            acc = markov_chain_monte_carlo.cmarkov_chain_monte_carlo._acceptance_test_fn(self.mcmc_algorithm.xi_1,
                                                                 self.mcmc_algorithm.xi,
                                                                 self.mcmc_algorithm.alpha,
                                                                 np.log(np.array([1.4])),
@@ -1352,6 +1437,87 @@ class IterativeTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
                                                                 True,
                                                                 self.mcmc_algorithm.gaussian_jump_params)
             self.assertAlmostEqual(self.mcmc_algorithm.acceptance(self.mcmc_algorithm.xi_1, np.log(1.4)), acc, 4)
+
+
+class IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase(TestCase):
+
+    def setUp(self):
+        self.mcmc_algorithm = IterativeMultipleTryMetropolisHastingsGaussianTape()
+        self.mcmc_algorithm.xi = self.mcmc_algorithm.random_mt()
+
+    def tearDown(self):
+        del self.mcmc_algorithm
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test_new_sample_cython(self, logger):
+        self.assertEqual(self.mcmc_algorithm._number_samples, int(1./self.mcmc_algorithm.min_acceptance_rate))
+        self.mcmc_algorithm._number_samples = 100
+        logger.info.reset_mock()
+        x0 = self.mcmc_algorithm.new_sample()
+        logger.info.assert_not_called()
+        self.assertEqual(x0.shape[0], 6)
+        self.assertEqual(x0.shape[1], 100)
+
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test_new_sample_no_cython(self, logger):
+        self.assertEqual(self.mcmc_algorithm._number_samples, int(1./self.mcmc_algorithm.min_acceptance_rate))
+        with PythonOnly():
+            self.mcmc_algorithm._number_samples = 100
+            logger.info.reset_mock()
+            x0 = self.mcmc_algorithm.new_sample()
+            self.assertEqual(x0.shape[0], 6)
+            self.assertEqual(x0.shape[1], 1)
+            # There is a call inside convert which sets this too
+            self.assertEqual(logger.info.call_args_list, [mock.call(C_EXTENSION_FALLBACK_LOG_MSG), mock.call(C_EXTENSION_FALLBACK_LOG_MSG)])
+
+    @unittest.skipIf(*C_EXTENSIONS)
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test__acceptance_check(self, logger):
+        self.mcmc_algorithm.new_sample()
+        self.mcmc_algorithm.ln_likelihood_xi = - np.inf
+        if isinstance(self.mcmc_algorithm.xi_1, dict):
+            n = 1
+        else:
+            n = len(self.mcmc_algorithm.xi_1)
+        logger.info.reset_mock()
+        xi_1, ln_pi1, sf1, index = self.mcmc_algorithm._acceptance_check(self.mcmc_algorithm.xi_1,
+                                                                         1.0*np.ones((n)))
+        self.assertEqual(index, 0)
+        logger.info.assert_not_called()
+
+    @mock.patch('MTfit.algorithms.markov_chain_monte_carlo.logger')
+    def test__acceptance_check_no_cython(self, logger):
+        with PythonOnly():
+            self.mcmc_algorithm.new_sample()
+            self.mcmc_algorithm.ln_likelihood_xi = - np.inf
+            if isinstance(self.mcmc_algorithm.xi_1, dict):
+                n = 1
+            else:
+                n = len(self.mcmc_algorithm.xi_1)
+            logger.info.reset_mock()
+            xi_1, ln_pi1, sf1, index = self.mcmc_algorithm._acceptance_check(self.mcmc_algorithm.xi_1,
+                                                                             1.0*np.ones((n)))
+            logger.info.assert_called_once_with(C_EXTENSION_FALLBACK_LOG_MSG)
+            self.assertEqual(index, 0)
+
+
+class IterativeMultipleTryTransDMetropolisHastingsGaussianTapeTestCase(TestCase):
+
+    def setUp(self):
+        self.mcmc_algorithm = IterativeMultipleTryTransDMetropolisHastingsGaussianTape()
+        self.mcmc_algorithm.xi = self.mcmc_algorithm.random_mt()
+
+    def tearDown(self):
+        del self.mcmc_algorithm
+
+    @unittest.expectedFailure
+    def test___init__(self):
+        raise NotImplementedError()
+
+    @unittest.expectedFailure
+    def test_new_sample(self):
+        raise NotImplementedError()
 
 
 class McMCAlgorithmCreatorTestCase(TestCase):
@@ -1365,37 +1531,3 @@ class McMCAlgorithmCreatorTestCase(TestCase):
         self.assertIsInstance(obj, IterativeMultipleTryMetropolisHastingsGaussianTape)
         obj = McMCAlgorithmCreator(mode='asafa')
         self.assertIsInstance(obj, IterativeMetropolisHastingsGaussianTape)
-
-
-def test_suite(verbosity=2):
-    global VERBOSITY
-    VERBOSITY = verbosity
-    suite = [unittest.TestLoader().loadTestsFromTestCase(MarginalisedMarkovChainMonteCarloTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(MarginalisedMetropolisHastingsTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(MarginalisedMetropolisHastingsGaussianTapeTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(IterativeMetropolisHastingsGaussianTapeTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(IterativeTransDMetropolisHastingsGaussianTapeTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(McMCAlgorithmCreatorTestCase),
-             unittest.TestLoader().loadTestsFromTestCase(IterativeMultipleTryMetropolisHastingsGaussianTapeTestCase)]
-    suite = unittest.TestSuite(suite)
-    try:
-        from MTfit.algorithms.cmarkov_chain_monte_carlo import test_suite as cmarkov_chain_monte_carlo_test_suite
-        suite = unittest.TestSuite([suite, cmarkov_chain_monte_carlo_test_suite(verbosity)])
-    except ImportError:
-        pass
-    return suite
-
-
-def run_tests(verbosity=2):
-    """Run tests"""
-    _run_tests(test_suite(verbosity), verbosity)
-
-
-def debug_tests(verbosity=2):
-    """Runs tests with debugging on errors"""
-    _debug_tests(test_suite(verbosity))
-
-
-if __name__ == "__main__":
-    # Run tests
-    run_tests(verbosity=2)

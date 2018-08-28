@@ -28,3 +28,4 @@ env/*
 .pytest_cache/*
 reports/*-py*
 .coverage
+reports/*

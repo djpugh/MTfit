@@ -5,7 +5,6 @@ test_file_io.py
 Tests for src/utils/file_io.py
 """
 
-import unittest
 import os
 import glob
 import sys
@@ -18,8 +17,6 @@ except ImportError:
 import numpy as np
 
 from MTfit.utilities.unittest_utils import TestCase
-from MTfit.utilities.unittest_utils import run_tests as _run_tests
-from MTfit.utilities.unittest_utils import debug_tests as _debug_tests
 from MTfit.utilities.file_io import csv2inv
 from MTfit.utilities.file_io import parse_csv
 from MTfit.utilities.file_io import _parse_csv_events
@@ -605,29 +602,3 @@ class UtilsTestCase(TestCase):
         result = convert_keys_from_unicode(result)
         self.assertTrue(all([isinstance(u, str) for u in result.keys()]))
         self.assertTrue(all([isinstance(u, str) for u in result['b'].keys()]))
-
-
-def test_suite(verbosity=2):
-    global VERBOSITY
-    VERBOSITY = verbosity
-    suite = [
-        unittest.TestLoader().loadTestsFromTestCase(UtilsTestCase),
-        unittest.TestLoader().loadTestsFromTestCase(IOTestCase),
-    ]
-    suite = unittest.TestSuite(suite)
-    return suite
-
-
-def run_tests(verbosity=2):
-    """Run tests"""
-    _run_tests(test_suite(verbosity), verbosity)
-
-
-def debug_tests(verbosity=2):
-    """Runs tests with debugging on errors"""
-    _debug_tests(test_suite(verbosity))
-
-
-if __name__ == "__main__":
-    # Run tests
-    run_tests(verbosity=2)
