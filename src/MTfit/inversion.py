@@ -58,13 +58,17 @@ from .utilities.extensions import get_extensions
 from .extensions.scatangle import parse_scatangle
 
 
+logger = logging.getLogger('MTfit.inversion')
+
+
 try:
     from .probability import cprobability
+except ImportError:
+    cprobability = False
 except Exception:
+    logger.exception('Error importing c extension')
     cprobability = False
 
-
-logger = logging.getLogger('MTfit.inversion')
 _MEMTEST = False
 _DEBUG = False
 _VERBOSITY = 0

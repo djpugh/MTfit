@@ -26,8 +26,12 @@ logger = logging.getLogger('MTfit.extensions.scatangle')
 
 try:
     from . import cscatangle
+except ImportError:
+    cscatangle = None
 except Exception:
-    cscatangle = False
+    logger.exception('Error importing c extension')
+    cscatangle = None
+
 try:
     import argparse  # noqa F401
     _argparse = True  # noqa F811

@@ -29,16 +29,22 @@ from scipy.stats import beta
 from scipy.special import erf
 
 from ..utilities import C_EXTENSION_FALLBACK_LOG_MSG
+
+logger = logging.getLogger('MTfit.probability')
+
+
 try:
     from . import cprobability
 except ImportError:
-    cprobability = False
+    cprobability = None
+except Exception:
+    logger.exception('Error importing c extension')
+    cprobability = None
+
 # Set to prevent numpy warnings
 np.seterr(divide='print', invalid='print')
 
 # Set flags for running with/without the c library
-
-logger = logging.getLogger('MTfit.probability')
 
 # Flag for testing Cython based C library functions even if they would be skipped
 # e.g. polarity_ln_pdf on windows due to missing functions in math.h

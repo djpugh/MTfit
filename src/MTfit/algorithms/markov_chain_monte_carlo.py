@@ -29,12 +29,16 @@ from ..convert import Tape_MT33, basic_cdc_GD, MT33_MT6, MT6_Tape
 from ..utilities.extensions import get_extensions
 from ..utilities import C_EXTENSION_FALLBACK_LOG_MSG
 
+logger = logging.getLogger('MTfit.algorithms')
+
 try:
     from . import cmarkov_chain_monte_carlo
+except ImportError:
+    cmarkov_chain_monte_carlo = None
 except Exception:
+    logger.exception('Error importing c extension')
     cmarkov_chain_monte_carlo = None
 
-logger = logging.getLogger('MTfit.algorithms')
 
 _CYTHON = True
 _CYTHON_TESTS = False

@@ -21,12 +21,17 @@ import numpy as np
 from scipy.optimize import fsolve
 
 from ..utilities import C_EXTENSION_FALLBACK_LOG_MSG
-try:
-    from . import cmoment_tensor_conversion
-except Exception:
-    cmoment_tensor_conversion = False
 
 logger = logging.getLogger('MTfit.convert')
+
+
+try:
+    from . import cmoment_tensor_conversion
+except ImportError:
+    cmoment_tensor_conversion = None
+except Exception:
+    logger.exception('Error importing c extension')
+    cmoment_tensor_conversion = None
 
 
 def MT33_MT6(MT33):

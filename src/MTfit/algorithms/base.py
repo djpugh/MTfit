@@ -22,12 +22,19 @@ import numpy as np
 from ..sampling import Sample, FileSample, _6sphere_prior
 from ..utilities.extensions import get_extensions
 from ..utilities import C_EXTENSION_FALLBACK_LOG_MSG
+
+
+logger = logging.getLogger('MTfit.algorithms')
+
+
 try:
     from ..probability import cprobability
 except ImportError:
-    cprobability = False
+    cprobability = None
+except Exception:
+    logger.exception('Error importing c extension')
+    cprobability = None
 
-logger = logging.getLogger('MTfit.algorithms')
 
 # No. of iterations to print output on
 PRINT_N_ITERATIONS = 20
