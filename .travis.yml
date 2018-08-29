@@ -2,9 +2,9 @@ sudo: false
 os: linux
 language: python
 python:
-  - "2.7"
-  - "3.5"
-  - "3.6"
+  - 2.7
+  - 3.5
+  - 3.6
 install: python ci/environment.py
          pip install tox-travis
 stages:
@@ -18,22 +18,22 @@ jobs:
     - stage: lint
       script: python ci/lint.py
       python:
-        - "2.7"
-        - "3.5"
-        - "3.6"
+        - 2.7
+        - 3.5
+        - 3.6
     - stage: examples-test
       script: tox -e example-py27,example-py35,example-py36
       python:
-        - "2.7"
-        - "3.5"
-        - "3.6"
+        - 2.7
+        - 3.5
+        - 3.6
       name: "Example Tests"
     - stage: build
       script: python ci/build.py
       python:
-        - "2.7"
-        - "3.5"
-        - "3.6"
+        - 2.7
+        - 3.5
+        - 3.6
 script:
   python ci/environment.py
   tox

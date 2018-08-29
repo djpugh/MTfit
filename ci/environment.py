@@ -10,7 +10,7 @@ def build_environment():
 
     if not tox:
         # Need to install tox
-        subprocess.call(['pip', 'install', 'tox', '--user'])
+        subprocess.call(['pip', 'install', 'tox'])
 
     try:
         import numpy
@@ -19,7 +19,7 @@ def build_environment():
 
     if not numpy:
         # Need to install numpy
-        subprocess.call(['pip', 'install', 'numpy', '--user'])
+        subprocess.call(['pip', 'install', 'numpy'])
 
 
 if __name__ == "__main__":
