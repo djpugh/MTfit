@@ -115,11 +115,12 @@ jobs:
     before_install:
       - sudo apt-get update
       - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
-    script: tox -e gh-pages
+    script: tox -e docs
     python: 3.6
     name: Build GitHub pages
     deploy:
       provider: releases
+      local-dir: docs/html/ 
       api_key: "$GH_PUSH"
       keep-history: true
       skip_cleanup: true
