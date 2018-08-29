@@ -15,12 +15,15 @@ stages:
   - test
   - examples-test
   - build
+    if: tag =~ ^v\d+\.\d+\.\d+
   - gh-pages
+    if: tag =~ ^v\d+\.\d+\.\d+
 
 script: skip
 
 
 jobs:
+  fast_finish: true
   include:
     - stage: lint
       script: python ci/lint.py
@@ -119,8 +122,14 @@ jobs:
         skip_cleanup: true
 
     - stage: gh-pages
-      if: tag IS present
       script: tox -e gh-pages
       python: 3.6
       name: "Build GitHub pages"
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        keep-history: true
+        skip_cleanup: true
+        on:
+          tags: true
 
