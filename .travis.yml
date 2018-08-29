@@ -69,7 +69,12 @@ jobs:
   #       user: $PYPI_USERNAME
   #       password: $PYPI_PW
   #       distributions: sdist
-  #       skip_-leanup: false
+  #       skip-cleanup: false
+  #       on:
+  #         tags: true
+  #     - provider: releases
+  #       api-key: $GH_PUSH
+  #       skip-cleanup: false
   #       on:
   #         tags: true
   # - stage: build
@@ -81,7 +86,7 @@ jobs:
   #       user: $PYPI_USERNAME
   #       password: $PYPI_PW
   #       distributions: sdist
-  #       skip_-leanup: true
+  #       skip-cleanup: true
   #       on:
   #         tags: true
   # - stage: build
@@ -93,7 +98,7 @@ jobs:
   #       user: $PYPI_USERNAME
   #       password: $PYPI_PW
   #       distributions: sdist
-  #       skip_-leanup: true
+  #       skip-cleanup: true
   #       on:
   #         tags: true
   - stage: gh-pages
