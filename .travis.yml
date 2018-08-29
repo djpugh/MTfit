@@ -56,17 +56,17 @@ jobs:
       name: "Unit Tests"
 
     - stage: examples-test
-      script: tox -e example-py27
+      script: tox -e examples-py27
       python: 2.7
       name: "Example Tests"
 
     - stage: examples-test
-      script: tox -e example-py35
+      script: tox -e examples-py35
       python: 3.5
       name: "Example Tests"
 
     - stage: examples-test
-      script: tox -e example-py36
+      script: tox -e examples-py36
       python: 3.6
       name: "Example Tests"
 
