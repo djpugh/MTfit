@@ -13,10 +13,9 @@ python:
 - 3.6
 install: python ci/environment.py
 stages:
-- name: environment
-- name: lint
-- name: test
-- name: examples-test
+# - name: lint
+# - name: test
+# - name: examples-test
 - name: build
   if: tag IS present
 - name: gh-pages
@@ -25,85 +24,93 @@ script: skip
 jobs:
   fast_finish: true
   include:
-  - stage: lint
-    script: python ci/lint.py
-    python: 2.7
-    name: Lint
-  - stage: lint
-    script: python ci/lint.py
-    python: 3.5
-    name: Lint
-  - stage: lint
-    script: python ci/lint.py
-    python: 3.6
-    name: Lint
-  - stage: test
-    script: tox -e test-py27
-    python: 2.7
-    name: Unit Tests
-  - stage: test
-    script: tox -e test-py35
-    python: 3.5
-    name: Unit Tests
-  - stage: test
-    script: tox -e test-py36
-    python: 3.6
-    name: Unit Tests
-  - stage: examples-test
-    script: tox -e examples-py27
-    python: 2.7
-    name: Example Tests
-  - stage: examples-test
-    script: tox -e examples-py35
-    python: 3.5
-    name: Example Tests
-  - stage: examples-test
-    script: tox -e examples-py36
-    python: 3.6
-    name: Example Tests
+  # - stage: lint
+  #   script: python ci/lint.py
+  #   python: 2.7
+  #   name: Lint
+  # - stage: lint
+  #   script: python ci/lint.py
+  #   python: 3.5
+  #   name: Lint
+  # - stage: lint
+  #   script: python ci/lint.py
+  #   python: 3.6
+  #   name: Lint
+  # - stage: test
+  #   script: tox -e test-py27
+  #   python: 2.7
+  #   name: Unit Tests
+  # - stage: test
+  #   script: tox -e test-py35
+  #   python: 3.5
+  #   name: Unit Tests
+  # - stage: test
+  #   script: tox -e test-py36
+  #   python: 3.6
+  #   name: Unit Tests
+  # - stage: examples-test
+  #   script: tox -e examples-py27
+  #   python: 2.7
+  #   name: Example Tests
+  # - stage: examples-test
+  #   script: tox -e examples-py35
+  #   python: 3.5
+  #   name: Example Tests
+  # - stage: examples-test
+  #   script: tox -e examples-py36
+  #   python: 3.6
+  #   name: Example Tests
   - stage: build
     script: tox -e build-py27
     python: 2.7
     name: Build
     deploy:
-      provider: pypi
-      user: $PYPI_USERNAME
-      password: $PYPI_PW
-      distributions: sdist bdist_wheel
-      skip_cleanup: true
-    deploy:
-        provider: releases
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist bdist_wheel
+        skip_cleanup: true
+        on:
+          tags: true
+      - provider: releases
         api_key: $GH_PUSH
         skip_cleanup: true
-
+        on:
+          tags: true
   - stage: build
     script: tox -e build-py35
     python: 3.5
     name: Build
     deploy:
-      provider: pypi
-      user: $PYPI_USERNAME
-      password: $PYPI_PW
-      distributions: sdist bdist_wheel
-      skip_cleanup: true
-    deploy:
-        provider: releases
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist bdist_wheel
+        skip_cleanup: true
+        on:
+          tags: true
+      - provider: releases
         api_key: $GH_PUSH
         skip_cleanup: true
+        on:
+          tags: true
   - stage: build
     script: tox -e build-py36
     python: 3.6
     name: Build
     deploy:
-      provider: pypi
-      user: $PYPI_USERNAME
-      password: $PYPI_PW
-      distributions: sdist bdist_wheel
-      skip_cleanup: true
-    deploy:
-        provider: releases
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist bdist_wheel
+        skip_cleanup: true
+        on:
+          tags: true
+      - provider: releases
         api_key: $GH_PUSH
         skip_cleanup: true
+        on:
+          tags: true
   - stage: gh-pages
     script: tox -e gh-pages
     python: 3.6
