@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,29 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="next" title="5. Tutorial: Using MTfit with Real Data" href="real-tutorial.html"/>
-        <link rel="prev" title="3. Running MTfit" href="run.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. Tutorial: Using MTfit with Real Data" href="real-tutorial.html" />
+    <link rel="prev" title="3. Running MTfit" href="run.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -71,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -138,7 +129,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -146,9 +137,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -192,9 +184,9 @@
             
   <div class="section" id="tutorial-using-mtfit">
 <h1>4. Tutorial: Using MTfit<a class="headerlink" href="#tutorial-using-mtfit" title="Permalink to this headline">¶</a></h1>
-<p><code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> is a bayesian approach to moment tensor inversion, allowing rigorous inclusion of uncertainties. This section shows a simple series of examples for running <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code>.</p>
-<p>The example data is included in <a class="reference download internal" href="_downloads/example_data.py" download=""><code class="xref download docutils literal"><span class="pre">examples/example_data.py</span></code></a> and are purely data that are used as an example, rather than a necessarily good solution.</p>
-<p>These examples show some of the common usage of <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code>. However, the reasons behind the choice of approach have not always been well explained. The next page (<a class="reference internal" href="real-tutorial.html"><span class="doc">Real Data Examples</span></a>) includes real and synthetic data used in the <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. 2016a</span></a> paper as an example of the results that can be obtained using <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code>, along with some explanation of the parameter choices made.</p>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> is a bayesian approach to moment tensor inversion, allowing rigorous inclusion of uncertainties. This section shows a simple series of examples for running <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code>.</p>
+<p>The example data is included in <a class="reference download internal" href="_downloads/example_data.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/example_data.py</span></code></a> and are purely data that are used as an example, rather than a necessarily good solution.</p>
+<p>These examples show some of the common usage of <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code>. However, the reasons behind the choice of approach have not always been well explained. The next page (<a class="reference internal" href="real-tutorial.html"><span class="doc">Real Data Examples</span></a>) includes real and synthetic data used in the <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. 2016a</span></a> paper as an example of the results that can be obtained using <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code>, along with some explanation of the parameter choices made.</p>
 <p>The tutorials described here are:</p>
 <blockquote>
 <div><ul class="simple">
@@ -214,7 +206,7 @@
 <div class="section" id="creating-a-data-dictionary">
 <span id="creating-data-dictionary-label"></span><h2>4.1. Creating a Data Dictionary<a class="headerlink" href="#creating-a-data-dictionary" title="Permalink to this headline">¶</a></h2>
 <p>The input data dictionary (see <a class="reference internal" href="run.html#input-data-label"><span class="std std-ref">Input Data</span></a>) can either be pickled or not pickled. The structure is simple:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]),</span>
 <span class="go">                          &#39;Error&#39;: np.matrix([[0.01], [0.02], [0.4], [0.1]]),</span>
 <span class="go">                          &#39;Stations&#39;:{&#39;Name&#39;: [&#39;Station1&#39;, &#39;Station2&#39;, &#39;Station3&#39;,</span>
@@ -226,8 +218,8 @@
 <span class="go">          &#39;UID&#39;: &#39;Event1&#39;}</span>
 </pre></div>
 </div>
-<p>This has created a data dictionary for <code class="docutils literal"><span class="pre">Event1</span></code> with P Polarity observations at 4 stations:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">data</span>
+<p>This has created a data dictionary for <code class="docutils literal notranslate"><span class="pre">Event1</span></code> with P Polarity observations at 4 stations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">data</span>
 <span class="go">{&#39;PPolarity&#39;: {&#39;Stations&#39;: {&#39;TakeOffAngle&#39;: matrix([[ 24.5],</span>
 <span class="go">        [ 22.8],</span>
 <span class="go">        [ 74.5],</span>
@@ -249,7 +241,7 @@
 </pre></div>
 </div>
 <p>If there were more observations such as P/SH Amplitude Ratios, the data dictionary above would need to be updated:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;P/SHAmplitudeRatio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1242</span><span class="p">,</span> <span class="mi">1113</span><span class="p">],</span> <span class="p">[</span><span class="mi">742</span><span class="p">,</span> <span class="mi">2341</span><span class="p">],</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;P/SHAmplitudeRatio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1242</span><span class="p">,</span> <span class="mi">1113</span><span class="p">],</span> <span class="p">[</span><span class="mi">742</span><span class="p">,</span> <span class="mi">2341</span><span class="p">],</span>
 <span class="go">                                                         [421, 112], [120, 87]]),</span>
 <span class="go">                     &#39;Error&#39;: np.matrix([[102, 743], [66, 45], [342, 98], [14, 11]]),</span>
 <span class="go">                     &#39;Stations&#39;: {&#39;Name&#39;: [&#39;Station5&#39;, &#39;Station6&#39;,</span>
@@ -263,7 +255,7 @@
 </pre></div>
 </div>
 <p>This has added P/SH Amplitude Ratio observations for 4 more stations to the data dictionary:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">data</span>
 <span class="go">{&#39;PPolarity&#39;: {&#39;Stations&#39;: {&#39;TakeOffAngle&#39;: matrix([[ 24.5],</span>
 <span class="go">        [ 22.8],</span>
 <span class="go">        [ 74.5],</span>
@@ -301,45 +293,45 @@
 <span class="go">&#39;UID&#39;: &#39;Event1&#39;}</span>
 </pre></div>
 </div>
-<p>The amplitude ratio <code class="docutils literal"><span class="pre">Measured</span></code> and <code class="docutils literal"><span class="pre">Error</span></code> numpy matrices have the observations of the ratio numerator and denominator at each station, i.e. in this case, <code class="docutils literal"><span class="pre">Station5</span></code> has P Amplitude is <code class="docutils literal"><span class="pre">1242</span></code> and SH Amplitude is <code class="docutils literal"><span class="pre">1113</span></code>, along with P error <code class="docutils literal"><span class="pre">102</span></code> and SH error <code class="docutils literal"><span class="pre">743</span></code>. The split into numerator and denominator is required because the appropriate <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> is the ratio PDF (see <a class="reference internal" href="probability.html#ratio-pdf-label"><span class="std std-ref">Amplitude Ratio PDF</span></a>).</p>
-<p>This dictionary can either be provided as a construction argument for the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
+<p>The amplitude ratio <code class="docutils literal notranslate"><span class="pre">Measured</span></code> and <code class="docutils literal notranslate"><span class="pre">Error</span></code> numpy matrices have the observations of the ratio numerator and denominator at each station, i.e. in this case, <code class="docutils literal notranslate"><span class="pre">Station5</span></code> has P Amplitude is <code class="docutils literal notranslate"><span class="pre">1242</span></code> and SH Amplitude is <code class="docutils literal notranslate"><span class="pre">1113</span></code>, along with P error <code class="docutils literal notranslate"><span class="pre">102</span></code> and SH error <code class="docutils literal notranslate"><span class="pre">743</span></code>. The split into numerator and denominator is required because the appropriate <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> is the ratio PDF (see <a class="reference internal" href="probability.html#ratio-pdf-label"><span class="std std-ref">Amplitude Ratio PDF</span></a>).</p>
+<p>This dictionary can either be provided as a construction argument for the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inversion_object</span> <span class="o">=</span> <span class="n">MTfit</span><span class="o">.</span><span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inversion_object</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Or read in from the command line:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cPickle</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cPickle</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Event1.inv&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>This has created a pickled dictionary called <code class="docutils literal"><span class="pre">Event1.inv</span></code> in the current directory. To perform the inversion, open a shell in the same directory:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit -d Event1.inv
+<p>This has created a pickled dictionary called <code class="docutils literal notranslate"><span class="pre">Event1.inv</span></code> in the current directory. To perform the inversion, open a shell in the same directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit -d Event1.inv
 </pre></div>
 </div>
-<p>This will create an output file <code class="docutils literal"><span class="pre">Event1MT.mat</span></code> which contains the MATLAB output data (see <a class="reference internal" href="run.html#matlab-output-label"><span class="std std-ref">Output</span></a>).</p>
+<p>This will create an output file <code class="docutils literal notranslate"><span class="pre">Event1MT.mat</span></code> which contains the MATLAB output data (see <a class="reference internal" href="run.html#matlab-output-label"><span class="std std-ref">Output</span></a>).</p>
 <p>The creation of the dictionary can easily be automated from different data types by writing a simple parser for the format.</p>
 </div>
 <div class="section" id="p-polarity-inversion">
 <span id="p-polarity-label"></span><h2>4.2. P Polarity Inversion<a class="headerlink" href="#p-polarity-inversion" title="Permalink to this headline">¶</a></h2>
-<p>Using the above tutorial, it is simple to carry out a P polarity inversion, <a class="reference download internal" href="_downloads/p_polarity.py" download=""><code class="xref download docutils literal"><span class="pre">examples/p_polarity.py</span></code></a> shows the example script and data and can be run in the examples directory.</p>
+<p>Using the above tutorial, it is simple to carry out a P polarity inversion, <a class="reference download internal" href="_downloads/p_polarity.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/p_polarity.py</span></code></a> shows the example script and data and can be run in the examples directory.</p>
 <p>The script can be run from the command line as:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python p_polarity.py
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python p_polarity.py
 </pre></div>
 </div>
 <p>The parameters used are:</p>
 <blockquote>
 <div><ul class="simple">
 <li>algorithm = 'iterate' - uses an iterative random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>).</li>
-<li>parallel = True - tries to run in parallel using <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a>.</li>
+<li>parallel = True - tries to run in parallel using <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>.</li>
 <li>phy_mem = 0.5 - uses a soft limit of 500Mb of RAM for estimating the sample sizes (This is only a soft limit, so no errors are thrown if the memory usage increases above this).</li>
 <li>dc = False - runs the full moment tensor inversion.</li>
 <li>max_samples = 1000000 - runs the inversion for 1,000,000 samples.</li>
 </ul>
 </div></blockquote>
-<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create the inversion object with the set parameters..</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the inversion object with the set parameters..</span>
 <span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
                              <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span> <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span>
                              <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -348,38 +340,38 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p>The output file is <code class="docutils literal"><span class="pre">P_Polarity_Example_OutputMT.mat</span></code>.</p>
+<p>The output file is <code class="docutils literal notranslate"><span class="pre">P_Polarity_Example_OutputMT.mat</span></code>.</p>
 <p>The source PDF can be plotted:</p>
 <div class="figure align-center" id="id3">
 <a class="reference internal image-reference" href="_images/p_polarity_hudson_result.png"><img alt="Hudson plot of the example results" src="_images/p_polarity_hudson_result.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-text"><em>Hudson plot of the example results from</em> <a class="reference download internal" href="_downloads/p_polarity.py" download=""><code class="xref download docutils literal"><span class="pre">examples/p_polarity.py</span></code></a> <em>(Plotted using MTplot MATLAB code)</em></span></p>
+<p class="caption"><span class="caption-text"><em>Hudson plot of the example results from</em> <a class="reference download internal" href="_downloads/p_polarity.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/p_polarity.py</span></code></a> <em>(Plotted using MTplot MATLAB code)</em></span></p>
 </div>
-<p>Increasing the number of samples can improve the fit at the expense of time taken to run the inversion. Re-running the inversion with more samples (10,000,000) takes longer, but produces a better density of sampling (output file is <code class="docutils literal"><span class="pre">P_Polarity_Example_Dense_OutputMT.mat</span></code>).</p>
+<p>Increasing the number of samples can improve the fit at the expense of time taken to run the inversion. Re-running the inversion with more samples (10,000,000) takes longer, but produces a better density of sampling (output file is <code class="docutils literal notranslate"><span class="pre">P_Polarity_Example_Dense_OutputMT.mat</span></code>).</p>
 <div class="figure align-center" id="id5">
 <a class="reference internal image-reference" href="_images/p_polarity_hudson_result_dense.png"><img alt="Dense Hudson plot of the example results" src="_images/p_polarity_hudson_result_dense.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-text"><em>Hudson plot of the example results from</em> <a class="reference download internal" href="_downloads/p_polarity.py" download=""><code class="xref download docutils literal"><span class="pre">examples/p_polarity.py</span></code></a> <em>(Plotted using MTplot MATLAB code)</em></span></p>
+<p class="caption"><span class="caption-text"><em>Hudson plot of the example results from</em> <a class="reference download internal" href="_downloads/p_polarity.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/p_polarity.py</span></code></a> <em>(Plotted using MTplot MATLAB code)</em></span></p>
 </div>
 </div>
 <div class="section" id="p-sh-amplitude-ratio-inversion">
 <span id="p-sh-label"></span><h2>4.3. P/SH Amplitude Ratio Inversion<a class="headerlink" href="#p-sh-amplitude-ratio-inversion" title="Permalink to this headline">¶</a></h2>
-<p>Example script for running P/SH amplitude ratio inversion is <a class="reference download internal" href="_downloads/p_sh_amplitude_ratio.py" download=""><code class="xref download docutils literal"><span class="pre">examples/p_sh_amplitude_ratio.py</span></code></a>
+<p>Example script for running P/SH amplitude ratio inversion is <a class="reference download internal" href="_downloads/p_sh_amplitude_ratio.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/p_sh_amplitude_ratio.py</span></code></a>
 To run the script:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python p_sh_amplitude_ratio.py
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python p_sh_amplitude_ratio.py
 </pre></div>
 </div>
 <p>The parameters used are:</p>
 <blockquote>
 <div><ul class="simple">
 <li>algorithm = 'iterate' - uses an iterative random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>).</li>
-<li>parallel = True - tries to run in parallel using <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a>.</li>
+<li>parallel = True - tries to run in parallel using <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>.</li>
 <li>phy_mem = 1 - uses a soft limit of 1Gb of RAM for estimating the sample sizes (This is only a soft limit, so no errors are thrown if the memory usage increases above this).</li>
 <li>dc = False - runs the full moment tensor inversion.</li>
 <li>max_samples = 1000000 - runs the inversion for 1,000,000 samples.</li>
 </ul>
 </div></blockquote>
-<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># Create the inversion object with the set parameters..</span>
 <span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
                              <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span> <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span>
@@ -390,17 +382,17 @@ To run the script:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>The output file is <code class="docutils literal"><span class="pre">P_SH_Amplitude_Ratio_Example_OutputMT.mat</span></code>.</p>
-<p>It is also possible to run the inversion for as many samples as possible in a given time (output file is <code class="docutils literal"><span class="pre">P_Polarity_Example_Time_OutputMT.mat</span></code>) by setting the parameters:</p>
+<p>The output file is <code class="docutils literal notranslate"><span class="pre">P_SH_Amplitude_Ratio_Example_OutputMT.mat</span></code>.</p>
+<p>It is also possible to run the inversion for as many samples as possible in a given time (output file is <code class="docutils literal notranslate"><span class="pre">P_Polarity_Example_Time_OutputMT.mat</span></code>) by setting the parameters:</p>
 <blockquote>
 <div><ul class="simple">
 <li>algorithm = 'time' - uses an iterative random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>) until a specified time has elapsed.</li>
 <li>max_time = 300 - runs the inversion for 300 seconds.</li>
 </ul>
 </div></blockquote>
-<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">ns</span> <span class="n">the</span> <span class="n">inversion</span> <span class="k">for</span> <span class="n">a</span> <span class="n">given</span> <span class="n">time</span> <span class="n">period</span><span class="o">.</span>
 <span class="n">rithm</span> <span class="o">=</span> <span class="s1">&#39;time&#39;</span>
 <span class="n">est</span><span class="p">:</span>
@@ -420,17 +412,17 @@ To run the script:</p>
 </div>
 <div class="section" id="double-couple-inversion">
 <span id="dc-inv-label"></span><h2>4.4. Double-Couple Inversion<a class="headerlink" href="#double-couple-inversion" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes it may be better to constrain the solution to only the double-couple space, this is easy to do from the command line using the <code class="docutils literal"><span class="pre">-c</span></code> flag (see <a class="reference internal" href="cli.html"><span class="doc">MTfit command line options</span></a>):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit -c ...
+<p>Sometimes it may be better to constrain the solution to only the double-couple space, this is easy to do from the command line using the <code class="docutils literal notranslate"><span class="pre">-c</span></code> flag (see <a class="reference internal" href="cli.html"><span class="doc">MTfit command line options</span></a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit -c ...
 </pre></div>
 </div>
-<p>An example script for running a mixed inversion constrained to double-couple space is <a class="reference download internal" href="_downloads/double_couple.py" download=""><code class="xref download docutils literal"><span class="pre">examples/double_couple.py</span></code></a>.
+<p>An example script for running a mixed inversion constrained to double-couple space is <a class="reference download internal" href="_downloads/double_couple.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/double_couple.py</span></code></a>.
 To run the script:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python double_couple.py
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python double_couple.py
 </pre></div>
 </div>
-<p>The inversion is run from a data file, which is the pickled (<a class="reference external" href="https://docs.python.org/2/library/pickle.html#module-pickle" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">pickle</span></code></a>/<a class="reference external" href="https://docs.python.org/2/library/pickle.html#module-cPickle" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">cPickle</span></code></a>) data dictionary:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cPickle</span>
+<p>The inversion is run from a data file, which is the pickled (<a class="reference external" href="https://docs.python.org/3/library/pickle.html#module-pickle" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a>/<code class="xref py py-mod docutils literal notranslate"><span class="pre">cPickle</span></code>) data dictionary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cPickle</span>
 <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Double_Couple_Example.inv&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -438,16 +430,16 @@ To run the script:</p>
 <blockquote>
 <div><ul class="simple">
 <li>algorithm = 'iterate' - uses an iterative random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>)</li>
-<li>parallel = True - tries to run in parallel using <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a></li>
+<li>parallel = True - tries to run in parallel using <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
 <li>phy_mem = 1 - uses a soft limit of 1Gb of RAM for estimating the sample sizes (This is only a soft limit, so no errors are thrown if the memory usage increases above this)</li>
 <li>dc = True - runs the inversion in the double-couple space.</li>
 <li>max_samples = 100000 - runs the inversion for 100,000 samples.</li>
 </ul>
 </div></blockquote>
 <p>Since the double-couple space has fewer dimensions than the moment tensor space, fewer samples are required for good coverage of the space, so only 100,000 samples are used.</p>
-<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create the inversion object with the set parameters.</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the inversion object with the set parameters.</span>
 <span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data_file</span><span class="o">=</span><span class="s1">&#39;Double_Couple_Example.inv&#39;</span><span class="p">,</span>
                              <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
                              <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
@@ -460,16 +452,16 @@ To run the script:</p>
 </div>
 <div class="section" id="time-limited-inversion">
 <span id="time-inversion-label"></span><h2>4.5. Time Limited Inversion<a class="headerlink" href="#time-limited-inversion" title="Permalink to this headline">¶</a></h2>
-<p>A different algorithm for the inverson can be set using the algorithm option. In this case the time constrained algorithm is used (for other options see <a class="reference internal" href="algorithms.html"><span class="doc">MTfit.algorithms: Search Algorithms</span></a>). An example script for running a time constrained inversion is <a class="reference download internal" href="_downloads/time_inversion.py" download=""><code class="xref download docutils literal"><span class="pre">examples/time_inversion.py</span></code></a>.
+<p>A different algorithm for the inverson can be set using the algorithm option. In this case the time constrained algorithm is used (for other options see <a class="reference internal" href="algorithms.html"><span class="doc">MTfit.algorithms: Search Algorithms</span></a>). An example script for running a time constrained inversion is <a class="reference download internal" href="_downloads/time_inversion.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/time_inversion.py</span></code></a>.
 To run the script:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python time_inversion.py
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python time_inversion.py
 </pre></div>
 </div>
 <p>The time option for the inversion algorithm sets a maximum time (in seconds) to run the inversion for rather than a maximum number of samples. To select the algorithm from the command line use:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$MTfit --algorithm=time ...
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$MTfit --algorithm=time ...
 </pre></div>
 </div>
-<p>For the other options see <a class="reference internal" href="cli.html"><span class="doc">Command Line Options</span></a>. The inversion parameters used in <a class="reference download internal" href="_downloads/time_inversion.py" download=""><code class="xref download docutils literal"><span class="pre">examples/time_inversion.py</span></code></a> are:</p>
+<p>For the other options see <a class="reference internal" href="cli.html"><span class="doc">Command Line Options</span></a>. The inversion parameters used in <a class="reference download internal" href="_downloads/time_inversion.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/time_inversion.py</span></code></a> are:</p>
 <blockquote>
 <div><ul class="simple">
 <li>algorithm = 'time' - uses an time limited random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>)</li>
@@ -480,14 +472,14 @@ To run the script:</p>
 <li>inversion_options = 'PPolarity,P/SHAmplitudeRatio' - Just uses PPolarity and P/SH Amplitude Ratios rather than all the data in the dictionary</li>
 </ul>
 </div></blockquote>
-<p>In this case the <code class="docutils literal"><span class="pre">inversion_options</span></code> keyword argument is used to set the data types used in the inversion. If this is not set the inversion will use all of the available data types in the dictionary that match possible data types (see <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> documentation), this is because the example data has other data types that are not desired or not independent:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">,</span><span class="s1">&#39;P/SHRMSAmplitudeRatio&#39;</span><span class="p">,</span><span class="s1">&#39;P/SVRMSAmplitudeRatio&#39;</span><span class="p">,</span><span class="s1">&#39;P/SHAmplitudeRatio&#39;</span><span class="p">,</span><span class="s1">&#39;UID]</span>
+<p>In this case the <code class="docutils literal notranslate"><span class="pre">inversion_options</span></code> keyword argument is used to set the data types used in the inversion. If this is not set the inversion will use all of the available data types in the dictionary that match possible data types (see <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> documentation), this is because the example data has other data types that are not desired or not independent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">,</span><span class="s1">&#39;P/SHRMSAmplitudeRatio&#39;</span><span class="p">,</span><span class="s1">&#39;P/SVRMSAmplitudeRatio&#39;</span><span class="p">,</span><span class="s1">&#39;P/SHAmplitudeRatio&#39;</span><span class="p">,</span><span class="s1">&#39;UID]</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">P/SHRMSAmplitudeRatio</span></code> and the <code class="docutils literal"><span class="pre">P/SHAmplitudeRatio</span></code> are not independent, and so cannot both be used in this inversion.</p>
-<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">P/SHRMSAmplitudeRatio</span></code> and the <code class="docutils literal notranslate"><span class="pre">P/SHAmplitudeRatio</span></code> are not independent, and so cannot both be used in this inversion.</p>
+<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create the inversion object with the set parameters.</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the inversion object with the set parameters.</span>
 <span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
                              <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span> <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span>
                              <span class="n">max_time</span><span class="o">=</span><span class="n">max_time</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -497,10 +489,10 @@ To run the script:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>The output file is <code class="docutils literal"><span class="pre">Time_Inversion_Example_OutputMT.mat</span></code>.</p>
-<p>It is also possible to run the inversion for the double-couple constrained inversion (output file is <code class="docutils literal"><span class="pre">Time_Inversion_Example_OutputDC.mat</span></code>):</p>
+<p>The output file is <code class="docutils literal notranslate"><span class="pre">Time_Inversion_Example_OutputMT.mat</span></code>.</p>
+<p>It is also possible to run the inversion for the double-couple constrained inversion (output file is <code class="docutils literal notranslate"><span class="pre">Time_Inversion_Example_OutputDC.mat</span></code>):</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">dc</span> <span class="o">=</span> <span class="bp">True</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dc</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="c1"># Create the inversion object with the set parameters.</span>
 <span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
                              <span class="n">phy_mem</span><span class="o">=</span><span class="n">phy_mem</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span> <span class="n">inversion_options</span><span class="o">=</span><span class="n">inversion_options</span><span class="p">,</span>
@@ -514,17 +506,17 @@ To run the script:</p>
 <div class="section" id="parallel-mpi-inversion">
 <span id="mpi-label"></span><h2>4.6. Parallel MPI Inversion<a class="headerlink" href="#parallel-mpi-inversion" title="Permalink to this headline">¶</a></h2>
 <p>Running the inversion using <a class="reference internal" href="glossary.html#term-mpi"><span class="xref std std-term">MPI</span></a> on a multi-node environment (such as a cluster) is done from the command line using:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit -M ...
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit -M ...
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Do not use the <code class="docutils literal"><span class="pre">--mpi-call</span></code> flag as this is a flag set automatically by the code</p>
+<p class="last">Do not use the <code class="docutils literal notranslate"><span class="pre">--mpi-call</span></code> flag as this is a flag set automatically by the code</p>
 </div>
-<p>The script <a class="reference download internal" href="_downloads/mpi.py" download=""><code class="xref download docutils literal"><span class="pre">examples/mpi.py</span></code></a> is an example script for running using <a class="reference internal" href="glossary.html#term-mpi"><span class="xref std std-term">MPI</span></a> (It will test if <a class="reference external" href="http://mpi4py.scipy.org/">mpi4py</a>  is installed)</p>
-<p>The data file is pickled using <a class="reference external" href="https://docs.python.org/2/library/pickle.html#module-cPickle" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">cPickle</span></code></a>:</p>
+<p>The script <a class="reference download internal" href="_downloads/mpi.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/mpi.py</span></code></a> is an example script for running using <a class="reference internal" href="glossary.html#term-mpi"><span class="xref std std-term">MPI</span></a> (It will test if <a class="reference external" href="http://mpi4py.scipy.org/">mpi4py</a>  is installed)</p>
+<p>The data file is pickled using <code class="xref py py-mod docutils literal notranslate"><span class="pre">cPickle</span></code>:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># pickle data using cPickle</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># pickle data using cPickle</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">cPickle</span> <span class="kn">as</span> <span class="nn">pickle</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -535,9 +527,9 @@ To run the script:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>And then <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#module-subprocess" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">subprocess</span></code></a> is used to call the inversion:</p>
+<p>And then <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#module-subprocess" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">subprocess</span></code></a> is used to call the inversion:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Use subprocess to call MTfit</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use subprocess to call MTfit</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;MTfit&#39;</span><span class="p">,</span> <span class="s1">&#39;-M&#39;</span><span class="p">,</span> <span class="s1">&#39;--data_file=MPI_Example.inv&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;--algorithm=iterate&#39;</span><span class="p">,</span> <span class="s1">&#39;--max_samples=100000&#39;</span><span class="p">])</span>
@@ -545,36 +537,36 @@ To run the script:</p>
 </div>
 </div></blockquote>
 <p>This is equivalent to (see <a class="reference internal" href="cli.html"><span class="doc">command line options</span></a> for more information on the command line options):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit -M --data_file=MPI_Example.inv --algorithm=iterate --max_samples=100000
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit -M --data_file=MPI_Example.inv --algorithm=iterate --max_samples=100000
 </pre></div>
 </div>
-<p>The output file is <code class="docutils literal"><span class="pre">MPI_Inversion_Example_OutputMT.mat</span></code>.</p>
+<p>The output file is <code class="docutils literal notranslate"><span class="pre">MPI_Inversion_Example_OutputMT.mat</span></code>.</p>
 <p>The main advantage of running using MPI is to allow for more samples to be tried in a given time by using more processors.</p>
 </div>
 <div class="section" id="submitting-to-a-cluster">
 <span id="cluster-label"></span><h2>4.7. Submitting to a Cluster<a class="headerlink" href="#submitting-to-a-cluster" title="Permalink to this headline">¶</a></h2>
-<p>Submitting an <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> job to a cluster using <code class="docutils literal"><span class="pre">qsub</span></code> uses a simple module called <code class="docutils literal"><span class="pre">pyqsub</span></code> (from <a class="reference external" href="https://www.github.com/djpugh/pyqsub">https://www.github.com/djpugh/pyqsub</a>) which provides command line options for running <code class="docutils literal"><span class="pre">qsub</span></code>.</p>
+<p>Submitting an <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> job to a cluster using <code class="docutils literal notranslate"><span class="pre">qsub</span></code> uses a simple module called <code class="docutils literal notranslate"><span class="pre">pyqsub</span></code> (from <a class="reference external" href="https://www.github.com/djpugh/pyqsub">https://www.github.com/djpugh/pyqsub</a>) which provides command line options for running <code class="docutils literal notranslate"><span class="pre">qsub</span></code>.</p>
 <p>To submit to the cluster from command line, on a computer with qsub available use:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit -q ...
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit -q ...
 </pre></div>
 </div>
 <p>There are other available options when submitting to the cluster:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit -q  --walltime=48:00:00 --nodes=4 --ppn=4 --pmem=2 --emailoptions=ae
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit -q  --walltime=48:00:00 --nodes=4 --ppn=4 --pmem=2 --emailoptions=ae
     --email=example@example.com --name=MTfitClusterTest --queue=auto ...
 </pre></div>
 </div>
-<p>This submits an MTfit job to the cluster using <code class="docutils literal"><span class="pre">qsub</span></code> (<code class="docutils literal"><span class="pre">-q</span></code>) with a <a class="reference internal" href="glossary.html#term-walltime"><span class="xref std std-term">walltime</span></a> of 48 hours (<code class="docutils literal"><span class="pre">--walltime</span></code>) using 4 nodes (<code class="docutils literal"><span class="pre">--nodes</span></code>) and 4 processors per node (<code class="docutils literal"><span class="pre">--ppn</span></code>) with a maximum amount of physical memory per process of 2Gb (<code class="docutils literal"><span class="pre">--pmem</span></code>). The job will send emails on abort and end (<code class="docutils literal"><span class="pre">--emailoptions</span></code>) to email <code class="docutils literal"><span class="pre">example&#64;example.com</span></code> (<code class="docutils literal"><span class="pre">--email</span></code>). It has a job name of <code class="docutils literal"><span class="pre">MTfitClusterTest</span></code> (<code class="docutils literal"><span class="pre">--name</span></code>) and is submitted to the auto queue (<code class="docutils literal"><span class="pre">--queue</span></code>).</p>
-<p>These options, combined with the other <a class="reference internal" href="cli.html"><span class="doc">command line options</span></a>, will be saved to a job script named <code class="docutils literal"><span class="pre">JobName.pJobID</span></code>. For the above case, if the JobID was <code class="docutils literal"><span class="pre">207642</span></code> a <code class="docutils literal"><span class="pre">PBS</span></code> script is saved called
-<code class="docutils literal"><span class="pre">MTfitClusterTest.p207642</span></code></p>
+<p>This submits an MTfit job to the cluster using <code class="docutils literal notranslate"><span class="pre">qsub</span></code> (<code class="docutils literal notranslate"><span class="pre">-q</span></code>) with a <a class="reference internal" href="glossary.html#term-walltime"><span class="xref std std-term">walltime</span></a> of 48 hours (<code class="docutils literal notranslate"><span class="pre">--walltime</span></code>) using 4 nodes (<code class="docutils literal notranslate"><span class="pre">--nodes</span></code>) and 4 processors per node (<code class="docutils literal notranslate"><span class="pre">--ppn</span></code>) with a maximum amount of physical memory per process of 2Gb (<code class="docutils literal notranslate"><span class="pre">--pmem</span></code>). The job will send emails on abort and end (<code class="docutils literal notranslate"><span class="pre">--emailoptions</span></code>) to email <code class="docutils literal notranslate"><span class="pre">example&#64;example.com</span></code> (<code class="docutils literal notranslate"><span class="pre">--email</span></code>). It has a job name of <code class="docutils literal notranslate"><span class="pre">MTfitClusterTest</span></code> (<code class="docutils literal notranslate"><span class="pre">--name</span></code>) and is submitted to the auto queue (<code class="docutils literal notranslate"><span class="pre">--queue</span></code>).</p>
+<p>These options, combined with the other <a class="reference internal" href="cli.html"><span class="doc">command line options</span></a>, will be saved to a job script named <code class="docutils literal notranslate"><span class="pre">JobName.pJobID</span></code>. For the above case, if the JobID was <code class="docutils literal notranslate"><span class="pre">207642</span></code> a <code class="docutils literal notranslate"><span class="pre">PBS</span></code> script is saved called
+<code class="docutils literal notranslate"><span class="pre">MTfitClusterTest.p207642</span></code></p>
 </div>
 <div class="section" id="inversion-from-a-csv-file">
 <span id="csv-example-label"></span><h2>4.8. Inversion from a CSV File<a class="headerlink" href="#inversion-from-a-csv-file" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> can use a <a class="reference internal" href="glossary.html#term-csv"><span class="xref std std-term">CSV</span></a> file as input. An example CSV file can be made by running <a class="reference download internal" href="_downloads/make_csv_file.py" download=""><code class="xref download docutils literal"><span class="pre">examples/make_csv_file.py</span></code></a> in the examples folder:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python make_csv_file.py
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> can use a <a class="reference internal" href="glossary.html#term-csv"><span class="xref std std-term">CSV</span></a> file as input. An example CSV file can be made by running <a class="reference download internal" href="_downloads/make_csv_file.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/make_csv_file.py</span></code></a> in the examples folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python make_csv_file.py
 </pre></div>
 </div>
 <p>This makes a <a class="reference internal" href="glossary.html#term-csv"><span class="xref std std-term">CSV</span></a> file (called csv_example_file.csv):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">UID</span><span class="o">=</span><span class="n">Event1</span><span class="p">,,,,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UID</span><span class="o">=</span><span class="n">Event1</span><span class="p">,,,,</span>
 <span class="n">PPolarity</span><span class="p">,,,,</span>
 <span class="n">Error</span><span class="p">,</span><span class="n">Name</span><span class="p">,</span><span class="n">TakeOffAngle</span><span class="p">,</span><span class="n">Measured</span><span class="p">,</span><span class="n">Azimuth</span>
 <span class="mf">0.1</span><span class="p">,</span><span class="n">S0006</span><span class="p">,</span><span class="mf">112.8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">210.6</span>
@@ -632,11 +624,11 @@ To run the script:</p>
 </div>
 <p>This is a CSV file with 2 events, one event ID of Event 1 with PPolarity and P/SHAmplitudeRatio and P/SVAmplitudeRatio data at 15 receivers, and a second event with no ID (will default to the event number, in this case 2) with PPolarity data at 15 receivers.</p>
 <p>Running an inversion using a <a class="reference internal" href="glossary.html#term-csv"><span class="xref std std-term">CSV</span></a> file is the same as running a normal inversion. Calling from the command line is simply called by:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit --datafile=thecsvfile.csv ...
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit --datafile=thecsvfile.csv ...
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">--invext</span></code> flag sets the file ending that the inversion searches for when no datafile is specified, so to search for CSV files in the current directory:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit --invext=csv
+<p>The <code class="docutils literal notranslate"><span class="pre">--invext</span></code> flag sets the file ending that the inversion searches for when no datafile is specified, so to search for CSV files in the current directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit --invext=csv
 </pre></div>
 </div>
 <p>This will try to invert the data from all the CSV files in the current directory.</p>
@@ -644,10 +636,10 @@ To run the script:</p>
 </div>
 <div class="section" id="location-uncertainty">
 <span id="location-uncertainty-tutorial-label"></span><h2>4.9. Location Uncertainty<a class="headerlink" href="#location-uncertainty" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> can include location uncertainty in the resultant <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>. This requires samples from the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>. The location uncertainty is included in the inversion using a <a class="reference internal" href="glossary.html#term-monte-carlo-method"><span class="xref std std-term">Monte Carlo method</span></a> (see <a class="reference internal" href="bayes.html"><span class="doc">Bayesian Approach</span></a>).</p>
-<p>This file can be made from the <a class="reference external" href="http://alomax.free.fr/nlloc">NonLinLoc</a> <code class="docutils literal"><span class="pre">*.scat</span></code> file using <code class="xref py py-mod docutils literal"><span class="pre">Scat2Angle</span></code> in the <a class="reference external" href="https://github.com/djpugh/pyNLLoc">pyNLLoc</a> module.</p>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> can include location uncertainty in the resultant <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>. This requires samples from the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>. The location uncertainty is included in the inversion using a <a class="reference internal" href="glossary.html#term-monte-carlo-method"><span class="xref std std-term">Monte Carlo method</span></a> (see <a class="reference internal" href="bayes.html"><span class="doc">Bayesian Approach</span></a>).</p>
+<p>This file can be made from the <a class="reference external" href="http://alomax.free.fr/nlloc">NonLinLoc</a> <code class="docutils literal notranslate"><span class="pre">*.scat</span></code> file using <code class="xref py py-mod docutils literal notranslate"><span class="pre">Scat2Angle</span></code> in the <a class="reference external" href="https://github.com/djpugh/pyNLLoc">pyNLLoc</a> module.</p>
 <p>The expected format for the location uncertainty file is:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Probability</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Probability</span>
 <span class="n">StationName</span> <span class="n">Azimuth</span> <span class="n">TakeOffAngle</span>
 <span class="n">StationName</span> <span class="n">Azimuth</span> <span class="n">TakeOffAngle</span>
 
@@ -658,7 +650,7 @@ To run the script:</p>
 </pre></div>
 </div>
 <p>e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">504.7</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">504.7</span>
 <span class="n">S0271</span>   <span class="mf">231.1</span>   <span class="mf">154.7</span>
 <span class="n">S0649</span>   <span class="mf">42.9</span>    <span class="mf">109.7</span>
 <span class="n">S0484</span>   <span class="mf">21.2</span>    <span class="mf">145.4</span>
@@ -697,31 +689,31 @@ To run the script:</p>
 </pre></div>
 </div>
 <p><cite>MTfit</cite> can be extended to use other location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> file formats using <a class="reference internal" href="extensions.html"><span class="doc">setuptools entry-points</span></a></p>
-<p>Running with the location uncertainty included will slow the inversion as this requires more memory to store each of the location samples in the inversion. The number of samples used can be changed by setting the <code class="docutils literal"><span class="pre">number_location_samples</span></code> parameter in the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
+<p>Running with the location uncertainty included will slow the inversion as this requires more memory to store each of the location samples in the inversion. The number of samples used can be changed by setting the <code class="docutils literal notranslate"><span class="pre">number_location_samples</span></code> parameter in the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">MTfit</span><span class="o">.</span><span class="n">Inversion</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="n">number_location_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This limits the number of station samples to 10,000, reducing the memory requirements and improving the speed.</p>
-<p>The script <a class="reference download internal" href="_downloads/location_uncertainty.py" download=""><code class="xref download docutils literal"><span class="pre">examples/location_uncertainty.py</span></code></a> contains an example for the location uncertainty inversion.
+<p>The script <a class="reference download internal" href="_downloads/location_uncertainty.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/location_uncertainty.py</span></code></a> contains an example for the location uncertainty inversion.
 To run the script:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python location_uncertainty.py
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python location_uncertainty.py
 </pre></div>
 </div>
 <p>The angle scatter file path option can be set from the command line using:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit --anglescatterfilepath=./ --angleext=.scatangle ...
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit --anglescatterfilepath=./ --angleext=.scatangle ...
 </pre></div>
 </div>
-<p>This will search in the current directory for <cite>scatangle</cite> files (default is to search for <cite>scatangle</cite> files if <code class="docutils literal"><span class="pre">--angleext</span></code> is not specified). The files are matched to the input data files if MTfit is called from the command line. A specific file or list of files can be set using:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit --anglescatterfilepath=./thisanglefile.scatangle ...
+<p>This will search in the current directory for <cite>scatangle</cite> files (default is to search for <cite>scatangle</cite> files if <code class="docutils literal notranslate"><span class="pre">--angleext</span></code> is not specified). The files are matched to the input data files if MTfit is called from the command line. A specific file or list of files can be set using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit --anglescatterfilepath=./thisanglefile.scatangle ...
 </pre></div>
 </div>
 <p>Which uses the <cite>thisanglefile.scatangle</cite> file in the current directory.</p>
-<p>The inversion parameters used in <a class="reference download internal" href="_downloads/location_uncertainty.py" download=""><code class="xref download docutils literal"><span class="pre">examples/location_uncertainty.py</span></code></a> are:</p>
+<p>The inversion parameters used in <a class="reference download internal" href="_downloads/location_uncertainty.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/location_uncertainty.py</span></code></a> are:</p>
 <blockquote>
 <div><ul class="simple">
 <li>algorithm = 'time' - uses an time limited random sampling approach (see <a class="reference internal" href="algorithms.html#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a>)</li>
-<li>parallel = True - runs in multiple threads using <a class="reference external" href="https://docs.python.org/2/library/multiprocessing.html#module-multiprocessing" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a>.</li>
+<li>parallel = True - runs in multiple threads using <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>.</li>
 <li>phy_mem = 1 - uses a soft limit of 1Gb of RAM for estimating the sample sizes (This is only a soft limit, so no errors are thrown if the memory usage increases above this)</li>
 <li>dc = False - runs the inversion in the double-couple space.</li>
 <li>max_time = 60 - runs the inversion for 60 seconds.</li>
@@ -729,9 +721,9 @@ To run the script:</p>
 <li>location_pdf_file_path = 'Location_Uncertainty.scatangle'</li>
 </ul>
 </div></blockquote>
-<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
+<p>The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object is created and then the forward model run with the results automatically outputted:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Location uncertainty path</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Location uncertainty path</span>
 <span class="n">location_pdf_file_path</span> <span class="o">=</span> <span class="s1">&#39;Location_Uncertainty.scatangle&#39;</span>
 <span class="c1"># Create the inversion object with the set parameters..</span>
 <span class="n">inversion_object</span> <span class="o">=</span> <span class="n">Inversion</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">location_pdf_file_path</span><span class="o">=</span><span class="n">location_pdf_file_path</span><span class="p">,</span>
@@ -743,10 +735,10 @@ To run the script:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>The output file is <code class="docutils literal"><span class="pre">Location_Uncertainty_Example_OutputMT.mat</span></code>.</p>
+<p>The output file is <code class="docutils literal notranslate"><span class="pre">Location_Uncertainty_Example_OutputMT.mat</span></code>.</p>
 <p>Including the location uncertainty in an inversion is slower, since fewer samples are used in a given time. Setting the number of station samples parameter to a smaller number can reduce this:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Reduce the number of station samples to increase the</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reduce the number of station samples to increase the</span>
 <span class="c1"># number of moment tensor samples tried</span>
 <span class="n">number_station_samples</span> <span class="o">=</span> <span class="mi">10000</span>
 <span class="c1"># Create the inversion object with the set parameters..</span>
@@ -759,20 +751,20 @@ To run the script:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>This tries more samples, however it has a worse sampling of the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> than before. Taking this to extremes, reducing the <code class="docutils literal"><span class="pre">number_location_samples</span></code> to <code class="docutils literal"><span class="pre">100</span></code> improves the number of samples tried but reduces the quality of the location uncertainty sampling.</p>
-<p>The method of including location uncertainty can also be used to include <strong>velocity model</strong> uncertainty by drawing location samples from a range of models and combining (see <a class="reference download internal" href="_downloads/model_sampling.py" download=""><code class="xref download docutils literal"><span class="pre">scripts/model_sampling.py</span></code></a>).</p>
+<p>This tries more samples, however it has a worse sampling of the location <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> than before. Taking this to extremes, reducing the <code class="docutils literal notranslate"><span class="pre">number_location_samples</span></code> to <code class="docutils literal notranslate"><span class="pre">100</span></code> improves the number of samples tried but reduces the quality of the location uncertainty sampling.</p>
+<p>The method of including location uncertainty can also be used to include <strong>velocity model</strong> uncertainty by drawing location samples from a range of models and combining (see <a class="reference download internal" href="_downloads/model_sampling.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">scripts/model_sampling.py</span></code></a>).</p>
 </div>
 <div class="section" id="running-from-the-command-line">
 <span id="cli-tutorial-label"></span><h2>4.10. Running from the Command Line<a class="headerlink" href="#running-from-the-command-line" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">MTfit</span></code> is easy to run from the command line. The installation should install a script onto the path so that:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit -h
+<p><code class="docutils literal notranslate"><span class="pre">MTfit</span></code> is easy to run from the command line. The installation should install a script onto the path so that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit -h
 </pre></div>
 </div>
 <p>Gives the command line options. If this does not work see <a class="reference internal" href="run.html"><span class="doc">Running MTfit</span></a> to install the script.</p>
 <p>There are many command line options available (see <a class="reference internal" href="cli.html"><span class="doc">MTfit command line options</span></a>) but the default settings are usually ok.</p>
-<p><a class="reference download internal" href="_downloads/command_line.sh" download=""><code class="xref download docutils literal"><span class="pre">examples/command_line.sh</span></code></a> (<a href="#id1"><span class="problematic" id="id2">*</span></a>nix) or <a class="reference download internal" href="_downloads/command_line.bat" download=""><code class="xref download docutils literal"><span class="pre">examples/command_line.bat</span></code></a> is an example script for running the inversion from the command line:</p>
+<p><a class="reference download internal" href="_downloads/command_line.sh" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/command_line.sh</span></code></a> (<a href="#id1"><span class="problematic" id="id2">*</span></a>nix) or <a class="reference download internal" href="_downloads/command_line.bat" download=""><code class="xref download docutils literal notranslate"><span class="pre">examples/command_line.bat</span></code></a> is an example script for running the inversion from the command line:</p>
 <blockquote>
-<div><div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/sh</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/sh</span>
 <span class="nb">echo</span> <span class="s2">&quot;Command line MTfit example script\n&quot;</span>
 <span class="nb">echo</span> <span class="s2">&quot;Needs MTfit to have been installed to run.\n&quot;</span>
 <span class="nb">echo</span> <span class="s2">&quot;Making data file - csv_example_file.csv\n&quot;</span>
@@ -808,7 +800,7 @@ MTfit --data_file<span class="o">=</span>csv_example*.csv --algorithm<span class
 <li>--max_samples=100000 - run for 100,000 samples</li>
 <li>-b - carry out the inversion for both the double couple constrained and full moment tensor spaces</li>
 <li>--inversionoptions=PPolarity - carry out the inversion using PPolarity data only</li>
-<li>--convert - convert the solution using <code class="xref py py-mod docutils literal"><span class="pre">MTfit.MTconvert</span></code>.</li>
+<li>--convert - convert the solution using <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit.MTconvert</span></code>.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -828,9 +820,7 @@ MTfit --data_file<span class="o">=</span>csv_example*.csv --algorithm<span class
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -849,11 +839,11 @@ MTfit --data_file<span class="o">=</span>csv_example*.csv --algorithm<span class
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -871,7 +861,8 @@ MTfit --data_file<span class="o">=</span>csv_example*.csv --algorithm<span class
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -888,19 +879,13 @@ MTfit --data_file<span class="o">=</span>csv_example*.csv --algorithm<span class
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

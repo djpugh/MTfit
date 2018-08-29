@@ -26,8 +26,12 @@ logger = logging.getLogger('MTfit.extensions.scatangle')
 
 try:
     from . import cscatangle
+except ImportError:
+    cscatangle = None
 except Exception:
-    cscatangle = False
+    logger.exception('Error importing c extension')
+    cscatangle = None
+
 try:
     import argparse  # noqa F401
     _argparse = True  # noqa F811
@@ -147,16 +151,16 @@ def parse_scatangle(filename, number_location_samples=0, bin_size=0, _use_c=True
     if bin_size:
         old_size = len(sample_records)
         if cscatangle and _use_c:
-            logging.info('C code used')
+            logger.info('C code used')
             t0 = time.time()
             sample_records, multipliers = cscatangle.bin_scatangle(sample_records, np.array(multipliers), bin_size)
-            logging.info('Elapsed time = {}'.format(time.time()-t0))
+            logger.info('Elapsed time = {}'.format(time.time()-t0))
         else:
-            logging.info('Python code used')
+            logger.info('Python code used')
             t0 = time.time()
             for i, record in enumerate(sample_records):
                 if not (i+1) % 10:
-                    logging.info('{} records completed'.format(i+1))
+                    logger.info('{} records completed'.format(i+1))
                 j = i+1
                 multiplier = multipliers[i]
                 while j < len(sample_records):
@@ -169,8 +173,8 @@ def parse_scatangle(filename, number_location_samples=0, bin_size=0, _use_c=True
                         j += 1
                 new_multipliers.append(multiplier)
             multipliers = new_multipliers
-            logging.info('Elapsed time = {}'.format(time.time()-t0))
-        logging.info('{} degree binning reduced {}  samples to {} samples.'.format(bin_size, old_size, len(sample_records)))
+            logger.info('Elapsed time = {}'.format(time.time()-t0))
+        logger.info('{} degree binning reduced {}  samples to {} samples.'.format(bin_size, old_size, len(sample_records)))
     return sample_records, multipliers
 
 
@@ -254,7 +258,7 @@ class BinScatangleTask(object):
         try:
             return bin_scatangle(self.fid, self.number_location_samples, self.bin_size)
         except Exception:
-            logging.exception('Scatangle Bin Error')
+            logger.exception('Scatangle Bin Error')
             return 20
 
 

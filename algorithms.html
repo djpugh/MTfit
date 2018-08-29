@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,29 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="next" title="9. convert" href="mtconvert.html"/>
-        <link rel="prev" title="7. Probability" href="probability.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. convert" href="mtconvert.html" />
+    <link rel="prev" title="7. Probability" href="probability.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -71,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -140,7 +131,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -148,9 +139,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -225,7 +217,7 @@
 <span id="mcsampling"></span><h2>8.3. Random Monte Carlo sampling<a class="headerlink" href="#random-monte-carlo-sampling" title="Permalink to this headline">¶</a></h2>
 <p>The simplest approach is that of random sampling over the moment tensor or double-couple space. Stochastic Monte Carlo sampling introduces no biases and provides an estimate for the true PDF, but requires a sufficient density of sampling to reduce the uncertainties in the estimate. The sampled PDF approaches the true distribution in the limit of infnite samples. However, this approach is limited both by time and memory. Some benefits can be gained by only keeping the samples with non-zero probability.</p>
 <p>The assumed prior distribution is a uniform distribution on the unit 6-sphere in moment tensor space. This is equivalent to unit normalisation of the moment tensor six vector:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{\tilde{M}}  =   \left(\begin{array}{c}M_{11}\\M_{22}\\M_{33}\\\sqrt{2}M_{12}\\\sqrt{2}M_{13}\\\sqrt{2}M_{23}\end{array}\right).\end{split}\]</div>
 <p>This sampling is explored further in <a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh et al, 2015t</span></a>.</p>
 </div>
@@ -233,23 +225,23 @@
 <span id="mcmcsampling"></span><h2>8.4. Markov chain Monte Carlo sampling<a class="headerlink" href="#markov-chain-monte-carlo-sampling" title="Permalink to this headline">¶</a></h2>
 <p>An alternative approach is to use Markov chain Monte Carlo (McMC) sampling. This constructs a Markov chain (<a class="reference internal" href="references.html#norris-1998"><span class="std std-ref">Norris, 1998</span></a>) of which the equilibrium distribution is a good sample of the target probability distribution.</p>
 <p>A Markov chain is a memoryless stochastic process of transitioning between states. The probability of the next value depends only on the current value, rather than all the previous values, which is known as the Markov property (<a class="reference internal" href="references.html#markov-1954"><span class="std std-ref">Markov, 1954</span></a>):</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\mathrm{p}\left({d_{n}|d_{n-1},d_{n-2},d_{n-3},\ldots d_{0}}\right)=\mathrm{p}\left({d_{n}|d_{n-1}}\right).\]</div>
 <p>A suitable McMC method should converge on the target distribution rapidly. As an approach it is more complex than the Monte Carlo random sampling approach described above, and by taking samples close to other non-zero samples, there is moreintelligence to the sampling than in the random Monte Carlo sampling approach.</p>
-<p>A Metropolis-Hastings approach is used here (<a class="reference internal" href="references.html#metropolis-1953"><span class="std std-ref">Metropolis, 1953</span></a> and <a class="reference internal" href="references.html#hastings-1970"><span class="std std-ref">Hastings, 1970</span></a>). The Metropolis-Hastings approach is a common method for McMC sampling and satisfies the detailed balance condition (Robert and Casella, 2004, eq. 6.22), which means that the probability density of the chain is stationary. New samples are drawn from a probability density <span class="math">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span> to evaluate the target probability density <span class="math">\(\mathrm{p}\left(\mathbf x|\mathbf d\right)\)</span>.</p>
-<p>The Metropolis-Hastings algorithm begins with a random starting point and then iterates until this initial state is forgotten (<span class="xref std std-ref">Algorithm</span>). Each iteration evaluates whether a new proposed state is accepted or not. If <span class="math">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span> is symmetric, then the ratio <span class="math">\(\frac{\mathrm{q}\left(\mathbf{x}_\mathrm{t}|\mathbf{x'}\right)}{\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)}=1\)</span>. The acceptance, alpha, is given by</p>
-<div class="math">
+<p>A Metropolis-Hastings approach is used here (<a class="reference internal" href="references.html#metropolis-1953"><span class="std std-ref">Metropolis, 1953</span></a> and <a class="reference internal" href="references.html#hastings-1970"><span class="std std-ref">Hastings, 1970</span></a>). The Metropolis-Hastings approach is a common method for McMC sampling and satisfies the detailed balance condition (Robert and Casella, 2004, eq. 6.22), which means that the probability density of the chain is stationary. New samples are drawn from a probability density <span class="math notranslate nohighlight">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span> to evaluate the target probability density <span class="math notranslate nohighlight">\(\mathrm{p}\left(\mathbf x|\mathbf d\right)\)</span>.</p>
+<p>The Metropolis-Hastings algorithm begins with a random starting point and then iterates until this initial state is forgotten (<span class="xref std std-ref">Algorithm</span>). Each iteration evaluates whether a new proposed state is accepted or not. If <span class="math notranslate nohighlight">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span> is symmetric, then the ratio <span class="math notranslate nohighlight">\(\frac{\mathrm{q}\left(\mathbf{x}_\mathrm{t}|\mathbf{x'}\right)}{\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)}=1\)</span>. The acceptance, alpha, is given by</p>
+<div class="math notranslate nohighlight">
 \[\alpha=\mathrm{min}\left(1,\frac{\mathrm{p}\left(\mathbf{x'}|\mathbf d\right)}{\mathrm{p}\left(\mathbf{x}_{\mathrm{t}}|\mathbf d\right)}.\frac{\mathrm{q}\left(\mathbf{x}_\mathrm{t}|\mathbf{x'}\right)}{\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_{\mathrm{t}}\right)}\right),\]</div>
-<p>which can be expanded using <a class="reference internal" href="bayes.html"><span class="doc">Bayes' Theorem</span></a> to give the acceptance in terms of the likelihood <span class="math">\(\mathrm{p}\left(\mathbf d|\mathbf x\right)\)</span> and prior <span class="math">\(\mathrm{p}\left(\mathbf x\right)\)</span>,</p>
-<div class="math">
+<p>which can be expanded using <a class="reference internal" href="bayes.html"><span class="doc">Bayes' Theorem</span></a> to give the acceptance in terms of the likelihood <span class="math notranslate nohighlight">\(\mathrm{p}\left(\mathbf d|\mathbf x\right)\)</span> and prior <span class="math notranslate nohighlight">\(\mathrm{p}\left(\mathbf x\right)\)</span>,</p>
+<div class="math notranslate nohighlight">
 \[\alpha    =   \mathrm{min}\left( 1,\frac{\mathrm{p}\left(\mathbf d|\mathbf{x'}\right)\mathrm{p}\left(\mathbf{x'}\right)}{\mathrm{p}\left(\mathbf d|\mathbf{x}_\mathrm{t}\right)\mathrm{p}\left(\mathbf{x}_\mathrm{t}\right)}.\frac{\mathrm{q}\left(\mathbf{x}_t|\mathbf{x'}\right)}{\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)}\right).\]</div>
-<p>The acceptance is the probability that the new sample in the chain, <span class="math">\(\mathbf{x}_\mathrm{t+1}\)</span>  is the new sample, <span class="math">\(\mathbf{x'}\)</span>, otherwise the original value, <span class="math">\(\mathbf{x}_\mathrm{t}\)</span> , is added to the chain again,</p>
-<div class="math">
+<p>The acceptance is the probability that the new sample in the chain, <span class="math notranslate nohighlight">\(\mathbf{x}_\mathrm{t+1}\)</span>  is the new sample, <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span>, otherwise the original value, <span class="math notranslate nohighlight">\(\mathbf{x}_\mathrm{t}\)</span> , is added to the chain again,</p>
+<div class="math notranslate nohighlight">
 \[\begin{split} \mathbf{x_{\mathrm{t}+1}}=\begin{cases}
 \mathbf{x'} &amp; probability=\alpha\\
 \mathbf{x}_t &amp; probability=1-\alpha
 \end{cases}.\end{split}\]</div>
-<p>The algorithm used in <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> is:</p>
+<p>The algorithm used in <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> is:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="3%" />
@@ -262,19 +254,19 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>1</td>
-<td colspan="2">Determine initial value for <span class="math">\(\mathbf{x}_0\)</span> with non-zero likelihood</td>
+<td colspan="2">Determine initial value for <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> with non-zero likelihood</td>
 </tr>
 <tr class="row-odd"><td>2</td>
-<td colspan="2">Draw new sample <span class="math">\(\mathbf{x'}\)</span> from transition PDF <span class="math">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span></td>
+<td colspan="2">Draw new sample <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span> from transition PDF <span class="math notranslate nohighlight">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span></td>
 </tr>
 <tr class="row-even"><td>3</td>
-<td colspan="2">Evaluate likelihood for sample <span class="math">\(\mathbf{x'}\)</span></td>
+<td colspan="2">Evaluate likelihood for sample <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span></td>
 </tr>
 <tr class="row-odd"><td>4</td>
-<td colspan="2">Calculate acceptance, <span class="math">\(\alpha\)</span>, for <span class="math">\(\mathbf{x'}\)</span>.</td>
+<td colspan="2">Calculate acceptance, <span class="math notranslate nohighlight">\(\alpha\)</span>, for <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span>.</td>
 </tr>
 <tr class="row-even"><td>5</td>
-<td colspan="2">Determine sample <span class="math">\(\mathbf{x}_\mathrm{t+1}\)</span>.</td>
+<td colspan="2">Determine sample <span class="math notranslate nohighlight">\(\mathbf{x}_\mathrm{t+1}\)</span>.</td>
 </tr>
 <tr class="row-odd"><td rowspan="4">6</td>
 <td colspan="2">If in learning period:</td>
@@ -299,30 +291,30 @@
 <div class="section" id="reversible-jump-markov-chain-monte-carlo-sampling">
 <h3>8.4.1. Reversible Jump Markov chain Monte Carlo Sampling<a class="headerlink" href="#reversible-jump-markov-chain-monte-carlo-sampling" title="Permalink to this headline">¶</a></h3>
 <p>The Metropolis-Hastings approach does not account for variable dimension models. <a class="reference internal" href="references.html#green-1995"><span class="std std-ref">Green (1995)</span></a> introduced a new type of move, a <em>jump</em>, extending the approach to variable dimension problems. The jump introduces a dimension-balancing vector, so it can be evaluated like the normal Metropolis-Hastings shift.</p>
-<p><a class="reference internal" href="references.html#green-1995"><span class="std std-ref">Green (1995)</span></a> showed that the acceptance for a pair of models <span class="math">\(M_\mathrm{t}\)</span> and <span class="math">\(M'\)</span> is given by:</p>
-<div class="math">
+<p><a class="reference internal" href="references.html#green-1995"><span class="std std-ref">Green (1995)</span></a> showed that the acceptance for a pair of models <span class="math notranslate nohighlight">\(M_\mathrm{t}\)</span> and <span class="math notranslate nohighlight">\(M'\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
 \[\alpha=\min\left(1,\frac{\mathrm{p}\left(\mathbf d|\mathbf{x'},M'\right)\mathrm{p}\left(\mathbf{x'}|M'\right)\mathrm{p}\left(M'\right)}{\mathrm{p}\left(\mathbf d|\mathbf{x}_\mathrm{t},M_\mathrm{t}\right)\mathrm{p}\left(\mathbf{x}_\mathrm{t}|M_\mathrm{t}\right)\mathrm{p}\left(M_\mathrm{t}\right)}.\frac{\mathrm{q}\left(\mathbf{x}_\mathrm{t}|\mathbf{x'}\right)}{\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)}\right),\]</div>
-<p>where <span class="math">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span> is the probability of making the transition from parameters <span class="math">\(\mathbf{x}_\mathrm{t}\)</span> from model <span class="math">\(M_\mathrm{t}\)</span> to parameters <span class="math">\(\mathbf{x'}\)</span> from model <span class="math">\(M'\)</span>, and <span class="math">\(\mathrm{p}\left(M_\mathrm{t}\right)\)</span> is the prior for the model <span class="math">\(M_\mathrm{t}\)</span>.</p>
-<p>If the models <span class="math">\(M_\mathrm{t}\)</span> and <span class="math">\(M'\)</span> are the same, the reversible jump acceptance is the same as the Metropolis-Hastings acceptance, because the model priors are the same. The importance of the reversible jump approach is that it allows a transformation between different models, and even different dimensions.</p>
-<p>The dimension balancing vector requires a bijection between the parameters of the two models, so that the transformation is not singular and a reverse jump can occur. In the case where <span class="math">\(\dim\left(M'\right)&gt;\dim\left(M_\mathrm{t}\right)\)</span>, a vector <span class="math">\(\mathbf u\)</span> of length <span class="math">\(\dim\left(M'\right)-\dim\left(M_\mathrm{t}\right)\)</span> needs to be introduced to balance the number of parameters in <span class="math">\(\mathbf{x'}\)</span>. The values of <span class="math">\(\mathbf u\)</span> have probability density <span class="math">\(\mathrm{q}\left(\mathbf u\right)\)</span> and some bijection that maps <span class="math">\(\mathbf{x}_\mathrm{t},\mathbf u\rightarrow\mathbf{x'}\)</span>, <span class="math">\(\mathbf{x'}=\mathrm{h}\left(\mathbf{x}_\mathrm{t},\mathbf u\right)\)</span>.</p>
-<p>If the jump has a probability <span class="math">\(\mathrm{j}\left(\mathbf x\right)\)</span> of occurring for a sample <span class="math">\(\mathbf x\)</span>, the transition probability depends on the jump parameters, <span class="math">\(\mathbf u\)</span> and the transition ratio is given by:</p>
-<div class="math">
+<p>where <span class="math notranslate nohighlight">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span> is the probability of making the transition from parameters <span class="math notranslate nohighlight">\(\mathbf{x}_\mathrm{t}\)</span> from model <span class="math notranslate nohighlight">\(M_\mathrm{t}\)</span> to parameters <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span> from model <span class="math notranslate nohighlight">\(M'\)</span>, and <span class="math notranslate nohighlight">\(\mathrm{p}\left(M_\mathrm{t}\right)\)</span> is the prior for the model <span class="math notranslate nohighlight">\(M_\mathrm{t}\)</span>.</p>
+<p>If the models <span class="math notranslate nohighlight">\(M_\mathrm{t}\)</span> and <span class="math notranslate nohighlight">\(M'\)</span> are the same, the reversible jump acceptance is the same as the Metropolis-Hastings acceptance, because the model priors are the same. The importance of the reversible jump approach is that it allows a transformation between different models, and even different dimensions.</p>
+<p>The dimension balancing vector requires a bijection between the parameters of the two models, so that the transformation is not singular and a reverse jump can occur. In the case where <span class="math notranslate nohighlight">\(\dim\left(M'\right)&gt;\dim\left(M_\mathrm{t}\right)\)</span>, a vector <span class="math notranslate nohighlight">\(\mathbf u\)</span> of length <span class="math notranslate nohighlight">\(\dim\left(M'\right)-\dim\left(M_\mathrm{t}\right)\)</span> needs to be introduced to balance the number of parameters in <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span>. The values of <span class="math notranslate nohighlight">\(\mathbf u\)</span> have probability density <span class="math notranslate nohighlight">\(\mathrm{q}\left(\mathbf u\right)\)</span> and some bijection that maps <span class="math notranslate nohighlight">\(\mathbf{x}_\mathrm{t},\mathbf u\rightarrow\mathbf{x'}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x'}=\mathrm{h}\left(\mathbf{x}_\mathrm{t},\mathbf u\right)\)</span>.</p>
+<p>If the jump has a probability <span class="math notranslate nohighlight">\(\mathrm{j}\left(\mathbf x\right)\)</span> of occurring for a sample <span class="math notranslate nohighlight">\(\mathbf x\)</span>, the transition probability depends on the jump parameters, <span class="math notranslate nohighlight">\(\mathbf u\)</span> and the transition ratio is given by:</p>
+<div class="math notranslate nohighlight">
 \[\frac{\mathrm{q}\left(\mathbf{x}_\mathrm{t},\mathbf u|\mathbf{x'}\right)}{\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t},\mathbf u\right)} =   \frac{\mathrm{j}\left(\mathbf{x'}\right)}{\mathrm{j}\left(\mathbf{x}_\mathrm{t}\right)\mathrm{q}\left(\mathbf u\right)}\left|\mathbf J\right|,\]</div>
-<p>with the Jacobian matrix, <span class="math">\(\mathbf J=\frac{\partial\mathrm{h}\left(\mathbf{x}_\mathrm{t},\mathbf u\right)}{\partial\left(\mathbf{x}_\mathrm{t},\mathbf u\right)}\)</span>.</p>
+<p>with the Jacobian matrix, <span class="math notranslate nohighlight">\(\mathbf J=\frac{\partial\mathrm{h}\left(\mathbf{x}_\mathrm{t},\mathbf u\right)}{\partial\left(\mathbf{x}_\mathrm{t},\mathbf u\right)}\)</span>.</p>
 <p>The general form of the jump acceptance involves a prior on the models, along with a prior on the parameters. The acceptance for this case is:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\alpha  =   \min\left(1,\frac{\mathrm{p}\left(\mathbf d|\mathbf{x'},M'\right)\mathrm{p}\left(\mathbf{x'}|M'\right)\mathrm{p}\left(M'\right)}{\mathrm{p}\left(\mathbf d|\mathbf{x}_\mathrm{t},M_\mathrm{t}\right)\mathrm{p}\left(\mathbf{x}_\mathrm{t}|M_\mathrm{t}\right)\mathrm{p}\left(M_\mathrm{t}\right)}.\frac{\mathrm{j}\left(\mathbf{x'}\right)}{\mathrm{j}\left(\mathbf{x}_\mathrm{t}\right)\mathrm{q}\left(\mathbf u\right)}\left|\mathbf J\right|\right) .\]</div>
-<p>If the jump is from higher dimensions to lower, the bijection describing the transformation has an inverse that describes the transformation <span class="math">\(\mathbf{x'}\rightarrow\mathbf{x}_\mathrm{t},\mathbf u\)</span>, and the acceptance is given by:</p>
-<div class="math">
+<p>If the jump is from higher dimensions to lower, the bijection describing the transformation has an inverse that describes the transformation <span class="math notranslate nohighlight">\(\mathbf{x'}\rightarrow\mathbf{x}_\mathrm{t},\mathbf u\)</span>, and the acceptance is given by:</p>
+<div class="math notranslate nohighlight">
 \[\alpha=\min\left( 1,\frac{\mathrm{p}\left(\mathbf d|\mathbf{x}_\mathrm{t},M_\mathrm{t}\right)\mathrm{p}\left(\mathbf{x}_\mathrm{t}|M_\mathrm{t}\right)\mathrm{p}\left(M_\mathrm{t}\right)}{\mathrm{p}\left(\mathbf d|\mathbf{x'},M'\right)\mathrm{p}\left(\mathbf{x'}|M'\right)\mathrm{p}\left(M'\right)}.\frac{\mathrm{j}\left(\mathbf{x}_\mathrm{t}\right)\mathrm{q}\left(\mathbf u\right)}{\mathrm{j}\left(\mathbf{x'}\right)}\left|\mathbf J^{-1}\right|\right) .\]</div>
-<p>A simple example used in the literature (see Green, 1995; Brooks et al., 2003) is a mapping from a one dimensional model with parameter <span class="math">\(\theta\)</span> to a two dimensional model with parameters <span class="math">\(\theta_{1},\theta_{2}\)</span>. A possible bijection is given by:</p>
-<div class="math">
+<p>A simple example used in the literature (see Green, 1995; Brooks et al., 2003) is a mapping from a one dimensional model with parameter <span class="math notranslate nohighlight">\(\theta\)</span> to a two dimensional model with parameters <span class="math notranslate nohighlight">\(\theta_{1},\theta_{2}\)</span>. A possible bijection is given by:</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}h\left(\theta,u\right) =   \begin{cases}
 \theta_{1} &amp; =\theta-u\\
 \theta_{2} &amp; =\theta+u
 \end{cases}\end{split}\]</div>
 <p>with the reverse bijection given by:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\begin{split}h\left(\theta_{1},\theta_{2}\right) =   \begin{cases}
 \theta &amp; =\frac{1}{2}\left(\theta_{1}+\theta_{2}\right)\\
 u &amp; =\frac{1}{2}\left(\theta_{1}-\theta_{2}\right)
@@ -333,15 +325,15 @@ u &amp; =\frac{1}{2}\left(\theta_{1}-\theta_{2}\right)
 <p>The full moment tensor model is nested around the double-couple point, leading to a simple description of the jumps by keeping the common parameters constant. The Tape parameterisation (<a class="reference internal" href="references.html#tape-2012"><span class="std std-ref">Tape and Tape, 2012</span></a>) allows for easy movement both in the source space and between models. The moment tensor model has five parameters:</p>
 <blockquote>
 <div><ul class="simple">
-<li>strike <span class="math">\(\left(\kappa\right)\)</span></li>
-<li>dip cosine <span class="math">\(\left(h\right)\)</span></li>
-<li>slip <span class="math">\(\left(\sigma\right)\)</span></li>
-<li>eigenvalue co-latitude <span class="math">\(\left(\delta\right)\)</span></li>
-<li>eigenvalue longitude <span class="math">\(\left(\gamma\right)\)</span></li>
+<li>strike <span class="math notranslate nohighlight">\(\left(\kappa\right)\)</span></li>
+<li>dip cosine <span class="math notranslate nohighlight">\(\left(h\right)\)</span></li>
+<li>slip <span class="math notranslate nohighlight">\(\left(\sigma\right)\)</span></li>
+<li>eigenvalue co-latitude <span class="math notranslate nohighlight">\(\left(\delta\right)\)</span></li>
+<li>eigenvalue longitude <span class="math notranslate nohighlight">\(\left(\gamma\right)\)</span></li>
 </ul>
 </div></blockquote>
-<p>while the double-couple model has only the three orientation parameters: <span class="math">\(\kappa\)</span>, <span class="math">\(h\)</span>, and <span class="math">\(\sigma\)</span>. Consequently, the orientation parameters are left unchanged between the two models, and the dimension balancing vector for the jump has two elements, which can be mapped to <span class="math">\(\gamma\)</span> and <span class="math">\(\delta\)</span>:</p>
-<div class="math">
+<p>while the double-couple model has only the three orientation parameters: <span class="math notranslate nohighlight">\(\kappa\)</span>, <span class="math notranslate nohighlight">\(h\)</span>, and <span class="math notranslate nohighlight">\(\sigma\)</span>. Consequently, the orientation parameters are left unchanged between the two models, and the dimension balancing vector for the jump has two elements, which can be mapped to <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(\delta\)</span>:</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}\mathrm{h}\left(\kappa_{\mathrm{DC}},h_{\mathrm{DC}},\sigma_{\mathrm{DC}},\mathbf u\right)\,\,\,\,\begin{cases}
 \kappa_{\mathrm{MT}} &amp; =\kappa_{\mathrm{DC}}\\
 h_{\mathrm{MT}} &amp; =h_{\mathrm{DC}}\\
@@ -362,7 +354,7 @@ h_{\mathrm{MT}} &amp; =h_{\mathrm{DC}}\\
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>1</td>
-<td colspan="2">Determine initial value for <span class="math">\(\mathbf{x}_0\)</span> with non-zero likelihood</td>
+<td colspan="2">Determine initial value for <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> with non-zero likelihood</td>
 </tr>
 <tr class="row-odd"><td rowspan="3">2</td>
 <td colspan="2">Determine which move type to carry out:</td>
@@ -371,25 +363,25 @@ h_{\mathrm{MT}} &amp; =h_{\mathrm{DC}}\\
 <li></li>
 </ol>
 </td>
-<td>Carry out jump with probability <span class="math">\(p_\mathrm{jump}\)</span>: Draw new sample
-<span class="math">\(\mathbf{x'}=\left(\mathbf{x},\mathbf{u}\right)\)</span> with dimension balancing vector <span class="math">\(\mathbf{u}\)</span> drawn from
-<span class="math">\(\mathrm{q}\left(u1, u2\right)\)</span>.</td>
+<td>Carry out jump with probability <span class="math notranslate nohighlight">\(p_\mathrm{jump}\)</span>: Draw new sample
+<span class="math notranslate nohighlight">\(\mathbf{x'}=\left(\mathbf{x},\mathbf{u}\right)\)</span> with dimension balancing vector <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> drawn from
+<span class="math notranslate nohighlight">\(\mathrm{q}\left(u1, u2\right)\)</span>.</td>
 </tr>
 <tr class="row-odd"><td><ol class="first last loweralpha simple" start="2">
 <li></li>
 </ol>
 </td>
-<td>Carry out shift with probability <span class="math">\(1-p_\mathrm{jump}\)</span>: Draw new sample <span class="math">\(\mathbf{x'}\)</span> from transition PDF
-<span class="math">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span>.</td>
+<td>Carry out shift with probability <span class="math notranslate nohighlight">\(1-p_\mathrm{jump}\)</span>: Draw new sample <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span> from transition PDF
+<span class="math notranslate nohighlight">\(\mathrm{q}\left(\mathbf{x'}|\mathbf{x}_\mathrm{t}\right)\)</span>.</td>
 </tr>
 <tr class="row-even"><td>3</td>
-<td colspan="2">Evaluate likelihood for sample <span class="math">\(\mathbf{x'}\)</span></td>
+<td colspan="2">Evaluate likelihood for sample <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span></td>
 </tr>
 <tr class="row-odd"><td>4</td>
-<td colspan="2">Calculate acceptance, <span class="math">\(\alpha\)</span>, for <span class="math">\(\mathbf{x'}\)</span>.</td>
+<td colspan="2">Calculate acceptance, <span class="math notranslate nohighlight">\(\alpha\)</span>, for <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span>.</td>
 </tr>
 <tr class="row-even"><td>5</td>
-<td colspan="2">Determine sample <span class="math">\(\mathbf{x}_\mathrm{t+1}\)</span>.</td>
+<td colspan="2">Determine sample <span class="math notranslate nohighlight">\(\mathbf{x}_\mathrm{t+1}\)</span>.</td>
 </tr>
 <tr class="row-odd"><td rowspan="4">6</td>
 <td colspan="2">If in learning period:</td>
@@ -418,7 +410,7 @@ h_{\mathrm{MT}} &amp; =h_{\mathrm{DC}}\\
 <p>Inverting for multiple events increases the dimensions of the source space for each event. This leads to a much reduced probability of obtaining a non-zero likelihood sample, because sampling from the n-event distribution leads to multiplying the probabilities of drawing a non-zero samples, resulting in sparser sampling of the joint source PDF.</p>
 <p>The elapsed time for the random sampling is longer per sample than the individual sampling, and longer than the combined sampling for both events due to
 evaluating the relative amplitude PDF. Moreover, increasing the number of samples 10-fold raises the required time by a factor of 10, requiring some method of reducing the running time
-for the inversion, since, given current processor speeds, <span class="math">\(10^{15}\)</span> samples would take many years to calculate on a single core. As a result, more intelligent search algorithms are required for the full moment tensor case.</p>
+for the inversion, since, given current processor speeds, <span class="math notranslate nohighlight">\(10^{15}\)</span> samples would take many years to calculate on a single core. As a result, more intelligent search algorithms are required for the full moment tensor case.</p>
 <p>Markov chain approaches are less dependent on the model dimensionality. To account for the fact that the uncertainties in each parameter can differ between the events, the Markov
 chain shape parameters can be scaled based on the relative non-zero percentages of the events when they are initialised. The initialisation approaches also need to be adjusted to
 account for the reduced non-zero sample probability, such as by initialising the Markov chain independently for each event. The trans-dimensional McMC algorithm allows model
@@ -469,9 +461,7 @@ Including location uncertainty increases the random sampling time drastically, a
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -490,11 +480,11 @@ Including location uncertainty increases the random sampling time drastically, a
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -512,7 +502,8 @@ Including location uncertainty increases the random sampling time drastically, a
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -529,19 +520,13 @@ Including location uncertainty increases the random sampling time drastically, a
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

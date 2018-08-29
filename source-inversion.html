@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,30 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="up" title="3. MTfit Source Code" href="source.html"/>
-        <link rel="next" title="3.1.2. MTfit.algorithms" href="source-algorithms.html"/>
-        <link rel="prev" title="3. MTfit Source Code" href="source.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3.1.2. MTfit.algorithms" href="source-algorithms.html" />
+    <link rel="prev" title="3. MTfit Source Code" href="source.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -64,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -72,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -140,7 +130,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -148,9 +138,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -196,7 +187,7 @@
             
   <div class="section" id="mtfit-inversion">
 <h1>3.1.1. MTfit.inversion<a class="headerlink" href="#mtfit-inversion" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">inversion</span>
 <span class="sd">=========</span>
 <span class="sd">Module containing the main inversion class, MTfit.inversion.Inversion class.</span>
@@ -256,13 +247,18 @@
 <span class="kn">from</span> <span class="nn">.extensions.scatangle</span> <span class="k">import</span> <span class="n">parse_scatangle</span>
 
 
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MTfit.inversion&#39;</span><span class="p">)</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">.probability</span> <span class="k">import</span> <span class="n">cprobability</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">cprobability</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error importing c extension&#39;</span><span class="p">)</span>
     <span class="n">cprobability</span> <span class="o">=</span> <span class="kc">False</span>
 
-
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MTfit.inversion&#39;</span><span class="p">)</span>
 <span class="n">_MEMTEST</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">_DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">_VERBOSITY</span> <span class="o">=</span> <span class="mi">0</span>
@@ -547,7 +543,7 @@
                             <span class="n">ln_p_total</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">location_sample_multipliers</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="c1"># Conversion to matrix and transpose to correct for list order to ln_p_total dimensions (0 is sample dimension)</span>
                     <span class="c1"># If there are location samples and the marginalise flag is set, then marginalise, trying to use Cython</span>
                     <span class="k">if</span> <span class="n">location_samples</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">marginalise</span><span class="p">:</span>
-                        <span class="n">ln_p_total</span> <span class="o">=</span> <span class="n">ln_marginalise</span><span class="p">(</span><span class="n">ln_p_total</span><span class="p">,</span> <span class="n">_cython</span><span class="o">=</span><span class="n">cprobability</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">)</span>
+                        <span class="n">ln_p_total</span> <span class="o">=</span> <span class="n">ln_marginalise</span><span class="p">(</span><span class="n">ln_p_total</span><span class="p">)</span>
                 <span class="c1"># Delete arrays to free memory if not reusing</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reuse</span><span class="p">:</span>
                     <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">a_polarity</span>
@@ -676,7 +672,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mts</span><span class="p">,</span> <span class="n">a_polarity</span><span class="p">,</span> <span class="n">error_polarity</span><span class="p">,</span> <span class="n">a1_amplitude_ratio</span><span class="p">,</span> <span class="n">a2_amplitude_ratio</span><span class="p">,</span> <span class="n">amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error1_amplitude_ratio</span><span class="p">,</span> <span class="n">percentage_error2_amplitude_ratio</span><span class="p">,</span>
                  <span class="n">a_polarity_prob</span><span class="p">,</span> <span class="n">polarity_prob</span><span class="p">,</span> <span class="n">a_relative_amplitude</span><span class="p">,</span> <span class="n">relative_amplitude</span><span class="p">,</span> <span class="n">percentage_error_relative_amplitude</span><span class="p">,</span> <span class="n">relative_amplitude_stations</span><span class="p">,</span> <span class="n">location_sample_multipliers</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">incorrect_polarity_prob</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minimum_number_intersections</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">return_zero</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">location_sample_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">marginalise_relative</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">incorrect_polarity_prob</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minimum_number_intersections</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">return_zero</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">location_sample_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">marginalise_relative</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extension_data</span><span class="o">=</span><span class="p">[]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialisation of MultipleEventsForwardTask</span>
@@ -700,6 +696,7 @@
 <span class="sd">            relative_amplitude_stations: List of relative amplitude stations allowing for intersections when evaluating the relative amplitudes</span>
 <span class="sd">            return_zero:[False] Boolean flag to return zero probability samples.</span>
 <span class="sd">            reuse:[False] Boolean flag as to whether task is reused (mt changed and re-run...)</span>
+<span class="sd">            relative:[False] Use relative amplitude on multiple</span>
 <span class="sd">            location_samples:[1]  Integer number of station samples, (default is 1)</span>
 <span class="sd">            marginalise_relative:[False] Boolean flag to marginalise the location uncertainty between absolute and relative data.</span>
 <span class="sd">            combine:[False] Boolean flag to combine the probabilities between multiple events.</span>
@@ -730,8 +727,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_marginalise_relative</span> <span class="o">=</span> <span class="n">marginalise_relative</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_combine</span> <span class="o">=</span> <span class="n">combine</span>
         <span class="c1"># Need to implement marginalisation of scale factor for self._marginalise_relative and location_samples</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marginalise_relative</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">location_sample_size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Marginalisation of location samples on relative data not implemented yet&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_relative</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marginalise_relative</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">location_sample_size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Marginalisation of location samples on relative data not implemented yet - we may well expect location uncertainty between the co-located events to be zero&#39;</span><span class="p">)</span>
+            <span class="c1"># https://github.com/djpugh/MTfit/issues/11</span>
+            <span class="c1"># Scale factor is location/amplitude specific</span>
+            <span class="c1"># We would expect amplitude ratio location uncertainty to be minimal between co-located events</span>
+            <span class="c1"># So probably need to remove any location uncertainty for the relative amplitude terms</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">extension_data</span> <span class="o">=</span> <span class="n">extension_data</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_relative</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combine</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return_zero</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_combine</span> <span class="o">=</span> <span class="kc">True</span>
@@ -3884,9 +3885,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -3905,11 +3904,11 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -3927,7 +3926,8 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -3944,19 +3944,13 @@
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

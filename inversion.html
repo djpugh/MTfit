@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,29 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="next" title="14. Extending MTfit" href="extensions.html"/>
-        <link rel="prev" title="12. MTplot command line options" href="mtplotcli.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="14. Extending MTfit" href="extensions.html" />
+    <link rel="prev" title="12. MTplot command line options" href="mtplotcli.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -71,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -125,7 +116,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -133,9 +124,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -179,7 +171,7 @@
             
   <div class="section" id="mtfit-inversion-inversion-object">
 <h1>13. MTfit.inversion: Inversion object<a class="headerlink" href="#mtfit-inversion-inversion-object" title="Permalink to this headline">¶</a></h1>
-<p>The main <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> inversion object is used to handle the forward model evaluation and process the results. The object initialisation and forward functions are documented here, although there are additional (private and special) functions that are documented in the source code.</p>
+<p>The main <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> inversion object is used to handle the forward model evaluation and process the results. The object initialisation and forward functions are documented here, although there are additional (private and special) functions that are documented in the source code.</p>
 <dl class="class">
 <dt id="MTfit.inversion.Inversion">
 <em class="property">class </em><code class="descclassname">MTfit.inversion.</code><code class="descname">Inversion</code><span class="sig-paren">(</span><em>data={}</em>, <em>data_file=False</em>, <em>location_pdf_file_path=False</em>, <em>algorithm='iterate'</em>, <em>parallel=True</em>, <em>n=0</em>, <em>phy_mem=8</em>, <em>dc=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/inversion.html#Inversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.inversion.Inversion" title="Permalink to this definition">¶</a></dt>
@@ -198,7 +190,7 @@
 <p>The inversion is run by calling the forward function (MTfit.inversion.Inversion.forward)</p>
 <p><strong>Data Format</strong></p>
 <p>The inversion expects a python dictionary of the data in the format:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">:{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">...</span><span class="p">]),</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">:{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">...</span><span class="p">]),</span>
                      <span class="s1">&#39;Error&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">0.01</span><span class="p">],[</span><span class="mf">0.02</span><span class="p">],</span><span class="o">...</span><span class="p">]),</span>
                      <span class="s1">&#39;Stations&#39;</span><span class="p">:{</span><span class="s1">&#39;Name&#39;</span><span class="p">:[</span><span class="n">Station1</span><span class="p">,</span><span class="n">Station2</span><span class="p">,</span><span class="o">...</span><span class="p">]</span>
                                  <span class="s1">&#39;Azimuth&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">248.0</span><span class="p">],[</span><span class="mf">122.3</span><span class="p">]</span><span class="o">...</span><span class="p">]),</span>
@@ -331,7 +323,7 @@ The expected format is for samples from the location PDF that have been converte
 from the location PDF as a Monte Carlo based integration approach is used for marginalising over the uncertainty.</p>
 <p>It is possible to use XYZ2Angle to samples drawn from a location PDF using the NonLinLoc angle approach.</p>
 <p>Expected format is:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Probability</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Probability</span>
 <span class="n">StationName</span> <span class="n">Azimuth</span> <span class="n">TakeOffAngle</span>
 <span class="n">StationName</span> <span class="n">Azimuth</span> <span class="n">TakeOffAngle</span>
 
@@ -343,7 +335,7 @@ from the location PDF as a Monte Carlo based integration approach is used for ma
 </div>
 <p>With TakeOffAngle as 0 down (NED coordinate system).
 e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">504.7</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">504.7</span>
 <span class="n">S0271</span>   <span class="mf">231.1</span>   <span class="mf">154.7</span>
 <span class="n">S0649</span>   <span class="mf">42.9</span>    <span class="mf">109.7</span>
 <span class="n">S0484</span>   <span class="mf">21.2</span>    <span class="mf">145.4</span>
@@ -388,49 +380,49 @@ e.g.:</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>data</strong> (<em>dict/list</em>) -- Dictionary or list of dictionaries containing data for inversion. Can be ignored if a data_file is passed as an argument (for data format, see below).</li>
-<li><strong>data_file</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- Path or list of file paths containing (binary) pickled data dictionaries.</li>
-<li><strong>location_pdf_file_path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- Path or list of file paths to angle scatter files (for file format, see above - other format extensions can be added using setuptools entry points).</li>
-<li><strong>algorithm</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- ['iterate'] algorithm selector</li>
-<li><strong>parallel</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [True] Run the inversion in parallel using multiprocessing</li>
-<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Number of workers, default is to use as many as returned by multiprocessing.cpu_count</li>
-<li><strong>phy_mem</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [8] Estimated physical memory to use (used for determining array sizes, it is likely that more memory will be used, and if so no errors are forced).
+<li><strong>data_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- Path or list of file paths containing (binary) pickled data dictionaries.</li>
+<li><strong>location_pdf_file_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- Path or list of file paths to angle scatter files (for file format, see above - other format extensions can be added using setuptools entry points).</li>
+<li><strong>algorithm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- ['iterate'] algorithm selector</li>
+<li><strong>parallel</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [True] Run the inversion in parallel using multiprocessing</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- [0] Number of workers, default is to use as many as returned by multiprocessing.cpu_count</li>
+<li><strong>phy_mem</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- [8] Estimated physical memory to use (used for determining array sizes, it is likely that more memory will be used, and if so no errors are forced).
 <em>On python versions &lt;2.7.4 there is a bug (http://bugs.python.org/issue13555) with pickle that limits the total number of samples when running in parallel, so large (&gt;20GB) phy_mem allocations per process are ignored.</em></li>
-<li><strong>dc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag as to run inversion constrained to double-couple or allowed to explore the full moment tensor space.</li>
+<li><strong>dc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Boolean flag as to run inversion constrained to double-couple or allowed to explore the full moment tensor space.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
-<li><strong>number_stations</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Used for estimating sample sizes in the Monte Carlo random sampling algorithms (Time,Iterate) if set.</li>
-<li><strong>number_location_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Used for estimating sample sizes in the Monte Carlo random sampling algorithms (Time,Iterate) if set.</li>
-<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- File path for output. Default is current working dir (interactive) or PBS workdir.</li>
-<li><strong>fid</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- File name root for output, default is to use MTfitOutput or the event UID if set in the data dictionary.</li>
-<li><strong>inversion_options</strong> (<em>list</em>) -- List of data types to be used in the iversion, if not set, the inversion uses all the data types in the data dictionary, irrespective of independence.</li>
-<li><strong>diagnostic_output</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to output diagnostic information in MATLAB save file.</li>
-<li><strong>marginalise_relative</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to marginalise over location/model uncertainty during relative amplitude inversion.</li>
-<li><strong>mpi</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to run using MPI from mpi4py (useful on cluster).</li>
-<li><strong>multiple_events</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to run all the events in the inversion in one single joint inversion.</li>
-<li><strong>relative_amplitude</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag to run multiple_events including relative amplitude inversion.</li>
-<li><strong>output_format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- ['matlab'] str format style.</li>
-<li><strong>minimum_number_intersections</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [2] Integer minimum number of station intersections between events in relative amplitude inversion.</li>
-<li><strong>quality_check</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Boolean flag/Float value for maximum non-zero percentage check (stops inversion if event quality is poor)</li>
-<li><strong>recover</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Tries to recover pre-existing inversions, and does not re-run if an output file exists and is readable.</li>
-<li><strong>file_sample</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Saves samples to a mat file (allowing for easier recovery and reduced memory requirements but can slow the inversion down as requires disk writing every non-zero iteration. Only works well for recovery with random sampling methods)</li>
-<li><strong>results_format</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) -- ['full_pdf'] Data format for the output</li>
+<li><strong>number_stations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- [0] Used for estimating sample sizes in the Monte Carlo random sampling algorithms (Time,Iterate) if set.</li>
+<li><strong>number_location_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- [0] Used for estimating sample sizes in the Monte Carlo random sampling algorithms (Time,Iterate) if set.</li>
+<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- File path for output. Default is current working dir (interactive) or PBS workdir.</li>
+<li><strong>fid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- File name root for output, default is to use MTfitOutput or the event UID if set in the data dictionary.</li>
+<li><strong>inversion_options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) -- List of data types to be used in the iversion, if not set, the inversion uses all the data types in the data dictionary, irrespective of independence.</li>
+<li><strong>diagnostic_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Boolean flag to output diagnostic information in MATLAB save file.</li>
+<li><strong>marginalise_relative</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Boolean flag to marginalise over location/model uncertainty during relative amplitude inversion.</li>
+<li><strong>mpi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Boolean flag to run using MPI from mpi4py (useful on cluster).</li>
+<li><strong>multiple_events</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Boolean flag to run all the events in the inversion in one single joint inversion.</li>
+<li><strong>relative_amplitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Boolean flag to run multiple_events including relative amplitude inversion.</li>
+<li><strong>output_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- ['matlab'] str format style.</li>
+<li><strong>minimum_number_intersections</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- [2] Integer minimum number of station intersections between events in relative amplitude inversion.</li>
+<li><strong>quality_check</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Boolean flag/Float value for maximum non-zero percentage check (stops inversion if event quality is poor)</li>
+<li><strong>recover</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Tries to recover pre-existing inversions, and does not re-run if an output file exists and is readable.</li>
+<li><strong>file_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Saves samples to a mat file (allowing for easier recovery and reduced memory requirements but can slow the inversion down as requires disk writing every non-zero iteration. Only works well for recovery with random sampling methods)</li>
+<li><strong>results_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- ['full_pdf'] Data format for the output</li>
 <li><strong>marginalise_relative</strong> -- [False] Boolean flag to marginalise the location uncertainty between absolute and relative data.</li>
 <li><strong>file_sample</strong> -- [False] save samples to file rather than keeping in memory (not necessary in normal use).</li>
-<li><strong>normalise</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [True] normalise output Probability (doesn't affect ln_pdf output).</li>
-<li><strong>convert</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- Convert output moment tensors to Tape parameters, Hudson u&amp;v coordinates and strike-dip-rake triples.</li>
-<li><strong>discard</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Probability cut-off for discarding samples Discarding samples - samples less than 1/(discard*n_samples) of the maximum likelihood value are discarded as negligeable. False means no samples are discarded.</li>
-<li><strong>c_generate</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Generate samples in the probability calculation when using Cython.</li>
-<li><strong>generate_cutoff</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- Set number of samples to cut-off at when using c_generate (Default is the value of max_samples)</li>
-<li><strong>relative_loop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Loop over non-zero samples when using relative amplitudes.</li>
-<li><strong>bin_angle_coefficient_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Bin size in degrees when binning angle coefficients (All station angle differences must be within this range for samples to fall in the same bin)</li>
-<li><strong>no_station_distribution</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [True] Boolean flag to output station distribution or not.</li>
-<li><strong>max_samples</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [6000000] Max number of samples when using the iterate algorithm.</li>
-<li><strong>max_time</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [600] Max time when using the time algorithm.</li>
-<li><strong>verbosity</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) -- [0] Set verbosity level (0-4) high numbers mean more logging output and verbosity==4 means the debugger will be called on errors.</li>
-<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) -- [False] Sets debug on or off (True means verbosity set to 4).</li>
+<li><strong>normalise</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [True] normalise output Probability (doesn't affect ln_pdf output).</li>
+<li><strong>convert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- Convert output moment tensors to Tape parameters, Hudson u&amp;v coordinates and strike-dip-rake triples.</li>
+<li><strong>discard</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Probability cut-off for discarding samples Discarding samples - samples less than 1/(discard*n_samples) of the maximum likelihood value are discarded as negligeable. False means no samples are discarded.</li>
+<li><strong>c_generate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Generate samples in the probability calculation when using Cython.</li>
+<li><strong>generate_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- Set number of samples to cut-off at when using c_generate (Default is the value of max_samples)</li>
+<li><strong>relative_loop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Loop over non-zero samples when using relative amplitudes.</li>
+<li><strong>bin_angle_coefficient_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- [0] Bin size in degrees when binning angle coefficients (All station angle differences must be within this range for samples to fall in the same bin)</li>
+<li><strong>no_station_distribution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [True] Boolean flag to output station distribution or not.</li>
+<li><strong>max_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- [6000000] Max number of samples when using the iterate algorithm.</li>
+<li><strong>max_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- [600] Max time when using the time algorithm.</li>
+<li><strong>verbosity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- [0] Set verbosity level (0-4) high numbers mean more logging output and verbosity==4 means the debugger will be called on errors.</li>
+<li><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) -- [False] Sets debug on or off (True means verbosity set to 4).</li>
 </ul>
 </td>
 </tr>
@@ -450,9 +442,7 @@ e.g.:</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -471,11 +461,11 @@ e.g.:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -493,7 +483,8 @@ e.g.:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -510,19 +501,13 @@ e.g.:</p>
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

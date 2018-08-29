@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,29 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="next" title="8. MTfit.algorithms: Search Algorithms" href="algorithms.html"/>
-        <link rel="prev" title="6. Bayesian Approach" href="bayes.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8. MTfit.algorithms: Search Algorithms" href="algorithms.html" />
+    <link rel="prev" title="6. Bayesian Approach" href="bayes.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -71,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -102,9 +93,9 @@
 <li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">5. Tutorial: Real Data Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bayes.html">6. Bayesian Approach</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">7. Probability Density Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#polarity-pdf">7.1. Polarity <code class="docutils literal"><span class="pre">PDF</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#polarity-probability-pdf">7.3. Polarity Probability <code class="docutils literal"><span class="pre">PDF</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#amplitude-ratio-pdf">7.5. Amplitude Ratio <code class="docutils literal"><span class="pre">PDF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#polarity-pdf">7.1. Polarity <code class="docutils literal notranslate"><span class="pre">PDF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#polarity-probability-pdf">7.3. Polarity Probability <code class="docutils literal notranslate"><span class="pre">PDF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#amplitude-ratio-pdf">7.5. Amplitude Ratio <code class="docutils literal notranslate"><span class="pre">PDF</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="algorithms.html">8. Search Algorithms</a></li>
@@ -130,7 +121,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -138,9 +129,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -184,13 +176,13 @@
             
   <div class="section" id="probability">
 <h1>7. Probability<a class="headerlink" href="#probability" title="Permalink to this headline">¶</a></h1>
-<p><code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> has <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> s for two data types, with two different approaches to measuring the polarity.</p>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> has <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> s for two data types, with two different approaches to measuring the polarity.</p>
 <p>However, it is possible to add <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> s for other data-types (see <a class="reference internal" href="extensions.html"><span class="doc">Extending MTfit</span></a>)</p>
 <div class="section" id="polarity-pdf">
 <span id="polarity-pdf-label"></span><h2>7.1. Polarity <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a><a class="headerlink" href="#polarity-pdf" title="Permalink to this headline">¶</a></h2>
 </div>
-<p><a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al, 2016a</span></a> has a derivation of the polarity <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> used in <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code>. It is given by:</p>
-<div class="math">
+<p><a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al, 2016a</span></a> has a derivation of the polarity <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> used in <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code>. It is given by:</p>
+<div class="math notranslate nohighlight">
 \[\mathrm{p}\left(Y=y\,|\, A,\sigma_{y},\varpi\right)=\frac{1}{2}\left(1+\mathrm{erf}\left(\frac{yA}{\sqrt{2}\sigma_{y}}\right)\right)\left(1-\varpi\right)+\frac{1}{2}\left(1+\mathrm{erf}\left(\frac{-yA}{\sqrt{2}\sigma_{y}}\right)\right)\varpi\]</div>
 <p>The different symbols in this equation are:</p>
 <table border="1" class="docutils">
@@ -204,29 +196,29 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><span class="math">\(Y\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(Y\)</span></td>
 <td>Polarity</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(A\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(A\)</span></td>
 <td>Amplitude</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(\sigma_{y}\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\sigma_{y}\)</span></td>
 <td>Uncertainty</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(\varpi\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\varpi\)</span></td>
 <td>Mispick Probability</td>
 </tr>
 </tbody>
 </table>
-<p>and <span class="math">\(\mathrm{erf}\left(x\right)\)</span> is the error function, given by <span class="math">\(\mathrm{erf}\left(x\right)=\frac{2}{\sqrt{\pi}}\int_{0}^{x}\mathrm{e}^{-t^{2}}\mathrm{d}t\)</span>.</p>
-<p>This approach requires an estimate of the uncertainty <span class="math">\(\sigma_{y}\)</span>. This is not the noise at the arrival, since it does not scale correctly in comparison to the modelled amplitude due to the propagation effects. It could be estimated from the fractional amplitude uncertainty, but this will be greater than or equal to the true value, because the amplitude at a receiver is only ever less than or equal to the maximum theoretical amplitude (accounting for propagation effects). Consequently, this would most likely overestimate the uncertainty. It is clear that the uncertainty value should be station-specific as noise environments at different stations often vary, so the maximum estimate of the event signal-to-noise ratio (SNR) fails to account for the variation across the receivers.</p>
-<p>The difficulty in estimating <span class="math">\(\sigma_{y}\)</span> is increased further when polarity picking is done manually, so the uncertainty on the trace is perhaps not even known. Due to the difficulty in quantifying the uncertainty, it is best left as a user-defined parameter that reflects the confidence in the arrival polarity pick, which can be mapped to the pick quality. However, <a class="reference internal" href="references.html#pugh-2016b"><span class="std std-ref">Pugh et al, 2016b</span></a> proposes an alternate method for calculating polarity uncertainties that can be included in this framework (see <a class="reference internal" href="#polarity-prob-pdf"><span class="std std-ref">Polarity Probability PDF</span></a>)</p>
+<p>and <span class="math notranslate nohighlight">\(\mathrm{erf}\left(x\right)\)</span> is the error function, given by <span class="math notranslate nohighlight">\(\mathrm{erf}\left(x\right)=\frac{2}{\sqrt{\pi}}\int_{0}^{x}\mathrm{e}^{-t^{2}}\mathrm{d}t\)</span>.</p>
+<p>This approach requires an estimate of the uncertainty <span class="math notranslate nohighlight">\(\sigma_{y}\)</span>. This is not the noise at the arrival, since it does not scale correctly in comparison to the modelled amplitude due to the propagation effects. It could be estimated from the fractional amplitude uncertainty, but this will be greater than or equal to the true value, because the amplitude at a receiver is only ever less than or equal to the maximum theoretical amplitude (accounting for propagation effects). Consequently, this would most likely overestimate the uncertainty. It is clear that the uncertainty value should be station-specific as noise environments at different stations often vary, so the maximum estimate of the event signal-to-noise ratio (SNR) fails to account for the variation across the receivers.</p>
+<p>The difficulty in estimating <span class="math notranslate nohighlight">\(\sigma_{y}\)</span> is increased further when polarity picking is done manually, so the uncertainty on the trace is perhaps not even known. Due to the difficulty in quantifying the uncertainty, it is best left as a user-defined parameter that reflects the confidence in the arrival polarity pick, which can be mapped to the pick quality. However, <a class="reference internal" href="references.html#pugh-2016b"><span class="std std-ref">Pugh et al, 2016b</span></a> proposes an alternate method for calculating polarity uncertainties that can be included in this framework (see <a class="reference internal" href="#polarity-prob-pdf"><span class="std std-ref">Polarity Probability PDF</span></a>)</p>
 <div class="section" id="polarity-probability-pdf">
 <span id="polarity-prob-pdf"></span><h2>7.3. Polarity Probability <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a><a class="headerlink" href="#polarity-probability-pdf" title="Permalink to this headline">¶</a></h2>
 </div>
 <p><a class="reference internal" href="references.html#pugh-2016b"><span class="std std-ref">Pugh et al, 2016b</span></a> introduces an alternate method for estimating the polarity, using an automated Bayesian probability estimate. This approach results in estimates of the postive and negative polarity probabilities.
-<code class="xref py py-mod docutils literal"><span class="pre">autopol</span></code> provides a Python module for calculating these values (<a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh, 2016a</span></a>), and may be available on request. These observations can be included in  <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code>, although the data independence must be preserved. The <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> is:</p>
-<div class="math">
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">autopol</span></code> provides a Python module for calculating these values (<a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh, 2016a</span></a>), and may be available on request. These observations can be included in  <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code>, although the data independence must be preserved. The <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> is:</p>
+<div class="math notranslate nohighlight">
 \[\mathrm{p}\left(\psi|A,\sigma,\tau,\sigma_{\tau},\varpi\right)=1-\varpi+\left(2\varpi-1\right)\left[\mathrm{H}\left(A\right)+\psi-2\mathrm{H}\left(A\right)\varpi\right]\]</div>
 <p>The different symbols in this equation are:</p>
 <table border="1" class="docutils">
@@ -240,44 +232,44 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><span class="math">\(\psi\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\psi\)</span></td>
 <td>Polarity Probability</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(A\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(A\)</span></td>
 <td>Amplitude</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(\sigma\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\sigma\)</span></td>
 <td>Trace Noise</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(\tau\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\tau\)</span></td>
 <td>Pick Time</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(\sigma_{\tau}\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\sigma_{\tau}\)</span></td>
 <td>Pick Time Noise</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(\varpi\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\varpi\)</span></td>
 <td>Mispick Probability</td>
 </tr>
 </tbody>
 </table>
-<p>and <span class="math">\(\mathrm{H}\left(x\right)\)</span> is the Heaviside step function, given by <span class="math">\(\mathrm{H}\left(x\right)=\int_{-\infty}^{x}\delta\left(s\right)\mathrm{d}s\)</span>.</p>
+<p>and <span class="math notranslate nohighlight">\(\mathrm{H}\left(x\right)\)</span> is the Heaviside step function, given by <span class="math notranslate nohighlight">\(\mathrm{H}\left(x\right)=\int_{-\infty}^{x}\delta\left(s\right)\mathrm{d}s\)</span>.</p>
 <div class="section" id="amplitude-ratio-pdf">
 <span id="ratio-pdf-label"></span><h2>7.5. Amplitude Ratio <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a><a class="headerlink" href="#amplitude-ratio-pdf" title="Permalink to this headline">¶</a></h2>
 </div>
-<p>The amplitude ratio <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> used in <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> is based on the ratio <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> for two gaussian distributed variables (<a class="reference internal" href="references.html#hinkley-1969"><span class="std std-ref">Hinkley, 1969</span></a>):</p>
-<div class="math">
+<p>The amplitude ratio <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> used in <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> is based on the ratio <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> for two gaussian distributed variables (<a class="reference internal" href="references.html#hinkley-1969"><span class="std std-ref">Hinkley, 1969</span></a>):</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}P\left(r\right)=\frac{b\left(r\right)d\left(r\right)}{\sigma_{x}\sigma_{y}a^{3}\left(r\right)\sqrt{2\pi}}\left[\Phi\left(\frac{b\left(r\right)}{a\left(r\right)\sqrt{1-\rho^{2}}}\right)-\Phi\left(\frac{-b\left(r\right)}{a\left(r\right)\sqrt{1-\rho^{2}}}\right)\right]\\
 +\frac{\sqrt{1-\rho^{2}}}{\pi\sigma_{x}\sigma_{y}a^{2}\left(r\right)}e^{\left(-\frac{c}{2\left(1-\rho^{2}\right)}\right)}\end{split}\]</div>
-<p>With coefficients <span class="math">\(a\left(r\right)\)</span>, <span class="math">\(b\left(r\right)\)</span>, <span class="math">\(c\)</span>  and <span class="math">\(d\left(r\right)\)</span> given by :</p>
-<div class="math">
+<p>With coefficients <span class="math notranslate nohighlight">\(a\left(r\right)\)</span>, <span class="math notranslate nohighlight">\(b\left(r\right)\)</span>, <span class="math notranslate nohighlight">\(c\)</span>  and <span class="math notranslate nohighlight">\(d\left(r\right)\)</span> given by :</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}a\left(r\right) =   \sqrt{\frac{r^{2}}{\sigma_{x}^{2}}-2\rho\frac{r}{\sigma_{x}\sigma_{y}}+\frac{1}{\sigma_{y}^{2}}}\\
 b\left(r\right) =   \frac{\mu_{x}r}{\sigma_{x}^{2}}-\rho\frac{\mu_{x}+\mu_{y}r}{\sigma_{x}\sigma_{y}}+\frac{\mu_{y}}{\sigma_{y}^{2}}\\
 c   =   \frac{\mu_{x}^{2}}{\sigma_{x}^{2}}-2\rho\frac{\mu_{x}\mu_{y}}{\sigma_{x}\sigma_{y}}+\frac{\mu_{y}^{2}}{\sigma_{y}^{2}}\\
 d\left(r\right) =   e^{\left(\frac{b^{2}\left(r\right)-ca^{2}\left(r\right)}{2\left(1-\rho^{2}\right)a^{2}\left(r\right)}\right)}\\\end{split}\]</div>
 <p>The resultant <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> is (unsigned amplitude ratios):</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[P\left(R=r\,|\, A_{x},A_{y},\sigma_{x},\sigma_{y}\right)=\mathcal{R_{N}}\left(r,A_{x},A_{y},\sigma_{x},\sigma_{y}\right)+\mathcal{R_{N}}\left(-r,A_{x},A_{y},\sigma_{x},\sigma_{y}\right)\]</div>
-<p>With <span class="math">\(\mathcal{R_{N}}\left(r,\mu_{x},\mu_{y},\sigma_{x},\sigma_{y}\right)\)</span> referring to the ratio <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> above, since <span class="math">\(\rho\)</span>, the correlation between the variables, is zero.</p>
+<p>With <span class="math notranslate nohighlight">\(\mathcal{R_{N}}\left(r,\mu_{x},\mu_{y},\sigma_{x},\sigma_{y}\right)\)</span> referring to the ratio <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> above, since <span class="math notranslate nohighlight">\(\rho\)</span>, the correlation between the variables, is zero.</p>
 <p>The different symbols in this equation are:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -290,13 +282,13 @@ d\left(r\right) =   e^{\left(\frac{b^{2}\left(r\right)-ca^{2}\left(r\right)}{2\l
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><span class="math">\(R\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(R\)</span></td>
 <td>Amplitude Ratio</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(A\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(A\)</span></td>
 <td>Amplitude</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(\sigma\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\sigma\)</span></td>
 <td>Amplitude Noise</td>
 </tr>
 </tbody>
@@ -305,9 +297,7 @@ d\left(r\right) =   e^{\left(\frac{b^{2}\left(r\right)-ca^{2}\left(r\right)}{2\l
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -326,11 +316,11 @@ d\left(r\right) =   e^{\left(\frac{b^{2}\left(r\right)-ca^{2}\left(r\right)}{2\l
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -348,7 +338,8 @@ d\left(r\right) =   e^{\left(\frac{b^{2}\left(r\right)-ca^{2}\left(r\right)}{2\l
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -365,19 +356,13 @@ d\left(r\right) =   e^{\left(\frac{b^{2}\left(r\right)-ca^{2}\left(r\right)}{2\l
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

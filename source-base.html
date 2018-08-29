@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,30 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="up" title="3.1.2. MTfit.algorithms" href="source-algorithms.html"/>
-        <link rel="next" title="3.1.2.2.2. MTfit.algorithms.monte_carlo" href="source-monte_carlo.html"/>
-        <link rel="prev" title="3.1.2. MTfit.algorithms" href="source-algorithms.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3.1.2.2.2. MTfit.algorithms.monte_carlo" href="source-monte_carlo.html" />
+    <link rel="prev" title="3.1.2. MTfit.algorithms" href="source-algorithms.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -64,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -72,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -144,7 +134,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -152,9 +142,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -202,7 +193,7 @@
             
   <div class="section" id="mtfit-algorithms-base">
 <h1>3.1.2.2.1. MTfit.algorithms.base<a class="headerlink" href="#mtfit-algorithms-base" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">algorithms/base.py</span>
 <span class="sd">******************</span>
 
@@ -225,12 +216,20 @@
 
 <span class="kn">from</span> <span class="nn">..sampling</span> <span class="k">import</span> <span class="n">Sample</span><span class="p">,</span> <span class="n">FileSample</span><span class="p">,</span> <span class="n">_6sphere_prior</span>
 <span class="kn">from</span> <span class="nn">..utilities.extensions</span> <span class="k">import</span> <span class="n">get_extensions</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">cprobability</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="n">cprobability</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span>
+
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MTfit.algorithms&#39;</span><span class="p">)</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">..probability</span> <span class="k">import</span> <span class="n">cprobability</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">cprobability</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error importing c extension&#39;</span><span class="p">)</span>
+    <span class="n">cprobability</span> <span class="o">=</span> <span class="kc">None</span>
+
 
 <span class="c1"># No. of iterations to print output on</span>
 <span class="n">PRINT_N_ITERATIONS</span> <span class="o">=</span> <span class="mi">20</span>
@@ -345,7 +344,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">pdf_sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="p">(</span><span class="n">number_events</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">number_events</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">max_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39; BaseAlgorithm has no max_value&#39;</span>
+        <span class="k">return</span> <span class="s1">&#39;BaseAlgorithm has no max_value&#39;</span>
 
     <span class="k">def</span> <span class="nf">random_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -431,6 +430,8 @@
         <span class="c1"># Check CYTHON code - use C code if possible</span>
         <span class="k">if</span> <span class="n">cprobability</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cprobability</span><span class="o">.</span><span class="n">random_dc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
         <span class="c1"># Use random_type for DC eigenvalues</span>
         <span class="n">dc_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)]])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_type</span><span class="p">(</span><span class="n">dc_diag</span><span class="p">)</span>
@@ -557,6 +558,8 @@
         <span class="n">ns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_samples</span>
     <span class="k">if</span> <span class="n">cprobability</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cprobability</span><span class="o">.</span><span class="n">random_mt</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
     <span class="c1"># Reseed np.random and generate new random samples.</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
@@ -567,9 +570,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -588,11 +589,11 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -610,7 +611,8 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -627,19 +629,13 @@
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

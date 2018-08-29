@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,29 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="next" title="12. MTplot command line options" href="mtplotcli.html"/>
-        <link rel="prev" title="11. Plotting the Moment Tensor" href="mtplot.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="12. MTplot command line options" href="mtplotcli.html" />
+    <link rel="prev" title="11. Plotting the Moment Tensor" href="mtplot.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -71,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -137,7 +128,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -145,9 +136,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -200,7 +192,7 @@
 <p>This object acts as a handle round a matplotlib figure, handling the moment tensors and creating the plot classes for axes.</p>
 <p>Initialises the MTplot object.</p>
 <p>Multiple plots (subplots) are handled using the matplotlib GridSpec - to create multiple plots, use nested lists for the MTs, with the inner lists corresponding to each column and the outer each row, e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">;</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">;</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">;</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">;</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
 </pre></div>
 </div>
 <p>The total number of columns is given by the max number of points in the nested list. Lists with fewer points will have the last plot stretched to cover the remaining columns.
@@ -656,6 +648,13 @@ resolution: int - resolution for spherical sampling etc</dd>
 </dd></dl>
 
 <dl class="method">
+<dt id="MTfit.plot.plot_classes._FocalSpherePlot._ax_plot">
+<code class="descname">_ax_plot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_FocalSpherePlot._ax_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._FocalSpherePlot._ax_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main plotting function</p>
+<p>Plots the axis</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="MTfit.plot.plot_classes._FocalSpherePlot._axis_lines">
 <code class="descname">_axis_lines</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_FocalSpherePlot._axis_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._FocalSpherePlot._axis_lines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the axis lines through the origin</p>
@@ -685,6 +684,12 @@ resolution: int - resolution for spherical sampling etc</dd>
 <dt id="MTfit.plot.plot_classes._FocalSpherePlot._convert">
 <code class="descname">_convert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MTfit.plot.plot_classes._FocalSpherePlot._convert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles MT conversion to coordinates (setting xdata,ydata,zdata (if required) and cdata attributes)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MTfit.plot.plot_classes._FocalSpherePlot._convert_mts">
+<code class="descname">_convert_mts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_FocalSpherePlot._convert_mts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._FocalSpherePlot._convert_mts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the moment tensors as required</p>
 </dd></dl>
 
 <dl class="method">
@@ -1989,6 +1994,18 @@ zorder: float - z index of the surface (positive higher)</dd>
 </dd></dl>
 
 <dl class="method">
+<dt id="MTfit.plot.plot_classes._RiedeselJordanPlot._stations">
+<code class="descname">_stations</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_RiedeselJordanPlot._stations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._RiedeselJordanPlot._stations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots stations on the focal sphere</p>
+<dl class="docutils">
+<dt>Keyword Args</dt>
+<dd>lim: float - limit of the focal sphere (projection dependent)
+colors: tuple - tuple of color descriptions for stations with negative, no and positive polarity
+marker: tuple - tuple of marker descriptions for stations with negative, no and positive polarity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="MTfit.plot.plot_classes._RiedeselJordanPlot._surf_plot">
 <code class="descname">_surf_plot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em>, <em>zorder=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MTfit.plot.plot_classes._RiedeselJordanPlot._surf_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call to plot a surface
@@ -3108,9 +3125,7 @@ zorder: float - z order of the plane (larger is on top)</dd>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -3129,11 +3144,11 @@ zorder: float - z order of the plane (larger is on top)</dd>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -3151,7 +3166,8 @@ zorder: float - z order of the plane (larger is on top)</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -3168,19 +3184,13 @@ zorder: float - z order of the plane (larger is on top)</dd>
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

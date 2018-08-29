@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,29 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="next" title="10. MTfit command line options" href="cli.html"/>
-        <link rel="prev" title="8. MTfit.algorithms: Search Algorithms" href="algorithms.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. MTfit command line options" href="cli.html" />
+    <link rel="prev" title="8. MTfit.algorithms: Search Algorithms" href="algorithms.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -71,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -128,7 +119,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -136,9 +127,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -182,7 +174,7 @@
             
   <div class="section" id="convert">
 <h1>9. convert<a class="headerlink" href="#convert" title="Permalink to this headline">¶</a></h1>
-<p><code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> contains a submodule <code class="xref py py-mod docutils literal"><span class="pre">MTfit.convert</span></code> that can handle moment tensor conversions. Mostly it is used with the <code class="docutils literal"><span class="pre">--convert</span></code> flag for converting the moment tensor results to the different source  parameterisations. However it can be used separately, and the functions are described here.</p>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> contains a submodule <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit.convert</span></code> that can handle moment tensor conversions. Mostly it is used with the <code class="docutils literal notranslate"><span class="pre">--convert</span></code> flag for converting the moment tensor results to the different source  parameterisations. However it can be used separately, and the functions are described here.</p>
 <span class="target" id="module-MTfit.convert.moment_tensor_conversion"></span><div class="section" id="moment-tensor-conversion-py">
 <h2>9.1. moment_tensor_conversion.py<a class="headerlink" href="#moment-tensor-conversion-py" title="Permalink to this headline">¶</a></h2>
 <p>Module containing moment tensor conversion functions. Acts on the parameters of the moment tensor 3x3 form or the modified 6-vector form, dependent on the name</p>
@@ -321,7 +313,7 @@ delta: numpy array of delta values</dd>
 <dt id="MTfit.convert.moment_tensor_conversion.MT33_MT6">
 <code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT33_MT6</code><span class="sig-paren">(</span><em>MT33</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT33_MT6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT33_MT6" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a 3x3 matrix to six vector maintaining normalisation. 6-vector has the form:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
 <span class="n">Myy</span>
 <span class="n">Mzz</span>
 <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Mxy</span>
@@ -369,7 +361,7 @@ delta: numpy array of delta values</dd>
 <dt id="MTfit.convert.moment_tensor_conversion.MT6_MT33">
 <code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_MT33</code><span class="sig-paren">(</span><em>MT6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT6_MT33"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT6_MT33" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a six vector to a 3x3 MT maintaining normalisation. 6-vector has the form:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
 <span class="n">Myy</span>
 <span class="n">Mzz</span>
 <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Mxy</span>
@@ -406,7 +398,7 @@ delta: numpy array of delta values</dd>
 <code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT6_Tape</code><span class="sig-paren">(</span><em>MT6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT6_Tape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT6_Tape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the moment tensor 6-vector to the Tape parameters.</p>
 <p>6-vector has the form:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
 <span class="n">Myy</span>
 <span class="n">Mzz</span>
 <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Mxy</span>
@@ -434,7 +426,7 @@ delta: numpy array of delta values</dd>
 Leaney,S, 2011. A new moment-tensor decomposition for seismic events in anisotropic
 media, GJI, 188(1), 343-370.
 The 6-vector has the form:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
 <span class="n">Myy</span>
 <span class="n">Mzz</span>
 <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Mxy</span>
@@ -444,7 +436,7 @@ The 6-vector has the form:</p>
 </div>
 <p>The stiffness tensor can be provided as an input, as a list of the 21 elements of the
 upper triangular part of the Voigt stiffness matrix:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
                 <span class="n">C_22</span><span class="p">,</span> <span class="n">C_23</span><span class="p">,</span> <span class="n">C_24</span><span class="p">,</span> <span class="n">C_25</span><span class="p">,</span> <span class="n">C_26</span><span class="p">,</span>
                       <span class="n">C_33</span><span class="p">,</span> <span class="n">C_34</span><span class="p">,</span> <span class="n">C_35</span><span class="p">,</span> <span class="n">C_36</span><span class="p">,</span>
                             <span class="n">C_44</span><span class="p">,</span> <span class="n">C_45</span><span class="p">,</span> <span class="n">C_46</span><span class="p">,</span>
@@ -474,7 +466,7 @@ c: list or numpy array of the 21 element input stiffness tensor</dd>
 <code class="descclassname">MTfit.convert.moment_tensor_conversion.</code><code class="descname">MT6c_D6</code><span class="sig-paren">(</span><em>MT6, c=[3.0, 1.0, 1.0, 0, 0, 0, 3.0, 1.0, 0, 0, 0, 3.0, 0, 0, 0, 1.0, 0, 0, 1.0, 0, 1.0]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/convert/moment_tensor_conversion.html#MT6c_D6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.convert.moment_tensor_conversion.MT6c_D6" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the moment tensor 6-vector to the potency tensor.
 The 6-vector has the form:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
 <span class="n">Myy</span>
 <span class="n">Mzz</span>
 <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Mxy</span>
@@ -484,7 +476,7 @@ The 6-vector has the form:</p>
 </div>
 <p>The stiffness tensor can be provided as an input, as a list of the 21 elements of the
 upper triangular part of the Voigt stiffness matrix:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
                 <span class="n">C_22</span><span class="p">,</span> <span class="n">C_23</span><span class="p">,</span> <span class="n">C_24</span><span class="p">,</span> <span class="n">C_25</span><span class="p">,</span> <span class="n">C_26</span><span class="p">,</span>
                       <span class="n">C_33</span><span class="p">,</span> <span class="n">C_34</span><span class="p">,</span> <span class="n">C_35</span><span class="p">,</span> <span class="n">C_36</span><span class="p">,</span>
                             <span class="n">C_44</span><span class="p">,</span> <span class="n">C_45</span><span class="p">,</span> <span class="n">C_46</span><span class="p">,</span>
@@ -713,7 +705,7 @@ poisson:[0.25] Poisson ratio on the fault surface.</dd>
 <dd><p>Convert an input stiffness tensor to voigt form</p>
 <p>The stiffness tensor needs to be provided as a list of the 21 elements of the
 upper triangular part of the Voigt stiffness matrix:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
                 <span class="n">C_22</span><span class="p">,</span> <span class="n">C_23</span><span class="p">,</span> <span class="n">C_24</span><span class="p">,</span> <span class="n">C_25</span><span class="p">,</span> <span class="n">C_26</span><span class="p">,</span>
                       <span class="n">C_33</span><span class="p">,</span> <span class="n">C_34</span><span class="p">,</span> <span class="n">C_35</span><span class="p">,</span> <span class="n">C_36</span><span class="p">,</span>
                             <span class="n">C_44</span><span class="p">,</span> <span class="n">C_45</span><span class="p">,</span> <span class="n">C_46</span><span class="p">,</span>
@@ -737,7 +729,7 @@ upper triangular part of the Voigt stiffness matrix:</p>
 <dd><p>Calculate norm of the stiffness tensor.</p>
 <p>The stiffness tensor needs to be provided as a list of the 21 elements of the
 upper triangular part of the Voigt stiffness matrix:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
                 <span class="n">C_22</span><span class="p">,</span> <span class="n">C_23</span><span class="p">,</span> <span class="n">C_24</span><span class="p">,</span> <span class="n">C_25</span><span class="p">,</span> <span class="n">C_26</span><span class="p">,</span>
                       <span class="n">C_33</span><span class="p">,</span> <span class="n">C_34</span><span class="p">,</span> <span class="n">C_35</span><span class="p">,</span> <span class="n">C_36</span><span class="p">,</span>
                             <span class="n">C_44</span><span class="p">,</span> <span class="n">C_45</span><span class="p">,</span> <span class="n">C_46</span><span class="p">,</span>
@@ -761,7 +753,7 @@ upper triangular part of the Voigt stiffness matrix:</p>
 <dd><p>Evaluate if an input stiffness tensor is isotropic</p>
 <p>The stiffness tensor needs to be provided as a list of the 21 elements of the
 upper triangular part of the Voigt stiffness matrix:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
                 <span class="n">C_22</span><span class="p">,</span> <span class="n">C_23</span><span class="p">,</span> <span class="n">C_24</span><span class="p">,</span> <span class="n">C_25</span><span class="p">,</span> <span class="n">C_26</span><span class="p">,</span>
                       <span class="n">C_33</span><span class="p">,</span> <span class="n">C_34</span><span class="p">,</span> <span class="n">C_35</span><span class="p">,</span> <span class="n">C_36</span><span class="p">,</span>
                             <span class="n">C_44</span><span class="p">,</span> <span class="n">C_45</span><span class="p">,</span> <span class="n">C_46</span><span class="p">,</span>
@@ -785,7 +777,7 @@ upper triangular part of the Voigt stiffness matrix:</p>
 <dd><p>Calculate the isotropic stiffness tensor</p>
 <p>Calculate isotropic stiffness parameters. The input parameters are either
 the two lame parameters lambda and mu, or is a full 21 element stiffness tensor:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">C_11</span><span class="p">,</span> <span class="n">C_12</span><span class="p">,</span> <span class="n">C_13</span><span class="p">,</span> <span class="n">C_14</span><span class="p">,</span> <span class="n">C_15</span><span class="p">,</span> <span class="n">C_16</span><span class="p">,</span>
                 <span class="n">C_22</span><span class="p">,</span> <span class="n">C_23</span><span class="p">,</span> <span class="n">C_24</span><span class="p">,</span> <span class="n">C_25</span><span class="p">,</span> <span class="n">C_26</span><span class="p">,</span>
                       <span class="n">C_33</span><span class="p">,</span> <span class="n">C_34</span><span class="p">,</span> <span class="n">C_35</span><span class="p">,</span> <span class="n">C_36</span><span class="p">,</span>
                             <span class="n">C_44</span><span class="p">,</span> <span class="n">C_45</span><span class="p">,</span> <span class="n">C_46</span><span class="p">,</span>
@@ -873,9 +865,7 @@ plunge: float, vector plunge</dd>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -894,11 +884,11 @@ plunge: float, vector plunge</dd>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -916,7 +906,8 @@ plunge: float, vector plunge</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -933,19 +924,13 @@ plunge: float, vector plunge</dd>
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

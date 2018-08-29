@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,27 +24,18 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -61,7 +52,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -69,7 +60,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -123,7 +114,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -131,9 +122,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -177,24 +169,22 @@
             
   <div class="section" id="introduction">
 <h1>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>Source inversion is carried out at many seismological observatories and research groups around the world. <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> builds on the approach introduced in <a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh, 2015</span></a>, using a Bayesian approach to source inversion for polarity and amplitude ratios, as well as automated Bayesian polarity probability estimates.  This approach differs from commonly used existing approaches, such as FPFIT (<a class="reference internal" href="references.html#reasenberg-1985"><span class="std std-ref">Reasenberg and Oppenheimer 1985</span></a>), HASH (<a class="reference internal" href="references.html#hardebeck-2002"><span class="std std-ref">Hardebeck and Shearer 2002</span></a>, <a class="reference internal" href="references.html#hardebeck-2003"><span class="std std-ref">2003</span></a>) and FOCMEC (<a class="reference internal" href="references.html#snoke-2003"><span class="std std-ref">Snoke 2003</span></a>), because it uses polarities and amplitude ratios in a Bayesian framework to estimate the full source PDF for the double-couple and full moment tensor model spaces. The approach can include location and velocity model uncertainty, as well as marginalising over measurement uncertainties in the data</p>
+<p>Source inversion is carried out at many seismological observatories and research groups around the world. <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> builds on the approach introduced in <a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh, 2015</span></a>, using a Bayesian approach to source inversion for polarity and amplitude ratios, as well as automated Bayesian polarity probability estimates.  This approach differs from commonly used existing approaches, such as FPFIT (<a class="reference internal" href="references.html#reasenberg-1985"><span class="std std-ref">Reasenberg and Oppenheimer 1985</span></a>), HASH (<a class="reference internal" href="references.html#hardebeck-2002"><span class="std std-ref">Hardebeck and Shearer 2002</span></a>, <a class="reference internal" href="references.html#hardebeck-2003"><span class="std std-ref">2003</span></a>) and FOCMEC (<a class="reference internal" href="references.html#snoke-2003"><span class="std std-ref">Snoke 2003</span></a>), because it uses polarities and amplitude ratios in a Bayesian framework to estimate the full source PDF for the double-couple and full moment tensor model spaces. The approach can include location and velocity model uncertainty, as well as marginalising over measurement uncertainties in the data</p>
 <p><a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. (2015)</span></a> introduced a Bayesian approach to source inversion for polarity and amplitude ratios, as well as automated Bayesian polarity probability estimates (<a class="reference internal" href="references.html#pugh-2016b"><span class="std std-ref">Pugh et al., 2015</span></a>). These approaches have been developed into MTfit, a Python module for source inversion. Python is a common programming and scripting language with many scientific modules available, both for mathematical calculation such as <a class="reference external" href="http://www.numpy.org">NumPy</a> and <a class="reference external" href="http://www.scipy.org">SciPy</a>, and for seismological methods such as <a class="reference external" href="http://www.obspy.org">ObsPy</a> (<a class="reference internal" href="references.html#beyreuther-2010"><span class="std std-ref">Beyreuther et al. 2010</span></a>).</p>
-<p>Python and many of its modules are open source, allowing easy development and removing licensing restrictions. Moreover, Python is platform independent, intuitive and accessible, with a good shell interface in the form of <a class="reference external" href="https://ipython.org/">iPython</a>. It is used in many fields and is easy to install on almost any computer platform. Python can also interface easily with C and fortran libraries, as well as calling functions from compiled C modules, such as those generated with <a class="reference external" href="http://www.cython.org">Cython</a>, with no difference from normal Python functions. <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> has been written in Python 2.7, and may not be compatible with Python 3.</p>
+<p>Python and many of its modules are open source, allowing easy development and removing licensing restrictions. Moreover, Python is platform independent, intuitive and accessible, with a good shell interface in the form of <a class="reference external" href="https://ipython.org/">iPython</a>. It is used in many fields and is easy to install on almost any computer platform. Python can also interface easily with C and fortran libraries, as well as calling functions from compiled C modules, such as those generated with <a class="reference external" href="http://www.cython.org">Cython</a>, with no difference from normal Python functions. <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> has been written in Python 2.7, and may not be compatible with Python 3.</p>
 <p>MTfit has been used in several studies, including those reported by <a class="reference internal" href="references.html#wilks-2015"><span class="std std-ref">Wilks et al. 2015</span></a>, <a class="reference internal" href="references.html#greenfield-2015"><span class="std std-ref">Greenfield and White 2015</span></a>, <a class="reference internal" href="references.html#watson-2015"><span class="std std-ref">Mildon et al. 2015</span></a>, and <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. 2015</span></a>.</p>
 <p>The polarity probability estimates can be calculated using the approach described in:ref:<cite>Pugh, 2016a &lt;Pugh-2016a&gt;</cite>.</p>
-<p>This manual describes how to install and run <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> in chapters  and .
-Chapters  and  provide an introduction to using <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> with different algorithms and parameter choices.
-All the data and scripts to run these examples can be found in the <code class="docutils literal"><span class="pre">MTfit/examples</span></code> directory. The basic theory underlying <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> is introduced in chapters  and , and <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. (2016a)</span></a> provides a full derivation and explanation of the theory.
+<p>This manual describes how to install and run <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> in chapters  and .
+Chapters  and  provide an introduction to using <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> with different algorithms and parameter choices.
+All the data and scripts to run these examples can be found in the <code class="docutils literal notranslate"><span class="pre">MTfit/examples</span></code> directory. The basic theory underlying <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> is introduced in chapters  and , and <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al. (2016a)</span></a> provides a full derivation and explanation of the theory.
 The different search algorithms are described in chapter . These are  investigated in more detail in <a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh et al. (2015t)</span></a>.
-The moment tensor conversion submodule, <code class="xref py py-mod docutils literal"><span class="pre">MTconvert</span></code> is introduced in chapter .
-Chapter  presents the different command line options for <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code>. Chapter  describes the different plotting options uisng the <code class="xref py py-mod docutils literal"><span class="pre">MTfit.plot</span></code> submodule. Chapter  presents the different command line options for <code class="xref py py-mod docutils literal"><span class="pre">MTplot</span></code> script. The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">MTfit.inversion.Inversion</span></code></a> class, used for carrying out the forward model is documented in chapter . Lastly the different ways <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> can be extended are shown in chapter .</p>
+The moment tensor conversion submodule, <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTconvert</span></code> is introduced in chapter .
+Chapter  presents the different command line options for <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code>. Chapter  describes the different plotting options uisng the <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit.plot</span></code> submodule. Chapter  presents the different command line options for <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTplot</span></code> script. The <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">MTfit.inversion.Inversion</span></code></a> class, used for carrying out the forward model is documented in chapter . Lastly the different ways <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> can be extended are shown in chapter .</p>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -204,11 +194,11 @@ Chapter  presents the different command line options for <code class="xref py py
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -226,7 +216,8 @@ Chapter  presents the different command line options for <code class="xref py py
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -243,19 +234,13 @@ Chapter  presents the different command line options for <code class="xref py py
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

@@ -9,7 +9,7 @@ Command line usage::
     [--station_marker_size STATION_MARKERSIZE] [--showmaxlikelihood]
     [--showmean] [--grid_lines] [--color COLOR] [--type_label]
     [--hex_bin] [--projection PROJECTION] [--save SAVE_FILE]
-    [--save-dpi SAVE_DPI] [--version]
+    [--save-dpi SAVE_DPI] [-q] [--version]
     [data_file]
 
 
@@ -248,6 +248,14 @@ to the file)
   --save-dpi SAVE_DPI, --savedpi SAVE_DPI, --save_dpi SAVE_DPI
 
 Output file dpi
+
+
+---------------------------
+
+::
+
+  -q, --quiet, --hide   Don't show the plot on screen
+
 
 
 ---------------------------

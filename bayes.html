@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,29 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="next" title="7. Probability" href="probability.html"/>
-        <link rel="prev" title="5. Tutorial: Using MTfit with Real Data" href="real-tutorial.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Probability" href="probability.html" />
+    <link rel="prev" title="5. Tutorial: Using MTfit with Real Data" href="real-tutorial.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -71,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -130,7 +121,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -138,9 +129,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -184,36 +176,36 @@
             
   <div class="section" id="bayesian-approach">
 <h1>6. Bayesian Approach<a class="headerlink" href="#bayesian-approach" title="Permalink to this headline">¶</a></h1>
-<p>The Bayesian approach used by <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> is based on the approach described in <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al, 2016a</span></a></p>
+<p>The Bayesian approach used by <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> is based on the approach described in <a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al, 2016a</span></a></p>
 <div class="section" id="bayes-theory">
 <h2>6.1. Bayes Theory<a class="headerlink" href="#bayes-theory" title="Permalink to this headline">¶</a></h2>
-<p>Inversion approaches fit model parameters to observed data, to find the best fitting parameters. In <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code>, the probability of the data being correct is evaluated for the possible sources. The resulting estimates of the <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> can be combined for all the data to approximate the true <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> for the source. This <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> can be considered to describe the probability of the observed data for a given source, the likelihood, <span class="math">\(p\left(\mathrm{data}\,|\mathrm{\, model}\right)\)</span>. However the value of interest in such an inversion is the probability of the model given the observed data, the posterior <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>. This can be evaluated from the likelihood using Bayes' Theory (<a class="reference internal" href="references.html#bayes-1763"><span class="std std-ref">Bayes and Price, 1763</span></a> , <a class="reference internal" href="references.html#laplace-1812"><span class="std std-ref">Laplace, 1812</span></a> , <a class="reference internal" href="references.html#sivia-2000"><span class="std std-ref">Sivia, 2000</span></a>) is given simply by:</p>
-<div class="math">
+<p>Inversion approaches fit model parameters to observed data, to find the best fitting parameters. In <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code>, the probability of the data being correct is evaluated for the possible sources. The resulting estimates of the <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> can be combined for all the data to approximate the true <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> for the source. This <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> can be considered to describe the probability of the observed data for a given source, the likelihood, <span class="math notranslate nohighlight">\(p\left(\mathrm{data}\,|\mathrm{\, model}\right)\)</span>. However the value of interest in such an inversion is the probability of the model given the observed data, the posterior <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>. This can be evaluated from the likelihood using Bayes' Theory (<a class="reference internal" href="references.html#bayes-1763"><span class="std std-ref">Bayes and Price, 1763</span></a> , <a class="reference internal" href="references.html#laplace-1812"><span class="std std-ref">Laplace, 1812</span></a> , <a class="reference internal" href="references.html#sivia-2000"><span class="std std-ref">Sivia, 2000</span></a>) is given simply by:</p>
+<div class="math notranslate nohighlight">
 \[\mathrm{p}\left(\mathrm{model\,|\, data}\right)=\frac{\mathrm{p}\left(\mathrm{data}\,|\mathrm{\, model}\right)\, \mathrm{p}\left(\mathrm{model}\right)}{\mathrm{p}\left(\mathrm{data}\right)}\]</div>
-<p>This relates the data likelihood <span class="math">\(\mathrm{p}\left(\mathrm{data}\,|\mathrm{\, model}\right)\)</span> to the posterior probability <span class="math">\(\mathrm{p}\left(\mathrm{model\,|\, data}\right)\)</span> via the prior probabilities <span class="math">\(\mathrm{p}\left(\mathrm{model}\right)\)</span> and <span class="math">\(\mathrm{p}\left(\mathrm{data}\right)\)</span>. The prior distributions incorporate the known information about the two parameters, and although the choice of prior is not trivial, it does not have a large affect on the posterior <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> given enough data.</p>
+<p>This relates the data likelihood <span class="math notranslate nohighlight">\(\mathrm{p}\left(\mathrm{data}\,|\mathrm{\, model}\right)\)</span> to the posterior probability <span class="math notranslate nohighlight">\(\mathrm{p}\left(\mathrm{model\,|\, data}\right)\)</span> via the prior probabilities <span class="math notranslate nohighlight">\(\mathrm{p}\left(\mathrm{model}\right)\)</span> and <span class="math notranslate nohighlight">\(\mathrm{p}\left(\mathrm{data}\right)\)</span>. The prior distributions incorporate the known information about the two parameters, and although the choice of prior is not trivial, it does not have a large affect on the posterior <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> given enough data.</p>
 </div>
 <div class="section" id="uncertainties">
 <h2>6.2. Uncertainties<a class="headerlink" href="#uncertainties" title="Permalink to this headline">¶</a></h2>
 <p>Source inversion is particularly sensitive to uncertainties, and since it is usually carried out after several other required steps, the effect of the uncertainties may be difficult to understand. The uncertainties can be broken down into several different types: instrument errors, model errors and background noise.</p>
-<p>Although the interdependencies between the uncertainties can be explored, a quantitative relationship is not known. For such a treatment to be truly rigorous, the variations in these errors must be included throughout the inversion. The Bayesian formulation allows rigorous inclusion of uncertainties in the problem using marginalisation. Marginalisation removes the dependence of the joint <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>, <span class="math">\(P(A,B)\)</span> , on one of the variables, by integrating over the <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> for that variable:</p>
-<div class="math">
+<p>Although the interdependencies between the uncertainties can be explored, a quantitative relationship is not known. For such a treatment to be truly rigorous, the variations in these errors must be included throughout the inversion. The Bayesian formulation allows rigorous inclusion of uncertainties in the problem using marginalisation. Marginalisation removes the dependence of the joint <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>, <span class="math notranslate nohighlight">\(P(A,B)\)</span> , on one of the variables, by integrating over the <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a> for that variable:</p>
+<div class="math notranslate nohighlight">
 \[\mathrm{p}\left(A\right)=\int \mathrm{p}\left(A\,,\, B\right)dB=\int \mathrm{p}\left(A\,|\, B\right)\mathrm{p}\left(B\right)dB\]</div>
 <p>Marginalisation can be used to incorporate the uncertainties in the inversion into the final <a class="reference internal" href="glossary.html#term-pdf"><span class="xref std std-term">PDF</span></a>.</p>
-<p>It is assumed that the noise has a mean and variance that are measurable, and therefore the most ambiguous (maximum entropy) distribution for these measurements is the Gaussian distribution (<a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al, 2015</span></a>). For de-meaned data, the noise can be assumed also to have zero mean, and a standard deviation <span class="math">\(\sigma_{mes}\)</span>, so that the PDF <span class="math">\(\mathrm{p}\left(\Delta_{mes}\right)\)</span>, is:</p>
-<div class="math">
+<p>It is assumed that the noise has a mean and variance that are measurable, and therefore the most ambiguous (maximum entropy) distribution for these measurements is the Gaussian distribution (<a class="reference internal" href="references.html#pugh-2016a"><span class="std std-ref">Pugh et al, 2015</span></a>). For de-meaned data, the noise can be assumed also to have zero mean, and a standard deviation <span class="math notranslate nohighlight">\(\sigma_{mes}\)</span>, so that the PDF <span class="math notranslate nohighlight">\(\mathrm{p}\left(\Delta_{mes}\right)\)</span>, is:</p>
+<div class="math notranslate nohighlight">
 \[\mathrm{p}\left(\Delta_{mes}\right)=\frac{1}{\sqrt{2\pi\sigma_{mes}^{2}}}\mathrm{e}^{-\frac{\Delta_{mes}^{2}}{2\sigma_{mes}^{2}}}\]</div>
 <p>There are several different types of uncertainties however most can be simplified to independent uncertainties on each trace, and uncertainties in the underlying model.</p>
 </div>
 <div class="section" id="posterior-pdf">
 <h2>6.3. Posterior PDF<a class="headerlink" href="#posterior-pdf" title="Permalink to this headline">¶</a></h2>
 <p>The likelihoods for the two different data types are described <a class="reference internal" href="probability.html"><span class="doc">here</span></a>.</p>
-<p>The posterior PDFs for the data used in <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> are, for a known Earth model:</p>
-<div class="math">
+<p>The posterior PDFs for the data used in <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> are, for a known Earth model:</p>
+<div class="math notranslate nohighlight">
 \[\mathrm{p}\left(\mathbf{d'}\:|\:\mathbf{M},\mathbf{t},\mathbf{\epsilon},\mathbf{k}\right)=\iint\sum_{j=1}^{M}\prod_{i=1}^{N}\left[\mathrm{p}\left(Y_{i}\:|\:\mathbf{\mathbf{A_{ij}}}=\mathbf{a}_{j}\cdot\mathbf{\tilde{M}},\mathbf{\sigma_{i}},\varpi_{i}\right)\mathrm{p}\left(\mathbf{R_{i}}\:|\:\mathbf{\mathbf{A_{i}}}=\mathbf{a}_{j}\cdot\mathbf{\tilde{M}},\mathbf{\sigma_{i}},\varpi_{i}\right)\right]\mathrm{p}\left(\mathbf{\sigma}\right)\mathrm{p}\left(\mathbf{\varpi}\right)d\mathbf{\sigma}d\mathbf{\varpi}\]</div>
-<p>An unknown earth model, samples from the model distribution, <span class="math">\(\mathbf{G}_{k}\)</span>, are included using a <a class="reference internal" href="glossary.html#term-monte-carlo-method"><span class="xref std std-term">Monte Carlo method</span></a> based marginalisation:</p>
-<div class="math">
+<p>An unknown earth model, samples from the model distribution, <span class="math notranslate nohighlight">\(\mathbf{G}_{k}\)</span>, are included using a <a class="reference internal" href="glossary.html#term-monte-carlo-method"><span class="xref std std-term">Monte Carlo method</span></a> based marginalisation:</p>
+<div class="math notranslate nohighlight">
 \[\mathrm{p}\left(\mathbf{d'}\:|\:\mathbf{M},\mathbf{t},\mathbf{\epsilon},\mathbf{k}\right)=\iint\sum_{k=1}^{Q}\sum_{j=1}^{M}\prod_{i=1}^{N}\left[\mathrm{p}\left(Y_{i}\:|\:\mathbf{\mathbf{A_{ijk}}}=\mathbf{a}_{jk}\cdot\mathbf{\tilde{M}},\mathbf{\sigma_{i}},\varpi_{i}\right)\mathrm{p}\left(\mathbf{R_{i}}\:|\:\mathbf{\mathbf{A_{ijk}}}=\mathbf{a}_{jk}\cdot\mathbf{\tilde{M}},\mathbf{\sigma_{i}},\varpi_{i}\right)\right]\mathrm{p}\left(\mathbf{\sigma}\right)\mathrm{p}\left(\mathbf{\varpi}\right)d\mathbf{\sigma}d\mathbf{\varpi},\]</div>
-<p>where <span class="math">\(\mathbf{a}_{jk}=\mathbf{a}\left(\mathbf{x}_{j},\mathbf{G}_{k}\right)\)</span> refers to the station propagation coefficients associated with the location at <span class="math">\(\mathbf{x}_{j}\)</span> and earth model <span class="math">\(\mathbf{G}_{k}\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{a}_{jk}=\mathbf{a}\left(\mathbf{x}_{j},\mathbf{G}_{k}\right)\)</span> refers to the station propagation coefficients associated with the location at <span class="math notranslate nohighlight">\(\mathbf{x}_{j}\)</span> and earth model <span class="math notranslate nohighlight">\(\mathbf{G}_{k}\)</span>.</p>
 <p>A common location method is <a class="reference external" href="http://alomax.free.fr/nlloc">NonLinLoc by Anthony Lomax</a> which can produces samples from the location PDF to be used in the <a class="reference internal" href="glossary.html#term-monte-carlo-method"><span class="xref std std-term">Monte Carlo method</span></a> described above (see <a class="reference internal" href="tutorial.html#location-uncertainty-tutorial-label"><span class="std std-ref">location uncertainty tutorial</span></a>).</p>
 <p>The symbols used in these PDFs are:</p>
 <table border="1" class="docutils">
@@ -227,43 +219,43 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><span class="math">\(Y\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(Y\)</span></td>
 <td>Polarity</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(A\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(A\)</span></td>
 <td>Amplitude</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(\sigma_{y}\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\sigma_{y}\)</span></td>
 <td>Uncertainty</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(\varpi\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\varpi\)</span></td>
 <td>Mispick Probability</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(\mathbf{\tilde{M}}\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\mathbf{\tilde{M}}\)</span></td>
 <td>Moment Tensor 6-vector</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(\mathbf{M}\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\mathbf{M}\)</span></td>
 <td>Moment Tensor</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(\mathbf{a}\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\mathbf{a}\)</span></td>
 <td>Receiver Ray Path Coefficients</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(\sigma\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\sigma\)</span></td>
 <td>Measurment Uncertainty</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(R\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(R\)</span></td>
 <td>Amplitude Ratio</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(A\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(A\)</span></td>
 <td>Amplitude</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(\mathbf{\epsilon}\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\mathbf{\epsilon}\)</span></td>
 <td>Nuisance Parameters</td>
 </tr>
-<tr class="row-odd"><td><span class="math">\(\mathbf{k}\)</span></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\mathbf{k}\)</span></td>
 <td>Known Parameters</td>
 </tr>
-<tr class="row-even"><td><span class="math">\(\mathbf{t}\)</span></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\mathbf{t}\)</span></td>
 <td>Arrival times</td>
 </tr>
 </tbody>
@@ -273,9 +265,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -294,11 +284,11 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -316,7 +306,8 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -333,19 +324,13 @@
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

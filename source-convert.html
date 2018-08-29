@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,30 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="up" title="3. MTfit Source Code" href="source.html"/>
-        <link rel="next" title="3.1.9. MTfit.plot" href="source-plot.html"/>
-        <link rel="prev" title="3.1.7.1. MTfit.extensions.scatangle" href="source-scatangle.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3.1.9. MTfit.plot" href="source-plot.html" />
+    <link rel="prev" title="3.1.7.1. MTfit.extensions.scatangle" href="source-scatangle.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -64,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -72,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -140,7 +130,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -148,9 +138,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -196,7 +187,7 @@
             
   <div class="section" id="mtfit-convert">
 <h1>3.1.8. MTfit.convert<a class="headerlink" href="#mtfit-convert" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">moment_tensor_conversion.py</span>
 <span class="sd">***************************</span>
 
@@ -213,19 +204,23 @@
 <span class="c1"># and non-commercially funded academic research purposes.</span>
 <span class="c1">#</span>
 <span class="c1"># Applications for commercial use should be made to Schlumberger or the University of Cambridge.</span>
-
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">fsolve</span>
 
-<span class="n">_CYTHON</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="k">if</span> <span class="n">_CYTHON</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">cmoment_tensor_conversion</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="n">cmoment_tensor_conversion</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">cmoment_tensor_conversion</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;MTfit.convert&#39;</span><span class="p">)</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">cmoment_tensor_conversion</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">cmoment_tensor_conversion</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error importing c extension&#39;</span><span class="p">)</span>
+    <span class="n">cmoment_tensor_conversion</span> <span class="o">=</span> <span class="kc">None</span>
 
 
 <span class="k">def</span> <span class="nf">MT33_MT6</span><span class="p">(</span><span class="n">MT33</span><span class="p">):</span>
@@ -292,17 +287,19 @@
 <span class="sd">        (numpy.matrix, numpy.matrix, numpy.matrix, numpy.array): tuple of T, N, P</span>
 <span class="sd">                        vectors and Eigenvalue array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">MT6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                <span class="n">MT6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">MT6</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">MT6</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="n">MT6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">MT6</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">MT6</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">MT6</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
-                <span class="n">MT6</span> <span class="o">=</span> <span class="n">MT6</span><span class="o">.</span><span class="n">T</span>
-            <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">MT6_TNPE</span><span class="p">(</span><span class="n">MT6</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">MT6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                    <span class="n">MT6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">MT6</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">MT6</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">MT6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">MT6</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">MT6</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">MT6</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+                    <span class="n">MT6</span> <span class="o">=</span> <span class="n">MT6</span><span class="o">.</span><span class="n">T</span>
+                <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">MT6_TNPE</span><span class="p">(</span><span class="n">MT6</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">MT6</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -503,7 +500,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">        (float, float): u, v  tuple</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">tk_uv</span><span class="p">(</span><span class="n">E_uv</span><span class="p">(</span><span class="n">E</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">tk_uv</span><span class="p">(</span><span class="o">*</span><span class="n">E_tk</span><span class="p">(</span><span class="n">E</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">E_GD</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
@@ -517,16 +514,18 @@
 <span class="sd">        (numpy.array, numpy.array): tuple of gamma, delta</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Expect E to be an array of arrays</span>
             <span class="k">if</span> <span class="n">E</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">E</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">E</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">E</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
                 <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">T</span>
             <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">E_GD</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">E</span><span class="p">))</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">E</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -578,11 +577,13 @@
 <span class="sd">        (float, float, float): tuple of strike, dip and rake angles of fault plane in radians</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">TP_SDR</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">P</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
     <span class="n">N1</span><span class="p">,</span> <span class="n">N2</span> <span class="o">=</span> <span class="n">TP_FP</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">FP_SDR</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">)</span>
 
@@ -606,8 +607,10 @@
         <span class="n">T</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">T</span>
     <span class="k">if</span> <span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
         <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">N1</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="n">P</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="n">P</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="n">P</span><span class="p">)))</span>
-    <span class="n">N2</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="n">P</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="n">P</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="n">P</span><span class="p">)))</span>
+    <span class="n">TP1</span> <span class="o">=</span> <span class="n">T</span><span class="o">+</span><span class="n">P</span>
+    <span class="n">TP2</span> <span class="o">=</span> <span class="n">T</span><span class="o">-</span><span class="n">P</span>
+    <span class="n">N1</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP1</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij,ij-&gt;j&#39;</span><span class="p">,</span> <span class="n">TP1</span><span class="p">,</span> <span class="n">TP1</span><span class="p">))</span>
+    <span class="n">N2</span> <span class="o">=</span> <span class="p">(</span><span class="n">TP2</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij,ij-&gt;j&#39;</span><span class="p">,</span> <span class="n">TP2</span><span class="p">,</span> <span class="n">TP2</span><span class="p">))</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">)</span>
 
 
@@ -627,13 +630,14 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">slip</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">matrixlib</span><span class="o">.</span><span class="n">defmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="p">):</span>
-        <span class="n">slip</span> <span class="o">=</span> <span class="n">slip</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">slip</span><span class="o">*</span><span class="n">slip</span><span class="p">))</span>
+        <span class="n">slip</span> <span class="o">=</span> <span class="n">slip</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">slip</span><span class="o">*</span><span class="n">slip</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">slip</span> <span class="o">=</span> <span class="n">slip</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">slip</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">slip</span><span class="p">))</span>
+        <span class="c1"># Do we need to replace this with einsum</span>
+        <span class="n">slip</span> <span class="o">=</span> <span class="n">slip</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij,ij-&gt;j&#39;</span><span class="p">,</span> <span class="n">slip</span><span class="p">,</span> <span class="n">slip</span><span class="p">))</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">matrixlib</span><span class="o">.</span><span class="n">defmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="p">):</span>
-        <span class="n">normal</span> <span class="o">=</span> <span class="n">normal</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">normal</span><span class="o">*</span><span class="n">normal</span><span class="p">))</span>
+        <span class="n">normal</span> <span class="o">=</span> <span class="n">normal</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">normal</span><span class="o">*</span><span class="n">normal</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">normal</span> <span class="o">=</span> <span class="n">normal</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">normal</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">normal</span><span class="p">))</span>
+        <span class="n">normal</span> <span class="o">=</span> <span class="n">normal</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij,ij-&gt;j&#39;</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">normal</span><span class="p">))</span>
     <span class="n">slip</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">normal</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="n">normal</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">normal</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="n">normal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
@@ -729,8 +733,7 @@
                     <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">strike</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rake</span><span class="p">))</span> <span class="o">-</span>
                     <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">strike</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dip</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">rake</span><span class="p">),</span>
                     <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dip</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">rake</span><span class="p">)])</span>
-    <span class="n">N2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span>
-        <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">strike</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dip</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">strike</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dip</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dip</span><span class="p">)])</span>
+    <span class="n">N2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">strike</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dip</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">strike</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dip</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dip</span><span class="p">)])</span>
     <span class="k">return</span> <span class="n">FP_TNP</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">)</span>
 
 
@@ -750,11 +753,13 @@
 <span class="sd">                        plane in radians</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">SDR_SDR</span><span class="p">(</span><span class="n">strike</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">dip</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">rake</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
     <span class="c1"># Handle multiple inputs</span>
     <span class="n">N1</span><span class="p">,</span> <span class="n">N2</span> <span class="o">=</span> <span class="n">SDR_FP</span><span class="p">(</span><span class="n">strike</span><span class="p">,</span> <span class="n">dip</span><span class="p">,</span> <span class="n">rake</span><span class="p">)</span>
     <span class="n">s1</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">FP_SDR</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">)</span>
@@ -786,9 +791,9 @@
 <span class="sd">        (numpy.matrix, numpy.matrix, numpy.matrix): tuple of T, N, P vectors</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="n">normal</span><span class="o">+</span><span class="n">slip</span><span class="p">)</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">T</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">T</span><span class="p">))</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">T</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij,ij-&gt;j&#39;</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
     <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">normal</span><span class="o">-</span><span class="n">slip</span><span class="p">)</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">P</span><span class="p">))</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij,ij-&gt;j&#39;</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">P</span><span class="p">))</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
 
@@ -914,15 +919,17 @@
 <span class="sd">        np.array: Array of MT 6-vectors</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">Tape_MT6</span><span class="p">(</span><span class="n">gamma</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
                                                       <span class="n">delta</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
                                                       <span class="n">kappa</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
                                                       <span class="n">h</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
                                                       <span class="n">sigma</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
         <span class="n">MT6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">)))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">)):</span>
@@ -972,7 +979,7 @@
 <span class="sd">        (float, float): tuple of strike and dip angles in radians</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">matrixlib</span><span class="o">.</span><span class="n">defmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="p">):</span>
-        <span class="n">normal</span> <span class="o">=</span> <span class="n">normal</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">normal</span><span class="o">*</span><span class="n">normal</span><span class="p">))</span>
+        <span class="n">normal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">normal</span><span class="o">*</span><span class="n">normal</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">normal</span> <span class="o">=</span> <span class="n">normal</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">normal</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">normal</span><span class="p">))</span>
     <span class="n">normal</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">normal</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
@@ -1027,11 +1034,13 @@
 <span class="sd">    Returns</span>
 <span class="sd">        dict: dictionary of numpy arrays for each parameter</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">MT_output_convert</span><span class="p">(</span><span class="n">mts</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">mts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],))</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">mts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],))</span>
     <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">mts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],))</span>
@@ -1114,13 +1123,15 @@
 <span class="sd">    Returns</span>
 <span class="sd">        list: list of 21 elements of the stiffness tensor</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
                 <span class="n">c</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">isotropic_c</span><span class="p">(</span><span class="n">lambda_</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
     <span class="c1"># Calculate isotropic approximation</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">21</span><span class="p">:</span>
         <span class="c1"># Eqns 81a and 81b from chapman and leaney 2011</span>
@@ -1182,12 +1193,15 @@
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">explosion</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">area_displacement</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">MT6_biaxes</span><span class="p">(</span><span class="n">MT6</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">c</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">MT6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">MT6</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">MT6</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">MT6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">MT6</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">MT6_biaxes</span><span class="p">(</span><span class="n">MT6</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="k">pass</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
         <span class="n">lambda2mu</span> <span class="o">=</span> <span class="p">(</span>
             <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">]))</span><span class="o">/</span><span class="mi">15</span>
         <span class="n">mu</span> <span class="o">=</span> <span class="p">((</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">]))</span><span class="o">/</span><span class="mi">15</span>
@@ -1256,11 +1270,13 @@
 <span class="sd">                moment tensor six vector)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">MT6c_D6</span><span class="p">(</span><span class="n">MT6</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">c</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
     <span class="n">mtvoigt</span> <span class="o">=</span> <span class="n">MT6</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">])]</span>
     <span class="n">mtvoigt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">mtvoigt</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">mtvoigt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
@@ -1292,21 +1308,22 @@
 <span class="sd">    Returns</span>
 <span class="sd">        bool: result of is_isotropic check</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">is_isotropic_c</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">tol</span> <span class="o">=</span> <span class="mf">1.e-6</span><span class="o">*</span><span class="n">c_norm</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">17</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1.e-6</span><span class="o">*</span><span class="n">c_norm</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">17</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">c21_cvoigt</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
@@ -1331,23 +1348,24 @@
 <span class="sd">    Returns</span>
 <span class="sd">        numpy.array: voigt form of the stiffness tensor</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">c21_cvoigt</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">]],</span>
-                         <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
-                             <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">10</span><span class="p">]],</span>
-                         <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
-                             <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">14</span><span class="p">]],</span>
-                         <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
-                          <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">17</span><span class="p">]],</span>
-                         <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
-                          <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">19</span><span class="p">]],</span>
-                         <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
-                          <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">20</span><span class="p">]]])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">]],</span>
+                     <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                         <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">10</span><span class="p">]],</span>
+                     <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                         <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">14</span><span class="p">]],</span>
+                     <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+                      <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">17</span><span class="p">]],</span>
+                     <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+                      <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">19</span><span class="p">]],</span>
+                     <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span>
+                      <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">20</span><span class="p">]]])</span>
 
 
 <span class="k">def</span> <span class="nf">c_norm</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
@@ -1373,20 +1391,21 @@
 <span class="sd">       float: Euclidean norm of the tensor</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cmoment_tensor_conversion</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cmoment_tensor_conversion</span><span class="o">.</span><span class="n">c_norm</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Error with C extension&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span>
-                       <span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
-                          <span class="n">c</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span>
-                       <span class="mi">8</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">C_EXTENSION_FALLBACK_LOG_MSG</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span>
+                   <span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+                      <span class="n">c</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span>
+                   <span class="mi">8</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>There are also Cython functions:</p>
-<div class="highlight-cython"><div class="highlight"><pre><span></span><span class="c">#!python</span>
+<div class="highlight-cython notranslate"><div class="highlight"><pre><span></span><span class="c">#!python</span>
 <span class="c"># cython: infer_types=True</span>
 
 <span class="c"># **Restricted:  For Non-Commercial Use Only** </span>
@@ -1490,28 +1509,29 @@
 <span class="nd">@cython</span><span class="o">.</span><span class="n">nonecheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
 <span class="nd">@cython</span><span class="o">.</span><span class="n">cdivision</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">cdef</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">cN_SDR</span><span class="p">(</span><span class="n">DTYPE_t</span> <span class="n">N0</span><span class="p">,</span><span class="n">DTYPE_t</span> <span class="n">N1</span><span class="p">,</span><span class="n">DTYPE_t</span> <span class="n">N2</span><span class="p">,</span><span class="n">DTYPE_t</span> <span class="n">S0</span><span class="p">,</span><span class="n">DTYPE_t</span> <span class="n">S1</span><span class="p">,</span><span class="n">DTYPE_t</span> <span class="n">S2</span><span class="p">,</span><span class="n">DTYPE_t</span><span class="o">*</span> <span class="n">strike</span><span class="p">,</span><span class="n">DTYPE_t</span><span class="o">*</span><span class="n">dip</span><span class="p">,</span><span class="n">DTYPE_t</span><span class="o">*</span><span class="n">rake</span><span class="p">)</span> <span class="k">nogil</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">N2</span><span class="o">&gt;</span><span class="mf">0</span><span class="p">:</span>
-        <span class="n">N0</span><span class="o">=-</span><span class="n">N0</span>
-        <span class="n">N1</span><span class="o">=-</span><span class="n">N1</span>
-        <span class="n">N2</span><span class="o">=-</span><span class="n">N2</span>
-        <span class="n">S0</span><span class="o">=-</span><span class="n">S0</span>
-        <span class="n">S1</span><span class="o">=-</span><span class="n">S1</span>
-        <span class="n">S2</span><span class="o">=-</span><span class="n">S2</span>
-    <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="n">atan2</span><span class="p">(</span><span class="o">-</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">)</span>
-    <span class="n">dip</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="n">atan2</span><span class="p">((</span><span class="n">N1</span><span class="o">**</span><span class="mf">2</span><span class="o">+</span><span class="n">N0</span><span class="o">**</span><span class="mf">2</span><span class="p">),</span><span class="n">sqrt</span><span class="p">((</span><span class="n">N0</span><span class="o">*</span><span class="n">N2</span><span class="p">)</span><span class="o">**</span><span class="mf">2</span><span class="o">+</span><span class="p">(</span><span class="n">N1</span><span class="o">*</span><span class="n">N2</span><span class="p">)</span><span class="o">**</span><span class="mf">2</span><span class="p">))</span>
-    <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="n">atan2</span><span class="p">(</span><span class="o">-</span><span class="n">S2</span><span class="p">,</span><span class="n">S0</span><span class="o">*</span><span class="n">N1</span><span class="o">-</span><span class="n">S1</span><span class="o">*</span><span class="n">N0</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">dip</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">&gt;</span><span class="n">pi</span><span class="o">/</span><span class="mf">2</span><span class="p">:</span>
-        <span class="n">dip</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="n">pi</span><span class="o">-</span><span class="n">dip</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
-        <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">+</span><span class="n">pi</span>
-        <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="n">PI2</span><span class="o">-</span><span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">fabs</span><span class="p">(</span><span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span><span class="o">&gt;</span><span class="n">PI2</span><span class="p">:</span>
-        <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="n">fmod</span><span class="p">(</span><span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">],</span><span class="n">PI2</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mf">0.0</span><span class="p">:</span>
-        <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">+=</span><span class="n">PI2</span>
-    <span class="k">if</span> <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">&gt;</span><span class="n">pi</span><span class="p">:</span>
-        <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">-=</span><span class="n">PI2</span>
-    <span class="k">elif</span> <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">pi</span><span class="p">:</span>
-        <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">+=</span><span class="n">PI2</span>
+    <span class="k">if</span> <span class="n">N2</span> <span class="o">&gt;</span> <span class="mf">0</span><span class="p">:</span>
+        <span class="n">N0</span> <span class="o">=</span> <span class="o">-</span><span class="n">N0</span>
+        <span class="n">N1</span> <span class="o">=</span> <span class="o">-</span><span class="n">N1</span>
+        <span class="n">N2</span> <span class="o">=</span> <span class="o">-</span><span class="n">N2</span>
+        <span class="n">S0</span> <span class="o">=</span> <span class="o">-</span><span class="n">S0</span>
+        <span class="n">S1</span> <span class="o">=</span> <span class="o">-</span><span class="n">S1</span>
+        <span class="n">S2</span> <span class="o">=</span> <span class="o">-</span><span class="n">S2</span>
+    <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atan2</span><span class="p">(</span><span class="o">-</span><span class="n">N0</span><span class="p">,</span> <span class="n">N1</span><span class="p">)</span>
+    <span class="n">dip</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atan2</span><span class="p">((</span><span class="n">N1</span><span class="o">**</span><span class="mf">2</span><span class="o">+</span><span class="n">N0</span><span class="o">**</span><span class="mf">2</span><span class="p">),</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">N0</span><span class="o">*</span><span class="n">N2</span><span class="p">)</span><span class="o">**</span><span class="mf">2</span><span class="o">+</span><span class="p">(</span><span class="n">N1</span><span class="o">*</span><span class="n">N2</span><span class="p">)</span><span class="o">**</span><span class="mf">2</span><span class="p">))</span>
+    <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atan2</span><span class="p">(</span><span class="o">-</span><span class="n">S2</span><span class="p">,</span> <span class="n">S0</span><span class="o">*</span><span class="n">N1</span> <span class="o">-</span> <span class="n">S1</span><span class="o">*</span><span class="n">N0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dip</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pi</span><span class="o">/</span><span class="mf">2</span><span class="p">:</span>
+        <span class="n">dip</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi</span><span class="o">-</span><span class="n">dip</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+        <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">+</span><span class="n">pi</span>
+        <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">PI2</span><span class="o">-</span><span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">fabs</span><span class="p">(</span><span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">PI2</span><span class="p">:</span>
+        <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">fmod</span><span class="p">(</span><span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">],</span><span class="n">PI2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">strike</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">PI2</span>
+    <span class="k">if</span> <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pi</span><span class="p">:</span>
+        <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">PI2</span>
+    <span class="k">elif</span> <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">pi</span><span class="p">:</span>
+        <span class="n">rake</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">PI2</span>
+
 <span class="nd">@cython</span><span class="o">.</span><span class="n">boundscheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
 <span class="nd">@cython</span><span class="o">.</span><span class="n">wraparound</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
 <span class="nd">@cython</span><span class="o">.</span><span class="n">nonecheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
@@ -1742,24 +1762,32 @@
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">imax</span><span class="p">):</span>
         <span class="n">cE_gd</span><span class="p">(</span><span class="n">E</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="o">&amp;</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">&amp;</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">g</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
 <span class="nd">@cython</span><span class="o">.</span><span class="n">boundscheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
 <span class="nd">@cython</span><span class="o">.</span><span class="n">wraparound</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
 <span class="nd">@cython</span><span class="o">.</span><span class="n">nonecheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
 <span class="nd">@cython</span><span class="o">.</span><span class="n">cdivision</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">cdef</span> <span class="nf">cSingleTP_SDR</span><span class="p">(</span><span class="n">DTYPE_t</span> <span class="p">[:]</span> <span class="n">T</span><span class="p">,</span><span class="n">DTYPE_t</span><span class="p">[:]</span><span class="n">P</span><span class="p">):</span>
-    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">Nt</span><span class="o">=</span><span class="n">sqrt</span><span class="p">((</span><span class="n">T</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span><span class="o">+</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="mf">1</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="mf">1</span><span class="p">])</span><span class="o">+</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="mf">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="mf">2</span><span class="p">]))</span>
-    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">St</span><span class="o">=</span><span class="n">sqrt</span><span class="p">((</span><span class="n">T</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span><span class="o">+</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mf">1</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mf">1</span><span class="p">])</span><span class="o">+</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mf">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mf">2</span><span class="p">]))</span>
-    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">N0</span><span class="o">=</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span><span class="o">/</span><span class="n">Nt</span>
-    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">N1</span><span class="o">=</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="mf">1</span><span class="p">])</span><span class="o">/</span><span class="n">Nt</span>
-    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">N2</span><span class="o">=</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="o">+</span><span class="n">P</span><span class="p">[</span><span class="mf">2</span><span class="p">])</span><span class="o">/</span><span class="n">Nt</span>
-    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">S0</span><span class="o">=</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span><span class="o">/</span><span class="n">St</span>
-    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">S1</span><span class="o">=</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mf">1</span><span class="p">])</span><span class="o">/</span><span class="n">St</span>
-    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">S2</span><span class="o">=</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mf">2</span><span class="p">])</span><span class="o">/</span><span class="n">St</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">t0</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">t1</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">t2</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">p0</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">p1</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">p2</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">Nt</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">t0</span><span class="o">+</span><span class="n">p0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t0</span><span class="o">+</span><span class="n">p0</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">t1</span><span class="o">+</span><span class="n">p1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t1</span><span class="o">+</span><span class="n">p1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">t2</span><span class="o">+</span><span class="n">p2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t2</span><span class="o">+</span><span class="n">p2</span><span class="p">))</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">St</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">t0</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t0</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">p1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">p1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">t2</span><span class="o">-</span><span class="n">p2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t2</span><span class="o">-</span><span class="n">p2</span><span class="p">))</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">N0</span> <span class="o">=</span> <span class="p">(</span><span class="n">t0</span><span class="o">+</span><span class="n">p0</span><span class="p">)</span><span class="o">/</span><span class="n">Nt</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">N1</span> <span class="o">=</span> <span class="p">(</span><span class="n">t1</span><span class="o">+</span><span class="n">p1</span><span class="p">)</span><span class="o">/</span><span class="n">Nt</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">N2</span> <span class="o">=</span> <span class="p">(</span><span class="n">t2</span><span class="o">+</span><span class="n">p2</span><span class="p">)</span><span class="o">/</span><span class="n">Nt</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">S0</span> <span class="o">=</span> <span class="p">(</span><span class="n">t0</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span><span class="o">/</span><span class="n">St</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">S1</span> <span class="o">=</span> <span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">p1</span><span class="p">)</span><span class="o">/</span><span class="n">St</span>
+    <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">S2</span> <span class="o">=</span> <span class="p">(</span><span class="n">t2</span><span class="o">-</span><span class="n">p2</span><span class="p">)</span><span class="o">/</span><span class="n">St</span>
     <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">strike1</span>
     <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">dip1</span>
     <span class="k">cdef</span> <span class="kt">DTYPE_t</span> <span class="nf">rake1</span>
-    <span class="n">cN_SDR</span><span class="p">(</span><span class="n">N0</span><span class="p">,</span><span class="n">N1</span><span class="p">,</span><span class="n">N2</span><span class="p">,</span><span class="n">S0</span><span class="p">,</span><span class="n">S1</span><span class="p">,</span><span class="n">S2</span><span class="p">,</span><span class="o">&amp;</span><span class="n">strike1</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dip1</span><span class="p">,</span><span class="o">&amp;</span><span class="n">rake1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">strike1</span><span class="p">,</span><span class="n">dip1</span><span class="p">,</span><span class="n">rake1</span>
+    <span class="n">cN_SDR</span><span class="p">(</span><span class="n">N0</span><span class="p">,</span> <span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">strike1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dip1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rake1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">strike1</span><span class="p">,</span> <span class="n">dip1</span><span class="p">,</span> <span class="n">rake1</span>
+
 <span class="nd">@cython</span><span class="o">.</span><span class="n">boundscheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
 <span class="nd">@cython</span><span class="o">.</span><span class="n">wraparound</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
 <span class="nd">@cython</span><span class="o">.</span><span class="n">nonecheck</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
@@ -1893,9 +1921,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -1914,11 +1940,11 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1936,7 +1962,8 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1953,19 +1980,13 @@
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

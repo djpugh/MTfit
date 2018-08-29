@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,29 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/>
-        <link rel="next" title="4. Tutorial: Using MTfit" href="tutorial.html"/>
-        <link rel="prev" title="2. Installing MTfit" href="setup.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Tutorial: Using MTfit" href="tutorial.html" />
+    <link rel="prev" title="2. Installing MTfit" href="setup.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +54,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -71,7 +62,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -148,7 +139,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -156,9 +147,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -202,11 +194,11 @@
             
   <div class="section" id="running-mtfit">
 <h1>3. Running MTfit<a class="headerlink" href="#running-mtfit" title="Permalink to this headline">¶</a></h1>
-<p>There are several ways to run <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code>, and these are described here.</p>
+<p>There are several ways to run <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code>, and these are described here.</p>
 <div class="section" id="command-line">
 <h2>3.1. Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> can be run from the command line. A script should have been installed onto the path during installation and should be callable as:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> can be run from the command line. A script should have been installed onto the path during installation and should be callable as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit
 </pre></div>
 </div>
 <p>However it may be necessary to install the script manually. This is platform dependent.</p>
@@ -215,7 +207,7 @@
 <div class="section" id="linux">
 <h4>3.1.1.1. Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
 <p>Add this python script to a directory in the $PATH environmental variable:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">MTfit</span>
 <span class="n">MTfit</span><span class="o">.</span><span class="n">__run__</span><span class="p">()</span>
 </pre></div>
@@ -224,8 +216,8 @@
 </div>
 <div class="section" id="windows">
 <h4>3.1.1.2. Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
-<p>Add the linux script (above) to the path or if using powershell edit the powershell profile (usually found in <em>Documents/WindowsPowerShell/</em> - if not present use <code class="docutils literal"><span class="pre">$PROFILE|Format-List</span> <span class="pre">-Force</span></code> to locate it, it may be necessary to create the profile) and add:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>function MTfit{
+<p>Add the linux script (above) to the path or if using powershell edit the powershell profile (usually found in <em>Documents/WindowsPowerShell/</em> - if not present use <code class="docutils literal notranslate"><span class="pre">$PROFILE|Format-List</span> <span class="pre">-Force</span></code> to locate it, it may be necessary to create the profile) and add:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function MTfit{
     $script={
         python -c &quot;import MTfit;MTfit.__run__()&quot; $args
         }
@@ -238,26 +230,26 @@
 </div>
 <div class="section" id="command-line-options">
 <h3>3.1.2. Command Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h3>
-<p>When running <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> from the command line, there are many options available, and these can be listed using:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit -h
+<p>When running <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> from the command line, there are many options available, and these can be listed using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit -h
 </pre></div>
 </div>
 <p>For a description of these options see <a class="reference internal" href="cli.html"><span class="doc">MTfit command line options</span></a>.</p>
 <p>The command line defaults can be set using a defaults file. This is recursively checked in 3 locations:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><code class="docutils literal"><span class="pre">MTFITDEFAULTSPATH</span></code> environmental variable (could be a system level setting)</li>
-<li><code class="docutils literal"><span class="pre">.MTfitdefaults</span></code> file in the users home directory</li>
-<li><code class="docutils literal"><span class="pre">.MTfitdefaults</span></code> file in the current working directory</li>
+<li><code class="docutils literal notranslate"><span class="pre">MTFITDEFAULTSPATH</span></code> environmental variable (could be a system level setting)</li>
+<li><code class="docutils literal notranslate"><span class="pre">.MTfitdefaults</span></code> file in the users home directory</li>
+<li><code class="docutils literal notranslate"><span class="pre">.MTfitdefaults</span></code> file in the current working directory</li>
 </ol>
 </div></blockquote>
 <p>The higher number file over-writes defaults in the lower files if they conflict.</p>
 <p>The structure of the defaults file is simply:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">key</span><span class="p">:</span><span class="n">attr</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">key</span><span class="p">:</span><span class="n">attr</span>
 </pre></div>
 </div>
 <p>e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dc</span><span class="p">:</span><span class="kc">True</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dc</span><span class="p">:</span><span class="kc">True</span>
 <span class="n">algorithm</span><span class="p">:</span><span class="n">iterate</span>
 </pre></div>
 </div>
@@ -266,25 +258,25 @@
 <div class="section" id="python-interpreter">
 <h2>3.2. Python Interpreter<a class="headerlink" href="#python-interpreter" title="Permalink to this headline">¶</a></h2>
 <p>Running MTfit from the python interpreter is done as:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="s1">&#39;-d&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">MTfit</span><span class="o">.</span><span class="n">__run__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Where args correspond to the command line arguments (see <a class="reference internal" href="cli.html"><span class="doc">MTfit command line options</span></a>).</p>
-<p>It is also possible to create the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
+<p>It is also possible to create the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inversion</span><span class="o">=</span><span class="n">MTfit</span><span class="o">.</span><span class="n">Inversion</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inversion</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The descriptions of the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> initialisation arguments can be found in the <code class="xref py py-class docutils literal"><span class="pre">__init__</span></code> docstrings, and <a class="reference internal" href="inversion.html"><span class="doc">MTfit.inversion: Inversion object</span></a>.</p>
+<p>The descriptions of the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> initialisation arguments can be found in the <code class="xref py py-class docutils literal notranslate"><span class="pre">__init__</span></code> docstrings, and <a class="reference internal" href="inversion.html"><span class="doc">MTfit.inversion: Inversion object</span></a>.</p>
 </div>
 <div class="section" id="input-data">
 <span id="input-data-label"></span><h2>3.3. Input Data<a class="headerlink" href="#input-data" title="Permalink to this headline">¶</a></h2>
-<p>There are several different input data types, and it is also possible to add additional parsers using the <code class="docutils literal"><span class="pre">MTfit.parsers</span></code> entry point.</p>
+<p>There are several different input data types, and it is also possible to add additional parsers using the <code class="docutils literal notranslate"><span class="pre">MTfit.parsers</span></code> entry point.</p>
 <p>The required data structure for running MTfit is very simple, the inversion expects a python dictionary of the data in the format:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">:{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">...</span><span class="p">]),</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PPolarity&#39;</span><span class="p">:{</span><span class="s1">&#39;Measured&#39;</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">...</span><span class="p">]),</span>
 <span class="go">                     &#39;Error&#39;:numpy.matrix([[0.01],[0.02],...]),</span>
 <span class="go">                     &#39;Stations&#39;:{&#39;Name&#39;:[&#39;Station1&#39;,&#39;Station2&#39;,...],</span>
 <span class="go">                                 &#39;Azimuth&#39;:numpy.matrix([[248.0],[122.3]...]),</span>
@@ -297,9 +289,9 @@
 <span class="go">          }</span>
 </pre></div>
 </div>
-<p>For more information on the data keywords and how to set them up, see <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> docstrings.</p>
-<p>The data dictionary can be passed directly to the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object (simple if running within python), or from a binary pickled object, these can be made by simply using pickle (or cPickle):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+<p>For more information on the data keywords and how to set them up, see <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> docstrings.</p>
+<p>The data dictionary can be passed directly to the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object (simple if running within python), or from a binary pickled object, these can be made by simply using pickle (or cPickle):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>The coordinate system is that the Azimuth is angle from x towards y and TakeOffAngle is the angle from positive z.</p>
@@ -309,7 +301,7 @@
 <h3>3.3.1. CSV<a class="headerlink" href="#csv" title="Permalink to this headline">¶</a></h3>
 <p>There is a CSV format parser which reads CSV files.
 The CSV file format is to have events split by blank lines, a header line showing where the information is, UID and data-type information stored in the first column, e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">UID</span><span class="o">=</span><span class="mi">123</span><span class="p">,,,,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UID</span><span class="o">=</span><span class="mi">123</span><span class="p">,,,,</span>
 <span class="n">PPolarity</span><span class="p">,,,,</span>
 <span class="n">Name</span><span class="p">,</span><span class="n">Azimuth</span><span class="p">,</span><span class="n">TakeOffAngle</span><span class="p">,</span><span class="n">Measured</span><span class="p">,</span><span class="n">Error</span>
 <span class="n">S001</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.01</span>
@@ -334,11 +326,11 @@ and a second event with no ID (will default to the event number, in this case 2)
 <div class="section" id="output">
 <span id="matlab-output-label"></span><h2>3.4. Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>The default output is to output a MATLAB file containing 2 structures and a cell array, although there are two other possible formats, and others can be added (see MTfit.extensions).
-The <code class="docutils literal"><span class="pre">Events</span></code> structure has the following fieldnames: <code class="docutils literal"><span class="pre">MTspace</span></code> and <code class="docutils literal"><span class="pre">Probability</span></code>.</p>
+The <code class="docutils literal notranslate"><span class="pre">Events</span></code> structure has the following fieldnames: <code class="docutils literal notranslate"><span class="pre">MTspace</span></code> and <code class="docutils literal notranslate"><span class="pre">Probability</span></code>.</p>
 <blockquote>
 <div><ul>
-<li><p class="first"><code class="docutils literal"><span class="pre">MTspace</span></code> - The moment tensor samples as a 6 by n vector of the form:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">MTspace</span></code> - The moment tensor samples as a 6 by n vector of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mxx</span>
 <span class="n">Myy</span>
 <span class="n">Mzz</span>
 <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Mxy</span>
@@ -347,12 +339,12 @@ The <code class="docutils literal"><span class="pre">Events</span></code> struct
 </pre></div>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">Probability</span></code> - The corresponding probability values</p>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">Probability</span></code> - The corresponding probability values</p>
 </li>
 </ul>
 </div></blockquote>
-<p>The <code class="docutils literal"><span class="pre">Other</span></code> structure contains information about the inversion</p>
-<p>The <code class="docutils literal"><span class="pre">Stations</span></code> cell array contains the station information, including, if available, the polarity:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Other</span></code> structure contains information about the inversion</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Stations</span></code> cell array contains the station information, including, if available, the polarity:</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -379,7 +371,7 @@ The <code class="docutils literal"><span class="pre">Events</span></code> struct
 <h3>3.4.2. hyp format<a class="headerlink" href="#hyp-format" title="Permalink to this headline">¶</a></h3>
 <p>The results can be outputted in the <a class="reference external" href="http://alomax.free.fr/nlloc/soft6.00/formats.html#_location_hypphs_">NonLinLoc hyp format</a>,
 with the range of solutions sampled outputted as a binary file with the following format:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">binary</span> <span class="n">file</span> <span class="n">version</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">long</span> <span class="n">integer</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">binary</span> <span class="n">file</span> <span class="n">version</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">long</span> <span class="n">integer</span><span class="p">)</span>
 <span class="n">total_number_samples</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">long</span> <span class="n">integer</span><span class="p">)</span>
 <span class="n">number_of_saved_samples</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">long</span> <span class="n">integer</span><span class="p">)</span>
 <span class="n">converted</span> <span class="p">(</span><span class="nb">bool</span> <span class="n">flag</span><span class="p">)</span>
@@ -387,8 +379,8 @@ with the range of solutions sampled outputted as a binary file with the followin
 <span class="n">Kullback</span><span class="o">-</span><span class="n">Liebeler</span> <span class="n">Divergence</span> <span class="kn">from</span> <span class="nn">sampling</span> <span class="n">prior</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Then for each moment tensor sample (up to <code class="docutils literal"><span class="pre">number_of_saved_samples</span></code> ):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Probability</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
+<p>Then for each moment tensor sample (up to <code class="docutils literal notranslate"><span class="pre">number_of_saved_samples</span></code> ):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Probability</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
 <span class="n">Ln_probability</span><span class="p">(</span><span class="n">double</span><span class="p">)</span>
 <span class="n">Mnn</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
 <span class="n">Mee</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
@@ -399,7 +391,7 @@ with the range of solutions sampled outputted as a binary file with the followin
 </pre></div>
 </div>
 <p>if Converted is true then each sample also contains:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
 <span class="n">delta</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
 <span class="n">kappa</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
 <span class="n">h</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
@@ -414,7 +406,7 @@ with the range of solutions sampled outputted as a binary file with the followin
 <span class="n">rake2</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If there are multiple events saved, then the next event starts immediately after the last with the same format. The output binary file can be re-read into python using <code class="xref py py-func docutils literal"><span class="pre">MTfit.inversion.read_binary_output()</span></code>.</p>
+<p>If there are multiple events saved, then the next event starts immediately after the last with the same format. The output binary file can be re-read into python using <code class="xref py py-func docutils literal notranslate"><span class="pre">MTfit.inversion.read_binary_output()</span></code>.</p>
 </div>
 </div>
 <div class="section" id="running-in-parallel">
@@ -434,19 +426,17 @@ A single thread mode can be forced using:</p>
 </ul>
 </div></blockquote>
 <p>This runs using a set of default parameters, however it is also possible to adjust these parameters using commandline flags (use -h flag for help and usage).</p>
-<p>There is a bug when using mpi and very large result sizes, giving a size error (negative integer) in <code class="xref py py-mod docutils literal"><span class="pre">mpi4py</span></code>. If this occurs, lower the sample size and it will be ok.</p>
+<p>There is a bug when using mpi and very large result sizes, giving a size error (negative integer) in <code class="xref py py-mod docutils literal notranslate"><span class="pre">mpi4py</span></code>. If this occurs, lower the sample size and it will be ok.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">If running this on a server, be aware that not setting the number of workers option <code class="docutils literal"><span class="pre">--numberworkers</span></code>, when running in parallel, means that as many processes as processors will be spawned, slowing down the machine for any other users.</p>
+<p class="last">If running this on a server, be aware that not setting the number of workers option <code class="docutils literal notranslate"><span class="pre">--numberworkers</span></code>, when running in parallel, means that as many processes as processors will be spawned, slowing down the machine for any other users.</p>
 </div>
 </div>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -465,11 +455,11 @@ A single thread mode can be forced using:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -487,7 +477,8 @@ A single thread mode can be forced using:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -504,19 +495,13 @@ A single thread mode can be forced using:</p>
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

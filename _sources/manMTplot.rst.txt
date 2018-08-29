@@ -8,7 +8,7 @@ MTplot [-h] [-d DATAFILE] [-p PLOT_TYPE] [-c COLORMAP] [-f FONTSIZE]
               [--station_marker_size STATION_MARKERSIZE] [--showmaxlikelihood]
               [--showmean] [--grid_lines] [--color COLOR] [--type_label]
               [--hex_bin] [--projection PROJECTION] [--save SAVE_FILE]
-              [--save-dpi SAVE_DPI] [--version]
+              [--save-dpi SAVE_DPI] [-q] [--version]
               [data_file]
 
 Positional Arguments:
@@ -122,6 +122,9 @@ Optional Arguments:
                          
   --save-dpi SAVE_DPI, --savedpi SAVE_DPI, --save_dpi SAVE_DPI
                         Output file dpi
+                         
+                         
+  -q, --quiet, --hide   Don't show the plot on screen
                          
                          
   --version             show program's version number and exit

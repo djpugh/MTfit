@@ -1,8 +1,8 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="English" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="English" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -24,27 +24,18 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MTfit documentation" href="index.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -61,7 +52,7 @@
 
           
             
-            <img src="_static/MTfitsphinx.png" class="logo" />
+            <img src="_static/MTfitsphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -69,7 +60,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3a12
               </div>
             
           
@@ -123,7 +114,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">MTfit</a>
@@ -131,9 +122,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -177,11 +169,11 @@
             
   <div class="section" id="running-mtfit">
 <h1>Running MTfit<a class="headerlink" href="#running-mtfit" title="Permalink to this headline">¶</a></h1>
-<p>There are several ways to run <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code>, and these are described here.</p>
+<p>There are several ways to run <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code>, and these are described here.</p>
 <div class="section" id="command-line">
 <h2>Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> can be run from the command line. A script should have been installed onto the path during installation and should be callable as:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> can be run from the command line. A script should have been installed onto the path during installation and should be callable as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit
 </pre></div>
 </div>
 <p>However it may be necessary to install the script manually. This is platform dependent.</p>
@@ -190,7 +182,7 @@
 <div class="section" id="linux">
 <h4>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
 <p>Add this python script to a directory in the $PATH environmental variable:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">MTfit</span>
 <span class="n">MTfit</span><span class="o">.</span><span class="n">__run__</span><span class="p">()</span>
 </pre></div>
@@ -199,8 +191,8 @@
 </div>
 <div class="section" id="windows">
 <h4>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
-<p>Add the linux script (above) to the path or if using powershell edit the powershell profile (usually found in <em>Documents/WindowsPowerShell/</em> - if not present use <code class="docutils literal"><span class="pre">$PROFILE|Format-List</span> <span class="pre">-Force</span></code> to locate it, it may be necessary to create the profile) and add:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>function MTfit{
+<p>Add the linux script (above) to the path or if using powershell edit the powershell profile (usually found in <em>Documents/WindowsPowerShell/</em> - if not present use <code class="docutils literal notranslate"><span class="pre">$PROFILE|Format-List</span> <span class="pre">-Force</span></code> to locate it, it may be necessary to create the profile) and add:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function MTfit{
     $script={
         python -c &quot;import MTfit;MTfit.__run__()&quot; $args
         }
@@ -213,26 +205,26 @@
 </div>
 <div class="section" id="command-line-options">
 <h3>Command Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h3>
-<p>When running <code class="xref py py-mod docutils literal"><span class="pre">MTfit</span></code> from the command line, there are many options available, and these can be listed using:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ MTfit -h
+<p>When running <code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> from the command line, there are many options available, and these can be listed using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTfit -h
 </pre></div>
 </div>
 <p>For a description of these options see <a class="reference internal" href="cli.html"><span class="doc">MTfit command line options</span></a>.</p>
 <p>The command line defaults can be set using a defaults file. This is recursively checked in 3 locations:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><code class="docutils literal"><span class="pre">MTFITDEFAULTSPATH</span></code> environmental variable (could be a system level setting)</li>
-<li><code class="docutils literal"><span class="pre">.MTfitdefaults</span></code> file in the users home directory</li>
-<li><code class="docutils literal"><span class="pre">.MTfitdefaults</span></code> file in the current working directory</li>
+<li><code class="docutils literal notranslate"><span class="pre">MTFITDEFAULTSPATH</span></code> environmental variable (could be a system level setting)</li>
+<li><code class="docutils literal notranslate"><span class="pre">.MTfitdefaults</span></code> file in the users home directory</li>
+<li><code class="docutils literal notranslate"><span class="pre">.MTfitdefaults</span></code> file in the current working directory</li>
 </ol>
 </div></blockquote>
 <p>The higher number file over-writes defaults in the lower files if they conflict.</p>
 <p>The structure of the defaults file is simply:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">key</span><span class="p">:</span><span class="n">attr</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">key</span><span class="p">:</span><span class="n">attr</span>
 </pre></div>
 </div>
 <p>e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dc</span><span class="p">:</span><span class="kc">True</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dc</span><span class="p">:</span><span class="kc">True</span>
 <span class="n">algorithm</span><span class="p">:</span><span class="n">iterate</span>
 </pre></div>
 </div>
@@ -241,27 +233,25 @@
 <div class="section" id="python-interpreter">
 <h2>Python Interpreter<a class="headerlink" href="#python-interpreter" title="Permalink to this headline">¶</a></h2>
 <p>Running MTfit from the python interpreter is done as:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="s1">&#39;-d&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">MTfit</span><span class="o">.</span><span class="n">__run__</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Where args correspond to the command line arguments (see <a class="reference internal" href="cli.html"><span class="doc">MTfit command line options</span></a>).</p>
-<p>It is also possible to create the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> object:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
+<p>It is also possible to create the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inversion</span><span class="o">=</span><span class="n">MTfit</span><span class="o">.</span><span class="n">Inversion</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inversion</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The descriptions of the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal"><span class="pre">Inversion</span></code></a> initialisation arguments can be found in the <code class="xref py py-class docutils literal"><span class="pre">__init__</span></code> docstrings, and <a class="reference internal" href="inversion.html"><span class="doc">MTfit.inversion: Inversion object</span></a>.</p>
+<p>The descriptions of the <a class="reference internal" href="inversion.html#MTfit.inversion.Inversion" title="MTfit.inversion.Inversion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Inversion</span></code></a> initialisation arguments can be found in the <code class="xref py py-class docutils literal notranslate"><span class="pre">__init__</span></code> docstrings, and <a class="reference internal" href="inversion.html"><span class="doc">MTfit.inversion: Inversion object</span></a>.</p>
 </div>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -271,11 +261,11 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Jan 29, 2018 (version 1.0.2).
+      Last updated on Aug 29, 2018 (version 1.0.3a12).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -293,7 +283,8 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.2',
+            VERSION:'1.0.3a12',
+            LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -310,19 +301,13 @@
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
