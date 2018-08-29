@@ -256,7 +256,9 @@ If there are any errors please see the documentation and if necessary contact th
 """
 
 
-def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
+def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False, travis=None):
+    if travis is None:
+        travis = os.environ.get('ON_TRAVIS', False)
     if 'setup.py' not in os.listdir('.'):
         raise ValueError('Needs to be run in the top of the repository')
     print('\n\n==============================\n\nBuilding Documentation\n\n==============================\n\n')
@@ -289,7 +291,7 @@ def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
         print("*********************************\n\nDocumentation Build Failed\n\n*********************************")
     if gh_pages:
         print("*********************************\n\nSetting up gh-pages\n\n*********************************")
-        setup_gh_pages()
+        setup_gh_pages(travis)
 
 
 def build_html(output_path=os.path.abspath('./docs/html/')):
@@ -358,7 +360,7 @@ def build_epub(output_path=os.path.abspath('./docs/epub/')):
         pass
 
 
-def setup_gh_pages():
+def setup_gh_pages(travis=False):
     # Copy docs/html to tempfolder
     from MTfit import __version__
     print("------------------------------\n\nMaking Temporary Directory\n\n------------------------------")
@@ -395,21 +397,22 @@ def setup_gh_pages():
     # Commit the changes
     repo.git.add('*')
     repo.git.commit('-m', 'Documentation {}'.format(__version__))
-    # Checkout old branch
-    print("------------------------------\n\nReturning to {} Branch\n\n------------------------------".format(current_branch))
-    repo.git.checkout(current_branch)
-    print("------------------------------\n\nUnstashing Changes\n\n------------------------------")
-    repo.git.stash('pop')
-    print("------------------------------\n\nCleaning Working Directory\n\n------------------------------")
-    doctrees = glob.glob('*.doctree')
-    for item in doctrees:
-        os.remove(item)
-    invs = glob.glob('*.inv')
-    for item in invs:
-        os.remove(item)
-    jss = glob.glob('*.js')
-    for item in jss:
-        os.remove(item)
+    if not travis:
+        # Checkout old branch
+        print("------------------------------\n\nReturning to {} Branch\n\n------------------------------".format(current_branch))
+        repo.git.checkout(current_branch)
+        print("------------------------------\n\nUnstashing Changes\n\n------------------------------")
+        repo.git.stash('pop')
+        print("------------------------------\n\nCleaning Working Directory\n\n------------------------------")
+        doctrees = glob.glob('*.doctree')
+        for item in doctrees:
+            os.remove(item)
+        invs = glob.glob('*.inv')
+        for item in invs:
+            os.remove(item)
+        jss = glob.glob('*.js')
+        for item in jss:
+            os.remove(item)
 
 
 def copy_recursively(source_folder, destination_folder):

@@ -1,6 +1,8 @@
 sudo: false
 os: linux
 language: python
+env:
+  global: ON_TRAVIS=1
 python:
   - 2.7
   - 3.5
@@ -13,8 +15,9 @@ stages:
   - test
   - examples-test
   - build
+  - gh-pages
 
-script: tox
+script: skip
 
 
 jobs:
@@ -34,18 +37,33 @@ jobs:
       python: 3.6
       name: "Lint"
 
+    - stage: test
+      script: tox -e test-py27
+      python: 2.7
+      name: "Unit Tests"
+
+    - stage: test
+      script: tox -e test-py35
+      python: 3.5
+      name: "Unit Tests"
+
+    - stage: test
+      script: tox -e test-py36
+      python: 3.6
+      name: "Unit Tests"
+
     - stage: examples-test
-      script: tox -e example-py27,example-py35,example-py36
+      script: tox -e example-py27
       python: 2.7
       name: "Example Tests"
 
     - stage: examples-test
-      script: tox -e example-py27,example-py35,example-py36
+      script: tox -e example-py35
       python: 3.5
       name: "Example Tests"
 
     - stage: examples-test
-      script: tox -e example-py27,example-py35,example-py36
+      script: tox -e example-py36
       python: 3.6
       name: "Example Tests"
 
@@ -99,4 +117,10 @@ jobs:
         # password: ...
         distributions: "sdist bdist_wheel"
         skip_cleanup: true
+
+    - stage: gh-pages
+      if: tag IS present
+      script: tox -e gh-pages
+      python: 3.6
+      name: "Build GitHub pages"
 
