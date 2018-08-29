@@ -10,13 +10,13 @@ python:
 install: python ci/environment.py
          pip install tox-travis
 stages:
-  - environment
-  - lint
-  - test
-  - examples-test
-  - build
+  - name: environment
+  - name: lint
+  - name: test
+  - name: examples-test
+  - name: build
     if: tag =~ ^v\d+\.\d+\.\d+
-  - gh-pages
+  - name: gh-pages
     if: tag =~ ^v\d+\.\d+\.\d+
 
 script: skip
