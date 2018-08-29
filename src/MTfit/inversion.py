@@ -60,8 +60,6 @@ from .extensions.scatangle import parse_scatangle
 
 logger = logging.getLogger('MTfit.inversion')
 
-logger.warning('test')
-
 try:
     from .probability import cprobability
 except ImportError:
