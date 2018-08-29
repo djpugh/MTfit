@@ -7,11 +7,11 @@ python:
   - "3.6"
 install: pip install tox-travis
 stages:
-  -environment
-  -lint
-  -test
-  -examples-test
-  -build
+  - environment
+  - lint
+  - test
+  - examples-test
+  - build
 jobs:
   include:
     - stage: environment
