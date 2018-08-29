@@ -16,16 +16,14 @@ from MTfit.algorithms.markov_chain_monte_carlo import IterativeMultipleTryTransD
 from MTfit.algorithms.markov_chain_monte_carlo import McMCAlgorithmCreator
 import MTfit.algorithms.markov_chain_monte_carlo as markov_chain_monte_carlo
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+from MTfit.utilities.unittest_utils import get_extension_skip_if_args
 
 if sys.version_info >= (3, 3):
     from unittest import mock
 else:
     import mock
 
-VERBOSITY = 2
-
-
-C_EXTENSIONS = (not markov_chain_monte_carlo.cmarkov_chain_monte_carlo, 'No C extension available')
+C_EXTENSIONS = get_extension_skip_if_args('MTfit.algorithms.cmarkov_chain_monte_carlo')
 
 
 class PythonOnly(object):

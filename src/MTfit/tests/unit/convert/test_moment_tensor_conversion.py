@@ -50,6 +50,7 @@ from MTfit.convert import c_norm
 from MTfit.convert import moment_tensor_conversion
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
 from MTfit.utilities.unittest_utils import TestCase
+from MTfit.utilities.unittest_utils import get_extension_skip_if_args
 
 if sys.version_info >= (3, 3):
     from unittest import mock
@@ -57,7 +58,7 @@ else:
     import mock
 
 
-C_EXTENSIONS = (not moment_tensor_conversion.cmoment_tensor_conversion, 'No C extension available')
+C_EXTENSIONS = get_extension_skip_if_args('MTfit.convert.cmoment_tensor_conversion')
 
 
 class PythonOnly(object):

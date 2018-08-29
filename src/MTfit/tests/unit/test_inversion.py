@@ -6,6 +6,7 @@ import sys
 import tempfile
 import shutil
 import gc
+import logging
 try:
     import cPickle as pickle
 except ImportError:
@@ -28,13 +29,17 @@ from MTfit.inversion import station_angles
 from MTfit.extensions.scatangle import parse_scatangle
 from MTfit.algorithms import markov_chain_monte_carlo as mcmc
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+from MTfit.utilities.unittest_utils import get_extension_skip_if_args
+
+logger = logging.getLogger('MTfit.tests')
 
 if sys.version_info >= (3, 3):
     from unittest import mock
 else:
     import mock
 
-C_EXTENSIONS = (not mcmc.cmarkov_chain_monte_carlo, 'No C extension available')
+
+C_EXTENSIONS = get_extension_skip_if_args('MTfit.algorithms.cmarkov_chain_monte_carlo')
 
 
 class PythonAlgorithms(object):

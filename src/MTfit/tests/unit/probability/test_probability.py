@@ -21,17 +21,15 @@ from MTfit.probability.probability import dkl_estimate
 from MTfit.probability.probability import LnPDF
 from MTfit.probability import probability
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+from MTfit.utilities.unittest_utils import get_extension_skip_if_args
+
 
 if sys.version_info >= (3, 3):
     from unittest import mock
 else:
     import mock
-try:
-    from MTfit.probability.cprobability import cProbabilityTestCase
-except ImportError:
-    pass
 
-C_EXTENSIONS = (not probability.cprobability, 'No C extension available')
+C_EXTENSIONS = get_extension_skip_if_args('MTfit.probability.cprobability')
 
 
 class PythonOnly(object):

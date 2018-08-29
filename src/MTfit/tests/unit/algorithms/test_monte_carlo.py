@@ -7,8 +7,6 @@ from MTfit.algorithms.monte_carlo import BaseMonteCarloRandomSample
 from MTfit.algorithms.monte_carlo import IterationSample
 from MTfit.algorithms.monte_carlo import TimeSample
 
-VERBOSITY = 2
-
 
 class BaseMonteCarloRandomSampleTestCase(unittest.TestCase):
 

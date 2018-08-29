@@ -8,6 +8,10 @@ Applications for commercial use should be made to Schlumberger or the University
 import sys
 import multiprocessing
 import json
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 
 from ._version import get_versions
 __version__ = get_versions()['version']

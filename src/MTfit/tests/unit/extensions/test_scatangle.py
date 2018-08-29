@@ -8,13 +8,15 @@ import shutil
 from MTfit.extensions.scatangle import parse_scatangle
 from MTfit.extensions import scatangle
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+from MTfit.utilities.unittest_utils import get_extension_skip_if_args
 
 if sys.version_info >= (3, 3):
     from unittest import mock
 else:
     import mock
 
-C_EXTENSIONS = (not scatangle.cscatangle, 'No C extension available')
+
+C_EXTENSIONS = get_extension_skip_if_args('MTfit.extension.cscatangle')
 
 
 class PythonOnly(object):

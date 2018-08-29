@@ -5,6 +5,7 @@ import sys
 import numpy as np
 
 from MTfit.utilities import C_EXTENSION_FALLBACK_LOG_MSG
+from MTfit.utilities.unittest_utils import get_extension_skip_if_args
 import MTfit.algorithms.base as base
 
 if sys.version_info >= (3, 3):
@@ -12,10 +13,8 @@ if sys.version_info >= (3, 3):
 else:
     import mock
 
-VERBOSITY = 2
 
-
-C_EXTENSIONS = (not base.cprobability, 'No C extension available')
+C_EXTENSIONS = get_extension_skip_if_args('MTfit.probability.cprobability')
 
 
 class PythonOnly(object):
@@ -26,9 +25,6 @@ class PythonOnly(object):
 
     def __exit__(self, *args, **kwargs):
         base.cprobability = self.cprobability
-
-
-VERBOSITY = 2
 
 
 class BaseAlgorithmTestCase(unittest.TestCase):

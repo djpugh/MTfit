@@ -108,7 +108,7 @@ def MT6_TNPE(MT6):
                     MT6 = MT6.T
                 return cmoment_tensor_conversion.MT6_TNPE(MT6.astype(np.float64))
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     try:
@@ -334,7 +334,7 @@ def E_GD(E):
                 E = E.T
             return cmoment_tensor_conversion.E_GD(E.astype(np.float64))
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     if isinstance(E, np.ndarray):
@@ -392,7 +392,7 @@ def TNP_SDR(T, N, P):
         try:
             return cmoment_tensor_conversion.TP_SDR(T.astype(np.float64), P.astype(np.float64))
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     N1, N2 = TP_FP(T, P)
@@ -568,7 +568,7 @@ def SDR_SDR(strike, dip, rake):
         try:
             return cmoment_tensor_conversion.SDR_SDR(strike.astype(np.float64), dip.astype(np.float64), rake.astype(np.float64))
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     # Handle multiple inputs
@@ -738,7 +738,7 @@ def Tape_MT6(gamma, delta, kappa, h, sigma):
                                                       h.astype(np.float64),
                                                       sigma.astype(np.float64))
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     if isinstance(gamma, (list, np.ndarray)):
@@ -849,7 +849,7 @@ def output_convert(mts):
         try:
             return cmoment_tensor_conversion.MT_output_convert(mts.astype(np.float64))
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     g = np.empty((mts.shape[1],))
@@ -940,7 +940,7 @@ def isotropic_c(lambda_=1, mu=1, c=False):
                 c = []
             return cmoment_tensor_conversion.isotropic_c(lambda_, mu, c)
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     # Calculate isotropic approximation
@@ -1085,7 +1085,7 @@ def MT6c_D6(MT6, c=isotropic_c(lambda_=1, mu=1)):
         try:
             return np.asarray(cmoment_tensor_conversion.MT6c_D6(MT6.astype(np.float64), c))
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     mtvoigt = MT6[np.array([0, 1, 2, 5, 4, 3])]
@@ -1123,7 +1123,7 @@ def is_isotropic_c(c):
         try:
             return cmoment_tensor_conversion.is_isotropic_c(c)
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     tol = 1.e-6*c_norm(c)
@@ -1163,7 +1163,7 @@ def c21_cvoigt(c):
         try:
             return np.asarray(cmoment_tensor_conversion.c21_cvoigt(c))
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     return np.array([[c[0], c[1], c[2], np.sqrt(2)*c[3], np.sqrt(2)*c[4], np.sqrt(2)*c[5]],
@@ -1206,7 +1206,7 @@ def c_norm(c):
         try:
             return cmoment_tensor_conversion.c_norm(c)
         except Exception:
-            pass
+            logger.exception('Error with C extension')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     return np.sqrt(c[0]**2 + c[6]**2 + c[11]**2 + 2*(c[1]**2+c[2]**2+c[7]**2) +
