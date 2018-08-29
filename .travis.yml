@@ -119,7 +119,7 @@ jobs:
     python: 3.6
     name: Build GitHub pages
     deploy:
-      provider: releases
+      provider: pages
       local-dir: docs/html/ 
       api_key: "$GH_PUSH"
       keep-history: true
