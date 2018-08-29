@@ -14,10 +14,16 @@ jobs:
       script: ci/environment.py
     - stage: lint
       script: ci/lint.py
-    - stage: test
-      script: tox
-      name: "Unit Tests"
-    - script: tox -e example-py27,example-py35,example-py36
+    - stage: examples-test
+      script: tox -e example-py27,example-py35,example-py36
       name: "Example Tests"
     - stage: build
       script: ci/build.py
+script:
+  tox
+stages:
+  -environment
+  -lint
+  -test
+  -examples-test
+  -build
