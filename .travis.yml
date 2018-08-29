@@ -11,6 +11,7 @@ stages:
   - environment
   - lint
   - test
+  - examples-test
   - build
 jobs:
   include:
@@ -26,11 +27,17 @@ jobs:
       script: python ci/lint.py
       python: 3.6
       name: "Lint"
-    - stage: test
-      script: tox 
-      name: "Unit Tests"
-    - stage: test
+    - stage: examples-test
       script: tox -e example-py27,example-py35,example-py36
+      python: 2.7
+      name: "Example Tests"
+    - stage: examples-test
+      script: tox -e example-py27,example-py35,example-py36
+      python: 3.5
+      name: "Example Tests"
+    - stage: examples-test
+      script: tox -e example-py27,example-py35,example-py36
+      python: 3.6
       name: "Example Tests"
     - stage: build
       script: python ci/build.py
@@ -47,4 +54,5 @@ jobs:
     - stage: test
       # Would have deploy code here as well -> PyPi and github if tag  
 script:
+  python ci/environment.py
   tox
