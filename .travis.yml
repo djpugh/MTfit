@@ -13,106 +13,106 @@ python:
 - 3.6
 install: python ci/environment.py
 stages:
-# - name: lint
-# - name: test
-# - name: examples-test
-# - name: build
-#   if: tag IS present
-- name: gh-pages
-  if: tag IS present # =~ ^v\d+\.\d+\.\d+
+- name: lint
+- name: test
+- name: examples-test
+- name: build
+  if: tag IS present
+# - name: gh-pages
+#   if: tag IS present # =~ ^v\d+\.\d+\.\d+
 script: skip
 jobs:
   fast_finish: true
   include:
-  # - stage: lint
-  #   script: python ci/lint.py
-  #   python: 2.7
-  #   name: Lint
-  # - stage: lint
-  #   script: python ci/lint.py
-  #   python: 3.5
-  #   name: Lint
-  # - stage: lint
-  #   script: python ci/lint.py
-  #   python: 3.6
-  #   name: Lint
-  # - stage: test
-  #   script: tox -e test-py27
-  #   python: 2.7
-  #   name: Unit Tests
-  # - stage: test
-  #   script: tox -e test-py35
-  #   python: 3.5
-  #   name: Unit Tests
-  # - stage: test
-  #   script: tox -e test-py36
-  #   python: 3.6
-  #   name: Unit Tests
-  # - stage: examples-test
-  #   script: tox -e examples-py27
-  #   python: 2.7
-  #   name: Example Tests
-  # - stage: examples-test
-  #   script: tox -e examples-py35
-  #   python: 3.5
-  #   name: Example Tests
-  # - stage: examples-test
-  #   script: tox -e examples-py36
-  #   python: 3.6
-  #   name: Example Tests
-  # - stage: build
-  #   python: 2.7
-  #   name: Build
-  #   before_deploy: pip install -rtest_requirements.txt
-  #   deploy:
-  #     - provider: pypi
-  #       user: $PYPI_USERNAME
-  #       password: $PYPI_PW
-  #       distributions: sdist
-  #       skip-cleanup: false
-  #       on:
-  #         tags: true
-  #     - provider: releases
-  #       api-key: $GH_PUSH
-  #       skip-cleanup: false
-  #       on:
-  #         tags: true
-  # - stage: build
-  #   script: tox -e build-py35
-  #   python: 3.5
-  #   name: Build
-  #   deploy:
-  #     - provider: pypi
-  #       user: $PYPI_USERNAME
-  #       password: $PYPI_PW
-  #       distributions: sdist
-  #       skip-cleanup: true
-  #       on:
-  #         tags: true
-  # - stage: build
-  #   script: tox -e build-py36
-  #   python: 3.6
-  #   name: Build
-  #   deploy:
-  #     - provider: pypi
-  #       user: $PYPI_USERNAME
-  #       password: $PYPI_PW
-  #       distributions: sdist
-  #       skip-cleanup: true
-  #       on:
-  #         tags: true
-  - stage: gh-pages
-    before_install:
-      - sudo apt-get update
-      - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
-    script: tox -e docs
+  - stage: lint
+    script: python ci/lint.py
+    python: 2.7
+    name: Lint
+  - stage: lint
+    script: python ci/lint.py
+    python: 3.5
+    name: Lint
+  - stage: lint
+    script: python ci/lint.py
     python: 3.6
-    name: Build GitHub pages
+    name: Lint
+  - stage: test
+    script: tox -e test-py27
+    python: 2.7
+    name: Unit Tests
+  - stage: test
+    script: tox -e test-py35
+    python: 3.5
+    name: Unit Tests
+  - stage: test
+    script: tox -e test-py36
+    python: 3.6
+    name: Unit Tests
+  - stage: examples-test
+    script: tox -e examples-py27
+    python: 2.7
+    name: Example Tests
+  - stage: examples-test
+    script: tox -e examples-py35
+    python: 3.5
+    name: Example Tests
+  - stage: examples-test
+    script: tox -e examples-py36
+    python: 3.6
+    name: Example Tests
+  - stage: build
+    python: 2.7
+    name: Build
+    before_deploy: pip install -rtest_requirements.txt
     deploy:
-      provider: pages
-      local-dir: docs/html/ 
-      github-token: "$GH_PUSH"
-      keep-history: true
-      skip-cleanup: true
-      on:
-        tags: true
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist
+        skip-cleanup: false
+        on:
+          tags: true
+      - provider: releases
+        api-key: $GH_PUSH
+        skip-cleanup: false
+        on:
+          tags: true
+  - stage: build
+    script: tox -e build-py35
+    python: 3.5
+    name: Build
+    deploy:
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist
+        skip-cleanup: true
+        on:
+          tags: true
+  - stage: build
+    script: tox -e build-py36
+    python: 3.6
+    name: Build
+    deploy:
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist
+        skip-cleanup: true
+        on:
+          tags: true
+  # - stage: gh-pages
+  #   before_install:
+  #     - sudo apt-get update
+  #     - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
+  #   script: tox -e docs
+  #   python: 3.6
+  #   name: Build GitHub pages
+  #   deploy:
+  #     provider: pages
+  #     local-dir: docs/html/ 
+  #     github-token: "$GH_PUSH"
+  #     keep-history: true
+  #     skip-cleanup: true
+  #     on:
+  #       tags: true
