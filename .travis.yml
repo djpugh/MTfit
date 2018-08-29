@@ -18,9 +18,9 @@ stages:
 - name: test
 - name: examples-test
 - name: build
-  if: tag =~ ^v\d+\.\d+\.\d+
+  if: tag IS present
 - name: gh-pages
-  if: tag =~ ^v\d+\.\d+\.\d+
+  if: tag IS present
 script: skip
 jobs:
   fast_finish: true
