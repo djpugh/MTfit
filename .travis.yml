@@ -69,12 +69,7 @@ jobs:
   #       user: $PYPI_USERNAME
   #       password: $PYPI_PW
   #       distributions: sdist
-  #       skip_cleanup: false
-  #       on:
-  #         tags: true
-  #     - provider: releases
-  #       api_key: $GH_PUSH
-  #       skip_cleanup: false
+  #       skip_-leanup: false
   #       on:
   #         tags: true
   # - stage: build
@@ -86,12 +81,7 @@ jobs:
   #       user: $PYPI_USERNAME
   #       password: $PYPI_PW
   #       distributions: sdist
-  #       skip_cleanup: true
-  #       on:
-  #         tags: true
-  #     - provider: releases
-  #       api_key: $GH_PUSH
-  #       skip_cleanup: true
+  #       skip_-leanup: true
   #       on:
   #         tags: true
   # - stage: build
@@ -103,12 +93,7 @@ jobs:
   #       user: $PYPI_USERNAME
   #       password: $PYPI_PW
   #       distributions: sdist
-  #       skip_cleanup: true
-  #       on:
-  #         tags: true
-  #     - provider: releases
-  #       api_key: $GH_PUSH
-  #       skip_cleanup: true
+  #       skip_-leanup: true
   #       on:
   #         tags: true
   - stage: gh-pages
@@ -121,8 +106,8 @@ jobs:
     deploy:
       provider: pages
       local-dir: docs/html/ 
-      api_key: "$GH_PUSH"
+      github-token: "$GH_PUSH"
       keep-history: true
-      skip_cleanup: true
+      skip-cleanup: true
       on:
         tags: true
