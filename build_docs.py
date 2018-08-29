@@ -259,6 +259,9 @@ If there are any errors please see the documentation and if necessary contact th
 def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False, travis=None):
     if travis is None:
         travis = os.environ.get('ON_TRAVIS', False) == '1'
+    if travis:
+        pdf = False
+        # PDF not available on travis-ci
     if 'setup.py' not in os.listdir('.'):
         raise ValueError('Needs to be run in the top of the repository')
     print('\n\n==============================\n\nBuilding Documentation\n\n==============================\n\n')

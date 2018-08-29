@@ -27,6 +27,8 @@ MTfit is dependent on numpy and scipy, and for MATLAB -v7.3 support also require
 Cluster support will be automatically installed via pyqsub from github
 MPI support requires mpi4py built against a valid MPI distribution.
 
+To build the C extensions when compiling from source you will need cython and associated C compilers
+
 
 
 

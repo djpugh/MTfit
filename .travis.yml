@@ -18,8 +18,6 @@ stages:
 # - name: examples-test
 - name: build
   if: tag IS present
-- name: gh-pages
-  if: tag IS present
 script: skip
 jobs:
   fast_finish: true
@@ -60,23 +58,23 @@ jobs:
   #   script: tox -e examples-py36
   #   python: 3.6
   #   name: Example Tests
-  # - stage: build
-  #   script: tox -e build-py27
-  #   python: 2.7
-  #   name: Build
-  #   deploy:
-  #     - provider: pypi
-  #       user: $PYPI_USERNAME
-  #       password: $PYPI_PW
-  #       distributions: sdist bdist_wheel
-  #       skip_cleanup: false
-  #       on:
-  #         tags: true
-  #     - provider: releases
-  #       api_key: $GH_PUSH
-  #       skip_cleanup: false
-  #       on:
-  #         tags: true
+  - stage: build
+    python: 2.7
+    name: Build
+    before_deploy: pip install -rtest_requirements.txt
+    deploy:
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist bdist_wheel
+        skip_cleanup: false
+        on:
+          tags: true
+      - provider: releases
+        api_key: $GH_PUSH
+        skip_cleanup: false
+        on:
+          tags: true
   # - stage: build
   #   script: tox -e build-py35
   #   python: 3.5
@@ -111,14 +109,14 @@ jobs:
   #       skip_cleanup: true
   #       on:
   #         tags: true
-  - stage: gh-pages
-    script: tox -e gh-pages
-    python: 3.6
-    name: Build GitHub pages
-    deploy:
-      provider: releases
-      api_key: "$GH_PUSH"
-      keep-history: true
-      skip_cleanup: true
-      on:
-        tags: true
+  # - stage: gh-pages
+  #   script: tox -e gh-pages
+  #   python: 3.6
+  #   name: Build GitHub pages
+  #   deploy:
+  #     provider: releases
+  #     api_key: "$GH_PUSH"
+  #     keep-history: true
+  #     skip_cleanup: true
+  #     on:
+  #       tags: true
