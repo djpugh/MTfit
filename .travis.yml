@@ -13,46 +13,90 @@ stages:
   - test
   - examples-test
   - build
+
+script: tox
+
+
 jobs:
   include:
     - stage: lint
       script: python ci/lint.py
       python: 2.7
       name: "Lint"
+
     - stage: lint
       script: python ci/lint.py
       python: 3.5
       name: "Lint"
+
     - stage: lint
       script: python ci/lint.py
       python: 3.6
       name: "Lint"
+
     - stage: examples-test
       script: tox -e example-py27,example-py35,example-py36
       python: 2.7
       name: "Example Tests"
+
     - stage: examples-test
       script: tox -e example-py27,example-py35,example-py36
       python: 3.5
       name: "Example Tests"
+
     - stage: examples-test
       script: tox -e example-py27,example-py35,example-py36
       python: 3.6
       name: "Example Tests"
+
     - stage: build
-      script: python ci/build.py
+      script: tox -e build-py27
       python: 2.7
       name: "Build"
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        skip_cleanup: true
+        on:
+          tags: true
+      deploy:
+        provider: pypi
+        # user: ...
+        # password: ...
+        distributions: "sdist bdist_wheel"
+        skip_cleanup: true
+
     - stage: build
-      script: python ci/build.py
+      script: tox -e build-py35
       python: 3.5
       name: "Build"
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        skip_cleanup: true
+        on:
+          tags: true
+      deploy:
+        provider: pypi
+        # user: ...
+        # password: ...
+        distributions: "sdist bdist_wheel"
+        skip_cleanup: true
+
     - stage: build
-      script: python ci/build.py
+      script: tox -e build-py36
       python: 3.6
       name: "Build"
-    - stage: test
-      # Would have deploy code here as well -> PyPi and github if tag  
-script:
-  python ci/environment.py
-  tox
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        skip_cleanup: true
+        on:
+          tags: true
+      deploy:
+        provider: pypi
+        # user: ...
+        # password: ...
+        distributions: "sdist bdist_wheel"
+        skip_cleanup: true
+
