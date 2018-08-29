@@ -12,7 +12,8 @@ python:
 - 3.5
 - 3.6
 before_install:
-  - sudo apt-get install -qy install texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
+  - sudo apt-get update
+  - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
 install: python ci/environment.py
 stages:
 # - name: lint
