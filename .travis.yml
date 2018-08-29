@@ -1,0 +1,23 @@
+sudo: false
+os:
+  - osx
+  - linux
+language: python
+python:
+  - "2.7"
+  - "3.5"
+  - "3.6"
+install: pip install tox-travis
+jobs:
+  include:
+    - stage: environment
+      script: ci/environment.py
+    - stage: lint
+      script: ci/lint.py
+    - stage: test
+      script: tox
+      name: "Unit Tests"
+    - script: tox -e example-py27,example-py35,example-py36
+      name: "Example Tests"
+    - stage: build
+      script: ci/build.py
