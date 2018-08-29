@@ -5,7 +5,8 @@ python:
   - "2.7"
   - "3.5"
   - "3.6"
-install: pip install tox-travis
+install: python ci/environment.py
+         pip install tox-travis
 stages:
   - environment
   - lint
@@ -15,14 +16,12 @@ stages:
 jobs:
   include:
     - stage: lint
-      script: python ci/environment.py
       script: python ci/lint.py
       python:
         - "2.7"
         - "3.5"
         - "3.6"
     - stage: examples-test
-      script: python ci/environment.py
       script: tox -e example-py27,example-py35,example-py36
       python:
         - "2.7"
