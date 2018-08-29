@@ -286,12 +286,12 @@ def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False, tr
         if html:
             build_html()
         print("*********************************\n\nDocumentation Build Succeeded\n\n*********************************")
+        if gh_pages:
+            print("*********************************\n\nSetting up gh-pages\n\n*********************************")
+            setup_gh_pages(travis)
     except Exception:
         traceback.print_exc()
         print("*********************************\n\nDocumentation Build Failed\n\n*********************************")
-    if gh_pages:
-        print("*********************************\n\nSetting up gh-pages\n\n*********************************")
-        setup_gh_pages(travis)
 
 
 def build_html(output_path=os.path.abspath('./docs/html/')):
@@ -341,6 +341,9 @@ def build_pdf(output_path=os.path.abspath('./docs/pdf/MTfit.pdf')):
     (bout, berr) = p.communicate()
     p2 = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'MTfit.tex'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     (b2out, b2err) = p2.communicate()
+    if sys.version_info.major >= 3:
+        bout = bout.decode()
+        b2out = b2out.decode()
     print(bout)
     os.chdir('../../')
     if 'fatal error occured' in bout.lower()+b2out.lower():
