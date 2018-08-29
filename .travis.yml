@@ -38,31 +38,31 @@ jobs:
     python: 3.6
     name: Lint
   - stage: test
-    script: tox -vv -e test-py27
+    script: tox -e test-py27
     python: 2.7
     name: Unit Tests
   - stage: test
-    script: tox -vv -e test-py35
+    script: tox -e test-py35
     python: 3.5
     name: Unit Tests
   - stage: test
-    script: tox -vv -e test-py36
+    script: tox -e test-py36
     python: 3.6
     name: Unit Tests
   - stage: examples-test
-    script: tox -vv -e examples-py27
+    script: tox -e examples-py27
     python: 2.7
     name: Example Tests
   - stage: examples-test
-    script: tox -vv -e examples-py35
+    script: tox -e examples-py35
     python: 3.5
     name: Example Tests
   - stage: examples-test
-    script: tox -vv -e examples-py36
+    script: tox -e examples-py36
     python: 3.6
     name: Example Tests
   - stage: build
-    script: tox -vv -e build-py27
+    script: tox -e build-py27
     python: 2.7
     name: Build
     deploy:

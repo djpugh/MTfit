@@ -159,7 +159,7 @@ def run(args=None):
             options['max_samples'] = options['chain_length']
         return pyqsub.submit(options, options_map, __name__)
     else:
-        for key in options.keys():
+        for key in list(options.keys()):
             if 'qsub' in key:
                 options.pop(key)
         if options['mpi'] and not options['_mpi_call']:
