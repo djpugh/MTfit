@@ -256,8 +256,10 @@ If there are any errors please see the documentation and if necessary contact th
 """
 
 
-def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
+def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False, travis=None):
 
+    if travis is None:
+        travis = os.environ.get('ON_TRAVIS', False) == '1'
     if 'setup.py' not in os.listdir('.'):
         raise ValueError('Needs to be run in the top of the repository')
     print('\n\n==============================\n\nBuilding Documentation\n\n==============================\n\n')
@@ -287,7 +289,7 @@ def build_docs(html=True, manpages=True, pdf=True, epub=True, gh_pages=False):
         print("*********************************\n\nDocumentation Build Succeeded\n\n*********************************")
         if gh_pages:
             print("*********************************\n\nSetting up gh-pages\n\n*********************************")
-            setup_gh_pages()
+            setup_gh_pages(travis)
     except Exception:
         traceback.print_exc()
         print("*********************************\n\nDocumentation Build Failed\n\n*********************************")
@@ -362,7 +364,7 @@ def build_epub(output_path=os.path.abspath('./docs/epub/')):
         pass
 
 
-def setup_gh_pages():
+def setup_gh_pages(travis=False):
     # Copy docs/html to tempfolder
     from MTfit import __version__
     print("------------------------------\n\nMaking Temporary Directory\n\n------------------------------")
@@ -376,7 +378,8 @@ def setup_gh_pages():
     print("------------------------------\n\nStashing Changes\n\n------------------------------")
     repo.git.stash('save')
     print("------------------------------\n\nSwitching Branch to gh-pages\n\n------------------------------")
-    current_branch = repo.active_branch.name
+    if not travis:
+        current_branch = repo.active_branch.name
     repo.git.checkout('gh-pages')
     # Clean folder and copy html into folder
     print("------------------------------\n\nCleaning Working Set\n\n------------------------------")
@@ -393,27 +396,34 @@ def setup_gh_pages():
             os.remove(item)
     print("------------------------------\n\nCopying Documentation from Temporary Directory\n\n------------------------------")
     copy_recursively(os.path.join(temp_dir, 'html'), os.path.abspath('./'))
+    if not os.path.exists('.nojekyll'):
+        with open('.nojekyll', 'w') as f:
+            f.write('')
+            f.close()
     print("------------------------------\n\nRemoving Temporary Directory\n\n------------------------------")
     shutil.rmtree(temp_dir)
     print("------------------------------\n\nCommitting Documentation to gh-pages\n\n------------------------------")
     # Commit the changes
     repo.git.add('*')
     repo.git.commit('-m', 'Documentation {}'.format(__version__))
-    # Checkout old branch
-    print("------------------------------\n\nReturning to {} Branch\n\n------------------------------".format(current_branch))
-    repo.git.checkout(current_branch)
-    print("------------------------------\n\nUnstashing Changes\n\n------------------------------")
-    repo.git.stash('pop')
-    print("------------------------------\n\nCleaning Working Directory\n\n------------------------------")
-    doctrees = glob.glob('*.doctree')
-    for item in doctrees:
-        os.remove(item)
-    invs = glob.glob('*.inv')
-    for item in invs:
-        os.remove(item)
-    jss = glob.glob('*.js')
-    for item in jss:
-        os.remove(item)
+    if travis:
+        subprocess.call(['git', 'push', '--quiet', '--set-upstream', 'origin-pages', 'gh-pages'])
+    else:
+        # Checkout old branch
+        print("------------------------------\n\nReturning to {} Branch\n\n------------------------------".format(current_branch))
+        repo.git.checkout(current_branch)
+        print("------------------------------\n\nUnstashing Changes\n\n------------------------------")
+        repo.git.stash('pop')
+        print("------------------------------\n\nCleaning Working Directory\n\n------------------------------")
+        doctrees = glob.glob('*.doctree')
+        for item in doctrees:
+            os.remove(item)
+        invs = glob.glob('*.inv')
+        for item in invs:
+            os.remove(item)
+        jss = glob.glob('*.js')
+        for item in jss:
+            os.remove(item)
 
 
 def copy_recursively(source_folder, destination_folder):

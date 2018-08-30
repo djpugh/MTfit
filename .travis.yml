@@ -11,6 +11,9 @@ python:
 - 2.7
 - 3.5
 - 3.6
+branches:
+  except:
+  - gh-pages
 install: python ci/environment.py
 stages:
 - name: lint
@@ -18,8 +21,8 @@ stages:
 - name: examples-test
 - name: build
   if: tag IS present
-# - name: gh-pages
-#   if: tag IS present # =~ ^v\d+\.\d+\.\d+
+- name: gh-pages
+  if: tag =~ ^v\d+\.\d+\.\d+
 script: skip
 jobs:
   fast_finish: true
@@ -101,18 +104,14 @@ jobs:
         skip-cleanup: true
         on:
           tags: true
-  # - stage: gh-pages
-  #   before_install:
-  #     - sudo apt-get update
-  #     - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
-  #   script: tox -e docs
-  #   python: 3.6
-  #   name: Build GitHub pages
-  #   deploy:
-  #     provider: pages
-  #     local-dir: docs/html/ 
-  #     github-token: "$GH_PUSH"
-  #     keep-history: true
-  #     skip-cleanup: true
-  #     on:
-  #       tags: true
+  - stage: gh-pages
+    before_install:
+      - sudo apt-get update
+      - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
+    script:
+      - echo "Adding GitHub remote"
+      - git remote add origin-pages https://${GH_PUSH}@github.com/djpugh/MTfit.git > /dev/null 2>&1
+      - git fetch origin-pages gh-pages:gh-pages
+      - tox -e gh-pages
+    python: 3.6
+    name: Build GitHub pages
