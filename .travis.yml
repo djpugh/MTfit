@@ -105,7 +105,10 @@ jobs:
     before_install:
       - sudo apt-get update
       - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
-    after_install: git remote add origin-pages https://${GH_PUSH}@github.com/djpugh/MTfit.git > /dev/null 2>&1
-    script: tox -e gh-pages
+    script:
+      - echo "Adding GitHub remote"
+      - git remote add origin-pages https://${GH_PUSH}@github.com/djpugh/MTfit.git > /dev/null 2>&1
+      - git fetch origin-pages gh-pages:gh-pages
+      - tox -e gh-pages
     python: 3.6
     name: Build GitHub pages
