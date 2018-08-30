@@ -11,6 +11,9 @@ python:
 - 2.7
 - 3.5
 - 3.6
+branches:
+  except:
+  - gh-pages
 install: python ci/environment.py
 stages:
 # - name: lint
