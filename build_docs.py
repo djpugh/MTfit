@@ -396,6 +396,10 @@ def setup_gh_pages(travis=False):
             os.remove(item)
     print("------------------------------\n\nCopying Documentation from Temporary Directory\n\n------------------------------")
     copy_recursively(os.path.join(temp_dir, 'html'), os.path.abspath('./'))
+    if not os.path.exists('.nojekyll'):
+        with open('.nojekyll', 'w') as f:
+            f.write('')
+            f.close()
     print("------------------------------\n\nRemoving Temporary Directory\n\n------------------------------")
     shutil.rmtree(temp_dir)
     print("------------------------------\n\nCommitting Documentation to gh-pages\n\n------------------------------")
