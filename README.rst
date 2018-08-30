@@ -1,3 +1,5 @@
+.. image:: https://travis-ci.org/djpugh/MTfit.svg?branch=develop
+
 The documentation is available at `https://djpugh.github.io/MTfit/ <https://djpugh.github.io/MTfit/>`_ and can be built using `sphinx` from the source in MTfit/docs/, or using the `build_docs.py`.
 
 The documentation includes tutorials and explanations of MTfit and the approaches used.
@@ -24,6 +26,8 @@ Alternative this repository can be cloned and the package then installed simply 
 MTfit is dependent on numpy and scipy, and for MATLAB -v7.3 support also requires h5py.
 Cluster support will be automatically installed via pyqsub from github
 MPI support requires mpi4py built against a valid MPI distribution.
+
+To build the C extensions when compiling from source you will need cython and associated C compilers
 
 
 

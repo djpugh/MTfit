@@ -1,0 +1,117 @@
+sudo: false
+os: linux
+language: python
+env:
+  global:
+  - ON_TRAVIS=1
+  - secure: X9w4qCkm5g+XqRwUp3BXtVJcgAxoQW20+9flUSTRfv583tNdd98Av0pZGoP1hivi8HxFwZLYT0uw8dyYhVToN7BPZHjwhrXwv1OHZBAmCNwZwdbi0jvfbrtLX0NejqbyEgwF6HmxrnRxkrH97yNKciF+LBZZAuZd0W2g1sisj+VAAn0VYeSJvmPVNoQovFLQVb+MSWZ22CN+sOmpajPp2Aq0IKW8+dnwLqY/0v+IjMHPjZikXBWFZo7joxM5FA/143kfwHcu71Xk4JsnYAsZFXB7vwxmRWeV21GjbmPAZrFV2WfZirV6GpN7DndNTfpq6ZZ9PrUpDnUi0wjoTWv28aHpP1j0gvkawaW3dAf/St1QT0KHwieELh91GXTarhybNZ2B7fBZBssEEkQG8NaRvkrKzPKoP7nD+zZGNfK/BBfREuBcs0p/acSle4nIJxOFxrrRnM3053LPnzn6YPuP5fL0Fozw8DggOkzdBuBmPP+4l6qNa/U1k9KwVgPQK9Cph7Zce0sz8YOGPbQKlZ3LZvMWTCZRlmiRtVS7nNndWsxNw/18Ezbi6qET1ia/+KH3hZpjiCVcQTjsHE6m7QGyoS/7XV0DN8kJyG6ChuBWMrQoR6qxxVxOQ13Soltdve9xghYjUv6/hVYWfio51aFzkFzqBxyTt2dOQtdZEo54qv8=
+  - secure: Ojj4iWp7CwaMrzWygdJ9fYXLx8LCKQrWZg8UrWG19WNR5CwVpkLc+TorpDELrLoy4Zwm/8qH0S9lJYQSzYMJftyngU19XbGMrHQ3+tizn49viUPCjVD0iiWTjIEgSYKieiBEl61CvEp+AWxhOTX3sG9GooI2R3xQPmgSdcXC7NRdj8YdNDftFr5/nRmgJTVhumDoGvfuecG8XL7rurvjl+5Z6kKfPVEJ4PjtZ0UvopYNARr96WwABsbg+zLRXhC/oy2GOrHhI/efZOk2UnsbfIfpfzlX75WeyHs1Zc3slayZ+6XfLj9mlMm2jKcAPcZ8f+p5LjBanLdI9R85LgwTDUlejWT3KehD5r7hFB7YpoZvoWELWfycTdzlYwxAf3Em9uaLtDVzQOkmOQpxX2KTYIqM43HQnzqO9YmKauFXu7YwgkwwCITH02rFpquZQlK3pKKw6kG//eoh0yh8eekL71Fila68+q+cyAhzXUvq8a8aUSS/E7dh9Djg3CiUqa0UXQ6yDkldh3sfJu/EBN51OLlRTJAOqk3D/Lc+eaizc+/PtWwBxqUT250d5W+IQWiOg9hDUvnsNO4e7SwpFEXTnTGazvPJUesRpn7QrlZjhNTqf8CagRl9xS9HgnBkveZVKOq2uDb1rboFawM1cCB942aKRqjhC+gnsvRns4sKo+o=
+  - secure: ZcGwnbX5o+y/clU1Z2VWPGhksX/sYTMgRJSZPlPUXJpAMHsKSqBrnoxTDL2gHmdKL0Wm4JCGnTimyxvAfvMV9q1vDmbqFhd5bAXwKN67Hz0EmUZ5I4JRAbcS8S0hrvQGxIXXFLnOdDrIoYP4DiTowTEzbaNMdb3Ebd26LandfL5tAO+74KkhXt+fQJvfM8430w8LChccWlEzzospFF9/7WyH2ObipDhPzfWsm67ugXSQ0fUOriIDHdhMzhkounaFjtR13OmKax6AYyfEkMiYduHRMEvdBCP2233tfGZBI10RaVmfTmzk4tkSGTDVPklbuUVO2Y58SeheQwGrDAwFdhH4fqlPtXJTsuF0pgqG2FXiFDifmzZqAuIV7AZpj5kXkKB/I4+TkPNJMMIOmSL3LAKky2riJfKUvEFU8lKIcMuG8VtcMZc87gQFN5D3pKvXrLSABPB+7lS123fxXBshU0vzxQoRL125OxnEAMM+vmNgXe1Kqm6Gtsb/JbEhDkRreqr882CbsgltUydmUNAHTXLR/vokBB3L3Mbe/ECGoE7zPQjkyx9ryth7bM0i+7xJ1b/EXAt3H3KILwbSFcH0CmGA/n0a1FOAXRd1uszD4szES/O0eqROweoSGADu39JgmT/XihMds5ELnU0Tkvf1lYWW3Wr56f3v/RTjft/GOR0=
+python:
+- 2.7
+- 3.5
+- 3.6
+branches:
+  except:
+  - gh-pages
+install: python ci/environment.py
+stages:
+- name: lint
+- name: test
+- name: examples-test
+- name: build
+  if: tag IS present
+- name: gh-pages
+  if: tag =~ ^v\d+\.\d+\.\d+
+script: skip
+jobs:
+  fast_finish: true
+  include:
+  - stage: lint
+    script: python ci/lint.py
+    python: 2.7
+    name: Lint
+  - stage: lint
+    script: python ci/lint.py
+    python: 3.5
+    name: Lint
+  - stage: lint
+    script: python ci/lint.py
+    python: 3.6
+    name: Lint
+  - stage: test
+    script: tox -e test-py27
+    python: 2.7
+    name: Unit Tests
+  - stage: test
+    script: tox -e test-py35
+    python: 3.5
+    name: Unit Tests
+  - stage: test
+    script: tox -e test-py36
+    python: 3.6
+    name: Unit Tests
+  - stage: examples-test
+    script: tox -e examples-py27
+    python: 2.7
+    name: Example Tests
+  - stage: examples-test
+    script: tox -e examples-py35
+    python: 3.5
+    name: Example Tests
+  - stage: examples-test
+    script: tox -e examples-py36
+    python: 3.6
+    name: Example Tests
+  - stage: build
+    python: 2.7
+    name: Build
+    before_deploy: pip install -rtest_requirements.txt
+    deploy:
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist
+        skip-cleanup: false
+        on:
+          tags: true
+      - provider: releases
+        api-key: $GH_PUSH
+        skip-cleanup: false
+        on:
+          tags: true
+  - stage: build
+    script: tox -e build-py35
+    python: 3.5
+    name: Build
+    deploy:
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist
+        skip-cleanup: true
+        on:
+          tags: true
+  - stage: build
+    script: tox -e build-py36
+    python: 3.6
+    name: Build
+    deploy:
+      - provider: pypi
+        user: $PYPI_USERNAME
+        password: $PYPI_PW
+        distributions: sdist
+        skip-cleanup: true
+        on:
+          tags: true
+  - stage: gh-pages
+    before_install:
+      - sudo apt-get update
+      - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
+    script:
+      - echo "Adding GitHub remote"
+      - git remote add origin-pages https://${GH_PUSH}@github.com/djpugh/MTfit.git > /dev/null 2>&1
+      - git fetch origin-pages gh-pages:gh-pages
+      - tox -e gh-pages
+    python: 3.6
+    name: Build GitHub pages

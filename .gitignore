@@ -25,3 +25,8 @@ env/*
 .venv/*
 \.venv/
 .vagrant/*
+.pytest_cache/*
+reports/*-py*
+.coverage
+reports/*
+*.c

@@ -1,0 +1,6 @@
+"""
+extensions
+*****
+
+Tests for extensions
+"""

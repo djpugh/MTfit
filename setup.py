@@ -9,12 +9,14 @@ or python setup.py install
 import sys
 import os
 import subprocess
-import versioneer
+import distutils
 
 import numpy as np
 from setuptools import setup
 from setuptools import Extension
 from setuptools import find_packages
+
+import versioneer
 
 _CYTHON = False
 
@@ -44,7 +46,10 @@ def setup_package():
     Checks to see if required modules are installed and if not tries to install them (apart from Basemap)
     """
     # Extensions
+    # try:
     build_extensions()
+    # extensions = True
+    # print('\n\n**********\nError building extensions, will just use native python implementation\nCaution this is slower and less efficient\n\nError {}\n\n**********'.format(e))
     version = versioneer.get_version()
     kwargs = dict(name='MTfit',
                   version=version,
@@ -97,19 +102,19 @@ def setup_package():
         extra_compile_args = []
         libraries = []
     if _CYTHON and 'build_ext' in sys.argv:
-        kwargs['ext_modules'] = [Extension('MTfit.probability.cprobability', sources=['src/MTfit/probability/cprobability.pyx'], libraries=libraries, extra_compile_args=extra_compile_args),
+        kwargs['ext_modules'] = [Extension('MTfit.probability.cprobability', sources=['src/MTfit/probability/cprobability.pyx'], libraries=libraries, extra_compile_args=extra_compile_args, optional=True),
                                  Extension('MTfit.convert.cmoment_tensor_conversion', sources=[
-                                           'src/MTfit/convert/cmoment_tensor_conversion.pyx'], libraries=libraries, extra_compile_args=extra_compile_args),
+                                           'src/MTfit/convert/cmoment_tensor_conversion.pyx'], libraries=libraries, extra_compile_args=extra_compile_args, optional=True),
                                  Extension('MTfit.extensions.cscatangle', sources=[
-                                           'src/MTfit/extensions/cscatangle.pyx'], libraries=libraries, extra_compile_args=extra_compile_args),
-                                 Extension('MTfit.algorithms.cmarkov_chain_monte_carlo', sources=['src/MTfit/algorithms/cmarkov_chain_monte_carlo.pyx'], libraries=libraries, extra_compile_args=extra_compile_args)]
+                                           'src/MTfit/extensions/cscatangle.pyx'], libraries=libraries, extra_compile_args=extra_compile_args, optional=True),
+                                 Extension('MTfit.algorithms.cmarkov_chain_monte_carlo', sources=['src/MTfit/algorithms/cmarkov_chain_monte_carlo.pyx'], libraries=libraries, extra_compile_args=extra_compile_args, optional=True)]
         kwargs['cmdclass'] = {"build_ext": build_ext}
     else:
-        kwargs['ext_modules'] = [Extension('MTfit.probability.cprobability', sources=['src/MTfit/probability/cprobability.c'], libraries=libraries, extra_compile_args=extra_compile_args),
+        kwargs['ext_modules'] = [Extension('MTfit.probability.cprobability', sources=['src/MTfit/probability/cprobability.c'], libraries=libraries, extra_compile_args=extra_compile_args, optional=True),
                                  Extension('MTfit.convert.cmoment_tensor_conversion', sources=[
-                                           'src/MTfit/convert/cmoment_tensor_conversion.c'], libraries=libraries, extra_compile_args=extra_compile_args),
-                                 Extension('MTfit.extensions.cscatangle', sources=['src/MTfit/extensions/cscatangle.c'], libraries=libraries, extra_compile_args=extra_compile_args),
-                                 Extension('MTfit.algorithms.cmarkov_chain_monte_carlo', sources=['src/MTfit/algorithms/cmarkov_chain_monte_carlo.c'], libraries=libraries, extra_compile_args=extra_compile_args)]
+                                           'src/MTfit/convert/cmoment_tensor_conversion.c'], libraries=libraries, extra_compile_args=extra_compile_args, optional=True),
+                                 Extension('MTfit.extensions.cscatangle', sources=['src/MTfit/extensions/cscatangle.c'], libraries=libraries, extra_compile_args=extra_compile_args, optional=True),
+                                 Extension('MTfit.algorithms.cmarkov_chain_monte_carlo', sources=['src/MTfit/algorithms/cmarkov_chain_monte_carlo.c'], libraries=libraries, extra_compile_args=extra_compile_args, optional=True)]
     setup(**kwargs)
 
 
@@ -136,29 +141,23 @@ This will install the module to the user site-packages directory. Alternatively,
 def build_extensions():
     if 'build_ext' in sys.argv:
         print('------\nCLEANING EXTENSION FILES\n-----\n')
+        exts = []
+        if _CYTHON:
+            exts.append('c')
         if 'win32' in sys.platform:
-            exts = ['c', 'pyd']
+            exts.append('pyd')
         else:
-            exts = ['c', 'so']
+            exts.append('so')
         for filename in ['src/MTfit/probablity/cprobability.', 'src/MTfit/algorithms/cmarkov_chain_monte_carlo.', 'src/MTfit/extensions/cscatangle.', 'src/MTfit/convert/cmoment_tensor_conversion.']:
             for ext in exts:
                 if os.path.exists(filename+ext):
                     os.remove(filename+ext)
-    elif 'develop' in sys.argv:
+    elif 'develop' in sys.argv or 'sdist' in sys.argv or 'bdist_wheel' in sys.argv  :
         print('------\nBUILDING EXTENSIONS\n-----\n')
         argv = [sys.executable, "setup.py", "build_ext", "--inplace"]
-        subprocess.check_call(argv)
-
-
-def _clean_package():
-    old_argv = sys.argv
-    sys.argv = ['clean_all']
-    setup_package(clean=True)
-    sys.argv = old_argv
-
-
-def cython_build():
-    setup_package(test=False, build=False, develop=True)
+        res = subprocess.call(argv)
+        if res:
+            print('------\nEXTENSIONS FAILED\n-----\n')
 
 
 if __name__ == "__main__":

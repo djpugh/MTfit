@@ -2,8 +2,8 @@ import numpy as np
 from numpy.random import rand, randn
 import scipy.stats as sp
 
-from mtfit import plot
-from mtfit import convert
+from MTfit import plot
+from MTfit import convert
 # Make Figure 2
 # Load Data
 station_distribution = plot.read(
@@ -17,7 +17,7 @@ plot = plot.MTplot([np.array([1, 0, -1, 0, 0, 0]), DCs, MTs],
                    station_distribution=[station_distribution, False, False],
                    plot_type=['faultplane', 'faultplane', 'hudson'],
                    fault_plane=[False, True, False],
-                   show_mean=False, show_max=True, grid_lines=True,
+                   show_mean=False, show_max_likelihood=True, grid_lines=True,
                    TNP=False, text=[False, False, True])
 # Make Figure 4
 n = 100
