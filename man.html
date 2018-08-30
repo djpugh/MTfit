@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                1.0.3a15
+                1.0.3a16
               </div>
             
           
@@ -85,23 +85,23 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running MTfit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">2. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">3. Running MTfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">4. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">5. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">6. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">7. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">8. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">9. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">10. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">11. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">1. Plot Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">2. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">3. Source Code</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
@@ -404,8 +404,8 @@ or to set up a manual alias/script, e.g. for bash:</p>
 [-j DIMENSION_JUMP_PROB] [-y {grid}] [-u MIN_ACCEPTANCE_RATE]
 [-v MAX_ACCEPTANCE_RATE] [-w ACCEPTANCE_RATE_WINDOW]
 [-W WARNINGS] [-z LEARNING_LENGTH] [--version] [--detail]
-[--mpi_call] [--output-format {pickle,matlab,hyp}]
-[--results-format {hyp,full_pdf}] [--no-dist]
+[--mpi_call] [--output-format {matlab,pickle,hyp}]
+[--results-format {full_pdf,hyp}] [--no-dist]
 [--dc-prior DC_PRIOR] [--sampling SAMPLING]
 [--sample-models SAMPLE_DISTRIBUTION]
 [--sampling-prior SAMPLING_PRIOR] [--no-normalise] [--convert]
@@ -895,12 +895,12 @@ period [default=5000]</div></blockquote>
 <p class="attribution">&mdash;mpi_call            DO NOT USE - only for spawning mpi subprocess</p>
 </div></blockquote>
 <blockquote>
-<div><p>--output-format {pickle,matlab,hyp}, --output_format {pickle,matlab,hyp},
---outputformat {pickle,matlab,hyp}, --format {pickle,matlab,hyp}</p>
+<div><p>--output-format {matlab,pickle,hyp}, --output_format {matlab,pickle,hyp},
+--outputformat {matlab,pickle,hyp}, --format {matlab,pickle,hyp}</p>
 <blockquote>
 <div>Output file format [default=matlab]</div></blockquote>
-<p class="attribution">&mdash;results-format {hyp,full_pdf}, --results_format {hyp,full_pdf},
---resultsformat {hyp,full_pdf}</p>
+<p class="attribution">&mdash;results-format {full_pdf,hyp}, --results_format {full_pdf,hyp},
+--resultsformat {full_pdf,hyp}</p>
 </div></blockquote>
 <blockquote>
 <div><blockquote>
@@ -1029,7 +1029,7 @@ parameter .</td></tr>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Aug 30, 2018 (version 1.0.3a15).
+      Last updated on Aug 30, 2018 (version 1.0.3a16).
 
     </p>
   </div>
@@ -1051,7 +1051,7 @@ parameter .</td></tr>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.3a15',
+            VERSION:'1.0.3a16',
             LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
