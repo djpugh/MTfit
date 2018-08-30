@@ -22,7 +22,7 @@ stages:
 - name: build
   if: tag IS present
 - name: gh-pages
-  if: tag =~ ^v\d+\.\d+\.\d+
+  if: tag =~ ^\d+\.\d+\.\d+
 script: skip
 jobs:
   fast_finish: true
@@ -89,7 +89,12 @@ jobs:
         user: $PYPI_USERNAME
         password: $PYPI_PW
         distributions: sdist
-        skip-cleanup: true
+        skip-cleanup: false
+        on:
+          tags: true
+      - provider: releases
+        api-key: $GH_PUSH
+        skip-cleanup: false
         on:
           tags: true
   - stage: build
@@ -101,7 +106,12 @@ jobs:
         user: $PYPI_USERNAME
         password: $PYPI_PW
         distributions: sdist
-        skip-cleanup: true
+        skip-cleanup: false
+        on:
+          tags: true
+      - provider: releases
+        api-key: $GH_PUSH
+        skip-cleanup: false
         on:
           tags: true
   - stage: gh-pages
