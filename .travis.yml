@@ -64,41 +64,6 @@ jobs:
     python: 3.6
     name: Example Tests
   - stage: build
-    python: 2.7
-    name: Build
-    before_deploy: pip install -rtest_requirements.txt
-    deploy:
-      - provider: pypi
-        user: $PYPI_USERNAME
-        password: $PYPI_PW
-        distributions: sdist
-        skip-cleanup: false
-        on:
-          tags: true
-      - provider: releases
-        api-key: $GH_PUSH
-        skip-cleanup: false
-        on:
-          tags: true
-  - stage: build
-    script: tox -e build-py35
-    python: 3.5
-    name: Build
-    deploy:
-      - provider: pypi
-        user: $PYPI_USERNAME
-        password: $PYPI_PW
-        distributions: sdist
-        skip-cleanup: false
-        on:
-          tags: true
-      - provider: releases
-        api-key: $GH_PUSH
-        skip-cleanup: false
-        on:
-          tags: true
-  - stage: build
-    script: tox -e build-py36
     python: 3.6
     name: Build
     deploy:
