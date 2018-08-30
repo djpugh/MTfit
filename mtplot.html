@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>11. Plotting the Moment Tensor &mdash; MTfit documentation</title>
+  <title>10. Plotting the Moment Tensor &mdash; MTfit documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Plotting classes" href="plot_classes.html" />
-    <link rel="prev" title="10. MTfit command line options" href="cli.html" /> 
+    <link rel="next" title="11. Plotting classes" href="plot_classes.html" />
+    <link rel="prev" title="9. MTfit command line options" href="cli.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                1.0.3a12
+                1.0.3a15
               </div>
             
           
@@ -87,45 +87,45 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="setup.html">2. Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run.html">3. Running MTfit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">4. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">5. Tutorial: Real Data Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayes.html">6. Bayesian Approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">7. Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algorithms.html">8. Search Algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">9. Moment Tensor Conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cli.html">10. Command Line Options</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">11. Plotting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#using-mtplot-from-the-command-line">11.1. Using MTplot from the command line</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#script-installation">11.1.1. Script Installation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#linux">11.1.1.1. Linux</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#windows">11.1.1.2. Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running MTfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-mtplot-from-the-command-line">10.1. Using MTplot from the command line</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#script-installation">10.1.1. Script Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#linux">10.1.1.1. Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows">10.1.1.2. Windows</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#command-line-options">11.1.2. Command Line Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-options">10.1.2. Command Line Options</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#using-mtplot-from-the-python-interpreter">11.2. Using MTplot from the Python interpreter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-data">11.3. Input Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mtplot-class">11.4. MTplot Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mtdata-class">11.5. MTData Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#beachball-plot">11.6. Beachball plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fault-plane-plot">11.7. Fault Plane plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#riedesel-jordan-plot">11.8. Riedesel-Jordan plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#radiation-plot">11.9. Radiation plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hudson-plot">11.10. Hudson plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lune-plot">11.11. Lune plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">11.12. Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-mtplot-from-the-python-interpreter">10.2. Using MTplot from the Python interpreter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-data">10.3. Input Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtplot-class">10.4. MTplot Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtdata-class">10.5. MTData Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beachball-plot">10.6. Beachball plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fault-plane-plot">10.7. Fault Plane plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#riedesel-jordan-plot">10.8. Riedesel-Jordan plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#radiation-plot">10.9. Radiation plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hudson-plot">10.10. Hudson plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lune-plot">10.11. Lune plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">10.12. Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">1. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">2. Glossary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source.html">3. Source Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
@@ -172,7 +172,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>11. Plotting the Moment Tensor</li>
+      <li>10. Plotting the Moment Tensor</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -192,7 +192,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="plotting-the-moment-tensor">
-<h1>11. Plotting the Moment Tensor<a class="headerlink" href="#plotting-the-moment-tensor" title="Permalink to this headline">¶</a></h1>
+<h1>10. Plotting the Moment Tensor<a class="headerlink" href="#plotting-the-moment-tensor" title="Permalink to this headline">¶</a></h1>
 <p><code class="xref py py-mod docutils literal notranslate"><span class="pre">MTfit</span></code> has a plotting submodule that can be used to represent the source. There are several different plot types, shown below, and MTplot can be used both from the command line, and from within the python interpreter.</p>
 <p>This section describes how to use the plotting tools and shows the different plot types:</p>
 <blockquote>
@@ -214,16 +214,16 @@ The <a class="reference internal" href="#mtplot-examples"><span class="std std-r
 </div>
 <p>For the full plot_classes documentation, see <a class="reference internal" href="plot_classes.html"><span class="doc">Plotting classes</span></a>.</p>
 <div class="section" id="using-mtplot-from-the-command-line">
-<h2>11.1. Using MTplot from the command line<a class="headerlink" href="#using-mtplot-from-the-command-line" title="Permalink to this headline">¶</a></h2>
+<h2>10.1. Using MTplot from the command line<a class="headerlink" href="#using-mtplot-from-the-command-line" title="Permalink to this headline">¶</a></h2>
 <p><code class="xref py py-mod docutils literal notranslate"><span class="pre">MTplot</span></code> can be run from the command line. A script should have been installed onto the path during installation and should be callable as:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTplot
 </pre></div>
 </div>
 <p>However it may be necessary to install the script manually. This is platform dependent.</p>
 <div class="section" id="script-installation">
-<h3>11.1.1. Script Installation<a class="headerlink" href="#script-installation" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.1. Script Installation<a class="headerlink" href="#script-installation" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="linux">
-<h4>11.1.1.1. Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
+<h4>10.1.1.1. Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
 <p>Add this python script to a directory on the $PATH environmental variable:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">MTfit</span>
@@ -233,7 +233,7 @@ The <a class="reference internal" href="#mtplot-examples"><span class="std std-r
 <p>and make sure it is executable.</p>
 </div>
 <div class="section" id="windows">
-<h4>11.1.1.2. Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
+<h4>10.1.1.2. Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
 <p>Add the linux script (above) to the path or if using powershell edit the powershell profile (usually found in <em>Documents/WindowsPowerShell/</em> - if not present use <code class="docutils literal notranslate"><span class="pre">$PROFILE|Format-List</span> <span class="pre">-Force</span></code> to locate it, it may be necessary to create the profile) and add:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function MTplot{
     $script={
@@ -247,7 +247,7 @@ The <a class="reference internal" href="#mtplot-examples"><span class="std std-r
 </div>
 </div>
 <div class="section" id="command-line-options">
-<h3>11.1.2. Command Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.2. Command Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h3>
 <p>There are several command line options available, these can be found by calling:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ MTplot -h
 </pre></div>
@@ -256,7 +256,7 @@ The <a class="reference internal" href="#mtplot-examples"><span class="std std-r
 </div>
 </div>
 <div class="section" id="using-mtplot-from-the-python-interpreter">
-<h2>11.2. Using MTplot from the Python interpreter<a class="headerlink" href="#using-mtplot-from-the-python-interpreter" title="Permalink to this headline">¶</a></h2>
+<h2>10.2. Using MTplot from the Python interpreter<a class="headerlink" href="#using-mtplot-from-the-python-interpreter" title="Permalink to this headline">¶</a></h2>
 <p>Although MTplot can be run from the command line, it is much more powerful to run it from within the python interpreter.
 To run MTplot from the python interpreter, create the <a class="reference internal" href="plot_classes.html#MTfit.plot.plot_classes.MTplot" title="MTfit.plot.plot_classes.MTplot"><code class="xref py py-class docutils literal notranslate"><span class="pre">MTplot</span></code></a> object:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MTfit.plot</span> <span class="k">import</span> <span class="n">MTplot</span>
@@ -266,12 +266,12 @@ To run MTplot from the python interpreter, create the <a class="reference intern
 <p>See <a class="reference internal" href="#mtplotclass"><span class="std std-ref">Making the MTplot class</span></a> for more information on the  <a class="reference internal" href="plot_classes.html#MTfit.plot.plot_classes.MTplot" title="MTfit.plot.plot_classes.MTplot"><code class="xref py py-class docutils literal notranslate"><span class="pre">MTplot</span></code></a> object.</p>
 </div>
 <div class="section" id="input-data">
-<span id="input-data-label"></span><h2>11.3. Input Data<a class="headerlink" href="#input-data" title="Permalink to this headline">¶</a></h2>
+<span id="input-data-label"></span><h2>10.3. Input Data<a class="headerlink" href="#input-data" title="Permalink to this headline">¶</a></h2>
 <p><code class="xref py py-func docutils literal notranslate"><span class="pre">MTfit.plot.__core__.read()</span></code> can read the three default output formats (MATLAB, hyp and pickle) for MTfit results.</p>
 <p>Additional parsers can be installed using the <cite>MTfit.plot_read</cite> entry point described in <a class="reference internal" href="extensions.html"><span class="doc">Extending MTfit</span></a>.</p>
 </div>
 <div class="section" id="mtplot-class">
-<span id="mtplotclass"></span><h2>11.4. MTplot Class<a class="headerlink" href="#mtplot-class" title="Permalink to this headline">¶</a></h2>
+<span id="mtplotclass"></span><h2>10.4. MTplot Class<a class="headerlink" href="#mtplot-class" title="Permalink to this headline">¶</a></h2>
 <p>The MTplot class is used to handle plotting the moment tensors. The moment tensors are stored as an <a class="reference internal" href="#mtdataclass"><span class="std std-ref">MTData</span></a> class.</p>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes.MTplot">
@@ -318,7 +318,7 @@ kwargs: passed through to plot_class initialisation</dd>
 <hr class="docutils" />
 </div>
 <div class="section" id="mtdata-class">
-<span id="mtdataclass"></span><h2>11.5. MTData Class<a class="headerlink" href="#mtdata-class" title="Permalink to this headline">¶</a></h2>
+<span id="mtdataclass"></span><h2>10.5. MTData Class<a class="headerlink" href="#mtdata-class" title="Permalink to this headline">¶</a></h2>
 <p>The MTData class is used for storing and converting the moment tensors for plotting.</p>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes.MTData">
@@ -435,7 +435,7 @@ or empty (Default is [])</dd>
 
 </div>
 <div class="section" id="beachball-plot">
-<span id="beachball"></span><h2>11.6. Beachball plot<a class="headerlink" href="#beachball-plot" title="Permalink to this headline">¶</a></h2>
+<span id="beachball"></span><h2>10.6. Beachball plot<a class="headerlink" href="#beachball-plot" title="Permalink to this headline">¶</a></h2>
 <p>The simplest plot is a beachball plot using the <a class="reference internal" href="plot_classes.html#MTfit.plot.plot_classes._AmplitudePlot" title="MTfit.plot.plot_classes._AmplitudePlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">MTfit.plot.plot_classes._AmplitudePlot</span></code></a> class.</p>
 <p>Using the MTplot function, it can be made with the following commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
@@ -520,7 +520,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
 
 </div>
 <div class="section" id="fault-plane-plot">
-<span id="faultplane"></span><h2>11.7. Fault Plane plot<a class="headerlink" href="#fault-plane-plot" title="Permalink to this headline">¶</a></h2>
+<span id="faultplane"></span><h2>10.7. Fault Plane plot<a class="headerlink" href="#fault-plane-plot" title="Permalink to this headline">¶</a></h2>
 <p>A similar plot to the amplitude beachball plot is the fault plane plot, made using the <a class="reference internal" href="plot_classes.html#MTfit.plot.plot_classes._FaultPlanePlot" title="MTfit.plot.plot_classes._FaultPlanePlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">MTfit.plot.plot_classes._FaultPlanePlot</span></code></a> class.</p>
 <p>Using the MTplot function, it can be made with the following commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
@@ -596,7 +596,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
 
 </div>
 <div class="section" id="riedesel-jordan-plot">
-<span id="rjplot"></span><h2>11.8. Riedesel-Jordan plot<a class="headerlink" href="#riedesel-jordan-plot" title="Permalink to this headline">¶</a></h2>
+<span id="rjplot"></span><h2>10.8. Riedesel-Jordan plot<a class="headerlink" href="#riedesel-jordan-plot" title="Permalink to this headline">¶</a></h2>
 <p>The Riedesel-Jordan plot is more complicated, and is described in <a class="reference internal" href="references.html#riedesel-1989"><span class="std std-ref">Riedesel and Jordan (1989)</span></a>. It plots the source type on the focal sphere, in a region described by the source eigenvectors.</p>
 <p>Using the MTplot function, it can be made with the following commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
@@ -651,7 +651,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
 
 </div>
 <div class="section" id="radiation-plot">
-<span id="radiation"></span><h2>11.9. Radiation plot<a class="headerlink" href="#radiation-plot" title="Permalink to this headline">¶</a></h2>
+<span id="radiation"></span><h2>10.9. Radiation plot<a class="headerlink" href="#radiation-plot" title="Permalink to this headline">¶</a></h2>
 <p>The radiation plot shows the same pattern as the beachball plot, except the shape is scaled by the amplitude on the focal sphere.</p>
 <p>Using the MTplot function, it can be made with the following commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
@@ -708,7 +708,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
 
 </div>
 <div class="section" id="hudson-plot">
-<span id="hudson"></span><h2>11.10. Hudson plot<a class="headerlink" href="#hudson-plot" title="Permalink to this headline">¶</a></h2>
+<span id="hudson"></span><h2>10.10. Hudson plot<a class="headerlink" href="#hudson-plot" title="Permalink to this headline">¶</a></h2>
 <p>The Hudson plot is a source type plot, described in <a class="reference internal" href="references.html#hudson-1989"><span class="std std-ref">Hudson et al. (1989)</span></a>. It plots the source type in a quadrilateral, depending on the chosen projection. There are two projections, the tau-k plot and the u-v plot, with the latter being more common (and the default).</p>
 <p>Using the MTplot function, it can be made with the following commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
@@ -762,7 +762,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
 
 </div>
 <div class="section" id="lune-plot">
-<span id="lune"></span><h2>11.11. Lune plot<a class="headerlink" href="#lune-plot" title="Permalink to this headline">¶</a></h2>
+<span id="lune"></span><h2>10.11. Lune plot<a class="headerlink" href="#lune-plot" title="Permalink to this headline">¶</a></h2>
 <p>The Lune plot is a source type plot, described in <a class="reference internal" href="references.html#tape-2012"><span class="std std-ref">Tape and Tape (2012)</span></a>. It plots the source type in the fundamental eigenvalue lune, which can be projected into 2 dimensions.</p>
 <p>Using the MTplot function, it can be made with the following commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MTfit</span>
@@ -820,7 +820,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
 
 </div>
 <div class="section" id="examples">
-<span id="mtplot-examples"></span><h2>11.12. Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<span id="mtplot-examples"></span><h2>10.12. Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>This section shows a pair of simple examples and their results.</p>
 <p>The first example is to plot the data from <a class="reference internal" href="real-tutorial.html#real-p-polarity"><span class="std std-ref">Krafla P Polarity example</span></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MTfit</span>
@@ -888,10 +888,10 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="plot_classes.html" class="btn btn-neutral float-right" title="1. Plotting classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="plot_classes.html" class="btn btn-neutral float-right" title="11. Plotting classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="cli.html" class="btn btn-neutral" title="10. MTfit command line options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="cli.html" class="btn btn-neutral" title="9. MTfit command line options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -901,7 +901,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Aug 29, 2018 (version 1.0.3a12).
+      Last updated on Aug 30, 2018 (version 1.0.3a15).
 
     </p>
   </div>
@@ -923,7 +923,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.3a12',
+            VERSION:'1.0.3a15',
             LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

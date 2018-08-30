@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. Plotting classes &mdash; MTfit documentation</title>
+  <title>11. Plotting classes &mdash; MTfit documentation</title>
   
 
   
@@ -30,7 +30,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="12. MTplot command line options" href="mtplotcli.html" />
-    <link rel="prev" title="11. Plotting the Moment Tensor" href="mtplot.html" /> 
+    <link rel="prev" title="10. Plotting the Moment Tensor" href="mtplot.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                1.0.3a12
+                1.0.3a15
               </div>
             
           
@@ -87,35 +87,35 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="setup.html">2. Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run.html">3. Running MTfit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">4. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">5. Tutorial: Real Data Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayes.html">6. Bayesian Approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">7. Probability Density Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algorithms.html">8. Search Algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">9. Moment Tensor Conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cli.html">10. Command Line Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mtplot.html">11. Plotting</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Plot Classes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#mtplot-class">1.1. MTplot class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mtdata-class">1.2. MTData class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#baseplot-class">1.3. _BasePlot class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#focalsphereplot-class">1.4. _FocalSpherePlot class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#amplitudeplot-class">1.5. _AmplitudePlot class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#faultplaneplot-class">1.6. _FaultPlanePlot class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#riedeseljordanplot-class">1.7. _RiedeselJordanPlot class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#radiationplot-class">1.8. _RadiationPlot class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hudsonplot-class">1.9. _HudsonPlot class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#luneplot-class">1.10. _LunePlot class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running MTfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">7. Search Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. Plot Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mtplot-class">11.1. MTplot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mtdata-class">11.2. MTData class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#baseplot-class">11.3. _BasePlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#focalsphereplot-class">11.4. _FocalSpherePlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#amplitudeplot-class">11.5. _AmplitudePlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#faultplaneplot-class">11.6. _FaultPlanePlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#riedeseljordanplot-class">11.7. _RiedeselJordanPlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#radiationplot-class">11.8. _RadiationPlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hudsonplot-class">11.9. _HudsonPlot class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#luneplot-class">11.10. _LunePlot class</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">2. Glossary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source.html">3. Source Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
@@ -162,7 +162,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>1. Plotting classes</li>
+      <li>11. Plotting classes</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -182,9 +182,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="plotting-classes">
-<h1>1. Plotting classes<a class="headerlink" href="#plotting-classes" title="Permalink to this headline">¶</a></h1>
+<h1>11. Plotting classes<a class="headerlink" href="#plotting-classes" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="mtplot-class">
-<h2>1.1. MTplot class<a class="headerlink" href="#mtplot-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.1. MTplot class<a class="headerlink" href="#mtplot-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes.MTplot">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">MTplot</code><span class="sig-paren">(</span><em>MTs</em>, <em>plot_type='beachball'</em>, <em>stations={}</em>, <em>plot=True</em>, <em>label=False</em>, <em>save_file=''</em>, <em>save_dpi=200</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#MTplot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes.MTplot" title="Permalink to this definition">¶</a></dt>
@@ -229,7 +229,7 @@ kwargs: passed through to plot_class initialisation</dd>
 
 </div>
 <div class="section" id="mtdata-class">
-<h2>1.2. MTData class<a class="headerlink" href="#mtdata-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.2. MTData class<a class="headerlink" href="#mtdata-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes.MTData">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">MTData</code><span class="sig-paren">(</span><em>MTs</em>, <em>probability=[]</em>, <em>c=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#MTData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes.MTData" title="Permalink to this definition">¶</a></dt>
@@ -345,7 +345,7 @@ or empty (Default is [])</dd>
 
 </div>
 <div class="section" id="baseplot-class">
-<h2>1.3. _BasePlot class<a class="headerlink" href="#baseplot-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.3. _BasePlot class<a class="headerlink" href="#baseplot-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes._BasePlot">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">_BasePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_BasePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._BasePlot" title="Permalink to this definition">¶</a></dt>
@@ -569,7 +569,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
 
 </div>
 <div class="section" id="focalsphereplot-class">
-<h2>1.4. _FocalSpherePlot class<a class="headerlink" href="#focalsphereplot-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.4. _FocalSpherePlot class<a class="headerlink" href="#focalsphereplot-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes._FocalSpherePlot">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">_FocalSpherePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_FocalSpherePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._FocalSpherePlot" title="Permalink to this definition">¶</a></dt>
@@ -941,7 +941,7 @@ zorder: float - z order of the plane (larger is on top)</dd>
 
 </div>
 <div class="section" id="amplitudeplot-class">
-<h2>1.5. _AmplitudePlot class<a class="headerlink" href="#amplitudeplot-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.5. _AmplitudePlot class<a class="headerlink" href="#amplitudeplot-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes._AmplitudePlot">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">_AmplitudePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_AmplitudePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._AmplitudePlot" title="Permalink to this definition">¶</a></dt>
@@ -1321,7 +1321,7 @@ zorder: float - z order of the plane (larger is on top)</dd>
 
 </div>
 <div class="section" id="faultplaneplot-class">
-<h2>1.6. _FaultPlanePlot class<a class="headerlink" href="#faultplaneplot-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.6. _FaultPlanePlot class<a class="headerlink" href="#faultplaneplot-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes._FaultPlanePlot">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">_FaultPlanePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>probability=[]</em>, <em>phase='p'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_FaultPlanePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._FaultPlanePlot" title="Permalink to this definition">¶</a></dt>
@@ -1698,7 +1698,7 @@ zorder: float - z order of the plane (larger is on top)</dd>
 
 </div>
 <div class="section" id="riedeseljordanplot-class">
-<h2>1.7. _RiedeselJordanPlot class<a class="headerlink" href="#riedeseljordanplot-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.7. _RiedeselJordanPlot class<a class="headerlink" href="#riedeseljordanplot-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes._RiedeselJordanPlot">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">_RiedeselJordanPlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_RiedeselJordanPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._RiedeselJordanPlot" title="Permalink to this definition">¶</a></dt>
@@ -2068,7 +2068,7 @@ zorder: float - z order of the plane (larger is on top)</dd>
 
 </div>
 <div class="section" id="radiationplot-class">
-<h2>1.8. _RadiationPlot class<a class="headerlink" href="#radiationplot-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.8. _RadiationPlot class<a class="headerlink" href="#radiationplot-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes._RadiationPlot">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">_RadiationPlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_RadiationPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._RadiationPlot" title="Permalink to this definition">¶</a></dt>
@@ -2437,7 +2437,7 @@ zorder: float - z order of the plane (larger is on top)</dd>
 
 </div>
 <div class="section" id="hudsonplot-class">
-<h2>1.9. _HudsonPlot class<a class="headerlink" href="#hudsonplot-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.9. _HudsonPlot class<a class="headerlink" href="#hudsonplot-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes._HudsonPlot">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">_HudsonPlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>projection='uv'</em>, <em>probability=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_HudsonPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._HudsonPlot" title="Permalink to this definition">¶</a></dt>
@@ -2712,7 +2712,7 @@ kwargs: kwargs passed to the _ax_plot function (e.g. set local parameters to be 
 
 </div>
 <div class="section" id="luneplot-class">
-<h2>1.10. _LunePlot class<a class="headerlink" href="#luneplot-class" title="Permalink to this headline">¶</a></h2>
+<h2>11.10. _LunePlot class<a class="headerlink" href="#luneplot-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MTfit.plot.plot_classes._LunePlot">
 <em class="property">class </em><code class="descclassname">MTfit.plot.plot_classes.</code><code class="descname">_LunePlot</code><span class="sig-paren">(</span><em>subplot_spec</em>, <em>fig</em>, <em>MTs</em>, <em>stations={}</em>, <em>phase='P'</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MTfit/plot/plot_classes.html#_LunePlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MTfit.plot.plot_classes._LunePlot" title="Permalink to this definition">¶</a></dt>
@@ -3134,7 +3134,7 @@ zorder: float - z order of the plane (larger is on top)</dd>
         <a href="mtplotcli.html" class="btn btn-neutral float-right" title="12. MTplot command line options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mtplot.html" class="btn btn-neutral" title="11. Plotting the Moment Tensor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mtplot.html" class="btn btn-neutral" title="10. Plotting the Moment Tensor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -3144,7 +3144,7 @@ zorder: float - z order of the plane (larger is on top)</dd>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Aug 29, 2018 (version 1.0.3a12).
+      Last updated on Aug 30, 2018 (version 1.0.3a15).
 
     </p>
   </div>
@@ -3166,7 +3166,7 @@ zorder: float - z order of the plane (larger is on top)</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.3a12',
+            VERSION:'1.0.3a15',
             LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

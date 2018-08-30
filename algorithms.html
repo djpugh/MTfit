@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8. MTfit.algorithms: Search Algorithms &mdash; MTfit documentation</title>
+  <title>7. MTfit.algorithms: Search Algorithms &mdash; MTfit documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. convert" href="mtconvert.html" />
-    <link rel="prev" title="7. Probability" href="probability.html" /> 
+    <link rel="next" title="8. convert" href="mtconvert.html" />
+    <link rel="prev" title="6. Probability" href="probability.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                1.0.3a12
+                1.0.3a15
               </div>
             
           
@@ -87,38 +87,38 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="setup.html">2. Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run.html">3. Running MTfit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">4. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">5. Tutorial: Real Data Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayes.html">6. Bayesian Approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">7. Probability Density Functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Search Algorithms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">8.1. Table Of Contents:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#algorithms">8.2. Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#random-monte-carlo-sampling">8.3. Random Monte Carlo sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#markov-chain-monte-carlo-sampling">8.4. Markov chain Monte Carlo sampling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#reversible-jump-markov-chain-monte-carlo-sampling">8.4.1. Reversible Jump Markov chain Monte Carlo Sampling</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#reversible-jump-mcmc-in-source-inversion">8.4.1.1. Reversible Jump McMC in Source Inversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">2. Running MTfit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real-tutorial.html">4. Tutorial: Real Data Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">5. Bayesian Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">6. Probability Density Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Search Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">7.1. Table Of Contents:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithms">7.2. Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#random-monte-carlo-sampling">7.3. Random Monte Carlo sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#markov-chain-monte-carlo-sampling">7.4. Markov chain Monte Carlo sampling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reversible-jump-markov-chain-monte-carlo-sampling">7.4.1. Reversible Jump Markov chain Monte Carlo Sampling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reversible-jump-mcmc-in-source-inversion">7.4.1.1. Reversible Jump McMC in Source Inversion</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#relative-amplitude">8.5. Relative Amplitude</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-time">8.6. Running Time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#summary">8.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#relative-amplitude">7.5. Relative Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-time">7.6. Running Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">7.7. Summary</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">9. Moment Tensor Conversion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cli.html">10. Command Line Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mtplot.html">11. Plotting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">1. Plot Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtconvert.html">8. Moment Tensor Conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">9. Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mtplot.html">10. Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_classes.html">11. Plot Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mtplotcli.html">12. MTplot Command Line Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inversion.html">13. Inversion Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extensions.html">14. Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">15. References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">2. Glossary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source.html">3. Source Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">16. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">17. Source Code</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/djpugh/MTfit">GitHub Repository</a></li>
 </ul>
 
@@ -165,7 +165,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>8. MTfit.algorithms: Search Algorithms</li>
+      <li>7. MTfit.algorithms: Search Algorithms</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -185,10 +185,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="mtfit-algorithms-search-algorithms">
-<h1>8. MTfit.algorithms: Search Algorithms<a class="headerlink" href="#mtfit-algorithms-search-algorithms" title="Permalink to this headline">¶</a></h1>
+<h1>7. MTfit.algorithms: Search Algorithms<a class="headerlink" href="#mtfit-algorithms-search-algorithms" title="Permalink to this headline">¶</a></h1>
 <p>These algorithms and their effects are explored in <a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh (2015)</span></a>, which expands in further detail on the topics covered here.</p>
 <div class="section" id="table-of-contents">
-<h2>8.1. Table Of Contents:<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<h2>7.1. Table Of Contents:<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference internal" href="#mcsampling"><span class="std std-ref">Random Monte Carlo sampling</span></a></li>
@@ -197,7 +197,7 @@
 </div></blockquote>
 </div>
 <span class="target" id="module-MTfit.algorithms"></span><div class="section" id="algorithms">
-<h2>8.2. Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
+<h2>7.2. Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
 <p>This module contains the sampling approaches used. Two main approaches are used:</p>
 <blockquote>
 <div><ul class="simple">
@@ -214,7 +214,7 @@
 </div></blockquote>
 </div>
 <div class="section" id="random-monte-carlo-sampling">
-<span id="mcsampling"></span><h2>8.3. Random Monte Carlo sampling<a class="headerlink" href="#random-monte-carlo-sampling" title="Permalink to this headline">¶</a></h2>
+<span id="mcsampling"></span><h2>7.3. Random Monte Carlo sampling<a class="headerlink" href="#random-monte-carlo-sampling" title="Permalink to this headline">¶</a></h2>
 <p>The simplest approach is that of random sampling over the moment tensor or double-couple space. Stochastic Monte Carlo sampling introduces no biases and provides an estimate for the true PDF, but requires a sufficient density of sampling to reduce the uncertainties in the estimate. The sampled PDF approaches the true distribution in the limit of infnite samples. However, this approach is limited both by time and memory. Some benefits can be gained by only keeping the samples with non-zero probability.</p>
 <p>The assumed prior distribution is a uniform distribution on the unit 6-sphere in moment tensor space. This is equivalent to unit normalisation of the moment tensor six vector:</p>
 <div class="math notranslate nohighlight">
@@ -222,7 +222,7 @@
 <p>This sampling is explored further in <a class="reference internal" href="references.html#pugh-2015t"><span class="std std-ref">Pugh et al, 2015t</span></a>.</p>
 </div>
 <div class="section" id="markov-chain-monte-carlo-sampling">
-<span id="mcmcsampling"></span><h2>8.4. Markov chain Monte Carlo sampling<a class="headerlink" href="#markov-chain-monte-carlo-sampling" title="Permalink to this headline">¶</a></h2>
+<span id="mcmcsampling"></span><h2>7.4. Markov chain Monte Carlo sampling<a class="headerlink" href="#markov-chain-monte-carlo-sampling" title="Permalink to this headline">¶</a></h2>
 <p>An alternative approach is to use Markov chain Monte Carlo (McMC) sampling. This constructs a Markov chain (<a class="reference internal" href="references.html#norris-1998"><span class="std std-ref">Norris, 1998</span></a>) of which the equilibrium distribution is a good sample of the target probability distribution.</p>
 <p>A Markov chain is a memoryless stochastic process of transitioning between states. The probability of the next value depends only on the current value, rather than all the previous values, which is known as the Markov property (<a class="reference internal" href="references.html#markov-1954"><span class="std std-ref">Markov, 1954</span></a>):</p>
 <div class="math notranslate nohighlight">
@@ -289,7 +289,7 @@
 </table>
 <p>The source parameterisation is from <a class="reference internal" href="references.html#tape-2012"><span class="std std-ref">Tape and Tape (2012)</span></a>, and the algorithm uses an iterative parameterisation for the learning parameters during a learning period, then generates a Markov chain from the pdf.</p>
 <div class="section" id="reversible-jump-markov-chain-monte-carlo-sampling">
-<h3>8.4.1. Reversible Jump Markov chain Monte Carlo Sampling<a class="headerlink" href="#reversible-jump-markov-chain-monte-carlo-sampling" title="Permalink to this headline">¶</a></h3>
+<h3>7.4.1. Reversible Jump Markov chain Monte Carlo Sampling<a class="headerlink" href="#reversible-jump-markov-chain-monte-carlo-sampling" title="Permalink to this headline">¶</a></h3>
 <p>The Metropolis-Hastings approach does not account for variable dimension models. <a class="reference internal" href="references.html#green-1995"><span class="std std-ref">Green (1995)</span></a> introduced a new type of move, a <em>jump</em>, extending the approach to variable dimension problems. The jump introduces a dimension-balancing vector, so it can be evaluated like the normal Metropolis-Hastings shift.</p>
 <p><a class="reference internal" href="references.html#green-1995"><span class="std std-ref">Green (1995)</span></a> showed that the acceptance for a pair of models <span class="math notranslate nohighlight">\(M_\mathrm{t}\)</span> and <span class="math notranslate nohighlight">\(M'\)</span> is given by:</p>
 <div class="math notranslate nohighlight">
@@ -320,7 +320,7 @@
 u &amp; =\frac{1}{2}\left(\theta_{1}-\theta_{2}\right)
 \end{cases}\end{split}\]</div>
 <div class="section" id="reversible-jump-mcmc-in-source-inversion">
-<h4>8.4.1.1. Reversible Jump McMC in Source Inversion<a class="headerlink" href="#reversible-jump-mcmc-in-source-inversion" title="Permalink to this headline">¶</a></h4>
+<h4>7.4.1.1. Reversible Jump McMC in Source Inversion<a class="headerlink" href="#reversible-jump-mcmc-in-source-inversion" title="Permalink to this headline">¶</a></h4>
 <p>The reversible jump McMC approach allows switching between different source models, such as the double-couple model and the higher dimensional model of the full moment tensor, and can be extended to other source models.</p>
 <p>The full moment tensor model is nested around the double-couple point, leading to a simple description of the jumps by keeping the common parameters constant. The Tape parameterisation (<a class="reference internal" href="references.html#tape-2012"><span class="std std-ref">Tape and Tape, 2012</span></a>) allows for easy movement both in the source space and between models. The moment tensor model has five parameters:</p>
 <blockquote>
@@ -406,7 +406,7 @@ h_{\mathrm{MT}} &amp; =h_{\mathrm{DC}}\\
 </div>
 </div>
 <div class="section" id="relative-amplitude">
-<h2>8.5. Relative Amplitude<a class="headerlink" href="#relative-amplitude" title="Permalink to this headline">¶</a></h2>
+<h2>7.5. Relative Amplitude<a class="headerlink" href="#relative-amplitude" title="Permalink to this headline">¶</a></h2>
 <p>Inverting for multiple events increases the dimensions of the source space for each event. This leads to a much reduced probability of obtaining a non-zero likelihood sample, because sampling from the n-event distribution leads to multiplying the probabilities of drawing a non-zero samples, resulting in sparser sampling of the joint source PDF.</p>
 <p>The elapsed time for the random sampling is longer per sample than the individual sampling, and longer than the combined sampling for both events due to
 evaluating the relative amplitude PDF. Moreover, increasing the number of samples 10-fold raises the required time by a factor of 10, requiring some method of reducing the running time
@@ -420,7 +420,7 @@ necessary to lower the targeted acceptance rate to improve sampling. Consequentl
 relative amplitude data.</p>
 </div>
 <div class="section" id="running-time">
-<h2>8.6. Running Time<a class="headerlink" href="#running-time" title="Permalink to this headline">¶</a></h2>
+<h2>7.6. Running Time<a class="headerlink" href="#running-time" title="Permalink to this headline">¶</a></h2>
 <p>Comparing different sample sizes shows that the McMC approaches require far fewer samples than random sampling. However, the random sampling algorithm is quick to calculate
 the likelihood for a large number of samples, unlike the McMC approach, because of the extra computations in calculating the acceptance and obtaining new samples. Some optimisations
 have been included in the McMC algorithms, including calculating the probability for multiple new samples at once, with sufficient samples that there is a high probability of containing
@@ -449,7 +449,7 @@ the burn in and initialisation of the algorithm:</p>
 </div>
 </div>
 <div class="section" id="summary">
-<h2>8.7. Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<h2>7.7. Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>There are several different approaches to sampling for the forward model. The Monte Carlo random sampling is quick, although it requires a large number of samples to produce good samplings of the PDF. The McMC approaches produce good sampling of the source for far fewer samples, but the evaluation time can be long due to the overhead of calculating the acceptance and generating new samples. Furthermore, these approaches rely on achieving the desired acceptance rate to sufficiently sample the PDF given the chain length.
 Including location uncertainty increases the random sampling time drastically, and has less of an effect on the McMC approaches.</p>
 <p>The solutions for the different algorithms and different source types are consistent, but the McMC approach can be poor at sampling multi-modal distributions if the acceptance rate is too high.</p>
@@ -467,10 +467,10 @@ Including location uncertainty increases the random sampling time drastically, a
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mtconvert.html" class="btn btn-neutral float-right" title="9. convert" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mtconvert.html" class="btn btn-neutral float-right" title="8. convert" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="probability.html" class="btn btn-neutral" title="7. Probability" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="probability.html" class="btn btn-neutral" title="6. Probability" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -480,7 +480,7 @@ Including location uncertainty increases the random sampling time drastically, a
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, David Pugh.
-      Last updated on Aug 29, 2018 (version 1.0.3a12).
+      Last updated on Aug 30, 2018 (version 1.0.3a15).
 
     </p>
   </div>
@@ -502,7 +502,7 @@ Including location uncertainty increases the random sampling time drastically, a
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.3a12',
+            VERSION:'1.0.3a15',
             LANGUAGE:'English',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
