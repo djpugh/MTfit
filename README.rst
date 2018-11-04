@@ -1,4 +1,5 @@
 .. image:: https://travis-ci.org/djpugh/MTfit.svg?branch=develop
+    :target: https://travis-ci.org/djpugh/MTfit/
 
 The documentation is available at `https://djpugh.github.io/MTfit/ <https://djpugh.github.io/MTfit/>`_ and can be built using `sphinx` from the source in MTfit/docs/, or using the `build_docs.py`.
 
