@@ -1,6 +1,9 @@
 .. image:: https://travis-ci.org/djpugh/MTfit.svg?branch=develop
     :target: https://travis-ci.org/djpugh/MTfit/
 
+.. image:: https://ci.appveyor.com/api/projects/status/rvi74lcro7q3od85?svg=true
+    :target: https://ci.appveyor.com/project/djpugh/mtfit 
+
 The documentation is available at `https://djpugh.github.io/MTfit/ <https://djpugh.github.io/MTfit/>`_ and can be built using `sphinx` from the source in MTfit/docs/, or using the `build_docs.py`.
 
 The documentation includes tutorials and explanations of MTfit and the approaches used.
