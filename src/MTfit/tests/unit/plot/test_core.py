@@ -12,7 +12,6 @@ VERBOSITY = 2
 PLOT_DIR = os.environ.get('MTFIT_TEST_PLOT_DIR', None)
 
 
-@unittest.skipIf(os.environ.get('APPVEYOR', 'False') == 'True', 'On appveyor which causes Tcl issues')
 class CoreTestCase(unittest.TestCase):
 
     def setUp(self):
