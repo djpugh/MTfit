@@ -9,10 +9,13 @@ environment:
 
     - PYTHON: "C:\\Python27-x64"
       TOXENV: 'test-py27'
+      MPLBACKEND: 'Agg'
     - PYTHON: "C:\\Python35-x64"
       TOXENV: 'test-py35'
+      MPLBACKEND: 'Agg'
     - PYTHON: "C:\\Python36-x64"
       TOXENV: 'test-py36'
+      MPLBACKEND: 'Agg'
 
 install:
   # We need wheel installed to build wheels
