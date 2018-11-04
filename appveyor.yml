@@ -8,8 +8,11 @@ environment:
     # isn't covered by this document) at the time of writing.
 
     - PYTHON: "C:\\Python27-x64"
+      TOXENV: 'test-py27'
     - PYTHON: "C:\\Python35-x64"
+      TOXENV: 'test-py35'
     - PYTHON: "C:\\Python36-x64"
+      TOXENV: 'test-py36'
 
 install:
   # We need wheel installed to build wheels

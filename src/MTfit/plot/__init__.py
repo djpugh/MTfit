@@ -27,7 +27,7 @@ import sys
 import os
 
 # CHECK DISPLAY
-if 'DISPLAY' not in os.environ.keys() and 'win32' not in sys.platform:
+if ('DISPLAY' not in os.environ.keys() and 'win32' not in sys.platform) or (os.environ.get('APPVEYOR', 'False') == 'True'):
     import matplotlib as mpl
     mpl.use('Agg')  # Default no backend
 
