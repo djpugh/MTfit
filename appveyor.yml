@@ -7,27 +7,27 @@ environment:
     # The list here is complete (excluding Python 2.6, which
     # isn't covered by this document) at the time of writing.
 
-    - PYTHON: "C:\\Python27-x64"
+    - PYTHON: "C:\\Python27-x64\\python.exe"
       TOXENV: 'test-py27'
       MPLBACKEND: 'Agg'
       PATH: "C:\\Python27-x64;$(PATH)"
-    - PYTHON: "C:\\Python35-x64"
+    - PYTHON: "C:\\Python35-x64\\python.exe"
       TOXENV: 'test-py35'
       MPLBACKEND: 'Agg'
       PATH: "C:\\Python35-x64;$(PATH)"
-    - PYTHON: "C:\\Python36-x64"
+    - PYTHON: "C:\\Python36-x64\\python.exe"
       TOXENV: 'test-py36'
       MPLBACKEND: 'Agg'
       PATH: "C:\\Python36-x64;$(PATH)"
 
 install:
   # We need wheel installed to build wheels
-  - ps: "& '$env:PYTHON\\python.exe' -m pip install wheel tox numpy cython"
+  - ps: $env:PYTHON-m pip install wheel tox numpy cython
 
 build: off
 
 before_test:
-  - ps:"& '$env:PYTHON\\python.exe' setup.py build_ext"
+  - ps:$env:PYTHON setup.py build_ext
 
 test_script:
   # Put your test command here.
@@ -38,15 +38,14 @@ test_script:
   # the interpreter you're using - Appveyor does not do anything special
   # to put the Python version you want to use on PATH.
   - ps: echo $env:PATH
-  - ps: $env:PATH = $env:PYTHON 
-  - ps: "& '$env:PYTHON\\Scripts\\tox' --skip-missing-interpreters"
+  - ps: $env:PYTHON -m tox --skip-missing-interpreters
 
 after_test:
   # This step builds your wheels.
   # Again, you only need if you're building C extensions for
   # 64-bit Python 3.3/3.4. And you need to use %PYTHON% to get the correct
   # interpreter
-  - ps: if($env:APPVEYOR_REPO_TAG -eq 'True') {& "$env:PYTHON\\python.exe" setup.py bdist_wheel} else { echo "Not building because this is not a tag build" }
+  - ps: if($env:APPVEYOR_REPO_TAG -eq 'True') {$env:PYTHON setup.py bdist_wheel} else { echo "Not building because this is not a tag build" }
   - ps: if($env:APPVEYOR_REPO_TAG -eq 'True') {ls dist}
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
