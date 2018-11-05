@@ -8,14 +8,17 @@ environment:
     # isn't covered by this document) at the time of writing.
 
     - PYTHON: "C:\\Python27-x64"
+      PYTHON_EXE: "C:\\Python27-x64\\python.exe"
       TOXENV: 'test-py27'
       MPLBACKEND: 'Agg'
       PATH: "C:\\Python27-x64;$(PATH)"
     - PYTHON: "C:\\Python35-x64"
+      PYTHON_EXE: "C:\\Python35-x64\\python.exe"
       TOXENV: 'test-py35'
       MPLBACKEND: 'Agg'
       PATH: "C:\\Python35-x64;$(PATH)"
     - PYTHON: "C:\\Python36-x64"
+      PYTHON_EXE: "C:\\Python36-x64\\python.exe"
       TOXENV: 'test-py36'
       MPLBACKEND: 'Agg'
       PATH: "C:\\Python36-x64;$(PATH)"
