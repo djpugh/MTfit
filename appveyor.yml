@@ -22,12 +22,12 @@ environment:
 
 install:
   # We need wheel installed to build wheels
-  - cmd: %PYTHON%\\python.exe -m pip install wheel tox numpy cython
+  - cmd: "%PYTHON%\\python.exe -m pip install wheel tox numpy cython"
 
 build: off
 
 before_test:
-  - cmd: %PYTHON%\\python.exe setup.py build_ext
+  - cmd: "%PYTHON%\\python.exe setup.py build_ext"
 
 test_script:
   # Put your test command here.
@@ -39,7 +39,7 @@ test_script:
   # to put the Python version you want to use on PATH.
   - cmd: echo %PATH%
   - cmd: SET PATH=%PYTHON%;%PATH%
-  - cmd: %PYTHON%\\Scripts\\tox --skip-missing-interpreters
+  - cmd: "%PYTHON%\\Scripts\\tox --skip-missing-interpreters"
 
 after_test:
   # This step builds your wheels.
