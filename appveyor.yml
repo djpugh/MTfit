@@ -25,7 +25,7 @@ environment:
 
 init:
   # Set the build version to the commit ID
-  - ps: Update-AppveyorBuild -Version "$($env:appveyor_repo_commit.substring(0,7))"
+  - ps: Update-AppveyorBuild -Version "$env:appveyor_build_number-$($env:appveyor_repo_commit.substring(0,7))"
 
 
 install:
