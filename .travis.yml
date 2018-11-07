@@ -60,7 +60,7 @@ jobs:
     python: 3.6
     name: Unit Tests
   - stage: test
-    script: python ci\travis_appveyor_build.py
+    script: python ci/travis_appveyor_build.py
     python: 3.6
     name: Unit Tests (Windows)
   - stage: examples-test
@@ -78,7 +78,7 @@ jobs:
   - stage: build
     python: 3.6
     name: Build
-    before_deploy: python ci\get_appveyor_wheels.py
+    before_deploy: python ci/get_appveyor_wheels.py
     python: 3.6
     deploy:
       - provider: pypi
