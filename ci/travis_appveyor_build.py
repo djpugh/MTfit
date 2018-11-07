@@ -29,6 +29,8 @@ class Log:
             log_diff = new_log.replace(self._log.get(job_id, ''), '').lstrip()
             self._log[job_id] = new_log
             print(log_diff.strip('/r').strip())
+        else:
+            print('Build status: {}; checking again in 10 seconds'.format(job_status))
         self.job_status[job_id] = current_status
 
 
@@ -51,6 +53,7 @@ while True:
                                               build['version'])
     r = requests.get(url, headers=headers)
     if r.status_code == 404 and not has_responded:
+        print('Waiting for build ...')
         time.sleep(5)
     else:
         has_responded = True
