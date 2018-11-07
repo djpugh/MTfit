@@ -23,7 +23,7 @@ class Log:
         current_status = self.job_status.get(job_id, 'queued')
         if job_status != 'queued' and not (current_status == 'success' and job_status == 'success'):
             # We need to get and update the log here
-            r = requests.get('{}/buildjobs/{}/log'.format(api_url, job_id))
+            r = requests.get('{}/buildjobs/{}/log'.format(api_url, job_id), headers=headers)
             r.raise_for_status()
             new_log = r.content.decode()
             log_diff = new_log.replace(self._log.get(job_id, ''), '').lstrip()
