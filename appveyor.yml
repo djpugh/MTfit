@@ -23,6 +23,11 @@ environment:
       MPLBACKEND: 'Agg'
       PATH: "C:\\Python36-x64;$(PATH)"
 
+init:
+  # Set the build version to the commit ID
+  - ps: Update-AppveyorBuild -Version "$($env:appveyor_repo_commit.substring(0,7))"
+
+
 install:
   # We need wheel installed to build wheels
   - cmd: "%PYTHON%\\python.exe -m pip install wheel tox numpy cython"
