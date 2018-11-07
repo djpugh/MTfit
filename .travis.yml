@@ -9,8 +9,8 @@ env:
   - secure: X9w4qCkm5g+XqRwUp3BXtVJcgAxoQW20+9flUSTRfv583tNdd98Av0pZGoP1hivi8HxFwZLYT0uw8dyYhVToN7BPZHjwhrXwv1OHZBAmCNwZwdbi0jvfbrtLX0NejqbyEgwF6HmxrnRxkrH97yNKciF+LBZZAuZd0W2g1sisj+VAAn0VYeSJvmPVNoQovFLQVb+MSWZ22CN+sOmpajPp2Aq0IKW8+dnwLqY/0v+IjMHPjZikXBWFZo7joxM5FA/143kfwHcu71Xk4JsnYAsZFXB7vwxmRWeV21GjbmPAZrFV2WfZirV6GpN7DndNTfpq6ZZ9PrUpDnUi0wjoTWv28aHpP1j0gvkawaW3dAf/St1QT0KHwieELh91GXTarhybNZ2B7fBZBssEEkQG8NaRvkrKzPKoP7nD+zZGNfK/BBfREuBcs0p/acSle4nIJxOFxrrRnM3053LPnzn6YPuP5fL0Fozw8DggOkzdBuBmPP+4l6qNa/U1k9KwVgPQK9Cph7Zce0sz8YOGPbQKlZ3LZvMWTCZRlmiRtVS7nNndWsxNw/18Ezbi6qET1ia/+KH3hZpjiCVcQTjsHE6m7QGyoS/7XV0DN8kJyG6ChuBWMrQoR6qxxVxOQ13Soltdve9xghYjUv6/hVYWfio51aFzkFzqBxyTt2dOQtdZEo54qv8=
   - secure: Ojj4iWp7CwaMrzWygdJ9fYXLx8LCKQrWZg8UrWG19WNR5CwVpkLc+TorpDELrLoy4Zwm/8qH0S9lJYQSzYMJftyngU19XbGMrHQ3+tizn49viUPCjVD0iiWTjIEgSYKieiBEl61CvEp+AWxhOTX3sG9GooI2R3xQPmgSdcXC7NRdj8YdNDftFr5/nRmgJTVhumDoGvfuecG8XL7rurvjl+5Z6kKfPVEJ4PjtZ0UvopYNARr96WwABsbg+zLRXhC/oy2GOrHhI/efZOk2UnsbfIfpfzlX75WeyHs1Zc3slayZ+6XfLj9mlMm2jKcAPcZ8f+p5LjBanLdI9R85LgwTDUlejWT3KehD5r7hFB7YpoZvoWELWfycTdzlYwxAf3Em9uaLtDVzQOkmOQpxX2KTYIqM43HQnzqO9YmKauFXu7YwgkwwCITH02rFpquZQlK3pKKw6kG//eoh0yh8eekL71Fila68+q+cyAhzXUvq8a8aUSS/E7dh9Djg3CiUqa0UXQ6yDkldh3sfJu/EBN51OLlRTJAOqk3D/Lc+eaizc+/PtWwBxqUT250d5W+IQWiOg9hDUvnsNO4e7SwpFEXTnTGazvPJUesRpn7QrlZjhNTqf8CagRl9xS9HgnBkveZVKOq2uDb1rboFawM1cCB942aKRqjhC+gnsvRns4sKo+o=
   - secure: ZcGwnbX5o+y/clU1Z2VWPGhksX/sYTMgRJSZPlPUXJpAMHsKSqBrnoxTDL2gHmdKL0Wm4JCGnTimyxvAfvMV9q1vDmbqFhd5bAXwKN67Hz0EmUZ5I4JRAbcS8S0hrvQGxIXXFLnOdDrIoYP4DiTowTEzbaNMdb3Ebd26LandfL5tAO+74KkhXt+fQJvfM8430w8LChccWlEzzospFF9/7WyH2ObipDhPzfWsm67ugXSQ0fUOriIDHdhMzhkounaFjtR13OmKax6AYyfEkMiYduHRMEvdBCP2233tfGZBI10RaVmfTmzk4tkSGTDVPklbuUVO2Y58SeheQwGrDAwFdhH4fqlPtXJTsuF0pgqG2FXiFDifmzZqAuIV7AZpj5kXkKB/I4+TkPNJMMIOmSL3LAKky2riJfKUvEFU8lKIcMuG8VtcMZc87gQFN5D3pKvXrLSABPB+7lS123fxXBshU0vzxQoRL125OxnEAMM+vmNgXe1Kqm6Gtsb/JbEhDkRreqr882CbsgltUydmUNAHTXLR/vokBB3L3Mbe/ECGoE7zPQjkyx9ryth7bM0i+7xJ1b/EXAt3H3KILwbSFcH0CmGA/n0a1FOAXRd1uszD4szES/O0eqROweoSGADu39JgmT/XihMds5ELnU0Tkvf1lYWW3Wr56f3v/RTjft/GOR0=
-  - secure: RHSaN8sJZbCxRe5Iwj3ocqsqPq2jC3cyGDpa6TG+7NnwgKn2lZCyxoj3pcdNC/isDXw/bUM183ZVhridZhDVfdmsrB72IoONH1KBB2JVizr0vCPywEmWHkKhDPt/Eb2JLl2dQEIhCMbjO+w/tn8613iZvNhnE2/bAVp46plG1tEACUCFC188BtT4IdyVs6MxdrTsN034DKmbyBE3nJxLsNnb/SaS1e4/zHxu3xowmX8VRzy3VSwsRAICNDZlbpeqin9VJWlQ8IzWkxdIp2AOEtFxYRdS9jJO1Ga4WoFbWoQWMzE4xc8gBrZWnW4jp9T/4NL6A444p9/xi6rSXkevf0RpVbSuxfWZqX/sVm0ToW+XQ0//Ox0zb5JOtQpVwGDRd/Yzk2Pm21dYp70fgVn8jpuEzEpnSAInI0tT6H8htnO66aBTES/VKAG+IBXSaruXTOCPsWmW64VKgGX+HALu86w1h16z/976CMmQFb4AyEsIskIy0kcsH5H4zO9IAjHZ6mlxMq08d+EUXEytdyOP/bw3OYRwVtjEE35Kg3k67UlB7v74mwQV5gf6GTHXDNxzs/ly8br7V6tM+DFqky4qmd8W+SYWgQ16fL+KrazLhGsUmq+taRys0lYToqTeI+icKwtj32L5tNHf2B30TJ2YhYOyz1OP1Qg6GPDFzd4CJSo=
-  - secure: wPRjQUvgrOWDdnIHrLo27xBFWHO21jL8i+41HqXfriJGJbmAe//XB21WiVBFvqvDDtWRII2GR4YCvozLZeerXG2LKxgwwoy+M0362glQryMsip/HDfeENTNZxEzQUS1jnhrLeYtM3Gj5P/MT3C+Q1OJh/yYO58gfE0UEMsFtucBNP3o4IZNFMExKbylYjaoLTHlcevqWiVDVyvS1S4qH/dSXYI2/9eIYrA4rCYzws4HmK8ZC27CN4sDtwo02/0koMMY66XP5hpo/LBrs65upkdu8XzTgLtZ14twmnT3SqAtE+2MF+RWdt0dFKmI7lcXlQjzIMvlPpMlZFYs0iYw2FriFYZ4cbu3NfyOaTqFF8YkeSbDtfhMUw0Kd0wIcUSCfjAlgVu1u+m+6vvTHBqIf1retQK1Er6V4vCoFssOYM7EXOrsfxaBw67z5RzRqOkRaJPgET0BeAjYSDPy4bncsqFezdUo4/P53P/IU/l4yXczM+OIBiznbb6w7e49DkvmlHnFjozhLtWa8KWcQArrKhQHFBgZG7Rcvr44FFqNAJFAcYL0VqqfyDIX8vuuhZLAbUybnYGhxM7PnYNIp1uMGH9XwXeBi/dmP0Ym7C3JE/DuH567bi/kvh2O9j7DCGEkyf4Nf54zcMu3spCTXUh3jFmnyRJCUH6cTsAabrpHyJh8=
+  - secure: k1TmGscXbOfGOodfgz0xZQw1FGVaL4arVlfCAlaRkLDvXU/SCa50RUQHXXPZ578zxCHukz64DjyLV1/4dm9+kUiFF2mgDLJWNo+qTQpO8Z4MSPwT1Cfla5jJqtTrn+WYP874tWD0xFOXrSWhRRyQx85eGKLnLwrnyrITaMPaCJJBPlDxR4hEQpxN6CKPrFhUVVA8Aj/UI9TgOi5c23B9VADv078dgJ9jlCJX2oR9Qpg13X2/KRo6ePVu+3Qxj7NntkNqMAKDJE3A/x+gVofUE2EHzkz4eCPiAGwN28RA26lDg9cutovcKNmEGrUF/nPxIqxsD8j+HNnmfroY9Y34BJLy3trUrwzY55k4xUH65FgHr395DA5DfGMXMhsQcdobMalGHTxrcWvx66ZUF8zZZjg4LBzQ9Ml0HQ+/KKVRWCqo93quOwM+5UIUtAU46WN1svCEp6UVM2rGpT+CbRGOJv2pRihXC1Id65HoyiYLShQvaEgpXJZ71Ylm3OrXHuOtOu3MyfDwD9tG42B+fc+VB3UZrn/erCIYZZ5uUnXaOnkcl8Pr5ZI6v1/wy9mc/7eaDQQVeFyLWbR3WYF37wi80CH3vN5h1L4tm56QYHre6g1RjjMQ3TAYmKV+7bnzf7NXbfi932Xe2oDRu6BtCnsuApjb4Phq4uHoDpz2y5TBiV0=
+  - secure: Lrngq8Ji0HSc8bcASdNkh9Yt2/JBBwklbuat966qEV1CsCB2vZI4QGPxCwU8cux3uInuc0kPFQfZDpAnWTH307YjswmnVXAvwuZGfFWVv1EKMLZA1NDpo1VaRIFp5jIoYXW/DwhqHQ5YXdZrE4VP8b66SmAaEAKGgAUxPaZGxkI6ApUMqdatqCQ10+XSL/FZqvpaDW0qs2/7fb68p6mKTGJ0Nn7AA1v3wjQ+Q4k01r4Eu16QskPQKtW3tcMpPae0lozExmjvUv93fpNzucZgZu3AX/SQkrvQLseLEZrifmT4HJsXR1OluCWSjrrU6H64JtzsJjxBHdioC3H7lkPFLZ0AX7sXOwxeglSpjJWNg0fY5myj0fzK7/FslUg5ZF+JK0rJusqxb+vL1c59VhsItEQKawZ1L2zZ21MrSaNQbG5eHsR2JpyHnLDq8GYXRO/c4fRErHQmcVxY6J8VfZtQoliR6oVUUdw2OLMwgn9UbhoQjTDXQxnV9ytfTHZD8vZ1lbvyYTFb4VhbU2N5DGj/BIIy/Hd+0aA3wJG6MKqVnQ5P0QEVOM0v8aU9YHtKXS8JTv7YY+U1XLKT5xc5w++feKRbxYOi1iRMVck1LNRblcxm9tK4a4iWSK0nZe9HUQk8xY8PXtJo6VgWDqocTlXyFvWsvp3gwHAv3ebNcKJ6vyc=
 python:
 - 2.7
 - 3.5
@@ -18,11 +18,11 @@ python:
 branches:
   except:
   - gh-pages
-install: 
-  - |
-    python ci/environment.py
-    pip install cython requests
-    python setup.py build_ext
+install:
+- |
+  python ci/environment.py
+  pip install cython requests
+  python setup.py build_ext
 stages:
 - name: lint
 - name: test
@@ -79,30 +79,31 @@ jobs:
     python: 3.6
     name: Build
     before_deploy: python ci/get_appveyor_wheels.py
-    python: 3.6
     deploy:
-      - provider: pypi
-        user: $PYPI_USERNAME
-        password: $PYPI_PW
-        distributions: sdist
-        skip-cleanup: true
-        on:
-          tags: true
-      - provider: releases
-        file_glob: true
-        file: "dist/*"
-        api-key: $GH_PUSH
-        skip-cleanup: false
-        on:
-          tags: true
+    - provider: pypi
+      user: "$PYPI_USERNAME"
+      password: "$PYPI_PW"
+      distributions: sdist
+      skip-cleanup: true
+      on:
+        tags: true
+    - provider: releases
+      file_glob: true
+      file: dist/*
+      api-key: "$GH_PUSH"
+      skip-cleanup: false
+      on:
+        tags: true
   - stage: gh-pages
     before_install:
-      - sudo apt-get update
-      - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
+    - sudo apt-get update
+    - sudo apt-get install -qy texlive-latex-base texlive-latex-extra texlive-fonts-recommended
+      texlive-fonts-extra
     script:
-      - echo "Adding GitHub remote"
-      - git remote add origin-pages https://${GH_PUSH}@github.com/djpugh/MTfit.git > /dev/null 2>&1
-      - git fetch origin-pages gh-pages:gh-pages
-      - tox -e gh-pages
+    - echo "Adding GitHub remote"
+    - git remote add origin-pages https://${GH_PUSH}@github.com/djpugh/MTfit.git >
+      /dev/null 2>&1
+    - git fetch origin-pages gh-pages:gh-pages
+    - tox -e gh-pages
     python: 3.6
     name: Build GitHub pages
