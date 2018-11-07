@@ -30,7 +30,7 @@ class Log:
             self._log[job_id] = new_log
             print(log_diff.strip('/r').strip())
         elif not (current_status == 'success' and job_status == 'success'):
-            print('{} - Build status: {}; checking again in 10 seconds'.format(job_id, job_status))
+            print('{} - Build status: {}; checking again in 30 seconds'.format(job_id, job_status))
         self.job_status[job_id] = job_status
 
 
