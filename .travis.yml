@@ -4,9 +4,13 @@ language: python
 env:
   global:
   - ON_TRAVIS=1
+  - APPVEYOR_ACCOUNT=djpugh
+  - APPVEYOR_SLUG=MTfit
   - secure: X9w4qCkm5g+XqRwUp3BXtVJcgAxoQW20+9flUSTRfv583tNdd98Av0pZGoP1hivi8HxFwZLYT0uw8dyYhVToN7BPZHjwhrXwv1OHZBAmCNwZwdbi0jvfbrtLX0NejqbyEgwF6HmxrnRxkrH97yNKciF+LBZZAuZd0W2g1sisj+VAAn0VYeSJvmPVNoQovFLQVb+MSWZ22CN+sOmpajPp2Aq0IKW8+dnwLqY/0v+IjMHPjZikXBWFZo7joxM5FA/143kfwHcu71Xk4JsnYAsZFXB7vwxmRWeV21GjbmPAZrFV2WfZirV6GpN7DndNTfpq6ZZ9PrUpDnUi0wjoTWv28aHpP1j0gvkawaW3dAf/St1QT0KHwieELh91GXTarhybNZ2B7fBZBssEEkQG8NaRvkrKzPKoP7nD+zZGNfK/BBfREuBcs0p/acSle4nIJxOFxrrRnM3053LPnzn6YPuP5fL0Fozw8DggOkzdBuBmPP+4l6qNa/U1k9KwVgPQK9Cph7Zce0sz8YOGPbQKlZ3LZvMWTCZRlmiRtVS7nNndWsxNw/18Ezbi6qET1ia/+KH3hZpjiCVcQTjsHE6m7QGyoS/7XV0DN8kJyG6ChuBWMrQoR6qxxVxOQ13Soltdve9xghYjUv6/hVYWfio51aFzkFzqBxyTt2dOQtdZEo54qv8=
   - secure: Ojj4iWp7CwaMrzWygdJ9fYXLx8LCKQrWZg8UrWG19WNR5CwVpkLc+TorpDELrLoy4Zwm/8qH0S9lJYQSzYMJftyngU19XbGMrHQ3+tizn49viUPCjVD0iiWTjIEgSYKieiBEl61CvEp+AWxhOTX3sG9GooI2R3xQPmgSdcXC7NRdj8YdNDftFr5/nRmgJTVhumDoGvfuecG8XL7rurvjl+5Z6kKfPVEJ4PjtZ0UvopYNARr96WwABsbg+zLRXhC/oy2GOrHhI/efZOk2UnsbfIfpfzlX75WeyHs1Zc3slayZ+6XfLj9mlMm2jKcAPcZ8f+p5LjBanLdI9R85LgwTDUlejWT3KehD5r7hFB7YpoZvoWELWfycTdzlYwxAf3Em9uaLtDVzQOkmOQpxX2KTYIqM43HQnzqO9YmKauFXu7YwgkwwCITH02rFpquZQlK3pKKw6kG//eoh0yh8eekL71Fila68+q+cyAhzXUvq8a8aUSS/E7dh9Djg3CiUqa0UXQ6yDkldh3sfJu/EBN51OLlRTJAOqk3D/Lc+eaizc+/PtWwBxqUT250d5W+IQWiOg9hDUvnsNO4e7SwpFEXTnTGazvPJUesRpn7QrlZjhNTqf8CagRl9xS9HgnBkveZVKOq2uDb1rboFawM1cCB942aKRqjhC+gnsvRns4sKo+o=
   - secure: ZcGwnbX5o+y/clU1Z2VWPGhksX/sYTMgRJSZPlPUXJpAMHsKSqBrnoxTDL2gHmdKL0Wm4JCGnTimyxvAfvMV9q1vDmbqFhd5bAXwKN67Hz0EmUZ5I4JRAbcS8S0hrvQGxIXXFLnOdDrIoYP4DiTowTEzbaNMdb3Ebd26LandfL5tAO+74KkhXt+fQJvfM8430w8LChccWlEzzospFF9/7WyH2ObipDhPzfWsm67ugXSQ0fUOriIDHdhMzhkounaFjtR13OmKax6AYyfEkMiYduHRMEvdBCP2233tfGZBI10RaVmfTmzk4tkSGTDVPklbuUVO2Y58SeheQwGrDAwFdhH4fqlPtXJTsuF0pgqG2FXiFDifmzZqAuIV7AZpj5kXkKB/I4+TkPNJMMIOmSL3LAKky2riJfKUvEFU8lKIcMuG8VtcMZc87gQFN5D3pKvXrLSABPB+7lS123fxXBshU0vzxQoRL125OxnEAMM+vmNgXe1Kqm6Gtsb/JbEhDkRreqr882CbsgltUydmUNAHTXLR/vokBB3L3Mbe/ECGoE7zPQjkyx9ryth7bM0i+7xJ1b/EXAt3H3KILwbSFcH0CmGA/n0a1FOAXRd1uszD4szES/O0eqROweoSGADu39JgmT/XihMds5ELnU0Tkvf1lYWW3Wr56f3v/RTjft/GOR0=
+  - secure: RHSaN8sJZbCxRe5Iwj3ocqsqPq2jC3cyGDpa6TG+7NnwgKn2lZCyxoj3pcdNC/isDXw/bUM183ZVhridZhDVfdmsrB72IoONH1KBB2JVizr0vCPywEmWHkKhDPt/Eb2JLl2dQEIhCMbjO+w/tn8613iZvNhnE2/bAVp46plG1tEACUCFC188BtT4IdyVs6MxdrTsN034DKmbyBE3nJxLsNnb/SaS1e4/zHxu3xowmX8VRzy3VSwsRAICNDZlbpeqin9VJWlQ8IzWkxdIp2AOEtFxYRdS9jJO1Ga4WoFbWoQWMzE4xc8gBrZWnW4jp9T/4NL6A444p9/xi6rSXkevf0RpVbSuxfWZqX/sVm0ToW+XQ0//Ox0zb5JOtQpVwGDRd/Yzk2Pm21dYp70fgVn8jpuEzEpnSAInI0tT6H8htnO66aBTES/VKAG+IBXSaruXTOCPsWmW64VKgGX+HALu86w1h16z/976CMmQFb4AyEsIskIy0kcsH5H4zO9IAjHZ6mlxMq08d+EUXEytdyOP/bw3OYRwVtjEE35Kg3k67UlB7v74mwQV5gf6GTHXDNxzs/ly8br7V6tM+DFqky4qmd8W+SYWgQ16fL+KrazLhGsUmq+taRys0lYToqTeI+icKwtj32L5tNHf2B30TJ2YhYOyz1OP1Qg6GPDFzd4CJSo=
+  - secure: wPRjQUvgrOWDdnIHrLo27xBFWHO21jL8i+41HqXfriJGJbmAe//XB21WiVBFvqvDDtWRII2GR4YCvozLZeerXG2LKxgwwoy+M0362glQryMsip/HDfeENTNZxEzQUS1jnhrLeYtM3Gj5P/MT3C+Q1OJh/yYO58gfE0UEMsFtucBNP3o4IZNFMExKbylYjaoLTHlcevqWiVDVyvS1S4qH/dSXYI2/9eIYrA4rCYzws4HmK8ZC27CN4sDtwo02/0koMMY66XP5hpo/LBrs65upkdu8XzTgLtZ14twmnT3SqAtE+2MF+RWdt0dFKmI7lcXlQjzIMvlPpMlZFYs0iYw2FriFYZ4cbu3NfyOaTqFF8YkeSbDtfhMUw0Kd0wIcUSCfjAlgVu1u+m+6vvTHBqIf1retQK1Er6V4vCoFssOYM7EXOrsfxaBw67z5RzRqOkRaJPgET0BeAjYSDPy4bncsqFezdUo4/P53P/IU/l4yXczM+OIBiznbb6w7e49DkvmlHnFjozhLtWa8KWcQArrKhQHFBgZG7Rcvr44FFqNAJFAcYL0VqqfyDIX8vuuhZLAbUybnYGhxM7PnYNIp1uMGH9XwXeBi/dmP0Ym7C3JE/DuH567bi/kvh2O9j7DCGEkyf4Nf54zcMu3spCTXUh3jFmnyRJCUH6cTsAabrpHyJh8=
 python:
 - 2.7
 - 3.5
@@ -55,6 +59,10 @@ jobs:
     script: tox -e test-py36
     python: 3.6
     name: Unit Tests
+  - stage: test
+    script: python ci\travis_appveyor_build.py
+    python: 3.6
+    name: Unit Tests (Windows)
   - stage: examples-test
     script: tox -e examples-py27
     python: 2.7
@@ -70,15 +78,19 @@ jobs:
   - stage: build
     python: 3.6
     name: Build
+    before_deploy: python ci\get_appveyor_wheels.py
+    python: 3.6
     deploy:
       - provider: pypi
         user: $PYPI_USERNAME
         password: $PYPI_PW
         distributions: sdist
-        skip-cleanup: false
+        skip-cleanup: true
         on:
           tags: true
       - provider: releases
+        file_glob: true
+        file: "dist/*"
         api-key: $GH_PUSH
         skip-cleanup: false
         on:
