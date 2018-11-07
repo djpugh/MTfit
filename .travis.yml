@@ -63,6 +63,7 @@ jobs:
     script: python ci/travis_appveyor_build.py
     python: 3.6
     name: Unit Tests (Windows)
+    if: branch in (master, develop) OR tag IS present
   - stage: examples-test
     script: tox -e examples-py27
     python: 2.7
