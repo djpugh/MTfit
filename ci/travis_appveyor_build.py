@@ -29,9 +29,9 @@ class Log:
             log_diff = new_log.replace(self._log.get(job_id, ''), '').lstrip()
             self._log[job_id] = new_log
             print(log_diff.strip('/r').strip())
-        else:
-            print('Build status: {}; checking again in 10 seconds'.format(job_status))
-        self.job_status[job_id] = current_status
+        elif not (current_status == 'success' and job_status == 'success'):
+            print('{} - Build status: {}; checking again in 10 seconds'.format(job_id, job_status))
+        self.job_status[job_id] = job_status
 
 
 # Trigger the AppVeyor build
@@ -67,7 +67,7 @@ while True:
             # Get the logs and update here
             for job in build['jobs']:
                 log.update_job(job['jobId'], job['status'])
-            time.sleep(10)
+            time.sleep(30)
         elif status == 'success':
             print('Build successful')
             break
