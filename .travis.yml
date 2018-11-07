@@ -21,7 +21,7 @@ branches:
 install: 
   - |
     python ci/environment.py
-    pip install cython
+    pip install cython requests
     python setup.py build_ext
 stages:
 - name: lint
