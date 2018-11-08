@@ -60,7 +60,7 @@ jobs:
     python: 3.6
     name: Unit Tests
   - stage: test
-    script: travis_wait 45 python ci/travis_appveyor_build.py
+    script: python ci/travis_appveyor_build.py
     python: 3.6
     name: Unit Tests (Windows)
     if: branch in (master, develop) OR tag IS present

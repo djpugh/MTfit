@@ -36,14 +36,6 @@ MTfit: Bayesian Source Inversion
    Source Code <source>
    GitHub Repository <https://github.com/djpugh/MTfit>
 
-.. only:: html
-
-   .. image:: https://travis-ci.org/djpugh/MTfit.svg?branch=develop
-      :target: https://travis-ci.org/djpugh/MTfit/
-
-   .. image:: https://ci.appveyor.com/api/projects/status/rvi74lcro7q3od85?svg=true
-      :target: https://ci.appveyor.com/project/djpugh/mtfit 
-
 
 :mod:`MTfit` is a Bayesian forward model inversion code for moment tensor and double-couple source inversion using different data types, based on the Bayesian approach presented in :ref:`Pugh et al, 2016a <Pugh-2016a>` and  :ref:`Pugh, 2015 <Pugh-2015t>`. The code has been developed as part of a PhD project (:ref:`Pugh, 2015 <Pugh-2015t>`). The solutions are estimated using polarity and amplitude ratio data, although the code is extensible (see :doc:`extensions`) so it is possible to include other data-types in this framework. :mod:`MTfit` can incorporate uncertainty estimates both in the data (noise etc.) and the model (and location) in the resultant posterior PDF. There are three sampling approaches that have been developed, with different advantages (:ref:`Pugh et al, 2015c <Pugh-2015t>`, and it is also possible to use the approach for relative amplitude inversion as well (:ref:`Pugh et al, 2015e <Pugh-2015t>`).
 

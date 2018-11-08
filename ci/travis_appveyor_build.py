@@ -28,9 +28,12 @@ class Log:
             new_log = r.content.decode()
             log_diff = new_log.replace(self._log.get(job_id, ''), '').lstrip()
             self._log[job_id] = new_log
-            print(log_diff.strip('/r').strip())
+            if log_diff:
+                print(log_diff.strip('/r').strip(), flush=True)
+            else:
+                print('.', end='', flush=True)
         elif not (current_status == 'success' and job_status == 'success'):
-            print('{} - Build status: {}; checking again in 30 seconds'.format(job_id, job_status))
+            print('{} - Build status: {}; checking again in 30 seconds'.format(job_id, job_status), flush=True)
         self.job_status[job_id] = job_status
 
 
@@ -44,7 +47,7 @@ payload = {
 r = requests.post(api_url + '/builds', payload, headers=headers)
 r.raise_for_status()
 build = r.json()
-print('Started AppVeyor build (buildId={buildId}, version={version})'.format(**build))
+print('Started AppVeyor build (buildId={buildId}, version={version})'.format(**build), flush=True)
 log = Log()
 # Wait until the build has finished
 has_responded = False
@@ -61,7 +64,7 @@ while True:
         build = r.json()['build']
         status = build['status']
         if status in ('queued'):
-            print('Build status: {}; checking again in 10 seconds'.format(status))
+            print('Build status: {}; checking again in 10 seconds'.format(status), flush=True)
             time.sleep(10)
         elif status in ('running'):
             # Get the logs and update here
@@ -71,8 +74,8 @@ while True:
         elif status == 'success':
             for job in build['jobs']:
                 log.update_job(job['jobId'], job['status'])
-            print('Build successful')
+            print('Build successful', flush=True)
             break
         else:
-            print('Build failed with status: {}'.format(status), file=sys.stderr)
+            print('Build failed with status: {}'.format(status), file=sys.stderr, flush=True)
             sys.exit(1)
