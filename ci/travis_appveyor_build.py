@@ -69,6 +69,8 @@ while True:
                 log.update_job(job['jobId'], job['status'])
             time.sleep(30)
         elif status == 'success':
+            for job in build['jobs']:
+                log.update_job(job['jobId'], job['status'])
             print('Build successful')
             break
         else:
