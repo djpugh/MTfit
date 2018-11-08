@@ -1,31 +1,14 @@
 environment:
 
   matrix:
-
-    # For Python versions available on Appveyor, see
-    # http://www.appveyor.com/docs/installed-software#python
-    # The list here is complete (excluding Python 2.6, which
-    # isn't covered by this document) at the time of writing.
-
-    - PYTHON: "C:\\Python27-x64"
-      PYTHON_EXE: "C:\\Python27-x64\\python.exe"
-      TOXENV: 'test-py27'
-      MPLBACKEND: 'Agg'
-      PATH: "C:\\Python27-x64;$(PATH)"
     - PYTHON: "C:\\Python35-x64"
       PYTHON_EXE: "C:\\Python35-x64\\python.exe"
       TOXENV: 'test-py35'
       MPLBACKEND: 'Agg'
       PATH: "C:\\Python35-x64;$(PATH)"
-    - PYTHON: "C:\\Python36-x64"
-      PYTHON_EXE: "C:\\Python36-x64\\python.exe"
-      TOXENV: 'test-py36'
-      MPLBACKEND: 'Agg'
-      PATH: "C:\\Python36-x64;$(PATH)"
 
 install:
   # We need wheel installed to build wheels
-  - ps: "Get-ChildItem Env:"
   - cmd: "%PYTHON%\\python.exe -m pip install wheel tox numpy cython"
 
 build: off
