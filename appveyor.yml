@@ -49,8 +49,8 @@ after_test:
   # Again, you only need if you're building C extensions for
   # 64-bit Python 3.3/3.4. And you need to use %PYTHON% to get the correct
   # interpreter
-  - cmd: IF %APPVEYOR_REPO_TAG% == 'True' (%PYTHON%\\python.exe setup.py bdist_wheel) ELSE (echo Not building because this is not a tag build)
-  - ps: if ($env:APPVEYOR_REPO_TAG -eq 'True') {ls dist}
+  - ps: if ($(& $env:PYTHON_EXE .\ci\get_version.py) -ne '') {& $env:PYTHON_EXE setup.py bdist_wheel} ELSE {echo "Not building because this is not a tag build"}
+  - ps: if ($LAST_EXIT_CODE -eq 'True') {ls dist}
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
   - path: dist\*
