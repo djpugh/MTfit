@@ -1516,7 +1516,7 @@ class IterativeMultipleTryMetropolisHastingsGaussianTape(IterativeMetropolisHast
                                                                           gaussian_jump=gaussian_jump)
                 return mt
             except Exception:
-                logging.exception('Cython error')
+                logging.exception('WARNING: Error running cython code, resorting to python code')
         else:
             logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
         # Otherwise/Fallback to use python code
@@ -1611,7 +1611,8 @@ class IterativeMultipleTryMetropolisHastingsGaussianTape(IterativeMetropolisHast
                     return xi_1, ln_pi_1, scale_factori_1[index], index
                 return xi_1, ln_pi_1, False, index
             except Exception:
-                logger.exception('Cython Error')
+                if not isinstance(xi_1, dict):
+                    logger.exception('WARNING: Error running cython code, resorting to python code')
         else:
             logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
         # Otherwise use/fallback to Python code

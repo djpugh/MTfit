@@ -59,11 +59,11 @@ jobs:
     script: tox -e test-py36
     python: 3.6
     name: Unit Tests
-  - stage: test
-    script: python ci/travis_appveyor_build.py
-    python: 3.6
-    name: Unit Tests (Windows)
-    if: branch in (master, develop) OR tag IS present
+  # - stage: test
+  #   script: python ci/travis_appveyor_build.py
+  #   python: 3.6
+  #   name: Unit Tests (Windows)
+  #   if: branch in (master, develop) OR tag IS present
   - stage: examples-test
     script: tox -e examples-py27
     python: 2.7
@@ -79,7 +79,7 @@ jobs:
   - stage: build
     python: 3.6
     name: Build
-    before_deploy: python ci/get_appveyor_wheels.py
+    # before_deploy: python ci/get_appveyor_wheels.py
     deploy:
     - provider: pypi
       user: "$PYPI_USERNAME"
