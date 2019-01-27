@@ -46,8 +46,8 @@ r = requests.get(build_info_url)
 r.raise_for_status()
 build = r.json()
 job_ids = [job['jobId'] for job in build['jobs']]
-if not os.path.exists(os.path.join(REPO_PATH, 'dist'))
-os.mkdir(os.path.join(REPO_PATH, 'dist'))
+if not os.path.exists(os.path.join(REPO_PATH, 'dist')):
+    os.mkdir(os.path.join(REPO_PATH, 'dist'))
 for job_id in job_ids:
     r = requests.get('{}/buildjobs/{}/artifacts'.format(api_url, job_id), headers=headers)
     r.raise_for_status()

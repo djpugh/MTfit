@@ -1313,7 +1313,7 @@ S003,110,10,1,0.05"""
                                    algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=10, convert=False)
         self.inversion.number_samples = 100
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion.forward()
         self.assertTrue(self.inversion.algorithm.pdf_sample.n, str(
             self.inversion.algorithm.pdf_sample.n))
@@ -1412,7 +1412,7 @@ S003,110,10,1,0.05"""
                                    algorithm='Time', parallel=self.parallel, phy_mem=0.1, n=2, max_time=10, convert=False)
         self.inversion.number_samples = 100
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion.forward()
         self.assertTrue(self.inversion.algorithm.pdf_sample.n, str(
             self.inversion.algorithm.pdf_sample.n))
@@ -1423,7 +1423,7 @@ S003,110,10,1,0.05"""
                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.5], [0.02]])}},
                                    algorithm='Time', parallel=self.parallel, phy_mem=0.1, n=2, max_time=10, convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion.forward()
         try:
             os.remove('test.scatangle')
@@ -1438,7 +1438,7 @@ S003,110,10,1,0.05"""
                                    algorithm='Time', parallel=self.parallel, phy_mem=0.1, n=2, max_time=10, convert=False)
         self.inversion.number_samples = 100
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._random_sampling_forward()
         self.assertTrue(self.inversion.algorithm.pdf_sample.n, str(
             self.inversion.algorithm.pdf_sample.n))
@@ -1450,7 +1450,7 @@ S003,110,10,1,0.05"""
                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.5], [0.02]])}},
                                    algorithm='Time', parallel=self.parallel, phy_mem=0.1, n=2, max_time=10, convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._random_sampling_forward()
         try:
             os.remove('test.scatangle')
@@ -1465,7 +1465,7 @@ S003,110,10,1,0.05"""
         self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=self.parallel, phy_mem=0.1, n=2, max_time=10, convert=False)
         self.inversion.number_samples = 100
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._random_sampling_multiple_forward()
         self.assertTrue(self.inversion.algorithm.pdf_sample.n, str(
             self.inversion.algorithm.pdf_sample.n))
@@ -1475,7 +1475,7 @@ S003,110,10,1,0.05"""
             f.write(self.station_angles())
         self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=self.parallel, phy_mem=0.1, n=2, max_time=10, convert=False)
         self.inversion.location_pdf_files = ['test.scatangle', 'test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._random_sampling_multiple_forward()
         try:
             os.remove('test.scatangle')
@@ -1490,7 +1490,7 @@ S003,110,10,1,0.05"""
         self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=self.parallel, phy_mem=0.1, n=2, max_time=10, relative_amplitude=True, convert=False)
         self.inversion.number_samples = 100
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._random_sampling_multiple_forward()
         self.assertTrue(self.inversion.algorithm.pdf_sample.n, str(self.inversion.algorithm.pdf_sample.n))
         self.inversion._close_pool()
@@ -1499,7 +1499,7 @@ S003,110,10,1,0.05"""
             f.write(self.station_angles())
         self.inversion = Inversion([data, data], multiple_events=True, algorithm='Time', parallel=self.parallel, phy_mem=0.1, n=2, max_time=10, relative_amplitude=True, convert=False)
         self.inversion.location_pdf_files = ['test.scatangle', 'test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._random_sampling_multiple_forward()
         try:
             os.remove('test.scatangle')
@@ -1522,7 +1522,7 @@ S003,110,10,1,0.05"""
                                    algorithm='McMC', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, convert=False)
         self.inversion.number_samples = 100
         self.assertFalse(len(self.inversion.algorithm.pdf_sample))
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._mcmc_forward()
         self.assertTrue(os.path.exists('TestAMT.mat'))
         try:
@@ -1537,7 +1537,7 @@ S003,110,10,1,0.05"""
                                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.5], [0.02]])}},
                                    algorithm='Time', parallel=False, learning_length=10, chain_length=100, acceptance_rate_window=5, phy_mem=1, max_time=10, convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._mcmc_forward()
         self.assertTrue(os.path.exists('TestAMT.mat'))
         try:
@@ -1580,7 +1580,7 @@ S003,110,10,1,0.05"""
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
         self.inversion.location_pdf_files = ['test.scatangle', 'test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._mcmc_multiple_forward()
         try:
             os.remove('test.scatangle')
@@ -1629,7 +1629,7 @@ S003,110,10,1,0.05"""
         with open('test.scatangle', 'w') as f:
             f.write(self.station_angles())
         self.inversion.location_pdf_files = ['test.scatangle', 'test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion._mcmc_multiple_forward()
         try:
             os.remove('test.scatangle')
@@ -1649,7 +1649,7 @@ S003,110,10,1,0.05"""
                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.001], [0.002]])}},
                                    algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=10, convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion.forward()
         try:
             os.remove('test.scatangle')
@@ -1669,7 +1669,7 @@ S003,110,10,1,0.05"""
                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.001], [0.002]])}},
                                    algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=10, output_format='pickle', convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion.forward()
         try:
             os.remove('test.scatangle')
@@ -1716,7 +1716,7 @@ S003,110,10,1,0.05"""
                                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.1], [0.1], [0.2]])}},
                                    algorithm='Time', parallel=self.parallel, phy_mem=1, max_time=10, convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion.forward()
         try:
             os.remove('test.scatangle')
@@ -1732,7 +1732,7 @@ S003,110,10,1,0.05"""
                                                                   'Measured': np.matrix([[1], [-1], [-1]]), 'Error': np.matrix([[0.001], [0.001], [0.02]])}},
                                    algorithm='Time', recover=True, parallel=self.parallel, phy_mem=1, max_time=10, convert=False)
         self.inversion.location_pdf_files = ['test.scatangle']
-        self.inversion.algorithm.max_time = 10
+        self.inversion.algorithm.max_time = 5
         self.inversion.forward()
         # LOG FILE NOT DELETING
         try:
