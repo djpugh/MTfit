@@ -3251,25 +3251,46 @@ def station_angles(stations, phase, radians=False):
     phase = phase.lower().rstrip('q')
     # Calculate angles
     if phase.lower() == 'p':
-        return np.matrix(np.array([np.cos(azimuth)*np.cos(azimuth)*np.sin(takeoff_angle)*np.sin(takeoff_angle),
+        return np.matrix(np.array([
+        # Mxx
+                         np.cos(azimuth)*np.cos(azimuth)*np.sin(takeoff_angle)*np.sin(takeoff_angle),
+        # Myy
                          np.sin(azimuth)*np.sin(azimuth)*np.sin(takeoff_angle)*np.sin(takeoff_angle),
+        # Mzz
                          np.cos(takeoff_angle)*np.cos(takeoff_angle),
+        # sqrt(2)*Mxy
                          (np.sqrt(2))*np.sin(azimuth)*np.cos(azimuth)*np.sin(takeoff_angle)*np.sin(takeoff_angle),
+        # sqrt(2)*Mxz
                          (np.sqrt(2))*np.cos(azimuth)*np.cos(takeoff_angle)*np.sin(takeoff_angle),
+        # sqrt(2)*Myz
                          (np.sqrt(2))*np.sin(azimuth)*np.cos(takeoff_angle)*np.sin(takeoff_angle)]).T)
     elif phase.lower() == 'sh':
-        return np.matrix(np.array([-np.sin(azimuth)*np.cos(azimuth)*np.sin(takeoff_angle),
+        return np.matrix(np.array([
+        # Mxx
+                         -np.sin(azimuth)*np.cos(azimuth)*np.sin(takeoff_angle),
+        # Myy
                          np.sin(azimuth)*np.cos(azimuth)*np.sin(takeoff_angle),
+        # Mzz
                          0*azimuth,
+        # sqrt(2)*Mxy
                          (1/np.sqrt(2))*np.cos(2*azimuth)*np.sin(takeoff_angle),
+        # sqrt(2)*Mxz
                          -(1/np.sqrt(2))*np.sin(azimuth)*np.cos(takeoff_angle),
+        # sqrt(2)*Myz
                          (1/np.sqrt(2))*np.cos(azimuth)*np.cos(takeoff_angle)]).T)
     elif phase.lower() == 'sv':
-        return np.matrix(np.array([np.cos(azimuth)*np.cos(azimuth)*np.sin(takeoff_angle)*np.cos(takeoff_angle),
+        return np.matrix(np.array([
+        # Mxx
+                         np.cos(azimuth)*np.cos(azimuth)*np.sin(takeoff_angle)*np.cos(takeoff_angle),
+        # Myy
                          np.sin(azimuth)*np.sin(azimuth)*np.sin(takeoff_angle)*np.cos(takeoff_angle),
+        # Mzz
                          -np.sin(takeoff_angle)*np.cos(takeoff_angle),
+        # sqrt(2)*Mxy
                          np.sqrt(2)*np.cos(azimuth)*np.sin(azimuth)*np.sin(takeoff_angle)*np.cos(takeoff_angle),
+        # sqrt(2)*Mxz
                          (1/np.sqrt(2))*np.cos(azimuth)*np.cos(2*takeoff_angle),
+        # sqrt(2)*Myz
                          (1/np.sqrt(2))*np.sin(azimuth)*np.cos(2*takeoff_angle)]).T)
     elif len(phase.split('/')) == 2:
         numerator = station_angles(stations, phase.split('/')[0], radians)
