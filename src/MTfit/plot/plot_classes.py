@@ -2746,7 +2746,7 @@ class _HudsonPlot(_HistPlot):
                 # A
                 self._line_plot(np.array([0, 4.*T/(4.-T)]), np.array([1, T/(4.-T)]), 0, c=grey,
                                 linestyle='--', linewidth=s*self.linewidth, zorder=-2)
-                if i <= np.floor(n/4.):
+                if i < 1:
                     self._line_plot(np.array([0, 4.*k/(1-2*k)]), np.array([k, k/(1-2.*k)]), 0, c=grey,
                                     linestyle='--', linewidth=s*self.linewidth, zorder=-2)
                 else:
@@ -2759,7 +2759,7 @@ class _HudsonPlot(_HistPlot):
                 # A
                 self._line_plot(np.array([0, -4.*T/(4.-T)]), np.array([-1, -T/(4.-T)]), 0, c=grey,
                                 linestyle='--', linewidth=s*self.linewidth, zorder=-2)
-                if i <= np.floor(n/4.):
+                if i < 1:
                     self._line_plot(np.array([0, -4*k/(1-2*k)]), np.array([-k, -k/(1-2*k)]), 0, c=grey,
                                     linestyle='--', linewidth=s*self.linewidth, zorder=-2)
                 else:
