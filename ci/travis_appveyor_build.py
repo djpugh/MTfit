@@ -45,7 +45,11 @@ payload = {
     'commitID': os.getenv('TRAVIS_COMMIT')
 }
 r = requests.post(api_url + '/builds', payload, headers=headers)
-r.raise_for_status()
+try:
+    r.raise_for_status()
+except Exception as e:
+    print(r.content)
+    raise e
 build = r.json()
 print('Started AppVeyor build (buildId={buildId}, version={version})'.format(**build), flush=True)
 log = Log()

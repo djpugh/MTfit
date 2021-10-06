@@ -137,7 +137,7 @@ def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0, _use_c=Non
         except Exception as e:
             # Run using python
             # Testing C code
-            logger.exception('Error running cython code')
+            logger.exception('WARNING: Error running cython code, resorting to python code')
             if _C_LIB_TESTS:
                 raise e
     else:
@@ -171,7 +171,7 @@ def polarity_ln_pdf(a, mt, sigma, incorrect_polarity_probability=0.0, _use_c=Non
             ln_p = cprobability.ln_prod(ln_p)
         except Exception:
             if cprobability:
-                logger.exception('Error running cython code')
+                logger.exception('WARNING: Error running cython code, resorting to python code')
             ln_p = np.sum(ln_p, 0)
     if isinstance(ln_p, np.ndarray):
         ln_p[np.isnan(ln_p)] = -np.inf
@@ -255,7 +255,7 @@ def polarity_probability_ln_pdf(a, mt, positive_probability, negative_probabilit
         except Exception as e:
             # Run using python
             # Testing C code
-            logger.exception('Error running cython code')
+            logger.exception('WARNING: Error running cython code, resorting to python code')
             if _C_LIB_TESTS:
                 raise e
     else:
@@ -360,7 +360,7 @@ def amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x, percentage_e
         except Exception as e:
             # Run using python
             # Testing C code
-            logger.exception('Error running cython code')
+            logger.exception('WARNING: Error running cython code, resorting to python code')
             if _C_LIB_TESTS:
                 raise e
     else:
@@ -394,7 +394,7 @@ def amplitude_ratio_ln_pdf(ratio, mt, a_x, a_y, percentage_error_x, percentage_e
             ln_p = cprobability.ln_prod(ln_p)
         except Exception:
             if cprobability:
-                logger.exception('Error running cython code')
+                logger.exception('WARNING: Error running cython code, resorting to python code')
             ln_p = np.sum(ln_p, 0)
     if isinstance(ln_p, np.ndarray):
         ln_p[np.isnan(ln_p)] = -np.inf
@@ -479,7 +479,7 @@ def relative_amplitude_ratio_ln_pdf(x_1, x_2, mt_1, mt_2, a_1, a_2, percentage_e
         except Exception as e:
             # Run using python
             # Testing C code
-            logger.exception('Error running cython code')
+            logger.exception('WARNING: Error running cython code, resorting to python code')
             if _C_LIB_TESTS:
                 raise e
     else:
@@ -826,7 +826,7 @@ def dkl(ln_probability_p, ln_probability_q, dV=1.0):
         try:
             return cprobability.dkl(ln_probability_p.copy(), ln_probability_q.copy(), dV)
         except Exception:
-            logger.exception('Error running cython code')
+            logger.exception('WARNING: Error running cython code, resorting to python code')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     ind = ln_probability_p > -np.inf
@@ -845,7 +845,7 @@ def dkl(ln_probability_p, ln_probability_q, dV=1.0):
                   ln_probability_q[ind]*probability_p[ind]) * dV
 
 
-def ln_marginalise(ln_pdf, axis=0, dV=1.0):
+def ln_marginalise(ln_pdf, axis=0, dV=1.0, _cprob_err=True):
     """
     Marginalise the pdf from the log pdf input
 
@@ -870,7 +870,8 @@ def ln_marginalise(ln_pdf, axis=0, dV=1.0):
                 return cprobability.ln_marginalise(ln_pdf._ln_pdf.astype(np.float64))
             return cprobability.ln_marginalise(ln_pdf.astype(np.float64))
         except Exception:
-            logger.exception('Error running cython code')
+            if _cprob_err:
+                logger.exception('WARNING: Error running cython code, resorting to python code')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     # scale and then marginalise:
@@ -922,7 +923,7 @@ def ln_normalise(ln_pdf, dV=1):
                 normalised_ln_pdf = cprobability.ln_normalise(ln_pdf)
             return normalised_ln_pdf
         except Exception:
-            logger.exception('Error running cython code')
+            logger.exception('WARNING: Error running cython code, resorting to python code')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     # scale and then marginalise:
@@ -993,7 +994,7 @@ def dkl_estimate(ln_pdf, V, N):
         try:
             return cprobability.dkl_uniform(ln_pdf.copy(), V, dV)
         except Exception:
-            logger.exception('Error running cython code')
+            logger.exception('WARNING: Error running cython code, resorting to python code')
     else:
         logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
     ind = ln_pdf > -np.inf
@@ -1263,17 +1264,18 @@ class LnPDF(object):
             return self.marginalise().normalise()
         return self.marginalise()
 
-    def exp(self):
+    def exp(self, _cprob_err=True):
         if cprobability:
             try:
                 return cprobability.ln_exp(self._ln_pdf)
             except Exception:
-                logger.exception('Error running cython code')
+                if _cprob_err:
+                    logger.exception('WARNING: Error running cython code, resorting to python code')
         else:
             logger.info(C_EXTENSION_FALLBACK_LOG_MSG)
         return np.exp(self._ln_pdf)
 
-    def nonzero(self, discard=100000., n_samples=0):
+    def nonzero(self, discard=100000., n_samples=0, _cprob_err=True):
         """
         Return the non-zero indices of the pdf
 
@@ -1286,7 +1288,7 @@ class LnPDF(object):
             discard: float - discard scale [default = 100000.]
             n_samples: integer - number of samples generated [default = 0]
         """
-        ln_pdf = np.array(self.marginalise(axis=0)._ln_pdf).flatten()
+        ln_pdf = np.array(self.marginalise(axis=0, _cprob_err=_cprob_err)._ln_pdf).flatten()
         m_val = -np.inf
         if n_samples > 0 and discard > 0:
             m_val = max(ln_pdf) - np.log(discard*n_samples)
@@ -1308,7 +1310,7 @@ class LnPDF(object):
         new._ln_pdf = ln_normalise(self._ln_pdf, self.dV)
         return new
 
-    def marginalise(self, axis=0, dV=False):
+    def marginalise(self, axis=0, dV=False, _cprob_err=True):
         """
         Marginalise the pdf object over a given axis
 
@@ -1322,7 +1324,7 @@ class LnPDF(object):
         if dV:
             self._set_dv(dV)
         new = self.__class__(dV=self.dV)
-        new._ln_pdf = ln_marginalise(self._ln_pdf, axis=axis, dV=self.dV)
+        new._ln_pdf = ln_marginalise(self._ln_pdf, axis=axis, dV=self.dV, _cprob_err=_cprob_err)
         return new
 
     def append(self, other, axis=1):

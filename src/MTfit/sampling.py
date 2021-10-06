@@ -170,7 +170,7 @@ class Sample(object):
         # Check if there are samples
         if len(ln_pdf):
             # Get non_zero samples
-            non_zero = ln_pdf.nonzero(discard=discard, n_samples=n_samples)
+            non_zero = ln_pdf.nonzero(discard=discard, n_samples=n_samples, _cprob_err=False)
             if discard and n_samples:
                 output_string += 'After discard, '+str(non_zero.shape[0])+' samples remain\n\n'
             if len(ln_pdf.shape) > 1:
@@ -428,7 +428,7 @@ def ln_bayesian_evidence(output, n_samples, prior=_6sphere_prior):
         p = prior(output['g'], output['d'])
     if not isinstance(output['ln_pdf'], LnPDF):
         output['ln_pdf'] = LnPDF(output['ln_pdf'])
-    return np.log((output['ln_pdf']+np.log(p)-output['ln_pdf']._ln_pdf.max()).exp().sum())+output['ln_pdf']._ln_pdf.max()-np.log(n_samples)
+    return np.log((output['ln_pdf']+np.log(p)-output['ln_pdf']._ln_pdf.max()).exp(_cprob_err=False).sum())+output['ln_pdf']._ln_pdf.max()-np.log(n_samples)
 
 
 def _convert(moment_tensors, i=None):

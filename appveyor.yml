@@ -25,7 +25,7 @@ environment:
 
 install:
   # We need wheel installed to build wheels
-  - cmd: "%PYTHON%\\python.exe -m pip install wheel tox numpy cython"
+  - cmd: "%PYTHON%\\python.exe -m pip install wheel tox numpy cython twine"
 
 build: off
 
@@ -49,13 +49,15 @@ after_test:
   # Again, you only need if you're building C extensions for
   # 64-bit Python 3.3/3.4. And you need to use %PYTHON% to get the correct
   # interpreter
-  - cmd: if(%APPVEYOR_REPO_TAG% == 'True') %PYTHON%\\python.exe setup.py bdist_wheel ELSE  echo "Not building because this is not a tag build"
-  - ps: if($env:APPVEYOR_REPO_TAG -eq 'True') {ls dist}
+  - ps: if ($(& $env:PYTHON_EXE .\ci\get_version.py) -ne '') {& $env:PYTHON_EXE setup.py bdist_wheel} ELSE {echo "Not building because this is not a tag build"}
+  - ps: if (& $env:PYTHON_EXE .\ci\get_version.py) {ls dist}
+
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
   - path: dist\*
 
-#on_success:
+on_success:
 #  You can use this step to upload your artifacts to a public website.
 #  See Appveyor's documentation for more details. Or you can simply
 #  access your wheels from the Appveyor "artifacts" tab for your build.
+  - ps if ($(& $env:PYTHON_EXE .\ci\get_version.py) -ne '') {& $env:PYTHON_EXE setup.py bdist_wheel} ELSE {echo "Not building because this is not a tag build"}
